@@ -1,3 +1,5 @@
 import noDoubleSpaces from './no-double-spaces/index.js';
 
-export default { noDoubleSpaces };
+export default {
+  'no-double-spaces': noDoubleSpaces,
+};
