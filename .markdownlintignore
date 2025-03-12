@@ -1,0 +1,10 @@
+# dependencies
+node_modules
+
+# production
+build
+.next
+**/.vitepress/cache/
+
+# files
+LICENSE.md
