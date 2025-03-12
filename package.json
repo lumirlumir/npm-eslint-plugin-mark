@@ -38,7 +38,7 @@
     "concurrently": "^9.0.0",
     "editorconfig-checker": "^6.0.0",
     "eslint": "^9.22.0",
-    "eslint-config-bananass": "^0.0.5",
+    "eslint-config-bananass": "^0.0.6",
     "husky": "^9.1.5",
     "lerna": "^8.2.1",
     "lint-staged": "^15.4.3",
