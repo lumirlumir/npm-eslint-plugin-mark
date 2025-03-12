@@ -64,6 +64,7 @@
     "@eslint/markdown": "^6.3.0"
   },
   "devDependencies": {
+    "@types/mdast": "^4.0.4",
     "eslint": "^9.22.0"
   }
 }
