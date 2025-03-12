@@ -1,3 +1,3 @@
 # eslint-plugin-mark
 
-Lint your Markdown easily with ESLint.🛠️
+Lint your Markdown with ESLint.🛠️

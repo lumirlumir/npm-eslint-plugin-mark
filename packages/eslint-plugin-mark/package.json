@@ -1,0 +1,44 @@
+{
+  "name": "eslint-plugin-mark",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Lint your Markdown with ESLint.🛠️",
+  "files": [
+    "src",
+    "build",
+    "LICENSE.md",
+    "README.md",
+    "!src/**/*.test.js",
+    "!**/fixtures/**"
+  ],
+  "keywords": [
+    "eslint",
+    "plugin",
+    "markdown",
+    "mark",
+    "commonmark",
+    "gfm"
+  ],
+  "author": "루밀LuMir <rpfos@naver.com> (https://github.com/lumirlumir)",
+  "license": "MIT",
+  "homepage": "https://eslint-plugin-mark.lumir.page",
+  "repository": {
+    "type": "github",
+    "url": "git+https://github.com/lumirlumir/npm-eslint-plugin-mark.git",
+    "directory": "packages/eslint-plugin-mark"
+  },
+  "bugs": {
+    "url": "https://github.com/lumirlumir/npm-eslint-plugin-mark/issues"
+  },
+  "engines": {
+    "node": "^20.18.0 || >= 22.3.0"
+  },
+  "publishConfig": {
+    "provenance": true
+  },
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "build": "shx cp ../../LICENSE.md ../../README.md .",
+    "test": "exit 0"
+  }
+}
