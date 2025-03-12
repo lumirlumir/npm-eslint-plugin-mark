@@ -1,2 +1,3 @@
-# npm-eslint-plugin-mark
+# eslint-plugin-mark
+
 Lint your Markdown easily with ESLint.🛠️
