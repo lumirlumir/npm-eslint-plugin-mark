@@ -1,0 +1,287 @@
+name: pull-request
+
+on:
+  pull_request_target:
+    types: [opened, edited, synchronize]
+
+permissions:
+  pull-requests: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  lint-pull-request-title:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up checkout
+        uses: actions/checkout@v4
+
+      # This step extracts the correct package names because it runs right after the checkout.
+      - name: Extract package names from the monorepo structure for use as scopes.
+        run: |
+          {
+            echo "SCOPES<<EOF"
+            find . -name package.json -not -path '**/node_modules/*' -exec jq -r .name {} \; | paste -sd '\n' -
+            echo "EOF"
+          } >> $GITHUB_ENV
+
+      - name: Debug extracted package names
+        run: echo '${{ env.SCOPES }}'
+
+      - uses: amannn/action-semantic-pull-request@v5
+        id: lint-pull-request-title
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          # Configure which types are allowed (newline-delimited).
+          # Default: https://github.com/commitizen/conventional-commit-types
+          types: |
+            feat
+            fix
+            build
+            chore
+            ci
+            docs
+            perf
+            refactor
+            revert
+            style
+            test
+          # Configure which scopes are allowed (newline-delimited).
+          # These are regex patterns auto-wrapped in `^ $`.
+          scopes: |
+            ${{ env.SCOPES }}
+            \*
+            deps
+            deps-dev
+            release
+            sync-server
+            sync-client
+          # Configure that a scope must always be provided.
+          requireScope: true
+          # Configure additional validation for the subject based on a regex.
+          # This ensures the subject doesn't start with an uppercase character.
+          subjectPattern: ^(?![A-Z]).+$
+          # If `subjectPattern` is configured, you can use this property to override
+          # the default error message that is shown when the pattern doesn't match.
+          # The variables `subject` and `title` can be used within the message.
+          subjectPatternError: The subject "{subject}" found in the pull request title "{title}" didn't match the configured pattern. Please ensure that the subject doesn't start with an uppercase character.
+
+      - uses: marocchino/sticky-pull-request-comment@v2
+        # When the previous steps fails, the workflow would stop. By adding this
+        # condition you can continue the execution with the populated error message.
+        if: always() && (steps.lint-pull-request-title.outputs.error_message != null)
+        with:
+          header: pull-request-title-lint-error
+          message: |
+            Thank you for opening this pull request!🥳
+
+            It looks like your proposed title needs to be adjusted. We require pull request titles to follow:
+            - [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/)
+            - [Conventional Commits types](https://github.com/commitizen/conventional-commit-types/blob/master/index.json)
+
+            <details>
+            <summary>Types</summary>
+
+            | Type     | Title                    | Description                                                                                            |
+            | -------- | ------------------------ | -------------------------------------------------------------------------------------------------------|
+            | feat     | Features                 | A new feature                                                                                          |
+            | fix      | Bug Fixes                | A bug fix                                                                                              |
+            | build    | Builds                   | Changes that affect the build system or external dependencies                                          |
+            | chore    | Chores                   | Other changes that don't modify src or test files                                                      |
+            | ci       | Continuous Integrations  | Changes to our CI configuration files and scripts (example: GitHub Actions, npm scripts)               |
+            | docs     | Documentation            | Documentation only changes                                                                             |
+            | perf     | Performance Improvements | A code change that improves performance                                                                |
+            | refactor | Code Refactoring         | A code change that neither fixes a bug nor adds a feature                                              |
+            | revert   | Reverts                  | Reverts a previous commit                                                                              |
+            | style    | Styles                   | Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc) |
+            | test     | Tests                    | Adding missing tests or correcting existing tests                                                      |
+
+            </details>
+
+            <details>
+            <summary>Scopes</summary>
+
+            Scopes are **required**. If you can't find a suitable scope, use `*`. (`*` in 'Allowed Types' means all types are allowed.)
+
+            | Scope                       | Allowed Types | Description                                                                                                          |
+            | --------------------------- | ------------- | -------------------------------------------------------------------------------------------------------------------- |
+            | `package.json` `name` field | *             | The `name` field in `package.json` file, used to identify the package or other parts like examples, tests or website |
+            | *                           | *             | `*` indicates changes affecting multiple or all scopes, often used for general updates or maintenance                |
+            | deps                        | chore         | Update dependencies. Dependabot PRs should use it                                                                    |
+            | deps-dev                    | chore         | Update dev dependencies. Dependabot PRs should use it                                                                |
+            | release                     | chore         | Version (bump) packages in preparation for release                                                                   |
+            | sync-server                 | *             | Auto-generated PR to synchronize repository configuration files created by `repo-file-sync-action`                   |
+            | sync-client                 | *             | Auto-generated PR to synchronize repository configuration files created by `repo-file-sync-action`                   |
+
+            </details>
+
+            <details>
+            <summary>Description(Subject)</summary>
+
+            - Must be a short, imperative present-tense phrase.
+            - Must not start with an uppercase character.
+
+            </details>
+
+            Error Details:
+
+            ```
+            ${{ steps.lint-pull-request-title.outputs.error_message }}
+            ```
+
+      # Delete the previous comment when the issue has been resolved.
+      - if: ${{ steps.lint-pull-request-title.outputs.error_message == null }}
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: pull-request-title-lint-error
+          delete: true
+
+    outputs:
+      type: ${{ steps.lint-pull-request-title.outputs.type }}
+      scope: ${{ steps.lint-pull-request-title.outputs.scope }}
+
+  labeler:
+    if: github.event.action == 'opened' || github.event.changes.title || github.event.action == 'synchronize'
+
+    runs-on: ubuntu-latest
+
+    needs:
+      - lint-pull-request-title
+
+    steps:
+      - name: Labeler
+        uses: actions/github-script@v7
+        id: labeler
+        with:
+          result-encoding: string
+          script: |
+            // --------------------------------------------------------------------------------
+            // Constants
+            // --------------------------------------------------------------------------------
+
+            const isBreakingChange = context.payload.pull_request.title.includes(')!: ');
+
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const issue_number = context.issue.number;
+
+            const emojiPrefix = ':label: ';
+            const breakingChangeLabelPrefix = `${emojiPrefix}BREAKING CHANGE`;
+            const typeLabelPrefix = `${emojiPrefix}type:`;
+            const scopeLabelPrefix = `${emojiPrefix}scope:`;
+
+            const newBreakingChangeLabel = breakingChangeLabelPrefix;
+            const newTypeLabel = `${typeLabelPrefix} ${{ needs.lint-pull-request-title.outputs.type }}`;
+            const newScopeLabel = `${scopeLabelPrefix} ${{ needs.lint-pull-request-title.outputs.scope }}`;
+
+            const newConventionalCommitsTypeLabels = isBreakingChange ? [newBreakingChangeLabel, newTypeLabel, newScopeLabel] : [newTypeLabel, newScopeLabel];
+
+            // --------------------------------------------------------------------------------
+            // Helpers
+            // --------------------------------------------------------------------------------
+
+            const formatLabels = labels => labels.map(label => `\`${label}\``).join(', ');
+
+            // --------------------------------------------------------------------------------
+            // List all current labels
+            // --------------------------------------------------------------------------------
+
+            // https://docs.github.com/en/rest/issues/labels?apiVersion=2022-11-28#list-labels-for-an-issue
+            const { data: labels } = await github.rest.issues.listLabelsOnIssue({
+              owner,
+              repo,
+              issue_number,
+            });
+
+            const oldConventionalCommitsTypeLabels = labels
+              .map(({ name }) => name)
+              .filter(label => label.startsWith(emojiPrefix));
+
+            // --------------------------------------------------------------------------------
+            // Choose the labels to add and remove
+            // --------------------------------------------------------------------------------
+
+            const labelsToAdd = newConventionalCommitsTypeLabels.filter(label => !oldConventionalCommitsTypeLabels.includes(label));
+            const labelsToRemove = oldConventionalCommitsTypeLabels.filter(label => !newConventionalCommitsTypeLabels.includes(label));
+
+            // --------------------------------------------------------------------------------
+            // Debug
+            // --------------------------------------------------------------------------------
+
+            console.log(`New Conventional Commits type labels: ${formatLabels(newConventionalCommitsTypeLabels)}`);
+            console.log(`Old Conventional Commits type labels: ${formatLabels(oldConventionalCommitsTypeLabels)}`);
+            console.log(`Labels to add: ${formatLabels(labelsToAdd)}`);
+            console.log(`Labels to remove: ${formatLabels(labelsToRemove)}`);
+
+            // --------------------------------------------------------------------------------
+            // Return early if there are no labels to add or remove
+            // --------------------------------------------------------------------------------
+
+            if (labelsToAdd.length === 0 && labelsToRemove.length === 0) {
+              console.log('No labels to add or remove: skipped');
+              return 'skipped';
+            }
+
+            // --------------------------------------------------------------------------------
+            // Remove all `BREAKING CHANGE`, `type:` and `scope:` labels synchronously
+            // --------------------------------------------------------------------------------
+
+            for (const label of labelsToRemove) {
+              try {
+                await github.rest.issues.removeLabel({
+                  owner,
+                  repo,
+                  issue_number,
+                  name: label,
+                });
+                console.log(`Removed label: \`${label}\``);
+              } catch (error) {
+                if (error.status !== 404) { // If the label doesn't exist, ignore the error
+                  throw error;
+                }
+              }
+            }
+
+            // --------------------------------------------------------------------------------
+            // Add `BREAKING CHANGE`, `type:` and `scope:` labels
+            // --------------------------------------------------------------------------------
+
+            // https://docs.github.com/en/rest/issues/labels?apiVersion=2022-11-28#add-labels-to-an-issue
+            if (labelsToAdd.length !== 0) {
+              await github.rest.issues.addLabels({
+                owner,
+                repo,
+                issue_number,
+                labels: labelsToAdd,
+              })
+
+              for (const label of labelsToAdd) {
+                await github.rest.issues.updateLabel({
+                  owner,
+                  repo,
+                  name: label,
+                  color: '000000',
+                  description: 'Auto-generated label based on Conventional Commits specification for GitHub release notes',
+                });
+              }
+            }
+
+            console.log(`Added labels: ${formatLabels(labelsToAdd)}`);
+
+      # Delete the previous comment if it exists.
+      - if: ${{ steps.labeler.outputs.result != 'skipped' }}
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: labeler
+          delete: true
+
+      - if: ${{ steps.labeler.outputs.result != 'skipped' }}
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: labeler
+          message: |
+            Labels have been automatically applied based on the [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/).🏷️
