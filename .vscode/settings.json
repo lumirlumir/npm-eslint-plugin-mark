@@ -1,0 +1,15 @@
+{
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[c][cpp]": {
+    "editor.defaultFormatter": "ms-vscode.cpptools"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always",
+    "source.fixAll.stylelint": "always",
+    "source.fixAll.markdownlint": "always"
+  },
+  "stylelint.validate": ["css", "scss"],
+  "C_Cpp.clang_format_fallbackStyle": "Google"
+}

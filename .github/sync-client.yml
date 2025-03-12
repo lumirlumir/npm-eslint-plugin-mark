@@ -1,0 +1,74 @@
+lumirlumir/lumirlumir-configs:
+  - source: ./.github/sync-client.yml
+    dest: ./clients/npm-eslint-plugin-mark.yml
+  # ./.github/ISSUE_TEMPLATE
+  - source: ./.github/ISSUE_TEMPLATE/1-bug.md
+    dest: ./configs/.github/ISSUE_TEMPLATE/1-bug.md
+  - source: ./.github/ISSUE_TEMPLATE/2-suggestion.md
+    dest: ./configs/.github/ISSUE_TEMPLATE/2-suggestion.md
+  - source: ./.github/ISSUE_TEMPLATE/3-others.md
+    dest: ./configs/.github/ISSUE_TEMPLATE/3-others.md
+  # ./.github/workflows
+  - source: ./.github/workflows/lint.yml
+    dest: ./configs/.github/workflows/lint.yml
+  - source: ./.github/workflows/publish.yml
+    dest: ./configs/.github/workflows/publish.yml
+  - source: ./.github/workflows/pull-request.yml
+    dest: ./configs/.github/workflows/pull-request.yml
+  - source: ./.github/workflows/sync-client.yml
+    dest: ./configs/.github/workflows/sync-client.yml
+  - source: ./.github/workflows/test.yml
+    dest: ./configs/.github/workflows/test.yml
+  - source: ./.github/workflows/version-monorepo.yml
+    dest: ./configs/.github/workflows/version-monorepo.yml
+  # ./.github
+  - source: ./.github/CODEOWNERS
+    dest: ./configs/.github/CODEOWNERS
+  - source: ./.github/FUNDING.yml
+    dest: ./configs/.github/FUNDING.yml
+  - source: ./.github/PULL_REQUEST_TEMPLATE.md
+    dest: ./configs/.github/PULL_REQUEST_TEMPLATE.md
+  - source: ./.github/dependabot.yml
+    dest: ./configs/.github/dependabot.yml
+  - source: ./.github/release.yml
+    dest: ./configs/.github/release.yml
+  # ./.husky
+  - source: ./.husky/pre-commit
+    dest: ./configs/.husky/pre-commit
+  # ./.vscode
+  - source: ./.vscode/extensions.json
+    dest: ./configs/.vscode/npm-extensions.json
+  - source: ./.vscode/settings.json
+    dest: ./configs/.vscode/settings.json
+  # ./scripts
+  - source: ./scripts/vercel-ignore-command.sh
+    dest: ./configs/scripts/vercel-ignore-command.sh
+  # ./
+  - source: ./.editorconfig
+    dest: ./configs/.editorconfig
+  - source: ./.gitattributes
+    dest: ./configs/.gitattributes
+  - source: ./.gitignore
+    dest: ./configs/.gitignore
+  - source: ./.markdownlint.json
+    dest: ./configs/.markdownlint.json
+  - source: ./.markdownlintignore
+    dest: ./configs/.markdownlintignore
+  - source: ./.nvmrc
+    dest: ./configs/.nvmrc
+  - source: ./.prettierignore
+    dest: ./configs/.prettierignore
+  - source: ./.prettierrc.js
+    dest: ./configs/.prettierrc.js
+  - source: ./.textlintrc.js
+    dest: ./configs/.textlintrc.js
+  - source: ./CODE_OF_CONDUCT.md
+    dest: ./configs/CODE_OF_CONDUCT.md
+  - source: ./LICENSE.md
+    dest: ./configs/LICENSE.md
+  - source: ./VScode.code-workspace
+    dest: ./configs/VScode.code-workspace
+  - source: ./eslint.config.mjs
+    dest: ./configs/eslint.config.mjs
+  - source: ./lint-staged.config.js
+    dest: ./configs/lint-staged.config.js

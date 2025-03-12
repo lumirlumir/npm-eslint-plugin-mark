@@ -1,0 +1,19 @@
+# dependencies
+node_modules
+
+# production
+build
+.next
+**/.vitepress/cache/
+
+# env
+.env
+.env.development
+.env.production
+
+# tests
+coverage
+
+# packages
+packages/**/LICENSE.md
+packages/**/README.md

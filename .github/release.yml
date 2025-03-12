@@ -1,0 +1,66 @@
+# https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes#configuration-options
+
+changelog:
+  exclude:
+    labels:
+      - ':label: scope: release'
+
+  categories:
+    - title: ':boom: BREAKING CHANGES'
+      labels:
+        - ':label: BREAKING CHANGE'
+
+    - title: ':sparkles: Features'
+      labels:
+        - ':label: type: feat'
+
+    - title: ':bug: Bug Fixes'
+      labels:
+        - ':label: type: fix'
+
+    - title: ':hammer_and_wrench: Builds'
+      labels:
+        - ':label: type: build'
+
+    - title: ':toolbox: Chores'
+      labels:
+        - ':label: type: chore'
+      exclude:
+        labels:
+          - 'dependencies'
+          - ':label: scope: deps'
+          - ':label: scope: deps-dev'
+
+    - title: ':arrows_counterclockwise: Continuous Integrations'
+      labels:
+        - ':label: type: ci'
+
+    - title: ':memo: Documentation'
+      labels:
+        - ':label: type: docs'
+
+    - title: ':zap: Performance Improvements'
+      labels:
+        - ':label: type: perf'
+
+    - title: ':recycle: Code Refactoring'
+      labels:
+        - ':label: type: refactor'
+
+    - title: ':rewind: Reverts'
+      labels:
+        - ':label: type: revert'
+
+    - title: ':art: Styles'
+      labels:
+        - ':label: type: style'
+
+    - title: ':test_tube: Tests'
+      labels:
+        - ':label: type: test'
+
+    - title: ':arrow_up: Dependency Updates'
+      labels:
+        - 'dependencies'
+        - ':label: scope: deps'
+        - ':label: scope: deps-dev'
