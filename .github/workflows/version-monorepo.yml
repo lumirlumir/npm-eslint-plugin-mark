@@ -1,0 +1,119 @@
+name: version-monorepo
+
+on:
+  workflow_dispatch:
+    inputs:
+      semver:
+        description: Select the semver of the new release
+        required: true
+        type: choice
+        default: patch
+        options:
+          - patch
+          - minor
+          - major
+          - prerelease
+          - prepatch
+          - preminor
+          - premajor
+      preid:
+        description: Select the preid of prerelease version
+        required: false
+        type: choice
+        default: canary
+        options:
+          - canary
+          - alpha
+          - beta
+          - rc
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  version-monorepo:
+    runs-on: ubuntu-latest
+
+    env:
+      GH_TOKEN: ${{ secrets.GH_PAT }}
+
+    steps:
+      - name: Set up checkout
+        uses: actions/checkout@v4
+
+      - name: Set up node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Set up cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Set up node_modules
+        run: npm ci
+
+      - name: Set up environment variables
+        run: |
+          echo "SHORT_SHA=${GITHUB_SHA:0:7}" >> $GITHUB_ENV
+          echo "OLD_VERSION=$(node -p "require('./lerna.json').version")" >> $GITHUB_ENV
+
+      - name: Version bump (patch, minor, major) # `--no-git-tag-version` includes `--no-push`
+        if: ${{ inputs.semver == 'patch' || inputs.semver == 'minor' || inputs.semver == 'major' }}
+        run: npx lerna version ${{ inputs.semver }} --no-git-tag-version --yes
+
+      - name: Version bump (prerelease, prepatch, preminor, premajor) # `--no-git-tag-version` includes `--no-push`
+        if: ${{ inputs.semver == 'prerelease' || inputs.semver == 'prepatch' || inputs.semver == 'preminor' || inputs.semver == 'premajor' }}
+        run: npx lerna version ${{ inputs.semver }} --no-git-tag-version --yes --preid ${{ inputs.preid }}
+
+      - name: Set up environment variables
+        run: echo "NEW_VERSION=$(node -p "require('./lerna.json').version")" >> $GITHUB_ENV
+
+      - name: Draft release (patch, minor, major)
+        if: ${{ inputs.semver == 'patch' || inputs.semver == 'minor' || inputs.semver == 'major' }}
+        run: gh release create v${{ env.NEW_VERSION }} --draft --generate-notes
+
+      - name: Draft release (prerelease, prepatch, preminor, premajor)
+        if: ${{ inputs.semver == 'prerelease' || inputs.semver == 'prepatch' || inputs.semver == 'preminor' || inputs.semver == 'premajor' }}
+        run: gh release create v${{ env.NEW_VERSION }} --draft --generate-notes --prerelease
+
+      - name: Get release info
+        run: |
+          {
+            echo "RELEASE_INFO<<EOF"
+            gh release view v${{ env.NEW_VERSION }} --json body | jq -r '.body'
+            echo "EOF"
+          } >> $GITHUB_ENV
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GH_PAT }}
+          commit-message: 'chore(release): bump package versions from `v${{ env.OLD_VERSION }}` to `v${{ env.NEW_VERSION }}`'
+          branch: 'chore-release-bump-package-versions-from-v${{ env.OLD_VERSION }}-to-v${{ env.NEW_VERSION }}-${{ env.SHORT_SHA }}'
+          base: 'main'
+          assignees: ${{ github.actor }}
+          title: 'chore(release): bump package versions from `v${{ env.OLD_VERSION }}` to `v${{ env.NEW_VERSION }}` (`${{ inputs.semver }}`)'
+          body: |
+            ## Release Information: `v${{ env.NEW_VERSION }}`
+
+            New release of `${{ github.repository }}` has arrived! :tada:
+
+            This PR bumps the package versions from `v${{ env.OLD_VERSION }}` to `v${{ env.NEW_VERSION }}` (`${{ inputs.semver }}`).
+
+            See [Actions](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) for more details.
+
+            | Info        | Value                      |
+            | ----------- | -------------------------- |
+            | Repository  | `${{ github.repository }}` |
+            | SEMVER      | `${{ inputs.semver }}`     |
+            | Pre ID      | `${{ inputs.preid }}`      |
+            | Short SHA   | ${{ env.SHORT_SHA }}       |
+            | Old Version | `v${{ env.OLD_VERSION }}`  |
+            | New Version | `v${{ env.NEW_VERSION }}`  |
+
+            ${{ env.RELEASE_INFO }}
