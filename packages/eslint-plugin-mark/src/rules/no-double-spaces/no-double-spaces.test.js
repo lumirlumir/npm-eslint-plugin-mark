@@ -238,75 +238,75 @@ qux
         },
       ],
     },
-    //     {
-    //       code: `foo
-    // bar  baz`, // Double space with newline.
-    //       output: `foo
-    // bar baz`,
-    //       errors: [
-    //         {
-    //           messageId: noDoubleSpaces,
-    //           line: 2,
-    //           column: 4,
-    //           endLine: 2,
-    //           endColumn: 6,
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       code: `foo
-    // bar  baz
-    // qux quux  quuz`, // Double spaces with newline.
-    //       output: `foo
-    // bar baz
-    // qux quux quuz`,
-    //       errors: [
-    //         {
-    //           messageId: noDoubleSpaces,
-    //           line: 2,
-    //           column: 4,
-    //           endLine: 2,
-    //           endColumn: 6,
-    //         },
-    //         {
-    //           messageId: noDoubleSpaces,
-    //           line: 3,
-    //           column: 9,
-    //           endLine: 3,
-    //           endColumn: 11,
-    //         },
-    //       ],
-    //     },
-    //   {
-    //     code: `foo
-    // bar  baz`, // Double space with newline and leading spaces.
-    //     output: `foo
-    // bar baz`,
-    //     errors: [
-    //       {
-    //         messageId: noDoubleSpaces,
-    //         line: 2,
-    //         column: 6,
-    //         endLine: 2,
-    //         endColumn: 8,
-    //       },
-    //     ],
-    //   },
-    //   {
-    //     code: `foo  bar
-    // bar baz`, // Double space with newline and leading spaces.
-    //     output: `foo bar
-    // bar baz`,
-    //     errors: [
-    //       {
-    //         messageId: noDoubleSpaces,
-    //         line: 1,
-    //         column: 4,
-    //         endLine: 1,
-    //         endColumn: 6,
-    //       },
-    //     ],
-    //   },
+    {
+      code: `foo
+bar  baz`, // Double space with newline.
+      output: `foo
+bar baz`,
+      errors: [
+        {
+          messageId: noDoubleSpaces,
+          line: 2,
+          column: 4,
+          endLine: 2,
+          endColumn: 6,
+        },
+      ],
+    },
+    {
+      code: `foo
+bar  baz
+qux quux  quuz`, // Double spaces with newline.
+      output: `foo
+bar baz
+qux quux quuz`,
+      errors: [
+        {
+          messageId: noDoubleSpaces,
+          line: 2,
+          column: 4,
+          endLine: 2,
+          endColumn: 6,
+        },
+        {
+          messageId: noDoubleSpaces,
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 11,
+        },
+      ],
+    },
+    {
+      code: `foo
+  bar  baz`, // Double space with newline and leading spaces.
+      output: `foo
+  bar baz`,
+      errors: [
+        {
+          messageId: noDoubleSpaces,
+          line: 2,
+          column: 6,
+          endLine: 2,
+          endColumn: 8,
+        },
+      ],
+    },
+    {
+      code: `foo  bar
+  bar baz`, // Double space with newline and leading spaces.
+      output: `foo bar
+  bar baz`,
+      errors: [
+        {
+          messageId: noDoubleSpaces,
+          line: 1,
+          column: 4,
+          endLine: 1,
+          endColumn: 6,
+        },
+      ],
+    },
   ],
 };
 
