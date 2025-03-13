@@ -65,6 +65,7 @@ qux
   ],
 
   invalid: [
+    // single line
     {
       name: 'Double space between words',
       code: 'foo  bar baz',
@@ -247,6 +248,8 @@ qux
         },
       ],
     },
+
+    // multiple lines
     {
       name: 'Double space with newline',
       code: `foo
