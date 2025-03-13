@@ -323,6 +323,35 @@ qux quux quuz`,
         },
       ],
     },
+    {
+      name: 'Double space with newline and leading spaces',
+      code: `foo   bar
+      foo  bar
+foo bar  baz
+          foo bar
+`,
+      output: `foo   bar
+      foo bar
+foo bar baz
+          foo bar
+`,
+      errors: [
+        {
+          messageId: noDoubleSpaces,
+          line: 2,
+          column: 10,
+          endLine: 2,
+          endColumn: 12,
+        },
+        {
+          messageId: noDoubleSpaces,
+          line: 3,
+          column: 8,
+          endLine: 3,
+          endColumn: 10,
+        },
+      ],
+    },
   ],
 };
 
