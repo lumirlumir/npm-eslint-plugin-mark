@@ -66,7 +66,8 @@ qux
 
   invalid: [
     {
-      code: 'foo  bar baz', // Double space between words.
+      name: 'Double space between words',
+      code: 'foo  bar baz',
       output: 'foo bar baz',
       errors: [
         {
@@ -79,7 +80,8 @@ qux
       ],
     },
     {
-      code: 'foo  bar  baz  qux', // Double spaces between words.
+      name: 'Double spaces between words',
+      code: 'foo  bar  baz  qux',
       output: 'foo bar baz qux',
       errors: [
         {
@@ -106,7 +108,8 @@ qux
       ],
     },
     {
-      code: 'foo  bar   baz', // Double and Triple space between words.
+      name: 'Double and Triple space between words',
+      code: 'foo  bar   baz',
       output: 'foo bar   baz',
       errors: [
         {
@@ -119,7 +122,8 @@ qux
       ],
     },
     {
-      code: '  foo  bar baz', // Double space with leading spaces.
+      name: 'Double space with leading spaces',
+      code: '  foo  bar baz',
       output: '  foo bar baz',
       errors: [
         {
@@ -132,7 +136,8 @@ qux
       ],
     },
     {
-      code: '  foo  bar  baz  qux', // Double spaces with leading spaces.
+      name: 'Double spaces with leading spaces',
+      code: '  foo  bar  baz  qux',
       output: '  foo bar baz qux',
       errors: [
         {
@@ -159,7 +164,8 @@ qux
       ],
     },
     {
-      code: 'foo  bar baz  ', // Double space with trailing spaces.
+      name: 'Double space with trailing spaces',
+      code: 'foo  bar baz  ',
       output: 'foo bar baz  ',
       errors: [
         {
@@ -172,7 +178,8 @@ qux
       ],
     },
     {
-      code: 'foo  bar  baz  qux  ', // Double spaces with trailing spaces.
+      name: 'Double spaces with trailing spaces',
+      code: 'foo  bar  baz  qux  ',
       output: 'foo bar baz qux  ',
       errors: [
         {
@@ -199,7 +206,8 @@ qux
       ],
     },
     {
-      code: '  foo  bar baz  ', // Double space with leading and trailing spaces.
+      name: 'Double space with leading and trailing spaces',
+      code: '  foo  bar baz  ',
       output: '  foo bar baz  ',
       errors: [
         {
@@ -212,7 +220,8 @@ qux
       ],
     },
     {
-      code: '  foo  bar  baz  qux  ', // Double spaces with leading and trailing spaces.
+      name: 'Double spaces with leading and trailing spaces',
+      code: '  foo  bar  baz  qux  ',
       output: '  foo bar baz qux  ',
       errors: [
         {
@@ -239,8 +248,9 @@ qux
       ],
     },
     {
+      name: 'Double space with newline',
       code: `foo
-bar  baz`, // Double space with newline.
+bar  baz`,
       output: `foo
 bar baz`,
       errors: [
@@ -254,9 +264,10 @@ bar baz`,
       ],
     },
     {
+      name: 'Double spaces with newline',
       code: `foo
 bar  baz
-qux quux  quuz`, // Double spaces with newline.
+qux quux  quuz`,
       output: `foo
 bar baz
 qux quux quuz`,
@@ -278,8 +289,9 @@ qux quux quuz`,
       ],
     },
     {
+      name: 'Double space with newline and leading spaces',
       code: `foo
-  bar  baz`, // Double space with newline and leading spaces.
+  bar  baz`,
       output: `foo
   bar baz`,
       errors: [
@@ -293,8 +305,9 @@ qux quux quuz`,
       ],
     },
     {
+      name: 'Double space with newline and leading spaces',
       code: `foo  bar
-  bar baz`, // Double space with newline and leading spaces.
+  bar baz`,
       output: `foo bar
   bar baz`,
       errors: [
