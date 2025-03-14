@@ -16,10 +16,10 @@
 // Helpers
 // --------------------------------------------------------------------------------
 
-const leftDoubleQutationMark = '\u201C'; // `“`
-const rightDoubleQutationMark = '\u201D'; // `”`
-const leftSingleQutationMark = '\u2018'; // `‘`
-const rightSingleQutationMark = '\u2019'; // `’`
+const leftDoubleQuotationMark = '\u201C'; // `“`
+const rightDoubleQuotationMark = '\u201D'; // `”`
+const leftSingleQuotationMark = '\u2018'; // `‘`
+const rightSingleQuotationMark = '\u2019'; // `’`
 const doubleStraightQuote = '"';
 const singleStraightQuote = "'";
 
@@ -65,7 +65,7 @@ export default {
           const matches = [
             ...line.matchAll(
               new RegExp(
-                `[${leftDoubleQutationMark}${rightDoubleQutationMark}${leftSingleQutationMark}${rightSingleQutationMark}]`,
+                `[${leftDoubleQuotationMark}${rightDoubleQuotationMark}${leftSingleQuotationMark}${rightSingleQuotationMark}]`,
                 'g',
               ),
             ),
@@ -116,8 +116,8 @@ export default {
                 fix(fixer) {
                   return fixer.replaceTextRange(
                     [rangeStart, rangeEnd],
-                    match[0] === leftDoubleQutationMark ||
-                      match[0] === rightDoubleQutationMark
+                    match[0] === leftDoubleQuotationMark ||
+                      match[0] === rightDoubleQuotationMark
                       ? doubleStraightQuote
                       : singleStraightQuote,
                   );
