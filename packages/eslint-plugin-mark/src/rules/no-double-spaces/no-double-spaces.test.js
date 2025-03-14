@@ -40,6 +40,7 @@ const ruleTesterGfm = new RuleTester({
 
 const tests = {
   valid: [
+    '  ', // Empty string with double spaces.
     'foo bar baz', // A single space between words.
     'foo   bar baz', // Triple space between words.
     'foo bar    baz', // Multiple (more than three) space between words.
