@@ -3,6 +3,23 @@
   "version": "0.0.0",
   "type": "module",
   "description": "Lint your Markdown with ESLint.🛠️",
+  "exports": {
+    ".": {
+      "types": "./build/index.d.ts",
+      "default": "./src/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./build/*"
+      ],
+      ".": [
+        "./build/index.d.ts"
+      ]
+    }
+  },
   "files": [
     "src",
     "build",
@@ -13,6 +30,8 @@
   ],
   "keywords": [
     "eslint",
+    "eslintplugin",
+    "eslint-plugin",
     "plugin",
     "markdown",
     "mark",
@@ -30,15 +49,22 @@
   "bugs": {
     "url": "https://github.com/lumirlumir/npm-eslint-plugin-mark/issues"
   },
-  "engines": {
-    "node": "^20.18.0 || >= 22.3.0"
-  },
   "publishConfig": {
     "provenance": true
   },
   "scripts": {
     "prepublishOnly": "npm run build",
-    "build": "shx cp ../../LICENSE.md ../../README.md .",
-    "test": "exit 0"
+    "build": "npx tsc && shx cp ../../LICENSE.md ../../README.md .",
+    "test": "node --test"
+  },
+  "peerDependencies": {
+    "eslint": "^9.0.0"
+  },
+  "dependencies": {
+    "@eslint/markdown": "^6.3.0",
+    "@types/mdast": "^4.0.4"
+  },
+  "devDependencies": {
+    "eslint": "^9.22.0"
   }
 }
