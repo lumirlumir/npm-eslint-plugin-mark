@@ -10,8 +10,7 @@ The purpose of this rule is to allow the use of ASCII characters in the editor a
 
 Additionally, curly quotes (`“`(`\u201C`), `”`(`\u201D`), `‘`(`\u2018`) or `’`(`\u2019`)), which are often introduced by word processors like Word, Google Docs, and Pages, can cause unwanted issues in code and markup. This rule helps keep your code clean and consistent by preventing unintended curly quotes.
 
-This rule only checks for curly quotes and applies only to [`text`](https://https://github.com/syntax-tree/mdast?tab=readme-ov-file#text) node.
-
+This rule only checks for curly quotes and applies only to [`text`](https://github.com/syntax-tree/mdast?tab=readme-ov-file#text) node.
 ### ❌ Incorrect
 
 Examples of **incorrect** code for this rule:
