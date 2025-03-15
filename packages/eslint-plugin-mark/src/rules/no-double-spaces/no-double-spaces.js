@@ -4,6 +4,12 @@
  */
 
 // --------------------------------------------------------------------------------
+// Import
+// --------------------------------------------------------------------------------
+
+import { getFileName } from '../../core/helpers/index.js';
+
+// --------------------------------------------------------------------------------
 // Typedefs
 // --------------------------------------------------------------------------------
 
@@ -32,6 +38,8 @@ export default {
     type: 'problem',
 
     docs: {
+      // @ts-ignore -- TODO: https://github.com/eslint/eslint/issues/19521, https://github.com/eslint/eslint/issues/19523
+      name: getFileName(import.meta.url),
       recommended: true,
       description:
         'Disallow double spaces in text, except for leading and trailing spaces',
@@ -44,6 +52,10 @@ export default {
       noDoubleSpaces:
         'Double spaces are not allowed except for leading and trailing spaces.',
     },
+
+    language: 'markdown',
+
+    dialects: ['commonmark', 'gfm'],
   },
 
   create(context) {

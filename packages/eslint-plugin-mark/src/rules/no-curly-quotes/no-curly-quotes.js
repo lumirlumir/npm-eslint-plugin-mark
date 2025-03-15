@@ -4,6 +4,12 @@
  */
 
 // --------------------------------------------------------------------------------
+// Import
+// --------------------------------------------------------------------------------
+
+import { getFileName } from '../../core/helpers/index.js';
+
+// --------------------------------------------------------------------------------
 // Typedefs
 // --------------------------------------------------------------------------------
 
@@ -36,6 +42,8 @@ export default {
     type: 'problem',
 
     docs: {
+      // @ts-ignore -- TODO: https://github.com/eslint/eslint/issues/19521, https://github.com/eslint/eslint/issues/19523
+      name: getFileName(import.meta.url),
       recommended: true,
       description: 'Disallow curly quotes(`“`, `”`, `‘` or `’`) in text',
       url: 'https://github.com/lumirlumir/npm-eslint-plugin-mark',
@@ -47,6 +55,10 @@ export default {
       noCurlyQuotes:
         'Curly quotes(`“`, `”`, `‘` or `’`) are not allowed. Use straight quotes(`"` or `\'`) instead.',
     },
+
+    language: 'markdown',
+
+    dialects: ['commonmark', 'gfm'],
   },
 
   create(context) {

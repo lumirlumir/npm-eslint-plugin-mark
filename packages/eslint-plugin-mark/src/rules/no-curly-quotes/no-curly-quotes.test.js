@@ -9,33 +9,18 @@
 
 import { test } from 'node:test';
 
-import { RuleTester } from 'eslint';
-import markdown from '@eslint/markdown';
-
+import { ruleTesterCommonmark, ruleTesterGfm } from '../../core/rule-tester/index.js';
 import rule from './no-curly-quotes.js';
 
 // --------------------------------------------------------------------------------
 // Helpers
 // --------------------------------------------------------------------------------
 
+const { name } = rule.meta.docs;
 const noCurlyQuotes = 'noCurlyQuotes';
 
-const ruleTesterCommonmark = new RuleTester({
-  plugins: {
-    markdown,
-  },
-  language: 'markdown/commonmark',
-});
-
-const ruleTesterGfm = new RuleTester({
-  plugins: {
-    markdown,
-  },
-  language: 'markdown/gfm',
-});
-
 // --------------------------------------------------------------------------------
-// Test
+// Testcases
 // --------------------------------------------------------------------------------
 
 const tests = {
@@ -224,7 +209,11 @@ const tests = {
   ],
 };
 
-test('no-curly-quotes', () => {
-  ruleTesterCommonmark.run('no-curly-quotes', rule, tests);
-  ruleTesterGfm.run('no-curly-quotes', rule, tests);
+// --------------------------------------------------------------------------------
+// Test Runner
+// --------------------------------------------------------------------------------
+
+test(name, () => {
+  ruleTesterCommonmark.run(name, rule, tests);
+  ruleTesterGfm.run(name, rule, tests);
 });
