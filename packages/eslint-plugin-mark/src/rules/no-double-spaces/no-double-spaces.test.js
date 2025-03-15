@@ -9,33 +9,18 @@
 
 import { test } from 'node:test';
 
-import { RuleTester } from 'eslint';
-import markdown from '@eslint/markdown';
-
+import { ruleTesterCommonmark, ruleTesterGfm } from '../../core/rule-tester/index.js';
 import rule from './no-double-spaces.js';
 
 // --------------------------------------------------------------------------------
 // Helpers
 // --------------------------------------------------------------------------------
 
+const { name } = rule.meta.docs;
 const noDoubleSpaces = 'noDoubleSpaces';
 
-const ruleTesterCommonmark = new RuleTester({
-  plugins: {
-    markdown,
-  },
-  language: 'markdown/commonmark',
-});
-
-const ruleTesterGfm = new RuleTester({
-  plugins: {
-    markdown,
-  },
-  language: 'markdown/gfm',
-});
-
 // --------------------------------------------------------------------------------
-// Test
+// Testcases
 // --------------------------------------------------------------------------------
 
 const tests = {
@@ -356,7 +341,11 @@ foo bar baz
   ],
 };
 
-test('no-double-spaces', () => {
-  ruleTesterCommonmark.run('no-double-spaces', rule, tests);
-  ruleTesterGfm.run('no-double-spaces', rule, tests);
+// --------------------------------------------------------------------------------
+// Test Runner
+// --------------------------------------------------------------------------------
+
+test(name, () => {
+  ruleTesterCommonmark.run(name, rule, tests);
+  ruleTesterGfm.run(name, rule, tests);
 });
