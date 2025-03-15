@@ -1,4 +1,5 @@
 import bananass from 'eslint-config-bananass';
+import mark from 'eslint-plugin-mark';
 
 /** @type {import("eslint").Linter.Config[]} */
 export default [
@@ -7,4 +8,5 @@ export default [
   },
   bananass.configs.js,
   bananass.configs.ts,
+  mark.configs.all.gfm,
 ];
