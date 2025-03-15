@@ -8,6 +8,8 @@
 // --------------------------------------------------------------------------------
 
 import { createRequire } from 'node:module';
+
+import { all } from './configs/index.js';
 import rules from './rules/index.js';
 
 // --------------------------------------------------------------------------------
@@ -37,5 +39,11 @@ export default {
 
   rules,
 
-  configs: {},
+  configs: {
+    all: {
+      // @ts-ignore -- TODO: https://github.com/eslint/eslint/issues/19519
+      commonmark: all('commonmark'),
+      gfm: all('gfm'),
+    },
+  },
 };
