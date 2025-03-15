@@ -1,13 +1,12 @@
 /**
  * @fileoverview Define common types.
- * @author 루밀LuMir(lumirlumir)
  */
 
 // --------------------------------------------------------------------------------
 // Import
 // --------------------------------------------------------------------------------
 
-import type { Literal, Node, Parent, TextData, BreakData } from 'mdast'; // eslint-disable-line n/no-missing-import -- TODO: Remove this line after fixing the issue
+import type { Literal, Text } from 'mdast'; // eslint-disable-line n/no-missing-import -- TODO: Remove this line after fixing the issue
 
 // --------------------------------------------------------------------------------
 // Typedefs
@@ -16,41 +15,23 @@ import type { Literal, Node, Parent, TextData, BreakData } from 'mdast'; // esli
 /**
  * Custom markdown text extension.
  */
-export interface TextExt extends Literal, Parent {
+export interface TextExt extends Text {
   /**
    * Node type of custom markdown text extension.
    */
   type: 'textExt';
   /**
-   * Data associated with the mdast text.
+   * Children of the node.
    */
-  data?: TextData | undefined;
+  children?: TextLine[] | undefined;
 }
 
 /**
- * Custom markdown line.
+ * Custom markdown text line.
  */
-export interface Line extends Literal {
+export interface TextLine extends Literal {
   /**
-   * Node type of custom markdown line.
+   * Node type of custom markdown text line.
    */
-  type: 'line';
-  /**
-   * Data associated with the mdast text.
-   */
-  data?: TextData | undefined;
-}
-
-/**
- * Custom markdown line break.
- */
-export interface LineBreak extends Node {
-  /**
-   * Node type of custom markdown line break.
-   */
-  type: 'lineBreak';
-  /**
-   * Data associated with the mdast break.
-   */
-  data?: BreakData | undefined;
+  type: 'textLine';
 }
