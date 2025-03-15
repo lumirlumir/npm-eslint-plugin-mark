@@ -34,6 +34,7 @@ export default function all(parserMode) {
     files: ['**/*.md'],
     plugins: {
       markdown,
+      // @ts-ignore -- TODO: https://github.com/eslint/eslint/issues/19521, https://github.com/eslint/eslint/issues/19523
       mark: { rules },
     },
     language: `markdown/${parserMode}`,
