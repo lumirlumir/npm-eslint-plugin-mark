@@ -1,0 +1,32 @@
+name: release
+
+on:
+  pull_request:
+    types: [closed]
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    if: (github.event.pull_request.merged == true) && (github.event.pull_request.user.login == 'lumirlumir') && contains(github.event.pull_request.title, 'chore(release)') && startsWith(github.event.pull_request.head.ref, 'chore-release-bump-package-versions-from-v')
+
+    runs-on: ubuntu-latest
+
+    env:
+      GH_TOKEN: ${{ secrets.GH_PAT }}
+
+    steps:
+      - name: Set up checkout
+        uses: actions/checkout@v4
+
+      - name: Set up environment variables
+        run: |
+          if [ -f "lerna.json" ]; then
+            echo "CURRENT_VERSION=$(node -p "require('./lerna.json').version")" >> $GITHUB_ENV
+          else
+            echo "CURRENT_VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
+          fi
+
+      - name: Release
+        run: gh release edit v${{ env.CURRENT_VERSION }} --draft=false
