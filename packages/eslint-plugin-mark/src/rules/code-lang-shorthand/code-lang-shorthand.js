@@ -2,6 +2,8 @@
  * @fileoverview Rule to enforce the use of shorthand for code block language identifiers.
  * @author 루밀LuMir(lumirlumir)
  * @see https://shiki.style/languages#bundled-languages
+ * @see https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/fromEntries
+ * @see https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
  */
 
 // --------------------------------------------------------------------------------
@@ -115,6 +117,34 @@ export default {
 
     fixable: 'code',
 
+    schema: [
+      {
+        type: 'object',
+        properties: {
+          ignores: {
+            type: 'array',
+            items: {
+              enum: Object.keys(langShorthandMap),
+            },
+          },
+          override: {
+            type: 'object',
+            additionalProperties: {
+              type: 'string',
+            },
+          },
+        },
+        additionalProperties: false,
+      },
+    ],
+
+    defaultOptions: [
+      {
+        ignores: [],
+        override: {},
+      },
+    ],
+
     messages: {
       codeLangShorthand: '`{{ lang }}` should be shortened to `{{ langShorthand }}`.',
     },
@@ -128,7 +158,13 @@ export default {
     return {
       /** @param {Code} node */
       code(node) {
-        const langShorthand = langShorthandMap[node.lang];
+        const langShorthandMapMerged = Object.fromEntries(
+          Object.entries({
+            ...langShorthandMap,
+            ...context.options[0].override,
+          }).filter(([key]) => !context.options[0].ignores.includes(key)),
+        );
+        const langShorthand = langShorthandMapMerged[node.lang];
 
         if (langShorthand === undefined) return;
 
@@ -171,7 +207,3 @@ export default {
     };
   },
 };
-
-// Options:
-// - ignores: ['js', 'ts']
-// - override: { 'c++': 'cpp' }
