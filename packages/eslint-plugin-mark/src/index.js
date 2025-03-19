@@ -9,7 +9,7 @@
 
 import { createRequire } from 'node:module';
 
-import { all } from './configs/index.js';
+import { all, base } from './configs/index.js';
 import rules from './rules/index.js';
 
 // --------------------------------------------------------------------------------
@@ -25,6 +25,8 @@ import rules from './rules/index.js';
 // --------------------------------------------------------------------------------
 
 const { name, version } = createRequire(import.meta.url)('../package.json');
+const commonmark = 'commonmark';
+const gfm = 'gfm';
 
 // --------------------------------------------------------------------------------
 // Export
@@ -40,10 +42,9 @@ export default {
   rules,
 
   configs: {
-    all: {
-      // @ts-ignore -- TODO: https://github.com/eslint/eslint/issues/19519
-      commonmark: all('commonmark'),
-      gfm: all('gfm'),
-    },
+    allCommonmark: all(commonmark),
+    allGfm: all(gfm),
+    baseCommonmark: base(commonmark),
+    baseGfm: base(gfm),
   },
 };

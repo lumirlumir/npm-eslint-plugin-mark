@@ -1,12 +1,13 @@
 /**
- * @fileoverview All configuration.
+ * @fileoverview Base configuration.
  */
 
 // --------------------------------------------------------------------------------
 // Import
 // --------------------------------------------------------------------------------
 
-import base from './base.js';
+import markdown from '@eslint/markdown';
+import rules from '../rules/index.js';
 
 // --------------------------------------------------------------------------------
 // Typedefs
@@ -22,18 +23,19 @@ import base from './base.js';
 // --------------------------------------------------------------------------------
 
 /**
- * All configuration.
+ * Base configuration.
  *
  * @param {ParserMode} parserMode
  * @return {LinterConfig}
  */
-export default function all(parserMode) {
+export default function base(parserMode) {
   return {
-    ...base(parserMode),
-    name: `mark/all/${parserMode}`,
-    rules: {
-      'mark/no-curly-quotes': 'error',
-      'mark/no-double-spaces': 'error',
+    name: `mark/base/${parserMode}`,
+    files: ['**/*.md'],
+    plugins: {
+      markdown,
+      mark: { rules },
     },
+    language: `markdown/${parserMode}`,
   };
 }
