@@ -1,5 +1,5 @@
 /**
- * @fileoverview
+ * @fileoverview Rule to enforce the use of shorthand for code block language identifiers.
  * @author 루밀LuMir(lumirlumir)
  * @see https://shiki.style/languages#bundled-languages
  */
@@ -109,14 +109,14 @@ export default {
       // @ts-ignore -- TODO: https://github.com/eslint/eslint/issues/19521, https://github.com/eslint/eslint/issues/19523
       name: getFileName(import.meta.url),
       recommended: true,
-      description: '',
+      description: 'Enforce the use of shorthand for code block language identifiers',
       url: 'https://github.com/lumirlumir/npm-eslint-plugin-mark',
     },
 
     fixable: 'code',
 
     messages: {
-      codeLangShorthand: '`{{ lang }}` should be shortened to {{ langShorthand }}.',
+      codeLangShorthand: '`{{ lang }}` should be shortened to `{{ langShorthand }}`.',
     },
 
     language: 'markdown',
