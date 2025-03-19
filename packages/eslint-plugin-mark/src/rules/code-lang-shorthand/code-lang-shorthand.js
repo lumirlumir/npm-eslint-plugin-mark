@@ -172,7 +172,7 @@ export default {
         if (langShorthand === undefined) return;
 
         // @ts-ignore -- TODO: https://github.com/eslint/markdown/issues/323
-        const match = context.sourceCode.getText(node).match(lang);
+        const match = context.sourceCode.getText(node).match(new RegExp(lang, 'i'));
 
         const matchIndexStart = match.index;
         const matchIndexEnd = matchIndexStart + match[0].length;
@@ -190,7 +190,7 @@ export default {
           },
 
           data: {
-            lang,
+            lang: node.lang, // Original lang.
             langShorthand,
           },
 
