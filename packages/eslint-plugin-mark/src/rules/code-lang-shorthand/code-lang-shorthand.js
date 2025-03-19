@@ -161,15 +161,18 @@ export default {
         const langShorthandMapMerged = Object.fromEntries(
           Object.entries({
             ...langShorthandMap,
-            ...context.options[0].override,
-          }).filter(([key]) => !context.options[0].ignores.includes(key)),
+            ...context.options[0].override, // `override` option handling.
+          })
+            .map(([key, value]) => [key.toLowerCase(), value.toLowerCase()]) // Normalize keys and values.
+            .filter(([key]) => !context.options[0].ignores.includes(key)), // `ignores` option handling.
         );
-        const langShorthand = langShorthandMapMerged[node.lang];
+        const lang = node.lang.toLowerCase(); // Normalize lang.
+        const langShorthand = langShorthandMapMerged[lang];
 
         if (langShorthand === undefined) return;
 
         // @ts-ignore -- TODO: https://github.com/eslint/markdown/issues/323
-        const match = context.sourceCode.getText(node).match(node.lang);
+        const match = context.sourceCode.getText(node).match(lang);
 
         const matchIndexStart = match.index;
         const matchIndexEnd = matchIndexStart + match[0].length;
@@ -187,7 +190,7 @@ export default {
           },
 
           data: {
-            lang: node.lang,
+            lang,
             langShorthand,
           },
 
