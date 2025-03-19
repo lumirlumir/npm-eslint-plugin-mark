@@ -8,5 +8,5 @@ export default [
   },
   bananass.configs.js,
   bananass.configs.ts,
-  mark.configs.all.gfm,
+  mark.configs.allGfm,
 ];

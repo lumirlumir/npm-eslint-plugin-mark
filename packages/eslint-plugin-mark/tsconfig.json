@@ -11,6 +11,6 @@
     "moduleResolution": "Node",
     "skipLibCheck": true
   },
-  "include": ["src/**/*.js"],
+  "include": ["src/**/*.js", "src/**/*.mjs", "src/**/*.cjs"],
   "exclude": ["src/**/*.test.js"]
 }
