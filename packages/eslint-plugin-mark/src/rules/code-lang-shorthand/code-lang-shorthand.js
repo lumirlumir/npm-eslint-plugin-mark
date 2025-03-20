@@ -166,7 +166,7 @@ export default {
             .map(([key, value]) => [key.toLowerCase(), value.toLowerCase()]) // Normalize keys and values.
             .filter(([key]) => !context.options[0].ignores.includes(key)), // `ignores` option handling.
         );
-        const lang = node.lang.toLowerCase(); // Normalize lang.
+        const lang = node.lang?.toLowerCase(); // Normalize lang.
         const langShorthand = langShorthandMapMerged[lang];
 
         if (langShorthand === undefined) return;
