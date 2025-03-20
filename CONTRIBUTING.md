@@ -12,19 +12,19 @@ All packages are located in the `packages` directory, and the documentation can 
 
 1. Clone it to your local directory. ([Git](https://git-scm.com/downloads) is required.)
 
-    ```bash
+    ```sh
     git clone https://github.com/lumirlumir/npm-eslint-plugin-mark.git
     ```
 
 1. Move to the `npm-eslint-plugin-mark` directory.
 
-    ```bash
+    ```sh
     cd npm-eslint-plugin-mark
     ```
 
 1. Install npm packages. ([Node.js](https://nodejs.org/en) is required.)
 
-    ```bash
+    ```sh
     npm install
     ```
 
@@ -32,13 +32,13 @@ All packages are located in the `packages` directory, and the documentation can 
 
 1. Create `my-branch` branch.
 
-    ```bash
+    ```sh
     git switch -c my-branch
     ```
 
 1. Commit your changes. (`husky` and `lint-staged` will lint your changed files!)
 
-    ```bash
+    ```sh
     git commit -am "<type>[optional scope]: <description>"
     ```
 

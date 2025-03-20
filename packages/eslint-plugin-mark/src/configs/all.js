@@ -32,6 +32,7 @@ export default function all(parserMode) {
     ...base(parserMode),
     name: `mark/all/${parserMode}`,
     rules: {
+      'mark/code-lang-shorthand': 'error',
       'mark/no-curly-quotes': 'error',
       'mark/no-double-spaces': 'error',
     },
