@@ -63,35 +63,12 @@
     #ccccfa 30%,
     #6358d4 60%
   );
-  --vp-home-hero-image-filter: blur(32px);
+  --vp-home-hero-image-filter: blur(48px);
 }
 
-@media (min-width: 640px) {
-  .image-container {
-    transform: scale(1.25) translate(0px, 0px) !important;
-    opacity: 0.9;
-  }
-}
-
-@media (min-width: 960px) {
-  .image-container {
-    transform: scale(1.4) translate(-24px, 0px) !important;
-  }
-}
-
-@media (min-width: 1440px) {
-  .image-container {
-    transform: scale(1.75) translate(-16px, 0px) !important;
-  }
-}
-
-.image-bg {
-  width: 180px !important;
-  height: 180px !important;
-}
-
-img.VPImage.logo {
-  transform: scale(1.75);
+.image-container {
+  opacity: 0.9;
+  transform: translate(0px, 0px) !important;
 }
 
 /**
