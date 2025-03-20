@@ -20,7 +20,7 @@ import rules from 'eslint-plugin-mark/rules';
  * @property {boolean} recommended
  * @property {boolean} fixable
  * @property {boolean} suggestion
- * @property {boolean} commonmark
+ * @property {boolean} cm
  * @property {boolean} gfm
  */
 
@@ -36,7 +36,7 @@ const ruleMetas = Object.keys(rules).map(
       recommended: rules[rule].meta.docs.recommended ?? false,
       fixable: rules[rule].meta.fixable ?? false,
       suggestion: rules[rule].meta.docs.suggestion ?? false,
-      commonmark: rules[rule].meta.dialects.includes('commonmark') ?? false,
+      cm: rules[rule].meta.dialects.includes('commonmark') ?? false,
       gfm: rules[rule].meta.dialects.includes('gfm') ?? false,
     }),
 );
