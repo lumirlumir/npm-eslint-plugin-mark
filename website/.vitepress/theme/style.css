@@ -78,3 +78,7 @@
 .vp-doc p img {
   display: inline;
 }
+
+.narrow {
+  padding: 4px !important;
+}

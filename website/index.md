@@ -15,7 +15,7 @@ hero:
       link: / # TODO
     - theme: alt
       text: Rules
-      link: / # TODO
+      link: docs/rules/
     - theme: alt
       text: Configs
       link: / # TODO

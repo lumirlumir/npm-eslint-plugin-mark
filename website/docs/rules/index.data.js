@@ -41,12 +41,24 @@ const ruleMetas = Object.keys(rules).map(
     }),
 );
 
+const emoji = {
+  recommended: '✅',
+  fixable: '🔧',
+  suggestion: '💡',
+  cm: '⭐',
+  gfm: '🌟',
+};
+
 // --------------------------------------------------------------------------------
 // Export
 // --------------------------------------------------------------------------------
 
 export default {
   load() {
-    return ruleMetas;
+    return {
+      rules,
+      ruleMetas,
+      emoji,
+    };
   },
 };
