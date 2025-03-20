@@ -166,13 +166,12 @@ export default {
             .map(([key, value]) => [key.toLowerCase(), value.toLowerCase()]) // Normalize keys and values.
             .filter(([key]) => !context.options[0].ignores.includes(key)), // `ignores` option handling.
         );
-        const lang = node.lang?.toLowerCase(); // Normalize lang.
-        const langShorthand = langShorthandMapMerged[lang];
+        const langShorthand = langShorthandMapMerged[node.lang?.toLowerCase()]; // Normalize lang.
 
         if (langShorthand === undefined) return;
 
         // @ts-ignore -- TODO: https://github.com/eslint/markdown/issues/323
-        const match = context.sourceCode.getText(node).match(new RegExp(lang, 'i'));
+        const match = context.sourceCode.getText(node).match(node.lang);
 
         const matchIndexStart = match.index;
         const matchIndexEnd = matchIndexStart + match[0].length;
