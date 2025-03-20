@@ -134,23 +134,6 @@ export default defineConfig({
           },
         ],
       },
-      {
-        text: 'Packages',
-        items: [
-          {
-            text: 'clang-format-node',
-            link: `${NPM_URL}/package/clang-format-node`,
-          },
-          {
-            text: 'clang-format-git',
-            link: `${NPM_URL}/package/clang-format-git`,
-          },
-          {
-            text: 'clang-format-git-python',
-            link: `${NPM_URL}/package/clang-format-git-python`,
-          },
-        ],
-      },
     ],
 
     sidebar: {
@@ -297,13 +280,13 @@ export default defineConfig({
     socialLinks: [
       {
         icon: 'npm',
-        link: `${NPM_URL}/~lumir`,
-        ariaLabel: 'npm profile link for LuMir',
+        link: `${NPM_URL}/package/eslint-plugin-mark`,
+        ariaLabel: 'npm package link for eslint-plugin-mark',
       },
       {
         icon: 'github',
         link: GITHUB_URL,
-        ariaLabel: 'GitHub repository link for clang-format-node',
+        ariaLabel: 'GitHub repository link for eslint-plugin-mark',
       },
     ],
 
