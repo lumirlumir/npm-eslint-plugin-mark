@@ -37,11 +37,11 @@ export default defineConfig({
   description: DESCRIPTION,
   head: [
     // Basic
-    ['link', { rel: 'icon', href: '/logo-lightgray.svg', type: 'image/svg+xml' }],
-    ['link', { rel: 'icon', href: '/logo-lightgray-small.png', type: 'image/png' }],
+    ['link', { rel: 'icon', href: '/logo.svg', type: 'image/svg+xml' }],
+    ['link', { rel: 'icon', href: '/logo-small.png', type: 'image/png' }],
     ['link', { rel: 'icon', href: '/favicon.ico', type: 'image/x-icon' }],
     ['meta', { name: 'title', content: TITLE }],
-    ['meta', { name: 'theme-color', content: '#83ba63' }],
+    ['meta', { name: 'theme-color', content: '#a0a0f5' }],
     ['meta', { name: 'author', content: AUTHOR }],
     [
       'meta',
@@ -93,9 +93,8 @@ export default defineConfig({
   /* Theme Configuration */
   themeConfig: {
     logo: {
-      light: '/logo-black.svg',
-      dark: '/logo-white.svg',
-      alt: 'clang-format-node Logo',
+      src: '/logo.svg',
+      alt: 'eslint-plugin-mark Logo',
     },
 
     outline: {
@@ -103,13 +102,14 @@ export default defineConfig({
     },
 
     nav: [
+      // TODO: From here
       {
         text: 'Get Started',
         link: '/docs/get-started',
         activeMatch: '/docs/get-started/',
       },
       {
-        text: 'APIs',
+        text: 'Rules',
         link: '/docs/apis/clang-format-node',
         activeMatch: '/docs/apis/',
       },
@@ -133,10 +133,6 @@ export default defineConfig({
             activeMatch: '/docs/community/',
           },
         ],
-      },
-      {
-        text: 'Examples',
-        link: `${GITHUB_URL}/tree/main/examples`,
       },
       {
         text: 'Packages',
