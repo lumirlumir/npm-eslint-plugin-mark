@@ -185,7 +185,7 @@ const foo = 'bar';
 
     // Options - override
     {
-      name: 'Override lang identifier (exsiting)',
+      name: 'Override lang identifier (existing)',
       code: `\`\`\`javascript
 const foo = 'bar';
 \`\`\``,
