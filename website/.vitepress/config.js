@@ -110,8 +110,8 @@ export default defineConfig({
       },
       {
         text: 'Rules',
-        link: '/docs/apis/clang-format-node',
-        activeMatch: '/docs/apis/',
+        link: '/docs/rules/',
+        activeMatch: '/docs/rules/',
       },
       {
         text: 'Others',
