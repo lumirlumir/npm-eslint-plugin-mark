@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+
+Sitemap: https://eslint-plugin-mark.lumir.page/sitemap.xml

@@ -1,8 +1,7 @@
-# `no-double-spaces`
+# `{{ $frontmatter.title }}`
 
-<kbd>Recommended ✅</kbd> <kbd>Fixable 🛠️</kbd>
-
-Disallow double spaces in text, except for leading and trailing spaces
+<!-- markdownlint-disable-next-line no-inline-html -->
+<div v-html="$frontmatter.rule"></div>
 
 ## Rule Details
 
