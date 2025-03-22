@@ -1,3 +1,3 @@
-# `code-lang-shorthand`
+# `{{ $frontmatter.title }}`
 
 case insensitive

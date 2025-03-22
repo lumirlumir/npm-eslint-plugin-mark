@@ -1,4 +1,4 @@
-# `no-double-spaces`
+# `{{ $frontmatter.title }}`
 
 <kbd>Recommended ✅</kbd> <kbd>Fixable 🛠️</kbd>
 

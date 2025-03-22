@@ -8,6 +8,8 @@
 // Import
 // --------------------------------------------------------------------------------
 
+import { parse } from 'node:path';
+
 import { generateGoogleAnalyticsScript } from 'bananass-utils-vitepress/head';
 import footnote from 'markdown-it-footnote';
 import { defineConfig } from 'vitepress';
@@ -323,5 +325,17 @@ export default defineConfig({
         gitService: 'github',
       }),
     ],
+  },
+
+  transformPageData(pageData) {
+    // Process only the files inside `docs/rules/`, excluding `index.md`.
+    if (/^docs\/rules\/(?!index).+/.test(pageData.relativePath)) {
+      const ruleName = parse(pageData.relativePath).name;
+
+      pageData.title = ruleName;
+      pageData.frontmatter.title = ruleName;
+    }
+
+    return pageData;
   },
 });

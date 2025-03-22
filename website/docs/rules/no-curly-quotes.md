@@ -1,4 +1,4 @@
-# `no-curly-quotes`
+# `{{ $frontmatter.title }}`
 
 <kbd>Recommended ✅</kbd> <kbd>Fixable 🛠️</kbd>
 
