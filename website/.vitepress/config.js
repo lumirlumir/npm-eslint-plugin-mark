@@ -338,9 +338,6 @@ export default defineConfig({
       pageData.frontmatter.title = ruleName;
       pageData.frontmatter.rule = `
 
-<h1>
-  <code>${ruleName}</code>
-</h1>
 <p>
   ${(rule.meta.docs.recommended ?? false) ? '<code class="rule-emoji">✅ Recommended</code>' : ''}
   ${(rule.meta.fixable ?? false) ? '<code class="rule-emoji">🔧 Fixable</code>' : ''}
@@ -349,7 +346,7 @@ export default defineConfig({
   ${(rule.meta.dialects.includes('gfm') ?? false) ? '<code class="rule-emoji">🌟 GFM</code>' : ''}
 </p>
 <p>
-  ${(rules[ruleName].meta.docs.description ?? '')
+  ${(rule.meta.docs.description ?? '')
     .split(/(`[^`]+`)/)
     .map(part =>
       part.startsWith('`') && part.endsWith('`')

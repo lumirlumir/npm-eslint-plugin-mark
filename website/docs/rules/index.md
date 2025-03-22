@@ -27,11 +27,11 @@ const { ruleMetas } = data;
       <tr>
         <th style="width: 11rem">Rules ({{ ruleMetas.length }})</th>
         <th>Description</th>
-        <th class="narrow">{{ $emoji.recommended }}</th>
-        <th class="narrow">{{ $emoji.fixable }}</th>
-        <th class="narrow">{{ $emoji.suggestion }}</th>
-        <th class="narrow">{{ $emoji.commonmark }}</th>
-        <th class="narrow">{{ $emoji.gfm }}</th>
+        <th class="table-narrow">{{ $emoji.recommended }}</th>
+        <th class="table-narrow">{{ $emoji.fixable }}</th>
+        <th class="table-narrow">{{ $emoji.suggestion }}</th>
+        <th class="table-narrow">{{ $emoji.commonmark }}</th>
+        <th class="table-narrow">{{ $emoji.gfm }}</th>
       </tr>
     </thead>
     <tbody>
@@ -46,11 +46,11 @@ const { ruleMetas } = data;
             <template v-else>{{ part }}</template>
           </template>
         </td>
-        <td class="narrow">{{ ruleMeta.recommended ? $emoji.recommended : '' }}</td>
-        <td class="narrow">{{ ruleMeta.fixable ? $emoji.fixable : '' }}</td>
-        <td class="narrow">{{ ruleMeta.suggestion ? $emoji.suggestion : '' }}</td>
-        <td class="narrow">{{ ruleMeta.commonmark ? $emoji.commonmark : '' }}</td>
-        <td class="narrow">{{ ruleMeta.gfm ? $emoji.gfm : '' }}</td>
+        <td class="table-narrow">{{ ruleMeta.recommended ? $emoji.recommended : '' }}</td>
+        <td class="table-narrow">{{ ruleMeta.fixable ? $emoji.fixable : '' }}</td>
+        <td class="table-narrow">{{ ruleMeta.suggestion ? $emoji.suggestion : '' }}</td>
+        <td class="table-narrow">{{ ruleMeta.commonmark ? $emoji.commonmark : '' }}</td>
+        <td class="table-narrow">{{ ruleMeta.gfm ? $emoji.gfm : '' }}</td>
       </tr>
     </tbody>
   </table>
