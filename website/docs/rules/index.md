@@ -39,7 +39,7 @@ const { ruleMetas } = data;
         <td><a :href="ruleMeta.name"><code>{{ ruleMeta.name }}</code></a></td>
         <td>
           <!-- Backticks handling -->
-          <template v-for="(part, index) in ruleMeta.description.split(/(`[^`]+`)/)">
+          <template v-for="part in ruleMeta.description.split(/(`[^`]+`)/)">
             <code v-if="part.startsWith('`') && part.endsWith('`')">
               {{ part.slice(1, -1) }}
             </code>

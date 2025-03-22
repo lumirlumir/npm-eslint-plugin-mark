@@ -16,6 +16,7 @@ import { defineConfig } from 'vitepress';
 import { groupIconMdPlugin, groupIconVitePlugin } from 'vitepress-plugin-group-icons';
 import { codecovVitePlugin } from '@codecov/vite-plugin';
 import isInteractive from 'is-interactive';
+import rules from 'eslint-plugin-mark/rules';
 
 // --------------------------------------------------------------------------------
 // Constants
@@ -331,9 +332,34 @@ export default defineConfig({
     // Process only the files inside `docs/rules/`, excluding `index.md`.
     if (/^docs\/rules\/(?!index).+/.test(pageData.relativePath)) {
       const ruleName = parse(pageData.relativePath).name;
+      const rule = rules[ruleName];
 
       pageData.title = ruleName;
       pageData.frontmatter.title = ruleName;
+      pageData.frontmatter.rule = `
+
+<h1>
+  <code>${ruleName}</code>
+</h1>
+<p>
+  ${(rule.meta.docs.recommended ?? false) ? '<code class="rule-emoji">✅ Recommended</code>' : ''}
+  ${(rule.meta.fixable ?? false) ? '<code class="rule-emoji">🔧 Fixable</code>' : ''}
+  ${(rule.meta.docs.suggestion ?? false) ? '<code class="rule-emoji">💡 Suggestion</code>' : ''}
+  ${(rule.meta.dialects.includes('commonmark') ?? false) ? '<code class="rule-emoji">⭐ CommonMark</code>' : ''}
+  ${(rule.meta.dialects.includes('gfm') ?? false) ? '<code class="rule-emoji">🌟 GFM</code>' : ''}
+</p>
+<p>
+  ${(rules[ruleName].meta.docs.description ?? '')
+    .split(/(`[^`]+`)/)
+    .map(part =>
+      part.startsWith('`') && part.endsWith('`')
+        ? `<code>${part.slice(1, -1)}</code>`
+        : part,
+    )
+    .join('')}.
+</p>
+
+`;
     }
 
     return pageData;
