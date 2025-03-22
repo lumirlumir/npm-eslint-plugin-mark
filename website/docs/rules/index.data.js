@@ -36,18 +36,10 @@ const ruleMetas = Object.keys(rules).map(
       recommended: rules[rule].meta.docs.recommended ?? false,
       fixable: rules[rule].meta.fixable ?? false,
       suggestion: rules[rule].meta.docs.suggestion ?? false,
-      cm: rules[rule].meta.dialects.includes('commonmark') ?? false,
+      commonmark: rules[rule].meta.dialects.includes('commonmark') ?? false,
       gfm: rules[rule].meta.dialects.includes('gfm') ?? false,
     }),
 );
-
-const emoji = {
-  recommended: '✅',
-  fixable: '🔧',
-  suggestion: '💡',
-  cm: '⭐',
-  gfm: '🌟',
-};
 
 // --------------------------------------------------------------------------------
 // Export
@@ -58,7 +50,6 @@ export default {
     return {
       rules,
       ruleMetas,
-      emoji,
     };
   },
 };

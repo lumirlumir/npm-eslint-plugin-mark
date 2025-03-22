@@ -18,4 +18,15 @@ import 'virtual:group-icons.css'; // eslint-disable-line n/no-missing-import
 // --------------------------------------------------------------------------------
 
 /** @type {import('vitepress').Theme} */
-export default theme;
+export default {
+  ...theme,
+  enhanceApp({ app }) {
+    app.config.globalProperties.$emoji = {
+      recommended: '✅',
+      fixable: '🔧',
+      suggestion: '💡',
+      commonmark: '⭐',
+      gfm: '🌟',
+    };
+  },
+};
