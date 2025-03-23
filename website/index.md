@@ -12,13 +12,13 @@ hero:
   actions:
     - theme: brand
       text: Get Started
-      link: / # TODO
+      link: docs/get-started/
     - theme: alt
       text: Rules
       link: docs/rules/
     - theme: alt
       text: Configs
-      link: / # TODO
+      link: docs/get-started/configurations/
     - theme: brand
       text: Give It a Star⭐
       link: https://github.com/lumirlumir/npm-eslint-plugin-mark

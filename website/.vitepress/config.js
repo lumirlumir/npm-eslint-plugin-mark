@@ -108,38 +108,46 @@ export default defineConfig({
       // TODO: From here
       {
         text: 'Get Started',
-        link: '/docs/get-started',
-        activeMatch: '/docs/get-started/',
-      },
-      {
-        text: 'Rules',
-        link: '/docs/rules/',
-        activeMatch: '/docs/rules/',
-      },
-      {
-        text: 'Others',
-        activeMatch: '/docs/(?:further-reading|blog|community)/',
+        activeMatch: '/docs/(?:get-started|community)',
         items: [
           {
-            text: 'Further Reading',
-            link: '/docs/further-reading/guides-on-llvm-clang-format',
-            activeMatch: '/docs/further-reading/',
-          },
-          {
-            text: 'Blog',
-            link: '/docs/blog/v1.2.0',
-            activeMatch: '/docs/blog/',
+            text: 'Get Started',
+            link: '/docs/get-started',
+            activeMatch: '/docs/get-started',
           },
           {
             text: 'Community',
             link: '/docs/community/code-of-conduct',
-            activeMatch: '/docs/community/',
+            activeMatch: '/docs/community',
           },
         ],
+      },
+      {
+        text: 'Rules',
+        link: '/docs/rules',
+        activeMatch: '/docs/rules',
+      },
+      {
+        text: 'Configs',
+        link: '/docs/get-started/configurations',
+        activeMatch: '/docs/get-started/configurations',
       },
     ],
 
     sidebar: {
+      '/docs/rules/': [
+        {
+          base: '/docs/rules/',
+          text: 'Rules',
+          link: '/',
+          collapsed: false,
+          items: Object.keys(rules).map(ruleName => ({
+            text: ruleName,
+            link: ruleName,
+          })),
+        },
+      ],
+
       '/docs/': [
         {
           base: '/docs/get-started/',
@@ -147,10 +155,6 @@ export default defineConfig({
           link: '/',
           collapsed: false, // Set it `false` to show `>` icon.
           items: [
-            {
-              text: 'Why We Started This Project',
-              link: 'why-we-started-this-project',
-            },
             {
               text: 'Introduction',
               link: 'introduction',
@@ -160,88 +164,16 @@ export default defineConfig({
               link: 'installation',
             },
             {
-              text: 'Configuration',
-              link: 'configuration',
+              text: 'Configurations',
+              link: 'configurations',
             },
             {
-              text: 'Ignore Files',
-              link: 'ignore-files',
+              text: 'Dependency Versions',
+              link: 'dependency-versions',
             },
             {
-              text: 'CLI',
-              link: 'cli',
-            },
-            {
-              text: 'Supported',
-              link: 'supported',
-            },
-            {
-              text: 'Migration Guide',
-              link: 'migration-from-angular-clang-format',
-            },
-            {
-              text: 'Use with <code>husky</code>, <code>lint-staged</code>',
-              link: 'use-with-husky-and-lint-staged',
-            },
-            {
-              text: 'Q & A',
-              link: 'q-and-a',
-            },
-          ],
-        },
-
-        {
-          base: '/docs/apis/',
-          text: 'APIs',
-          collapsed: true,
-          items: [
-            {
-              text: 'clang-format-node',
-              link: 'clang-format-node',
-            },
-            {
-              text: 'clang-format-git',
-              link: 'clang-format-git',
-            },
-            {
-              text: 'clang-format-git-python',
-              link: 'clang-format-git-python',
-            },
-          ],
-        },
-
-        {
-          base: '/docs/further-reading/',
-          text: 'Further Reading',
-          collapsed: true,
-          items: [
-            {
-              text: 'Guides on LLVM Clang Format',
-              link: 'guides-on-llvm-clang-format',
-            },
-            {
-              text: 'Build Process',
-              link: 'build-process',
-            },
-            {
-              text: '<code>os.platform()</code>, <code>os.arch()</code>',
-              link: 'about-os-platform-and-os-arch-in-nodejs',
-            },
-            {
-              text: '<code>|| exit 0</code> and <code>|| true</code>',
-              link: 'difference-between-exit-0-and-true',
-            },
-          ],
-        },
-
-        {
-          base: '/docs/blog/',
-          text: 'Blog',
-          collapsed: true,
-          items: [
-            {
-              text: 'v1.2.0',
-              link: 'v1.2.0',
+              text: 'Versioning',
+              link: 'versioning',
             },
           ],
         },
@@ -262,10 +194,6 @@ export default defineConfig({
             {
               text: 'Change Log',
               link: 'change-log',
-            },
-            {
-              text: 'Versioning',
-              link: 'versioning',
             },
             {
               text: 'Security',
