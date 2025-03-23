@@ -1,8 +1,8 @@
 ---
 description: "Overview for the `eslint-plugin-mark` npm package."
 next:
-  text: 'Installation'
-  link: '/docs/get-started/installation/'
+  text: 'Introduction'
+  link: '/docs/get-started/introduction/'
 ---
 
 <!-- @include: ../../../README.md -->
