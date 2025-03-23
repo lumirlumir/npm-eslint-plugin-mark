@@ -8,6 +8,10 @@
       "types": "./build/index.d.ts",
       "default": "./src/index.js"
     },
+    "./rules": {
+      "types": "./build/rules/index.d.ts",
+      "default": "./src/rules/index.js"
+    },
     "./package.json": "./package.json"
   },
   "typesVersions": {
@@ -17,6 +21,9 @@
       ],
       ".": [
         "./build/index.d.ts"
+      ],
+      "./rules": [
+        "./build/rules/index.d.ts"
       ]
     }
   },

@@ -1,16 +1,15 @@
-# `no-double-spaces`
+# `{{ $frontmatter.title }}`
 
-<kbd>Recommended ✅</kbd> <kbd>Fixable 🛠️</kbd>
-
-Disallow double spaces in text, except for leading and trailing spaces
+<!-- markdownlint-disable-next-line no-inline-html -->
+<div v-html="$frontmatter.rule"></div>
 
 ## Rule Details
 
-Markdown treats double or more spaces as a single space. Double spaces in Markdown sentences are usually typos or mistakes and can be hard to spot. This rule will help keep your code clean and consistent.
+Markdown treats double or more multiple spaces as a single space. Double spaces in Markdown sentences are usually typos and can be hard to spot. This rule will help keep your code clean and consistent.
 
 This rule only checks for **double** spaces ***in the middle of sentences*** and applies only to [`text`](https://github.com/syntax-tree/mdast?tab=readme-ov-file#text) node.
 
-Since **leading** and **trailing** spaces have special meaning in markdown, this rule will not check for them. **Leading** spaces are used for creating code blocks or indentation, and **trailing** spaces are used to create line breaks.
+Since **leading** and **trailing** spaces have special meaning in markdown, this rule won't check for them. **Leading** spaces are used for creating code blocks or indentation, and **trailing** spaces are used to create line breaks.
 
 ### ❌ Incorrect
 
