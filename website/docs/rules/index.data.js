@@ -20,7 +20,7 @@ import rules from 'eslint-plugin-mark/rules';
  * @property {boolean} recommended
  * @property {boolean} fixable
  * @property {boolean} suggestion
- * @property {boolean} cm
+ * @property {boolean} commonmark
  * @property {boolean} gfm
  */
 
