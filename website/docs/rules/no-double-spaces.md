@@ -9,7 +9,7 @@ Markdown treats double or multiple consecutive spaces within a sentence as a sin
 
 Double spaces within a sentence are usually typos and can be hard to spot. This rule helps keep your code clean and consistent.
 
-Please note that this rule only checks for **double or multiple consecutive** spaces ***within sentences***. Since **leading** and **trailing** spaces have special meanings in Markdown, this rule does not check for them. **Leading** spaces are used for creating code blocks or indentation, while **trailing** spaces are used to create line breaks.
+It only checks for **double or multiple consecutive** spaces ***within sentences***. Since **leading** and **trailing** spaces have special meanings in Markdown, this rule does not check for them. **Leading** spaces are used for creating code blocks or indentation, while **trailing** spaces are used to create line breaks.
 
 ### :x: Incorrect {#incorrect}
 
@@ -20,8 +20,7 @@ Examples of **incorrect** code for this rule:
 ::: code-group
 
 ```md [incorrect.md]
-foo  bar
-
+<!-- [!code word:  :1] -->
 foo  bar  baz
 ```
 
@@ -30,7 +29,7 @@ export default [
   // ...
   {
     rules: {
-      'mark/no-double-spaces': 'error',
+      'mark/no-double-spaces': 'error', // [!code focus]
     },
   },
   // ...
@@ -39,14 +38,19 @@ export default [
 
 :::
 
-#### With `multipleSpaces` Option
+#### With `multipleSpaces: true` Option
 
 ::: code-group
 
 ```md [incorrect.md]
-foo   bar
+<!-- [!code word:  :1] -->
+foo  bar  baz
 
-foo  bar   baz    qux
+<!-- [!code word:   :1] -->
+foo   bar   baz
+
+<!-- [!code word:    :1] -->
+foo    bar    baz    qux
 ```
 
 ```js [eslint.config.mjs]
@@ -54,9 +58,9 @@ export default [
   // ...
   {
     rules: {
-      'mark/no-double-spaces': ['error', {
-        multipleSpaces: true,
-      }],
+      'mark/no-double-spaces': ['error', { // [!code focus]
+        multipleSpaces: true, // [!code focus]
+      }], // [!code focus]
     },
   },
   // ...
@@ -74,17 +78,15 @@ Examples of **correct** code for this rule:
 ::: code-group
 
 ```md [correct.md]
-<!-- single spaces -->
 foo bar baz qux
 
-<!-- multiple (more than three) spaces -->
-foo   bar     baz
+foo   bar    baz     qux
 
-<!-- leading double space -->
   foo bar
 
-<!-- trailing double space -->
-foo bar␣␣
+foo bar  ⁡
+
+foo bar    ⁡
 ```
 
 ```js [eslint.config.mjs]
@@ -92,7 +94,7 @@ export default [
   // ...
   {
     rules: {
-      'mark/no-double-spaces': 'error',
+      'mark/no-double-spaces': 'error', // [!code focus]
     },
   },
   // ...
@@ -101,25 +103,18 @@ export default [
 
 :::
 
-#### With `multipleSpaces` Option
+#### With `multipleSpaces: true` Option
 
 ::: code-group
 
 ```md [correct.md]
-<!-- Single spaces -->
 foo bar baz qux
 
-<!-- leading double space -->
   foo bar
 
-<!-- leading multiple space -->
-    foo bar
+foo bar  ⁡
 
-<!-- trailing double space -->
-foo bar␣␣
-
-<!-- trailing multiple space -->
-foo bar␣␣␣
+foo bar    ⁡
 ```
 
 ```js [eslint.config.mjs]
@@ -127,9 +122,9 @@ export default [
   // ...
   {
     rules: {
-      'mark/no-double-spaces': ['error', {
-        multipleSpaces: true,
-      }],
+      'mark/no-double-spaces': ['error', { // [!code focus]
+        multipleSpaces: true, // [!code focus]
+      }], // [!code focus]
     },
   },
   // ...
