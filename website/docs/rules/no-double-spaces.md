@@ -5,26 +5,76 @@
 
 ## Rule Details
 
-Markdown treats double or more multiple spaces as a single space. Double spaces in Markdown sentences are usually typos and can be hard to spot. This rule will help keep your code clean and consistent.
+Markdown treats double or multiple consecutive spaces within a sentence as a single space.
 
-This rule only checks for **double** spaces ***in the middle of sentences*** and applies only to [`text`](https://github.com/syntax-tree/mdast?tab=readme-ov-file#text) node.
+Double spaces within a sentence are usually typos and can be hard to spot. This rule helps keep your code clean and consistent.
 
-Since **leading** and **trailing** spaces have special meaning in markdown, this rule won't check for them. **Leading** spaces are used for creating code blocks or indentation, and **trailing** spaces are used to create line breaks.
+Please note that this rule only checks for **double or multiple consecutive** spaces ***within sentences***. Since **leading** and **trailing** spaces have special meanings in Markdown, this rule does not check for them. **Leading** spaces are used for creating code blocks or indentation, while **trailing** spaces are used to create line breaks.
 
-### ❌ Incorrect
+### :x: Incorrect {#incorrect}
 
 Examples of **incorrect** code for this rule:
 
-```md
+#### Default
+
+::: code-group
+
+```md [incorrect.md]
 foo  bar
+
+foo  bar  baz
 ```
 
-### ✅ Correct
+```js [eslint.config.mjs]
+export default [
+  // ...
+  {
+    rules: {
+      'mark/no-double-spaces': 'error',
+    },
+  },
+  // ...
+];
+```
+
+:::
+
+#### With `multipleSpaces` Option
+
+::: code-group
+
+```md [incorrect.md]
+foo   bar
+
+foo  bar   baz    qux
+```
+
+```js [eslint.config.mjs]
+export default [
+  // ...
+  {
+    rules: {
+      'mark/no-double-spaces': ['error', {
+        multipleSpaces: true,
+      }],
+    },
+  },
+  // ...
+];
+```
+
+:::
+
+### :white_check_mark: Correct {#correct}
 
 Examples of **correct** code for this rule:
 
-```md
-<!-- Single spaces -->
+#### Default
+
+::: code-group
+
+```md [correct.md]
+<!-- single spaces -->
 foo bar baz qux
 
 <!-- multiple (more than three) spaces -->
@@ -37,13 +87,78 @@ foo   bar     baz
 foo bar␣␣
 ```
 
-## Fix
+```js [eslint.config.mjs]
+export default [
+  // ...
+  {
+    rules: {
+      'mark/no-double-spaces': 'error',
+    },
+  },
+  // ...
+];
+```
 
-This rule fixes the double spaces by replacing them with a single space.
+:::
+
+#### With `multipleSpaces` Option
+
+::: code-group
+
+```md [correct.md]
+<!-- Single spaces -->
+foo bar baz qux
+
+<!-- leading double space -->
+  foo bar
+
+<!-- leading multiple space -->
+    foo bar
+
+<!-- trailing double space -->
+foo bar␣␣
+
+<!-- trailing multiple space -->
+foo bar␣␣␣
+```
+
+```js [eslint.config.mjs]
+export default [
+  // ...
+  {
+    rules: {
+      'mark/no-double-spaces': ['error', {
+        multipleSpaces: true,
+      }],
+    },
+  },
+  // ...
+];
+```
+
+:::
 
 ## Options
 
-No options are provided.
+```js
+'mark/no-double-spaces': ['error', {
+  multipleSpaces: false,
+}]
+```
+
+### `multipleSpaces`
+
+> Default: `false`
+
+When `multipleSpaces` is set to `true`, this rule will also check for multiple consecutive spaces (more than two) within a sentence.
+
+## Fix
+
+This rule fixes the double or multiple consecutive spaces by replacing them with a single space.
+
+## AST
+
+This rule applies only to the [`Text`](https://github.com/syntax-tree/mdast?tab=readme-ov-file#text) node.
 
 ## Prior Art
 

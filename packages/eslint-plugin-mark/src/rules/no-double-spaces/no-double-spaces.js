@@ -1,5 +1,5 @@
 /**
- * @fileoverview Rule to disallow double spaces in text, except for leading and trailing spaces.
+ * @fileoverview Rule to disallow double or multiple consecutive spaces in text, except for leading and trailing spaces.
  * @author 루밀LuMir(lumirlumir)
  */
 
@@ -24,6 +24,7 @@ import { getFileName } from '../../core/helpers/index.js';
 // --------------------------------------------------------------------------------
 
 const doubleSpacesRegex = /(?<! ) {2}(?! )/g; // Exactly two spaces. No more, no less.
+const multipleSpacesRegex = /(?<! ) {2,}(?! )/g; // More than two spaces.
 const leadingSpacesRegex = /^ */;
 const singleSpace = ' ';
 
@@ -41,15 +42,35 @@ export default {
       name: getFileName(import.meta.url),
       recommended: true,
       description:
-        'Disallow double spaces in text, except for leading and trailing spaces',
+        'Disallow double or multiple consecutive spaces in text, except for leading and trailing spaces',
       url: 'https://github.com/lumirlumir/npm-eslint-plugin-mark',
     },
 
     fixable: 'whitespace',
 
+    schema: [
+      {
+        type: 'object',
+        properties: {
+          multipleSpaces: {
+            type: 'boolean',
+          },
+        },
+        additionalProperties: false,
+      },
+    ],
+
+    defaultOptions: [
+      {
+        multipleSpaces: false,
+      },
+    ],
+
     messages: {
       noDoubleSpaces:
         'Double spaces are not allowed except for leading and trailing spaces.',
+      noMultipleSpaces:
+        'Multiple spaces are not allowed except for leading and trailing spaces.',
     },
 
     language: 'markdown',
@@ -63,17 +84,21 @@ export default {
       text(node) {
         textHandler(context, node);
 
+        const { multipleSpaces } = context.options[0];
+        const spacesRegex = multipleSpaces ? multipleSpacesRegex : doubleSpacesRegex;
+        const messageId = multipleSpaces ? 'noMultipleSpaces' : 'noDoubleSpaces';
+
         node.children.forEach(textLineNode => {
-          const matches = [...textLineNode.value.trim().matchAll(doubleSpacesRegex)];
+          const matches = [...textLineNode.value.trim().matchAll(spacesRegex)];
 
           if (matches.length > 0) {
             matches.forEach(match => {
-              const doubleSpacesLength = match[0].length;
+              const spacesLength = match[0].length;
               const leadingSpacesLength =
                 textLineNode.value.match(leadingSpacesRegex)[0].length;
 
               const matchIndexStart = match.index + leadingSpacesLength;
-              const matchIndexEnd = matchIndexStart + doubleSpacesLength;
+              const matchIndexEnd = matchIndexStart + spacesLength;
 
               context.report({
                 loc: {
@@ -87,7 +112,7 @@ export default {
                   },
                 },
 
-                messageId: 'noDoubleSpaces',
+                messageId,
 
                 fix(fixer) {
                   return fixer.replaceTextRange(
