@@ -37,6 +37,8 @@ foo   bar     baz
 foo bar␣␣
 ```
 
+## AST
+
 ## Fix
 
 This rule fixes the double spaces by replacing them with a single space.
