@@ -18,6 +18,7 @@ import rule from './no-double-spaces.js';
 
 const { name } = rule.meta.docs;
 const noDoubleSpaces = 'noDoubleSpaces';
+const noMultipleSpaces = 'noMultipleSpaces';
 
 // --------------------------------------------------------------------------------
 // Testcases
@@ -25,6 +26,7 @@ const noDoubleSpaces = 'noDoubleSpaces';
 
 const tests = {
   valid: [
+    // Double spaces.
     '  ', // Empty string with double spaces.
     'foo bar baz', // A single space between words.
     'foo   bar baz', // Triple space between words.
@@ -48,10 +50,102 @@ qux
     'foo\n\n\nbar baz', // Triple newlines between words.
     'foo\t\tbar baz', // A single tab between words.
     'foo\t\t\tbar baz', // Triple tabs between words.
+
+    // Multiple spaces.
+    {
+      name: 'Empty string with multiple spaces',
+      code: '  ',
+      options: [
+        {
+          multipleSpaces: true,
+        },
+      ],
+    },
+    {
+      name: 'A single space between words',
+      code: 'foo bar baz',
+      options: [
+        {
+          multipleSpaces: true,
+        },
+      ],
+    },
+    {
+      name: 'A single leading space',
+      code: ' foo bar baz',
+      options: [
+        {
+          multipleSpaces: true,
+        },
+      ],
+    },
+    {
+      name: 'Double leading space',
+      code: '  foo bar baz',
+      options: [
+        {
+          multipleSpaces: true,
+        },
+      ],
+    },
+    {
+      name: 'Triple leading space',
+      code: '   foo bar baz',
+      options: [
+        {
+          multipleSpaces: true,
+        },
+      ],
+    },
+    {
+      name: 'Multiple (more than three) leading space',
+      code: '    foo bar baz',
+      options: [
+        {
+          multipleSpaces: true,
+        },
+      ],
+    },
+    {
+      name: 'A single trailing space',
+      code: 'foo bar baz ',
+      options: [
+        {
+          multipleSpaces: true,
+        },
+      ],
+    },
+    {
+      name: 'Double trailing space',
+      code: 'foo bar baz  ',
+      options: [
+        {
+          multipleSpaces: true,
+        },
+      ],
+    },
+    {
+      name: 'Triple trailing space',
+      code: 'foo bar baz   ',
+      options: [
+        {
+          multipleSpaces: true,
+        },
+      ],
+    },
+    {
+      name: 'Multiple (more than three) trailing space',
+      code: 'foo bar baz    ',
+      options: [
+        {
+          multipleSpaces: true,
+        },
+      ],
+    },
   ],
 
   invalid: [
-    // single line
+    // double spaces: single line
     {
       name: 'Double space between words',
       code: 'foo  bar baz',
@@ -235,7 +329,7 @@ qux
       ],
     },
 
-    // multiple lines
+    // double spaces: multiple lines
     {
       name: 'Double space with newline',
       code: `foo
@@ -335,6 +429,92 @@ foo bar baz
           column: 8,
           endLine: 3,
           endColumn: 10,
+        },
+      ],
+    },
+
+    // multiple spaces: single line
+    {
+      name: 'Multiple space between words',
+      code: 'foo   bar baz',
+      output: 'foo bar baz',
+      errors: [
+        {
+          messageId: noMultipleSpaces,
+          line: 1,
+          column: 4,
+          endLine: 1,
+          endColumn: 7,
+        },
+      ],
+      options: [
+        {
+          multipleSpaces: true,
+        },
+      ],
+    },
+    {
+      name: 'Multiple spaces between words',
+      code: 'foo  bar   baz    qux',
+      output: 'foo bar baz qux',
+      errors: [
+        {
+          messageId: noMultipleSpaces,
+          line: 1,
+          column: 4,
+          endLine: 1,
+          endColumn: 6,
+        },
+        {
+          messageId: noMultipleSpaces,
+          line: 1,
+          column: 9,
+          endLine: 1,
+          endColumn: 12,
+        },
+        {
+          messageId: noMultipleSpaces,
+          line: 1,
+          column: 15,
+          endLine: 1,
+          endColumn: 19,
+        },
+      ],
+      options: [
+        {
+          multipleSpaces: true,
+        },
+      ],
+    },
+
+    // multiple spaces: multiple lines
+    {
+      name: 'Multiple spaces with newline and leading spaces',
+      code: `foo
+  bar   baz  qux
+quux`,
+      output: `foo
+  bar baz qux
+quux`,
+      errors: [
+        {
+          messageId: noMultipleSpaces,
+          line: 2,
+          column: 6,
+          endLine: 2,
+          endColumn: 9,
+        },
+        {
+          messageId: noMultipleSpaces,
+          line: 2,
+          column: 12,
+          endLine: 2,
+          endColumn: 14,
+        },
+      ],
+      options: [
+        {
+          multipleSpaces: true,
         },
       ],
     },
