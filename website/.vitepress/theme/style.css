@@ -64,6 +64,8 @@
     #6358d4 60%
   );
   --vp-home-hero-image-filter: blur(48px);
+
+  --vp-code-line-height: 2;
 }
 
 .image-container {
@@ -87,4 +89,33 @@ code.rule-emoji {
   font-size: 0.75rem !important;
   color: var(--vp-c-text-1) !important;
   border: 1px solid var(--vp-c-text-3) !important;
+}
+
+/**
+ * Markdown Document: `transformerNotationWordHighlight` and `transformerMetaWordHighlight`
+ * -------------------------------------------------------------------------- */
+
+.highlighted-word {
+  text-decoration: wavy underline red;
+}
+
+/**
+ * Markdown Document: `transformerRenderWhitespace`
+ * -------------------------------------------------------------------------- */
+
+.language-md .vp-code .tab,
+.language-md .vp-code .space {
+  position: relative;
+}
+
+.language-md .vp-code .tab::before {
+  content: '⇥';
+  position: absolute;
+  opacity: 0.5;
+}
+
+.language-md .vp-code .space::before {
+  content: '·';
+  position: absolute;
+  opacity: 0.5;
 }

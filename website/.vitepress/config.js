@@ -17,6 +17,11 @@ import { groupIconMdPlugin, groupIconVitePlugin } from 'vitepress-plugin-group-i
 import { codecovVitePlugin } from '@codecov/vite-plugin';
 import isInteractive from 'is-interactive';
 import rules from 'eslint-plugin-mark/rules';
+import {
+  transformerNotationWordHighlight,
+  transformerMetaWordHighlight,
+  transformerRenderWhitespace,
+} from '@shikijs/transformers';
 
 // --------------------------------------------------------------------------------
 // Constants
@@ -241,6 +246,12 @@ export default defineConfig({
       md.use(footnote);
       md.use(groupIconMdPlugin);
     },
+
+    codeTransformers: [
+      transformerNotationWordHighlight(), // https://shiki.style/packages/transformers#transformernotationwordhighlight
+      transformerMetaWordHighlight(), // https://shiki.style/packages/transformers#transformermetawordhighlight
+      transformerRenderWhitespace(), // https://shiki.style/packages/transformers#transformerrenderwhitespace
+    ],
   },
 
   vite: {
