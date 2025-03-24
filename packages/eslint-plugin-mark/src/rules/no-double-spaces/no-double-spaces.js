@@ -8,7 +8,7 @@
 // --------------------------------------------------------------------------------
 
 import { textHandler } from '../../core/ast/index.js';
-import { getFileName } from '../../core/helpers/index.js';
+import { getFileName, getRuleDocsUrl } from '../../core/helpers/index.js';
 
 // --------------------------------------------------------------------------------
 // Typedefs
@@ -22,6 +22,8 @@ import { getFileName } from '../../core/helpers/index.js';
 // --------------------------------------------------------------------------------
 // Helpers
 // --------------------------------------------------------------------------------
+
+const ruleName = getFileName(import.meta.url);
 
 const doubleSpacesRegex = /(?<! ) {2}(?! )/g; // Exactly two spaces. No more, no less.
 const multipleSpacesRegex = /(?<! ) {2,}(?! )/g; // More than two spaces.
@@ -39,11 +41,11 @@ export default {
 
     docs: {
       // @ts-ignore -- TODO: https://github.com/eslint/eslint/issues/19521, https://github.com/eslint/eslint/issues/19523
-      name: getFileName(import.meta.url),
+      name: ruleName,
       recommended: true,
       description:
         'Disallow double or multiple consecutive spaces in text, except for leading and trailing spaces',
-      url: 'https://github.com/lumirlumir/npm-eslint-plugin-mark',
+      url: getRuleDocsUrl(ruleName),
     },
 
     fixable: 'whitespace',
