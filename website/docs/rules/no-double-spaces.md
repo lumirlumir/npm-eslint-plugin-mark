@@ -15,16 +15,66 @@ Please note that this rule only checks for **double or multiple consecutive** sp
 
 Examples of **incorrect** code for this rule:
 
-```md
+#### Default
+
+::: code-group
+
+```md [incorrect.md]
 foo  bar
+
+foo  bar  baz
 ```
+
+```js [eslint.config.mjs]
+export default [
+  // ...
+  {
+    rules: {
+      'mark/no-double-spaces': 'error',
+    },
+  },
+  // ...
+];
+```
+
+:::
+
+#### With `multipleSpaces` Option
+
+::: code-group
+
+```md [incorrect.md]
+foo   bar
+
+foo  bar   baz    qux
+```
+
+```js [eslint.config.mjs]
+export default [
+  // ...
+  {
+    rules: {
+      'mark/no-double-spaces': ['error', {
+        multipleSpaces: true,
+      }],
+    },
+  },
+  // ...
+];
+```
+
+:::
 
 ### :white_check_mark: Correct {#correct}
 
 Examples of **correct** code for this rule:
 
-```md
-<!-- Single spaces -->
+#### Default
+
+::: code-group
+
+```md [correct.md]
+<!-- single spaces -->
 foo bar baz qux
 
 <!-- multiple (more than three) spaces -->
@@ -36,6 +86,57 @@ foo   bar     baz
 <!-- trailing double space -->
 foo bar␣␣
 ```
+
+```js [eslint.config.mjs]
+export default [
+  // ...
+  {
+    rules: {
+      'mark/no-double-spaces': 'error',
+    },
+  },
+  // ...
+];
+```
+
+:::
+
+#### With `multipleSpaces` Option
+
+::: code-group
+
+```md [correct.md]
+<!-- Single spaces -->
+foo bar baz qux
+
+<!-- leading double space -->
+  foo bar
+
+<!-- leading multiple space -->
+    foo bar
+
+<!-- trailing double space -->
+foo bar␣␣
+
+<!-- trailing multiple space -->
+foo bar␣␣␣
+```
+
+```js [eslint.config.mjs]
+export default [
+  // ...
+  {
+    rules: {
+      'mark/no-double-spaces': ['error', {
+        multipleSpaces: true,
+      }],
+    },
+  },
+  // ...
+];
+```
+
+:::
 
 ## Options
 
