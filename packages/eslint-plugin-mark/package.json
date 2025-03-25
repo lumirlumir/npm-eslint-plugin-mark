@@ -12,6 +12,10 @@
       "types": "./build/rules/index.d.ts",
       "default": "./src/rules/index.js"
     },
+    "./constants": {
+      "types": "./build/core/constants.d.ts",
+      "default": "./src/core/constants.js"
+    },
     "./package.json": "./package.json"
   },
   "typesVersions": {
@@ -24,6 +28,9 @@
       ],
       "./rules": [
         "./build/rules/index.d.ts"
+      ],
+      "./constants": [
+        "./build/core/constants.d.ts"
       ]
     }
   },

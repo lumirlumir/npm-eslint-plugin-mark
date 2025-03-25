@@ -6,7 +6,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { URL_RULES } from '../../constants.js';
+import { URL_RULE_DOCS } from '../../constants.js';
 
 // --------------------------------------------------------------------------------
 // Export
@@ -19,5 +19,5 @@ import { URL_RULES } from '../../constants.js';
  * @returns {string} The URL for the rule documentation.
  */
 export default function getRuleDocsUrl(ruleName) {
-  return `${URL_RULES}${ruleName}`;
+  return `${URL_RULE_DOCS}${ruleName}`;
 }

@@ -12,13 +12,28 @@ import { createRequire } from 'node:module';
 // Declaration
 // --------------------------------------------------------------------------------
 
-const { homepage } = createRequire(import.meta.url)('../../package.json');
+const { description, homepage, name } = createRequire(import.meta.url)(
+  '../../package.json',
+);
 
 // --------------------------------------------------------------------------------
 // Export
 // --------------------------------------------------------------------------------
 
 /** @type {string} */
+export const PKG_DESCRIPTION = description;
+/** @type {string} */
+export const PKG_NAME = name;
+/** @type {string} */
+export const PKG_AUTHOR = '루밀LuMir';
+
+/** @type {string} */
 export const URL_HOMEPAGE = homepage;
 /** @type {string} */
-export const URL_RULES = `${URL_HOMEPAGE}/docs/rules/`;
+export const URL_GITHUB = `https://github.com/lumirlumir/npm-${PKG_NAME}`;
+/** @type {string} */
+export const URL_NPM = 'https://www.npmjs.com';
+/** @type {string} */
+export const URL_RULE_DOCS = `${URL_HOMEPAGE}/docs/rules/`;
+/** @type {string} */
+export const URL_RULE_SRC = `${URL_GITHUB}/tree/main/packages/${PKG_NAME}/src/rules`;
