@@ -109,10 +109,13 @@ export default {
           leftSingleQuotationMarkOption ? leftSingleQuotationMark : '',
           rightSingleQuotationMarkOption ? rightSingleQuotationMark : '',
         ].join('');
-        const regex = new RegExp(`[${regexString}]`, 'g');
+
+        if (!regexString) return;
 
         node.children.forEach(textLineNode => {
-          const matches = [...textLineNode.value.matchAll(regex)];
+          const matches = [
+            ...textLineNode.value.matchAll(new RegExp(`[${regexString}]`, 'g')),
+          ];
 
           if (matches.length > 0) {
             matches.forEach(match => {
