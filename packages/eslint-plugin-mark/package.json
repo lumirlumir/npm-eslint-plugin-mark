@@ -80,6 +80,6 @@
     "cheerio": "^1.0.0"
   },
   "devDependencies": {
-    "eslint": "^9.22.0"
+    "eslint": "^9.23.0"
   }
 }
