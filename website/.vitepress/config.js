@@ -1,6 +1,5 @@
 /**
  * @fileoverview Vitepress site configuration.
- *
  * @see https://vitepress.dev/reference/site-config#site-config
  */
 
@@ -11,12 +10,22 @@
 import { parse } from 'node:path';
 
 import { generateGoogleAnalyticsScript } from 'bananass-utils-vitepress/head';
+import rules from 'eslint-plugin-mark/rules';
+import {
+  PKG_NAME,
+  PKG_DESCRIPTION,
+  PKG_AUTHOR,
+  URL_HOMEPAGE,
+  URL_GITHUB,
+  URL_NPM,
+  URL_RULE_SRC,
+} from 'eslint-plugin-mark/constants';
+
 import footnote from 'markdown-it-footnote';
 import { defineConfig } from 'vitepress';
 import { groupIconMdPlugin, groupIconVitePlugin } from 'vitepress-plugin-group-icons';
 import { codecovVitePlugin } from '@codecov/vite-plugin';
 import isInteractive from 'is-interactive';
-import rules from 'eslint-plugin-mark/rules';
 import {
   transformerNotationWordHighlight,
   transformerMetaWordHighlight,
@@ -27,12 +36,6 @@ import {
 // Constants
 // --------------------------------------------------------------------------------
 
-const TITLE = 'eslint-plugin-mark';
-const DESCRIPTION = 'Lint your Markdown with ESLint.🛠️';
-const AUTHOR = '루밀LuMir';
-const SITE_URL = 'https://eslint-plugin-mark.lumir.page';
-const GITHUB_URL = 'https://github.com/lumirlumir/npm-eslint-plugin-mark';
-const NPM_URL = 'https://www.npmjs.com';
 const GOOGLE_GA_ID = 'G-9KLYX5PTLT';
 
 // --------------------------------------------------------------------------------
@@ -41,16 +44,16 @@ const GOOGLE_GA_ID = 'G-9KLYX5PTLT';
 
 export default defineConfig({
   /* Site Metadata */
-  title: TITLE,
-  description: DESCRIPTION,
+  title: PKG_NAME,
+  description: PKG_DESCRIPTION,
   head: [
     // Basic
     ['link', { rel: 'icon', href: '/logo.svg', type: 'image/svg+xml' }],
     ['link', { rel: 'icon', href: '/logo-small.png', type: 'image/png' }],
     ['link', { rel: 'icon', href: '/favicon.ico', type: 'image/x-icon' }],
-    ['meta', { name: 'title', content: TITLE }],
+    ['meta', { name: 'title', content: PKG_NAME }],
     ['meta', { name: 'theme-color', content: '#a0a0f5' }],
-    ['meta', { name: 'author', content: AUTHOR }],
+    ['meta', { name: 'author', content: PKG_AUTHOR }],
     [
       'meta',
       {
@@ -61,21 +64,21 @@ export default defineConfig({
 
     // Open Graph
     ['meta', { property: 'og:type', content: 'website' }],
-    ['meta', { property: 'og:url', content: SITE_URL }],
-    ['meta', { property: 'og:title', content: TITLE }],
-    ['meta', { property: 'og:description', content: DESCRIPTION }],
-    ['meta', { property: 'og:image', content: `${SITE_URL}/logo-og.png` }],
+    ['meta', { property: 'og:url', content: URL_HOMEPAGE }],
+    ['meta', { property: 'og:title', content: PKG_NAME }],
+    ['meta', { property: 'og:description', content: PKG_DESCRIPTION }],
+    ['meta', { property: 'og:image', content: `${URL_HOMEPAGE}/logo-og.png` }],
     ['meta', { property: 'og:image:width', content: '1280' }],
     ['meta', { property: 'og:image:height', content: '640' }],
-    ['meta', { property: 'og:site_name', content: TITLE }],
-    ['meta', { property: 'og:article:author', content: AUTHOR }],
+    ['meta', { property: 'og:site_name', content: PKG_NAME }],
+    ['meta', { property: 'og:article:author', content: PKG_AUTHOR }],
 
     // Twitter
-    ['meta', { name: 'twitter:url', content: SITE_URL }],
-    ['meta', { name: 'twitter:title', content: TITLE }],
-    ['meta', { name: 'twitter:description', content: DESCRIPTION }],
-    ['meta', { name: 'twitter:image', content: `${SITE_URL}/logo-og.png` }],
-    ['meta', { name: 'twitter:creator', content: AUTHOR }],
+    ['meta', { name: 'twitter:url', content: URL_HOMEPAGE }],
+    ['meta', { name: 'twitter:title', content: PKG_NAME }],
+    ['meta', { name: 'twitter:description', content: PKG_DESCRIPTION }],
+    ['meta', { name: 'twitter:image', content: `${URL_HOMEPAGE}/logo-og.png` }],
+    ['meta', { name: 'twitter:creator', content: PKG_AUTHOR }],
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
 
     // Google Analytics
@@ -95,7 +98,7 @@ export default defineConfig({
 
   /* Sitemap */
   sitemap: {
-    hostname: SITE_URL,
+    hostname: URL_HOMEPAGE,
   },
 
   /* Theme Configuration */
@@ -216,18 +219,18 @@ export default defineConfig({
     socialLinks: [
       {
         icon: 'npm',
-        link: `${NPM_URL}/package/eslint-plugin-mark`,
+        link: `${URL_NPM}/package/eslint-plugin-mark`,
         ariaLabel: 'npm package link for eslint-plugin-mark',
       },
       {
         icon: 'github',
-        link: GITHUB_URL,
+        link: URL_GITHUB,
         ariaLabel: 'GitHub repository link for eslint-plugin-mark',
       },
     ],
 
     editLink: {
-      pattern: `${GITHUB_URL}/edit/main/website/:path`,
+      pattern: `${URL_GITHUB}/edit/main/website/:path`,
       text: 'Edit this page on GitHub',
     },
 
@@ -237,7 +240,7 @@ export default defineConfig({
 
     footer: {
       message: 'Released under the MIT License.',
-      copyright: `Copyright © 2024-${new Date().getFullYear()} <a href="https://github.com/lumirlumir">${AUTHOR}(lumirlumir)</a>`,
+      copyright: `Copyright © 2024-${new Date().getFullYear()} <a href="https://github.com/lumirlumir">${PKG_AUTHOR}(lumirlumir)</a>`,
     },
   },
 
@@ -288,8 +291,8 @@ export default defineConfig({
   ${(rule.meta.dialects.includes('gfm') ?? false) ? '<code class="rule-emoji">🌟 GFM</code>' : ''}
 </p>
 <p>
-  <code class="rule-emoji">🔗 Rule Source</code>
-  <code class="rule-emoji">🔗 Test Source</code>
+  <code class="rule-emoji">🔗 <a target="_blank" href="${URL_RULE_SRC}/${ruleName}/${ruleName}.js">Rule Source</a></code>
+  <code class="rule-emoji">🔗 <a target="_blank" href="${URL_RULE_SRC}/${ruleName}/${ruleName}.test.js">Test Source</a></code>
 </p>
 <p>
   ${(rule.meta.docs.description ?? '')
