@@ -29,8 +29,8 @@ const leftDoubleQuotationMark = '\u201C'; // `“`
 const rightDoubleQuotationMark = '\u201D'; // `”`
 const leftSingleQuotationMark = '\u2018'; // `‘`
 const rightSingleQuotationMark = '\u2019'; // `’`
-const doubleStraightQuote = '"';
-const singleStraightQuote = "'";
+const doubleQuotationMark = '"';
+const singleQuotationMark = "'";
 
 // --------------------------------------------------------------------------------
 // Rule Definition
@@ -51,6 +51,36 @@ export default {
 
     fixable: 'code',
 
+    schema: [
+      {
+        type: 'object',
+        properties: {
+          leftDoubleQuotationMark: {
+            type: 'boolean',
+          },
+          rightDoubleQuotationMark: {
+            type: 'boolean',
+          },
+          leftSingleQuotationMark: {
+            type: 'boolean',
+          },
+          rightSingleQuotationMark: {
+            type: 'boolean',
+          },
+        },
+        additionalProperties: false,
+      },
+    ],
+
+    defaultOptions: [
+      {
+        leftDoubleQuotationMark: true,
+        rightDoubleQuotationMark: true,
+        leftSingleQuotationMark: true,
+        rightSingleQuotationMark: true,
+      },
+    ],
+
     messages: {
       noCurlyQuotes:
         'Curly quotes(`“`, `”`, `‘` or `’`) are not allowed. Use straight quotes(`"` or `\'`) instead.',
@@ -67,15 +97,22 @@ export default {
       text(node) {
         textHandler(context, node);
 
+        const {
+          leftDoubleQuotationMark: leftDoubleQuotationMarkOption,
+          rightDoubleQuotationMark: rightDoubleQuotationMarkOption,
+          leftSingleQuotationMark: leftSingleQuotationMarkOption,
+          rightSingleQuotationMark: rightSingleQuotationMarkOption,
+        } = context.options[0];
+        const regexString = [
+          leftDoubleQuotationMarkOption ? leftDoubleQuotationMark : '',
+          rightDoubleQuotationMarkOption ? rightDoubleQuotationMark : '',
+          leftSingleQuotationMarkOption ? leftSingleQuotationMark : '',
+          rightSingleQuotationMarkOption ? rightSingleQuotationMark : '',
+        ].join('');
+        const regex = new RegExp(`[${regexString}]`, 'g');
+
         node.children.forEach(textLineNode => {
-          const matches = [
-            ...textLineNode.value.matchAll(
-              new RegExp(
-                `[${leftDoubleQuotationMark}${rightDoubleQuotationMark}${leftSingleQuotationMark}${rightSingleQuotationMark}]`,
-                'g',
-              ),
-            ),
-          ];
+          const matches = [...textLineNode.value.matchAll(regex)];
 
           if (matches.length > 0) {
             matches.forEach(match => {
@@ -105,8 +142,8 @@ export default {
                       textLineNode.position.start.offset + matchIndexEnd,
                     ],
                     [leftDoubleQuotationMark, rightDoubleQuotationMark].includes(match[0])
-                      ? doubleStraightQuote
-                      : singleStraightQuote,
+                      ? doubleQuotationMark
+                      : singleQuotationMark,
                   );
                 },
               });

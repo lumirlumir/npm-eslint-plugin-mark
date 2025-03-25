@@ -24,7 +24,7 @@ Examples of **incorrect** code for this rule:
 foo  bar  baz
 ```
 
-```js [eslint.config.mjs]
+```js [eslint.config.mjs] {5}
 export default [
   // ...
   {
@@ -53,7 +53,7 @@ foo   bar   baz
 foo    bar    baz    qux
 ```
 
-```js [eslint.config.mjs]
+```js [eslint.config.mjs] {5-7}
 export default [
   // ...
   {
@@ -89,7 +89,7 @@ foo bar  ⁡
 foo bar    ⁡
 ```
 
-```js [eslint.config.mjs]
+```js [eslint.config.mjs] {5}
 export default [
   // ...
   {
@@ -117,7 +117,7 @@ foo bar  ⁡
 foo bar    ⁡
 ```
 
-```js [eslint.config.mjs]
+```js [eslint.config.mjs] {5-7}
 export default [
   // ...
   {
