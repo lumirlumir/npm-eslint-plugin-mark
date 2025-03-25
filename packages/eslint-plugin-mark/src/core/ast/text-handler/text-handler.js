@@ -41,7 +41,7 @@ export default function textHandler(context, textNode) {
    * - In JavaScript, `\n` represents a newline character and splits text accordingly.
    *   However, in Markdown, writing `abcd\ndefg` treats `\n` as plain text (backslash + 'n'), not a newline.
    *   Only actual line breaks in Markdown (`abcd↵defg`) are stored as `"\n"` and split properly.
-   */ // @ts-ignore -- TODO: https://github.com/eslint/markdown/issues/323
+   */ // @ts-expect-error -- TODO: https://github.com/eslint/markdown/issues/323
   const lines = context.sourceCode.getText(textNode).split(newLineRegex);
 
   lines.forEach((line, lineNumber) => {

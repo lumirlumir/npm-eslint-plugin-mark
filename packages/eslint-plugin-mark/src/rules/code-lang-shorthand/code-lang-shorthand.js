@@ -110,7 +110,7 @@ export default {
     type: 'problem',
 
     docs: {
-      // @ts-ignore -- TODO: https://github.com/eslint/eslint/issues/19521, https://github.com/eslint/eslint/issues/19523
+      // @ts-expect-error -- TODO: https://github.com/eslint/eslint/issues/19521, https://github.com/eslint/eslint/issues/19523
       name: ruleName,
       recommended: false,
       description: 'Enforce the use of shorthand for code block language identifiers',
@@ -160,19 +160,21 @@ export default {
     return {
       /** @param {Code} node */
       code(node) {
+        // @ts-expect-error -- TODO
+        const { ignores, override } = context.options[0];
         const langShorthandMapMerged = Object.fromEntries(
           Object.entries({
             ...langShorthandMap,
-            ...context.options[0].override, // `override` option handling.
+            ...override, // `override` option handling.
           })
             .map(([key, value]) => [key.toLowerCase(), value.toLowerCase()]) // Normalize keys and values.
-            .filter(([key]) => !context.options[0].ignores.includes(key)), // `ignores` option handling.
+            .filter(([key]) => !ignores.includes(key)), // `ignores` option handling.
         );
         const langShorthand = langShorthandMapMerged[node.lang?.toLowerCase()]; // Normalize lang.
 
         if (langShorthand === undefined) return;
 
-        // @ts-ignore -- TODO: https://github.com/eslint/markdown/issues/323
+        // @ts-expect-error -- TODO: https://github.com/eslint/markdown/issues/323
         const match = context.sourceCode.getText(node).match(node.lang);
 
         const matchIndexStart = match.index;
