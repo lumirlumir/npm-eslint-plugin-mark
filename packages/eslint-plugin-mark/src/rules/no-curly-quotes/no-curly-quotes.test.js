@@ -24,7 +24,75 @@ const noCurlyQuotes = 'noCurlyQuotes';
 // --------------------------------------------------------------------------------
 
 const tests = {
-  valid: ['', ' ', '"', "'"],
+  valid: [
+    // Default
+    '',
+    ' ',
+    '"',
+    "'",
+
+    // With options
+    {
+      name: 'Zero width string with all options disabled',
+      code: '',
+      options: [
+        {
+          leftDoubleQuotationMark: false,
+          rightDoubleQuotationMark: false,
+          leftSingleQuotationMark: false,
+          rightSingleQuotationMark: false,
+        },
+      ],
+    },
+    {
+      name: 'Empty string with all options disabled',
+      code: ' ',
+      options: [
+        {
+          leftDoubleQuotationMark: false,
+          rightDoubleQuotationMark: false,
+          leftSingleQuotationMark: false,
+          rightSingleQuotationMark: false,
+        },
+      ],
+    },
+    {
+      name: 'Disable left double quotation mark',
+      code: '“',
+      options: [
+        {
+          leftDoubleQuotationMark: false,
+        },
+      ],
+    },
+    {
+      name: 'Disable right double quotation mark',
+      code: '”',
+      options: [
+        {
+          rightDoubleQuotationMark: false,
+        },
+      ],
+    },
+    {
+      name: 'Disable left single quotation mark',
+      code: '‘',
+      options: [
+        {
+          leftSingleQuotationMark: false,
+        },
+      ],
+    },
+    {
+      name: 'Disable right single quotation mark',
+      code: '’',
+      options: [
+        {
+          rightSingleQuotationMark: false,
+        },
+      ],
+    },
+  ],
 
   invalid: [
     {
