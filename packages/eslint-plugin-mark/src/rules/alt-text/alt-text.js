@@ -40,7 +40,7 @@ export default {
       // @ts-ignore -- TODO: https://github.com/eslint/eslint/issues/19521, https://github.com/eslint/eslint/issues/19523
       name: ruleName,
       recommended: true,
-      description: 'Enforce the use of alternative text for images.',
+      description: 'Enforce the use of alternative text for images',
       url: getRuleDocsUrl(ruleName),
     },
 
