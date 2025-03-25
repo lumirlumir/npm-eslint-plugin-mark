@@ -21,4 +21,4 @@ const { homepage } = createRequire(import.meta.url)('../../package.json');
 /** @type {string} */
 export const URL_HOMEPAGE = homepage;
 /** @type {string} */
-export const URL_RULES = `${URL_HOMEPAGE}/docs/rules/`;
+export const URL_RULE_DOCS = `${URL_HOMEPAGE}/docs/rules/`;

@@ -277,12 +277,19 @@ export default defineConfig({
       pageData.frontmatter.title = ruleName;
       pageData.frontmatter.rule = `
 
+<h1>
+  <code>${ruleName}</code>
+</h1>
 <p>
   ${(rule.meta.docs.recommended ?? false) ? '<code class="rule-emoji">✅ Recommended</code>' : ''}
   ${(rule.meta.fixable ?? false) ? '<code class="rule-emoji">🔧 Fixable</code>' : ''}
   ${(rule.meta.docs.suggestion ?? false) ? '<code class="rule-emoji">💡 Suggestion</code>' : ''}
   ${(rule.meta.dialects.includes('commonmark') ?? false) ? '<code class="rule-emoji">⭐ CommonMark</code>' : ''}
   ${(rule.meta.dialects.includes('gfm') ?? false) ? '<code class="rule-emoji">🌟 GFM</code>' : ''}
+</p>
+<p>
+  <code class="rule-emoji">🔗 Rule Source</code>
+  <code class="rule-emoji">🔗 Test Source</code>
 </p>
 <p>
   ${(rule.meta.docs.description ?? '')

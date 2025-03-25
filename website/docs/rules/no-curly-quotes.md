@@ -1,7 +1,5 @@
-# `{{ $frontmatter.title }}`
-
-<!-- markdownlint-disable-next-line no-inline-html -->
-<div v-html="$frontmatter.rule"></div>
+<!-- markdownlint-disable-next-line no-inline-html first-line-h1 -->
+<header v-html="$frontmatter.rule"></header>
 
 ## Rule Details
 
