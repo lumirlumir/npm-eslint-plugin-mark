@@ -40,7 +40,7 @@ export default {
     type: 'problem',
 
     docs: {
-      // @ts-ignore -- TODO: https://github.com/eslint/eslint/issues/19521, https://github.com/eslint/eslint/issues/19523
+      // @ts-expect-error -- TODO: https://github.com/eslint/eslint/issues/19521, https://github.com/eslint/eslint/issues/19523
       name: ruleName,
       recommended: true,
       description:
@@ -86,6 +86,7 @@ export default {
       text(node) {
         textHandler(context, node);
 
+        // @ts-expect-error -- TODO
         const { multipleSpaces } = context.options[0];
         const spacesRegex = multipleSpaces ? multipleSpacesRegex : doubleSpacesRegex;
         const messageId = multipleSpaces ? 'noMultipleSpaces' : 'noDoubleSpaces';

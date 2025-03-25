@@ -37,7 +37,7 @@ export default {
     type: 'problem',
 
     docs: {
-      // @ts-ignore -- TODO: https://github.com/eslint/eslint/issues/19521, https://github.com/eslint/eslint/issues/19523
+      // @ts-expect-error -- TODO: https://github.com/eslint/eslint/issues/19521, https://github.com/eslint/eslint/issues/19523
       name: ruleName,
       recommended: true,
       description: 'Enforce the use of alternative text for images',
@@ -59,7 +59,7 @@ export default {
       image(node) {
         if (node.alt === '') {
           context.report({
-            // @ts-ignore -- TODO
+            // @ts-expect-error -- TODO
             node,
             messageId: 'altText',
           });
@@ -70,7 +70,7 @@ export default {
       imageReference(node) {
         if (node.alt === '') {
           context.report({
-            // @ts-ignore -- TODO
+            // @ts-expect-error -- TODO
             node,
             messageId: 'altText',
           });
@@ -84,7 +84,7 @@ export default {
         $('img').each((_, elem) => {
           if (!elem.attribs.alt) {
             context.report({
-              // @ts-ignore -- TODO
+              // @ts-expect-error -- TODO
               node,
               messageId: 'altText',
             });

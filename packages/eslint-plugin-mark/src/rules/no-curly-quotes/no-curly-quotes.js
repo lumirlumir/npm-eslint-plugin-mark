@@ -42,7 +42,7 @@ export default {
     type: 'problem',
 
     docs: {
-      // @ts-ignore -- TODO: https://github.com/eslint/eslint/issues/19521, https://github.com/eslint/eslint/issues/19523
+      // @ts-expect-error -- TODO: https://github.com/eslint/eslint/issues/19521, https://github.com/eslint/eslint/issues/19523
       name: ruleName,
       recommended: true,
       description: 'Disallow curly quotes(`“`, `”`, `‘` or `’`) in text',
@@ -98,9 +98,13 @@ export default {
         textHandler(context, node);
 
         const {
+          // @ts-expect-error -- TODO
           leftDoubleQuotationMark: leftDoubleQuotationMarkOption,
+          // @ts-expect-error -- TODO
           rightDoubleQuotationMark: rightDoubleQuotationMarkOption,
+          // @ts-expect-error -- TODO
           leftSingleQuotationMark: leftSingleQuotationMarkOption,
+          // @ts-expect-error -- TODO
           rightSingleQuotationMark: rightSingleQuotationMarkOption,
         } = context.options[0];
         const regexString = [
