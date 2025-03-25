@@ -112,7 +112,7 @@ export default {
     docs: {
       // @ts-ignore -- TODO: https://github.com/eslint/eslint/issues/19521, https://github.com/eslint/eslint/issues/19523
       name: ruleName,
-      recommended: true,
+      recommended: false,
       description: 'Enforce the use of shorthand for code block language identifiers',
       url: getRuleDocsUrl(ruleName),
     },
