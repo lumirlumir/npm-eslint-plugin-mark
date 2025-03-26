@@ -33,9 +33,10 @@ export default function all(parserMode) {
     name: `mark/all/${parserMode}`,
     rules: {
       'mark/alt-text': 'error',
-      'mark/code-lang-shorthand': 'error',
+      'mark/code-lang-shorthand': 'warn',
       'mark/no-curly-quotes': 'error',
       'mark/no-double-spaces': 'error',
+      'mark/no-emojis': 'warn',
     },
   };
 }
