@@ -41,8 +41,42 @@ export default {
       url: getRuleDocsUrl(ruleName),
     },
 
+    schema: [
+      {
+        enum: ['always', 'never'],
+      },
+      {
+        type: 'object',
+        properties: {
+          leftDelimiter: {
+            type: 'string',
+          },
+          rightDelimiter: {
+            type: 'string',
+          },
+          ignoreDepth: {
+            type: 'array',
+            items: {
+              enum: [1, 2, 3, 4, 5, 6],
+            },
+          },
+        },
+        additionalProperties: false,
+      },
+    ],
+
+    defaultOptions: [
+      'always',
+      {
+        leftDelimiter: '{',
+        rightDelimiter: '}',
+        ignoreDepth: [],
+      },
+    ],
+
     messages: {
-      headingId: 'Headings should have an ID attribute.',
+      headingIdAlways: 'Headings should have an ID attribute.',
+      headingIdNever: 'Headings should not have an ID attribute.',
     },
 
     language: 'markdown',
@@ -54,12 +88,15 @@ export default {
     return {
       /** @param {Heading} node */
       heading(node) {
-        const regex = /{#[^}]+}[ \t]*$/g;
+        const mode = context.options[0];
+        // const { leftDelimiter, rightDelimiter, ignoreDepth } = context.options[1];
+
+        const regex = /{#[^}]+}[ \t]*$/;
 
         // @ts-expect-error -- TODO: https://github.com/eslint/markdown/issues/323
-        const matches = [...context.sourceCode.getText(node).matchAll(regex)];
+        const match = context.sourceCode.getText(node).match(regex);
 
-        if (matches.length === 0) {
+        if (mode === 'always' && match === null) {
           context.report({
             loc: {
               start: {
@@ -72,7 +109,27 @@ export default {
               },
             },
 
-            messageId: 'headingId',
+            messageId: 'headingIdAlways',
+          });
+        } else if (mode === 'never' && match !== null) {
+          const headingIdLength = match[0].length;
+
+          const matchIndexStart = match.index;
+          const matchIndexEnd = matchIndexStart + headingIdLength;
+
+          context.report({
+            loc: {
+              start: {
+                line: node.position.start.line,
+                column: node.position.start.column + matchIndexStart,
+              },
+              end: {
+                line: node.position.start.line,
+                column: node.position.start.column + matchIndexEnd,
+              },
+            },
+
+            messageId: 'headingIdNever',
           });
         }
       },
