@@ -212,6 +212,7 @@ const tests = {
     {
       name: 'h1 heading ID exists',
       code: '# Heading {#id}',
+      output: '# Heading ',
       errors: [
         {
           messageId: headingIdNever,
@@ -226,6 +227,7 @@ const tests = {
     {
       name: 'h2 heading ID exists',
       code: '## Heading {#id}',
+      output: '## Heading ',
       errors: [
         {
           messageId: headingIdNever,
@@ -240,6 +242,7 @@ const tests = {
     {
       name: 'h3 heading ID exists',
       code: '### Heading {#id}',
+      output: '### Heading ',
       errors: [
         {
           messageId: headingIdNever,
@@ -254,6 +257,7 @@ const tests = {
     {
       name: 'h4 heading ID exists',
       code: '#### Heading {#id}',
+      output: '#### Heading ',
       errors: [
         {
           messageId: headingIdNever,
@@ -268,6 +272,7 @@ const tests = {
     {
       name: 'h5 heading ID exists',
       code: '##### Heading {#id}',
+      output: '##### Heading ',
       errors: [
         {
           messageId: headingIdNever,
@@ -282,6 +287,7 @@ const tests = {
     {
       name: 'h6 heading ID exists',
       code: '###### Heading {#id}',
+      output: '###### Heading ',
       errors: [
         {
           messageId: headingIdNever,

@@ -41,6 +41,8 @@ export default {
       url: getRuleDocsUrl(ruleName),
     },
 
+    fixable: 'code',
+
     schema: [
       {
         enum: ['always', 'never'],
@@ -76,7 +78,8 @@ export default {
 
     messages: {
       headingIdAlways: 'Headings should have an ID attribute.',
-      headingIdNever: 'Headings should not have an ID attribute.',
+      headingIdNever:
+        'Headings should not have an ID attribute. Remove the `{{ headingId }}`.',
     },
 
     language: 'markdown',
@@ -129,7 +132,21 @@ export default {
               },
             },
 
+            data: {
+              headingId: match[0],
+            },
+
             messageId: 'headingIdNever',
+
+            fix(fixer) {
+              return fixer.replaceTextRange(
+                [
+                  node.position.start.offset + matchIndexStart,
+                  node.position.start.offset + matchIndexEnd,
+                ],
+                '',
+              );
+            },
           });
         }
       },
