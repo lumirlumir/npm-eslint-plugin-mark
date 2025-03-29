@@ -91,14 +91,14 @@ export default {
     return {
       /** @param {Heading} node */
       heading(node) {
-        const mode = context.options[0];
         // @ts-expect-error -- TODO
-        const { leftDelimiter, rightDelimiter } = context.options[1];
+        const [mode, { leftDelimiter, rightDelimiter, ignoreDepth }] = context.options;
+
+        if (ignoreDepth.includes(node.depth)) return;
 
         const regex = new RegExp(
           `${leftDelimiter}#[^${rightDelimiter}]+${rightDelimiter}[ \t]*$`,
         );
-
         // @ts-expect-error -- TODO: https://github.com/eslint/markdown/issues/323
         const match = context.sourceCode.getText(node).match(regex);
 

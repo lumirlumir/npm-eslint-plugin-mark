@@ -98,7 +98,7 @@ const tests = {
       options: ['never'],
     },
 
-    // Custom Delimiters
+    // `leftDelimiter` and `rightDelimiter` option
     {
       name: 'Custom Delimiters `[`, `]`',
       code: '# Heading [#id]',
@@ -118,6 +118,28 @@ const tests = {
         {
           leftDelimiter: '\\|',
           rightDelimiter: '\\|',
+        },
+      ],
+    },
+
+    // `ignoreDepth` option
+    {
+      name: 'Ignore h1 heading ID',
+      code: '# Heading',
+      options: [
+        'always',
+        {
+          ignoreDepth: [1],
+        },
+      ],
+    },
+    {
+      name: 'Ignore h1, h2, h3 heading ID',
+      code: '# Heading 1\n\n## Heading 2\n\n### Heading 3',
+      options: [
+        'always',
+        {
+          ignoreDepth: [1, 2, 3],
         },
       ],
     },
