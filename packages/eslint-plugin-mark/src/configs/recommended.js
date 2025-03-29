@@ -1,5 +1,5 @@
 /**
- * @fileoverview All configuration.
+ * @fileoverview Recommended configuration.
  */
 
 // --------------------------------------------------------------------------------
@@ -22,22 +22,20 @@ import base from './base.js';
 // --------------------------------------------------------------------------------
 
 /**
- * All configuration.
+ * Recommended configuration.
  *
  * @param {ParserMode} parserMode
  * @return {LinterConfig}
  */
-export default function all(parserMode) {
+export default function recommended(parserMode) {
   return {
     ...base(parserMode),
-    name: `mark/all/${parserMode}`,
+    name: `mark/recommended/${parserMode}`,
     rules: {
       'mark/alt-text': 'error',
       'mark/code-lang-shorthand': 'error',
-      'mark/heading-id': 'warn',
       'mark/no-curly-quotes': 'error',
       'mark/no-double-spaces': 'error',
-      'mark/no-emojis': 'warn',
     },
   };
 }
