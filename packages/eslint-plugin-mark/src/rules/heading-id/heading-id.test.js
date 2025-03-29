@@ -97,6 +97,30 @@ const tests = {
       code: '###### Heading',
       options: ['never'],
     },
+
+    // Custom Delimiters
+    {
+      name: 'Custom Delimiters `[`, `]`',
+      code: '# Heading [#id]',
+      options: [
+        'always',
+        {
+          leftDelimiter: '\\[',
+          rightDelimiter: '\\]',
+        },
+      ],
+    },
+    {
+      name: 'Custom Delimiters `|`, `|`',
+      code: '# Heading |#id|',
+      options: [
+        'always',
+        {
+          leftDelimiter: '\\|',
+          rightDelimiter: '\\|',
+        },
+      ],
+    },
   ],
 
   invalid: [
