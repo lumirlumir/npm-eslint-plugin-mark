@@ -9,7 +9,7 @@
 
 import { createRequire } from 'node:module';
 
-import { all, base } from './configs/index.js';
+import { all, base, recommended } from './configs/index.js';
 import rules from './rules/index.js';
 
 // --------------------------------------------------------------------------------
@@ -46,5 +46,7 @@ export default {
     allGfm: all(gfm),
     baseCommonmark: base(commonmark),
     baseGfm: base(gfm),
+    recommendedCommonmark: recommended(commonmark),
+    recommendedGfm: recommended(gfm),
   },
 };
