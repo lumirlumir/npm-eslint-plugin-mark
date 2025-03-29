@@ -66,7 +66,7 @@ const tests = {
       code: '# Heading {#id}  ',
     },
 
-    // Never option
+    // `never` option
     {
       name: 'No h1 heading ID',
       code: '# Heading',
