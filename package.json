@@ -27,10 +27,10 @@
     "start:website": "npm run start -w website",
     "fix": "concurrently \"npm:fix:*\"",
     "fix:eslint": "npx eslint --fix",
-    "fix:prettier": "npx prettier . --write",
+    "fix:prettier": "npx prettier . --write --ignore-unknown",
     "lint": "concurrently \"npm:lint:*\"",
     "lint:eslint": "npx eslint",
-    "lint:prettier": "npx prettier . --check",
+    "lint:prettier": "npx prettier . --check --ignore-unknown",
     "lint:editorconfig": "npx editorconfig-checker -config .editorconfig-checker.json",
     "lint:markdownlint": "npx markdownlint **/*.md",
     "lint:textlint": "npx textlint -f pretty-error **/*.md"
