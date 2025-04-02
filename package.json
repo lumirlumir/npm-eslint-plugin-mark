@@ -50,7 +50,7 @@
     "prettier": "^3.5.3",
     "prettier-config-bananass": "^0.0.1",
     "shx": "^0.4.0",
-    "textlint": "^14.3.0",
+    "textlint": "^14.6.0",
     "textlint-rule-allowed-uris": "^1.0.9",
     "typescript": "^5.8.2"
   }
