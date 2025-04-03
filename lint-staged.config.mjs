@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   '*': [
     'npx prettier --check --ignore-unknown',
     'npx editorconfig-checker -config .editorconfig-checker.json',
