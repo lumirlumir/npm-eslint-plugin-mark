@@ -81,6 +81,7 @@ export default {
     // @ts-expect-error -- TODO
     const [{ skipCode, skipInlineCode }] = context.options;
     const { lines } = context.sourceCode;
+
     const ignorePositions = []; // Array to store position information of `Code` and `InlineCode`.
 
     /** @param {number} lineNum @param {number} colNum */
