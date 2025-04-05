@@ -72,6 +72,19 @@ describe('rules-meta', () => {
     });
   });
 
+  it('`meta.message.messageId` should exist and should end with a period', () => {
+    Object.values(rules).forEach(rule => {
+      const { messages } = rule.meta;
+
+      Object.values(messages).forEach(message => {
+        console.log(message);
+
+        ok(message);
+        match(message, /\.$/);
+      });
+    });
+  });
+
   it('`meta.language` should exist and should be `markdown`', () => {
     Object.values(rules).forEach(rule => {
       const { language } = rule.meta;
