@@ -19,7 +19,6 @@ import { getRuleDocsUrl } from '../../core/helpers/index.js';
  * @typedef {import("mdast").Root} Root
  * @typedef {import("mdast").Code} Code
  * @typedef {import("mdast").InlineCode} InlineCode
- *
  */
 
 // --------------------------------------------------------------------------------
