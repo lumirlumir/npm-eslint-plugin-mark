@@ -10,7 +10,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { getFileName, getRuleDocsUrl } from '../../core/helpers/index.js';
+import { getRuleDocsUrl } from '../../core/helpers/index.js';
 
 // --------------------------------------------------------------------------------
 // Typedefs
@@ -24,8 +24,6 @@ import { getFileName, getRuleDocsUrl } from '../../core/helpers/index.js';
 // --------------------------------------------------------------------------------
 // Helpers
 // --------------------------------------------------------------------------------
-
-const ruleName = getFileName(import.meta.url);
 
 /** @type {Record<string, string>} */
 const langShorthandMap = Object.freeze({
@@ -110,11 +108,9 @@ export default {
     type: 'problem',
 
     docs: {
-      // @ts-expect-error -- TODO: https://github.com/eslint/eslint/issues/19521, https://github.com/eslint/eslint/issues/19523
-      name: ruleName,
       recommended: true,
       description: 'Enforce the use of shorthand for code block language identifiers',
-      url: getRuleDocsUrl(ruleName),
+      url: getRuleDocsUrl('code-lang-shorthand'),
     },
 
     fixable: 'code',

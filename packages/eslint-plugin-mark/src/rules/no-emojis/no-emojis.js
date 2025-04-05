@@ -10,7 +10,7 @@
 import emojiRegex from 'emoji-regex';
 
 import { textHandler } from '../../core/ast/index.js';
-import { getFileName, getRuleDocsUrl } from '../../core/helpers/index.js';
+import { getRuleDocsUrl } from '../../core/helpers/index.js';
 
 // --------------------------------------------------------------------------------
 // Typedefs
@@ -22,12 +22,6 @@ import { getFileName, getRuleDocsUrl } from '../../core/helpers/index.js';
  */
 
 // --------------------------------------------------------------------------------
-// Helpers
-// --------------------------------------------------------------------------------
-
-const ruleName = getFileName(import.meta.url);
-
-// --------------------------------------------------------------------------------
 // Rule Definition
 // --------------------------------------------------------------------------------
 
@@ -37,11 +31,9 @@ export default {
     type: 'problem',
 
     docs: {
-      // @ts-expect-error -- TODO: https://github.com/eslint/eslint/issues/19521, https://github.com/eslint/eslint/issues/19523
-      name: ruleName,
       recommended: false,
       description: 'Disallow emojis in text',
-      url: getRuleDocsUrl(ruleName),
+      url: getRuleDocsUrl('no-emojis'),
     },
 
     messages: {
