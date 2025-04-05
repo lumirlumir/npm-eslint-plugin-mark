@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `no-emojis.js`.
+ * @fileoverview Test for `no-irregular-whitespace.js`.
  * @author 루밀LuMir(lumirlumir)
  */
 
