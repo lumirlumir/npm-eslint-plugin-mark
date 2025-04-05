@@ -6,6 +6,7 @@ import headingId from './heading-id/index.js';
 import noCurlyQuotes from './no-curly-quotes/index.js';
 import noDoubleSpaces from './no-double-spaces/index.js';
 import noEmojis from './no-emojis/index.js';
+import noIrregularWhitespace from './no-irregular-whitespace/index.js';
 
 export default {
   'alt-text': altText,
@@ -14,4 +15,5 @@ export default {
   'no-curly-quotes': noCurlyQuotes,
   'no-double-spaces': noDoubleSpaces,
   'no-emojis': noEmojis,
+  'no-irregular-whitespace': noIrregularWhitespace,
 };
