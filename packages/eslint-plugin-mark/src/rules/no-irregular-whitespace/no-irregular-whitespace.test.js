@@ -234,6 +234,47 @@ console.log(\u200b'Hello World');
         },
       ],
     },
+
+    // Options
+    {
+      name: '`skipCode: false`',
+      code: `
+\`\`\`js
+console.log(\u200b'Hello World');
+\`\`\``,
+      errors: [
+        {
+          messageId: noIrregularWhitespace,
+          line: 3,
+          column: 13,
+          endLine: 3,
+          endColumn: 14,
+        },
+      ],
+      options: [
+        {
+          skipCode: false,
+        },
+      ],
+    },
+    {
+      name: '`skipInlineCode: false`',
+      code: "`console.log(\u200b'Hello World')`",
+      errors: [
+        {
+          messageId: noIrregularWhitespace,
+          line: 1,
+          column: 14,
+          endLine: 1,
+          endColumn: 15,
+        },
+      ],
+      options: [
+        {
+          skipInlineCode: false,
+        },
+      ],
+    },
   ],
 };
 

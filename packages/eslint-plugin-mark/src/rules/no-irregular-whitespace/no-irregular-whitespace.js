@@ -45,6 +45,28 @@ export default {
       url: getRuleDocsUrl('no-irregular-whitespace'),
     },
 
+    schema: [
+      {
+        type: 'object',
+        properties: {
+          skipCode: {
+            type: 'boolean',
+          },
+          skipInlineCode: {
+            type: 'boolean',
+          },
+        },
+        additionalProperties: false,
+      },
+    ],
+
+    defaultOptions: [
+      {
+        skipCode: true,
+        skipInlineCode: true,
+      },
+    ],
+
     messages: {
       noIrregularWhitespace:
         'Irregular whitespace `{{ irregularWhitespace }}` is not allowed.',
@@ -56,6 +78,8 @@ export default {
   },
 
   create(context) {
+    // @ts-expect-error -- TODO
+    const [{ skipCode, skipInlineCode }] = context.options;
     const { lines } = context.sourceCode;
     const ignorePositions = []; // Array to store position information of `Code` and `InlineCode`.
 
@@ -76,11 +100,15 @@ export default {
     return {
       /** @param {Code} node */
       code(node) {
+        if (!skipCode) return;
+
         ignorePositions.push(node.position); // Store position information of `Code`.
       },
 
       /** @param {InlineCode} node */
       inlineCode(node) {
+        if (!skipInlineCode) return;
+
         ignorePositions.push(node.position); // Store position information of `InlineCode`.
       },
 
