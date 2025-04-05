@@ -6,7 +6,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import type { Literal, Text } from 'mdast'; // eslint-disable-line n/no-missing-import -- TODO: Remove this line after fixing the issue
+import type { Literal, Text } from 'mdast';
 
 // --------------------------------------------------------------------------------
 // Typedefs
