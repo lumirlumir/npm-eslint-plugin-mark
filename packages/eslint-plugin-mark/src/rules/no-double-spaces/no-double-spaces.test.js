@@ -9,14 +9,16 @@
 
 import { test } from 'node:test';
 
+import { getFileName } from '../../core/helpers/index.js';
 import { ruleTesterCommonmark, ruleTesterGfm } from '../../core/rule-tester/index.js';
+
 import rule from './no-double-spaces.js';
 
 // --------------------------------------------------------------------------------
 // Helpers
 // --------------------------------------------------------------------------------
 
-const { name } = rule.meta.docs;
+const name = getFileName(import.meta.url);
 const noDoubleSpaces = 'noDoubleSpaces';
 const noMultipleSpaces = 'noMultipleSpaces';
 

@@ -7,7 +7,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { getFileName, getRuleDocsUrl } from '../../core/helpers/index.js';
+import { getRuleDocsUrl } from '../../core/helpers/index.js';
 
 // --------------------------------------------------------------------------------
 // Typedefs
@@ -19,12 +19,6 @@ import { getFileName, getRuleDocsUrl } from '../../core/helpers/index.js';
  */
 
 // --------------------------------------------------------------------------------
-// Helpers
-// --------------------------------------------------------------------------------
-
-const ruleName = getFileName(import.meta.url);
-
-// --------------------------------------------------------------------------------
 // Rule Definition
 // --------------------------------------------------------------------------------
 
@@ -34,11 +28,9 @@ export default {
     type: 'problem',
 
     docs: {
-      // @ts-expect-error -- TODO: https://github.com/eslint/eslint/issues/19521, https://github.com/eslint/eslint/issues/19523
-      name: ruleName,
       recommended: false,
       description: 'Enforce the use of heading IDs',
-      url: getRuleDocsUrl(ruleName),
+      url: getRuleDocsUrl('heading-id'),
     },
 
     fixable: 'code',
