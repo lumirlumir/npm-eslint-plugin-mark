@@ -77,8 +77,6 @@ describe('rules-meta', () => {
       const { messages } = rule.meta;
 
       Object.values(messages).forEach(message => {
-        console.log(message);
-
         ok(message);
         match(message, /\.$/);
       });

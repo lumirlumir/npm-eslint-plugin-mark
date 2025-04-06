@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `no-emojis.js`.
+ * @fileoverview Test for `no-emoji.js`.
  * @author 루밀LuMir(lumirlumir)
  */
 
@@ -12,14 +12,14 @@ import { test } from 'node:test';
 import { getFileName } from '../../core/helpers/index.js';
 import { ruleTesterCommonmark, ruleTesterGfm } from '../../core/rule-tester/index.js';
 
-import rule from './no-emojis.js';
+import rule from './no-emoji.js';
 
 // --------------------------------------------------------------------------------
 // Helpers
 // --------------------------------------------------------------------------------
 
 const name = getFileName(import.meta.url);
-const noEmojis = 'noEmojis';
+const noEmoji = 'noEmoji';
 
 // --------------------------------------------------------------------------------
 // Testcases
@@ -47,7 +47,7 @@ const tests = {
       code: 'Hello, 😊!',
       errors: [
         {
-          messageId: noEmojis,
+          messageId: noEmoji,
           line: 1,
           column: 8,
         },
@@ -59,12 +59,12 @@ const tests = {
 🦄!`,
       errors: [
         {
-          messageId: noEmojis,
+          messageId: noEmoji,
           line: 1,
           column: 5,
         },
         {
-          messageId: noEmojis,
+          messageId: noEmoji,
           line: 2,
           column: 1,
         },

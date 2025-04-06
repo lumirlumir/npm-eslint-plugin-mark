@@ -42,7 +42,7 @@ export default {
     docs: {
       recommended: true,
       description: 'Disallow curly quotes(`“`, `”`, `‘` or `’`) in text',
-      url: getRuleDocsUrl('no-curly-quotes'),
+      url: getRuleDocsUrl('no-curly-quote'),
     },
 
     fixable: 'code',
@@ -78,7 +78,7 @@ export default {
     ],
 
     messages: {
-      noCurlyQuotes:
+      noCurlyQuote:
         'Curly quotes(`“`, `”`, `‘` or `’`) are not allowed. Use straight quotes(`"` or `\'`) instead.',
     },
 
@@ -136,7 +136,7 @@ export default {
                   },
                 },
 
-                messageId: 'noCurlyQuotes',
+                messageId: 'noCurlyQuote',
 
                 fix(fixer) {
                   return fixer.replaceTextRange(

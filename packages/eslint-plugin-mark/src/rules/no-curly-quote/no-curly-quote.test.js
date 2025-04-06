@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `no-curly-quotes.js`.
+ * @fileoverview Test for `no-curly-quote.js`.
  * @author 루밀LuMir(lumirlumir)
  */
 
@@ -12,14 +12,14 @@ import { test } from 'node:test';
 import { getFileName } from '../../core/helpers/index.js';
 import { ruleTesterCommonmark, ruleTesterGfm } from '../../core/rule-tester/index.js';
 
-import rule from './no-curly-quotes.js';
+import rule from './no-curly-quote.js';
 
 // --------------------------------------------------------------------------------
 // Helpers
 // --------------------------------------------------------------------------------
 
 const name = getFileName(import.meta.url);
-const noCurlyQuotes = 'noCurlyQuotes';
+const noCurlyQuote = 'noCurlyQuote';
 
 // --------------------------------------------------------------------------------
 // Testcases
@@ -103,7 +103,7 @@ const tests = {
       output: '"',
       errors: [
         {
-          messageId: noCurlyQuotes,
+          messageId: noCurlyQuote,
           line: 1,
           column: 1,
           endLine: 1,
@@ -117,7 +117,7 @@ const tests = {
       output: '"',
       errors: [
         {
-          messageId: noCurlyQuotes,
+          messageId: noCurlyQuote,
           line: 1,
           column: 1,
           endLine: 1,
@@ -131,7 +131,7 @@ const tests = {
       output: "'",
       errors: [
         {
-          messageId: noCurlyQuotes,
+          messageId: noCurlyQuote,
           line: 1,
           column: 1,
           endLine: 1,
@@ -145,7 +145,7 @@ const tests = {
       output: "'",
       errors: [
         {
-          messageId: noCurlyQuotes,
+          messageId: noCurlyQuote,
           line: 1,
           column: 1,
           endLine: 1,
@@ -159,7 +159,7 @@ const tests = {
       output: '" foo',
       errors: [
         {
-          messageId: noCurlyQuotes,
+          messageId: noCurlyQuote,
           line: 1,
           column: 1,
           endLine: 1,
@@ -173,7 +173,7 @@ const tests = {
       output: '" foo',
       errors: [
         {
-          messageId: noCurlyQuotes,
+          messageId: noCurlyQuote,
           line: 1,
           column: 1,
           endLine: 1,
@@ -187,7 +187,7 @@ const tests = {
       output: "' foo",
       errors: [
         {
-          messageId: noCurlyQuotes,
+          messageId: noCurlyQuote,
           line: 1,
           column: 1,
           endLine: 1,
@@ -201,7 +201,7 @@ const tests = {
       output: "' foo",
       errors: [
         {
-          messageId: noCurlyQuotes,
+          messageId: noCurlyQuote,
           line: 1,
           column: 1,
           endLine: 1,
@@ -219,56 +219,56 @@ const tests = {
 '  '`,
       errors: [
         {
-          messageId: noCurlyQuotes,
+          messageId: noCurlyQuote,
           line: 1,
           column: 1,
           endLine: 1,
           endColumn: 2,
         },
         {
-          messageId: noCurlyQuotes,
+          messageId: noCurlyQuote,
           line: 1,
           column: 5,
           endLine: 1,
           endColumn: 6,
         },
         {
-          messageId: noCurlyQuotes,
+          messageId: noCurlyQuote,
           line: 1,
           column: 7,
           endLine: 1,
           endColumn: 8,
         },
         {
-          messageId: noCurlyQuotes,
+          messageId: noCurlyQuote,
           line: 1,
           column: 11,
           endLine: 1,
           endColumn: 12,
         },
         {
-          messageId: noCurlyQuotes,
+          messageId: noCurlyQuote,
           line: 2,
           column: 3,
           endLine: 2,
           endColumn: 4,
         },
         {
-          messageId: noCurlyQuotes,
+          messageId: noCurlyQuote,
           line: 2,
           column: 6,
           endLine: 2,
           endColumn: 7,
         },
         {
-          messageId: noCurlyQuotes,
+          messageId: noCurlyQuote,
           line: 3,
           column: 1,
           endLine: 3,
           endColumn: 2,
         },
         {
-          messageId: noCurlyQuotes,
+          messageId: noCurlyQuote,
           line: 3,
           column: 4,
           endLine: 3,

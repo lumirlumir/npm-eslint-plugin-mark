@@ -23,9 +23,9 @@ import { getRuleDocsUrl } from '../../core/helpers/index.js';
 // Helpers
 // --------------------------------------------------------------------------------
 
-const doubleSpacesRegex = /(?<! ) {2}(?! )/g; // Exactly two spaces. No more, no less.
-const multipleSpacesRegex = /(?<! ) {2,}(?! )/g; // More than two spaces.
-const leadingSpacesRegex = /^ */;
+const doubleSpaceRegex = /(?<! ) {2}(?! )/g; // Exactly two spaces. No more, no less.
+const multipleSpaceRegex = /(?<! ) {2,}(?! )/g; // More than two spaces.
+const leadingSpaceRegex = /^ */;
 const singleSpace = ' ';
 
 // --------------------------------------------------------------------------------
@@ -41,7 +41,7 @@ export default {
       recommended: true,
       description:
         'Disallow double or multiple consecutive spaces in text, except for leading and trailing spaces',
-      url: getRuleDocsUrl('no-double-spaces'),
+      url: getRuleDocsUrl('no-double-space'),
     },
 
     fixable: 'whitespace',
@@ -50,7 +50,7 @@ export default {
       {
         type: 'object',
         properties: {
-          multipleSpaces: {
+          multipleSpace: {
             type: 'boolean',
           },
         },
@@ -60,14 +60,14 @@ export default {
 
     defaultOptions: [
       {
-        multipleSpaces: false,
+        multipleSpace: false,
       },
     ],
 
     messages: {
-      noDoubleSpaces:
+      noDoubleSpace:
         'Double spaces are not allowed except for leading and trailing spaces.',
-      noMultipleSpaces:
+      noMultipleSpace:
         'Multiple spaces are not allowed except for leading and trailing spaces.',
     },
 
@@ -83,21 +83,21 @@ export default {
         textHandler(context, node);
 
         // @ts-expect-error -- TODO
-        const { multipleSpaces } = context.options[0];
-        const spacesRegex = multipleSpaces ? multipleSpacesRegex : doubleSpacesRegex;
-        const messageId = multipleSpaces ? 'noMultipleSpaces' : 'noDoubleSpaces';
+        const { multipleSpace } = context.options[0];
+        const spacesRegex = multipleSpace ? multipleSpaceRegex : doubleSpaceRegex;
+        const messageId = multipleSpace ? 'noMultipleSpace' : 'noDoubleSpace';
 
         node.children.forEach(textLineNode => {
           const matches = [...textLineNode.value.trim().matchAll(spacesRegex)];
 
           if (matches.length > 0) {
             matches.forEach(match => {
-              const spacesLength = match[0].length;
-              const leadingSpacesLength =
-                textLineNode.value.match(leadingSpacesRegex)[0].length;
+              const spaceLength = match[0].length;
+              const leadingSpaceLength =
+                textLineNode.value.match(leadingSpaceRegex)[0].length;
 
-              const matchIndexStart = match.index + leadingSpacesLength;
-              const matchIndexEnd = matchIndexStart + spacesLength;
+              const matchIndexStart = match.index + leadingSpaceLength;
+              const matchIndexEnd = matchIndexStart + spaceLength;
 
               context.report({
                 loc: {

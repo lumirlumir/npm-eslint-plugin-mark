@@ -35,9 +35,9 @@ export default function all(parserMode) {
       'mark/alt-text': 'error',
       'mark/code-lang-shorthand': 'error',
       'mark/heading-id': 'warn',
-      'mark/no-curly-quotes': 'error',
-      'mark/no-double-spaces': 'error',
-      'mark/no-emojis': 'warn',
+      'mark/no-curly-quote': 'error',
+      'mark/no-double-space': 'error',
+      'mark/no-emoji': 'warn',
       'mark/no-irregular-whitespace': 'error',
     },
   };

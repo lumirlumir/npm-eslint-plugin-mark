@@ -33,11 +33,11 @@ export default {
     docs: {
       recommended: false,
       description: 'Disallow emojis in text',
-      url: getRuleDocsUrl('no-emojis'),
+      url: getRuleDocsUrl('no-emoji'),
     },
 
     messages: {
-      noEmojis: 'Emojis are not allowed.',
+      noEmoji: 'Emojis are not allowed.',
     },
 
     language: 'markdown',
@@ -73,7 +73,7 @@ export default {
                   },
                 },
 
-                messageId: 'noEmojis',
+                messageId: 'noEmoji',
               });
             });
           }
