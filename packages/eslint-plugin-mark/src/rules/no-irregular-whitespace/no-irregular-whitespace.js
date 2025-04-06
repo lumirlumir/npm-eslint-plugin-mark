@@ -8,6 +8,7 @@
 // --------------------------------------------------------------------------------
 
 import { getRuleDocsUrl } from '../../core/helpers/index.js';
+import { ZERO_TO_ONE_BASED_OFFSET } from '../../core/constants.js';
 
 // --------------------------------------------------------------------------------
 // Typedefs
@@ -15,10 +16,9 @@ import { getRuleDocsUrl } from '../../core/helpers/index.js';
 
 /**
  * @typedef {import("@eslint/markdown").RuleModule} RuleModule
- * @typedef {import("@eslint/core").SourceLocationWithOffset} SourceLocationWithOffset
- * @typedef {import("mdast").Root} Root
  * @typedef {import("mdast").Code} Code
  * @typedef {import("mdast").InlineCode} InlineCode
+ * @typedef {import("unist").Position} Position
  */
 
 // --------------------------------------------------------------------------------
@@ -27,7 +27,6 @@ import { getRuleDocsUrl } from '../../core/helpers/index.js';
 
 const irregularWhitespaceRegex =
   /[\f\v\u0085\ufeff\u00a0\u1680\u180e\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u200b\u202f\u205f\u3000\u2028\u2029]/gu;
-const indexOffset = 1;
 
 // --------------------------------------------------------------------------------
 // Rule Definition
@@ -81,11 +80,12 @@ export default {
     const [{ skipCode, skipInlineCode }] = context.options;
     const { lines } = context.sourceCode;
 
-    const ignorePositions = []; // Array to store position information of `Code` and `InlineCode`.
+    /** @type {Position[]} */
+    const ignoredPositions = []; // Array to store position information of `Code` and `InlineCode`.
 
     /** @param {number} lineNum @param {number} colNum */
-    function isPositionIgnored(lineNum, colNum) {
-      return ignorePositions.some(pos => {
+    function isIgnoredPosition(lineNum, colNum) {
+      return ignoredPositions.some(pos => {
         const { start, end } = pos;
 
         // If any of the following conditions are satisfied, it is located inside the `Code` or `InlineCode` node.
@@ -102,14 +102,14 @@ export default {
       code(node) {
         if (!skipCode) return;
 
-        ignorePositions.push(node.position); // Store position information of `Code`.
+        ignoredPositions.push(node.position); // Store position information of `Code`.
       },
 
       /** @param {InlineCode} node */
       inlineCode(node) {
         if (!skipInlineCode) return;
 
-        ignorePositions.push(node.position); // Store position information of `InlineCode`.
+        ignoredPositions.push(node.position); // Store position information of `InlineCode`.
       },
 
       'root:exit': function () {
@@ -123,12 +123,12 @@ export default {
               const matchIndexStart = match.index;
               const matchIndexEnd = matchIndexStart + irregularWhitespaceLength;
 
-              const startLineNum = index + indexOffset;
-              const startColNum = matchIndexStart + indexOffset;
+              const startLineNum = index + ZERO_TO_ONE_BASED_OFFSET;
+              const startColNum = matchIndexStart + ZERO_TO_ONE_BASED_OFFSET;
               const endLineNum = startLineNum;
-              const endColNum = matchIndexEnd + indexOffset;
+              const endColNum = matchIndexEnd + ZERO_TO_ONE_BASED_OFFSET;
 
-              if (!isPositionIgnored(startLineNum, startColNum)) {
+              if (!isIgnoredPosition(startLineNum, startColNum)) {
                 context.report({
                   loc: {
                     start: {
