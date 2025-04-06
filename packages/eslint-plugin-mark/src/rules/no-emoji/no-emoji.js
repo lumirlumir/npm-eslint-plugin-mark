@@ -18,7 +18,7 @@ import { getRuleDocsUrl } from '../../core/helpers/index.js';
 
 /**
  * @typedef {import("@eslint/markdown").RuleModule} RuleModule
- * @typedef {import("../../core/types").TextExt} TextExt
+ * @typedef {import("../../core/types.d.ts").TextExt} TextExt
  */
 
 // --------------------------------------------------------------------------------
