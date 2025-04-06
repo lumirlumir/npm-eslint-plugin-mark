@@ -27,7 +27,7 @@ export default [
   // ...
   {
     rules: {
-      'mark/no-double-spaces': 'error', // [!code focus]
+      'mark/no-double-space': 'error', // [!code focus]
     },
   },
   // ...
@@ -36,7 +36,7 @@ export default [
 
 :::
 
-#### With `multipleSpaces: true` Option
+#### With `multipleSpace: true` Option
 
 ::: code-group
 
@@ -56,8 +56,8 @@ export default [
   // ...
   {
     rules: {
-      'mark/no-double-spaces': ['error', { // [!code focus]
-        multipleSpaces: true, // [!code focus]
+      'mark/no-double-space': ['error', { // [!code focus]
+        multipleSpace: true, // [!code focus]
       }], // [!code focus]
     },
   },
@@ -92,7 +92,7 @@ export default [
   // ...
   {
     rules: {
-      'mark/no-double-spaces': 'error', // [!code focus]
+      'mark/no-double-space': 'error', // [!code focus]
     },
   },
   // ...
@@ -101,7 +101,7 @@ export default [
 
 :::
 
-#### With `multipleSpaces: true` Option
+#### With `multipleSpace: true` Option
 
 ::: code-group
 
@@ -120,8 +120,8 @@ export default [
   // ...
   {
     rules: {
-      'mark/no-double-spaces': ['error', { // [!code focus]
-        multipleSpaces: true, // [!code focus]
+      'mark/no-double-space': ['error', { // [!code focus]
+        multipleSpace: true, // [!code focus]
       }], // [!code focus]
     },
   },
@@ -134,16 +134,16 @@ export default [
 ## Options
 
 ```js
-'mark/no-double-spaces': ['error', {
-  multipleSpaces: false,
+'mark/no-double-space': ['error', {
+  multipleSpace: false,
 }]
 ```
 
-### `multipleSpaces`
+### `multipleSpace`
 
 > Default: `false`
 
-When `multipleSpaces` is set to `true`, this rule will also check for multiple consecutive spaces (more than two) within a sentence.
+When `multipleSpace` is set to `true`, this rule will also check for multiple consecutive spaces (more than two) within a sentence.
 
 ## Fix
 
