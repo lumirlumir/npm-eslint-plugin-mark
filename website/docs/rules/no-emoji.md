@@ -30,7 +30,7 @@ export default [
   // ...
   {
     rules: {
-      'mark/no-emojis': 'error', // [!code focus]
+      'mark/no-emoji': 'error', // [!code focus]
     },
   },
   // ...
@@ -58,7 +58,7 @@ export default [
   // ...
   {
     rules: {
-      'mark/no-emojis': 'error', // [!code focus]
+      'mark/no-emoji': 'error', // [!code focus]
     },
   },
   // ...

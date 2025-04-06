@@ -37,7 +37,7 @@ export default function all(parserMode) {
       'mark/heading-id': 'warn',
       'mark/no-curly-quotes': 'error',
       'mark/no-double-spaces': 'error',
-      'mark/no-emojis': 'warn',
+      'mark/no-emoji': 'warn',
       'mark/no-irregular-whitespace': 'error',
     },
   };

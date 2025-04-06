@@ -18,7 +18,7 @@ import { getRuleDocsUrl } from '../../core/helpers/index.js';
 
 /**
  * @typedef {import("@eslint/markdown").RuleModule} RuleModule
- * @typedef {import("../../core/types.d.ts").TextExt} TextExt
+ * @typedef {import("../../core/types.js").TextExt} TextExt
  */
 
 // --------------------------------------------------------------------------------
@@ -33,11 +33,11 @@ export default {
     docs: {
       recommended: false,
       description: 'Disallow emojis in text',
-      url: getRuleDocsUrl('no-emojis'),
+      url: getRuleDocsUrl('no-emoji'),
     },
 
     messages: {
-      noEmojis: 'Emojis are not allowed.',
+      noEmoji: 'Emojis are not allowed.',
     },
 
     language: 'markdown',
@@ -73,7 +73,7 @@ export default {
                   },
                 },
 
-                messageId: 'noEmojis',
+                messageId: 'noEmoji',
               });
             });
           }
