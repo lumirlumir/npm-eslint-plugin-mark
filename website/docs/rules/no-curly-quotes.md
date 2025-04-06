@@ -30,7 +30,7 @@ export default [
   // ...
   {
     rules: {
-      'mark/no-curly-quotes': 'error', // [!code focus]
+      'mark/no-curly-quote': 'error', // [!code focus]
     },
   },
   // ...
@@ -60,7 +60,7 @@ export default [
   // ...
   {
     rules: {
-      'mark/no-curly-quotes': 'error', // [!code focus]
+      'mark/no-curly-quote': 'error', // [!code focus]
     },
   },
   // ...
@@ -72,7 +72,7 @@ export default [
 ## Options
 
 ```js
-'mark/no-curly-quotes': ['error', {
+'mark/no-curly-quote': ['error', {
   leftDoubleQuotationMark: true,
   rightDoubleQuotationMark: true,
   leftSingleQuotationMark: true,
