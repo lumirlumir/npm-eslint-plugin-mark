@@ -52,6 +52,6 @@
     "shx": "^0.4.0",
     "textlint": "^14.6.0",
     "textlint-rule-allowed-uris": "^1.0.9",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.3"
   }
 }
