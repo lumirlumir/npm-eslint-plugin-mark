@@ -12,7 +12,7 @@ import { createRequire } from 'node:module';
 // Declaration
 // --------------------------------------------------------------------------------
 
-const { description, homepage, name } = createRequire(import.meta.url)(
+const { description, homepage, name, version } = createRequire(import.meta.url)(
   '../../package.json',
 );
 
@@ -24,6 +24,8 @@ const { description, homepage, name } = createRequire(import.meta.url)(
 export const PKG_DESCRIPTION = description;
 /** @type {string} */
 export const PKG_NAME = name;
+/** @type {string} */
+export const PKG_VERSION = version;
 /** @type {string} */
 export const PKG_AUTHOR = '루밀LuMir';
 

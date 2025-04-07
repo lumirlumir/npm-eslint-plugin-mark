@@ -3,6 +3,12 @@
  */
 
 // --------------------------------------------------------------------------------
+// Import
+// --------------------------------------------------------------------------------
+
+import { ZERO_TO_ONE_BASED_OFFSET } from '../../constants.js';
+
+// --------------------------------------------------------------------------------
 // Typedefs
 // --------------------------------------------------------------------------------
 
@@ -17,7 +23,6 @@
 // --------------------------------------------------------------------------------
 
 const newLineRegex = /\r?\n/;
-const indexOffset = 1; // `index` is 0-based, but `column` is 1-based.
 
 // --------------------------------------------------------------------------------
 // Export
@@ -46,7 +51,8 @@ export default function textHandler(context, textNode) {
 
   lines.forEach((line, lineNumber) => {
     const locLine = textNode.position.start.line + lineNumber;
-    const locColumn = lineNumber === 0 ? textNode.position.start.column : indexOffset;
+    const locColumn =
+      lineNumber === 0 ? textNode.position.start.column : ZERO_TO_ONE_BASED_OFFSET;
     let locOffset = textNode.position.start.offset;
 
     for (let i = 0; i < lineNumber; i++) {
