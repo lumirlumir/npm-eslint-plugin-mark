@@ -93,16 +93,18 @@ export default {
       text(node) {
         textHandler(context, node);
 
-        const {
-          // @ts-expect-error -- TODO
-          leftDoubleQuotationMark: leftDoubleQuotationMarkOption,
-          // @ts-expect-error -- TODO
-          rightDoubleQuotationMark: rightDoubleQuotationMarkOption,
-          // @ts-expect-error -- TODO
-          leftSingleQuotationMark: leftSingleQuotationMarkOption,
-          // @ts-expect-error -- TODO
-          rightSingleQuotationMark: rightSingleQuotationMarkOption,
-        } = context.options[0];
+        const [
+          {
+            // @ts-expect-error -- TODO
+            leftDoubleQuotationMark: leftDoubleQuotationMarkOption,
+            // @ts-expect-error -- TODO
+            rightDoubleQuotationMark: rightDoubleQuotationMarkOption,
+            // @ts-expect-error -- TODO
+            leftSingleQuotationMark: leftSingleQuotationMarkOption,
+            // @ts-expect-error -- TODO
+            rightSingleQuotationMark: rightSingleQuotationMarkOption,
+          },
+        ] = context.options;
         const regexString = [
           leftDoubleQuotationMarkOption ? leftDoubleQuotationMark : '',
           rightDoubleQuotationMarkOption ? rightDoubleQuotationMark : '',

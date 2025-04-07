@@ -83,12 +83,12 @@ export default {
         textHandler(context, node);
 
         // @ts-expect-error -- TODO
-        const { multipleSpace } = context.options[0];
-        const spacesRegex = multipleSpace ? multipleSpaceRegex : doubleSpaceRegex;
+        const [{ multipleSpace }] = context.options;
+        const spaceRegex = multipleSpace ? multipleSpaceRegex : doubleSpaceRegex;
         const messageId = multipleSpace ? 'noMultipleSpace' : 'noDoubleSpace';
 
         node.children.forEach(textLineNode => {
-          const matches = [...textLineNode.value.trim().matchAll(spacesRegex)];
+          const matches = [...textLineNode.value.trim().matchAll(spaceRegex)];
 
           if (matches.length > 0) {
             matches.forEach(match => {

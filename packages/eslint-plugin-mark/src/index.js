@@ -7,8 +7,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { createRequire } from 'node:module';
-
+import { PKG_NAME as name, PKG_VERSION as version } from './core/constants.js';
 import { all, base, recommended } from './configs/index.js';
 import rules from './rules/index.js';
 
@@ -24,7 +23,6 @@ import rules from './rules/index.js';
 // Helpers
 // --------------------------------------------------------------------------------
 
-const { name, version } = createRequire(import.meta.url)('../package.json');
 const commonmark = 'commonmark';
 const gfm = 'gfm';
 

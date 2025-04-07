@@ -157,7 +157,7 @@ export default {
       /** @param {Code} node */
       code(node) {
         // @ts-expect-error -- TODO
-        const { ignores, override } = context.options[0];
+        const [{ ignores, override }] = context.options;
         const langShorthandMapMerged = Object.fromEntries(
           Object.entries({
             ...langShorthandMap,
