@@ -27,6 +27,33 @@ export default class IgnoredPositions {
   #ignoredPositions = [];
 
   // ------------------------------------------------------------------------------
+  // Static Methods
+  // ------------------------------------------------------------------------------
+
+  /**
+   * Check if a point is in the ignored position.
+   * @param {Point} point
+   * @param {Position} position
+   */
+  static isIgnoredPoint(point, position) {
+    const isPositionSingleLine = position.start.line === position.end.line;
+
+    if (isPositionSingleLine) {
+      return (
+        position.start.line === point.line &&
+        position.start.column <= point.column &&
+        point.column < position.end.column
+      );
+    } else {
+      return (
+        (position.start.line < point.line && point.line < position.end.line) || // Middle line.
+        (position.start.line === point.line && position.start.column <= point.column) || // After the start column of the start line.
+        (position.end.line === point.line && point.column < position.end.column) // Before the end column of the end line.
+      );
+    }
+  }
+
+  // ------------------------------------------------------------------------------
   // Public Methods
   // ------------------------------------------------------------------------------
 
@@ -43,23 +70,9 @@ export default class IgnoredPositions {
    * @param {Point} point
    */
   isIgnoredPoint(point) {
-    return this.#ignoredPositions.some(position => {
-      const isPositionSingleLine = position.start.line === position.end.line;
-
-      if (isPositionSingleLine) {
-        return (
-          position.start.line === point.line &&
-          position.start.column <= point.column &&
-          point.column < position.end.column
-        );
-      } else {
-        return (
-          (position.start.line < point.line && point.line < position.end.line) || // Middle line.
-          (position.start.line === point.line && position.start.column <= point.column) || // After the start column of the start line.
-          (position.end.line === point.line && point.column < position.end.column) // Before the end column of the end line.
-        );
-      }
-    });
+    return this.#ignoredPositions.some(position =>
+      IgnoredPositions.isIgnoredPoint(point, position),
+    );
   }
 
   // ------------------------------------------------------------------------------
