@@ -70,8 +70,23 @@ export default class IgnoredPositions {
    * @param {Point} point
    */
   isIgnoredPoint(point) {
-    return this.#ignoredPositions.some(position =>
-      IgnoredPositions.isIgnoredPoint(point, position),
+    return this.#ignoredPositions.some(ignoredPosition =>
+      IgnoredPositions.isIgnoredPoint(point, ignoredPosition),
+    );
+  }
+
+  /**
+   * Check if a position is in the ignored positions.
+   * @param {Position} position
+   */
+  isIgnoredPosition(position) {
+    return this.#ignoredPositions.some(
+      ignoredPosition =>
+        IgnoredPositions.isIgnoredPoint(position.start, ignoredPosition) &&
+        IgnoredPositions.isIgnoredPoint(
+          { line: position.end.line, column: position.end.column - 1 }, // Since it's an open interval, we subtract 1 from the column only.
+          ignoredPosition,
+        ),
     );
   }
 
