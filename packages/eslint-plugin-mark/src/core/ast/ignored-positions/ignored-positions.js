@@ -56,8 +56,8 @@ export default class IgnoredPositions {
         return (
           (position.start.line < point.line && point.line < position.end.line) || // Middle line.
           (position.start.line === point.line && position.start.column <= point.column) || // After the start column of the start line.
-          (position.end.line === point.line && point.column < position.end.column)
-        ); // Before the end column of the end line.
+          (position.end.line === point.line && point.column < position.end.column) // Before the end column of the end line.
+        );
       }
     });
   }
