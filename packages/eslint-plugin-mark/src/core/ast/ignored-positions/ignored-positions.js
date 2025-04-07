@@ -63,6 +63,8 @@ export default class IgnoredPositions {
    */
   push(position) {
     this.#ignoredPositions.push(position);
+
+    return this;
   }
 
   /**

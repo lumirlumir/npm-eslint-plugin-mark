@@ -26,15 +26,24 @@ describe(getFileName(import.meta.url), () => {
     it('should push a position to the list of ignored positions', () => {
       const ignoredPositions = new IgnoredPositions();
 
-      ignoredPositions.push({
-        start: { line: 1, column: 1, offset: 0 },
-        end: { line: 1, column: 5, offset: 4 },
-      });
+      ignoredPositions
+        .push({
+          start: { line: 1, column: 1, offset: 0 },
+          end: { line: 1, column: 5, offset: 4 },
+        })
+        .push({
+          start: { line: 2, column: 1, offset: 5 },
+          end: { line: 2, column: 5, offset: 9 },
+        });
 
       deepStrictEqual(ignoredPositions.ignoredPositions, [
         {
           start: { line: 1, column: 1, offset: 0 },
           end: { line: 1, column: 5, offset: 4 },
+        },
+        {
+          start: { line: 2, column: 1, offset: 5 },
+          end: { line: 2, column: 5, offset: 9 },
         },
       ]);
     });
@@ -155,6 +164,122 @@ describe(getFileName(import.meta.url), () => {
         strictEqual(ignoredPositions.isIgnoredPoint({ line: 2, column: 5 }), true);
         strictEqual(ignoredPositions.isIgnoredPoint({ line: 2, column: 6 }), false);
         strictEqual(ignoredPositions.isIgnoredPoint({ line: 3, column: 1 }), false);
+      });
+    });
+  });
+
+  describe('isIgnoredPosition()', () => {
+    describe('Code', () => {
+      it('```js\nconst hello = "world";\n```', () => {
+        const ignoredPositions = new IgnoredPositions();
+
+        ignoredPositions.push({
+          start: { line: 1, column: 1, offset: 0 },
+          end: { line: 3, column: 4, offset: 32 },
+        });
+
+        // true
+        strictEqual(
+          ignoredPositions.isIgnoredPosition({
+            start: { line: 1, column: 1 },
+            end: { line: 3, column: 4 },
+          }),
+          true,
+        );
+        strictEqual(
+          ignoredPositions.isIgnoredPosition({
+            start: { line: 1, column: 1 },
+            end: { line: 1, column: 2 },
+          }),
+          true,
+        );
+        strictEqual(
+          ignoredPositions.isIgnoredPosition({
+            start: { line: 3, column: 3 },
+            end: { line: 3, column: 4 },
+          }),
+          true,
+        );
+        strictEqual(
+          ignoredPositions.isIgnoredPosition({
+            start: { line: 1, column: 2 },
+            end: { line: 3, column: 1 },
+          }),
+          true,
+        );
+
+        // false
+        strictEqual(
+          ignoredPositions.isIgnoredPosition({
+            start: { line: 1, column: 1 },
+            end: { line: 3, column: 5 },
+          }),
+          false,
+        );
+        strictEqual(
+          ignoredPositions.isIgnoredPosition({
+            start: { line: 3, column: 4 },
+            end: { line: 3, column: 5 },
+          }),
+          false,
+        );
+      });
+    });
+
+    describe('InlineCode', () => {
+      it('`hello`', () => {
+        const ignoredPositions = new IgnoredPositions();
+
+        ignoredPositions.push({
+          start: { line: 1, column: 1, offset: 0 },
+          end: { line: 1, column: 8, offset: 7 },
+        });
+
+        // true
+        strictEqual(
+          ignoredPositions.isIgnoredPosition({
+            start: { line: 1, column: 1 },
+            end: { line: 1, column: 8 },
+          }),
+          true,
+        );
+        strictEqual(
+          ignoredPositions.isIgnoredPosition({
+            start: { line: 1, column: 1 },
+            end: { line: 1, column: 2 },
+          }),
+          true,
+        );
+        strictEqual(
+          ignoredPositions.isIgnoredPosition({
+            start: { line: 1, column: 7 },
+            end: { line: 1, column: 8 },
+          }),
+          true,
+        );
+        strictEqual(
+          ignoredPositions.isIgnoredPosition({
+            start: { line: 1, column: 2 },
+            end: { line: 1, column: 7 },
+          }),
+          true,
+        );
+
+        // false
+        strictEqual(
+          ignoredPositions.isIgnoredPosition({
+            start: { line: 1, column: 1 },
+            end: { line: 1, column: 9 },
+          }),
+          false,
+        );
+        strictEqual(
+          ignoredPositions.isIgnoredPosition({
+            start: { line: 1, column: 8 },
+            end: { line: 1, column: 9 },
+          }),
+          false,
+        );
       });
     });
   });
