@@ -51,7 +51,9 @@ console.log(\u200b'Hello World');
     },
     {
       name: 'irregular whitespace in inline code',
-      code: "`console.log(\u200b'Hello World')`",
+      code: `\`console.log(\u200b'Hello World')\`
+
+\`console.log(\u202f'Hello World')\``,
     },
   ],
 
