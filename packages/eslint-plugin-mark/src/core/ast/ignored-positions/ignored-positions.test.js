@@ -11,7 +11,7 @@
 // --------------------------------------------------------------------------------
 
 import { describe, it } from 'node:test';
-import { strictEqual } from 'node:assert';
+import { deepStrictEqual, strictEqual } from 'node:assert';
 
 import { getFileName } from '../../helpers/index.js';
 
@@ -22,6 +22,24 @@ import IgnoredPositions from './ignored-positions.js';
 // --------------------------------------------------------------------------------
 
 describe(getFileName(import.meta.url), () => {
+  describe('push()', () => {
+    it('should push a position to the list of ignored positions', () => {
+      const ignoredPositions = new IgnoredPositions();
+
+      ignoredPositions.push({
+        start: { line: 1, column: 1, offset: 0 },
+        end: { line: 1, column: 5, offset: 4 },
+      });
+
+      deepStrictEqual(ignoredPositions.ignoredPositions, [
+        {
+          start: { line: 1, column: 1, offset: 0 },
+          end: { line: 1, column: 5, offset: 4 },
+        },
+      ]);
+    });
+  });
+
   describe('isIgnoredPoint()', () => {
     describe('Code', () => {
       it('```js\nconst hello = "world";\n```', () => {
@@ -112,6 +130,31 @@ describe(getFileName(import.meta.url), () => {
         strictEqual(ignoredPositions.isIgnoredPoint({ line: 1, column: 9 }), true);
         strictEqual(ignoredPositions.isIgnoredPoint({ line: 1, column: 10 }), false);
         strictEqual(ignoredPositions.isIgnoredPoint({ line: 2, column: 1 }), false);
+      });
+    });
+
+    describe('Text', () => {
+      it('hello\nworld', () => {
+        const ignoredPositions = new IgnoredPositions();
+
+        ignoredPositions.push({
+          start: { line: 1, column: 1, offset: 0 },
+          end: { line: 2, column: 6, offset: 11 },
+        });
+
+        strictEqual(ignoredPositions.isIgnoredPoint({ line: 1, column: 1 }), true);
+        strictEqual(ignoredPositions.isIgnoredPoint({ line: 1, column: 2 }), true);
+        strictEqual(ignoredPositions.isIgnoredPoint({ line: 1, column: 3 }), true);
+        strictEqual(ignoredPositions.isIgnoredPoint({ line: 1, column: 4 }), true);
+        strictEqual(ignoredPositions.isIgnoredPoint({ line: 1, column: 5 }), true);
+        strictEqual(ignoredPositions.isIgnoredPoint({ line: 1, column: 6 }), true);
+        strictEqual(ignoredPositions.isIgnoredPoint({ line: 2, column: 1 }), true);
+        strictEqual(ignoredPositions.isIgnoredPoint({ line: 2, column: 2 }), true);
+        strictEqual(ignoredPositions.isIgnoredPoint({ line: 2, column: 3 }), true);
+        strictEqual(ignoredPositions.isIgnoredPoint({ line: 2, column: 4 }), true);
+        strictEqual(ignoredPositions.isIgnoredPoint({ line: 2, column: 5 }), true);
+        strictEqual(ignoredPositions.isIgnoredPoint({ line: 2, column: 6 }), false);
+        strictEqual(ignoredPositions.isIgnoredPoint({ line: 3, column: 1 }), false);
       });
     });
   });

@@ -61,4 +61,15 @@ export default class IgnoredPositions {
       }
     });
   }
+
+  // ------------------------------------------------------------------------------
+  // Getters and Setters
+  // ------------------------------------------------------------------------------
+
+  /**
+   * Get the ignored positions.
+   */
+  get ignoredPositions() {
+    return this.#ignoredPositions;
+  }
 }
