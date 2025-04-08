@@ -36,6 +36,7 @@ export default function recommended(parserMode) {
       'mark/code-lang-shorthand': 'error',
       'mark/no-curly-quote': 'error',
       'mark/no-double-space': 'error',
+      'mark/no-git-conflict-marker': 'error',
       'mark/no-irregular-whitespace': 'error',
     },
   };
