@@ -9,6 +9,8 @@ In addition, curly quotes (`“` `\u201C`, `”` `\u201D`, `‘` `\u2018` or `�
 
 By applying this rule, you can prevent unintended curly quotes and keep your code clean and consistent.
 
+## Examples
+
 ### :x: Incorrect {#incorrect}
 
 Examples of **incorrect** code for this rule:

@@ -9,6 +9,8 @@ Double spaces within a sentence are usually typos and can be hard to spot. This 
 
 It only checks for **double or multiple consecutive** spaces ***within sentences***. Since **leading** and **trailing** spaces have special meanings in Markdown, this rule does not check for them. **Leading** spaces are used for creating code blocks or indentation, while **trailing** spaces are used to create line breaks.
 
+## Examples
+
 ### :x: Incorrect {#incorrect}
 
 Examples of **incorrect** code for this rule:

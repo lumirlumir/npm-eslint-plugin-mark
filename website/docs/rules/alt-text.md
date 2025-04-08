@@ -32,6 +32,8 @@ Or with HTML as:
 <img src="https://example.com/image.jpg" alt="alternative text" />
 ```
 
+## Examples
+
 ### :x: Incorrect {#incorrect}
 
 Examples of **incorrect** code for this rule:

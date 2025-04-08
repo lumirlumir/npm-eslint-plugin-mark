@@ -35,6 +35,7 @@ export default function all(parserMode) {
       'mark/alt-text': 'error',
       'mark/code-lang-shorthand': 'error',
       'mark/heading-id': 'warn',
+      'mark/no-bold-paragraph': 'error',
       'mark/no-curly-quote': 'error',
       'mark/no-double-space': 'error',
       'mark/no-emoji': 'warn',

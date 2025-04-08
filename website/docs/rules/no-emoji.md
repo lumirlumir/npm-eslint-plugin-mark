@@ -11,6 +11,8 @@ For a full list of supported emojis, you can refer to the [Emoji Cheat Sheet](ht
 
 Platforms like [GitHub](https://github.com) and Markdown plugins such as [`remark-emoji`](https://github.com/rhysd/remark-emoji) and [`markdown-it-emoji`](https://github.com/markdown-it/markdown-it-emoji) also support this feature.
 
+## Examples
+
 ### :x: Incorrect {#incorrect}
 
 Examples of **incorrect** code for this rule:
