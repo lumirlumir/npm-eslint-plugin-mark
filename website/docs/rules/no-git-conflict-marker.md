@@ -19,6 +19,8 @@ While other programming languages would typically throw syntax errors when confl
 
 This rule identifies and reports any Git conflict markers in your Markdown files to ensure they are resolved before the content is published or shared.
 
+## Examples
+
 ### :x: Incorrect
 
 Examples of **incorrect** code for this rule:

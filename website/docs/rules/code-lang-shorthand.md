@@ -11,6 +11,8 @@ Note that the code block language identifiers are **case-insensitive**, meaning 
 
 You can see the full list of [language identifiers shorthand mapping](https://github.com/lumirlumir/npm-eslint-plugin-mark/blob/main/packages/eslint-plugin-mark/src/rules/code-lang-shorthand/code-lang-shorthand.js#L31-L101) in the source code.
 
+## Examples
+
 ### :x: Incorrect {#incorrect}
 
 Examples of **incorrect** code for this rule:
