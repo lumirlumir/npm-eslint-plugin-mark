@@ -69,4 +69,4 @@ Examples of **correct** code for this rule:
 
 ## AST
 
-This rule applies only to the [`Root`](https://github.com/syntax-tree/mdast?tab=readme-ov-file#root) node.
+This rule applies to the entire document, specifically to the [`Root`](https://github.com/syntax-tree/mdast?tab=readme-ov-file#root) node.
