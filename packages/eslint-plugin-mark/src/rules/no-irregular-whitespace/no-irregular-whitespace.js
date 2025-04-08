@@ -86,16 +86,12 @@ export default {
     return {
       /** @param {Code} node */
       code(node) {
-        if (!skipCode) return;
-
-        ignoredPositions.push(node.position); // Store position information of `Code`.
+        if (skipCode) ignoredPositions.push(node.position); // Store position information of `Code`.
       },
 
       /** @param {InlineCode} node */
       inlineCode(node) {
-        if (!skipInlineCode) return;
-
-        ignoredPositions.push(node.position); // Store position information of `InlineCode`.
+        if (skipInlineCode) ignoredPositions.push(node.position); // Store position information of `InlineCode`.
       },
 
       'root:exit': function () {
