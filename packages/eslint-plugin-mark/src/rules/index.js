@@ -8,6 +8,7 @@ import noCurlyQuote from './no-curly-quote/index.js';
 import noDoubleSpace from './no-double-space/index.js';
 import noEmoji from './no-emoji/index.js';
 import noGitConflictMarker from './no-git-conflict-marker/index.js';
+import noIrregularDash from './no-irregular-dash/index.js';
 import noIrregularWhitespace from './no-irregular-whitespace/index.js';
 
 export default {
@@ -19,5 +20,6 @@ export default {
   'no-double-space': noDoubleSpace,
   'no-emoji': noEmoji,
   'no-git-conflict-marker': noGitConflictMarker,
+  'no-irregular-dash': noIrregularDash,
   'no-irregular-whitespace': noIrregularWhitespace,
 };

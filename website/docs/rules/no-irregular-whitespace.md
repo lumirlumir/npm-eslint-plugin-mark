@@ -81,7 +81,7 @@ If you decide that you wish to use whitespace other than tabs and spaces outside
 
 ## AST
 
-This rule applies only to the [`Root`](https://github.com/syntax-tree/mdast?tab=readme-ov-file#root) node.
+This rule applies to the entire document, specifically to the [`Root`](https://github.com/syntax-tree/mdast?tab=readme-ov-file#root) node.
 
 ## Prior Art
 

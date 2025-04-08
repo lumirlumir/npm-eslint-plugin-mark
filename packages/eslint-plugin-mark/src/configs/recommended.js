@@ -38,6 +38,7 @@ export default function recommended(parserMode) {
       'mark/no-curly-quote': 'error',
       'mark/no-double-space': 'error',
       'mark/no-git-conflict-marker': 'error',
+      'mark/no-irregular-dash': 'error',
       'mark/no-irregular-whitespace': 'error',
     },
   };
