@@ -7,6 +7,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
+import { IgnoredPositions } from '../../core/ast/index.js';
 import { getRuleDocsUrl } from '../../core/helpers/index.js';
 import { ZERO_TO_ONE_BASED_OFFSET } from '../../core/constants.js';
 
@@ -80,22 +81,7 @@ export default {
     const [{ skipCode, skipInlineCode }] = context.options;
     const { lines } = context.sourceCode;
 
-    /** @type {Position[]} */
-    const ignoredPositions = []; // Array to store position information of `Code` and `InlineCode`.
-
-    /** @param {number} lineNum @param {number} colNum */
-    function isIgnoredPosition(lineNum, colNum) {
-      return ignoredPositions.some(pos => {
-        const { start, end } = pos;
-
-        // If any of the following conditions are satisfied, it is located inside the `Code` or `InlineCode` node.
-        return (
-          (start.line < lineNum && lineNum < end.line) || //  Middle line of a code block.
-          (lineNum === start.line && start.column <= colNum) || // After the start column of the start line.
-          (lineNum === end.line && colNum < end.column) // Before the end column of the end line.
-        );
-      });
-    }
+    const ignoredPositions = new IgnoredPositions();
 
     return {
       /** @param {Code} node */
@@ -113,7 +99,7 @@ export default {
       },
 
       'root:exit': function () {
-        lines.forEach((line, index) => {
+        lines.forEach((line, lineIndex) => {
           const matches = [...line.matchAll(irregularWhitespaceRegex)];
 
           if (matches.length > 0) {
@@ -123,31 +109,29 @@ export default {
               const matchIndexStart = match.index;
               const matchIndexEnd = matchIndexStart + irregularWhitespaceLength;
 
-              const startLineNum = index + ZERO_TO_ONE_BASED_OFFSET;
-              const startColNum = matchIndexStart + ZERO_TO_ONE_BASED_OFFSET;
-              const endLineNum = startLineNum;
-              const endColNum = matchIndexEnd + ZERO_TO_ONE_BASED_OFFSET;
+              /** @type {Position} */
+              const loc = {
+                start: {
+                  line: lineIndex + ZERO_TO_ONE_BASED_OFFSET,
+                  column: matchIndexStart + ZERO_TO_ONE_BASED_OFFSET,
+                },
+                end: {
+                  line: lineIndex + ZERO_TO_ONE_BASED_OFFSET,
+                  column: matchIndexEnd + ZERO_TO_ONE_BASED_OFFSET,
+                },
+              };
 
-              if (!isIgnoredPosition(startLineNum, startColNum)) {
-                context.report({
-                  loc: {
-                    start: {
-                      line: startLineNum,
-                      column: startColNum,
-                    },
-                    end: {
-                      line: endLineNum,
-                      column: endColNum,
-                    },
-                  },
+              if (ignoredPositions.isIgnoredPosition(loc)) return;
 
-                  data: {
-                    irregularWhitespace: `U+${match[0].codePointAt(0).toString(16).toUpperCase().padStart(4, '0')}`,
-                  },
+              context.report({
+                loc,
 
-                  messageId: 'noIrregularWhitespace',
-                });
-              }
+                data: {
+                  irregularWhitespace: `U+${match[0].codePointAt(0).toString(16).toUpperCase().padStart(4, '0')}`,
+                },
+
+                messageId: 'noIrregularWhitespace',
+              });
             });
           }
         });
