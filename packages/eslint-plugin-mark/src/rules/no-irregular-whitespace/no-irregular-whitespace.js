@@ -121,17 +121,17 @@ export default {
                 },
               };
 
-              if (!ignoredPositions.isIgnoredPosition(loc)) {
-                context.report({
-                  loc,
+              if (ignoredPositions.isIgnoredPosition(loc)) return;
 
-                  data: {
-                    irregularWhitespace: `U+${match[0].codePointAt(0).toString(16).toUpperCase().padStart(4, '0')}`,
-                  },
+              context.report({
+                loc,
 
-                  messageId: 'noIrregularWhitespace',
-                });
-              }
+                data: {
+                  irregularWhitespace: `U+${match[0].codePointAt(0).toString(16).toUpperCase().padStart(4, '0')}`,
+                },
+
+                messageId: 'noIrregularWhitespace',
+              });
             });
           }
         });
