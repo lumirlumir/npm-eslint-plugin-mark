@@ -37,7 +37,7 @@ Examples of **incorrect** code for this rule:
   ## Next Section
   ```
 
-### ✅ Correct
+### :white_check_mark: Correct
 
 Examples of **correct** code for this rule:
 
