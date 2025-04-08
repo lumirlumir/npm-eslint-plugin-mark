@@ -38,6 +38,7 @@ export default function all(parserMode) {
       'mark/no-curly-quote': 'error',
       'mark/no-double-space': 'error',
       'mark/no-emoji': 'warn',
+      'mark/no-git-conflict-marker': 'error',
       'mark/no-irregular-whitespace': 'error',
     },
   };

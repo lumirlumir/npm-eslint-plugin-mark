@@ -1,5 +1,5 @@
 /**
- * @fileoverview Rule to disallow irregular whitespace.
+ * @fileoverview Rule to disallow git conflict markers.
  * @author 루밀LuMir(lumirlumir)
  */
 
@@ -18,7 +18,6 @@ import { ZERO_TO_ONE_BASED_OFFSET } from '../../core/constants.js';
 /**
  * @typedef {import("@eslint/markdown").RuleModule} RuleModule
  * @typedef {import("mdast").Code} Code
- * @typedef {import("mdast").InlineCode} InlineCode
  * @typedef {import("unist").Position} Position
  */
 
@@ -26,8 +25,7 @@ import { ZERO_TO_ONE_BASED_OFFSET } from '../../core/constants.js';
 // Helpers
 // --------------------------------------------------------------------------------
 
-const irregularWhitespaceRegex =
-  /[\f\v\u0085\ufeff\u00a0\u1680\u180e\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u200b\u202f\u205f\u3000\u2028\u2029]/gu;
+const gitConflictMarkerRegex = /^(?:<{7}(?!<)|={7}(?!=)|>{7}(?!>))/gmu;
 
 // --------------------------------------------------------------------------------
 // Rule Definition
@@ -40,8 +38,8 @@ export default {
 
     docs: {
       recommended: true,
-      description: 'Disallow irregular whitespace',
-      url: getRuleDocsUrl('no-irregular-whitespace'),
+      description: 'Disallow git conflict markers',
+      url: getRuleDocsUrl('no-git-conflict-marker'),
     },
 
     schema: [
@@ -49,9 +47,6 @@ export default {
         type: 'object',
         properties: {
           skipCode: {
-            type: 'boolean',
-          },
-          skipInlineCode: {
             type: 'boolean',
           },
         },
@@ -62,13 +57,12 @@ export default {
     defaultOptions: [
       {
         skipCode: true,
-        skipInlineCode: true,
       },
     ],
 
     messages: {
-      noIrregularWhitespace:
-        'Irregular whitespace `{{ irregularWhitespace }}` is not allowed.',
+      noGitConflictMarker:
+        'Git conflict marker `{{ gitConflictMarker }}` is not allowed.',
     },
 
     language: 'markdown',
@@ -78,7 +72,7 @@ export default {
 
   create(context) {
     // @ts-expect-error -- TODO
-    const [{ skipCode, skipInlineCode }] = context.options;
+    const [{ skipCode }] = context.options;
     const { lines } = context.sourceCode;
 
     const ignoredPositions = new IgnoredPositions();
@@ -89,21 +83,16 @@ export default {
         if (skipCode) ignoredPositions.push(node.position); // Store position information of `Code`.
       },
 
-      /** @param {InlineCode} node */
-      inlineCode(node) {
-        if (skipInlineCode) ignoredPositions.push(node.position); // Store position information of `InlineCode`.
-      },
-
       'root:exit': function () {
         lines.forEach((line, lineIndex) => {
-          const matches = [...line.matchAll(irregularWhitespaceRegex)];
+          const matches = [...line.matchAll(gitConflictMarkerRegex)];
 
           if (matches.length > 0) {
             matches.forEach(match => {
-              const irregularWhitespaceLength = match[0].length;
+              const gitConflictMarkerLength = match[0].length;
 
               const matchIndexStart = match.index;
-              const matchIndexEnd = matchIndexStart + irregularWhitespaceLength;
+              const matchIndexEnd = matchIndexStart + gitConflictMarkerLength;
 
               /** @type {Position} */
               const loc = {
@@ -123,10 +112,10 @@ export default {
                 loc,
 
                 data: {
-                  irregularWhitespace: `U+${match[0].codePointAt(0).toString(16).toUpperCase().padStart(4, '0')}`,
+                  gitConflictMarker: match[0],
                 },
 
-                messageId: 'noIrregularWhitespace',
+                messageId: 'noGitConflictMarker',
               });
             });
           }
