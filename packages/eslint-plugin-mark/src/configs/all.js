@@ -40,6 +40,7 @@ export default function all(parserMode) {
       'mark/no-double-space': 'error',
       'mark/no-emoji': 'warn',
       'mark/no-git-conflict-marker': 'error',
+      'mark/no-irregular-dash': 'error',
       'mark/no-irregular-whitespace': 'error',
     },
   };
