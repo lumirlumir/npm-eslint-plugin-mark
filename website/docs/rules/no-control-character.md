@@ -114,5 +114,5 @@ This rule applies to the entire document, specifically to the [`Root`](https://g
 
 ## Prior Art
 
-- [`textlint-rule-no-invalid-control-chracter`](https://github.com/textlint-rule/textlint-rule-no-invalid-control-character)
+- [`textlint-rule-no-invalid-control-character`](https://github.com/textlint-rule/textlint-rule-no-invalid-control-character)
 - [`eslint/no-control-regex`](https://eslint.org/docs/latest/rules/no-control-regex)
