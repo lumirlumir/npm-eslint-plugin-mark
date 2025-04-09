@@ -3,6 +3,18 @@
 
 ## Rule Details
 
+::: info
+
+Carriage return(`\r`), line feed(`\n`) and tab(`\t`) are not reported by this rule.
+
+:::
+
+This rule is aimed at identifying and preventing the use of control characters in Markdown documents. Control characters are non-printing characters primarily used to control the interpretation or display of text, and they can cause issues with Markdown parsers, create inconsistencies in document formatting, and lead to potential rendering problems across different platforms.
+
+The rule helps ensure that no unexpected control characters are present in your Markdown documents, which improves document consistency and prevents potential parsing problems. Control characters can be accidentally introduced when copying content from different sources or through certain keyboard shortcuts and can be difficult to detect visually.
+
+This rule disallows the following control characters except where the options allow:
+
 ```txt
 \u0000 - Null - <NUL>
 \u0001 - Start of Heading - <SOH>
@@ -71,9 +83,36 @@
 \u202e - Right-to-Left Override - <RLO>
 ```
 
-Carriage return(`\r`), line feed(`\n`) and tab(`\t`) are not considered control characters in this rule.
+## Options
+
+```js
+'mark/no-control-character': ['error', {
+  skipCode: true,
+  skipInlineCode: true,
+}]
+```
+
+### `skipCode`
+
+> Default: `true`
+
+`true` allows any control characters in code blocks.
+
+### `skipInlineCode`
+
+> Default: `true`
+
+`true` allows any control characters in inline code.
+
+## When Not To Use It
+
+You might want to disable this rule if you're working with documents that intentionally contain control characters for specific purposes, such as demonstrating control character behavior or working with specialized text formats.
+
+## AST
+
+This rule applies to the entire document, specifically to the [`Root`](https://github.com/syntax-tree/mdast?tab=readme-ov-file#root) node.
 
 ## Prior Art
 
-- [`textlint-rule-no-invalid-control-chracter](https://github.com/textlint-rule/textlint-rule-no-invalid-control-character)
+- [`textlint-rule-no-invalid-control-chracter`](https://github.com/textlint-rule/textlint-rule-no-invalid-control-character)
 - [`eslint/no-control-regex`](https://eslint.org/docs/latest/rules/no-control-regex)
