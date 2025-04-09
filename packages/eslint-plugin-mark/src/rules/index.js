@@ -4,6 +4,7 @@ import altText from './alt-text/index.js';
 import codeLangShorthand from './code-lang-shorthand/index.js';
 import headingId from './heading-id/index.js';
 import noBoldParagraph from './no-bold-paragraph/index.js';
+import noControlCharacter from './no-control-character/index.js';
 import noCurlyQuote from './no-curly-quote/index.js';
 import noDoubleSpace from './no-double-space/index.js';
 import noEmoji from './no-emoji/index.js';
@@ -16,6 +17,7 @@ export default {
   'code-lang-shorthand': codeLangShorthand,
   'heading-id': headingId,
   'no-bold-paragraph': noBoldParagraph,
+  'no-control-character': noControlCharacter,
   'no-curly-quote': noCurlyQuote,
   'no-double-space': noDoubleSpace,
   'no-emoji': noEmoji,
