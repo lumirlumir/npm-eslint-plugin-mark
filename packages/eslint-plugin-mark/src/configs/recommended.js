@@ -34,6 +34,7 @@ export default function recommended(parserMode) {
     rules: {
       'mark/alt-text': 'error',
       'mark/code-lang-shorthand': 'error',
+      'mark/en-capitalization': 'error',
       'mark/no-bold-paragraph': 'error',
       'mark/no-control-character': 'error',
       'mark/no-curly-quote': 'error',
