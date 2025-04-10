@@ -35,10 +35,6 @@ const tests = {
       name: 'Empty string',
       code: '  ',
     },
-    {
-      name: 'Empty heading',
-      code: '## ',
-    },
 
     // paragraph
     {
@@ -70,6 +66,11 @@ const tests = {
     },
 
     {
+      name: 'Heading: Empty',
+      code: '## ',
+      options: [{ skipHeading: false }],
+    },
+    {
       name: 'Heading: 1 level depth',
       code: '# Hello World!',
       options: [{ skipHeading: false }],
@@ -91,7 +92,7 @@ const tests = {
     },
     {
       name: 'Heading: 3 level depth - em + strong - 2',
-      code: '# _**Hello**_ World!',
+      code: '# _**Hello**_ _World!_',
       options: [{ skipHeading: false }],
     },
 
@@ -124,7 +125,7 @@ const tests = {
     },
     {
       name: 'ListItem: 3 level depth - em + strong - 2',
-      code: '- _**Hello**_ World!',
+      code: '- _**Hello**_ _World!_',
       options: [{ skipListItem: false }],
     },
   ],
