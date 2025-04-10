@@ -16,7 +16,7 @@ Examples of **incorrect** code for this rule:
 ```md
 this sentence starts with a lowercase letter.
 
-A paragraph with multiple sentences. this one incorrectly starts with lowercase.
+a paragraph with multiple sentences. only the first one is checked.
 ```
 
 ### :white_check_mark: Correct
