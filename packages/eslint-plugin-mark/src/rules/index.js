@@ -2,6 +2,7 @@
 
 import altText from './alt-text/index.js';
 import codeLangShorthand from './code-lang-shorthand/index.js';
+import enCapitalization from './en-capitalization/index.js';
 import headingId from './heading-id/index.js';
 import noBoldParagraph from './no-bold-paragraph/index.js';
 import noControlCharacter from './no-control-character/index.js';
@@ -15,6 +16,7 @@ import noIrregularWhitespace from './no-irregular-whitespace/index.js';
 export default {
   'alt-text': altText,
   'code-lang-shorthand': codeLangShorthand,
+  'en-capitalization': enCapitalization,
   'heading-id': headingId,
   'no-bold-paragraph': noBoldParagraph,
   'no-control-character': noControlCharacter,
