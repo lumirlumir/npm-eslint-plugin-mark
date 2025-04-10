@@ -104,6 +104,11 @@ const tests = {
     },
 
     {
+      name: 'ListItem: Empty',
+      code: '- ',
+      options: [{ skipListItem: false }],
+    },
+    {
       name: 'ListItem: 1 level depth',
       code: '- Hello World!',
       options: [{ skipListItem: false }],

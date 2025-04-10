@@ -36,14 +36,13 @@ function findFirstLeafTextNode(node) {
   if (node.type === 'text') return node;
 
   // Check if node has children to traverse
-  if (node.children && node.children.length > 0) {
+  if (node.children && node.children.length > 0)
     // Iterate through children in order
     for (const child of node.children) {
       const textNode = findFirstLeafTextNode(child);
       // Return the first text node found in the subtree
       if (textNode) return textNode;
     }
-  }
 
   // No text node found in this subtree
   return null;
