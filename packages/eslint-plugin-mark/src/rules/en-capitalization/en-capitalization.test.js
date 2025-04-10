@@ -35,6 +35,10 @@ const tests = {
       name: 'Empty string',
       code: '  ',
     },
+    {
+      name: 'Empty heading',
+      code: '## ',
+    },
 
     // paragraph
     {
