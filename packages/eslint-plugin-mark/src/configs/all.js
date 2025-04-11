@@ -37,7 +37,7 @@ export default function all(parserMode) {
       'mark/code-lang-shorthand': 'error',
       'mark/en-capitalization': 'error',
       'mark/heading-id': 'warn',
-      'mark/image-title': 'error',
+      'mark/image-title': 'warn',
       'mark/no-bold-paragraph': 'error',
       'mark/no-control-character': 'error',
       'mark/no-curly-quote': 'error',
