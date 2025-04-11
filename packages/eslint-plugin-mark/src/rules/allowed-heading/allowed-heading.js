@@ -127,7 +127,7 @@ export default {
 
     messages: {
       allowedHeading:
-        'The heading text `{{ heading }}` is not allowed. Please use one of the allowed text: {{ allowed }}',
+        'The heading text `{{ heading }}` is not allowed. Please use one of the following allowed text: {{ allowed }}.',
     },
 
     language: 'markdown',
