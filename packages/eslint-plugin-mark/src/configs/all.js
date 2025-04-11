@@ -32,6 +32,7 @@ export default function all(parserMode) {
     ...base(parserMode),
     name: `mark/all/${parserMode}`,
     rules: {
+      'mark/allowed-heading': 'warn',
       'mark/alt-text': 'error',
       'mark/code-lang-shorthand': 'error',
       'mark/en-capitalization': 'error',
