@@ -47,6 +47,8 @@ export default class ReferenceDefinitionHandler {
     } else if (node.type === 'definition') {
       this.#definitions.push(node);
     }
+
+    return this;
   }
 
   /**
