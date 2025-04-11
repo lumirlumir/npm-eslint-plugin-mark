@@ -1,0 +1,177 @@
+/**
+ * @fileoverview Test for `image-title.js`.
+ * @author 루밀LuMir(lumirlumir)
+ */
+
+// --------------------------------------------------------------------------------
+// Import
+// --------------------------------------------------------------------------------
+
+import { test } from 'node:test';
+
+import { getFileName } from '../../core/helpers/index.js';
+import { ruleTesterCommonmark, ruleTesterGfm } from '../../core/rule-tester/index.js';
+
+import rule from './image-title.js';
+
+// --------------------------------------------------------------------------------
+// Helpers
+// --------------------------------------------------------------------------------
+
+const name = getFileName(import.meta.url);
+const imageTitle = 'imageTitle';
+
+// --------------------------------------------------------------------------------
+// Testcases
+// --------------------------------------------------------------------------------
+
+const tests = {
+  valid: [
+    {
+      name: 'Empty',
+      code: '',
+    },
+    {
+      name: 'Empty string',
+      code: '  ',
+    },
+    {
+      name: 'Image node with title attribute',
+      code: '![](https://example.com/image.jpg "title")',
+    },
+    {
+      name: 'ImageReference node with title attribute',
+      code: `
+![alt text][image]
+
+[image]: https://example.com/image.jpg "title"
+`,
+    },
+    {
+      name: 'Html node with title attribute',
+      code: '<img src="https://example.com/image.jpg" title="title">',
+    },
+    {
+      name: 'Nested Html node with title attribute',
+      code: `
+<div>
+  <img src="https://example.com/image.jpg" title="title">
+</div>
+`,
+    },
+  ],
+
+  invalid: [
+    {
+      name: 'Image node without title attribute',
+      code: '![](https://example.com/image.jpg)',
+      errors: [
+        {
+          messageId: imageTitle,
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 35,
+        },
+      ],
+    },
+    {
+      name: 'Image node with empty title attribute',
+      code: '![](https://example.com/image.jpg "")',
+      errors: [
+        {
+          messageId: imageTitle,
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 38,
+        },
+      ],
+    },
+
+    {
+      name: 'ImageReference node without title attribute',
+      code: `
+![alt text][image]
+
+[image]: https://example.com/image.jpg`,
+      errors: [
+        {
+          messageId: imageTitle,
+          line: 4,
+          column: 1,
+          endLine: 4,
+          endColumn: 39,
+        },
+      ],
+    },
+    {
+      name: 'ImageReference node with empty title attribute',
+      code: `
+![alt text][image]
+
+[image]: https://example.com/image.jpg ""`,
+      errors: [
+        {
+          messageId: imageTitle,
+          line: 4,
+          column: 1,
+          endLine: 4,
+          endColumn: 42,
+        },
+      ],
+    },
+
+    {
+      name: 'Html node without title attribute',
+      code: '<img src="https://example.com/image.jpg">',
+      errors: [
+        {
+          messageId: imageTitle,
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 42,
+        },
+      ],
+    },
+    {
+      name: 'Html node with empty title attribute',
+      code: '<img src="https://example.com/image.jpg" title="">',
+      errors: [
+        {
+          messageId: imageTitle,
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 51,
+        },
+      ],
+    },
+    {
+      name: 'Nested Html node without title attribute',
+      code: `
+<div>
+  <img src="https://example.com/image.jpg">
+</div>`,
+      errors: [
+        {
+          messageId: imageTitle,
+          line: 2,
+          column: 1,
+          endLine: 4,
+          endColumn: 7,
+        },
+      ],
+    },
+  ],
+};
+
+// --------------------------------------------------------------------------------
+// Test Runner
+// --------------------------------------------------------------------------------
+
+test(name, () => {
+  ruleTesterCommonmark.run(name, rule, tests);
+  ruleTesterGfm.run(name, rule, tests);
+});
