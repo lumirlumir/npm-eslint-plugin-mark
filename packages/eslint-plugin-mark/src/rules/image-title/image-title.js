@@ -50,16 +50,19 @@ export default {
   create(context) {
     const refDefHandler = new ReferenceDefinitionHandler();
 
+    /** @param {Image | ImageReference | Definition | Html} node */
+    function report(node) {
+      context.report({
+        // @ts-expect-error -- TODO
+        node,
+        messageId: 'imageTitle',
+      });
+    }
+
     return {
       /** @param {Image} node */
       image(node) {
-        if (!node.title) {
-          context.report({
-            // @ts-expect-error -- TODO
-            node,
-            messageId: 'imageTitle',
-          });
-        }
+        if (!node.title) report(node);
       },
 
       /** @param {Html} node */
@@ -67,13 +70,7 @@ export default {
         const $ = cheerio.load(node.value);
 
         $('img').each((_, elem) => {
-          if (!elem.attribs.title) {
-            context.report({
-              // @ts-expect-error -- TODO
-              node,
-              messageId: 'imageTitle',
-            });
-          }
+          if (!elem.attribs.title) report(node);
         });
       },
 
@@ -89,16 +86,8 @@ export default {
 
       // TODO: Enable `'root:exit'()` syntax.
       'root:exit': function () {
-        const imageDefinitions = refDefHandler.getImageDefinitions();
-
-        imageDefinitions.forEach(definition => {
-          if (!definition.title) {
-            context.report({
-              // @ts-expect-error -- TODO
-              node: definition,
-              messageId: 'imageTitle',
-            });
-          }
+        refDefHandler.getImageDefinitions().forEach(definition => {
+          if (!definition.title) report(definition);
         });
       },
     };
