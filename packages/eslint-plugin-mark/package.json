@@ -87,6 +87,7 @@
     "emoji-regex": "^10.4.0"
   },
   "devDependencies": {
+    "@types/mdast": "^4.0.4",
     "eslint": "^9.23.0"
   }
 }
