@@ -7,25 +7,20 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { test } from 'node:test';
-
-import { getFileName } from '../../core/tests/index.js';
-import { ruleTesterCommonmark, ruleTesterGfm } from '../../core/rule-tester/index.js';
-
+import { getFileName, ruleTester } from '../../core/tests/index.js';
 import rule from './no-irregular-whitespace.js';
 
 // --------------------------------------------------------------------------------
 // Helpers
 // --------------------------------------------------------------------------------
 
-const name = getFileName(import.meta.url);
 const noIrregularWhitespace = 'noIrregularWhitespace';
 
 // --------------------------------------------------------------------------------
-// Testcases
+// Test
 // --------------------------------------------------------------------------------
 
-const tests = {
+ruleTester(getFileName(import.meta.url), rule, {
   valid: [
     {
       name: 'Empty',
@@ -278,13 +273,4 @@ console.log(\u200b'Hello World');
       ],
     },
   ],
-};
-
-// --------------------------------------------------------------------------------
-// Test Runner
-// --------------------------------------------------------------------------------
-
-test(name, () => {
-  ruleTesterCommonmark.run(name, rule, tests);
-  ruleTesterGfm.run(name, rule, tests);
 });

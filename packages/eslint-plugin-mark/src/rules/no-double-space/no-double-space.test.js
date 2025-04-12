@@ -7,26 +7,21 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { test } from 'node:test';
-
-import { getFileName } from '../../core/tests/index.js';
-import { ruleTesterCommonmark, ruleTesterGfm } from '../../core/rule-tester/index.js';
-
+import { getFileName, ruleTester } from '../../core/tests/index.js';
 import rule from './no-double-space.js';
 
 // --------------------------------------------------------------------------------
 // Helpers
 // --------------------------------------------------------------------------------
 
-const name = getFileName(import.meta.url);
 const noDoubleSpace = 'noDoubleSpace';
 const noMultipleSpace = 'noMultipleSpace';
 
 // --------------------------------------------------------------------------------
-// Testcases
+// Test
 // --------------------------------------------------------------------------------
 
-const tests = {
+ruleTester(getFileName(import.meta.url), rule, {
   valid: [
     // Double spaces.
     '  ', // Empty string with double spaces.
@@ -521,13 +516,4 @@ quux`,
       ],
     },
   ],
-};
-
-// --------------------------------------------------------------------------------
-// Test Runner
-// --------------------------------------------------------------------------------
-
-test(name, () => {
-  ruleTesterCommonmark.run(name, rule, tests);
-  ruleTesterGfm.run(name, rule, tests);
 });
