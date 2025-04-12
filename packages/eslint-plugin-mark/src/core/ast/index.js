@@ -2,6 +2,6 @@
 
 import IgnoredPositions from './ignored-positions/index.js';
 import ReferenceDefinitionHandler from './reference-definition-handler/index.js';
-import textHandler from './text-handler/index.js';
+import TextHandler from './text-handler/index.js';
 
-export { IgnoredPositions, ReferenceDefinitionHandler, textHandler };
+export { IgnoredPositions, ReferenceDefinitionHandler, TextHandler };

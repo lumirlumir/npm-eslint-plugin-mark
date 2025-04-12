@@ -1,3 +1,3 @@
-import textHandler from './text-handler.js';
+import TextHandler from './text-handler.js';
 
-export default textHandler;
+export default TextHandler;

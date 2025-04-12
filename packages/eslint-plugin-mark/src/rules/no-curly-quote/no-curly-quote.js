@@ -7,7 +7,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { textHandler } from '../../core/ast/index.js';
+import { TextHandler } from '../../core/ast/index.js';
 import { URL_RULE_DOCS } from '../../core/constants.js';
 
 // --------------------------------------------------------------------------------
@@ -16,7 +16,7 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
 
 /**
  * @typedef {import("@eslint/markdown").RuleModule} RuleModule
- * @typedef {import("../../core/types.d.ts").TextExt} TextExt
+ * @typedef {import("mdast").Text} Text
  */
 
 // --------------------------------------------------------------------------------
@@ -89,9 +89,9 @@ export default {
 
   create(context) {
     return {
-      /** @param {TextExt} node */
+      /** @param {Text} node */
       text(node) {
-        textHandler(context, node);
+        const textHandler = new TextHandler(context, node);
 
         const [
           {
@@ -114,7 +114,7 @@ export default {
 
         if (!regexString) return;
 
-        node.children.forEach(textLineNode => {
+        textHandler.lines.forEach(textLineNode => {
           const matches = [
             ...textLineNode.value.matchAll(new RegExp(`[${regexString}]`, 'g')),
           ];

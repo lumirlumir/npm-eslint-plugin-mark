@@ -7,7 +7,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { textHandler } from '../../core/ast/index.js';
+import { TextHandler } from '../../core/ast/index.js';
 import { URL_RULE_DOCS } from '../../core/constants.js';
 
 // --------------------------------------------------------------------------------
@@ -16,7 +16,7 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
 
 /**
  * @typedef {import("@eslint/markdown").RuleModule} RuleModule
- * @typedef {import("../../core/types.d.ts").TextExt} TextExt
+ * @typedef {import("mdast").Text} Text
  */
 
 // --------------------------------------------------------------------------------
@@ -78,16 +78,16 @@ export default {
 
   create(context) {
     return {
-      /** @param {TextExt} node */
+      /** @param {Text} node */
       text(node) {
-        textHandler(context, node);
+        const textHandler = new TextHandler(context, node);
 
         // @ts-expect-error -- TODO
         const [{ multipleSpace }] = context.options;
         const spaceRegex = multipleSpace ? multipleSpaceRegex : doubleSpaceRegex;
         const messageId = multipleSpace ? 'noMultipleSpace' : 'noDoubleSpace';
 
-        node.children.forEach(textLineNode => {
+        textHandler.lines.forEach(textLineNode => {
           const matches = [...textLineNode.value.trim().matchAll(spaceRegex)];
 
           if (matches.length > 0) {

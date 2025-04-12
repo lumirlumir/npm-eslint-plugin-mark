@@ -11,14 +11,14 @@ import { deepStrictEqual } from 'node:assert';
 
 import { getFileName } from '../../tests/index.js';
 
-import textHandler from './text-handler.js';
+import TextHandler from './text-handler.js';
 
 // --------------------------------------------------------------------------------
 // Test
 // --------------------------------------------------------------------------------
 
 describe(getFileName(import.meta.url), () => {
-  it('should return correct `TextExt` node: singleline', () => {
+  it('should return correct lines: singleline', () => {
     const text = 'foo';
     const context = {
       sourceCode: {
@@ -35,11 +35,10 @@ describe(getFileName(import.meta.url), () => {
       },
     };
 
-    textHandler(context, textNode);
+    const textHandler = new TextHandler(context, textNode);
 
-    deepStrictEqual(textNode.children, [
+    deepStrictEqual(textHandler.lines, [
       {
-        type: 'textLine',
         value: 'foo',
         position: {
           start: {
@@ -57,7 +56,7 @@ describe(getFileName(import.meta.url), () => {
     ]);
   });
 
-  it('should return correct `TextExt` node: multiline', () => {
+  it('should return correct lines: multiline', () => {
     const text = `foo
   bar
 baz`;
@@ -76,11 +75,10 @@ baz`;
       },
     };
 
-    textHandler(context, textNode);
+    const textHandler = new TextHandler(context, textNode);
 
-    deepStrictEqual(textNode.children, [
+    deepStrictEqual(textHandler.lines, [
       {
-        type: 'textLine',
         value: 'foo',
         position: {
           start: {
@@ -96,7 +94,6 @@ baz`;
         },
       },
       {
-        type: 'textLine',
         value: '  bar',
         position: {
           start: {
@@ -112,7 +109,6 @@ baz`;
         },
       },
       {
-        type: 'textLine',
         value: 'baz',
         position: {
           start: {
