@@ -57,9 +57,9 @@ const ruleTesterGfm = new RuleTester({
 
 /**
  * Markdown rule tester.
- * @param {string} name
- * @param {RuleModule} rule
- * @param {Tests} tests
+ * @param {string} name Rule name.
+ * @param {RuleModule} rule Rule module.
+ * @param {Tests} tests Tests.
  */
 export default function ruleTester(name, rule, tests) {
   const dialects = rule?.meta?.dialects;
