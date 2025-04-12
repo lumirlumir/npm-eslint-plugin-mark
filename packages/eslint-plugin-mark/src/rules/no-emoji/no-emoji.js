@@ -10,7 +10,7 @@
 import emojiRegex from 'emoji-regex';
 
 import { textHandler } from '../../core/ast/index.js';
-import { getRuleDocsUrl } from '../../core/helpers/index.js';
+import { URL_RULE_DOCS } from '../../core/constants.js';
 
 // --------------------------------------------------------------------------------
 // Typedefs
@@ -33,7 +33,7 @@ export default {
     docs: {
       recommended: false,
       description: 'Disallow emojis in text',
-      url: getRuleDocsUrl('no-emoji'),
+      url: URL_RULE_DOCS('no-emoji'),
     },
 
     messages: {

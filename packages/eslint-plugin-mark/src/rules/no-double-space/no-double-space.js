@@ -8,7 +8,7 @@
 // --------------------------------------------------------------------------------
 
 import { textHandler } from '../../core/ast/index.js';
-import { getRuleDocsUrl } from '../../core/helpers/index.js';
+import { URL_RULE_DOCS } from '../../core/constants.js';
 
 // --------------------------------------------------------------------------------
 // Typedefs
@@ -41,7 +41,7 @@ export default {
       recommended: true,
       description:
         'Disallow double or multiple consecutive spaces in text, except for leading and trailing spaces',
-      url: getRuleDocsUrl('no-double-space'),
+      url: URL_RULE_DOCS('no-double-space'),
     },
 
     fixable: 'whitespace',

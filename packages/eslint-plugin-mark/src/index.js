@@ -1,6 +1,5 @@
 /**
  * @fileoverview Entry file for the `eslint-plugin-mark` package.
- * @module eslint-plugin-mark
  */
 
 // --------------------------------------------------------------------------------

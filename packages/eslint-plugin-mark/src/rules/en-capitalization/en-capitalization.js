@@ -7,7 +7,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { getRuleDocsUrl } from '../../core/helpers/index.js';
+import { URL_RULE_DOCS } from '../../core/constants.js';
 
 // --------------------------------------------------------------------------------
 // Typedefs
@@ -60,7 +60,7 @@ export default {
     docs: {
       recommended: true,
       description: 'Enforce the use of capital letters at the beginning of sentences',
-      url: getRuleDocsUrl('en-capitalization'),
+      url: URL_RULE_DOCS('en-capitalization'),
     },
 
     fixable: 'code',

@@ -13,7 +13,7 @@
 import { describe, it } from 'node:test';
 import { deepStrictEqual, strictEqual } from 'node:assert';
 
-import { getFileName } from '../../helpers/index.js';
+import { getFileName } from '../../tests/index.js';
 
 import IgnoredPositions from './ignored-positions.js';
 

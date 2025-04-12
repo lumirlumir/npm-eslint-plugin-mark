@@ -17,6 +17,6 @@ import getFileName from './get-file-name.js';
 
 describe(getFileName(import.meta.url), () => {
   it('should return the file name of the module', () => {
-    strictEqual(getFileName(import.meta.url), 'get-file-name.test');
+    strictEqual(getFileName(import.meta.url), 'get-file-name');
   });
 });

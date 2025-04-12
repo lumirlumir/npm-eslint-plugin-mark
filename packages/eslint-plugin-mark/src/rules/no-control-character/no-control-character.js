@@ -10,8 +10,7 @@
 // --------------------------------------------------------------------------------
 
 import { IgnoredPositions } from '../../core/ast/index.js';
-import { getRuleDocsUrl } from '../../core/helpers/index.js';
-import { ZERO_TO_ONE_BASED_OFFSET } from '../../core/constants.js';
+import { URL_RULE_DOCS, ZERO_TO_ONE_BASED_OFFSET } from '../../core/constants.js';
 
 // --------------------------------------------------------------------------------
 // Typedefs
@@ -43,7 +42,7 @@ export default {
     docs: {
       recommended: true,
       description: 'Disallow control character',
-      url: getRuleDocsUrl('no-control-character'),
+      url: URL_RULE_DOCS('no-control-character'),
     },
 
     schema: [
