@@ -9,7 +9,7 @@
 import { describe, it } from 'node:test';
 import { deepStrictEqual, strictEqual } from 'node:assert';
 
-import { getFileName } from '../../helpers/index.js';
+import { getFileName } from '../../tests/index.js';
 
 import ReferenceDefinitionHandler from './reference-definition-handler.js';
 
