@@ -18,6 +18,7 @@
     "coverage": "npx c8 --reporter=lcov npm run test",
     "test": "npx lerna run test --ignore npm-eslint-plugin-mark",
     "test:pkg:epm": "npm run test -w packages/eslint-plugin-mark",
+    "test:t:i": "npm run test -w tests/integration",
     "build": "npx lerna run build --ignore npm-eslint-plugin-mark",
     "build:pkg:epm": "npm run build -w packages/eslint-plugin-mark",
     "build:website": "npm run build -w website",
