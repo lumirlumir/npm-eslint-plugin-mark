@@ -12,7 +12,11 @@
       "types": "./build/rules/index.d.ts",
       "default": "./src/rules/index.js"
     },
-    "./constants": {
+    "./core/tests": {
+      "types": "./build/core/tests/index.d.ts",
+      "default": "./src/core/tests/index.js"
+    },
+    "./core/constants": {
       "types": "./build/core/constants.d.ts",
       "default": "./src/core/constants.js"
     },
@@ -29,7 +33,10 @@
       "./rules": [
         "./build/rules/index.d.ts"
       ],
-      "./constants": [
+      "./core/tests": [
+        "./build/core/tests/index.d.ts"
+      ],
+      "./core/constants": [
         "./build/core/constants.d.ts"
       ]
     }

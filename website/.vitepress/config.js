@@ -19,7 +19,7 @@ import {
   URL_GITHUB,
   URL_NPM,
   URL_RULE_SRC,
-} from 'eslint-plugin-mark/constants';
+} from 'eslint-plugin-mark/core/constants';
 
 import footnote from 'markdown-it-footnote';
 import { defineConfig } from 'vitepress';

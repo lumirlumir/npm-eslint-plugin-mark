@@ -9,19 +9,14 @@
 import { describe, it } from 'node:test';
 import { doesNotMatch, match, ok } from 'node:assert';
 
-import mark from 'eslint-plugin-mark';
-
-// ---------------------------------------------------------------------------------
-// Helpers
-// ---------------------------------------------------------------------------------
-
-const { rules } = mark;
+import rules from 'eslint-plugin-mark/rules';
+import { getFileName } from 'eslint-plugin-mark/core/tests';
 
 // ---------------------------------------------------------------------------------
 // Test
 // ---------------------------------------------------------------------------------
 
-describe('rules-meta', () => {
+describe(getFileName(import.meta.url), () => {
   it('`meta` should exist', () => {
     Object.values(rules).forEach(rule => {
       const { meta } = rule;
@@ -97,6 +92,7 @@ describe('rules-meta', () => {
       const { dialects } = rule.meta;
 
       ok(dialects);
+      ok(dialects.length > 0);
       dialects.forEach(dialect => {
         match(dialect, /^(?:commonmark|gfm)$/);
       });
