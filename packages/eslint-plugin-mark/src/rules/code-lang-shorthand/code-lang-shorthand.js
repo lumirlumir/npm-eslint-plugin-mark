@@ -10,7 +10,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { getRuleDocsUrl } from '../../core/helpers/index.js';
+import { URL_RULE_DOCS } from '../../core/constants.js';
 
 // --------------------------------------------------------------------------------
 // Typedefs
@@ -110,7 +110,7 @@ export default {
     docs: {
       recommended: true,
       description: 'Enforce the use of shorthand for code block language identifiers',
-      url: getRuleDocsUrl('code-lang-shorthand'),
+      url: URL_RULE_DOCS('code-lang-shorthand'),
     },
 
     fixable: 'code',

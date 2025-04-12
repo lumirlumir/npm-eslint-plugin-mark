@@ -9,7 +9,7 @@
 
 import * as cheerio from 'cheerio';
 import { ReferenceDefinitionHandler } from '../../core/ast/index.js';
-import { getRuleDocsUrl } from '../../core/helpers/index.js';
+import { URL_RULE_DOCS } from '../../core/constants.js';
 
 // --------------------------------------------------------------------------------
 // Typedefs
@@ -35,7 +35,7 @@ export default {
     docs: {
       recommended: false,
       description: 'Enforce the use of title attribute for images',
-      url: getRuleDocsUrl('image-title'),
+      url: URL_RULE_DOCS('image-title'),
     },
 
     messages: {

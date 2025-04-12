@@ -7,7 +7,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { getRuleDocsUrl } from '../../core/helpers/index.js';
+import { URL_RULE_DOCS } from '../../core/constants.js';
 
 // --------------------------------------------------------------------------------
 // Typedefs
@@ -36,7 +36,7 @@ export default {
     docs: {
       recommended: false,
       description: 'Enforce the use of allowed text for headings',
-      url: getRuleDocsUrl('allowed-heading'),
+      url: URL_RULE_DOCS('allowed-heading'),
     },
 
     schema: [

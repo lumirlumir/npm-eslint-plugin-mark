@@ -8,7 +8,7 @@
 // --------------------------------------------------------------------------------
 
 import { textHandler } from '../../core/ast/index.js';
-import { getRuleDocsUrl } from '../../core/helpers/index.js';
+import { URL_RULE_DOCS } from '../../core/constants.js';
 
 // --------------------------------------------------------------------------------
 // Typedefs
@@ -42,7 +42,7 @@ export default {
     docs: {
       recommended: true,
       description: 'Disallow curly quotes(`“`, `”`, `‘` or `’`) in text',
-      url: getRuleDocsUrl('no-curly-quote'),
+      url: URL_RULE_DOCS('no-curly-quote'),
     },
 
     fixable: 'code',

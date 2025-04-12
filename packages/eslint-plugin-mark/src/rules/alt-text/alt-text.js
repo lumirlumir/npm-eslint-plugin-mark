@@ -8,7 +8,7 @@
 // --------------------------------------------------------------------------------
 
 import * as cheerio from 'cheerio';
-import { getRuleDocsUrl } from '../../core/helpers/index.js';
+import { URL_RULE_DOCS } from '../../core/constants.js';
 
 // --------------------------------------------------------------------------------
 // Typedefs
@@ -33,7 +33,7 @@ export default {
     docs: {
       recommended: true,
       description: 'Enforce the use of alternative text for images',
-      url: getRuleDocsUrl('alt-text'),
+      url: URL_RULE_DOCS('alt-text'),
     },
 
     messages: {

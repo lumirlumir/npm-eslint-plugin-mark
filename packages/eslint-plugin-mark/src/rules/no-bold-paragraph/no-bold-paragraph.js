@@ -7,7 +7,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { getRuleDocsUrl } from '../../core/helpers/index.js';
+import { URL_RULE_DOCS } from '../../core/constants.js';
 
 // --------------------------------------------------------------------------------
 // Typedefs
@@ -30,7 +30,7 @@ export default {
     docs: {
       recommended: true,
       description: 'Disallow using fully bolded paragraphs as headings',
-      url: getRuleDocsUrl('no-bold-paragraph'),
+      url: URL_RULE_DOCS('no-bold-paragraph'),
     },
 
     messages: {
