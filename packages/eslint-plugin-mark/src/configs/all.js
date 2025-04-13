@@ -46,7 +46,7 @@ export default function all(parserMode) {
       'mark/no-git-conflict-marker': 'error',
       'mark/no-irregular-dash': 'error',
       'mark/no-irregular-whitespace': 'error',
-      'makr/no-unused-definition': 'error',
+      'mark/no-unused-definition': 'error',
     },
   };
 }
