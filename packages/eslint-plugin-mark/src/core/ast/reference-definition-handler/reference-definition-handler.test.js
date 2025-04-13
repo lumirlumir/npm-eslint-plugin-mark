@@ -157,6 +157,26 @@ const definition3 = {
   },
 };
 
+const definition4 = {
+  type: 'definition',
+  identifier: 'unused',
+  label: 'unused',
+  title: null,
+  url: 'https://example.com/unused',
+  position: {
+    start: {
+      line: 14,
+      column: 1,
+      offset: 164,
+    },
+    end: {
+      line: 14,
+      column: 37,
+      offset: 200,
+    },
+  },
+};
+
 const refDefHandler = new ReferenceDefinitionHandler()
   .push(imageReference1)
   .push(imageReference2)
@@ -164,7 +184,8 @@ const refDefHandler = new ReferenceDefinitionHandler()
   .push(linkReference2)
   .push(definition1)
   .push(definition2)
-  .push(definition3);
+  .push(definition3)
+  .push(definition4);
 
 // --------------------------------------------------------------------------------
 // Test
@@ -175,7 +196,12 @@ describe(getFileName(import.meta.url), () => {
     it('should push nodes to the list correctly', () => {
       deepStrictEqual(refDefHandler.imageReferences, [imageReference1, imageReference2]);
       deepStrictEqual(refDefHandler.linkReferences, [linkReference1, linkReference2]);
-      deepStrictEqual(refDefHandler.definitions, [definition1, definition2, definition3]);
+      deepStrictEqual(refDefHandler.definitions, [
+        definition1,
+        definition2,
+        definition3,
+        definition4,
+      ]);
     });
   });
 
@@ -184,6 +210,7 @@ describe(getFileName(import.meta.url), () => {
       strictEqual(refDefHandler.isImageDefinition(definition1), true);
       strictEqual(refDefHandler.isImageDefinition(definition2), false);
       strictEqual(refDefHandler.isImageDefinition(definition3), true);
+      strictEqual(refDefHandler.isImageDefinition(definition4), false);
     });
   });
 
@@ -192,6 +219,16 @@ describe(getFileName(import.meta.url), () => {
       strictEqual(refDefHandler.isLinkDefinition(definition1), false);
       strictEqual(refDefHandler.isLinkDefinition(definition2), true);
       strictEqual(refDefHandler.isLinkDefinition(definition3), true);
+      strictEqual(refDefHandler.isLinkDefinition(definition4), false);
+    });
+  });
+
+  describe('isUnusedDefinition()', () => {
+    it('should return true for unused definitions', () => {
+      strictEqual(refDefHandler.isUnusedDefinition(definition1), false);
+      strictEqual(refDefHandler.isUnusedDefinition(definition2), false);
+      strictEqual(refDefHandler.isUnusedDefinition(definition3), false);
+      strictEqual(refDefHandler.isUnusedDefinition(definition4), true);
     });
   });
 
@@ -204,6 +241,12 @@ describe(getFileName(import.meta.url), () => {
   describe('getLinkDefinitions()', () => {
     it('should return link definitions', () => {
       deepStrictEqual(refDefHandler.getLinkDefinitions(), [definition2, definition3]);
+    });
+  });
+
+  describe('getUnusedDefinitions()', () => {
+    it('should return unused definitions', () => {
+      deepStrictEqual(refDefHandler.getUnusedDefinitions(), [definition4]);
     });
   });
 });

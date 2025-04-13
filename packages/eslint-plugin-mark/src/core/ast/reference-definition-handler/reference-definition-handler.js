@@ -68,6 +68,14 @@ export default class ReferenceDefinitionHandler {
   }
 
   /**
+   * Check if a `Definition` node is unused.
+   * @param {Definition} node
+   */
+  isUnusedDefinition(node) {
+    return !this.isImageDefinition(node) && !this.isLinkDefinition(node);
+  }
+
+  /**
    * Get all `Definition` nodes that are image definitions.
    */
   getImageDefinitions() {
@@ -79,6 +87,13 @@ export default class ReferenceDefinitionHandler {
    */
   getLinkDefinitions() {
     return this.#definitions.filter(def => this.isLinkDefinition(def));
+  }
+
+  /**
+   * Get all `Definition` nodes that are unused.
+   */
+  getUnusedDefinitions() {
+    return this.#definitions.filter(def => this.isUnusedDefinition(def));
   }
 
   // ------------------------------------------------------------------------------
