@@ -14,6 +14,7 @@ import noEmoji from './no-emoji/index.js';
 import noGitConflictMarker from './no-git-conflict-marker/index.js';
 import noIrregularDash from './no-irregular-dash/index.js';
 import noIrregularWhitespace from './no-irregular-whitespace/index.js';
+import noUnusedDefinition from './no-unused-definition/index.js';
 
 export default {
   'allowed-heading': allowedHeading,
@@ -30,4 +31,5 @@ export default {
   'no-git-conflict-marker': noGitConflictMarker,
   'no-irregular-dash': noIrregularDash,
   'no-irregular-whitespace': noIrregularWhitespace,
+  'no-unused-definition': noUnusedDefinition,
 };
