@@ -7,8 +7,8 @@
     "emitDeclarationOnly": true,
     "outDir": "build",
     "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "Node",
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
     "skipLibCheck": true
   },
   "include": ["src/**/*.js", "src/**/*.mjs", "src/**/*.cjs"],
