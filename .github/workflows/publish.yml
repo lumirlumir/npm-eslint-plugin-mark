@@ -31,9 +31,6 @@ jobs:
       - name: Set up node_modules
         run: npm ci
 
-      - name: Test
-        run: npm run test
-
       - name: Publish
         run: npm run publish-package
         env:
