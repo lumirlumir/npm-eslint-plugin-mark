@@ -93,7 +93,7 @@ export default {
         if (skipInlineCode) ignoredPositions.push(node.position); // Store position information of `InlineCode`.
       },
 
-      'root:exit': function () {
+      'root:exit'() {
         lines.forEach((line, lineIndex) => {
           const matches = [...line.matchAll(irregularWhitespaceRegex)];
 

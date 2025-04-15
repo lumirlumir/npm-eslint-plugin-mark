@@ -82,7 +82,7 @@ export default {
         if (skipCode) ignoredPositions.push(node.position); // Store position information of `Code`.
       },
 
-      'root:exit': function () {
+      'root:exit'() {
         lines.forEach((line, lineIndex) => {
           const matches = [...line.matchAll(gitConflictMarkerRegex)];
 

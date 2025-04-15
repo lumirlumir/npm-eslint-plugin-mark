@@ -84,8 +84,7 @@ export default {
         refDefHandler.push(node);
       },
 
-      // TODO: Enable `'root:exit'()` syntax.
-      'root:exit': function () {
+      'root:exit'() {
         refDefHandler.getImageDefinitions().forEach(definition => {
           if (!definition.title) report(definition);
         });

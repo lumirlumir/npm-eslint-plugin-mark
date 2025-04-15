@@ -66,8 +66,7 @@ export default {
         refDefHandler.push(node);
       },
 
-      // TODO: Enable `'root:exit'()` syntax.
-      'root:exit': function () {
+      'root:exit'() {
         refDefHandler.getUnusedDefinitions().forEach(definition => {
           context.report({
             // @ts-expect-error -- TODO

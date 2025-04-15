@@ -60,8 +60,6 @@ lumirlumir/lumirlumir-configs:
     dest: ./configs/.nvmrc
   - source: ./.prettierignore
     dest: ./configs/.prettierignore
-  - source: ./.prettierrc.cjs
-    dest: ./configs/.prettierrc.cjs
   - source: ./.textlintrc.cjs
     dest: ./configs/.textlintrc.cjs
   - source: ./CODE_OF_CONDUCT.md
@@ -74,6 +72,8 @@ lumirlumir/lumirlumir-configs:
     dest: ./configs/eslint.config.mjs
   - source: ./lint-staged.config.mjs
     dest: ./configs/lint-staged.config.mjs
+  - source: ./prettier.config.mjs
+    dest: ./configs/prettier.config.mjs
   # tsconfig.json
   - source: ./packages/eslint-plugin-mark/tsconfig.json
     dest: ./configs/tsconfig.json
