@@ -1,8 +1,8 @@
 export default {
   '*': [
-    'npx prettier --check --ignore-unknown',
+    'npx prettier --write --ignore-unknown',
     'npx editorconfig-checker -config .editorconfig-checker.json',
   ],
-  '*.{js,mjs,cjs,jsx,ts,mts,cts,tsx,md}': 'npx eslint',
-  '*.md': ['npx markdownlint', 'npx textlint -f pretty-error'],
+  '*.{js,mjs,cjs,jsx,ts,mts,cts,tsx,md}': 'npx eslint --fix',
+  '*.md': ['npx markdownlint --fix', 'npx textlint -f pretty-error'],
 };
