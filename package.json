@@ -29,6 +29,7 @@
     "fix": "concurrently \"npm:fix:*\"",
     "fix:eslint": "npx eslint --fix",
     "fix:prettier": "npx prettier . --write --ignore-unknown",
+    "fix:markdownlint": "npx markdownlint **/*.md --fix",
     "lint": "concurrently \"npm:lint:*\"",
     "lint:eslint": "npx eslint",
     "lint:prettier": "npx prettier . --check --ignore-unknown",
