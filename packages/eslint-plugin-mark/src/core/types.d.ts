@@ -15,6 +15,8 @@ import type {
 // Typedefs
 // --------------------------------------------------------------------------------
 
+export type RuleContext = Parameters<MarkdownRuleDefinition['create']>[0];
+
 export type RuleModuleTypeOptions = Omit<
   MarkdownRuleDefinitionTypeOptions,
   'ExtRuleDocs'

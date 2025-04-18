@@ -17,8 +17,7 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
 // --------------------------------------------------------------------------------
 
 /**
- * @typedef {import("@eslint/markdown").RuleModule} RuleModule
- * @typedef {import("mdast").Text} Text
+ * @typedef {import("../../core/types.d.ts").RuleModule<{ RuleOptions: []; MessageIds: 'noEmoji' }>} RuleModule
  */
 
 // --------------------------------------------------------------------------------
@@ -31,9 +30,13 @@ export default {
     type: 'problem',
 
     docs: {
-      recommended: false,
       description: 'Disallow emojis in text',
       url: URL_RULE_DOCS('no-emoji'),
+
+      recommended: false,
+      strict: false,
+      style: false,
+      typography: false,
     },
 
     messages: {
@@ -47,7 +50,6 @@ export default {
 
   create(context) {
     return {
-      /** @param {Text} node */
       text(node) {
         const textHandler = new TextHandler(context, node);
 

@@ -13,7 +13,7 @@ import { ZERO_TO_ONE_BASED_OFFSET } from '../../constants.js';
 // --------------------------------------------------------------------------------
 
 /**
- * @typedef {import("eslint").Rule.RuleContext} RuleContext
+ * @typedef {import("../../types.d.ts").RuleContext} RuleContext
  * @typedef {import("mdast").Text} Text
  * @typedef {import("unist").Position} Position
  */
@@ -54,7 +54,7 @@ export default class TextHandler {
      * - In JavaScript, `\n` represents a newline character and splits text accordingly.
      *   However, in Markdown, writing `abcd\ndefg` treats `\n` as plain text (backslash + 'n'), not a newline.
      *   Only actual line breaks in Markdown (`abcd↵defg`) are stored as `"\n"` and split properly.
-     */ // @ts-expect-error -- TODO: https://github.com/eslint/markdown/issues/323
+     */
     const lines = context.sourceCode.getText(textNode).split(newLineRegex);
 
     lines.forEach((line, lineNumber) => {
