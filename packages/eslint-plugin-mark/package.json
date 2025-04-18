@@ -82,7 +82,7 @@
     "eslint": "^9.0.0"
   },
   "dependencies": {
-    "@eslint/markdown": "^6.3.0",
+    "@eslint/markdown": "^6.4.0",
     "cheerio": "^1.0.0",
     "emoji-regex": "^10.4.0"
   },
