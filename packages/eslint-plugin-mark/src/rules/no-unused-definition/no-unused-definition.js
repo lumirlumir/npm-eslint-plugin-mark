@@ -25,7 +25,7 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
 // --------------------------------------------------------------------------------
 
 /** @type {RuleModule} */
-const rule = {
+export default {
   meta: {
     type: 'problem',
 
@@ -80,5 +80,3 @@ const rule = {
     };
   },
 };
-
-export default rule;

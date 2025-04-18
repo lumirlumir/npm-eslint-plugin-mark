@@ -31,7 +31,7 @@ const irregularWhitespaceRegex =
 // --------------------------------------------------------------------------------
 
 /** @type {RuleModule} */
-const rule = {
+export default {
   meta: {
     type: 'problem',
 
@@ -133,5 +133,3 @@ const rule = {
     };
   },
 };
-
-export default rule;
