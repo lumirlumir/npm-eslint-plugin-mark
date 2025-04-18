@@ -15,8 +15,7 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
 // --------------------------------------------------------------------------------
 
 /**
- * @typedef {import("@eslint/markdown").RuleModule} RuleModule
- * @typedef {import("mdast").Text} Text
+ * @typedef {import("../../core/types.d.ts").RuleModule<{ RuleOptions: [{ leftDoubleQuotationMark: boolean, rightDoubleQuotationMark: boolean, leftSingleQuotationMark: boolean, rightSingleQuotationMark: boolean }]; MessageIds: 'noCurlyQuote' }>} RuleModule
  */
 
 // --------------------------------------------------------------------------------
@@ -40,9 +39,13 @@ export default {
     type: 'problem',
 
     docs: {
-      recommended: true,
       description: 'Disallow curly quotes(`“`, `”`, `‘` or `’`) in text',
       url: URL_RULE_DOCS('no-curly-quote'),
+
+      recommended: false,
+      strict: false,
+      style: false,
+      typography: true,
     },
 
     fixable: 'code',
@@ -89,19 +92,14 @@ export default {
 
   create(context) {
     return {
-      /** @param {Text} node */
       text(node) {
         const textHandler = new TextHandler(context, node);
 
         const [
           {
-            // @ts-expect-error -- TODO
             leftDoubleQuotationMark: leftDoubleQuotationMarkOption,
-            // @ts-expect-error -- TODO
             rightDoubleQuotationMark: rightDoubleQuotationMarkOption,
-            // @ts-expect-error -- TODO
             leftSingleQuotationMark: leftSingleQuotationMarkOption,
-            // @ts-expect-error -- TODO
             rightSingleQuotationMark: rightSingleQuotationMarkOption,
           },
         ] = context.options;
