@@ -36,15 +36,6 @@ export type RuleModule<Options extends Partial<RuleModuleTypeOptions> = object> 
          * Indicates whether this rule is part of the typography configuration.
          */
         typography?: boolean | RuleModuleTypeOptions['RuleOptions'];
-
-        /**
-         * Rule is applicable to CommonMark.
-         */
-        commonmark: boolean;
-        /**
-         * Rule is applicable to GitHub Flavored Markdown.
-         */
-        gfm: boolean;
       };
     }
   >;
