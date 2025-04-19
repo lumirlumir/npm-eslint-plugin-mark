@@ -14,8 +14,8 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
 // --------------------------------------------------------------------------------
 
 /**
- * @typedef {import("@eslint/markdown").RuleModule} RuleModule
- * @typedef {import("mdast").Heading} Heading
+ * @typedef {false | string[]} headingOption
+ * @typedef {import("../../core/types.d.ts").RuleModule<{ RuleOptions: [{ h1: headingOption, h2: headingOption, h3: headingOption, h4: headingOption, h5: headingOption, h6: headingOption }]; MessageIds: 'allowedHeading' }>} RuleModule
  */
 
 // --------------------------------------------------------------------------------
@@ -34,9 +34,13 @@ export default {
     type: 'problem',
 
     docs: {
-      recommended: false,
       description: 'Enforce the use of allowed text for headings',
       url: URL_RULE_DOCS('allowed-heading'),
+
+      recommended: false,
+      strict: false,
+      style: false,
+      typography: false,
     },
 
     schema: [
@@ -136,7 +140,6 @@ export default {
   },
 
   create(context) {
-    // @ts-expect-error -- TODO
     const [{ h1, h2, h3, h4, h5, h6 }] = context.options;
     const headingMap = {
       1: h1,
@@ -148,10 +151,8 @@ export default {
     };
 
     return {
-      /** @param {Heading} node */
       heading(node) {
         const actualHeadingText = context.sourceCode
-          // @ts-expect-error -- TODO
           .getText(node)
           .replace(headingRegex, '');
         const expectedHeadingTexts = headingMap[node.depth];
@@ -160,7 +161,6 @@ export default {
 
         if (!expectedHeadingTexts.includes(actualHeadingText)) {
           context.report({
-            // @ts-expect-error -- TODO
             node,
 
             messageId: 'allowedHeading',
