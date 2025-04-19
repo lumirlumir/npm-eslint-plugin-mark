@@ -17,9 +17,7 @@ import { URL_RULE_DOCS, ZERO_TO_ONE_BASED_OFFSET } from '../../core/constants.js
 // --------------------------------------------------------------------------------
 
 /**
- * @typedef {import("@eslint/markdown").RuleModule} RuleModule
- * @typedef {import("mdast").Code} Code
- * @typedef {import("mdast").InlineCode} InlineCode
+ * @typedef {import("../../core/types.d.ts").RuleModule<{ RuleOptions: [{ skipCode: boolean, skipInlineCode: boolean }]; MessageIds: 'noControlCharacter' }>} RuleModule
  * @typedef {import("unist").Position} Position
  */
 
@@ -40,9 +38,13 @@ export default {
     type: 'problem',
 
     docs: {
-      recommended: true,
       description: 'Disallow control character',
       url: URL_RULE_DOCS('no-control-character'),
+
+      recommended: true,
+      strict: true,
+      style: false,
+      typography: false,
     },
 
     schema: [
@@ -77,19 +79,16 @@ export default {
   },
 
   create(context) {
-    // @ts-expect-error -- TODO
     const [{ skipCode, skipInlineCode }] = context.options;
     const { lines } = context.sourceCode;
 
     const ignoredPositions = new IgnoredPositions();
 
     return {
-      /** @param {Code} node */
       code(node) {
         if (skipCode) ignoredPositions.push(node.position); // Store position information of `Code`.
       },
 
-      /** @param {InlineCode} node */
       inlineCode(node) {
         if (skipInlineCode) ignoredPositions.push(node.position); // Store position information of `InlineCode`.
       },
