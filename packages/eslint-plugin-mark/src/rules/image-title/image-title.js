@@ -16,7 +16,7 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
 // --------------------------------------------------------------------------------
 
 /**
- * @typedef {import("@eslint/markdown").RuleModule} RuleModule
+ * @typedef {import("../../core/types.d.ts").RuleModule<{ RuleOptions: []; MessageIds: 'imageTitle' }>} RuleModule
  * @typedef {import("mdast").Image} Image
  * @typedef {import("mdast").ImageReference} ImageReference
  * @typedef {import("mdast").Definition} Definition
@@ -33,9 +33,13 @@ export default {
     type: 'problem',
 
     docs: {
-      recommended: false,
       description: 'Enforce the use of title attribute for images',
       url: URL_RULE_DOCS('image-title'),
+
+      recommended: false,
+      strict: false,
+      style: false,
+      typography: false,
     },
 
     messages: {
@@ -53,19 +57,16 @@ export default {
     /** @param {Image | ImageReference | Definition | Html} node */
     function report(node) {
       context.report({
-        // @ts-expect-error -- TODO
         node,
         messageId: 'imageTitle',
       });
     }
 
     return {
-      /** @param {Image} node */
       image(node) {
         if (!node.title) report(node);
       },
 
-      /** @param {Html} node */
       html(node) {
         const $ = cheerio.load(node.value);
 
@@ -74,12 +75,10 @@ export default {
         });
       },
 
-      /** @param {ImageReference} node */
       imageReference(node) {
         refDefHandler.push(node);
       },
 
-      /** @param {Definition} node */
       definition(node) {
         refDefHandler.push(node);
       },

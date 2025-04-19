@@ -17,8 +17,7 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
 // --------------------------------------------------------------------------------
 
 /**
- * @typedef {import("@eslint/markdown").RuleModule} RuleModule
- * @typedef {import("mdast").Code} Code
+ * @typedef {import("../../core/types.d.ts").RuleModule<{ RuleOptions: [{ ignores: string[], override: object }]; MessageIds: 'codeLangShorthand' }>} RuleModule
  */
 
 // --------------------------------------------------------------------------------
@@ -108,9 +107,13 @@ export default {
     type: 'problem',
 
     docs: {
-      recommended: true,
       description: 'Enforce the use of shorthand for code block language identifiers',
       url: URL_RULE_DOCS('code-lang-shorthand'),
+
+      recommended: false,
+      strict: true,
+      style: false,
+      typography: false,
     },
 
     fixable: 'code',
@@ -154,9 +157,7 @@ export default {
 
   create(context) {
     return {
-      /** @param {Code} node */
       code(node) {
-        // @ts-expect-error -- TODO
         const [{ ignores, override }] = context.options;
         const langShorthandMapMerged = Object.fromEntries(
           Object.entries({
@@ -170,7 +171,6 @@ export default {
 
         if (langShorthand === undefined) return;
 
-        // @ts-expect-error -- TODO: https://github.com/eslint/markdown/issues/323
         const match = context.sourceCode.getText(node).match(node.lang);
 
         const matchIndexStart = match.index;

@@ -15,8 +15,7 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
 // --------------------------------------------------------------------------------
 
 /**
- * @typedef {import("@eslint/markdown").RuleModule} RuleModule
- * @typedef {import("mdast").Text} Text
+ * @typedef {import("../../core/types.d.ts").RuleModule<{ RuleOptions: [{ multipleSpace: boolean }]; MessageIds: 'noDoubleSpace' | 'noMultipleSpace' }>} RuleModule
  */
 
 // --------------------------------------------------------------------------------
@@ -38,10 +37,14 @@ export default {
     type: 'problem',
 
     docs: {
-      recommended: true,
       description:
         'Disallow double or multiple consecutive spaces in text, except for leading and trailing spaces',
       url: URL_RULE_DOCS('no-double-space'),
+
+      recommended: true,
+      strict: true,
+      style: false,
+      typography: false,
     },
 
     fixable: 'whitespace',
@@ -78,11 +81,9 @@ export default {
 
   create(context) {
     return {
-      /** @param {Text} node */
       text(node) {
         const textHandler = new TextHandler(context, node);
 
-        // @ts-expect-error -- TODO
         const [{ multipleSpace }] = context.options;
         const spaceRegex = multipleSpace ? multipleSpaceRegex : doubleSpaceRegex;
         const messageId = multipleSpace ? 'noMultipleSpace' : 'noDoubleSpace';

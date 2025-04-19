@@ -16,15 +16,8 @@ import markdown from '@eslint/markdown';
 // --------------------------------------------------------------------------------
 
 /**
- * @typedef {import("@eslint/markdown").RuleModule} RuleModule
- * @typedef {import("eslint").RuleTester.ValidTestCase} ValidTestCase
- * @typedef {import("eslint").RuleTester.InvalidTestCase} InvalidTestCase
- */
-
-/**
- * @typedef {object} Tests
- * @property {Array<string | ValidTestCase>} valid
- * @property {InvalidTestCase[]} invalid
+ * @typedef {import("../../types.d.ts").RuleModule} RuleModule
+ * @typedef {Parameters<import("eslint").RuleTester['run']>[2]} Tests
  */
 
 // --------------------------------------------------------------------------------
@@ -68,7 +61,9 @@ export default function ruleTester(name, rule, tests) {
   if (dialects.length === 0) throw new Error('Rule meta dialects should not be empty');
 
   test(name, () => {
+    // @ts-expect-error -- TODO: https://github.com/eslint/eslint/issues/19633
     if (dialects.includes('commonmark')) ruleTesterCommonmark.run(name, rule, tests);
+    // @ts-expect-error -- TODO: https://github.com/eslint/eslint/issues/19633
     if (dialects.includes('gfm')) ruleTesterGfm.run(name, rule, tests);
   });
 }

@@ -15,8 +15,7 @@ import { URL_RULE_DOCS, ZERO_TO_ONE_BASED_OFFSET } from '../../core/constants.js
 // --------------------------------------------------------------------------------
 
 /**
- * @typedef {import("@eslint/markdown").RuleModule} RuleModule
- * @typedef {import("mdast").Code} Code
+ * @typedef {import("../../core/types.d.ts").RuleModule<{ RuleOptions: [{ skipCode: boolean }]; MessageIds: 'noGitConflictMarker' }>} RuleModule
  * @typedef {import("unist").Position} Position
  */
 
@@ -36,9 +35,13 @@ export default {
     type: 'problem',
 
     docs: {
-      recommended: true,
       description: 'Disallow git conflict markers',
       url: URL_RULE_DOCS('no-git-conflict-marker'),
+
+      recommended: true,
+      strict: true,
+      style: false,
+      typography: false,
     },
 
     schema: [
@@ -70,14 +73,12 @@ export default {
   },
 
   create(context) {
-    // @ts-expect-error -- TODO
     const [{ skipCode }] = context.options;
     const { lines } = context.sourceCode;
 
     const ignoredPositions = new IgnoredPositions();
 
     return {
-      /** @param {Code} node */
       code(node) {
         if (skipCode) ignoredPositions.push(node.position); // Store position information of `Code`.
       },

@@ -17,10 +17,7 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
 // --------------------------------------------------------------------------------
 
 /**
- * @typedef {import("@eslint/markdown").RuleModule} RuleModule
- * @typedef {import("mdast").ImageReference} ImageReference
- * @typedef {import("mdast").LinkReference} LinkReference
- * @typedef {import("mdast").Definition} Definition
+ * @typedef {import("../../core/types.d.ts").RuleModule<{ RuleOptions: []; MessageIds: 'noUnusedDefinition' }>} RuleModule
  */
 
 // --------------------------------------------------------------------------------
@@ -33,9 +30,13 @@ export default {
     type: 'problem',
 
     docs: {
-      recommended: true,
       description: 'Disallow unused definitions',
       url: URL_RULE_DOCS('no-unused-definition'),
+
+      recommended: true,
+      strict: true,
+      style: false,
+      typography: false,
     },
 
     messages: {
@@ -51,17 +52,14 @@ export default {
     const refDefHandler = new ReferenceDefinitionHandler();
 
     return {
-      /** @param {ImageReference} node */
       imageReference(node) {
         refDefHandler.push(node);
       },
 
-      /** @param {LinkReference} node */
       linkReference(node) {
         refDefHandler.push(node);
       },
 
-      /** @param {Definition} node */
       definition(node) {
         refDefHandler.push(node);
       },
@@ -69,7 +67,6 @@ export default {
       'root:exit'() {
         refDefHandler.getUnusedDefinitions().forEach(definition => {
           context.report({
-            // @ts-expect-error -- TODO
             node: definition,
 
             data: {

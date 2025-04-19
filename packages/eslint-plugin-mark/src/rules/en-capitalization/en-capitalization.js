@@ -14,7 +14,7 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
 // --------------------------------------------------------------------------------
 
 /**
- * @typedef {import("@eslint/markdown").RuleModule} RuleModule
+ * @typedef {import("../../core/types.d.ts").RuleModule<{ RuleOptions: [{ skipHeading: boolean, skipListItem: boolean }]; MessageIds: 'enCapitalization' }>} RuleModule
  * @typedef {import("mdast").Text} Text
  * @typedef {import("mdast").Heading} Heading
  * @typedef {import("mdast").Paragraph} Paragraph
@@ -58,9 +58,13 @@ export default {
     type: 'problem',
 
     docs: {
-      recommended: true,
       description: 'Enforce the use of capital letters at the beginning of sentences',
       url: URL_RULE_DOCS('en-capitalization'),
+
+      recommended: false,
+      strict: true,
+      style: false,
+      typography: false,
     },
 
     fixable: 'code',
@@ -139,20 +143,16 @@ export default {
       });
     }
 
-    // @ts-expect-error -- TODO
     const [{ skipHeading, skipListItem }] = context.options;
 
     return {
-      /** @param {Paragraph} node */
       paragraph(node) {
-        // @ts-expect-error -- TODO
         if (context.sourceCode.getParent(node).type === 'listItem' && skipListItem)
           return;
 
         report(node);
       },
 
-      /** @param {Heading} node */
       heading(node) {
         if (skipHeading) return;
 

@@ -14,8 +14,7 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
 // --------------------------------------------------------------------------------
 
 /**
- * @typedef {import("@eslint/markdown").RuleModule} RuleModule
- * @typedef {import("mdast").Strong} Strong
+ * @typedef {import("../../core/types.d.ts").RuleModule<{ RuleOptions: []; MessageIds: 'noBoldParagraph' }>} RuleModule
  */
 
 // --------------------------------------------------------------------------------
@@ -28,9 +27,13 @@ export default {
     type: 'problem',
 
     docs: {
-      recommended: true,
       description: 'Disallow using fully bolded paragraphs as headings',
       url: URL_RULE_DOCS('no-bold-paragraph'),
+
+      recommended: true,
+      strict: true,
+      style: false,
+      typography: false,
     },
 
     messages: {
@@ -45,11 +48,8 @@ export default {
 
   create(context) {
     return {
-      /** @param {Strong} node */
       strong(node) {
-        // @ts-expect-error -- TODO
         const parentNode = context.sourceCode.getParent(node);
-        // @ts-expect-error -- TODO
         const ancestorNode = context.sourceCode.getParent(parentNode);
 
         if (
@@ -60,7 +60,6 @@ export default {
           parentNode.position.end.offset === node.position.end.offset // Should have the same end offset.
         ) {
           context.report({
-            // @ts-expect-error -- TODO
             node,
 
             messageId: 'noBoldParagraph',

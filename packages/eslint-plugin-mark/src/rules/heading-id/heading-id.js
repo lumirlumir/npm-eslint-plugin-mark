@@ -14,8 +14,8 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
 // --------------------------------------------------------------------------------
 
 /**
- * @typedef {import("@eslint/markdown").RuleModule} RuleModule
- * @typedef {import("mdast").Heading} Heading
+ * @typedef {import("../../core/types.d.ts").RuleModule<{ RuleOptions: ['always' | 'never', { leftDelimiter: string, rightDelimiter: string, ignoreDepth: HeadingDepth[] }]; MessageIds: 'headingIdAlways' | 'headingIdNever' }>} RuleModule
+ * @typedef {import("mdast").Heading['depth']} HeadingDepth
  */
 
 // --------------------------------------------------------------------------------
@@ -28,9 +28,13 @@ export default {
     type: 'problem',
 
     docs: {
-      recommended: false,
       description: 'Enforce the use of heading IDs',
       url: URL_RULE_DOCS('heading-id'),
+
+      recommended: false,
+      strict: false,
+      style: false,
+      typography: false,
     },
 
     fixable: 'code',
@@ -81,9 +85,7 @@ export default {
 
   create(context) {
     return {
-      /** @param {Heading} node */
       heading(node) {
-        // @ts-expect-error -- TODO
         const [mode, { leftDelimiter, rightDelimiter, ignoreDepth }] = context.options;
 
         if (ignoreDepth.includes(node.depth)) return;
@@ -91,7 +93,6 @@ export default {
         const regex = new RegExp(
           `${leftDelimiter}#[^${rightDelimiter}]+${rightDelimiter}[ \t]*$`,
         );
-        // @ts-expect-error -- TODO: https://github.com/eslint/markdown/issues/323
         const match = context.sourceCode.getText(node).match(regex);
 
         if (mode === 'always' && match === null) {
