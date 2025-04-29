@@ -36,6 +36,9 @@ export default function base(parserMode) {
       markdown,
       mark: { rules },
     },
+    languageOptions: {
+      frontmatter: 'yaml',
+    },
     language: `markdown/${parserMode}`,
   };
 }
