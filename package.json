@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "npm-eslint-plugin-mark",
-  "version": "0.1.0-canary.4",
+  "version": "0.1.0-canary.5",
   "packageManager": "npm@10.9.2",
   "engines": {
     "node": ">=20.18.0"
@@ -44,7 +44,7 @@
     "editorconfig-checker": "^6.0.1",
     "eslint": "^9.25.1",
     "eslint-config-bananass": "^0.1.0-canary.4",
-    "eslint-plugin-mark": "^0.1.0-canary.4",
+    "eslint-plugin-mark": "^0.1.0-canary.5",
     "husky": "^9.1.5",
     "lerna": "^8.2.2",
     "lint-staged": "^15.5.1",
