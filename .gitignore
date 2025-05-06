@@ -15,5 +15,5 @@ build
 coverage
 
 # packages
-packages/**/LICENSE.md
-packages/**/README.md
+packages/*/LICENSE.md
+packages/*/README.md
