@@ -31,8 +31,6 @@ updates:
         patterns:
           - '@typescript-eslint/*'
     open-pull-requests-limit: 3
-    reviewers:
-      - 'lumirlumir'
     schedule:
       interval: 'daily'
       time: '10:00'
@@ -51,8 +49,6 @@ updates:
     # Workflow files stored in the default location of `.github/workflows`. (You don't need to specify `/.github/workflows` for `directory`. You can use `directory: "/"`.)
     directory: '/'
     open-pull-requests-limit: 3
-    reviewers:
-      - 'lumirlumir'
     schedule:
       interval: 'weekly'
       day: 'monday'
