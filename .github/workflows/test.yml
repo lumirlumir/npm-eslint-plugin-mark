@@ -18,6 +18,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    env:
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
     steps:
       - name: Set up checkout
         uses: actions/checkout@v4
