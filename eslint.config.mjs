@@ -1,8 +1,9 @@
+import { defineConfig } from 'eslint/config';
 import bananass from 'eslint-config-bananass';
 import mark from 'eslint-plugin-mark';
 
 /** @type {import("eslint").Linter.Config[]} */
-export default [
+export default defineConfig([
   {
     name: 'global/ignores',
     ignores: ['**/build/', '**/coverage/', '**/.vitepress/cache/'],
@@ -10,4 +11,26 @@ export default [
   bananass.configs.js,
   bananass.configs.ts,
   mark.configs.recommendedGfm,
-];
+  {
+    name: 'website/rules',
+    files: ['website/docs/rules/**/*.md'],
+    rules: {
+      'mark/allowed-heading': [
+        'error',
+        {
+          h2: [
+            'Rule Details',
+            'Examples',
+            'Options',
+            'When Not To Use It',
+            'AST',
+            'Fix',
+            'Limitations',
+            'Prior Art',
+          ],
+        },
+      ],
+      'mark/no-emoji': 'error',
+    },
+  },
+]);
