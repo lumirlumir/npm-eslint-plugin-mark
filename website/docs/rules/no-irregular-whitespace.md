@@ -1,6 +1,7 @@
 <!-- markdownlint-disable-next-line no-inline-html first-line-h1 -->
 <header v-html="$frontmatter.rule"></header>
 
+<!-- eslint-disable-next-line -- TODO -->
 ## Overview
 
 Invalid or irregular whitespace can cause issues with Markdown parsers and also makes code harder to debug in a similar nature to mixed tabs and spaces.
