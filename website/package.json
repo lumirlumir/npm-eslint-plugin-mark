@@ -9,7 +9,7 @@
     "start": "npx vitepress preview"
   },
   "devDependencies": {
-    "@codecov/vite-plugin": "^1.9.0",
+    "@codecov/vite-plugin": "^1.9.1",
     "@shikijs/transformers": "^3.4.2",
     "bananass-utils-vitepress": "^0.1.0",
     "eslint-plugin-mark": "^0.1.0-canary.5",
