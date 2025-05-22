@@ -11,7 +11,7 @@
   "devDependencies": {
     "@codecov/vite-plugin": "^1.9.1",
     "@shikijs/transformers": "^3.4.2",
-    "bananass-utils-vitepress": "^0.1.0",
+    "bananass-utils-vitepress": "^0.1.1",
     "eslint-plugin-mark": "^0.1.0-canary.5",
     "markdown-it-footnote": "^4.0.0",
     "vitepress": "^1.6.3",
