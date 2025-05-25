@@ -15,6 +15,7 @@ import rule from './allowed-heading.js';
 // --------------------------------------------------------------------------------
 
 const allowedHeading = 'allowedHeading';
+const allowedHeadingDepth = 'allowedHeadingDepth';
 
 // --------------------------------------------------------------------------------
 // Test
@@ -44,6 +45,28 @@ ruleTester(getFileName(import.meta.url), rule, {
     },
 
     // Options
+    {
+      name: 'Headings should not be reported when false is given',
+      code: `
+# Hello
+## World
+### Hello World
+#### Hello World
+##### Hello World
+###### Hello World
+`,
+      options: [
+        {
+          h1: false,
+          h2: false,
+          h3: false,
+          h4: false,
+          h5: false,
+          h6: false,
+        },
+      ],
+    },
+
     {
       name: 'Headings should not be reported when they are allowed',
       code: `
@@ -79,7 +102,7 @@ ruleTester(getFileName(import.meta.url), rule, {
   ],
 
   invalid: [
-    // Basic
+    // Basic: allowed heading
     {
       name: 'Headings should be reported when they are not allowed - h1',
       code: '# Hello',
@@ -95,6 +118,7 @@ ruleTester(getFileName(import.meta.url), rule, {
           column: 1,
           endLine: 1,
           endColumn: 8,
+          data: { heading: 'Hello', allowed: '`World`' },
         },
       ],
     },
@@ -113,6 +137,7 @@ ruleTester(getFileName(import.meta.url), rule, {
           column: 1,
           endLine: 1,
           endColumn: 9,
+          data: { heading: 'Hello', allowed: '`World`' },
         },
       ],
     },
@@ -131,6 +156,7 @@ ruleTester(getFileName(import.meta.url), rule, {
           column: 1,
           endLine: 1,
           endColumn: 10,
+          data: { heading: 'Hello', allowed: '`World`' },
         },
       ],
     },
@@ -149,6 +175,7 @@ ruleTester(getFileName(import.meta.url), rule, {
           column: 1,
           endLine: 1,
           endColumn: 11,
+          data: { heading: 'Hello', allowed: '`World`' },
         },
       ],
     },
@@ -167,6 +194,7 @@ ruleTester(getFileName(import.meta.url), rule, {
           column: 1,
           endLine: 1,
           endColumn: 12,
+          data: { heading: 'Hello', allowed: '`World`' },
         },
       ],
     },
@@ -185,13 +213,14 @@ ruleTester(getFileName(import.meta.url), rule, {
           column: 1,
           endLine: 1,
           endColumn: 13,
+          data: { heading: 'Hello', allowed: '`World`' },
         },
       ],
     },
 
-    // Edge Cases
+    // Basic: allowed heading depth
     {
-      name: 'Specific level headings should be reported entirely when empty array option is given - h1',
+      name: 'Specific depth headings should be reported entirely when empty array option is given - h1',
       code: '# Hello\n# World',
       options: [
         {
@@ -200,23 +229,25 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
       errors: [
         {
-          messageId: allowedHeading,
+          messageId: allowedHeadingDepth,
           line: 1,
           column: 1,
           endLine: 1,
           endColumn: 8,
+          data: { depth: 1 },
         },
         {
-          messageId: allowedHeading,
+          messageId: allowedHeadingDepth,
           line: 2,
           column: 1,
           endLine: 2,
           endColumn: 8,
+          data: { depth: 1 },
         },
       ],
     },
     {
-      name: 'Specific level headings should be reported entirely when empty array option is given - h2',
+      name: 'Specific depth headings should be reported entirely when empty array option is given - h2',
       code: '## Hello\n## World',
       options: [
         {
@@ -225,23 +256,25 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
       errors: [
         {
-          messageId: allowedHeading,
+          messageId: allowedHeadingDepth,
           line: 1,
           column: 1,
           endLine: 1,
           endColumn: 9,
+          data: { depth: 2 },
         },
         {
-          messageId: allowedHeading,
+          messageId: allowedHeadingDepth,
           line: 2,
           column: 1,
           endLine: 2,
           endColumn: 9,
+          data: { depth: 2 },
         },
       ],
     },
     {
-      name: 'Specific level headings should be reported entirely when empty array option is given - h3',
+      name: 'Specific depth headings should be reported entirely when empty array option is given - h3',
       code: '### Hello\n### World',
       options: [
         {
@@ -250,23 +283,25 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
       errors: [
         {
-          messageId: allowedHeading,
+          messageId: allowedHeadingDepth,
           line: 1,
           column: 1,
           endLine: 1,
           endColumn: 10,
+          data: { depth: 3 },
         },
         {
-          messageId: allowedHeading,
+          messageId: allowedHeadingDepth,
           line: 2,
           column: 1,
           endLine: 2,
           endColumn: 10,
+          data: { depth: 3 },
         },
       ],
     },
     {
-      name: 'Specific level headings should be reported entirely when empty array option is given - h4',
+      name: 'Specific depth headings should be reported entirely when empty array option is given - h4',
       code: '#### Hello\n#### World',
       options: [
         {
@@ -275,23 +310,25 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
       errors: [
         {
-          messageId: allowedHeading,
+          messageId: allowedHeadingDepth,
           line: 1,
           column: 1,
           endLine: 1,
           endColumn: 11,
+          data: { depth: 4 },
         },
         {
-          messageId: allowedHeading,
+          messageId: allowedHeadingDepth,
           line: 2,
           column: 1,
           endLine: 2,
           endColumn: 11,
+          data: { depth: 4 },
         },
       ],
     },
     {
-      name: 'Specific level headings should be reported entirely when empty array option is given - h5',
+      name: 'Specific depth headings should be reported entirely when empty array option is given - h5',
       code: '##### Hello\n##### World',
       options: [
         {
@@ -300,23 +337,25 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
       errors: [
         {
-          messageId: allowedHeading,
+          messageId: allowedHeadingDepth,
           line: 1,
           column: 1,
           endLine: 1,
           endColumn: 12,
+          data: { depth: 5 },
         },
         {
-          messageId: allowedHeading,
+          messageId: allowedHeadingDepth,
           line: 2,
           column: 1,
           endLine: 2,
           endColumn: 12,
+          data: { depth: 5 },
         },
       ],
     },
     {
-      name: 'Specific level headings should be reported entirely when empty array option is given - h6',
+      name: 'Specific depth headings should be reported entirely when empty array option is given - h6',
       code: '###### Hello\n###### World',
       options: [
         {
@@ -325,18 +364,20 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
       errors: [
         {
-          messageId: allowedHeading,
+          messageId: allowedHeadingDepth,
           line: 1,
           column: 1,
           endLine: 1,
           endColumn: 13,
+          data: { depth: 6 },
         },
         {
-          messageId: allowedHeading,
+          messageId: allowedHeadingDepth,
           line: 2,
           column: 1,
           endLine: 2,
           endColumn: 13,
+          data: { depth: 6 },
         },
       ],
     },
