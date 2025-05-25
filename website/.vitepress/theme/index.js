@@ -9,9 +9,11 @@
 // --------------------------------------------------------------------------------
 
 import theme from 'vitepress/theme';
+import TwoslashFloatingVue from '@shikijs/vitepress-twoslash/client';
 
 import './style.css';
 import 'virtual:group-icons.css'; // eslint-disable-line n/no-missing-import
+import '@shikijs/vitepress-twoslash/style.css';
 
 // --------------------------------------------------------------------------------
 // Export
@@ -21,6 +23,7 @@ import 'virtual:group-icons.css'; // eslint-disable-line n/no-missing-import
 export default {
   ...theme,
   enhanceApp({ app }) {
+    app.use(TwoslashFloatingVue);
     app.config.globalProperties.$emoji = {
       recommended: '✅',
       fixable: '🔧',

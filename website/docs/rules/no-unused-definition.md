@@ -13,14 +13,18 @@ The rule identifies definition entries (e.g., `[reference-id]: http://example.co
 
 Examples of **incorrect** code for this rule:
 
-```md
+```md eslint-check
+<!-- eslint mark/no-unused-definition: "error" -->
+
 This paragraph has no references to any definitions.
 
 [unused-link]: https://example.com
 [another-unused]: https://example.com/another "With title"
 ```
 
-```md
+```md eslint-check
+<!-- eslint mark/no-unused-definition: "error" -->
+
 This paragraph references [some-link][used-link] but not all definitions.
 
 [used-link]: https://example.com

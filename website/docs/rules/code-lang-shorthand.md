@@ -21,7 +21,9 @@ Examples of **incorrect** code for this rule:
 
 ::: code-group
 
-````md [incorrect.md] /javascript/ /typescript/ /markdown/
+````md [incorrect.md] eslint-check
+<!-- eslint mark/code-lang-shorthand: "error" -->
+
 ```javascript
 console.log('Hello, world!');
 ```
