@@ -55,6 +55,7 @@ export default {
               {
                 type: 'array',
                 items: { type: 'string' },
+                uniqueItems: true,
               },
             ],
           },
@@ -66,6 +67,7 @@ export default {
               {
                 type: 'array',
                 items: { type: 'string' },
+                uniqueItems: true,
               },
             ],
           },
@@ -77,6 +79,7 @@ export default {
               {
                 type: 'array',
                 items: { type: 'string' },
+                uniqueItems: true,
               },
             ],
           },
@@ -88,6 +91,7 @@ export default {
               {
                 type: 'array',
                 items: { type: 'string' },
+                uniqueItems: true,
               },
             ],
           },
@@ -99,6 +103,7 @@ export default {
               {
                 type: 'array',
                 items: { type: 'string' },
+                uniqueItems: true,
               },
             ],
           },
@@ -110,6 +115,7 @@ export default {
               {
                 type: 'array',
                 items: { type: 'string' },
+                uniqueItems: true,
               },
             ],
           },

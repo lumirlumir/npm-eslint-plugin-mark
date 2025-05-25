@@ -57,6 +57,7 @@ export default {
             items: {
               enum: [1, 2, 3, 4, 5, 6],
             },
+            uniqueItems: true,
           },
         },
         additionalProperties: false,
