@@ -127,6 +127,7 @@ export default {
             items: {
               enum: Object.keys(langShorthandMap),
             },
+            uniqueItems: true,
           },
           override: {
             type: 'object',
