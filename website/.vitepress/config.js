@@ -10,6 +10,7 @@
 import { parse } from 'node:path';
 
 import { generateGoogleAnalyticsScript } from 'bananass-utils-vitepress/head';
+import mark from 'eslint-plugin-mark';
 import rules from 'eslint-plugin-mark/rules';
 import {
   PKG_NAME,
@@ -30,6 +31,8 @@ import {
   transformerMetaWordHighlight,
   transformerRenderWhitespace,
 } from '@shikijs/transformers';
+import { transformerTwoslash } from '@shikijs/vitepress-twoslash';
+import { createTwoslasher } from 'twoslash-eslint';
 
 // --------------------------------------------------------------------------------
 // Constants
@@ -253,6 +256,14 @@ export default defineConfig({
       transformerNotationWordHighlight(), // https://shiki.style/packages/transformers#transformernotationwordhighlight
       transformerMetaWordHighlight(), // https://shiki.style/packages/transformers#transformermetawordhighlight
       transformerRenderWhitespace(), // https://shiki.style/packages/transformers#transformerrenderwhitespace
+      transformerTwoslash({
+        langs: ['md', 'markdown'],
+        errorRendering: 'hover',
+        explicitTrigger: /\beslint-check\b/,
+        twoslasher: createTwoslasher({
+          eslintConfig: [mark.configs.baseGfm],
+        }),
+      }),
     ],
   },
 
