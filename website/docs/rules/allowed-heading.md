@@ -72,7 +72,7 @@ Examples of **correct** code for this rule:
 
 #### Default
 
-This rule doesn't report any errors by dafault. You must configure it with the allowed heading values you want to enforce.
+This rule doesn't report any errors by default. You must configure it with the allowed heading values you want to enforce.
 
 ```md [correct.md] eslint-check
 <!-- eslint mark/allowed-heading: "error" -->
