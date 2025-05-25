@@ -14,8 +14,10 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
 // --------------------------------------------------------------------------------
 
 /**
+ * @typedef {import("../../core/types.d.ts").RuleModule<{ RuleOptions: RuleOptions; MessageIds: MessageIds }>} RuleModule
+ * @typedef {[{h1: headingOption, h2: headingOption, h3: headingOption, h4: headingOption, h5: headingOption, h6: headingOption}]} RuleOptions
+ * @typedef {'allowedHeading' | 'allowedHeadingDepth'} MessageIds
  * @typedef {false | string[]} headingOption
- * @typedef {import("../../core/types.d.ts").RuleModule<{ RuleOptions: [{ h1: headingOption, h2: headingOption, h3: headingOption, h4: headingOption, h5: headingOption, h6: headingOption }]; MessageIds: 'allowedHeading' }>} RuleModule
  */
 
 // --------------------------------------------------------------------------------
@@ -137,7 +139,8 @@ export default {
 
     messages: {
       allowedHeading:
-        'The heading text `{{ heading }}` is not allowed. Please use one of the following allowed text: {{ allowed }}.',
+        'The heading text `{{ heading }}` is not allowed. Please use one of the following text: {{ allowed }}.',
+      allowedHeadingDepth: 'The heading depth `h{{ depth }}` is not allowed.',
     },
 
     language: 'markdown',
@@ -147,25 +150,35 @@ export default {
 
   create(context) {
     const [{ h1, h2, h3, h4, h5, h6 }] = context.options;
-    const headingMap = {
-      1: h1,
-      2: h2,
-      3: h3,
-      4: h4,
-      5: h5,
-      6: h6,
-    };
+    const headingMap = new Map([
+      [1, h1],
+      [2, h2],
+      [3, h3],
+      [4, h4],
+      [5, h5],
+      [6, h6],
+    ]);
 
     return {
       heading(node) {
         const actualHeadingText = context.sourceCode
           .getText(node)
           .replace(headingRegex, '');
-        const expectedHeadingTexts = headingMap[node.depth];
+        const expectedHeadingTexts = headingMap.get(node.depth);
 
         if (expectedHeadingTexts === false) return;
 
-        if (!expectedHeadingTexts.includes(actualHeadingText)) {
+        if (expectedHeadingTexts.length === 0) {
+          context.report({
+            node,
+
+            messageId: 'allowedHeadingDepth',
+
+            data: {
+              depth: String(node.depth),
+            },
+          });
+        } else if (!expectedHeadingTexts.includes(actualHeadingText)) {
           context.report({
             node,
 
