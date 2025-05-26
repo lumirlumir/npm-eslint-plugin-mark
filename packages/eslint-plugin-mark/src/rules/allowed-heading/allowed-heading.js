@@ -150,21 +150,21 @@ export default {
 
   create(context) {
     const [{ h1, h2, h3, h4, h5, h6 }] = context.options;
-    const headingMap = new Map([
-      [1, h1],
-      [2, h2],
-      [3, h3],
-      [4, h4],
-      [5, h5],
-      [6, h6],
-    ]);
+    const headingMap = {
+      1: h1,
+      2: h2,
+      3: h3,
+      4: h4,
+      5: h5,
+      6: h6,
+    };
 
     return {
       heading(node) {
         const actualHeadingText = context.sourceCode
           .getText(node)
           .replace(headingRegex, '');
-        const expectedHeadingTexts = headingMap.get(node.depth);
+        const expectedHeadingTexts = headingMap[node.depth];
 
         if (expectedHeadingTexts === false) return;
 
