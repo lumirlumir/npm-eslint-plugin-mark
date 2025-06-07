@@ -55,8 +55,5 @@
     "textlint": "^14.7.2",
     "textlint-rule-allowed-uris": "^1.1.0",
     "typescript": "^5.8.3"
-  },
-  "overrides": {
-    "@eslint/core": "^0.13.0"
   }
 }
