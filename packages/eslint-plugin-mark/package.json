@@ -75,7 +75,7 @@
   },
   "scripts": {
     "prepublishOnly": "npm run build",
-    "build": "npx tsc && shx cp ./src/core/types.d.ts ./build/core/types.d.ts && shx cp ../../LICENSE.md ../../README.md .",
+    "build": "npx tsc && node ../../scripts/cp.mjs ./src/core/types.d.ts ./build/core/types.d.ts ../../LICENSE.md LICENSE.md ../../README.md README.md",
     "test": "node --test"
   },
   "peerDependencies": {
