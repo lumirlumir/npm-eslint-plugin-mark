@@ -51,7 +51,7 @@
     "markdownlint-cli": "^0.45.0",
     "prettier": "^3.5.3",
     "prettier-config-bananass": "^0.1.2",
-    "textlint": "^14.7.2",
+    "textlint": "^14.8.0",
     "textlint-rule-allowed-uris": "^1.1.1",
     "typescript": "^5.8.3"
   }
