@@ -38,7 +38,7 @@
     "lint:textlint": "npx textlint -f pretty-error **/*.md"
   },
   "devDependencies": {
-    "@types/node": "^24.0.0",
+    "@types/node": "^24.0.3",
     "c8": "^10.1.3",
     "concurrently": "^9.0.0",
     "editorconfig-checker": "^6.0.1",
