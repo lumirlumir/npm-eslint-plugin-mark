@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "@codecov/vite-plugin": "^1.9.1",
-    "@shikijs/transformers": "^3.6.0",
+    "@shikijs/transformers": "^3.7.0",
     "@shikijs/vitepress-twoslash": "^3.6.0",
     "bananass-utils-vitepress": "^0.1.2",
     "eslint-plugin-mark": "^0.1.0-canary.6",
