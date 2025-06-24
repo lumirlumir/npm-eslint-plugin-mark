@@ -15,7 +15,7 @@ import rules from './rules/index.js';
 // --------------------------------------------------------------------------------
 
 /**
- * @typedef {import("eslint").ESLint.Plugin} Plugin
+ * @import { ESLint } from "eslint";
  */
 
 // --------------------------------------------------------------------------------
@@ -29,7 +29,7 @@ const gfm = 'gfm';
 // Export
 // --------------------------------------------------------------------------------
 
-/** @type {Plugin} */
+/** @type {ESLint.Plugin} */
 export default {
   meta: {
     name,
