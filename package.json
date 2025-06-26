@@ -49,7 +49,7 @@
     "lerna": "^8.2.2",
     "lint-staged": "^16.1.2",
     "markdownlint-cli": "^0.45.0",
-    "prettier": "^3.6.0",
+    "prettier": "^3.6.1",
     "prettier-config-bananass": "^0.1.2",
     "textlint": "^14.7.2",
     "textlint-rule-allowed-uris": "^1.1.1",
