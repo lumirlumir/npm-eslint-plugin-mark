@@ -16,11 +16,10 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
 // --------------------------------------------------------------------------------
 
 /**
- * @typedef {import("../../core/types.d.ts").RuleModule<{ RuleOptions: []; MessageIds: 'imageTitle' }>} RuleModule
- * @typedef {import("mdast").Image} Image
- * @typedef {import("mdast").ImageReference} ImageReference
- * @typedef {import("mdast").Definition} Definition
- * @typedef {import("mdast").Html} Html
+ * @import { Image, ImageReference, Definition, Html } from 'mdast'
+ * @typedef {import("../../core/types.d.ts").RuleModule<{ RuleOptions: RuleOptions, MessageIds: MessageIds }>} RuleModule
+ * @typedef {[]} RuleOptions
+ * @typedef {'imageTitle'} MessageIds
  */
 
 // --------------------------------------------------------------------------------

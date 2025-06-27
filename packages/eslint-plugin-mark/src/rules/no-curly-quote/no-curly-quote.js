@@ -15,7 +15,9 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
 // --------------------------------------------------------------------------------
 
 /**
- * @typedef {import("../../core/types.d.ts").RuleModule<{ RuleOptions: [{ leftDoubleQuotationMark: boolean, rightDoubleQuotationMark: boolean, leftSingleQuotationMark: boolean, rightSingleQuotationMark: boolean }]; MessageIds: 'noCurlyQuote' }>} RuleModule
+ * @typedef {import("../../core/types.d.ts").RuleModule<{ RuleOptions: RuleOptions, MessageIds: MessageIds }>} RuleModule
+ * @typedef {[{ leftDoubleQuotationMark: boolean, rightDoubleQuotationMark: boolean, leftSingleQuotationMark: boolean, rightSingleQuotationMark: boolean }]} RuleOptions
+ * @typedef {'noCurlyQuote'} MessageIds
  */
 
 // --------------------------------------------------------------------------------

@@ -14,10 +14,10 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
 // --------------------------------------------------------------------------------
 
 /**
- * @typedef {import("../../core/types.d.ts").RuleModule<{ RuleOptions: [{ skipHeading: boolean, skipListItem: boolean }]; MessageIds: 'enCapitalization' }>} RuleModule
- * @typedef {import("mdast").Text} Text
- * @typedef {import("mdast").Heading} Heading
- * @typedef {import("mdast").Paragraph} Paragraph
+ * @import { Text, Heading, Paragraph } from 'mdast';
+ * @typedef {import("../../core/types.d.ts").RuleModule<{ RuleOptions: RuleOptions, MessageIds: MessageIds }>} RuleModule
+ * @typedef {[{ skipHeading: boolean, skipListItem: boolean }]} RuleOptions
+ * @typedef {'enCapitalization'} MessageIds
  */
 
 // --------------------------------------------------------------------------------

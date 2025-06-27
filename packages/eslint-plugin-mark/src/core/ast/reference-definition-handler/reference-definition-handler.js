@@ -7,9 +7,7 @@
 // --------------------------------------------------------------------------------
 
 /**
- * @typedef {import("mdast").ImageReference} ImageReference
- * @typedef {import("mdast").LinkReference} LinkReference
- * @typedef {import("mdast").Definition} Definition
+ * @import { ImageReference, LinkReference, Definition } from 'mdast';
  */
 
 // --------------------------------------------------------------------------------

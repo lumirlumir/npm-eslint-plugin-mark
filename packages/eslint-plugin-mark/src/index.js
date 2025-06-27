@@ -19,13 +19,6 @@ import rules from './rules/index.js';
  */
 
 // --------------------------------------------------------------------------------
-// Helpers
-// --------------------------------------------------------------------------------
-
-const commonmark = 'commonmark';
-const gfm = 'gfm';
-
-// --------------------------------------------------------------------------------
 // Export
 // --------------------------------------------------------------------------------
 
@@ -39,11 +32,11 @@ export default {
   rules,
 
   configs: {
-    allCommonmark: all(commonmark),
-    allGfm: all(gfm),
-    baseCommonmark: base(commonmark),
-    baseGfm: base(gfm),
-    recommendedCommonmark: recommended(commonmark),
-    recommendedGfm: recommended(gfm),
+    allCommonmark: all('commonmark'),
+    allGfm: all('gfm'),
+    baseCommonmark: base('commonmark'),
+    baseGfm: base('gfm'),
+    recommendedCommonmark: recommended('commonmark'),
+    recommendedGfm: recommended('gfm'),
   },
 };

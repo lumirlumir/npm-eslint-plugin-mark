@@ -13,8 +13,8 @@ import base from './base.js';
 // --------------------------------------------------------------------------------
 
 /**
- * @typedef {import("eslint").Linter.Config} LinterConfig
- * @typedef {import("../core/types.d.ts").ParserMode} ParserMode
+ * @import { Linter } from "eslint";
+ * @import { ParserMode } from '../core/types.d.ts';
  */
 
 // --------------------------------------------------------------------------------
@@ -24,7 +24,7 @@ import base from './base.js';
 /**
  * Recommended configuration.
  * @param {ParserMode} parserMode
- * @return {LinterConfig}
+ * @return {Linter.Config}
  */
 export default function recommended(parserMode) {
   return {

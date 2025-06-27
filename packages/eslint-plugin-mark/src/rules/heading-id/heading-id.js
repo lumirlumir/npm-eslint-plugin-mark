@@ -14,8 +14,10 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
 // --------------------------------------------------------------------------------
 
 /**
- * @typedef {import("../../core/types.d.ts").RuleModule<{ RuleOptions: ['always' | 'never', { leftDelimiter: string, rightDelimiter: string, ignoreDepth: HeadingDepth[] }]; MessageIds: 'headingIdAlways' | 'headingIdNever' }>} RuleModule
- * @typedef {import("mdast").Heading['depth']} HeadingDepth
+ * @import { Heading } from 'mdast';
+ * @typedef {import("../../core/types.d.ts").RuleModule<{ RuleOptions: RuleOptions, MessageIds: MessageIds }>} RuleModule
+ * @typedef {['always' | 'never', { leftDelimiter: string, rightDelimiter: string, ignoreDepth: Heading['depth'][] }]} RuleOptions
+ * @typedef {'headingIdAlways' | 'headingIdNever'} MessageIds
  */
 
 // --------------------------------------------------------------------------------

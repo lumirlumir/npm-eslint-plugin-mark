@@ -15,8 +15,10 @@ import { URL_RULE_DOCS, ZERO_TO_ONE_BASED_OFFSET } from '../../core/constants.js
 // --------------------------------------------------------------------------------
 
 /**
- * @typedef {import("../../core/types.d.ts").RuleModule<{ RuleOptions: [{ skipCode: boolean }]; MessageIds: 'noGitConflictMarker' }>} RuleModule
- * @typedef {import("unist").Position} Position
+ * @import { Position } from 'unist';
+ * @typedef {import("../../core/types.d.ts").RuleModule<{ RuleOptions: RuleOptions, MessageIds: MessageIds }>} RuleModule
+ * @typedef {[{ skipCode: boolean }]} RuleOptions
+ * @typedef {'noGitConflictMarker'} MessageIds
  */
 
 // --------------------------------------------------------------------------------

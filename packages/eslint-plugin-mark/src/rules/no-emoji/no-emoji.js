@@ -17,7 +17,9 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
 // --------------------------------------------------------------------------------
 
 /**
- * @typedef {import("../../core/types.d.ts").RuleModule<{ RuleOptions: []; MessageIds: 'noEmoji' }>} RuleModule
+ * @typedef {import("../../core/types.d.ts").RuleModule<{ RuleOptions: RuleOptions, MessageIds: MessageIds }>} RuleModule
+ * @typedef {[]} RuleOptions
+ * @typedef {'noEmoji'} MessageIds
  */
 
 // --------------------------------------------------------------------------------

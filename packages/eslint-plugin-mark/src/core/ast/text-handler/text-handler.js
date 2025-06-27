@@ -13,15 +13,10 @@ import { ZERO_TO_ONE_BASED_OFFSET } from '../../constants.js';
 // --------------------------------------------------------------------------------
 
 /**
- * @typedef {import("../../types.d.ts").RuleContext} RuleContext
- * @typedef {import("mdast").Text} Text
- * @typedef {import("unist").Position} Position
- */
-
-/**
- * @typedef {object} Line
- * @property {string} value The text of the line.
- * @property {Position} position The position of the line.
+ * @import { Position } from 'unist';
+ * @import { Text } from 'mdast';
+ * @import { RuleContext } from '../../types.d.ts';
+ * @typedef {{value: string, position: Position}} Line
  */
 
 // --------------------------------------------------------------------------------

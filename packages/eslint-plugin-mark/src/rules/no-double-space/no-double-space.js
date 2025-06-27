@@ -15,7 +15,9 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
 // --------------------------------------------------------------------------------
 
 /**
- * @typedef {import("../../core/types.d.ts").RuleModule<{ RuleOptions: [{ multipleSpace: boolean }]; MessageIds: 'noDoubleSpace' | 'noMultipleSpace' }>} RuleModule
+ * @typedef {import("../../core/types.d.ts").RuleModule<{ RuleOptions: RuleOptions, MessageIds: MessageIds }>} RuleModule
+ * @typedef {[{ multipleSpace: boolean }]} RuleOptions
+ * @typedef {'noDoubleSpace' | 'noMultipleSpace'} MessageIds
  */
 
 // --------------------------------------------------------------------------------
