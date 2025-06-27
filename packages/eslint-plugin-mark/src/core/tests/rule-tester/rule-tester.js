@@ -16,8 +16,8 @@ import markdown from '@eslint/markdown';
 // --------------------------------------------------------------------------------
 
 /**
- * @typedef {import("../../types.d.ts").RuleModule} RuleModule
- * @typedef {Parameters<import("eslint").RuleTester['run']>[2]} Tests
+ * @import { RuleModule } from "../../types.d.ts";
+ * @typedef {Parameters<RuleTester['run']>[2]} Tests
  */
 
 // --------------------------------------------------------------------------------

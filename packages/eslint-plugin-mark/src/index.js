@@ -15,21 +15,14 @@ import rules from './rules/index.js';
 // --------------------------------------------------------------------------------
 
 /**
- * @typedef {import("eslint").ESLint.Plugin} Plugin
+ * @import { ESLint } from "eslint";
  */
-
-// --------------------------------------------------------------------------------
-// Helpers
-// --------------------------------------------------------------------------------
-
-const commonmark = 'commonmark';
-const gfm = 'gfm';
 
 // --------------------------------------------------------------------------------
 // Export
 // --------------------------------------------------------------------------------
 
-/** @type {Plugin} */
+/** @type {ESLint.Plugin} */
 export default {
   meta: {
     name,
@@ -39,11 +32,11 @@ export default {
   rules,
 
   configs: {
-    allCommonmark: all(commonmark),
-    allGfm: all(gfm),
-    baseCommonmark: base(commonmark),
-    baseGfm: base(gfm),
-    recommendedCommonmark: recommended(commonmark),
-    recommendedGfm: recommended(gfm),
+    allCommonmark: all('commonmark'),
+    allGfm: all('gfm'),
+    baseCommonmark: base('commonmark'),
+    baseGfm: base('gfm'),
+    recommendedCommonmark: recommended('commonmark'),
+    recommendedGfm: recommended('gfm'),
   },
 };

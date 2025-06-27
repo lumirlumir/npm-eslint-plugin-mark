@@ -14,8 +14,8 @@ import rules from '../rules/index.js';
 // --------------------------------------------------------------------------------
 
 /**
- * @typedef {import("eslint").Linter.Config} LinterConfig
- * @typedef {import("../core/types.d.ts").ParserMode} ParserMode
+ * @import { Linter } from "eslint";
+ * @import { ParserMode } from '../core/types.d.ts';
  */
 
 // --------------------------------------------------------------------------------
@@ -25,7 +25,7 @@ import rules from '../rules/index.js';
 /**
  * Base configuration.
  * @param {ParserMode} parserMode
- * @return {LinterConfig}
+ * @return {Linter.Config}
  */
 export default function base(parserMode) {
   return {
