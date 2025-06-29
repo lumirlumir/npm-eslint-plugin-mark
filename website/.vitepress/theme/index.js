@@ -1,6 +1,5 @@
 /**
  * @fileoverview VitePress theme entry file.
- *
  * @see https://vitepress.dev/guide/custom-theme#using-a-custom-theme
  */
 
