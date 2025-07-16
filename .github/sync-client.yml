@@ -26,8 +26,6 @@ lumirlumir/lumirlumir-configs:
   # ./.github
   - source: ./.github/CODEOWNERS
     dest: ./configs/.github/CODEOWNERS
-  - source: ./.github/PULL_REQUEST_TEMPLATE.md
-    dest: ./configs/.github/PULL_REQUEST_TEMPLATE.md
   - source: ./.github/dependabot.yml
     dest: ./configs/.github/dependabot.yml
   - source: ./.github/release.yml
