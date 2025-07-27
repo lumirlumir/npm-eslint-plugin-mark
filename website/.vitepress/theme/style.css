@@ -73,6 +73,15 @@
   transform: translate(0px, 0px) !important;
 }
 
+.DocSearch-Button {
+  border: 1px solid transparent;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.DocSearch-Button:hover {
+  border-color: var(--vp-c-brand-1);
+}
+
 /**
  * Markdown Document
  * -------------------------------------------------------------------------- */
