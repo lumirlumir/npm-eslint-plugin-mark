@@ -15,7 +15,7 @@
     "eslint-plugin-mark": "^0.1.0-canary.6",
     "markdown-it-footnote": "^4.0.0",
     "twoslash-eslint": "^0.3.2",
-    "vitepress": "^1.6.3",
+    "vitepress": "^2.0.0-alpha.9",
     "vitepress-plugin-group-icons": "^1.6.1"
   }
 }
