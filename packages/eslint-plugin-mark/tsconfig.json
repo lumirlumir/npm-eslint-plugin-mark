@@ -1,16 +1,58 @@
 {
+  "include": [
+    "src/**/*.js",
+    "src/**/*.mjs",
+    "src/**/*.cjs",
+    "src/**/*.jsx",
+    "src/**/*.ts",
+    "src/**/*.mts",
+    "src/**/*.cts",
+    "src/**/*.tsx"
+  ],
+  "exclude": ["src/**/*.test.js", "src/**/*.test.ts"],
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "allowJs": true,
-    "checkJs": true,
+    /* Type Checking */
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "alwaysStrict": true,
+    "exactOptionalPropertyTypes": false, // Off: TODO
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noPropertyAccessFromIndexSignature": false, // Off: Prefer ESLint rule
+    "noUncheckedIndexedAccess": false, // Off: Too tight
+    "noUnusedLocals": false, // Off: Does not recognize JSDoc `@import` statements
+    "noUnusedParameters": true,
+    "strict": false, // Off: TODO
+    "strictBindCallApply": true,
+    "strictBuiltinIteratorReturn": true,
+    "strictFunctionTypes": true,
+    "strictNullChecks": false, // Off: TODO
+    "strictPropertyInitialization": false, // Off: TODO
+    "useUnknownInCatchVariables": true,
+
+    /* Modules */
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
+
+    /* Emit */
     "declaration": true,
     "emitDeclarationOnly": true,
     "outDir": "build",
+
+    /* JavaScript Support */
+    "allowJs": true,
+    "checkJs": true,
+
+    /* Interop Constraints */
+    "allowSyntheticDefaultImports": true,
+
+    /* Language and Environment */
     "target": "ESNext",
-    "module": "NodeNext",
-    "moduleResolution": "nodenext",
+
+    /* Completeness */
     "skipLibCheck": true
-  },
-  "include": ["src/**/*.js", "src/**/*.mjs", "src/**/*.cjs"],
-  "exclude": ["src/**/*.test.js"]
+  }
 }
