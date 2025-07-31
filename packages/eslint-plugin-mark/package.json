@@ -83,11 +83,11 @@
   },
   "dependencies": {
     "@eslint/markdown": "^7.1.0",
-    "cheerio": "^1.1.1",
+    "cheerio": "^1.1.2",
     "emoji-regex": "^10.4.0"
   },
   "devDependencies": {
     "@types/mdast": "^4.0.4",
-    "eslint": "^9.31.0"
+    "eslint": "^9.32.0"
   }
 }
