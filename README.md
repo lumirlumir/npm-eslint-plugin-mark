@@ -7,4 +7,33 @@
 [![npm package eslint-plugin-mark latest version](https://img.shields.io/npm/v/eslint-plugin-mark?label=eslint-plugin-mark@latest&color=6358d4&labelColor=333333&logo=npm)](https://www.npmjs.com/package/eslint-plugin-mark)
 [![npm package eslint-plugin-mark next version](https://img.shields.io/npm/v/eslint-plugin-mark/next?label=eslint-plugin-mark@next&color=6358d4&labelColor=333333&logo=npm)](https://www.npmjs.com/package/eslint-plugin-mark)
 
+> [!IMPORTANT]
+>
+> If you like this package, please give it a star on [GitHub](https://github.com/lumirlumir/npm-eslint-plugin-mark)!⭐<br/>
+> Your support helps us improve and maintain the project.
+
 Lint your Markdown with ESLint.🛠️
+
+## Documentation
+
+For full documentation, see the [official documentation of the `eslint-plugin-mark`](https://eslint-plugin-mark.lumir.page).
+
+## Code of Conduct
+
+See [Code of Conduct](https://github.com/lumirlumir/.github/blob/main/CODE_OF_CONDUCT.md#contributor-covenant-code-of-conduct).
+
+## Change Log
+
+See [Change Log](https://github.com/lumirlumir/npm-eslint-plugin-mark/blob/main/CHANGELOG.md).
+
+## Versioning
+
+See [Versioning](http://eslint-plugin-mark.lumir.page/docs/community/versioning).
+
+## Security
+
+See [Security](https://github.com/lumirlumir/.github/blob/main/SECURITY.md#security).
+
+## License
+
+[MIT](https://github.com/lumirlumir/npm-eslint-plugin-mark/blob/main/LICENSE.md)
