@@ -20,7 +20,7 @@ For full documentation, see the [official documentation of the `eslint-plugin-ma
 
 ## Code of Conduct
 
-See [Code of Conduct](https://github.com/lumirlumir/.github/blob/main/CODE_OF_CONDUCT.md#contributor-covenant-code-of-conduct)
+See [Code of Conduct](https://github.com/lumirlumir/.github/blob/main/CODE_OF_CONDUCT.md#contributor-covenant-code-of-conduct).
 
 ## Change Log
 
