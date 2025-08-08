@@ -110,6 +110,19 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
     },
     {
+      name: 'Html node with empty alt text - 2',
+      code: '<img src="https://example.com/image.jpg" alt>',
+      errors: [
+        {
+          messageId: altText,
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 46,
+        },
+      ],
+    },
+    {
       name: 'Nested Html node without alt text',
       code: `
 <div>

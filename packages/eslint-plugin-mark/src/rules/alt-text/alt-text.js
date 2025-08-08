@@ -7,7 +7,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import * as cheerio from 'cheerio';
+import { getElementsByTagName } from '../../core/ast/index.js';
 import { URL_RULE_DOCS } from '../../core/constants.js';
 
 // --------------------------------------------------------------------------------
@@ -69,10 +69,16 @@ export default {
       },
 
       html(node) {
-        const $ = cheerio.load(node.value);
+        getElementsByTagName(node.value, 'img').forEach(({ attrs }) => {
+          let hasAltText = false;
 
-        $('img').each((_, elem) => {
-          if (!elem.attribs.alt) {
+          attrs.forEach(({ name, value }) => {
+            if (name === 'alt' && value) {
+              hasAltText = true;
+            }
+          });
+
+          if (!hasAltText) {
             context.report({
               node,
               messageId: 'altText',
