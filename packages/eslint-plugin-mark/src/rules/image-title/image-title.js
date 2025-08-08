@@ -7,8 +7,10 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import * as cheerio from 'cheerio';
-import { ReferenceDefinitionHandler } from '../../core/ast/index.js';
+import {
+  getElementsByTagName,
+  ReferenceDefinitionHandler,
+} from '../../core/ast/index.js';
 import { URL_RULE_DOCS } from '../../core/constants.js';
 
 // --------------------------------------------------------------------------------
@@ -67,10 +69,18 @@ export default {
       },
 
       html(node) {
-        const $ = cheerio.load(node.value);
+        getElementsByTagName(node.value, 'img').forEach(({ attrs }) => {
+          let hasTitle = false;
 
-        $('img').each((_, elem) => {
-          if (!elem.attribs.title) report(node);
+          attrs.forEach(({ name, value }) => {
+            if (name === 'title' && value) {
+              hasTitle = true;
+            }
+          });
+
+          if (!hasTitle) {
+            report(node);
+          }
         });
       },
 
