@@ -1,12 +1,12 @@
 {
   "private": true,
   "name": "tests-integration",
-  "version": "0.1.0-canary.6",
+  "version": "0.1.0-canary.7",
   "type": "module",
   "scripts": {
     "test": "node --test"
   },
   "devDependencies": {
-    "eslint-plugin-mark": "^0.1.0-canary.6"
+    "eslint-plugin-mark": "^0.1.0-canary.7"
   }
 }
