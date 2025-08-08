@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-mark",
-  "version": "0.1.0-canary.6",
+  "version": "0.1.0-canary.7",
   "type": "module",
   "description": "Lint your Markdown with ESLint.🛠️",
   "exports": {

@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "website",
-  "version": "0.1.0-canary.6",
+  "version": "0.1.0-canary.7",
   "type": "module",
   "scripts": {
     "dev": "npx vitepress --open --host",
@@ -12,7 +12,7 @@
     "@codecov/vite-plugin": "^1.9.1",
     "@shikijs/transformers": "^3.9.1",
     "@shikijs/vitepress-twoslash": "^3.9.2",
-    "eslint-plugin-mark": "^0.1.0-canary.6",
+    "eslint-plugin-mark": "^0.1.0-canary.7",
     "markdown-it-footnote": "^4.0.0",
     "twoslash-eslint": "^0.3.3",
     "vitepress": "^2.0.0-alpha.9",
