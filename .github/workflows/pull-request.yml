@@ -31,7 +31,7 @@ jobs:
       - name: Debug extracted package names
         run: echo '${{ env.SCOPES }}'
 
-      - uses: amannn/action-semantic-pull-request@v5
+      - uses: amannn/action-semantic-pull-request@v6
         id: lint-pull-request-title
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
