@@ -82,12 +82,12 @@
     "eslint": "^9.0.0"
   },
   "dependencies": {
-    "@eslint/markdown": "^7.1.0",
+    "@eslint/markdown": "^7.2.0",
     "emoji-regex": "^10.4.0",
     "parse5": "^8.0.0"
   },
   "devDependencies": {
     "@types/mdast": "^4.0.4",
-    "eslint": "^9.32.0"
+    "eslint": "^9.33.0"
   }
 }
