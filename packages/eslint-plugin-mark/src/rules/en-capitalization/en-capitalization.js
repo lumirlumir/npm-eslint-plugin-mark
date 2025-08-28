@@ -15,7 +15,7 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
 
 /**
  * @import { Text, Heading, Paragraph } from 'mdast';
- * @typedef {import("../../core/types.d.ts").RuleModule<{ RuleOptions: RuleOptions, MessageIds: MessageIds }>} RuleModule
+ * @typedef {import("../../core/types.js").RuleModule<{ RuleOptions: RuleOptions, MessageIds: MessageIds }>} RuleModule
  * @typedef {[{ skipHeading: boolean, skipListItem: boolean }]} RuleOptions
  * @typedef {'enCapitalization'} MessageIds
  */

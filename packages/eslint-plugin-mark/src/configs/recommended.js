@@ -14,7 +14,7 @@ import base from './base.js';
 
 /**
  * @import { Linter } from "eslint";
- * @import { ParserMode } from '../core/types.d.ts';
+ * @import { ParserMode } from '../core/types.js';
  */
 
 // --------------------------------------------------------------------------------
