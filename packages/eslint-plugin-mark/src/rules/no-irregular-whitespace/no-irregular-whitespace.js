@@ -16,7 +16,7 @@ import { URL_RULE_DOCS, ZERO_TO_ONE_BASED_OFFSET } from '../../core/constants.js
 
 /**
  * @import { Position } from 'unist';
- * @typedef {import("../../core/types.d.ts").RuleModule<{ RuleOptions: RuleOptions, MessageIds: MessageIds }>} RuleModule
+ * @typedef {import("../../core/types.js").RuleModule<{ RuleOptions: RuleOptions, MessageIds: MessageIds }>} RuleModule
  * @typedef {[{ skipCode: boolean, skipInlineCode: boolean }]} RuleOptions
  * @typedef {'noIrregularWhitespace'} MessageIds
  */

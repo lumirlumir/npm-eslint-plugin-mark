@@ -15,7 +15,7 @@ import rules from '../rules/index.js';
 
 /**
  * @import { Linter } from "eslint";
- * @import { ParserMode } from '../core/types.d.ts';
+ * @import { ParserMode } from '../core/types.js';
  */
 
 // --------------------------------------------------------------------------------

@@ -15,7 +15,7 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
 
 /**
  * @import { Heading } from 'mdast';
- * @typedef {import("../../core/types.d.ts").RuleModule<{ RuleOptions: RuleOptions, MessageIds: MessageIds }>} RuleModule
+ * @typedef {import("../../core/types.js").RuleModule<{ RuleOptions: RuleOptions, MessageIds: MessageIds }>} RuleModule
  * @typedef {['always' | 'never', { leftDelimiter: string, rightDelimiter: string, ignoreDepth: Heading['depth'][] }]} RuleOptions
  * @typedef {'headingIdAlways' | 'headingIdNever'} MessageIds
  */

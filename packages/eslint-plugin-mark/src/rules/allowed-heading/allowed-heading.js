@@ -14,7 +14,7 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
 // --------------------------------------------------------------------------------
 
 /**
- * @typedef {import("../../core/types.d.ts").RuleModule<{ RuleOptions: RuleOptions; MessageIds: MessageIds }>} RuleModule
+ * @typedef {import("../../core/types.js").RuleModule<{ RuleOptions: RuleOptions; MessageIds: MessageIds }>} RuleModule
  * @typedef {[{h1: headingOption, h2: headingOption, h3: headingOption, h4: headingOption, h5: headingOption, h6: headingOption}]} RuleOptions
  * @typedef {'allowedHeading' | 'allowedHeadingDepth'} MessageIds
  * @typedef {false | string[]} headingOption

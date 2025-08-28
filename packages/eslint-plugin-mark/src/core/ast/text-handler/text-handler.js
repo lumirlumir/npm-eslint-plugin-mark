@@ -15,7 +15,7 @@ import { ZERO_TO_ONE_BASED_OFFSET } from '../../constants.js';
 /**
  * @import { Position } from 'unist';
  * @import { Text } from 'mdast';
- * @import { RuleContext } from '../../types.d.ts';
+ * @import { RuleContext } from '../../types.js';
  * @typedef {{value: string, position: Position}} Line
  */
 
