@@ -5,7 +5,7 @@
 ::: danger
 
 - This plugin only supports ***ECMAScript Modules (ESM)*** configurations. CommonJS configurations are not supported.
-- This plugin only supports ***ESLint `v9.0.0` and above***.
+- This plugin only supports ***ESLint [`v9.15.0`](https://github.com/eslint/eslint/releases/tag/v9.15.0) and above***.
 
 :::
 
