@@ -3,7 +3,7 @@
 ::: info TL;DR
 
 - Module Support: ECMAScript Modules (ESM) only
-- ESLint: `^9.0.0` (Flat Config)
+- ESLint: `^9.15.0` (Flat Config)
 - Node.js: `^18.18.0 || ^20.9.0 || >=21.1.0`
 
 :::
@@ -12,7 +12,7 @@
 
 ## ESLint
 
-The version range of ESLint currently supported is `^9.0.0`.
+The version range of ESLint currently supported is [`^9.15.0`](https://github.com/eslint/eslint/releases/tag/v9.15.0).
 
 ## Node.js
 

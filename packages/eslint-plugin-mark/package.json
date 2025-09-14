@@ -79,7 +79,7 @@
     "test": "node --test"
   },
   "peerDependencies": {
-    "eslint": "^9.0.0"
+    "eslint": "^9.15.0"
   },
   "dependencies": {
     "@eslint/markdown": "^7.2.0",
