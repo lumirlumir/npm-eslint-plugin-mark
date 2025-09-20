@@ -10,6 +10,29 @@
     "source.fixAll.stylelint": "always",
     "source.fixAll.markdownlint": "always"
   },
+  "eslint.validate": [
+    "html",
+    "md",
+    "mdx",
+    "css",
+    "scss",
+    "js",
+    "mjs",
+    "cjs",
+    "jsx",
+    "ts",
+    "mts",
+    "cts",
+    "tsx",
+    "json",
+    "jsonc",
+    "json5",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "markdown"
+  ],
   "stylelint.validate": ["css", "scss"],
   "C_Cpp.clang_format_fallbackStyle": "Google"
 }
