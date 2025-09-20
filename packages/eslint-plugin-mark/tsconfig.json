@@ -15,7 +15,7 @@
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "alwaysStrict": true,
-    "exactOptionalPropertyTypes": false, // Off: TODO
+    "exactOptionalPropertyTypes": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
     "noImplicitOverride": true,
@@ -25,12 +25,12 @@
     "noUncheckedIndexedAccess": false, // Off: Too tight
     "noUnusedLocals": false, // Off: Does not recognize JSDoc `@import` statements
     "noUnusedParameters": true,
-    "strict": false, // Off: TODO
+    "strict": true,
     "strictBindCallApply": true,
     "strictBuiltinIteratorReturn": true,
     "strictFunctionTypes": true,
-    "strictNullChecks": false, // Off: TODO
-    "strictPropertyInitialization": false, // Off: TODO
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
     "useUnknownInCatchVariables": true,
 
     /* Modules */
