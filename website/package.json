@@ -11,11 +11,11 @@
   "devDependencies": {
     "@codecov/vite-plugin": "^1.9.1",
     "@shikijs/transformers": "^3.12.2",
-    "@shikijs/vitepress-twoslash": "^3.12.2",
+    "@shikijs/vitepress-twoslash": "^3.13.0",
     "eslint-plugin-mark": "^0.1.0-canary.7",
     "markdown-it-footnote": "^4.0.0",
     "twoslash-eslint": "^0.3.4",
-    "vitepress": "^2.0.0-alpha.9",
+    "vitepress": "^2.0.0-alpha.12",
     "vitepress-plugin-group-icons": "^1.6.3"
   }
 }
