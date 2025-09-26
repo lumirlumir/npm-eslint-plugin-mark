@@ -17,7 +17,7 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
 // --------------------------------------------------------------------------------
 
 /**
- * @typedef {import("../../core/types.js").RuleModule<{ RuleOptions: RuleOptions, MessageIds: MessageIds }>} RuleModule
+ * @import { RuleModule } from '../../core/types.js';
  * @typedef {[{ ignores: string[], override: Record<string, string> }]} RuleOptions
  * @typedef {'codeLangShorthand'} MessageIds
  */
@@ -26,7 +26,7 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
 // Helpers
 // --------------------------------------------------------------------------------
 
-/** @type {Record<string, string>} */
+/** @satisfies {Record<string, string>} */
 const langShorthandMap = Object.freeze({
   asciidoc: 'adoc',
   batch: 'bat',
@@ -103,7 +103,7 @@ const langShorthandMap = Object.freeze({
 // Rule Definition
 // --------------------------------------------------------------------------------
 
-/** @type {RuleModule} */
+/** @type {RuleModule<RuleOptions, MessageIds>} */
 export default {
   meta: {
     type: 'problem',

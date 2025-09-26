@@ -12,16 +12,19 @@ import { RuleTester } from 'eslint';
 import markdown from '@eslint/markdown';
 
 // --------------------------------------------------------------------------------
-// Typedefs
+// Typedef
 // --------------------------------------------------------------------------------
 
 /**
- * @import { RuleModule } from "../../types.d.ts";
+ * @import { MarkdownRuleDefinitionTypeOptions } from '@eslint/markdown';
+ * @import { RuleModule } from '../../types.js';
+ * @typedef {MarkdownRuleDefinitionTypeOptions['RuleOptions']} RuleOptions
+ * @typedef {MarkdownRuleDefinitionTypeOptions['MessageIds']} MessageIds
  * @typedef {Parameters<RuleTester['run']>[2]} Tests
  */
 
 // --------------------------------------------------------------------------------
-// Helpers
+// Helper
 // --------------------------------------------------------------------------------
 
 /**
@@ -51,7 +54,7 @@ const ruleTesterGfm = new RuleTester({
 /**
  * Markdown rule tester.
  * @param {string} name Rule name.
- * @param {RuleModule} rule Rule module.
+ * @param {RuleModule<RuleOptions, MessageIds>} rule Rule module.
  * @param {Tests} tests Tests.
  */
 export default function ruleTester(name, rule, tests) {
