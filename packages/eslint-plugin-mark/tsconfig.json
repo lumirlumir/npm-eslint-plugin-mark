@@ -25,7 +25,7 @@
     "noUncheckedIndexedAccess": false, // Off: Too tight
     "noUnusedLocals": false, // Off: Does not recognize JSDoc `@import` statements
     "noUnusedParameters": true,
-    "strict": false, // Off: TODO
+    "strict": true,
     "strictBindCallApply": true,
     "strictBuiltinIteratorReturn": true,
     "strictFunctionTypes": true,
