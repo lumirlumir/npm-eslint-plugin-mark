@@ -15,7 +15,7 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
 // --------------------------------------------------------------------------------
 
 /**
- * @typedef {import("../../core/types.js").RuleModule<{ RuleOptions: RuleOptions, MessageIds: MessageIds }>} RuleModule
+ * @import { RuleModule } from '../../core/types.js';
  * @typedef {[{ multipleSpace: boolean }]} RuleOptions
  * @typedef {'noDoubleSpace' | 'noMultipleSpace'} MessageIds
  */
@@ -33,7 +33,7 @@ const singleSpace = ' ';
 // Rule Definition
 // --------------------------------------------------------------------------------
 
-/** @type {RuleModule} */
+/** @type {RuleModule<RuleOptions, MessageIds>} */
 export default {
   meta: {
     type: 'problem',

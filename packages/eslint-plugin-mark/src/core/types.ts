@@ -9,7 +9,7 @@
 import type {
   MarkdownRuleDefinition,
   MarkdownRuleDefinitionTypeOptions,
-} from '@eslint/markdown/types';
+} from '@eslint/markdown';
 
 // --------------------------------------------------------------------------------
 // Typedefs
@@ -19,27 +19,26 @@ export type ParserMode = 'commonmark' | 'gfm';
 
 export type RuleContext = Parameters<MarkdownRuleDefinition['create']>[0];
 
-export type RuleModuleTypeOptions = Omit<
-  MarkdownRuleDefinitionTypeOptions,
-  'ExtRuleDocs'
->;
+export type RuleModule<
+  RuleOptions extends MarkdownRuleDefinitionTypeOptions['RuleOptions'],
+  MessageIds extends MarkdownRuleDefinitionTypeOptions['MessageIds'],
+> = MarkdownRuleDefinition<{
+  RuleOptions: RuleOptions;
+  MessageIds: MessageIds;
+  ExtRuleDocs: Partial<{
+    /**
+     * Indicates whether this rule is part of the strict configuration.
+     */
+    strict: boolean;
 
-export type RuleModule<Options extends Partial<RuleModuleTypeOptions> = object> =
-  MarkdownRuleDefinition<
-    Options & {
-      ExtRuleDocs: {
-        /**
-         * Indicates whether this rule is part of the strict configuration.
-         */
-        strict?: boolean | RuleModuleTypeOptions['RuleOptions'];
-        /**
-         * Indicates whether this rule is part of the style configuration.
-         */
-        style?: boolean | RuleModuleTypeOptions['RuleOptions'];
-        /**
-         * Indicates whether this rule is part of the typography configuration.
-         */
-        typography?: boolean | RuleModuleTypeOptions['RuleOptions'];
-      };
-    }
-  >;
+    /**
+     * Indicates whether this rule is part of the style configuration.
+     */
+    style: boolean;
+
+    /**
+     * Indicates whether this rule is part of the typography configuration.
+     */
+    typography: boolean;
+  }>;
+}>;

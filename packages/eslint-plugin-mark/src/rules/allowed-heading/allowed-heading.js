@@ -14,10 +14,10 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
 // --------------------------------------------------------------------------------
 
 /**
- * @typedef {import("../../core/types.js").RuleModule<{ RuleOptions: RuleOptions; MessageIds: MessageIds }>} RuleModule
- * @typedef {[{h1: headingOption, h2: headingOption, h3: headingOption, h4: headingOption, h5: headingOption, h6: headingOption}]} RuleOptions
+ * @import { RuleModule } from '../../core/types.js';
+ * @typedef {[{ h1: HeadingOption, h2: HeadingOption, h3: HeadingOption, h4: HeadingOption, h5: HeadingOption, h6: HeadingOption }]} RuleOptions
  * @typedef {'allowedHeading' | 'allowedHeadingDepth'} MessageIds
- * @typedef {false | string[]} headingOption
+ * @typedef {false | string[]} HeadingOption
  */
 
 // --------------------------------------------------------------------------------
@@ -30,7 +30,7 @@ const headingRegex = /^#{1,6}\s+/u;
 // Rule Definition
 // --------------------------------------------------------------------------------
 
-/** @type {RuleModule} */
+/** @type {RuleModule<RuleOptions, MessageIds>} */
 export default {
   meta: {
     type: 'problem',
