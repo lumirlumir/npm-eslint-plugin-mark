@@ -16,7 +16,7 @@ import { URL_RULE_DOCS, ZERO_TO_ONE_BASED_OFFSET } from '../../core/constants.js
 
 /**
  * @import { Position } from 'unist';
- * @typedef {import("../../core/types.js").RuleModule<{ RuleOptions: RuleOptions, MessageIds: MessageIds }>} RuleModule
+ * @import { RuleModule } from '../../core/types.js';
  * @typedef {[{ skipCode: boolean, skipInlineCode: boolean }]} RuleOptions
  * @typedef {'noIrregularDash'} MessageIds
  */
@@ -32,7 +32,7 @@ const irregularDashRegex =
 // Rule Definition
 // --------------------------------------------------------------------------------
 
-/** @type {RuleModule} */
+/** @type {RuleModule<RuleOptions, MessageIds>} */
 export default {
   meta: {
     type: 'problem',
