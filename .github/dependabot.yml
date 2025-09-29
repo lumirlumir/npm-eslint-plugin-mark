@@ -7,11 +7,6 @@ updates:
     commit-message:
       prefix: 'chore'
       include: 'scope'
-    cooldown:
-      default-days: 7
-      semver-major-days: 45
-      semver-minor-days: 15
-      semver-patch-days: 7
     # Specify all directories from the current layer and below recursively, using globstar, for locations of manifest files.
     directories:
       - '**/*'
@@ -50,8 +45,6 @@ updates:
     commit-message:
       prefix: 'chore'
       include: 'scope'
-    cooldown:
-      default-days: 15
     # Workflow files stored in the default location of `.github/workflows`. (You don't need to specify `/.github/workflows` for `directory`. You can use `directory: "/"`.)
     directory: '/'
     open-pull-requests-limit: 2
