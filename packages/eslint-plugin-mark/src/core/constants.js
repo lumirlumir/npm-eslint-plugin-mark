@@ -12,6 +12,7 @@ import { createRequire } from 'node:module';
 // Declaration
 // --------------------------------------------------------------------------------
 
+/** @type {{ description: string, homepage: string, name: 'eslint-plugin-mark', version: string }} */
 const { description, homepage, name, version } = createRequire(import.meta.url)(
   '../../package.json',
 );
@@ -20,25 +21,25 @@ const { description, homepage, name, version } = createRequire(import.meta.url)(
 // Export
 // --------------------------------------------------------------------------------
 
-/** @type {string} */
+/** @satisfies {string} */
 export const PKG_DESCRIPTION = description;
-/** @type {string} */
+/** @satisfies {string} */
 export const PKG_NAME = name;
-/** @type {string} */
+/** @satisfies {string} */
 export const PKG_VERSION = version;
-/** @type {string} */
+/** @satisfies {string} */
 export const PKG_AUTHOR = '루밀LuMir';
 
-/** @type {string} */
+/** @satisfies {string} */
 export const URL_HOMEPAGE = homepage;
-/** @type {string} */
+/** @satisfies {string} */
 export const URL_GITHUB = `https://github.com/lumirlumir/npm-${PKG_NAME}`;
-/** @type {string} */
+/** @satisfies {string} */
 export const URL_NPM = 'https://www.npmjs.com';
-/** @type {string} */
+/** @satisfies {string} */
 export const URL_RULE_SRC = `${URL_GITHUB}/tree/main/packages/${PKG_NAME}/src/rules`;
 /** Get the URL for the rule documentation based on the rule name. @param {string} [ruleName] */
 export const URL_RULE_DOCS = (ruleName = '') => `${URL_HOMEPAGE}/docs/rules/${ruleName}`;
 
-/** @type {1} */
+/** @satisfies {number} */
 export const ZERO_TO_ONE_BASED_OFFSET = 1;
