@@ -53,6 +53,6 @@
     "prettier-config-bananass": "^0.4.1",
     "textlint": "14.7.2",
     "textlint-rule-allowed-uris": "^2.0.1",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.3"
   }
 }
