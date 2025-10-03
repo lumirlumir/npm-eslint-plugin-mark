@@ -139,7 +139,7 @@ export default {
 
     messages: {
       allowHeading:
-        'The heading text `{{ heading }}` is not allowed. Please use one of the following text: {{ allowed }}.',
+        'The heading text `{{ heading }}` is not allowed. Please use one of the following text: {{ allow }}.',
       allowHeadingDepth: 'The heading depth `h{{ depth }}` is not allowed.',
     },
 
