@@ -16,7 +16,7 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
 /**
  * @import { RuleModule } from '../../core/types.js';
  * @typedef {[{ h1: HeadingOption, h2: HeadingOption, h3: HeadingOption, h4: HeadingOption, h5: HeadingOption, h6: HeadingOption }]} RuleOptions
- * @typedef {'allowedHeading' | 'allowedHeadingDepth'} MessageIds
+ * @typedef {'allowHeading' | 'allowHeadingDepth'} MessageIds
  * @typedef {false | string[]} HeadingOption
  */
 
@@ -37,7 +37,7 @@ export default {
 
     docs: {
       description: 'Enforce the use of allowed text for headings',
-      url: URL_RULE_DOCS('allowed-heading'),
+      url: URL_RULE_DOCS('allow-heading'),
 
       recommended: false,
       strict: false,
@@ -138,9 +138,9 @@ export default {
     ],
 
     messages: {
-      allowedHeading:
+      allowHeading:
         'The heading text `{{ heading }}` is not allowed. Please use one of the following text: {{ allowed }}.',
-      allowedHeadingDepth: 'The heading depth `h{{ depth }}` is not allowed.',
+      allowHeadingDepth: 'The heading depth `h{{ depth }}` is not allowed.',
     },
 
     language: 'markdown',
@@ -172,7 +172,7 @@ export default {
           context.report({
             node,
 
-            messageId: 'allowedHeadingDepth',
+            messageId: 'allowHeadingDepth',
 
             data: {
               depth: String(node.depth),
@@ -182,11 +182,11 @@ export default {
           context.report({
             node,
 
-            messageId: 'allowedHeading',
+            messageId: 'allowHeading',
 
             data: {
               heading: actualHeadingText,
-              allowed: expectedHeadingTexts.map(text => `\`${text}\``).join(', '),
+              allow: expectedHeadingTexts.map(text => `\`${text}\``).join(', '),
             },
           });
         }
