@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `allowed-heading.js`.
+ * @fileoverview Test for `allow-heading.js`.
  * @author 루밀LuMir(lumirlumir)
  */
 
@@ -8,14 +8,14 @@
 // --------------------------------------------------------------------------------
 
 import { getFileName, ruleTester } from '../../core/tests/index.js';
-import rule from './allowed-heading.js';
+import rule from './allow-heading.js';
 
 // --------------------------------------------------------------------------------
 // Helpers
 // --------------------------------------------------------------------------------
 
-const allowedHeading = 'allowedHeading';
-const allowedHeadingDepth = 'allowedHeadingDepth';
+const allowHeading = 'allowHeading';
+const allowHeadingDepth = 'allowHeadingDepth';
 
 // --------------------------------------------------------------------------------
 // Test
@@ -102,7 +102,7 @@ ruleTester(getFileName(import.meta.url), rule, {
   ],
 
   invalid: [
-    // Basic: allowed heading
+    // Basic: allow heading
     {
       name: 'Headings should be reported when they are not allowed - h1',
       code: '# Hello',
@@ -113,12 +113,12 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
       errors: [
         {
-          messageId: allowedHeading,
+          messageId: allowHeading,
           line: 1,
           column: 1,
           endLine: 1,
           endColumn: 8,
-          data: { heading: 'Hello', allowed: '`World`' },
+          data: { heading: 'Hello', allow: '`World`' },
         },
       ],
     },
@@ -132,12 +132,12 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
       errors: [
         {
-          messageId: allowedHeading,
+          messageId: allowHeading,
           line: 1,
           column: 1,
           endLine: 1,
           endColumn: 9,
-          data: { heading: 'Hello', allowed: '`World`' },
+          data: { heading: 'Hello', allow: '`World`' },
         },
       ],
     },
@@ -151,12 +151,12 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
       errors: [
         {
-          messageId: allowedHeading,
+          messageId: allowHeading,
           line: 1,
           column: 1,
           endLine: 1,
           endColumn: 10,
-          data: { heading: 'Hello', allowed: '`World`' },
+          data: { heading: 'Hello', allow: '`World`' },
         },
       ],
     },
@@ -170,12 +170,12 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
       errors: [
         {
-          messageId: allowedHeading,
+          messageId: allowHeading,
           line: 1,
           column: 1,
           endLine: 1,
           endColumn: 11,
-          data: { heading: 'Hello', allowed: '`World`' },
+          data: { heading: 'Hello', allow: '`World`' },
         },
       ],
     },
@@ -189,12 +189,12 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
       errors: [
         {
-          messageId: allowedHeading,
+          messageId: allowHeading,
           line: 1,
           column: 1,
           endLine: 1,
           endColumn: 12,
-          data: { heading: 'Hello', allowed: '`World`' },
+          data: { heading: 'Hello', allow: '`World`' },
         },
       ],
     },
@@ -208,17 +208,17 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
       errors: [
         {
-          messageId: allowedHeading,
+          messageId: allowHeading,
           line: 1,
           column: 1,
           endLine: 1,
           endColumn: 13,
-          data: { heading: 'Hello', allowed: '`World`' },
+          data: { heading: 'Hello', allow: '`World`' },
         },
       ],
     },
 
-    // Basic: allowed heading depth
+    // Basic: allow heading depth
     {
       name: 'Specific depth headings should be reported entirely when empty array option is given - h1',
       code: '# Hello\n# World',
@@ -229,7 +229,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
       errors: [
         {
-          messageId: allowedHeadingDepth,
+          messageId: allowHeadingDepth,
           line: 1,
           column: 1,
           endLine: 1,
@@ -237,7 +237,7 @@ ruleTester(getFileName(import.meta.url), rule, {
           data: { depth: 1 },
         },
         {
-          messageId: allowedHeadingDepth,
+          messageId: allowHeadingDepth,
           line: 2,
           column: 1,
           endLine: 2,
@@ -256,7 +256,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
       errors: [
         {
-          messageId: allowedHeadingDepth,
+          messageId: allowHeadingDepth,
           line: 1,
           column: 1,
           endLine: 1,
@@ -264,7 +264,7 @@ ruleTester(getFileName(import.meta.url), rule, {
           data: { depth: 2 },
         },
         {
-          messageId: allowedHeadingDepth,
+          messageId: allowHeadingDepth,
           line: 2,
           column: 1,
           endLine: 2,
@@ -283,7 +283,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
       errors: [
         {
-          messageId: allowedHeadingDepth,
+          messageId: allowHeadingDepth,
           line: 1,
           column: 1,
           endLine: 1,
@@ -291,7 +291,7 @@ ruleTester(getFileName(import.meta.url), rule, {
           data: { depth: 3 },
         },
         {
-          messageId: allowedHeadingDepth,
+          messageId: allowHeadingDepth,
           line: 2,
           column: 1,
           endLine: 2,
@@ -310,7 +310,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
       errors: [
         {
-          messageId: allowedHeadingDepth,
+          messageId: allowHeadingDepth,
           line: 1,
           column: 1,
           endLine: 1,
@@ -318,7 +318,7 @@ ruleTester(getFileName(import.meta.url), rule, {
           data: { depth: 4 },
         },
         {
-          messageId: allowedHeadingDepth,
+          messageId: allowHeadingDepth,
           line: 2,
           column: 1,
           endLine: 2,
@@ -337,7 +337,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
       errors: [
         {
-          messageId: allowedHeadingDepth,
+          messageId: allowHeadingDepth,
           line: 1,
           column: 1,
           endLine: 1,
@@ -345,7 +345,7 @@ ruleTester(getFileName(import.meta.url), rule, {
           data: { depth: 5 },
         },
         {
-          messageId: allowedHeadingDepth,
+          messageId: allowHeadingDepth,
           line: 2,
           column: 1,
           endLine: 2,
@@ -364,7 +364,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
       errors: [
         {
-          messageId: allowedHeadingDepth,
+          messageId: allowHeadingDepth,
           line: 1,
           column: 1,
           endLine: 1,
@@ -372,7 +372,7 @@ ruleTester(getFileName(import.meta.url), rule, {
           data: { depth: 6 },
         },
         {
-          messageId: allowedHeadingDepth,
+          messageId: allowHeadingDepth,
           line: 2,
           column: 1,
           endLine: 2,

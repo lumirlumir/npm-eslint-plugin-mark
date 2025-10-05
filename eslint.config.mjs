@@ -12,7 +12,7 @@ export default defineConfig([
     name: 'website/rules',
     files: ['website/docs/rules/**/*.md'],
     rules: {
-      'mark/allowed-heading': [
+      'mark/allow-heading': [
         'error',
         {
           h2: [
