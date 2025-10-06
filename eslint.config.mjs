@@ -5,9 +5,14 @@ import mark from 'eslint-plugin-mark';
 /** @type {import("eslint").Linter.Config[]} */
 export default defineConfig([
   globalIgnores(['**/build/', '**/coverage/', '**/.vitepress/cache/'], 'global/ignores'),
+
   bananass.configs.js,
   bananass.configs.ts,
+  bananass.configs.json,
+  bananass.configs.jsonc,
+  bananass.configs.json5,
   mark.configs.recommendedGfm,
+
   {
     name: 'website/rules',
     files: ['website/docs/rules/**/*.md'],
