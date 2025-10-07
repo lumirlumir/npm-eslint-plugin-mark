@@ -99,29 +99,20 @@ export default {
             const leadingSpaceLength =
               textLineNode.value.match(leadingSpaceRegex)[0].length;
 
-            const matchIndexStart = match.index + leadingSpaceLength;
-            const matchIndexEnd = matchIndexStart + spaceLength;
+            const startOffset = // Adjust regex match index to the full source code.
+              leadingSpaceLength + match.index + textLineNode.position.start.offset;
+            const endOffset = startOffset + spaceLength;
 
             context.report({
               loc: {
-                start: sourceCode.getLocFromIndex(
-                  textLineNode.position.start.offset + matchIndexStart,
-                ),
-                end: sourceCode.getLocFromIndex(
-                  textLineNode.position.start.offset + matchIndexEnd,
-                ),
+                start: sourceCode.getLocFromIndex(startOffset),
+                end: sourceCode.getLocFromIndex(endOffset),
               },
 
               messageId,
 
               fix(fixer) {
-                return fixer.replaceTextRange(
-                  [
-                    textLineNode.position.start.offset + matchIndexStart,
-                    textLineNode.position.start.offset + matchIndexEnd,
-                  ],
-                  singleSpace,
-                );
+                return fixer.replaceTextRange([startOffset, endOffset], singleSpace);
               },
             });
           }
