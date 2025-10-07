@@ -38,6 +38,7 @@ ruleTester(getFileName(import.meta.url), rule, {
 
   invalid: [
     {
+      // 😊's length 2.
       name: 'Singleline emoji',
       code: 'Hello, 😊!',
       errors: [
@@ -45,10 +46,13 @@ ruleTester(getFileName(import.meta.url), rule, {
           messageId: noEmoji,
           line: 1,
           column: 8,
+          endLine: 1,
+          endColumn: 10,
         },
       ],
     },
     {
+      // 😊's length 2, 🦄's length 2.
       name: 'Multiline emojis - 1',
       code: `Hi, 😊
 🦄!`,
@@ -57,11 +61,15 @@ ruleTester(getFileName(import.meta.url), rule, {
           messageId: noEmoji,
           line: 1,
           column: 5,
+          endLine: 1,
+          endColumn: 7,
         },
         {
           messageId: noEmoji,
           line: 2,
           column: 1,
+          endLine: 2,
+          endColumn: 3,
         },
       ],
     },
@@ -74,11 +82,15 @@ ruleTester(getFileName(import.meta.url), rule, {
           messageId: noEmoji,
           line: 1,
           column: 5,
+          endLine: 1,
+          endColumn: 7,
         },
         {
           messageId: noEmoji,
           line: 2,
           column: 3,
+          endLine: 2,
+          endColumn: 5,
         },
       ],
     },
