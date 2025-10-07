@@ -86,46 +86,43 @@ export default {
       text(node) {
         const textHandler = new TextHandler(context, node);
 
+        const { sourceCode } = context;
         const [{ multipleSpace }] = context.options;
         const spaceRegex = multipleSpace ? multipleSpaceRegex : doubleSpaceRegex;
         const messageId = multipleSpace ? 'noMultipleSpace' : 'noDoubleSpace';
 
         textHandler.lines.forEach(textLineNode => {
-          const matches = [...textLineNode.value.trim().matchAll(spaceRegex)];
+          const matches = textLineNode.value.trim().matchAll(spaceRegex);
 
-          if (matches.length > 0) {
-            matches.forEach(match => {
-              const spaceLength = match[0].length;
-              const leadingSpaceLength =
-                textLineNode.value.match(leadingSpaceRegex)[0].length;
+          for (const match of matches) {
+            const spaceLength = match[0].length;
+            const leadingSpaceLength =
+              textLineNode.value.match(leadingSpaceRegex)[0].length;
 
-              const matchIndexStart = match.index + leadingSpaceLength;
-              const matchIndexEnd = matchIndexStart + spaceLength;
+            const matchIndexStart = match.index + leadingSpaceLength;
+            const matchIndexEnd = matchIndexStart + spaceLength;
 
-              context.report({
-                loc: {
-                  start: {
-                    line: textLineNode.position.start.line,
-                    column: textLineNode.position.start.column + matchIndexStart,
-                  },
-                  end: {
-                    line: textLineNode.position.start.line,
-                    column: textLineNode.position.start.column + matchIndexEnd,
-                  },
-                },
+            context.report({
+              loc: {
+                start: sourceCode.getLocFromIndex(
+                  textLineNode.position.start.offset + matchIndexStart,
+                ),
+                end: sourceCode.getLocFromIndex(
+                  textLineNode.position.start.offset + matchIndexEnd,
+                ),
+              },
 
-                messageId,
+              messageId,
 
-                fix(fixer) {
-                  return fixer.replaceTextRange(
-                    [
-                      textLineNode.position.start.offset + matchIndexStart,
-                      textLineNode.position.start.offset + matchIndexEnd,
-                    ],
-                    singleSpace,
-                  );
-                },
-              });
+              fix(fixer) {
+                return fixer.replaceTextRange(
+                  [
+                    textLineNode.position.start.offset + matchIndexStart,
+                    textLineNode.position.start.offset + matchIndexEnd,
+                  ],
+                  singleSpace,
+                );
+              },
             });
           }
         });
