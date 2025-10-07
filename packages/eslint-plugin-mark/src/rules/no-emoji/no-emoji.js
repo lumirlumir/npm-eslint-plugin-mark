@@ -8,12 +8,10 @@
 // --------------------------------------------------------------------------------
 
 import emojiRegex from 'emoji-regex';
-
-import { TextHandler } from '../../core/ast/index.js';
 import { URL_RULE_DOCS } from '../../core/constants.js';
 
 // --------------------------------------------------------------------------------
-// Typedefs
+// Typedef
 // --------------------------------------------------------------------------------
 
 /**
@@ -55,27 +53,23 @@ export default {
 
     return {
       text(node) {
-        const textHandler = new TextHandler(context, node);
+        const matches = sourceCode.getText(node).matchAll(emojiRegex());
 
-        textHandler.lines.forEach(textLineNode => {
-          const matches = textLineNode.value.matchAll(emojiRegex());
+        for (const match of matches) {
+          const emojiLength = match[0].length;
 
-          for (const match of matches) {
-            const emojiLength = match[0].length;
+          const startOffset = node.position.start.offset + match.index;
+          const endOffset = startOffset + emojiLength;
 
-            const startOffset = match.index + textLineNode.position.start.offset;
-            const endOffset = startOffset + emojiLength;
+          context.report({
+            loc: {
+              start: sourceCode.getLocFromIndex(startOffset),
+              end: sourceCode.getLocFromIndex(endOffset),
+            },
 
-            context.report({
-              loc: {
-                start: sourceCode.getLocFromIndex(startOffset),
-                end: sourceCode.getLocFromIndex(endOffset),
-              },
-
-              messageId: 'noEmoji',
-            });
-          }
-        });
+            messageId: 'noEmoji',
+          });
+        }
       },
     };
   },
