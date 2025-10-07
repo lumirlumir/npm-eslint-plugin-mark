@@ -38,7 +38,7 @@ ruleTester(getFileName(import.meta.url), rule, {
 
   invalid: [
     {
-      // 😊's length 2.
+      // 😊's length is 2.
       name: 'Singleline emoji',
       code: 'Hello, 😊!',
       errors: [
@@ -52,7 +52,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
     },
     {
-      // 😊's length 2, 🦄's length 2.
+      // 😊's length is 2, 🦄's length is 2.
       name: 'Multiline emojis - 1',
       code: `Hi, 😊
 🦄!`,
