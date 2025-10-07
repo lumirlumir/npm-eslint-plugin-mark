@@ -51,34 +51,28 @@ export default {
   },
 
   create(context) {
+    const { sourceCode } = context;
+
     return {
       text(node) {
         const textHandler = new TextHandler(context, node);
 
         textHandler.lines.forEach(textLineNode => {
-          const matches = [...textLineNode.value.matchAll(emojiRegex())];
+          const matches = textLineNode.value.matchAll(emojiRegex());
 
-          if (matches.length > 0) {
-            matches.forEach(match => {
-              const emojiLength = match[0].length;
+          for (const match of matches) {
+            const emojiLength = match[0].length;
 
-              const matchIndexStart = match.index;
-              const matchIndexEnd = matchIndexStart + emojiLength;
+            const startOffset = match.index + textLineNode.position.start.offset;
+            const endOffset = startOffset + emojiLength;
 
-              context.report({
-                loc: {
-                  start: {
-                    line: textLineNode.position.start.line,
-                    column: textLineNode.position.start.column + matchIndexStart,
-                  },
-                  end: {
-                    line: textLineNode.position.start.line,
-                    column: textLineNode.position.start.column + matchIndexEnd,
-                  },
-                },
+            context.report({
+              loc: {
+                start: sourceCode.getLocFromIndex(startOffset),
+                end: sourceCode.getLocFromIndex(endOffset),
+              },
 
-                messageId: 'noEmoji',
-              });
+              messageId: 'noEmoji',
             });
           }
         });

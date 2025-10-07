@@ -49,7 +49,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
     },
     {
-      name: 'Multiline emojis',
+      name: 'Multiline emojis - 1',
       code: `Hi, 😊
 🦄!`,
       errors: [
@@ -62,6 +62,23 @@ ruleTester(getFileName(import.meta.url), rule, {
           messageId: noEmoji,
           line: 2,
           column: 1,
+        },
+      ],
+    },
+    {
+      name: 'Multiline emojis - 2',
+      code: `Hi, 😊
+  🦄!`,
+      errors: [
+        {
+          messageId: noEmoji,
+          line: 1,
+          column: 5,
+        },
+        {
+          messageId: noEmoji,
+          line: 2,
+          column: 3,
         },
       ],
     },

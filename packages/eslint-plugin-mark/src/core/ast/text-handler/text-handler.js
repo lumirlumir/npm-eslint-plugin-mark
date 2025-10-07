@@ -63,7 +63,7 @@ export default class TextHandler {
       }
 
       this.#lines.push(
-        /** @type {Line} */ {
+        /** @type {Line} */ ({
           value: line,
           position: {
             start: {
@@ -77,7 +77,7 @@ export default class TextHandler {
               offset: locOffset + line.length,
             },
           },
-        },
+        }),
       );
     });
   }
