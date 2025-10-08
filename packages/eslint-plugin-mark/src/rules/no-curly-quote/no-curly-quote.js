@@ -15,7 +15,7 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
 
 /**
  * @import { RuleModule } from '../../core/types.js';
- * @typedef {[{ leftDoubleQuotationMark: boolean, rightDoubleQuotationMark: boolean, leftSingleQuotationMark: boolean, rightSingleQuotationMark: boolean }]} RuleOptions
+ * @typedef {[{ checkLeftDoubleQuotationMark: boolean, checkRightDoubleQuotationMark: boolean, checkLeftSingleQuotationMark: boolean, checkRightSingleQuotationMark: boolean }]} RuleOptions
  * @typedef {'noCurlyQuote'} MessageIds
  */
 
@@ -55,16 +55,16 @@ export default {
       {
         type: 'object',
         properties: {
-          leftDoubleQuotationMark: {
+          checkLeftDoubleQuotationMark: {
             type: 'boolean',
           },
-          rightDoubleQuotationMark: {
+          checkRightDoubleQuotationMark: {
             type: 'boolean',
           },
-          leftSingleQuotationMark: {
+          checkLeftSingleQuotationMark: {
             type: 'boolean',
           },
-          rightSingleQuotationMark: {
+          checkRightSingleQuotationMark: {
             type: 'boolean',
           },
         },
@@ -74,10 +74,10 @@ export default {
 
     defaultOptions: [
       {
-        leftDoubleQuotationMark: true,
-        rightDoubleQuotationMark: true,
-        leftSingleQuotationMark: true,
-        rightSingleQuotationMark: true,
+        checkLeftDoubleQuotationMark: true,
+        checkRightDoubleQuotationMark: true,
+        checkLeftSingleQuotationMark: true,
+        checkRightSingleQuotationMark: true,
       },
     ],
 
@@ -95,10 +95,10 @@ export default {
     const { sourceCode } = context;
     const [
       {
-        leftDoubleQuotationMark: leftDoubleQuotationMarkOption,
-        rightDoubleQuotationMark: rightDoubleQuotationMarkOption,
-        leftSingleQuotationMark: leftSingleQuotationMarkOption,
-        rightSingleQuotationMark: rightSingleQuotationMarkOption,
+        checkLeftDoubleQuotationMark: leftDoubleQuotationMarkOption,
+        checkRightDoubleQuotationMark: rightDoubleQuotationMarkOption,
+        checkLeftSingleQuotationMark: leftSingleQuotationMarkOption,
+        checkRightSingleQuotationMark: rightSingleQuotationMarkOption,
       },
     ] = context.options;
     const regexString = [

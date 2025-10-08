@@ -34,10 +34,10 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: '',
       options: [
         {
-          leftDoubleQuotationMark: false,
-          rightDoubleQuotationMark: false,
-          leftSingleQuotationMark: false,
-          rightSingleQuotationMark: false,
+          checkLeftDoubleQuotationMark: false,
+          checkRightDoubleQuotationMark: false,
+          checkLeftSingleQuotationMark: false,
+          checkRightSingleQuotationMark: false,
         },
       ],
     },
@@ -46,10 +46,10 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: ' ',
       options: [
         {
-          leftDoubleQuotationMark: false,
-          rightDoubleQuotationMark: false,
-          leftSingleQuotationMark: false,
-          rightSingleQuotationMark: false,
+          checkLeftDoubleQuotationMark: false,
+          checkRightDoubleQuotationMark: false,
+          checkLeftSingleQuotationMark: false,
+          checkRightSingleQuotationMark: false,
         },
       ],
     },
@@ -58,7 +58,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: '“',
       options: [
         {
-          leftDoubleQuotationMark: false,
+          checkLeftDoubleQuotationMark: false,
         },
       ],
     },
@@ -67,7 +67,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: '”',
       options: [
         {
-          rightDoubleQuotationMark: false,
+          checkRightDoubleQuotationMark: false,
         },
       ],
     },
@@ -76,7 +76,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: '‘',
       options: [
         {
-          leftSingleQuotationMark: false,
+          checkLeftSingleQuotationMark: false,
         },
       ],
     },
@@ -85,7 +85,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: '’',
       options: [
         {
-          rightSingleQuotationMark: false,
+          checkRightSingleQuotationMark: false,
         },
       ],
     },
