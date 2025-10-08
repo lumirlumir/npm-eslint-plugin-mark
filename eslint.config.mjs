@@ -25,7 +25,7 @@ export default defineConfig([
             'Examples',
             'Options',
             'When Not To Use It',
-            'AST',
+            'AST', // TODO: Remove
             'Fix',
             'Limitations',
             'Prior Art',
