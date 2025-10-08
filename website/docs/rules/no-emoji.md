@@ -3,7 +3,7 @@
 
 ## Rule Details
 
-Some websites and Markdown parsers handle emojis natively or provide their own plugins for support. Instead of using raw emojis like `😃`, you can use the `:smiley:`-style syntax, which places colons around the emoji name.
+Some websites and Markdown parsers handle emojis natively or provide their own plugins for support. Instead of using raw emojis like `😃`, you can use the `:smiley:`-style shortcode syntax, which places colons around the emoji name.
 
 The main purpose of this rule is to discourage the use of raw (Unicode) emojis in Markdown files and encourage the use of the `:smiley:`-style shortcode syntax for better:
 
