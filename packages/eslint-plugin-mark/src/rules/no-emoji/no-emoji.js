@@ -53,13 +53,12 @@ export default {
 
     return {
       text(node) {
+        const [nodeStartOffset] = sourceCode.getRange(node);
         const matches = sourceCode.getText(node).matchAll(emojiRegex());
 
         for (const match of matches) {
-          const emojiLength = match[0].length;
-
-          const startOffset = node.position.start.offset + match.index;
-          const endOffset = startOffset + emojiLength;
+          const startOffset = nodeStartOffset + match.index;
+          const endOffset = startOffset + match[0].length;
 
           context.report({
             loc: {

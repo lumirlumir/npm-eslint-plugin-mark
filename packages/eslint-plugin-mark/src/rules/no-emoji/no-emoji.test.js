@@ -11,12 +11,6 @@ import { getFileName, ruleTester } from '../../core/tests/index.js';
 import rule from './no-emoji.js';
 
 // --------------------------------------------------------------------------------
-// Helpers
-// --------------------------------------------------------------------------------
-
-const noEmoji = 'noEmoji';
-
-// --------------------------------------------------------------------------------
 // Test
 // --------------------------------------------------------------------------------
 
@@ -39,11 +33,11 @@ ruleTester(getFileName(import.meta.url), rule, {
   invalid: [
     {
       // 😊's length is 2.
-      name: 'Singleline emoji',
+      name: 'Single-line emoji - 1',
       code: 'Hello, 😊!',
       errors: [
         {
-          messageId: noEmoji,
+          messageId: 'noEmoji',
           line: 1,
           column: 8,
           endLine: 1,
@@ -52,20 +46,34 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
     },
     {
+      // 🙇‍♂️'s length is 5.
+      name: 'Single-line emoji - 2',
+      code: 'Hello, 🙇‍♂️!',
+      errors: [
+        {
+          messageId: 'noEmoji',
+          line: 1,
+          column: 8,
+          endLine: 1,
+          endColumn: 13,
+        },
+      ],
+    },
+    {
       // 😊's length is 2, 🦄's length is 2.
-      name: 'Multiline emojis - 1',
+      name: 'Multi-line emojis - 1',
       code: `Hi, 😊
 🦄!`,
       errors: [
         {
-          messageId: noEmoji,
+          messageId: 'noEmoji',
           line: 1,
           column: 5,
           endLine: 1,
           endColumn: 7,
         },
         {
-          messageId: noEmoji,
+          messageId: 'noEmoji',
           line: 2,
           column: 1,
           endLine: 2,
@@ -74,19 +82,19 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
     },
     {
-      name: 'Multiline emojis - 2',
+      name: 'Multi-line emojis - 2',
       code: `Hi, 😊
   🦄!`,
       errors: [
         {
-          messageId: noEmoji,
+          messageId: 'noEmoji',
           line: 1,
           column: 5,
           endLine: 1,
           endColumn: 7,
         },
         {
-          messageId: noEmoji,
+          messageId: 'noEmoji',
           line: 2,
           column: 3,
           endLine: 2,
