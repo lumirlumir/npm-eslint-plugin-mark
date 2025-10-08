@@ -25,57 +25,25 @@ Platforms like [GitHub](https://github.com) and Markdown plugins such as [`remar
 
 Examples of **incorrect** code for this rule:
 
-::: code-group
+```md eslint-check
+<!-- eslint mark/no-emoji: "error" -->
 
-```md [incorrect.md] /😃/ /🦄/ /👍/
 Smiley 😃
-
 Unicorn 🦄
-
 +1 👍
 ```
-
-```js [eslint.config.mjs] {5}
-export default [
-  // ...
-  {
-    rules: {
-      'mark/no-emoji': 'error', // [!code focus]
-    },
-  },
-  // ...
-];
-```
-
-:::
 
 ### :white_check_mark: Correct {#correct}
 
 Examples of **correct** code for this rule:
 
-::: code-group
+```md eslint-check
+<!-- eslint mark/no-emoji: "error" -->
 
-```md [correct.md]
 Smiley :smiley:
-
 Unicorn :unicorn:
-
 +1 :+1:
 ```
-
-```js [eslint.config.mjs] {5}
-export default [
-  // ...
-  {
-    rules: {
-      'mark/no-emoji': 'error', // [!code focus]
-    },
-  },
-  // ...
-];
-```
-
-:::
 
 ## Options
 
