@@ -8,12 +8,10 @@
 // --------------------------------------------------------------------------------
 
 import emojiRegex from 'emoji-regex';
-
-import { TextHandler } from '../../core/ast/index.js';
 import { URL_RULE_DOCS } from '../../core/constants.js';
 
 // --------------------------------------------------------------------------------
-// Typedefs
+// Typedef
 // --------------------------------------------------------------------------------
 
 /**
@@ -51,37 +49,26 @@ export default {
   },
 
   create(context) {
+    const { sourceCode } = context;
+
     return {
       text(node) {
-        const textHandler = new TextHandler(context, node);
+        const [nodeStartOffset] = sourceCode.getRange(node);
+        const matches = sourceCode.getText(node).matchAll(emojiRegex());
 
-        textHandler.lines.forEach(textLineNode => {
-          const matches = [...textLineNode.value.matchAll(emojiRegex())];
+        for (const match of matches) {
+          const startOffset = nodeStartOffset + match.index;
+          const endOffset = startOffset + match[0].length;
 
-          if (matches.length > 0) {
-            matches.forEach(match => {
-              const emojiLength = match[0].length;
+          context.report({
+            loc: {
+              start: sourceCode.getLocFromIndex(startOffset),
+              end: sourceCode.getLocFromIndex(endOffset),
+            },
 
-              const matchIndexStart = match.index;
-              const matchIndexEnd = matchIndexStart + emojiLength;
-
-              context.report({
-                loc: {
-                  start: {
-                    line: textLineNode.position.start.line,
-                    column: textLineNode.position.start.column + matchIndexStart,
-                  },
-                  end: {
-                    line: textLineNode.position.start.line,
-                    column: textLineNode.position.start.column + matchIndexEnd,
-                  },
-                },
-
-                messageId: 'noEmoji',
-              });
-            });
-          }
-        });
+            messageId: 'noEmoji',
+          });
+        }
       },
     };
   },
