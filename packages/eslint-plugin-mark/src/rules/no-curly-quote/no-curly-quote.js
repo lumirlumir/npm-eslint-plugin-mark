@@ -95,17 +95,17 @@ export default {
     const { sourceCode } = context;
     const [
       {
-        checkLeftDoubleQuotationMark: leftDoubleQuotationMarkOption,
-        checkRightDoubleQuotationMark: rightDoubleQuotationMarkOption,
-        checkLeftSingleQuotationMark: leftSingleQuotationMarkOption,
-        checkRightSingleQuotationMark: rightSingleQuotationMarkOption,
+        checkLeftDoubleQuotationMark,
+        checkRightDoubleQuotationMark,
+        checkLeftSingleQuotationMark,
+        checkRightSingleQuotationMark,
       },
     ] = context.options;
     const regexString = [
-      leftDoubleQuotationMarkOption ? leftDoubleQuotationMark : '',
-      rightDoubleQuotationMarkOption ? rightDoubleQuotationMark : '',
-      leftSingleQuotationMarkOption ? leftSingleQuotationMark : '',
-      rightSingleQuotationMarkOption ? rightSingleQuotationMark : '',
+      checkLeftDoubleQuotationMark ? leftDoubleQuotationMark : '',
+      checkRightDoubleQuotationMark ? rightDoubleQuotationMark : '',
+      checkLeftSingleQuotationMark ? leftSingleQuotationMark : '',
+      checkRightSingleQuotationMark ? rightSingleQuotationMark : '',
     ].join('');
 
     return {
