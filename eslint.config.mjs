@@ -24,11 +24,11 @@ export default defineConfig([
             'Rule Details',
             'Examples',
             'Options',
-            'When Not To Use It',
-            'AST', // TODO: Remove
             'Fix',
             'Limitations',
+            'When Not To Use It',
             'Prior Art',
+            'AST', // TODO: Remove
           ],
         },
       ],
