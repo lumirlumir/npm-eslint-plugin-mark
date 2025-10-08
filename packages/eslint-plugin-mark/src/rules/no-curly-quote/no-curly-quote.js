@@ -7,11 +7,10 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { TextHandler } from '../../core/ast/index.js';
 import { URL_RULE_DOCS } from '../../core/constants.js';
 
 // --------------------------------------------------------------------------------
-// Typedefs
+// Typedef
 // --------------------------------------------------------------------------------
 
 /**
@@ -21,7 +20,7 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
  */
 
 // --------------------------------------------------------------------------------
-// Helpers
+// Helper
 // --------------------------------------------------------------------------------
 
 const leftDoubleQuotationMark = '\u201C'; // `“`
@@ -93,68 +92,55 @@ export default {
   },
 
   create(context) {
+    const { sourceCode } = context;
+    const [
+      {
+        leftDoubleQuotationMark: leftDoubleQuotationMarkOption,
+        rightDoubleQuotationMark: rightDoubleQuotationMarkOption,
+        leftSingleQuotationMark: leftSingleQuotationMarkOption,
+        rightSingleQuotationMark: rightSingleQuotationMarkOption,
+      },
+    ] = context.options;
+    const regexString = [
+      leftDoubleQuotationMarkOption ? leftDoubleQuotationMark : '',
+      rightDoubleQuotationMarkOption ? rightDoubleQuotationMark : '',
+      leftSingleQuotationMarkOption ? leftSingleQuotationMark : '',
+      rightSingleQuotationMarkOption ? rightSingleQuotationMark : '',
+    ].join('');
+
     return {
       text(node) {
-        const textHandler = new TextHandler(context, node);
+        if (!regexString) {
+          return;
+        }
 
-        const [
-          {
-            leftDoubleQuotationMark: leftDoubleQuotationMarkOption,
-            rightDoubleQuotationMark: rightDoubleQuotationMarkOption,
-            leftSingleQuotationMark: leftSingleQuotationMarkOption,
-            rightSingleQuotationMark: rightSingleQuotationMarkOption,
-          },
-        ] = context.options;
-        const regexString = [
-          leftDoubleQuotationMarkOption ? leftDoubleQuotationMark : '',
-          rightDoubleQuotationMarkOption ? rightDoubleQuotationMark : '',
-          leftSingleQuotationMarkOption ? leftSingleQuotationMark : '',
-          rightSingleQuotationMarkOption ? rightSingleQuotationMark : '',
-        ].join('');
+        const [nodeStartOffset] = sourceCode.getRange(node);
+        const matches = sourceCode
+          .getText(node)
+          .matchAll(new RegExp(`[${regexString}]`, 'g'));
 
-        if (!regexString) return;
+        for (const match of matches) {
+          const startOffset = nodeStartOffset + match.index;
+          const endOffset = startOffset + match[0].length;
 
-        textHandler.lines.forEach(textLineNode => {
-          const matches = [
-            ...textLineNode.value.matchAll(new RegExp(`[${regexString}]`, 'g')),
-          ];
+          context.report({
+            loc: {
+              start: sourceCode.getLocFromIndex(startOffset),
+              end: sourceCode.getLocFromIndex(endOffset),
+            },
 
-          if (matches.length > 0) {
-            matches.forEach(match => {
-              const curlyQuoteLength = match[0].length;
+            messageId: 'noCurlyQuote',
 
-              const matchIndexStart = match.index;
-              const matchIndexEnd = matchIndexStart + curlyQuoteLength;
-
-              context.report({
-                loc: {
-                  start: {
-                    line: textLineNode.position.start.line,
-                    column: textLineNode.position.start.column + matchIndexStart,
-                  },
-                  end: {
-                    line: textLineNode.position.start.line,
-                    column: textLineNode.position.start.column + matchIndexEnd,
-                  },
-                },
-
-                messageId: 'noCurlyQuote',
-
-                fix(fixer) {
-                  return fixer.replaceTextRange(
-                    [
-                      textLineNode.position.start.offset + matchIndexStart,
-                      textLineNode.position.start.offset + matchIndexEnd,
-                    ],
-                    [leftDoubleQuotationMark, rightDoubleQuotationMark].includes(match[0])
-                      ? doubleQuotationMark
-                      : singleQuotationMark,
-                  );
-                },
-              });
-            });
-          }
-        });
+            fix(fixer) {
+              return fixer.replaceTextRange(
+                [startOffset, endOffset],
+                [leftDoubleQuotationMark, rightDoubleQuotationMark].includes(match[0])
+                  ? doubleQuotationMark
+                  : singleQuotationMark,
+              );
+            },
+          });
+        }
       },
     };
   },
