@@ -54,7 +54,7 @@ qux
       code: '  ',
       options: [
         {
-          multipleSpace: true,
+          checkMultipleSpace: true,
         },
       ],
     },
@@ -63,7 +63,7 @@ qux
       code: 'foo bar baz',
       options: [
         {
-          multipleSpace: true,
+          checkMultipleSpace: true,
         },
       ],
     },
@@ -72,7 +72,7 @@ qux
       code: ' foo bar baz',
       options: [
         {
-          multipleSpace: true,
+          checkMultipleSpace: true,
         },
       ],
     },
@@ -81,7 +81,7 @@ qux
       code: '  foo bar baz',
       options: [
         {
-          multipleSpace: true,
+          checkMultipleSpace: true,
         },
       ],
     },
@@ -90,7 +90,7 @@ qux
       code: '   foo bar baz',
       options: [
         {
-          multipleSpace: true,
+          checkMultipleSpace: true,
         },
       ],
     },
@@ -99,7 +99,7 @@ qux
       code: '    foo bar baz',
       options: [
         {
-          multipleSpace: true,
+          checkMultipleSpace: true,
         },
       ],
     },
@@ -108,7 +108,7 @@ qux
       code: 'foo bar baz ',
       options: [
         {
-          multipleSpace: true,
+          checkMultipleSpace: true,
         },
       ],
     },
@@ -117,7 +117,7 @@ qux
       code: 'foo bar baz  ',
       options: [
         {
-          multipleSpace: true,
+          checkMultipleSpace: true,
         },
       ],
     },
@@ -126,7 +126,7 @@ qux
       code: 'foo bar baz   ',
       options: [
         {
-          multipleSpace: true,
+          checkMultipleSpace: true,
         },
       ],
     },
@@ -135,7 +135,7 @@ qux
       code: 'foo bar baz    ',
       options: [
         {
-          multipleSpace: true,
+          checkMultipleSpace: true,
         },
       ],
     },
@@ -446,7 +446,7 @@ foo bar baz
       ],
       options: [
         {
-          multipleSpace: true,
+          checkMultipleSpace: true,
         },
       ],
     },
@@ -479,7 +479,7 @@ foo bar baz
       ],
       options: [
         {
-          multipleSpace: true,
+          checkMultipleSpace: true,
         },
       ],
     },
@@ -511,7 +511,7 @@ quux`,
       ],
       options: [
         {
-          multipleSpace: true,
+          checkMultipleSpace: true,
         },
       ],
     },

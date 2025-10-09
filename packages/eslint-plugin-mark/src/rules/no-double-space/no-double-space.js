@@ -16,7 +16,7 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
 
 /**
  * @import { RuleModule } from '../../core/types.js';
- * @typedef {[{ multipleSpace: boolean }]} RuleOptions
+ * @typedef {[{ checkMultipleSpace: boolean }]} RuleOptions
  * @typedef {'noDoubleSpace' | 'noMultipleSpace'} MessageIds
  */
 
@@ -55,7 +55,7 @@ export default {
       {
         type: 'object',
         properties: {
-          multipleSpace: {
+          checkMultipleSpace: {
             type: 'boolean',
           },
         },
@@ -65,7 +65,7 @@ export default {
 
     defaultOptions: [
       {
-        multipleSpace: false,
+        checkMultipleSpace: false,
       },
     ],
 
@@ -87,9 +87,9 @@ export default {
         const textHandler = new TextHandler(context, node);
 
         const { sourceCode } = context;
-        const [{ multipleSpace }] = context.options;
-        const spaceRegex = multipleSpace ? multipleSpaceRegex : doubleSpaceRegex;
-        const messageId = multipleSpace ? 'noMultipleSpace' : 'noDoubleSpace';
+        const [{ checkMultipleSpace }] = context.options;
+        const spaceRegex = checkMultipleSpace ? multipleSpaceRegex : doubleSpaceRegex;
+        const messageId = checkMultipleSpace ? 'noMultipleSpace' : 'noDoubleSpace';
 
         textHandler.lines.forEach(textLineNode => {
           const matches = textLineNode.value.trim().matchAll(spaceRegex);
