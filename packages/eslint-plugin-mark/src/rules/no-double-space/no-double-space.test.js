@@ -422,6 +422,55 @@ foo bar baz
         },
       ],
     },
+    {
+      name: 'Double spaces with CRLF and LF newlines',
+      code: '  hi  hi  hi  \r\n  hi  hi  hi  \n  hi  hi  hi  ',
+      output: '  hi hi hi  \r\n  hi hi hi  \n  hi hi hi  ',
+      errors: [
+        {
+          messageId: 'noDoubleSpace',
+          line: 1,
+          column: 5,
+          endLine: 1,
+          endColumn: 7,
+        },
+        {
+          messageId: 'noDoubleSpace',
+          line: 1,
+          column: 9,
+          endLine: 1,
+          endColumn: 11,
+        },
+        {
+          messageId: 'noDoubleSpace',
+          line: 2,
+          column: 5,
+          endLine: 2,
+          endColumn: 7,
+        },
+        {
+          messageId: 'noDoubleSpace',
+          line: 2,
+          column: 9,
+          endLine: 2,
+          endColumn: 11,
+        },
+        {
+          messageId: 'noDoubleSpace',
+          line: 3,
+          column: 5,
+          endLine: 3,
+          endColumn: 7,
+        },
+        {
+          messageId: 'noDoubleSpace',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 11,
+        },
+      ],
+    },
 
     // multiple spaces: single line
     {
