@@ -1,8 +1,7 @@
 <!-- markdownlint-disable-next-line no-inline-html first-line-h1 -->
 <header v-html="$frontmatter.rule"></header>
 
-<!-- eslint-disable-next-line -- TODO -->
-## Overview
+## Rule Details
 
 Invalid or irregular whitespace can cause issues with Markdown parsers and also makes code harder to debug in a similar nature to mixed tabs and spaces.
 
@@ -22,8 +21,6 @@ Known issues these spaces cause:
   - Is NOT considered a separator for tokens.
   - Is NOT shown in modern browsers making code repository software expected to resolve the visualization.
 
-## Rule Details
-
 This rule is aimed at catching invalid whitespace that is not a normal tab and space. Some of these characters may cause issues in modern browsers and others will be a debugging issue to spot.
 
 This rule disallows the following characters except where the options allow:
@@ -31,11 +28,10 @@ This rule disallows the following characters except where the options allow:
 ```txt
 \u000B - Line Tabulation (\v) - <VT>
 \u000C - Form Feed (\f) - <FF>
-\u00A0 - No-Break Space - <NBSP>
 \u0085 - Next Line - <NEL>
+\u00A0 - No-Break Space - <NBSP>
 \u1680 - Ogham Space Mark - <OGSP>
 \u180E - Mongolian Vowel Separator - <MVS>
-\ufeff - Zero Width No-Break Space - <BOM>
 \u2000 - En Quad - <NQSP>
 \u2001 - Em Quad - <MQSP>
 \u2002 - En Space - <ENSP>
@@ -51,9 +47,14 @@ This rule disallows the following characters except where the options allow:
 \u2028 - Line Separator - <LS> - <LSEP>
 \u2029 - Paragraph Separator - <PS> - <PSEP>
 \u202F - Narrow No-Break Space - <NNBSP>
-\u205f - Medium Mathematical Space - <MMSP>
+\u205F - Medium Mathematical Space - <MMSP>
 \u3000 - Ideographic Space - <IDSP>
+\uFEFF - Zero Width No-Break Space - <BOM>
 ```
+
+## Examples
+
+TODO
 
 ## Options
 
@@ -79,10 +80,6 @@ This rule disallows the following characters except where the options allow:
 ## When Not To Use It
 
 If you decide that you wish to use whitespace other than tabs and spaces outside of strings in your document.
-
-## AST
-
-This rule applies to the entire document, specifically to the [`Root`](https://github.com/syntax-tree/mdast?tab=readme-ov-file#root) node.
 
 ## Prior Art
 
