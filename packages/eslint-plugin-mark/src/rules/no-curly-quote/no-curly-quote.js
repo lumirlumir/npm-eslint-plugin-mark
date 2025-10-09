@@ -107,17 +107,17 @@ export default {
       checkLeftSingleQuotationMark ? leftSingleQuotationMark : '',
       checkRightSingleQuotationMark ? rightSingleQuotationMark : '',
     ].join('');
+    const quotationMarkRegex =
+      regexString === '' ? null : new RegExp(`[${regexString}]`, 'g');
 
     return {
       text(node) {
-        if (regexString === '') {
+        if (quotationMarkRegex === null) {
           return;
         }
 
         const [nodeStartOffset] = sourceCode.getRange(node);
-        const matches = sourceCode
-          .getText(node)
-          .matchAll(new RegExp(`[${regexString}]`, 'g'));
+        const matches = sourceCode.getText(node).matchAll(quotationMarkRegex);
 
         for (const match of matches) {
           const startOffset = nodeStartOffset + match.index;
