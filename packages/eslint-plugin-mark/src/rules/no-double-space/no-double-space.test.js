@@ -11,13 +11,6 @@ import { getFileName, ruleTester } from '../../core/tests/index.js';
 import rule from './no-double-space.js';
 
 // --------------------------------------------------------------------------------
-// Helpers
-// --------------------------------------------------------------------------------
-
-const noDoubleSpace = 'noDoubleSpace';
-const noMultipleSpace = 'noMultipleSpace';
-
-// --------------------------------------------------------------------------------
 // Test
 // --------------------------------------------------------------------------------
 
@@ -149,7 +142,7 @@ qux
       output: 'foo bar baz',
       errors: [
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 1,
           column: 4,
           endLine: 1,
@@ -163,21 +156,21 @@ qux
       output: 'foo bar baz qux',
       errors: [
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 1,
           column: 4,
           endLine: 1,
           endColumn: 6,
         },
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 1,
           column: 9,
           endLine: 1,
           endColumn: 11,
         },
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 1,
           column: 14,
           endLine: 1,
@@ -191,7 +184,7 @@ qux
       output: 'foo bar   baz',
       errors: [
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 1,
           column: 4,
           endLine: 1,
@@ -205,7 +198,7 @@ qux
       output: '  foo bar baz',
       errors: [
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 1,
           column: 6,
           endLine: 1,
@@ -219,21 +212,21 @@ qux
       output: '  foo bar baz qux',
       errors: [
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 1,
           column: 6,
           endLine: 1,
           endColumn: 8,
         },
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 1,
           column: 11,
           endLine: 1,
           endColumn: 13,
         },
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 1,
           column: 16,
           endLine: 1,
@@ -247,7 +240,7 @@ qux
       output: 'foo bar baz  ',
       errors: [
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 1,
           column: 4,
           endLine: 1,
@@ -261,21 +254,21 @@ qux
       output: 'foo bar baz qux  ',
       errors: [
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 1,
           column: 4,
           endLine: 1,
           endColumn: 6,
         },
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 1,
           column: 9,
           endLine: 1,
           endColumn: 11,
         },
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 1,
           column: 14,
           endLine: 1,
@@ -289,7 +282,7 @@ qux
       output: '  foo bar baz  ',
       errors: [
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 1,
           column: 6,
           endLine: 1,
@@ -303,21 +296,21 @@ qux
       output: '  foo bar baz qux  ',
       errors: [
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 1,
           column: 6,
           endLine: 1,
           endColumn: 8,
         },
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 1,
           column: 11,
           endLine: 1,
           endColumn: 13,
         },
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 1,
           column: 16,
           endLine: 1,
@@ -335,7 +328,7 @@ bar  baz`,
 bar baz`,
       errors: [
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 2,
           column: 4,
           endLine: 2,
@@ -353,14 +346,14 @@ bar baz
 qux quux quuz`,
       errors: [
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 2,
           column: 4,
           endLine: 2,
           endColumn: 6,
         },
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 3,
           column: 9,
           endLine: 3,
@@ -376,7 +369,7 @@ qux quux quuz`,
   bar baz`,
       errors: [
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 2,
           column: 6,
           endLine: 2,
@@ -392,7 +385,7 @@ qux quux quuz`,
   bar baz`,
       errors: [
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 1,
           column: 4,
           endLine: 1,
@@ -414,14 +407,14 @@ foo bar baz
 `,
       errors: [
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 2,
           column: 10,
           endLine: 2,
           endColumn: 12,
         },
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 3,
           column: 8,
           endLine: 3,
@@ -437,7 +430,7 @@ foo bar baz
       output: 'foo bar baz',
       errors: [
         {
-          messageId: noMultipleSpace,
+          messageId: 'noMultipleSpace',
           line: 1,
           column: 4,
           endLine: 1,
@@ -456,21 +449,21 @@ foo bar baz
       output: 'foo bar baz qux',
       errors: [
         {
-          messageId: noMultipleSpace,
+          messageId: 'noMultipleSpace',
           line: 1,
           column: 4,
           endLine: 1,
           endColumn: 6,
         },
         {
-          messageId: noMultipleSpace,
+          messageId: 'noMultipleSpace',
           line: 1,
           column: 9,
           endLine: 1,
           endColumn: 12,
         },
         {
-          messageId: noMultipleSpace,
+          messageId: 'noMultipleSpace',
           line: 1,
           column: 15,
           endLine: 1,
@@ -495,14 +488,14 @@ quux`,
 quux`,
       errors: [
         {
-          messageId: noMultipleSpace,
+          messageId: 'noMultipleSpace',
           line: 2,
           column: 6,
           endLine: 2,
           endColumn: 9,
         },
         {
-          messageId: noMultipleSpace,
+          messageId: 'noMultipleSpace',
           line: 2,
           column: 12,
           endLine: 2,
