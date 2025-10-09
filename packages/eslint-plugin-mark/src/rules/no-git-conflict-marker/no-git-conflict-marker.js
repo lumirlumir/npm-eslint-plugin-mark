@@ -11,7 +11,7 @@ import { IgnoredPositions } from '../../core/ast/index.js';
 import { URL_RULE_DOCS, ZERO_TO_ONE_BASED_OFFSET } from '../../core/constants.js';
 
 // --------------------------------------------------------------------------------
-// Typedefs
+// Typedef
 // --------------------------------------------------------------------------------
 
 /**
@@ -22,7 +22,7 @@ import { URL_RULE_DOCS, ZERO_TO_ONE_BASED_OFFSET } from '../../core/constants.js
  */
 
 // --------------------------------------------------------------------------------
-// Helpers
+// Helper
 // --------------------------------------------------------------------------------
 
 const gitConflictMarkerRegex = /^(?:<{7}(?!<)|={7}(?!=)|>{7}(?!>))/gmu;
@@ -75,50 +75,48 @@ export default {
   },
 
   create(context) {
+    const { sourceCode } = context;
     const [{ skipCode }] = context.options;
-    const { lines } = context.sourceCode;
 
     const ignoredPositions = new IgnoredPositions();
 
     return {
       code(node) {
-        if (skipCode) ignoredPositions.push(node.position); // Store position information of `Code`.
+        if (skipCode) ignoredPositions.push(sourceCode.getLoc(node)); // Store position information of `Code`.
       },
 
       'root:exit'() {
-        lines.forEach((line, lineIndex) => {
-          const matches = [...line.matchAll(gitConflictMarkerRegex)];
+        sourceCode.lines.forEach((line, lineIndex) => {
+          const matches = line.matchAll(gitConflictMarkerRegex);
 
-          if (matches.length > 0) {
-            matches.forEach(match => {
-              const gitConflictMarkerLength = match[0].length;
+          for (const match of matches) {
+            const gitConflictMarker = match[0];
 
-              const matchIndexStart = match.index;
-              const matchIndexEnd = matchIndexStart + gitConflictMarkerLength;
+            const matchIndexStart = match.index;
+            const matchIndexEnd = matchIndexStart + gitConflictMarker.length;
 
-              /** @type {Position} */
-              const loc = {
-                start: {
-                  line: lineIndex + ZERO_TO_ONE_BASED_OFFSET,
-                  column: matchIndexStart + ZERO_TO_ONE_BASED_OFFSET,
-                },
-                end: {
-                  line: lineIndex + ZERO_TO_ONE_BASED_OFFSET,
-                  column: matchIndexEnd + ZERO_TO_ONE_BASED_OFFSET,
-                },
-              };
+            /** @type {Position} */
+            const loc = {
+              start: {
+                line: lineIndex + ZERO_TO_ONE_BASED_OFFSET,
+                column: matchIndexStart + ZERO_TO_ONE_BASED_OFFSET,
+              },
+              end: {
+                line: lineIndex + ZERO_TO_ONE_BASED_OFFSET,
+                column: matchIndexEnd + ZERO_TO_ONE_BASED_OFFSET,
+              },
+            };
 
-              if (ignoredPositions.isIgnoredPosition(loc)) return;
+            if (ignoredPositions.isIgnoredPosition(loc)) return;
 
-              context.report({
-                loc,
+            context.report({
+              loc,
 
-                data: {
-                  gitConflictMarker: match[0],
-                },
+              data: {
+                gitConflictMarker,
+              },
 
-                messageId: 'noGitConflictMarker',
-              });
+              messageId: 'noGitConflictMarker',
             });
           }
         });
