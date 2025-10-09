@@ -17,8 +17,6 @@ import type {
 
 export type ParserMode = 'commonmark' | 'gfm';
 
-export type RuleContext = Parameters<MarkdownRuleDefinition['create']>[0];
-
 export type RuleModule<
   RuleOptions extends MarkdownRuleDefinitionTypeOptions['RuleOptions'],
   MessageIds extends MarkdownRuleDefinitionTypeOptions['MessageIds'],
