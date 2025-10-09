@@ -11,12 +11,6 @@ import { getFileName, ruleTester } from '../../core/tests/index.js';
 import rule from './no-git-conflict-marker.js';
 
 // --------------------------------------------------------------------------------
-// Helpers
-// --------------------------------------------------------------------------------
-
-const noGitConflictMarker = 'noGitConflictMarker';
-
-// --------------------------------------------------------------------------------
 // Test
 // --------------------------------------------------------------------------------
 
@@ -84,7 +78,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: '<<<<<<<',
       errors: [
         {
-          messageId: noGitConflictMarker,
+          messageId: 'noGitConflictMarker',
           line: 1,
           column: 1,
           endLine: 1,
@@ -97,7 +91,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: '=======',
       errors: [
         {
-          messageId: noGitConflictMarker,
+          messageId: 'noGitConflictMarker',
           line: 1,
           column: 1,
           endLine: 1,
@@ -110,7 +104,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: '>>>>>>>',
       errors: [
         {
-          messageId: noGitConflictMarker,
+          messageId: 'noGitConflictMarker',
           line: 1,
           column: 1,
           endLine: 1,
@@ -119,25 +113,52 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
     },
     {
-      name: 'Real world example',
-      code: '<<<<<<< HEAD\nHello\n=======\nWorld\n>>>>>>> ab18d2f0f5151ab0c927a12eb0a64f8170762eff',
+      name: 'Real world example (CRLF)',
+      code: '<<<<<<< HEAD\r\nHello\r\n=======\r\nWorld\r\n>>>>>>> ab18d2f0f5151ab0c927a12eb0a64f8170762eff',
       errors: [
         {
-          messageId: noGitConflictMarker,
+          messageId: 'noGitConflictMarker',
           line: 1,
           column: 1,
           endLine: 1,
           endColumn: 8,
         },
         {
-          messageId: noGitConflictMarker,
+          messageId: 'noGitConflictMarker',
           line: 3,
           column: 1,
           endLine: 3,
           endColumn: 8,
         },
         {
-          messageId: noGitConflictMarker,
+          messageId: 'noGitConflictMarker',
+          line: 5,
+          column: 1,
+          endLine: 5,
+          endColumn: 8,
+        },
+      ],
+    },
+    {
+      name: 'Real world example (LF)',
+      code: '<<<<<<< HEAD\nHello\n=======\nWorld\n>>>>>>> ab18d2f0f5151ab0c927a12eb0a64f8170762eff',
+      errors: [
+        {
+          messageId: 'noGitConflictMarker',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 8,
+        },
+        {
+          messageId: 'noGitConflictMarker',
+          line: 3,
+          column: 1,
+          endLine: 3,
+          endColumn: 8,
+        },
+        {
+          messageId: 'noGitConflictMarker',
           line: 5,
           column: 1,
           endLine: 5,
@@ -154,7 +175,7 @@ ruleTester(getFileName(import.meta.url), rule, {
 \`\`\``,
       errors: [
         {
-          messageId: noGitConflictMarker,
+          messageId: 'noGitConflictMarker',
           line: 2,
           column: 1,
           endLine: 2,
@@ -174,7 +195,7 @@ ruleTester(getFileName(import.meta.url), rule, {
 \`\`\``,
       errors: [
         {
-          messageId: noGitConflictMarker,
+          messageId: 'noGitConflictMarker',
           line: 2,
           column: 1,
           endLine: 2,
@@ -194,7 +215,7 @@ ruleTester(getFileName(import.meta.url), rule, {
 \`\`\``,
       errors: [
         {
-          messageId: noGitConflictMarker,
+          messageId: 'noGitConflictMarker',
           line: 2,
           column: 1,
           endLine: 2,
