@@ -11,13 +11,6 @@ import { getFileName, ruleTester } from '../../core/tests/index.js';
 import rule from './no-double-space.js';
 
 // --------------------------------------------------------------------------------
-// Helpers
-// --------------------------------------------------------------------------------
-
-const noDoubleSpace = 'noDoubleSpace';
-const noMultipleSpace = 'noMultipleSpace';
-
-// --------------------------------------------------------------------------------
 // Test
 // --------------------------------------------------------------------------------
 
@@ -54,7 +47,7 @@ qux
       code: '  ',
       options: [
         {
-          multipleSpace: true,
+          checkMultipleSpace: true,
         },
       ],
     },
@@ -63,7 +56,7 @@ qux
       code: 'foo bar baz',
       options: [
         {
-          multipleSpace: true,
+          checkMultipleSpace: true,
         },
       ],
     },
@@ -72,7 +65,7 @@ qux
       code: ' foo bar baz',
       options: [
         {
-          multipleSpace: true,
+          checkMultipleSpace: true,
         },
       ],
     },
@@ -81,7 +74,7 @@ qux
       code: '  foo bar baz',
       options: [
         {
-          multipleSpace: true,
+          checkMultipleSpace: true,
         },
       ],
     },
@@ -90,7 +83,7 @@ qux
       code: '   foo bar baz',
       options: [
         {
-          multipleSpace: true,
+          checkMultipleSpace: true,
         },
       ],
     },
@@ -99,7 +92,7 @@ qux
       code: '    foo bar baz',
       options: [
         {
-          multipleSpace: true,
+          checkMultipleSpace: true,
         },
       ],
     },
@@ -108,7 +101,7 @@ qux
       code: 'foo bar baz ',
       options: [
         {
-          multipleSpace: true,
+          checkMultipleSpace: true,
         },
       ],
     },
@@ -117,7 +110,7 @@ qux
       code: 'foo bar baz  ',
       options: [
         {
-          multipleSpace: true,
+          checkMultipleSpace: true,
         },
       ],
     },
@@ -126,7 +119,7 @@ qux
       code: 'foo bar baz   ',
       options: [
         {
-          multipleSpace: true,
+          checkMultipleSpace: true,
         },
       ],
     },
@@ -135,7 +128,7 @@ qux
       code: 'foo bar baz    ',
       options: [
         {
-          multipleSpace: true,
+          checkMultipleSpace: true,
         },
       ],
     },
@@ -149,7 +142,7 @@ qux
       output: 'foo bar baz',
       errors: [
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 1,
           column: 4,
           endLine: 1,
@@ -163,21 +156,21 @@ qux
       output: 'foo bar baz qux',
       errors: [
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 1,
           column: 4,
           endLine: 1,
           endColumn: 6,
         },
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 1,
           column: 9,
           endLine: 1,
           endColumn: 11,
         },
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 1,
           column: 14,
           endLine: 1,
@@ -191,7 +184,7 @@ qux
       output: 'foo bar   baz',
       errors: [
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 1,
           column: 4,
           endLine: 1,
@@ -205,7 +198,7 @@ qux
       output: '  foo bar baz',
       errors: [
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 1,
           column: 6,
           endLine: 1,
@@ -219,21 +212,21 @@ qux
       output: '  foo bar baz qux',
       errors: [
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 1,
           column: 6,
           endLine: 1,
           endColumn: 8,
         },
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 1,
           column: 11,
           endLine: 1,
           endColumn: 13,
         },
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 1,
           column: 16,
           endLine: 1,
@@ -247,7 +240,7 @@ qux
       output: 'foo bar baz  ',
       errors: [
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 1,
           column: 4,
           endLine: 1,
@@ -261,21 +254,21 @@ qux
       output: 'foo bar baz qux  ',
       errors: [
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 1,
           column: 4,
           endLine: 1,
           endColumn: 6,
         },
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 1,
           column: 9,
           endLine: 1,
           endColumn: 11,
         },
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 1,
           column: 14,
           endLine: 1,
@@ -289,7 +282,7 @@ qux
       output: '  foo bar baz  ',
       errors: [
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 1,
           column: 6,
           endLine: 1,
@@ -303,21 +296,21 @@ qux
       output: '  foo bar baz qux  ',
       errors: [
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 1,
           column: 6,
           endLine: 1,
           endColumn: 8,
         },
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 1,
           column: 11,
           endLine: 1,
           endColumn: 13,
         },
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 1,
           column: 16,
           endLine: 1,
@@ -335,7 +328,7 @@ bar  baz`,
 bar baz`,
       errors: [
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 2,
           column: 4,
           endLine: 2,
@@ -353,14 +346,14 @@ bar baz
 qux quux quuz`,
       errors: [
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 2,
           column: 4,
           endLine: 2,
           endColumn: 6,
         },
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 3,
           column: 9,
           endLine: 3,
@@ -376,7 +369,7 @@ qux quux quuz`,
   bar baz`,
       errors: [
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 2,
           column: 6,
           endLine: 2,
@@ -392,7 +385,7 @@ qux quux quuz`,
   bar baz`,
       errors: [
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 1,
           column: 4,
           endLine: 1,
@@ -414,18 +407,67 @@ foo bar baz
 `,
       errors: [
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 2,
           column: 10,
           endLine: 2,
           endColumn: 12,
         },
         {
-          messageId: noDoubleSpace,
+          messageId: 'noDoubleSpace',
           line: 3,
           column: 8,
           endLine: 3,
           endColumn: 10,
+        },
+      ],
+    },
+    {
+      name: 'Double spaces with CRLF and LF newlines',
+      code: '  hi  hi  hi  \r\n  hi  hi  hi  \n  hi  hi  hi  ',
+      output: '  hi hi hi  \r\n  hi hi hi  \n  hi hi hi  ',
+      errors: [
+        {
+          messageId: 'noDoubleSpace',
+          line: 1,
+          column: 5,
+          endLine: 1,
+          endColumn: 7,
+        },
+        {
+          messageId: 'noDoubleSpace',
+          line: 1,
+          column: 9,
+          endLine: 1,
+          endColumn: 11,
+        },
+        {
+          messageId: 'noDoubleSpace',
+          line: 2,
+          column: 5,
+          endLine: 2,
+          endColumn: 7,
+        },
+        {
+          messageId: 'noDoubleSpace',
+          line: 2,
+          column: 9,
+          endLine: 2,
+          endColumn: 11,
+        },
+        {
+          messageId: 'noDoubleSpace',
+          line: 3,
+          column: 5,
+          endLine: 3,
+          endColumn: 7,
+        },
+        {
+          messageId: 'noDoubleSpace',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 11,
         },
       ],
     },
@@ -437,7 +479,7 @@ foo bar baz
       output: 'foo bar baz',
       errors: [
         {
-          messageId: noMultipleSpace,
+          messageId: 'noMultipleSpace',
           line: 1,
           column: 4,
           endLine: 1,
@@ -446,7 +488,7 @@ foo bar baz
       ],
       options: [
         {
-          multipleSpace: true,
+          checkMultipleSpace: true,
         },
       ],
     },
@@ -456,21 +498,21 @@ foo bar baz
       output: 'foo bar baz qux',
       errors: [
         {
-          messageId: noMultipleSpace,
+          messageId: 'noMultipleSpace',
           line: 1,
           column: 4,
           endLine: 1,
           endColumn: 6,
         },
         {
-          messageId: noMultipleSpace,
+          messageId: 'noMultipleSpace',
           line: 1,
           column: 9,
           endLine: 1,
           endColumn: 12,
         },
         {
-          messageId: noMultipleSpace,
+          messageId: 'noMultipleSpace',
           line: 1,
           column: 15,
           endLine: 1,
@@ -479,7 +521,7 @@ foo bar baz
       ],
       options: [
         {
-          multipleSpace: true,
+          checkMultipleSpace: true,
         },
       ],
     },
@@ -495,14 +537,14 @@ quux`,
 quux`,
       errors: [
         {
-          messageId: noMultipleSpace,
+          messageId: 'noMultipleSpace',
           line: 2,
           column: 6,
           endLine: 2,
           endColumn: 9,
         },
         {
-          messageId: noMultipleSpace,
+          messageId: 'noMultipleSpace',
           line: 2,
           column: 12,
           endLine: 2,
@@ -511,7 +553,7 @@ quux`,
       ],
       options: [
         {
-          multipleSpace: true,
+          checkMultipleSpace: true,
         },
       ],
     },

@@ -7,26 +7,24 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { TextHandler } from '../../core/ast/index.js';
 import { URL_RULE_DOCS } from '../../core/constants.js';
 
 // --------------------------------------------------------------------------------
-// Typedefs
+// Typedef
 // --------------------------------------------------------------------------------
 
 /**
  * @import { RuleModule } from '../../core/types.js';
- * @typedef {[{ multipleSpace: boolean }]} RuleOptions
+ * @typedef {[{ checkMultipleSpace: boolean }]} RuleOptions
  * @typedef {'noDoubleSpace' | 'noMultipleSpace'} MessageIds
  */
 
 // --------------------------------------------------------------------------------
-// Helpers
+// Helper
 // --------------------------------------------------------------------------------
 
-const doubleSpaceRegex = /(?<! ) {2}(?! )/g; // Exactly two spaces. No more, no less.
-const multipleSpaceRegex = /(?<! ) {2,}(?! )/g; // More than two spaces.
-const leadingSpaceRegex = /^ */;
+const doubleSpaceRegex = /(?<=[^ \r\n]) {2}(?=[^ \r\n])/g; // Exactly two spaces. No more, no less. (lookbehind and lookahead to ensure not leading or trailing).
+const multipleSpaceRegex = /(?<=[^ \r\n]) {2,}(?=[^ \r\n])/g; // More than two spaces. (lookbehind and lookahead to ensure not leading or trailing).
 const singleSpace = ' ';
 
 // --------------------------------------------------------------------------------
@@ -55,7 +53,7 @@ export default {
       {
         type: 'object',
         properties: {
-          multipleSpace: {
+          checkMultipleSpace: {
             type: 'boolean',
           },
         },
@@ -65,7 +63,7 @@ export default {
 
     defaultOptions: [
       {
-        multipleSpace: false,
+        checkMultipleSpace: false,
       },
     ],
 
@@ -82,53 +80,34 @@ export default {
   },
 
   create(context) {
+    const { sourceCode } = context;
+    const [{ checkMultipleSpace }] = context.options;
+
+    const spaceRegex = checkMultipleSpace ? multipleSpaceRegex : doubleSpaceRegex;
+    const messageId = checkMultipleSpace ? 'noMultipleSpace' : 'noDoubleSpace';
+
     return {
       text(node) {
-        const textHandler = new TextHandler(context, node);
+        const [nodeStartOffset] = sourceCode.getRange(node);
+        const matches = sourceCode.getText(node).matchAll(spaceRegex);
 
-        const [{ multipleSpace }] = context.options;
-        const spaceRegex = multipleSpace ? multipleSpaceRegex : doubleSpaceRegex;
-        const messageId = multipleSpace ? 'noMultipleSpace' : 'noDoubleSpace';
+        for (const match of matches) {
+          const startOffset = nodeStartOffset + match.index;
+          const endOffset = startOffset + match[0].length;
 
-        textHandler.lines.forEach(textLineNode => {
-          const matches = [...textLineNode.value.trim().matchAll(spaceRegex)];
+          context.report({
+            loc: {
+              start: sourceCode.getLocFromIndex(startOffset),
+              end: sourceCode.getLocFromIndex(endOffset),
+            },
 
-          if (matches.length > 0) {
-            matches.forEach(match => {
-              const spaceLength = match[0].length;
-              const leadingSpaceLength =
-                textLineNode.value.match(leadingSpaceRegex)[0].length;
+            messageId,
 
-              const matchIndexStart = match.index + leadingSpaceLength;
-              const matchIndexEnd = matchIndexStart + spaceLength;
-
-              context.report({
-                loc: {
-                  start: {
-                    line: textLineNode.position.start.line,
-                    column: textLineNode.position.start.column + matchIndexStart,
-                  },
-                  end: {
-                    line: textLineNode.position.start.line,
-                    column: textLineNode.position.start.column + matchIndexEnd,
-                  },
-                },
-
-                messageId,
-
-                fix(fixer) {
-                  return fixer.replaceTextRange(
-                    [
-                      textLineNode.position.start.offset + matchIndexStart,
-                      textLineNode.position.start.offset + matchIndexEnd,
-                    ],
-                    singleSpace,
-                  );
-                },
-              });
-            });
-          }
-        });
+            fix(fixer) {
+              return fixer.replaceTextRange([startOffset, endOffset], singleSpace);
+            },
+          });
+        }
       },
     };
   },
