@@ -24,9 +24,8 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
 // Helpers
 // --------------------------------------------------------------------------------
 
-const doubleSpaceRegex = /(?<! ) {2}(?! )/g; // Exactly two spaces. No more, no less.
-const multipleSpaceRegex = /(?<! ) {2,}(?! )/g; // More than two spaces.
-const leadingSpaceRegex = /^ */;
+const doubleSpaceRegex = /(?<=[^ \r\n]) {2}(?=[^ \r\n])/g; // Exactly two spaces. No more, no less.
+const multipleSpaceRegex = /(?<=[^ \r\n]) {2,}(?=[^ \r\n])/g; // More than two spaces.
 const singleSpace = ' ';
 
 // --------------------------------------------------------------------------------
@@ -92,15 +91,12 @@ export default {
         const messageId = checkMultipleSpace ? 'noMultipleSpace' : 'noDoubleSpace';
 
         textHandler.lines.forEach(textLineNode => {
-          const matches = textLineNode.value.trim().matchAll(spaceRegex);
+          const matches = textLineNode.value.matchAll(spaceRegex);
 
           for (const match of matches) {
             const spaceLength = match[0].length;
-            const leadingSpaceLength =
-              textLineNode.value.match(leadingSpaceRegex)[0].length;
 
-            const startOffset = // Adjust regex match index to the full source code.
-              leadingSpaceLength + match.index + textLineNode.position.start.offset;
+            const startOffset = match.index + textLineNode.position.start.offset;
             const endOffset = startOffset + spaceLength;
 
             context.report({
