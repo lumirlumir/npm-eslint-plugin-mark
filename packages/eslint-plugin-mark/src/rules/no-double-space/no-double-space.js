@@ -7,11 +7,10 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { TextHandler } from '../../core/ast/index.js';
 import { URL_RULE_DOCS } from '../../core/constants.js';
 
 // --------------------------------------------------------------------------------
-// Typedefs
+// Typedef
 // --------------------------------------------------------------------------------
 
 /**
@@ -21,11 +20,11 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
  */
 
 // --------------------------------------------------------------------------------
-// Helpers
+// Helper
 // --------------------------------------------------------------------------------
 
-const doubleSpaceRegex = /(?<=[^ \r\n]) {2}(?=[^ \r\n])/g; // Exactly two spaces. No more, no less.
-const multipleSpaceRegex = /(?<=[^ \r\n]) {2,}(?=[^ \r\n])/g; // More than two spaces.
+const doubleSpaceRegex = /(?<=[^ \r\n]) {2}(?=[^ \r\n])/g; // Exactly two spaces. No more, no less. (lookbehind and lookahead to ensure not leading or trailing).
+const multipleSpaceRegex = /(?<=[^ \r\n]) {2,}(?=[^ \r\n])/g; // More than two spaces. (lookbehind and lookahead to ensure not leading or trailing).
 const singleSpace = ' ';
 
 // --------------------------------------------------------------------------------
@@ -89,29 +88,26 @@ export default {
 
     return {
       text(node) {
-        const textHandler = new TextHandler(context, node);
+        const [nodeStartOffset] = sourceCode.getRange(node);
+        const matches = sourceCode.getText(node).matchAll(spaceRegex);
 
-        textHandler.lines.forEach(textLineNode => {
-          const matches = textLineNode.value.matchAll(spaceRegex);
+        for (const match of matches) {
+          const startOffset = nodeStartOffset + match.index;
+          const endOffset = startOffset + match[0].length;
 
-          for (const match of matches) {
-            const startOffset = match.index + textLineNode.position.start.offset;
-            const endOffset = startOffset + match[0].length;
+          context.report({
+            loc: {
+              start: sourceCode.getLocFromIndex(startOffset),
+              end: sourceCode.getLocFromIndex(endOffset),
+            },
 
-            context.report({
-              loc: {
-                start: sourceCode.getLocFromIndex(startOffset),
-                end: sourceCode.getLocFromIndex(endOffset),
-              },
+            messageId,
 
-              messageId,
-
-              fix(fixer) {
-                return fixer.replaceTextRange([startOffset, endOffset], singleSpace);
-              },
-            });
-          }
-        });
+            fix(fixer) {
+              return fixer.replaceTextRange([startOffset, endOffset], singleSpace);
+            },
+          });
+        }
       },
     };
   },
