@@ -11,12 +11,6 @@ import { getFileName, ruleTester } from '../../core/tests/index.js';
 import rule from './no-curly-quote.js';
 
 // --------------------------------------------------------------------------------
-// Helpers
-// --------------------------------------------------------------------------------
-
-const noCurlyQuote = 'noCurlyQuote';
-
-// --------------------------------------------------------------------------------
 // Test
 // --------------------------------------------------------------------------------
 
@@ -34,10 +28,10 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: '',
       options: [
         {
-          leftDoubleQuotationMark: false,
-          rightDoubleQuotationMark: false,
-          leftSingleQuotationMark: false,
-          rightSingleQuotationMark: false,
+          checkLeftDoubleQuotationMark: false,
+          checkRightDoubleQuotationMark: false,
+          checkLeftSingleQuotationMark: false,
+          checkRightSingleQuotationMark: false,
         },
       ],
     },
@@ -46,10 +40,22 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: ' ',
       options: [
         {
-          leftDoubleQuotationMark: false,
-          rightDoubleQuotationMark: false,
-          leftSingleQuotationMark: false,
-          rightSingleQuotationMark: false,
+          checkLeftDoubleQuotationMark: false,
+          checkRightDoubleQuotationMark: false,
+          checkLeftSingleQuotationMark: false,
+          checkRightSingleQuotationMark: false,
+        },
+      ],
+    },
+    {
+      name: 'Quotes with all options disabled',
+      code: '\u201C\u201D\u2018\u2019',
+      options: [
+        {
+          checkLeftDoubleQuotationMark: false,
+          checkRightDoubleQuotationMark: false,
+          checkLeftSingleQuotationMark: false,
+          checkRightSingleQuotationMark: false,
         },
       ],
     },
@@ -58,7 +64,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: '“',
       options: [
         {
-          leftDoubleQuotationMark: false,
+          checkLeftDoubleQuotationMark: false,
         },
       ],
     },
@@ -67,7 +73,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: '”',
       options: [
         {
-          rightDoubleQuotationMark: false,
+          checkRightDoubleQuotationMark: false,
         },
       ],
     },
@@ -76,7 +82,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: '‘',
       options: [
         {
-          leftSingleQuotationMark: false,
+          checkLeftSingleQuotationMark: false,
         },
       ],
     },
@@ -85,7 +91,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: '’',
       options: [
         {
-          rightSingleQuotationMark: false,
+          checkRightSingleQuotationMark: false,
         },
       ],
     },
@@ -98,7 +104,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       output: '"',
       errors: [
         {
-          messageId: noCurlyQuote,
+          messageId: 'noCurlyQuote',
           line: 1,
           column: 1,
           endLine: 1,
@@ -112,7 +118,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       output: '"',
       errors: [
         {
-          messageId: noCurlyQuote,
+          messageId: 'noCurlyQuote',
           line: 1,
           column: 1,
           endLine: 1,
@@ -126,7 +132,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       output: "'",
       errors: [
         {
-          messageId: noCurlyQuote,
+          messageId: 'noCurlyQuote',
           line: 1,
           column: 1,
           endLine: 1,
@@ -140,7 +146,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       output: "'",
       errors: [
         {
-          messageId: noCurlyQuote,
+          messageId: 'noCurlyQuote',
           line: 1,
           column: 1,
           endLine: 1,
@@ -154,7 +160,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       output: '" foo',
       errors: [
         {
-          messageId: noCurlyQuote,
+          messageId: 'noCurlyQuote',
           line: 1,
           column: 1,
           endLine: 1,
@@ -168,7 +174,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       output: '" foo',
       errors: [
         {
-          messageId: noCurlyQuote,
+          messageId: 'noCurlyQuote',
           line: 1,
           column: 1,
           endLine: 1,
@@ -182,7 +188,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       output: "' foo",
       errors: [
         {
-          messageId: noCurlyQuote,
+          messageId: 'noCurlyQuote',
           line: 1,
           column: 1,
           endLine: 1,
@@ -196,7 +202,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       output: "' foo",
       errors: [
         {
-          messageId: noCurlyQuote,
+          messageId: 'noCurlyQuote',
           line: 1,
           column: 1,
           endLine: 1,
@@ -214,56 +220,56 @@ ruleTester(getFileName(import.meta.url), rule, {
 '  '`,
       errors: [
         {
-          messageId: noCurlyQuote,
+          messageId: 'noCurlyQuote',
           line: 1,
           column: 1,
           endLine: 1,
           endColumn: 2,
         },
         {
-          messageId: noCurlyQuote,
+          messageId: 'noCurlyQuote',
           line: 1,
           column: 5,
           endLine: 1,
           endColumn: 6,
         },
         {
-          messageId: noCurlyQuote,
+          messageId: 'noCurlyQuote',
           line: 1,
           column: 7,
           endLine: 1,
           endColumn: 8,
         },
         {
-          messageId: noCurlyQuote,
+          messageId: 'noCurlyQuote',
           line: 1,
           column: 11,
           endLine: 1,
           endColumn: 12,
         },
         {
-          messageId: noCurlyQuote,
+          messageId: 'noCurlyQuote',
           line: 2,
           column: 3,
           endLine: 2,
           endColumn: 4,
         },
         {
-          messageId: noCurlyQuote,
+          messageId: 'noCurlyQuote',
           line: 2,
           column: 6,
           endLine: 2,
           endColumn: 7,
         },
         {
-          messageId: noCurlyQuote,
+          messageId: 'noCurlyQuote',
           line: 3,
           column: 1,
           endLine: 3,
           endColumn: 2,
         },
         {
-          messageId: noCurlyQuote,
+          messageId: 'noCurlyQuote',
           line: 3,
           column: 4,
           endLine: 3,
