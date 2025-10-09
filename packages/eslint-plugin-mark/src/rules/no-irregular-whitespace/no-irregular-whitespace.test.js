@@ -11,12 +11,6 @@ import { getFileName, ruleTester } from '../../core/tests/index.js';
 import rule from './no-irregular-whitespace.js';
 
 // --------------------------------------------------------------------------------
-// Helpers
-// --------------------------------------------------------------------------------
-
-const noIrregularWhitespace = 'noIrregularWhitespace';
-
-// --------------------------------------------------------------------------------
 // Test
 // --------------------------------------------------------------------------------
 
@@ -62,168 +56,168 @@ console.log(\u200b'Hello World');
 1\u205f2\u30003\u20284\u2029`,
       errors: [
         {
-          messageId: noIrregularWhitespace,
+          messageId: 'noIrregularWhitespace',
           line: 2,
           column: 2,
           endLine: 2,
           endColumn: 3,
         },
         {
-          messageId: noIrregularWhitespace,
+          messageId: 'noIrregularWhitespace',
           line: 2,
           column: 4,
           endLine: 2,
           endColumn: 5,
         },
         {
-          messageId: noIrregularWhitespace,
+          messageId: 'noIrregularWhitespace',
           line: 2,
           column: 6,
           endLine: 2,
           endColumn: 7,
         },
         {
-          messageId: noIrregularWhitespace,
+          messageId: 'noIrregularWhitespace',
           line: 2,
           column: 8,
           endLine: 2,
           endColumn: 9,
         },
         {
-          messageId: noIrregularWhitespace,
+          messageId: 'noIrregularWhitespace',
           line: 2,
           column: 10,
           endLine: 2,
           endColumn: 11,
         },
         {
-          messageId: noIrregularWhitespace,
+          messageId: 'noIrregularWhitespace',
           line: 2,
           column: 12,
           endLine: 2,
           endColumn: 13,
         },
         {
-          messageId: noIrregularWhitespace,
+          messageId: 'noIrregularWhitespace',
           line: 2,
           column: 14,
           endLine: 2,
           endColumn: 15,
         },
         {
-          messageId: noIrregularWhitespace,
+          messageId: 'noIrregularWhitespace',
           line: 2,
           column: 16,
           endLine: 2,
           endColumn: 17,
         },
         {
-          messageId: noIrregularWhitespace,
+          messageId: 'noIrregularWhitespace',
           line: 2,
           column: 18,
           endLine: 2,
           endColumn: 19,
         },
         {
-          messageId: noIrregularWhitespace,
+          messageId: 'noIrregularWhitespace',
           line: 2,
           column: 20,
           endLine: 2,
           endColumn: 21,
         },
         {
-          messageId: noIrregularWhitespace,
+          messageId: 'noIrregularWhitespace',
           line: 3,
           column: 2,
           endLine: 3,
           endColumn: 3,
         },
         {
-          messageId: noIrregularWhitespace,
+          messageId: 'noIrregularWhitespace',
           line: 3,
           column: 4,
           endLine: 3,
           endColumn: 5,
         },
         {
-          messageId: noIrregularWhitespace,
+          messageId: 'noIrregularWhitespace',
           line: 3,
           column: 6,
           endLine: 3,
           endColumn: 7,
         },
         {
-          messageId: noIrregularWhitespace,
+          messageId: 'noIrregularWhitespace',
           line: 3,
           column: 8,
           endLine: 3,
           endColumn: 9,
         },
         {
-          messageId: noIrregularWhitespace,
+          messageId: 'noIrregularWhitespace',
           line: 3,
           column: 10,
           endLine: 3,
           endColumn: 11,
         },
         {
-          messageId: noIrregularWhitespace,
+          messageId: 'noIrregularWhitespace',
           line: 3,
           column: 12,
           endLine: 3,
           endColumn: 13,
         },
         {
-          messageId: noIrregularWhitespace,
+          messageId: 'noIrregularWhitespace',
           line: 3,
           column: 14,
           endLine: 3,
           endColumn: 15,
         },
         {
-          messageId: noIrregularWhitespace,
+          messageId: 'noIrregularWhitespace',
           line: 3,
           column: 16,
           endLine: 3,
           endColumn: 17,
         },
         {
-          messageId: noIrregularWhitespace,
+          messageId: 'noIrregularWhitespace',
           line: 3,
           column: 18,
           endLine: 3,
           endColumn: 19,
         },
         {
-          messageId: noIrregularWhitespace,
+          messageId: 'noIrregularWhitespace',
           line: 3,
           column: 20,
           endLine: 3,
           endColumn: 21,
         },
         {
-          messageId: noIrregularWhitespace,
+          messageId: 'noIrregularWhitespace',
           line: 4,
           column: 2,
           endLine: 4,
           endColumn: 3,
         },
         {
-          messageId: noIrregularWhitespace,
+          messageId: 'noIrregularWhitespace',
           line: 4,
           column: 4,
           endLine: 4,
           endColumn: 5,
         },
         {
-          messageId: noIrregularWhitespace,
+          messageId: 'noIrregularWhitespace',
           line: 4,
           column: 6,
           endLine: 4,
           endColumn: 7,
         },
         {
-          messageId: noIrregularWhitespace,
+          messageId: 'noIrregularWhitespace',
           line: 4,
           column: 8,
           endLine: 4,
@@ -241,7 +235,7 @@ console.log(\u200b'Hello World');
 \`\`\``,
       errors: [
         {
-          messageId: noIrregularWhitespace,
+          messageId: 'noIrregularWhitespace',
           line: 3,
           column: 13,
           endLine: 3,
@@ -259,7 +253,7 @@ console.log(\u200b'Hello World');
       code: "`console.log(\u200b'Hello World')`",
       errors: [
         {
-          messageId: noIrregularWhitespace,
+          messageId: 'noIrregularWhitespace',
           line: 1,
           column: 14,
           endLine: 1,
