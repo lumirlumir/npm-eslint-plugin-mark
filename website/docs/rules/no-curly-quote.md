@@ -3,9 +3,11 @@
 
 ## Rule Details
 
-The purpose of this rule is to allow the use of ASCII characters in the editor and optionally convert them to curly symbols during rendering, using a parser that supports this feature, such as the Typographer extension of [Goldmark](https://github.com/yuin/goldmark) or [SmartyPants](https://daringfireball.net/projects/smartypants/).
+The purpose of this rule is to keep authoring sources restricted to plain ASCII quotes (`"` and `'`) while still allowing a downstream rendering layer (e.g. a Markdown processor with a typographic / "smart quotes" feature such as the Typographer extension of [Goldmark](https://github.com/yuin/goldmark#readme) or [SmartyPants](https://daringfireball.net/projects/smartypants/)) to convert them into curly (typographic) quotes for presentation if desired.
 
-In addition, curly quotes (`“` `\u201C`, `”` `\u201D`, `‘` `\u2018` or `’` `\u2019`), which are often introduced by word processors like Word, Google Docs, and Pages, can cause unwanted issues in code and markup. Especially in non-monospaced fonts, it can be difficult to distinguish curly quotes from straight ones, leading to potential errors.
+Curly quotes (`“` `\u201C`, `”` `\u201D`, `‘` `\u2018`, `’` `\u2019`) are frequently and unintentionally introduced through copy-and-paste from word processors (Word, Google Docs, Pages) or rich-text/WYSIWYG editors, as well as AI-generated text (e.g. large language model outputs) which often emits curly quotes by default.
+
+In source form-especially with non-monospaced fonts-these characters can be visually subtle, making it harder to notice accidental inconsistencies and increasing the risk of errors in code examples, configuration snippets, or markup fragments.
 
 By applying this rule, you can prevent unintended curly quotes and keep your code clean and consistent.
 
@@ -17,29 +19,23 @@ Examples of **incorrect** code for this rule:
 
 #### Default
 
-::: code-group
+```md eslint-check
+<!-- eslint mark/no-curly-quote: "error" -->
 
-```md [incorrect.md] /“/ /”/ /‘/ /’/
 “foo bar”
-
 ‘foo bar’
-
 “foo ‘bar baz’ qux”
 ```
 
-```js [eslint.config.mjs] {5}
-export default [
-  // ...
-  {
-    rules: {
-      'mark/no-curly-quote': 'error', // [!code focus]
-    },
-  },
-  // ...
-];
-```
+#### With `{ checkLeftDoubleQuotationMark: false }` Option
 
-:::
+```md eslint-check
+<!-- eslint mark/no-curly-quote: ["error", { checkLeftDoubleQuotationMark: false }] -->
+
+“foo bar”
+‘foo bar’
+“foo ‘bar baz’ qux”
+```
 
 ### :white_check_mark: Correct {#correct}
 
@@ -47,73 +43,53 @@ Examples of **correct** code for this rule:
 
 #### Default
 
-::: code-group
+```md eslint-check
+<!-- eslint mark/no-curly-quote: "error" -->
 
-```md [correct.md]
 "foo bar"
-
 'foo bar'
-
 "foo 'bar baz' qux"
 ```
-
-```js [eslint.config.mjs] {5}
-export default [
-  // ...
-  {
-    rules: {
-      'mark/no-curly-quote': 'error', // [!code focus]
-    },
-  },
-  // ...
-];
-```
-
-:::
 
 ## Options
 
 ```js
 'mark/no-curly-quote': ['error', {
-  leftDoubleQuotationMark: true,
-  rightDoubleQuotationMark: true,
-  leftSingleQuotationMark: true,
-  rightSingleQuotationMark: true,
+  checkLeftDoubleQuotationMark: true,
+  checkRightDoubleQuotationMark: true,
+  checkLeftSingleQuotationMark: true,
+  checkRightSingleQuotationMark: true,
 }]
 ```
 
-### `leftDoubleQuotationMark`
+### `checkLeftDoubleQuotationMark`
 
 > Default: `true`
 
-When `leftDoubleQuotationMark` is set to `false`, this rule will not check for the left double quotation mark (`“`).
+When `checkLeftDoubleQuotationMark` is set to `false`, this rule will not check for the left double quotation mark (`“`).
 
-### `rightDoubleQuotationMark`
-
-> Default: `true`
-
-When `rightDoubleQuotationMark` is set to `false`, this rule will not check for the right double quotation mark (`”`).
-
-### `leftSingleQuotationMark`
+### `checkRightDoubleQuotationMark`
 
 > Default: `true`
 
-When `leftSingleQuotationMark` is set to `false`, this rule will not check for the left single quotation mark (`‘`).
+When `checkRightDoubleQuotationMark` is set to `false`, this rule will not check for the right double quotation mark (`”`).
 
-### `rightSingleQuotationMark`
+### `checkLeftSingleQuotationMark`
 
 > Default: `true`
 
-When `rightSingleQuotationMark` is set to `false`, this rule will not check for the right single quotation mark (`’`).
+When `checkLeftSingleQuotationMark` is set to `false`, this rule will not check for the left single quotation mark (`‘`).
+
+### `checkRightSingleQuotationMark`
+
+> Default: `true`
+
+When `checkRightSingleQuotationMark` is set to `false`, this rule will not check for the right single quotation mark (`’`).
 
 ## Fix
 
 This rule fixes the curly quotes by replacing them with straight quotes.
 
-## AST
-
-This rule applies only to the [`Text`](https://github.com/syntax-tree/mdast?tab=readme-ov-file#text) node.
-
 ## Prior Art
 
-- [textlint-rule-no-curly-quotes](https://github.com/aborazmeh/textlint-rule-no-curly-quotes)
+- [textlint-rule-no-curly-quotes](https://github.com/aborazmeh/textlint-rule-no-curly-quotes#readme)

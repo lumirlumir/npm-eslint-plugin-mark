@@ -7,21 +7,20 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { TextHandler } from '../../core/ast/index.js';
 import { URL_RULE_DOCS } from '../../core/constants.js';
 
 // --------------------------------------------------------------------------------
-// Typedefs
+// Typedef
 // --------------------------------------------------------------------------------
 
 /**
  * @import { RuleModule } from '../../core/types.js';
- * @typedef {[{ leftDoubleQuotationMark: boolean, rightDoubleQuotationMark: boolean, leftSingleQuotationMark: boolean, rightSingleQuotationMark: boolean }]} RuleOptions
+ * @typedef {[{ checkLeftDoubleQuotationMark: boolean, checkRightDoubleQuotationMark: boolean, checkLeftSingleQuotationMark: boolean, checkRightSingleQuotationMark: boolean }]} RuleOptions
  * @typedef {'noCurlyQuote'} MessageIds
  */
 
 // --------------------------------------------------------------------------------
-// Helpers
+// Helper
 // --------------------------------------------------------------------------------
 
 const leftDoubleQuotationMark = '\u201C'; // `“`
@@ -56,16 +55,16 @@ export default {
       {
         type: 'object',
         properties: {
-          leftDoubleQuotationMark: {
+          checkLeftDoubleQuotationMark: {
             type: 'boolean',
           },
-          rightDoubleQuotationMark: {
+          checkRightDoubleQuotationMark: {
             type: 'boolean',
           },
-          leftSingleQuotationMark: {
+          checkLeftSingleQuotationMark: {
             type: 'boolean',
           },
-          rightSingleQuotationMark: {
+          checkRightSingleQuotationMark: {
             type: 'boolean',
           },
         },
@@ -75,10 +74,10 @@ export default {
 
     defaultOptions: [
       {
-        leftDoubleQuotationMark: true,
-        rightDoubleQuotationMark: true,
-        leftSingleQuotationMark: true,
-        rightSingleQuotationMark: true,
+        checkLeftDoubleQuotationMark: true,
+        checkRightDoubleQuotationMark: true,
+        checkLeftSingleQuotationMark: true,
+        checkRightSingleQuotationMark: true,
       },
     ],
 
@@ -93,68 +92,55 @@ export default {
   },
 
   create(context) {
+    const { sourceCode } = context;
+    const [
+      {
+        checkLeftDoubleQuotationMark,
+        checkRightDoubleQuotationMark,
+        checkLeftSingleQuotationMark,
+        checkRightSingleQuotationMark,
+      },
+    ] = context.options;
+    const regexString = [
+      checkLeftDoubleQuotationMark ? leftDoubleQuotationMark : '',
+      checkRightDoubleQuotationMark ? rightDoubleQuotationMark : '',
+      checkLeftSingleQuotationMark ? leftSingleQuotationMark : '',
+      checkRightSingleQuotationMark ? rightSingleQuotationMark : '',
+    ].join('');
+    const quotationMarkRegex =
+      regexString === '' ? null : new RegExp(`[${regexString}]`, 'g');
+
     return {
       text(node) {
-        const textHandler = new TextHandler(context, node);
+        if (quotationMarkRegex === null) {
+          return;
+        }
 
-        const [
-          {
-            leftDoubleQuotationMark: leftDoubleQuotationMarkOption,
-            rightDoubleQuotationMark: rightDoubleQuotationMarkOption,
-            leftSingleQuotationMark: leftSingleQuotationMarkOption,
-            rightSingleQuotationMark: rightSingleQuotationMarkOption,
-          },
-        ] = context.options;
-        const regexString = [
-          leftDoubleQuotationMarkOption ? leftDoubleQuotationMark : '',
-          rightDoubleQuotationMarkOption ? rightDoubleQuotationMark : '',
-          leftSingleQuotationMarkOption ? leftSingleQuotationMark : '',
-          rightSingleQuotationMarkOption ? rightSingleQuotationMark : '',
-        ].join('');
+        const [nodeStartOffset] = sourceCode.getRange(node);
+        const matches = sourceCode.getText(node).matchAll(quotationMarkRegex);
 
-        if (!regexString) return;
+        for (const match of matches) {
+          const startOffset = nodeStartOffset + match.index;
+          const endOffset = startOffset + match[0].length;
 
-        textHandler.lines.forEach(textLineNode => {
-          const matches = [
-            ...textLineNode.value.matchAll(new RegExp(`[${regexString}]`, 'g')),
-          ];
+          context.report({
+            loc: {
+              start: sourceCode.getLocFromIndex(startOffset),
+              end: sourceCode.getLocFromIndex(endOffset),
+            },
 
-          if (matches.length > 0) {
-            matches.forEach(match => {
-              const curlyQuoteLength = match[0].length;
+            messageId: 'noCurlyQuote',
 
-              const matchIndexStart = match.index;
-              const matchIndexEnd = matchIndexStart + curlyQuoteLength;
-
-              context.report({
-                loc: {
-                  start: {
-                    line: textLineNode.position.start.line,
-                    column: textLineNode.position.start.column + matchIndexStart,
-                  },
-                  end: {
-                    line: textLineNode.position.start.line,
-                    column: textLineNode.position.start.column + matchIndexEnd,
-                  },
-                },
-
-                messageId: 'noCurlyQuote',
-
-                fix(fixer) {
-                  return fixer.replaceTextRange(
-                    [
-                      textLineNode.position.start.offset + matchIndexStart,
-                      textLineNode.position.start.offset + matchIndexEnd,
-                    ],
-                    [leftDoubleQuotationMark, rightDoubleQuotationMark].includes(match[0])
-                      ? doubleQuotationMark
-                      : singleQuotationMark,
-                  );
-                },
-              });
-            });
-          }
-        });
+            fix(fixer) {
+              return fixer.replaceTextRange(
+                [startOffset, endOffset],
+                [leftDoubleQuotationMark, rightDoubleQuotationMark].includes(match[0])
+                  ? doubleQuotationMark
+                  : singleQuotationMark,
+              );
+            },
+          });
+        }
       },
     };
   },
