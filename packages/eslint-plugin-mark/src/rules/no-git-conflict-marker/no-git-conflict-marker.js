@@ -8,7 +8,7 @@
 // --------------------------------------------------------------------------------
 
 import { IgnoredPositions } from '../../core/ast/index.js';
-import { URL_RULE_DOCS, ZERO_TO_ONE_BASED_OFFSET } from '../../core/constants.js';
+import { URL_RULE_DOCS } from '../../core/constants.js';
 
 // --------------------------------------------------------------------------------
 // Typedef
@@ -86,40 +86,32 @@ export default {
       },
 
       'root:exit'() {
-        sourceCode.lines.forEach((line, lineIndex) => {
-          const matches = line.matchAll(gitConflictMarkerRegex);
+        const matches = sourceCode.text.matchAll(gitConflictMarkerRegex);
 
-          for (const match of matches) {
-            const gitConflictMarker = match[0];
+        for (const match of matches) {
+          const gitConflictMarker = match[0];
 
-            const matchIndexStart = match.index;
-            const matchIndexEnd = matchIndexStart + gitConflictMarker.length;
+          const startOffset = match.index;
+          const endOffset = startOffset + gitConflictMarker.length;
 
-            /** @type {Position} */
-            const loc = {
-              start: {
-                line: lineIndex + ZERO_TO_ONE_BASED_OFFSET,
-                column: matchIndexStart + ZERO_TO_ONE_BASED_OFFSET,
-              },
-              end: {
-                line: lineIndex + ZERO_TO_ONE_BASED_OFFSET,
-                column: matchIndexEnd + ZERO_TO_ONE_BASED_OFFSET,
-              },
-            };
+          /** @type {Position} */
+          const loc = {
+            start: sourceCode.getLocFromIndex(startOffset),
+            end: sourceCode.getLocFromIndex(endOffset),
+          };
 
-            if (ignoredPositions.isIgnoredPosition(loc)) return;
+          if (ignoredPositions.isIgnoredPosition(loc)) return;
 
-            context.report({
-              loc,
+          context.report({
+            loc,
 
-              data: {
-                gitConflictMarker,
-              },
+            data: {
+              gitConflictMarker,
+            },
 
-              messageId: 'noGitConflictMarker',
-            });
-          }
-        });
+            messageId: 'noGitConflictMarker',
+          });
+        }
       },
     };
   },
