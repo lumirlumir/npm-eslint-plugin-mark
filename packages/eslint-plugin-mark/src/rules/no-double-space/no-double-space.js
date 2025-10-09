@@ -81,23 +81,22 @@ export default {
   },
 
   create(context) {
+    const { sourceCode } = context;
+    const [{ checkMultipleSpace }] = context.options;
+
+    const spaceRegex = checkMultipleSpace ? multipleSpaceRegex : doubleSpaceRegex;
+    const messageId = checkMultipleSpace ? 'noMultipleSpace' : 'noDoubleSpace';
+
     return {
       text(node) {
         const textHandler = new TextHandler(context, node);
-
-        const { sourceCode } = context;
-        const [{ checkMultipleSpace }] = context.options;
-        const spaceRegex = checkMultipleSpace ? multipleSpaceRegex : doubleSpaceRegex;
-        const messageId = checkMultipleSpace ? 'noMultipleSpace' : 'noDoubleSpace';
 
         textHandler.lines.forEach(textLineNode => {
           const matches = textLineNode.value.matchAll(spaceRegex);
 
           for (const match of matches) {
-            const spaceLength = match[0].length;
-
             const startOffset = match.index + textLineNode.position.start.offset;
-            const endOffset = startOffset + spaceLength;
+            const endOffset = startOffset + match[0].length;
 
             context.report({
               loc: {
