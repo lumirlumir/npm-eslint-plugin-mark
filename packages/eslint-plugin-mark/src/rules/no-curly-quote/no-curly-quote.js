@@ -110,7 +110,7 @@ export default {
 
     return {
       text(node) {
-        if (!regexString) {
+        if (regexString === '') {
           return;
         }
 

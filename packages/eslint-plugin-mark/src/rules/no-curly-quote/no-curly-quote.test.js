@@ -54,6 +54,18 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
     },
     {
+      name: 'Quotes with all options disabled',
+      code: '\u201C\u201D\u2018\u2019',
+      options: [
+        {
+          checkLeftDoubleQuotationMark: false,
+          checkRightDoubleQuotationMark: false,
+          checkLeftSingleQuotationMark: false,
+          checkRightSingleQuotationMark: false,
+        },
+      ],
+    },
+    {
       name: 'Disable left double quotation mark',
       code: '“',
       options: [
