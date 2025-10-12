@@ -15,7 +15,6 @@ build
 coverage
 
 # package
-lerna.json
 package-lock.json
 
 # markdown

@@ -1,7 +1,6 @@
 {
   "private": true,
   "name": "website",
-  "version": "0.1.0-canary.8",
   "type": "module",
   "scripts": {
     "dev": "npx vitepress --open --host",

@@ -1,7 +1,6 @@
 {
   "private": true,
   "name": "tests-integration",
-  "version": "0.1.0-canary.8",
   "type": "module",
   "scripts": {
     "test": "node --test"
