@@ -46,7 +46,7 @@
     "eslint-config-bananass": "^0.5.1",
     "eslint-plugin-mark": "^0.1.0-canary.8",
     "husky": "^9.1.7",
-    "lint-staged": "^16.2.3",
+    "lint-staged": "^16.2.4",
     "markdownlint-cli": "^0.45.0",
     "npm-run-all2": "^8.0.4",
     "prettier": "^3.6.2",
