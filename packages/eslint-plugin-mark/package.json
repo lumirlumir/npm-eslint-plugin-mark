@@ -83,7 +83,7 @@
   },
   "dependencies": {
     "@eslint/markdown": "^7.4.0",
-    "emoji-regex": "^10.5.0",
+    "emoji-regex": "^10.6.0",
     "parse5": "^8.0.0"
   },
   "devDependencies": {
