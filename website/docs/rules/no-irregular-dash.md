@@ -51,7 +51,3 @@ This rule disallows the following characters except where the options allow:
 ## When Not To Use It
 
 If you deliberately want to use typographically correct dash characters in your Markdown documents, such as em dashes for parenthetical statements or en dashes for ranges, you may want to disable this rule.
-
-## AST
-
-This rule applies to the entire document, specifically to the [`Root`](https://github.com/syntax-tree/mdast?tab=readme-ov-file#root) node.

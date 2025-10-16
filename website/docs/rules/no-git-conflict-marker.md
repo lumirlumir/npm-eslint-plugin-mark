@@ -66,7 +66,3 @@ Examples of **correct** code for this rule:
 > Default: `true`
 
 `true` allows any Git conflict markers in code blocks.
-
-## AST
-
-This rule applies to the entire document, specifically to the [`Root`](https://github.com/syntax-tree/mdast?tab=readme-ov-file#root) node.
