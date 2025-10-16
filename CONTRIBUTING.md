@@ -1,6 +1,6 @@
 # Contributing
 
-This repository uses [`npm workspaces`](https://docs.npmjs.com/cli/using-npm/workspaces) and [`lerna`](https://lerna.js.org/) to maintain a **monorepo**.
+This repository uses [`npm workspaces`](https://docs.npmjs.com/cli/using-npm/workspaces) to maintain a **monorepo**.
 
 ## Directory Structure
 

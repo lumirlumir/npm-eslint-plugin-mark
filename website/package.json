@@ -1,7 +1,6 @@
 {
   "private": true,
   "name": "website",
-  "version": "0.1.0-canary.8",
   "type": "module",
   "scripts": {
     "dev": "npx vitepress --open --host",
@@ -16,6 +15,6 @@
     "markdown-it-footnote": "^4.0.0",
     "twoslash-eslint": "^0.3.4",
     "vitepress": "^2.0.0-alpha.12",
-    "vitepress-plugin-group-icons": "^1.6.3"
+    "vitepress-plugin-group-icons": "^1.6.4"
   }
 }
