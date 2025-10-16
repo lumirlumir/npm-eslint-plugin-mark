@@ -49,6 +49,14 @@ ruleTester(getFileName(import.meta.url), rule, {
       name: '`>` repeats 8 times',
       code: '>>>>>>>>',
     },
+    {
+      name: 'LS(U+2028) should not be recognized as a line terminator',
+      code: '\u2028<<<<<<< HEAD\u2028Hello\u2028=======\u2028World\u2028>>>>>>> ab18d2f0f5151ab0c927a12eb0a64f8170762eff',
+    },
+    {
+      name: 'PS(U+2029) should not be recognized as a line terminator',
+      code: '\u2029<<<<<<< HEAD\u2029Hello\u2029=======\u2029World\u2029>>>>>>> ab18d2f0f5151ab0c927a12eb0a64f8170762eff',
+    },
 
     // Options
     {
