@@ -179,7 +179,3 @@ You should disable this rule if:
 - Your documents have dynamic or generated content in headings.
 - You're writing exploratory or draft content where enforcing heading structure would be too restrictive.
 - You have different heading requirements for different types of documents.
-
-## AST
-
-This rule applies to [`Heading`](https://github.com/syntax-tree/mdast?tab=readme-ov-file#heading) nodes in the Markdown AST. It extracts the text content after the heading markers (e.g., `##`) and compares it against the allowed values.

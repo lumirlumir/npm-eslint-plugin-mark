@@ -98,10 +98,6 @@ export default [
 
 No options are available for this rule.
 
-## AST
-
-This rule applies to the [`Image`](https://github.com/syntax-tree/mdast?tab=readme-ov-file#image), [`ImageReference`](https://github.com/syntax-tree/mdast?tab=readme-ov-file#imagereference), and [`Html`](https://github.com/syntax-tree/mdast?tab=readme-ov-file#html) nodes.
-
 ## Prior Art
 
 - [markdownlint: MD045](https://github.com/DavidAnson/markdownlint/blob/main/doc/md045.md)
