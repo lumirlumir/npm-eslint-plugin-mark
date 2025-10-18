@@ -77,29 +77,26 @@ describe(getFileName(import.meta.url), () => {
       });
     });
 
-    /*
-
     describe('InlineCode', () => {
       it('`hello`', () => {
-        const ignoredPositions = new SkipRanges();
+        const skipRanges = new SkipRanges();
 
-        ignoredPositions.push({
-          start: { line: 1, column: 1, offset: 0 },
-          end: { line: 1, column: 8, offset: 7 },
-        });
+        skipRanges.push([0, 7]);
 
-        strictEqual(ignoredPositions.isIgnoredPoint({ line: 1, column: 1 }), true);
-        strictEqual(ignoredPositions.isIgnoredPoint({ line: 1, column: 2 }), true);
-        strictEqual(ignoredPositions.isIgnoredPoint({ line: 1, column: 3 }), true);
-        strictEqual(ignoredPositions.isIgnoredPoint({ line: 1, column: 4 }), true);
-        strictEqual(ignoredPositions.isIgnoredPoint({ line: 1, column: 5 }), true);
-        strictEqual(ignoredPositions.isIgnoredPoint({ line: 1, column: 6 }), true);
-        strictEqual(ignoredPositions.isIgnoredPoint({ line: 1, column: 7 }), true);
-        strictEqual(ignoredPositions.isIgnoredPoint({ line: 1, column: 8 }), false);
-        strictEqual(ignoredPositions.isIgnoredPoint({ line: 1, column: 9 }), false);
-        strictEqual(ignoredPositions.isIgnoredPoint({ line: 2, column: 1 }), false);
+        strictEqual(skipRanges.isOffsetInSkipRange(0), true);
+        strictEqual(skipRanges.isOffsetInSkipRange(1), true);
+        strictEqual(skipRanges.isOffsetInSkipRange(2), true);
+        strictEqual(skipRanges.isOffsetInSkipRange(3), true);
+        strictEqual(skipRanges.isOffsetInSkipRange(4), true);
+        strictEqual(skipRanges.isOffsetInSkipRange(5), true);
+        strictEqual(skipRanges.isOffsetInSkipRange(6), true);
+        strictEqual(skipRanges.isOffsetInSkipRange(7), false);
+        strictEqual(skipRanges.isOffsetInSkipRange(8), false);
+        strictEqual(skipRanges.isOffsetInSkipRange(9), false);
       });
     });
+
+    /*
 
     describe('Strong', () => {
       it('**hello**', () => {
