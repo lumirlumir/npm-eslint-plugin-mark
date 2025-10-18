@@ -141,10 +141,6 @@ The right delimiter to use for heading IDs.
 
 An array of heading depths to ignore. For example, `[1, 2]` would ignore the first and second level headings.
 
-## AST
-
-This rule applies only to the [`Heading`](https://github.com/syntax-tree/mdast?tab=readme-ov-file#heading) node.  
-
 ## Prior Art
 
 - [textlint-rule-require-header-id](https://github.com/textlint-rule/textlint-rule-require-header-id)

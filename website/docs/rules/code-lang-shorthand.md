@@ -200,7 +200,3 @@ For example, to change the default abbreviation for `javascript` to `mjs`:
 ## Fix
 
 This rule converts unabridged code block language identifiers into their abbreviated forms.
-
-## AST
-
-This rule applies only to the [`Code`](https://github.com/syntax-tree/mdast?tab=readme-ov-file#code) node.
