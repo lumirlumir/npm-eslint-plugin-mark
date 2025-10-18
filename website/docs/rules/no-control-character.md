@@ -108,10 +108,6 @@ This rule disallows the following control characters except where the options al
 
 You might want to disable this rule if you're working with documents that intentionally contain control characters for specific purposes, such as demonstrating control character behavior or working with specialized text formats.
 
-## AST
-
-This rule applies to the entire document, specifically to the [`Root`](https://github.com/syntax-tree/mdast?tab=readme-ov-file#root) node.
-
 ## Prior Art
 
 - [`textlint-rule-no-invalid-control-character`](https://github.com/textlint-rule/textlint-rule-no-invalid-control-character)

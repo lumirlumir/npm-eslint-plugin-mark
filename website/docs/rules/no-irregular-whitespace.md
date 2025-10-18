@@ -80,10 +80,6 @@ This rule disallows the following characters except where the options allow:
 
 If you decide that you wish to use whitespace other than tabs and spaces outside of strings in your document.
 
-## AST
-
-This rule applies to the entire document, specifically to the [`Root`](https://github.com/syntax-tree/mdast?tab=readme-ov-file#root) node.
-
 ## Prior Art
 
 - [`no-irregular-whitespace`](https://eslint.org/docs/latest/rules/no-irregular-whitespace)

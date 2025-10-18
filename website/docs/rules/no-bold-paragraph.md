@@ -73,10 +73,6 @@ Text with **bold parts** is fine.
 
 No options are available for this rule.
 
-## AST
-
-This rule applies to the [`Strong`](https://github.com/syntax-tree/mdast?tab=readme-ov-file#strong), [`Paragraph`](https://github.com/syntax-tree/mdast?tab=readme-ov-file#paragraph), and [`ListItem`](https://github.com/syntax-tree/mdast?tab=readme-ov-file#listItem) nodes.
-
 ## Prior Art
 
 - [textlint-rule-no-bold-paragraph](https://github.com/aborazmeh/textlint-rule-no-bold-paragraph)
