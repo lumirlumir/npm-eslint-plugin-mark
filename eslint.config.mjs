@@ -28,7 +28,6 @@ export default defineConfig([
             'Limitations',
             'When Not To Use It',
             'Prior Art',
-            'AST', // TODO: Remove
           ],
         },
       ],

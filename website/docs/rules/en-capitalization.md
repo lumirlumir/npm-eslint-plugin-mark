@@ -59,7 +59,3 @@ You might want to disable this rule if:
 - You're working with a documentation style guide that permits or requires lowercase at the beginning of sentences
 - Your document contains many code examples or technical terms that conventionally start with lowercase
 - You're writing in a language other than English or a language that doesn't follow the same capitalization rules
-
-## AST
-
-This rule examines the AST for [`Paragraph`](https://github.com/syntax-tree/mdast?tab=readme-ov-file#paragraph) and [`Heading`](https://github.com/syntax-tree/mdast?tab=readme-ov-file#heading) nodes, finds their first text node, and checks if it starts with a lowercase letter.
