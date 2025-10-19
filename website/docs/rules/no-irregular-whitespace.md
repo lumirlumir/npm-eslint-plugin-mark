@@ -3,7 +3,7 @@
 
 ## Rule Details
 
-Invalid or irregular whitespace can cause issues with Markdown renderers and also makes Markdown documents harder to debug in a similar nature to mixed tabs and spaces.
+Irregular whitespace can cause issues with Markdown renderers and also makes Markdown documents harder to debug in a similar nature to mixed tabs and spaces.
 
 Various whitespace characters can be inputted by writers by mistake, for example from copying or keyboard shortcuts. Pressing Alt + Space on macOS adds in a non-breaking space character, for example. Additionally, AI-generated Markdown documents often include irregular whitespace characters.
 
@@ -17,25 +17,9 @@ In Markdown, irregular whitespace may cause:
 - Links and images to break when zero-width or non-breaking spaces are embedded in URLs or reference labels.
 - Table alignment to render incorrectly when pipes `|` are surrounded by irregular whitespace.
 - Front matter delimiters (`---`) or HTML blocks to be misparsed if invisible characters are mixed into delimiter lines.
+- Line Separator (U+2028) and Paragraph Separator (U+2029): Since many Markdown parsers expect `\r\n`, `\r`, or `\n`, these characters may not be recognized as line breaks, causing merged paragraphs, broken lists, or unclosed code fences.
 
-Known issues these spaces cause in Markdown:
-
-- Ogham Space Mark (U+1680)
-  - Renders as a visible glyph in most fonts, producing unexpected symbols in rendered Markdown.
-  - May prevent syntax that requires a normal space from being recognized (e.g., the space after `#` in headings, before list markers, or around table pipes).
-
-- Mongolian Vowel Separator (U+180E)
-  - No longer treated as a whitespace separator since Unicode 6.3; most Markdown parsers will not treat it as a space.
-  - Can break headings, lists, links, and tables when used where a normal space is required, and may cause parsing errors.
-
-- Line Separator (U+2028) and Paragraph Separator (U+2029)
-  - Many Markdown parsers expect line endings to be `\r\n`, `\r`, or `\n`. These characters may not be recognized as line breaks, leading to merged paragraphs, broken lists, or code fences not closing.
-
-- Zero Width Space (U+200B)
-  - Invisible in most editors and renderers, making it hard to locate.
-  - Not treated as a normal space in Markdown syntax; can cause headings not to parse, autolinks or reference labels to fail, and table cell alignment to break when inserted inadvertently.
-
-This rule aims to catch invalid whitespace other than normal tabs and spaces, and disallows the following characters except where permitted by the options:
+This rule aims to catch irregular whitespace other than normal tabs and spaces, and disallows the following characters except where permitted by the options:
 
 ```txt
 \u000B - Line Tabulation (\v) - <VT>
