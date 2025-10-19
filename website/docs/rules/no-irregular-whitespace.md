@@ -77,7 +77,7 @@ Examples of **incorrect** code for this rule:
 \u2029 - Paragraph Separator - <PS> - <PSEP>   <= Here
 \u202F - Narrow No-Break Space - <NNBSP>   <= Here
 \u205F - Medium Mathematical Space - <MMSP>   <= Here
-\u3000 - Ideographic Space - <IDSP>　 <= Here
+\u3000 - Ideographic Space - <IDSP> 　 <= Here
 ```
 
 #### With `{ skipCode: false }` Option
