@@ -43,30 +43,9 @@ export default class SkipRanges {
    * Check whether an `offset` is within the skip ranges.
    * @param {number} offset
    */
-  isOffsetInSkipRange(offset) {
+  isInSkipRange(offset) {
     return [...this.#skipRanges].some(
       skipRange => skipRange[0] <= offset && offset < skipRange[1],
     );
-  }
-
-  /**
-   * Check whether a `range` is within the skip ranges.
-   * @param {SourceRange} range
-   */
-  isRangeInSkipRange(range) {
-    return [...this.#skipRanges].some(
-      skipRange => skipRange[0] <= range[0] && range[1] < skipRange[1],
-    );
-  }
-
-  // ------------------------------------------------------------------------------
-  // Getter and Setter
-  // ------------------------------------------------------------------------------
-
-  /**
-   * Get the skip ranges.
-   */
-  get skipRanges() {
-    return [...this.#skipRanges];
   }
 }

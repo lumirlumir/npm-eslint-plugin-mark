@@ -11,7 +11,7 @@
 // --------------------------------------------------------------------------------
 
 import { describe, it } from 'node:test';
-import { deepStrictEqual, strictEqual } from 'node:assert';
+import { strictEqual } from 'node:assert';
 import { getFileName } from '../../tests/index.js';
 import SkipRanges from './skip-ranges.js';
 
@@ -24,56 +24,52 @@ describe(getFileName(import.meta.url), () => {
     it('should push a range to the list of skip ranges', () => {
       const skipRanges = new SkipRanges();
 
-      skipRanges.push([0, 1]).push([2, 3]);
-
-      deepStrictEqual(skipRanges.skipRanges, [
-        [0, 1],
-        [2, 3],
-      ]);
+      skipRanges.push([0, 1]);
+      skipRanges.push([2, 3]).push([4, 5]);
     });
   });
 
-  describe('isOffsetInSkipRange()', () => {
+  describe('isInSkipRange()', () => {
     describe('Code', () => {
       it('```js\nconst hello = "world";\n```', () => {
         const skipRanges = new SkipRanges();
 
         skipRanges.push([0, 32]);
 
-        strictEqual(skipRanges.isOffsetInSkipRange(0), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(1), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(2), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(3), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(4), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(5), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(6), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(7), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(8), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(9), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(10), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(11), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(12), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(13), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(14), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(15), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(16), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(17), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(18), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(19), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(20), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(21), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(22), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(23), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(24), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(25), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(26), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(27), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(28), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(29), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(30), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(31), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(32), false);
-        strictEqual(skipRanges.isOffsetInSkipRange(33), false);
+        strictEqual(skipRanges.isInSkipRange(0), true);
+        strictEqual(skipRanges.isInSkipRange(1), true);
+        strictEqual(skipRanges.isInSkipRange(2), true);
+        strictEqual(skipRanges.isInSkipRange(3), true);
+        strictEqual(skipRanges.isInSkipRange(4), true);
+        strictEqual(skipRanges.isInSkipRange(5), true);
+        strictEqual(skipRanges.isInSkipRange(6), true);
+        strictEqual(skipRanges.isInSkipRange(7), true);
+        strictEqual(skipRanges.isInSkipRange(8), true);
+        strictEqual(skipRanges.isInSkipRange(9), true);
+        strictEqual(skipRanges.isInSkipRange(10), true);
+        strictEqual(skipRanges.isInSkipRange(11), true);
+        strictEqual(skipRanges.isInSkipRange(12), true);
+        strictEqual(skipRanges.isInSkipRange(13), true);
+        strictEqual(skipRanges.isInSkipRange(14), true);
+        strictEqual(skipRanges.isInSkipRange(15), true);
+        strictEqual(skipRanges.isInSkipRange(16), true);
+        strictEqual(skipRanges.isInSkipRange(17), true);
+        strictEqual(skipRanges.isInSkipRange(18), true);
+        strictEqual(skipRanges.isInSkipRange(19), true);
+        strictEqual(skipRanges.isInSkipRange(20), true);
+        strictEqual(skipRanges.isInSkipRange(21), true);
+        strictEqual(skipRanges.isInSkipRange(22), true);
+        strictEqual(skipRanges.isInSkipRange(23), true);
+        strictEqual(skipRanges.isInSkipRange(24), true);
+        strictEqual(skipRanges.isInSkipRange(25), true);
+        strictEqual(skipRanges.isInSkipRange(26), true);
+        strictEqual(skipRanges.isInSkipRange(27), true);
+        strictEqual(skipRanges.isInSkipRange(28), true);
+        strictEqual(skipRanges.isInSkipRange(29), true);
+        strictEqual(skipRanges.isInSkipRange(30), true);
+        strictEqual(skipRanges.isInSkipRange(31), true);
+        strictEqual(skipRanges.isInSkipRange(32), false);
+        strictEqual(skipRanges.isInSkipRange(33), false);
       });
     });
 
@@ -83,16 +79,16 @@ describe(getFileName(import.meta.url), () => {
 
         skipRanges.push([0, 7]);
 
-        strictEqual(skipRanges.isOffsetInSkipRange(0), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(1), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(2), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(3), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(4), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(5), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(6), true);
-        strictEqual(skipRanges.isOffsetInSkipRange(7), false);
-        strictEqual(skipRanges.isOffsetInSkipRange(8), false);
-        strictEqual(skipRanges.isOffsetInSkipRange(9), false);
+        strictEqual(skipRanges.isInSkipRange(0), true);
+        strictEqual(skipRanges.isInSkipRange(1), true);
+        strictEqual(skipRanges.isInSkipRange(2), true);
+        strictEqual(skipRanges.isInSkipRange(3), true);
+        strictEqual(skipRanges.isInSkipRange(4), true);
+        strictEqual(skipRanges.isInSkipRange(5), true);
+        strictEqual(skipRanges.isInSkipRange(6), true);
+        strictEqual(skipRanges.isInSkipRange(7), false);
+        strictEqual(skipRanges.isInSkipRange(8), false);
+        strictEqual(skipRanges.isInSkipRange(9), false);
       });
     });
 
@@ -147,121 +143,6 @@ describe(getFileName(import.meta.url), () => {
     });
   });
 
-  describe('isIgnoredPosition()', () => {
-    describe('Code', () => {
-      it('```js\nconst hello = "world";\n```', () => {
-        const ignoredPositions = new SkipRanges();
-
-        ignoredPositions.push({
-          start: { line: 1, column: 1, offset: 0 },
-          end: { line: 3, column: 4, offset: 32 },
-        });
-
-        // true
-        strictEqual(
-          ignoredPositions.isIgnoredPosition({
-            start: { line: 1, column: 1 },
-            end: { line: 3, column: 4 },
-          }),
-          true,
-        );
-        strictEqual(
-          ignoredPositions.isIgnoredPosition({
-            start: { line: 1, column: 1 },
-            end: { line: 1, column: 2 },
-          }),
-          true,
-        );
-        strictEqual(
-          ignoredPositions.isIgnoredPosition({
-            start: { line: 3, column: 3 },
-            end: { line: 3, column: 4 },
-          }),
-          true,
-        );
-        strictEqual(
-          ignoredPositions.isIgnoredPosition({
-            start: { line: 1, column: 2 },
-            end: { line: 3, column: 1 },
-          }),
-          true,
-        );
-
-        // false
-        strictEqual(
-          ignoredPositions.isIgnoredPosition({
-            start: { line: 1, column: 1 },
-            end: { line: 3, column: 5 },
-          }),
-          false,
-        );
-        strictEqual(
-          ignoredPositions.isIgnoredPosition({
-            start: { line: 3, column: 4 },
-            end: { line: 3, column: 5 },
-          }),
-          false,
-        );
-      });
-    });
-
-    describe('InlineCode', () => {
-      it('`hello`', () => {
-        const ignoredPositions = new SkipRanges();
-
-        ignoredPositions.push({
-          start: { line: 1, column: 1, offset: 0 },
-          end: { line: 1, column: 8, offset: 7 },
-        });
-
-        // true
-        strictEqual(
-          ignoredPositions.isIgnoredPosition({
-            start: { line: 1, column: 1 },
-            end: { line: 1, column: 8 },
-          }),
-          true,
-        );
-        strictEqual(
-          ignoredPositions.isIgnoredPosition({
-            start: { line: 1, column: 1 },
-            end: { line: 1, column: 2 },
-          }),
-          true,
-        );
-        strictEqual(
-          ignoredPositions.isIgnoredPosition({
-            start: { line: 1, column: 7 },
-            end: { line: 1, column: 8 },
-          }),
-          true,
-        );
-        strictEqual(
-          ignoredPositions.isIgnoredPosition({
-            start: { line: 1, column: 2 },
-            end: { line: 1, column: 7 },
-          }),
-          true,
-        );
-
-        // false
-        strictEqual(
-          ignoredPositions.isIgnoredPosition({
-            start: { line: 1, column: 1 },
-            end: { line: 1, column: 9 },
-          }),
-          false,
-        );
-        strictEqual(
-          ignoredPositions.isIgnoredPosition({
-            start: { line: 1, column: 8 },
-            end: { line: 1, column: 9 },
-          }),
-          false,
-        );
-      });
-    });
-
-    */
+  */
   });
 });
