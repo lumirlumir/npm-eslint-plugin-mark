@@ -26,6 +26,18 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: '  ',
     },
     {
+      name: 'Three spaces in front of `<`',
+      code: '   <<<<<<<',
+    },
+    {
+      name: 'Three spaces in front of `=`',
+      code: '   =======',
+    },
+    {
+      name: 'Three spaces in front of `>`',
+      code: '   >>>>>>>',
+    },
+    {
       name: '`<` repeats 6 times',
       code: '<<<<<<',
     },
