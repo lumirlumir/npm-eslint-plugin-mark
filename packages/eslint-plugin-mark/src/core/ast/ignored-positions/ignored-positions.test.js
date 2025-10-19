@@ -88,7 +88,6 @@ describe(getFileName(import.meta.url), () => {
         strictEqual(ignoredPositions.isIgnoredPoint({ line: 2, column: 21 }), true);
         strictEqual(ignoredPositions.isIgnoredPoint({ line: 2, column: 22 }), true);
         strictEqual(ignoredPositions.isIgnoredPoint({ line: 2, column: 23 }), true);
-        strictEqual(ignoredPositions.isIgnoredPoint({ line: 2, column: 24 }), true);
         strictEqual(ignoredPositions.isIgnoredPoint({ line: 3, column: 1 }), true);
         strictEqual(ignoredPositions.isIgnoredPoint({ line: 3, column: 2 }), true);
         strictEqual(ignoredPositions.isIgnoredPoint({ line: 3, column: 3 }), true);

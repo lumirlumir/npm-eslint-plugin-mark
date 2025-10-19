@@ -60,18 +60,18 @@ jobs:
       - name: Set up environment variables
         run: |
           echo "SHORT_SHA=${GITHUB_SHA:0:7}" >> $GITHUB_ENV
-          echo "OLD_VERSION=$(node -p "require('./lerna.json').version")" >> $GITHUB_ENV
+          echo "OLD_VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
 
-      - name: Version bump (patch, minor, major) # `--no-git-tag-version` includes `--no-push`
+      - name: Version bump (patch, minor, major)
         if: ${{ inputs.semver == 'patch' || inputs.semver == 'minor' || inputs.semver == 'major' }}
-        run: npx lerna version ${{ inputs.semver }} --no-git-tag-version --yes
+        run: npm run release:version -- ${{ inputs.semver }}
 
-      - name: Version bump (prerelease, prepatch, preminor, premajor) # `--no-git-tag-version` includes `--no-push`
+      - name: Version bump (prerelease, prepatch, preminor, premajor)
         if: ${{ inputs.semver == 'prerelease' || inputs.semver == 'prepatch' || inputs.semver == 'preminor' || inputs.semver == 'premajor' }}
-        run: npx lerna version ${{ inputs.semver }} --no-git-tag-version --yes --preid ${{ inputs.preid }}
+        run: npm run release:version -- ${{ inputs.semver }} ${{ inputs.preid }}
 
       - name: Set up environment variables
-        run: echo "NEW_VERSION=$(node -p "require('./lerna.json').version")" >> $GITHUB_ENV
+        run: echo "NEW_VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
 
       - name: Draft release (patch, minor, major)
         if: ${{ inputs.semver == 'patch' || inputs.semver == 'minor' || inputs.semver == 'major' }}

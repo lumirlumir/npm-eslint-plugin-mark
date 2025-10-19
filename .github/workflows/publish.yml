@@ -28,10 +28,14 @@ jobs:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 
+      - name: Update npm
+        run: npm install -g npm@latest
+
       - name: Set up node_modules
         run: npm ci
 
+      - name: Build
+        run: npm run build --if-present
+
       - name: Publish
-        run: npm run publish-package
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm run release:publish

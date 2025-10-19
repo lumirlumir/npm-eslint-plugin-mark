@@ -25,7 +25,9 @@ This rule identifies and reports any Git conflict markers in your Markdown files
 
 Examples of **incorrect** code for this rule:
 
-  ```md /<<<<<<</ /=======/ />>>>>>>/
+#### Default
+
+  ```md eslint-check
   <!-- eslint mark/no-git-conflict-marker: "error" -->
 
   # My Document
@@ -39,11 +41,31 @@ Examples of **incorrect** code for this rule:
   ## Next Section
   ```
 
+#### With `{ skipCode: false }` Option
+
+  ````md eslint-check
+  <!-- eslint mark/no-git-conflict-marker: ["error", { skipCode: false }] -->
+
+  # My Document
+
+  ```md
+  <<<<<<< HEAD
+  This is my version of the content.
+  =======
+  This is someone else's version of the content.
+  >>>>>>> branch-name
+  ```
+
+  ## Next Section
+  ````
+
 ### :white_check_mark: Correct
 
 Examples of **correct** code for this rule:
 
-  ```md
+#### Default
+
+  ```md eslint-check
   <!-- eslint mark/no-git-conflict-marker: "error" -->
 
   # My Document
@@ -53,11 +75,29 @@ Examples of **correct** code for this rule:
   ## Next Section
   ```
 
+#### With `{ skipCode: true }` Option
+
+  ````md eslint-check
+  <!-- eslint mark/no-git-conflict-marker: ["error", { skipCode: true }] -->
+
+  # My Document
+
+  ```md
+  <<<<<<< HEAD
+  This is my version of the content.
+  =======
+  This is someone else's version of the content.
+  >>>>>>> branch-name
+  ```
+
+  ## Next Section
+  ````  
+
 ## Options
 
 ```js
 'mark/no-git-conflict-marker': ['error', {
-  skipCode: true
+  skipCode: true,
 }]
 ```
 
@@ -66,7 +106,3 @@ Examples of **correct** code for this rule:
 > Default: `true`
 
 `true` allows any Git conflict markers in code blocks.
-
-## AST
-
-This rule applies to the entire document, specifically to the [`Root`](https://github.com/syntax-tree/mdast?tab=readme-ov-file#root) node.

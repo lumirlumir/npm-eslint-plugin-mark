@@ -11,12 +11,6 @@ import { getFileName, ruleTester } from '../../core/tests/index.js';
 import rule from './no-git-conflict-marker.js';
 
 // --------------------------------------------------------------------------------
-// Helpers
-// --------------------------------------------------------------------------------
-
-const noGitConflictMarker = 'noGitConflictMarker';
-
-// --------------------------------------------------------------------------------
 // Test
 // --------------------------------------------------------------------------------
 
@@ -30,6 +24,18 @@ ruleTester(getFileName(import.meta.url), rule, {
     {
       name: 'Empty string',
       code: '  ',
+    },
+    {
+      name: 'Three spaces in front of `<`',
+      code: '   <<<<<<<',
+    },
+    {
+      name: 'Three spaces in front of `=`',
+      code: '   =======',
+    },
+    {
+      name: 'Three spaces in front of `>`',
+      code: '   >>>>>>>',
     },
     {
       name: '`<` repeats 6 times',
@@ -54,6 +60,14 @@ ruleTester(getFileName(import.meta.url), rule, {
     {
       name: '`>` repeats 8 times',
       code: '>>>>>>>>',
+    },
+    {
+      name: 'LS(U+2028) should not be recognized as a line terminator',
+      code: '\u2028<<<<<<< HEAD\u2028Hello\u2028=======\u2028World\u2028>>>>>>> ab18d2f0f5151ab0c927a12eb0a64f8170762eff',
+    },
+    {
+      name: 'PS(U+2029) should not be recognized as a line terminator',
+      code: '\u2029<<<<<<< HEAD\u2029Hello\u2029=======\u2029World\u2029>>>>>>> ab18d2f0f5151ab0c927a12eb0a64f8170762eff',
     },
 
     // Options
@@ -84,7 +98,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: '<<<<<<<',
       errors: [
         {
-          messageId: noGitConflictMarker,
+          messageId: 'noGitConflictMarker',
           line: 1,
           column: 1,
           endLine: 1,
@@ -97,7 +111,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: '=======',
       errors: [
         {
-          messageId: noGitConflictMarker,
+          messageId: 'noGitConflictMarker',
           line: 1,
           column: 1,
           endLine: 1,
@@ -110,7 +124,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: '>>>>>>>',
       errors: [
         {
-          messageId: noGitConflictMarker,
+          messageId: 'noGitConflictMarker',
           line: 1,
           column: 1,
           endLine: 1,
@@ -119,25 +133,52 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
     },
     {
-      name: 'Real world example',
-      code: '<<<<<<< HEAD\nHello\n=======\nWorld\n>>>>>>> ab18d2f0f5151ab0c927a12eb0a64f8170762eff',
+      name: 'Real world example (CRLF)',
+      code: '<<<<<<< HEAD\r\nHello\r\n=======\r\nWorld\r\n>>>>>>> ab18d2f0f5151ab0c927a12eb0a64f8170762eff',
       errors: [
         {
-          messageId: noGitConflictMarker,
+          messageId: 'noGitConflictMarker',
           line: 1,
           column: 1,
           endLine: 1,
           endColumn: 8,
         },
         {
-          messageId: noGitConflictMarker,
+          messageId: 'noGitConflictMarker',
           line: 3,
           column: 1,
           endLine: 3,
           endColumn: 8,
         },
         {
-          messageId: noGitConflictMarker,
+          messageId: 'noGitConflictMarker',
+          line: 5,
+          column: 1,
+          endLine: 5,
+          endColumn: 8,
+        },
+      ],
+    },
+    {
+      name: 'Real world example (LF)',
+      code: '<<<<<<< HEAD\nHello\n=======\nWorld\n>>>>>>> ab18d2f0f5151ab0c927a12eb0a64f8170762eff',
+      errors: [
+        {
+          messageId: 'noGitConflictMarker',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 8,
+        },
+        {
+          messageId: 'noGitConflictMarker',
+          line: 3,
+          column: 1,
+          endLine: 3,
+          endColumn: 8,
+        },
+        {
+          messageId: 'noGitConflictMarker',
           line: 5,
           column: 1,
           endLine: 5,
@@ -154,7 +195,7 @@ ruleTester(getFileName(import.meta.url), rule, {
 \`\`\``,
       errors: [
         {
-          messageId: noGitConflictMarker,
+          messageId: 'noGitConflictMarker',
           line: 2,
           column: 1,
           endLine: 2,
@@ -174,7 +215,7 @@ ruleTester(getFileName(import.meta.url), rule, {
 \`\`\``,
       errors: [
         {
-          messageId: noGitConflictMarker,
+          messageId: 'noGitConflictMarker',
           line: 2,
           column: 1,
           endLine: 2,
@@ -194,7 +235,7 @@ ruleTester(getFileName(import.meta.url), rule, {
 \`\`\``,
       errors: [
         {
-          messageId: noGitConflictMarker,
+          messageId: 'noGitConflictMarker',
           line: 2,
           column: 1,
           endLine: 2,

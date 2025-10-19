@@ -52,11 +52,3 @@ You might want to disable this rule if:
 ## Options
 
 No options are available for this rule.
-
-## AST
-
-This rule examines the following AST node types:
-
-- [`Image`](https://github.com/syntax-tree/mdast?tab=readme-ov-file#image) nodes for standard Markdown image syntax
-- [`Html`](https://github.com/syntax-tree/mdast?tab=readme-ov-file#html) nodes to check for `<img>` tags
-- [`ImageReference`](https://github.com/syntax-tree/mdast?tab=readme-ov-file#imagereference) and [`Definition`](https://github.com/syntax-tree/mdast?tab=readme-ov-file#definition) nodes for referenced images
