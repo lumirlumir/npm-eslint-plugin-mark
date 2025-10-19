@@ -1,41 +1,33 @@
 <!-- markdownlint-disable-next-line no-inline-html first-line-h1 -->
 <header v-html="$frontmatter.rule"></header>
 
-<!-- eslint-disable-next-line -- TODO -->
-## Overview
+## Rule Details
 
-Invalid or irregular whitespace can cause issues with Markdown parsers and also makes code harder to debug in a similar nature to mixed tabs and spaces.
+Irregular whitespace can cause issues with Markdown renderers and also makes Markdown documents harder to debug in a similar nature to mixed tabs and spaces.
 
-Various whitespace characters can be inputted by programmers by mistake for example from copying or keyboard shortcuts. Pressing Alt + Space on macOS adds in a non breaking space character for example.
+Various whitespace characters can be introduced accidentally, for example, when copying text or using keyboard shortcuts; on macOS, pressing Alt + Space inserts a non-breaking space. AI-generated Markdown documents also often contain irregular whitespace characters.
 
 A simple fix for this problem could be to rewrite the offending line from scratch. This might also be a problem introduced by the text editor: if rewriting the line does not fix it, try using a different editor.
 
-Known issues these spaces cause:
+In Markdown, irregular whitespace may cause:
 
-- Ogham Space Mark
-  - Is a valid token separator, but is rendered as a visible glyph in most typefaces, which may be misleading in source code.
-- Mongolian Vowel Separator
-  - Is no longer considered a space separator since Unicode 6.3. It could result in a error in Markdown parsers.
-- Line Separator and Paragraph Separator
-  - Can cause issues with Markdown parsers that expect traditional line breaks (`\n` or `\r\n`). Many Markdown implementations may not properly recognize these as line terminators, leading to incorrectly formatted content or rendering problems.
-- Zero Width Space
-  - Is NOT considered a separator for tokens.
-  - Is NOT shown in modern browsers making code repository software expected to resolve the visualization.
+- Headings not to be recognized (e.g., a non-breaking space between `#` and the heading text).
+- Lists or task lists to fail to parse due to non-standard spaces before `-`, `*`, `+`, or digits.
+- Code fences or indented code blocks to break because indentation uses irregular spaces instead of normal spaces or tabs.
+- Links and images to break when zero-width or non-breaking spaces are embedded in URLs or reference labels.
+- Table alignment to render incorrectly when pipes `|` are surrounded by irregular whitespace.
+- Front matter delimiters (`---`) or HTML blocks to be misparsed if invisible characters are mixed into delimiter lines.
+- Line Separator (U+2028) and Paragraph Separator (U+2029): Since many Markdown parsers expect `\r\n`, `\r`, or `\n`, these characters may not be recognized as line breaks, causing merged paragraphs, broken lists, or unclosed code fences.
 
-## Rule Details
-
-This rule is aimed at catching invalid whitespace that is not a normal tab and space. Some of these characters may cause issues in modern browsers and others will be a debugging issue to spot.
-
-This rule disallows the following characters except where the options allow:
+This rule aims to catch irregular whitespace other than normal tabs and spaces, and disallows the following characters except where permitted by the options:
 
 ```txt
 \u000B - Line Tabulation (\v) - <VT>
 \u000C - Form Feed (\f) - <FF>
-\u00A0 - No-Break Space - <NBSP>
 \u0085 - Next Line - <NEL>
+\u00A0 - No-Break Space - <NBSP>
 \u1680 - Ogham Space Mark - <OGSP>
 \u180E - Mongolian Vowel Separator - <MVS>
-\ufeff - Zero Width No-Break Space - <BOM>
 \u2000 - En Quad - <NQSP>
 \u2001 - Em Quad - <MQSP>
 \u2002 - En Space - <ENSP>
@@ -51,8 +43,124 @@ This rule disallows the following characters except where the options allow:
 \u2028 - Line Separator - <LS> - <LSEP>
 \u2029 - Paragraph Separator - <PS> - <PSEP>
 \u202F - Narrow No-Break Space - <NNBSP>
-\u205f - Medium Mathematical Space - <MMSP>
+\u205F - Medium Mathematical Space - <MMSP>
 \u3000 - Ideographic Space - <IDSP>
+\uFEFF - Zero Width No-Break Space - <BOM>
+```
+
+## Examples
+
+### :x: Incorrect
+
+Examples of **incorrect** code for this rule:
+
+#### Default
+
+```md eslint-check
+<!-- eslint mark/no-irregular-whitespace: "error" -->
+
+\u000B - Line Tabulation (\v) - <VT>  <= Here
+\u0085 - Next Line - <NEL>  <= Here
+\u1680 - Ogham Space Mark - <OGSP>   <= Here
+\u2000 - En Quad - <NQSP>   <= Here
+\u2001 - Em Quad - <MQSP>   <= Here
+\u2002 - En Space - <ENSP>   <= Here
+\u2003 - Em Space - <EMSP>   <= Here
+\u2004 - Three-Per-Em - <THPMSP> - <3/MSP>   <= Here
+\u2005 - Four-Per-Em - <FPMSP> - <4/MSP>  <= Here
+\u2006 - Six-Per-Em - <SPMSP> - <6/MSP>   <= Here
+\u2007 - Figure Space - <FSP>   <= Here
+\u2008 - Punctuation Space - <PUNCSP>   <= Here
+\u2009 - Thin Space - <THSP>   <= Here
+\u200A - Hair Space - <HSP>   <= Here
+\u2028 - Line Separator - <LS> - <LSEP>   <= Here
+\u2029 - Paragraph Separator - <PS> - <PSEP>   <= Here
+\u202F - Narrow No-Break Space - <NNBSP>   <= Here
+\u205F - Medium Mathematical Space - <MMSP>   <= Here
+\u3000 - Ideographic Space - <IDSP> 　 <= Here
+```
+
+#### With `{ skipCode: false }` Option
+
+`````md eslint-check
+<!-- eslint mark/no-irregular-whitespace: ["error", { skipCode: false }] -->
+
+```md
+\u000B - Line Tabulation (\v) - <VT>  <= Here
+\u0085 - Next Line - <NEL>  <= Here
+```
+
+````md
+\u1680 - Ogham Space Mark - <OGSP>   <= Here
+\u2000 - En Quad - <NQSP>   <= Here
+````
+
+~~~txt
+\u2001 - Em Quad - <MQSP>   <= Here
+\u2002 - En Space - <ENSP>   <= Here
+~~~
+
+    \u2003 - Em Space - <EMSP>   <= Here
+    \u2004 - Three-Per-Em - <THPMSP> - <3/MSP>   <= Here
+`````
+
+#### With `{ skipInlineCode: false }` Option
+
+```md eslint-check
+<!-- eslint mark/no-irregular-whitespace: ["error", { skipInlineCode: false }] -->
+
+\u000B - Line Tabulation (\v) - <VT> `` <= Here
+\u0085 - Next Line - <NEL> `` <= Here
+```
+
+### :white_check_mark: Correct
+
+Examples of **correct** code for this rule:
+
+#### Default
+
+<!-- markdownlint-disable no-hard-tabs -->
+
+```md eslint-check
+<!-- eslint mark/no-irregular-whitespace: "error" -->
+
+\u0009 - Horizontal Tab (\t) - <TAB> 	 <= Here
+\u0020 - Space - <SP>   <= Here
+```
+
+<!-- markdownlint-enable no-hard-tabs -->
+
+#### With `{ skipCode: true }` Option
+
+`````md eslint-check
+<!-- eslint mark/no-irregular-whitespace: ["error", { skipCode: true }] -->
+
+```md
+\u000B - Line Tabulation (\v) - <VT>  <= Here
+\u0085 - Next Line - <NEL>  <= Here
+```
+
+````md
+\u1680 - Ogham Space Mark - <OGSP>   <= Here
+\u2000 - En Quad - <NQSP>   <= Here
+````
+
+~~~txt
+\u2001 - Em Quad - <MQSP>   <= Here
+\u2002 - En Space - <ENSP>   <= Here
+~~~
+
+    \u2003 - Em Space - <EMSP>   <= Here
+    \u2004 - Three-Per-Em - <THPMSP> - <3/MSP>   <= Here
+`````
+
+#### With `{ skipInlineCode: true }` Option
+
+```md eslint-check
+<!-- eslint mark/no-irregular-whitespace: ["error", { skipInlineCode: true }] -->
+
+\u000B - Line Tabulation (\v) - <VT> `` <= Here
+\u0085 - Next Line - <NEL> `` <= Here
 ```
 
 ## Options

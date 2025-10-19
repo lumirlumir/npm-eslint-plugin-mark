@@ -29,47 +29,47 @@ describe(getFileName(import.meta.url), () => {
     });
   });
 
-  describe('isInSkipRange()', () => {
+  describe('includes()', () => {
     describe('Code', () => {
       it('```js\nconst hello = "world";\n```', () => {
         const skipRanges = new SkipRanges();
 
         skipRanges.push([0, 32]);
 
-        strictEqual(skipRanges.isInSkipRange(0), true);
-        strictEqual(skipRanges.isInSkipRange(1), true);
-        strictEqual(skipRanges.isInSkipRange(2), true);
-        strictEqual(skipRanges.isInSkipRange(3), true);
-        strictEqual(skipRanges.isInSkipRange(4), true);
-        strictEqual(skipRanges.isInSkipRange(5), true);
-        strictEqual(skipRanges.isInSkipRange(6), true);
-        strictEqual(skipRanges.isInSkipRange(7), true);
-        strictEqual(skipRanges.isInSkipRange(8), true);
-        strictEqual(skipRanges.isInSkipRange(9), true);
-        strictEqual(skipRanges.isInSkipRange(10), true);
-        strictEqual(skipRanges.isInSkipRange(11), true);
-        strictEqual(skipRanges.isInSkipRange(12), true);
-        strictEqual(skipRanges.isInSkipRange(13), true);
-        strictEqual(skipRanges.isInSkipRange(14), true);
-        strictEqual(skipRanges.isInSkipRange(15), true);
-        strictEqual(skipRanges.isInSkipRange(16), true);
-        strictEqual(skipRanges.isInSkipRange(17), true);
-        strictEqual(skipRanges.isInSkipRange(18), true);
-        strictEqual(skipRanges.isInSkipRange(19), true);
-        strictEqual(skipRanges.isInSkipRange(20), true);
-        strictEqual(skipRanges.isInSkipRange(21), true);
-        strictEqual(skipRanges.isInSkipRange(22), true);
-        strictEqual(skipRanges.isInSkipRange(23), true);
-        strictEqual(skipRanges.isInSkipRange(24), true);
-        strictEqual(skipRanges.isInSkipRange(25), true);
-        strictEqual(skipRanges.isInSkipRange(26), true);
-        strictEqual(skipRanges.isInSkipRange(27), true);
-        strictEqual(skipRanges.isInSkipRange(28), true);
-        strictEqual(skipRanges.isInSkipRange(29), true);
-        strictEqual(skipRanges.isInSkipRange(30), true);
-        strictEqual(skipRanges.isInSkipRange(31), true);
-        strictEqual(skipRanges.isInSkipRange(32), false);
-        strictEqual(skipRanges.isInSkipRange(33), false);
+        strictEqual(skipRanges.includes(0), true);
+        strictEqual(skipRanges.includes(1), true);
+        strictEqual(skipRanges.includes(2), true);
+        strictEqual(skipRanges.includes(3), true);
+        strictEqual(skipRanges.includes(4), true);
+        strictEqual(skipRanges.includes(5), true);
+        strictEqual(skipRanges.includes(6), true);
+        strictEqual(skipRanges.includes(7), true);
+        strictEqual(skipRanges.includes(8), true);
+        strictEqual(skipRanges.includes(9), true);
+        strictEqual(skipRanges.includes(10), true);
+        strictEqual(skipRanges.includes(11), true);
+        strictEqual(skipRanges.includes(12), true);
+        strictEqual(skipRanges.includes(13), true);
+        strictEqual(skipRanges.includes(14), true);
+        strictEqual(skipRanges.includes(15), true);
+        strictEqual(skipRanges.includes(16), true);
+        strictEqual(skipRanges.includes(17), true);
+        strictEqual(skipRanges.includes(18), true);
+        strictEqual(skipRanges.includes(19), true);
+        strictEqual(skipRanges.includes(20), true);
+        strictEqual(skipRanges.includes(21), true);
+        strictEqual(skipRanges.includes(22), true);
+        strictEqual(skipRanges.includes(23), true);
+        strictEqual(skipRanges.includes(24), true);
+        strictEqual(skipRanges.includes(25), true);
+        strictEqual(skipRanges.includes(26), true);
+        strictEqual(skipRanges.includes(27), true);
+        strictEqual(skipRanges.includes(28), true);
+        strictEqual(skipRanges.includes(29), true);
+        strictEqual(skipRanges.includes(30), true);
+        strictEqual(skipRanges.includes(31), true);
+        strictEqual(skipRanges.includes(32), false);
+        strictEqual(skipRanges.includes(33), false);
       });
     });
 
@@ -79,16 +79,16 @@ describe(getFileName(import.meta.url), () => {
 
         skipRanges.push([0, 7]);
 
-        strictEqual(skipRanges.isInSkipRange(0), true);
-        strictEqual(skipRanges.isInSkipRange(1), true);
-        strictEqual(skipRanges.isInSkipRange(2), true);
-        strictEqual(skipRanges.isInSkipRange(3), true);
-        strictEqual(skipRanges.isInSkipRange(4), true);
-        strictEqual(skipRanges.isInSkipRange(5), true);
-        strictEqual(skipRanges.isInSkipRange(6), true);
-        strictEqual(skipRanges.isInSkipRange(7), false);
-        strictEqual(skipRanges.isInSkipRange(8), false);
-        strictEqual(skipRanges.isInSkipRange(9), false);
+        strictEqual(skipRanges.includes(0), true);
+        strictEqual(skipRanges.includes(1), true);
+        strictEqual(skipRanges.includes(2), true);
+        strictEqual(skipRanges.includes(3), true);
+        strictEqual(skipRanges.includes(4), true);
+        strictEqual(skipRanges.includes(5), true);
+        strictEqual(skipRanges.includes(6), true);
+        strictEqual(skipRanges.includes(7), false);
+        strictEqual(skipRanges.includes(8), false);
+        strictEqual(skipRanges.includes(9), false);
       });
     });
 
@@ -98,17 +98,17 @@ describe(getFileName(import.meta.url), () => {
 
         skipRanges.push([0, 9]);
 
-        strictEqual(skipRanges.isInSkipRange(0), true);
-        strictEqual(skipRanges.isInSkipRange(1), true);
-        strictEqual(skipRanges.isInSkipRange(2), true);
-        strictEqual(skipRanges.isInSkipRange(3), true);
-        strictEqual(skipRanges.isInSkipRange(4), true);
-        strictEqual(skipRanges.isInSkipRange(5), true);
-        strictEqual(skipRanges.isInSkipRange(6), true);
-        strictEqual(skipRanges.isInSkipRange(7), true);
-        strictEqual(skipRanges.isInSkipRange(8), true);
-        strictEqual(skipRanges.isInSkipRange(9), false);
-        strictEqual(skipRanges.isInSkipRange(10), false);
+        strictEqual(skipRanges.includes(0), true);
+        strictEqual(skipRanges.includes(1), true);
+        strictEqual(skipRanges.includes(2), true);
+        strictEqual(skipRanges.includes(3), true);
+        strictEqual(skipRanges.includes(4), true);
+        strictEqual(skipRanges.includes(5), true);
+        strictEqual(skipRanges.includes(6), true);
+        strictEqual(skipRanges.includes(7), true);
+        strictEqual(skipRanges.includes(8), true);
+        strictEqual(skipRanges.includes(9), false);
+        strictEqual(skipRanges.includes(10), false);
       });
     });
 
@@ -118,19 +118,19 @@ describe(getFileName(import.meta.url), () => {
 
         skipRanges.push([0, 11]);
 
-        strictEqual(skipRanges.isInSkipRange(0), true);
-        strictEqual(skipRanges.isInSkipRange(1), true);
-        strictEqual(skipRanges.isInSkipRange(2), true);
-        strictEqual(skipRanges.isInSkipRange(3), true);
-        strictEqual(skipRanges.isInSkipRange(4), true);
-        strictEqual(skipRanges.isInSkipRange(5), true);
-        strictEqual(skipRanges.isInSkipRange(6), true);
-        strictEqual(skipRanges.isInSkipRange(7), true);
-        strictEqual(skipRanges.isInSkipRange(8), true);
-        strictEqual(skipRanges.isInSkipRange(9), true);
-        strictEqual(skipRanges.isInSkipRange(10), true);
-        strictEqual(skipRanges.isInSkipRange(11), false);
-        strictEqual(skipRanges.isInSkipRange(12), false);
+        strictEqual(skipRanges.includes(0), true);
+        strictEqual(skipRanges.includes(1), true);
+        strictEqual(skipRanges.includes(2), true);
+        strictEqual(skipRanges.includes(3), true);
+        strictEqual(skipRanges.includes(4), true);
+        strictEqual(skipRanges.includes(5), true);
+        strictEqual(skipRanges.includes(6), true);
+        strictEqual(skipRanges.includes(7), true);
+        strictEqual(skipRanges.includes(8), true);
+        strictEqual(skipRanges.includes(9), true);
+        strictEqual(skipRanges.includes(10), true);
+        strictEqual(skipRanges.includes(11), false);
+        strictEqual(skipRanges.includes(12), false);
       });
     });
   });

@@ -40,10 +40,10 @@ export default class SkipRanges {
   }
 
   /**
-   * Check whether an `offset` is within the skip ranges.
+   * Check whether the `offset` is included in any skip ranges.
    * @param {number} offset
    */
-  isInSkipRange(offset) {
+  includes(offset) {
     return [...this.#skipRanges].some(
       skipRange => skipRange[0] <= offset && offset < skipRange[1],
     );

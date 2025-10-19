@@ -94,7 +94,7 @@ export default {
           const startOffset = match.index;
           const endOffset = startOffset + gitConflictMarker.length;
 
-          if (skipRanges.isInSkipRange(startOffset)) return;
+          if (skipRanges.includes(startOffset)) return;
 
           context.report({
             loc: {
