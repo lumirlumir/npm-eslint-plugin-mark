@@ -12,7 +12,7 @@
 
 import { describe, it } from 'node:test';
 import { strictEqual } from 'node:assert';
-import { getFileName } from '../../tests/index.js';
+import { getFileName } from '../tests/index.js';
 import SkipRanges from './skip-ranges.js';
 
 // --------------------------------------------------------------------------------
