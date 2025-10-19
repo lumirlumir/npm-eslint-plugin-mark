@@ -82,57 +82,35 @@ Examples of **incorrect** code for this rule:
 
 #### With `{ skipCode: false }` Option
 
-````md eslint-check
+`````md eslint-check
 <!-- eslint mark/no-irregular-whitespace: ["error", { skipCode: false }] -->
 
 ```md
 \u000B - Line Tabulation (\v) - <VT>  <= Here
 \u0085 - Next Line - <NEL>  <= Here
-\u1680 - Ogham Space Mark - <OGSP>   <= Here
-\u2000 - En Quad - <NQSP>   <= Here
-\u2001 - Em Quad - <MQSP>   <= Here
-\u2002 - En Space - <ENSP>   <= Here
-\u2003 - Em Space - <EMSP>   <= Here
-\u2004 - Three-Per-Em - <THPMSP> - <3/MSP>   <= Here
-\u2005 - Four-Per-Em - <FPMSP> - <4/MSP>  <= Here
-\u2006 - Six-Per-Em - <SPMSP> - <6/MSP>   <= Here
-\u2007 - Figure Space - <FSP>   <= Here
-\u2008 - Punctuation Space - <PUNCSP>   <= Here
-\u2009 - Thin Space - <THSP>   <= Here
-\u200A - Hair Space - <HSP>   <= Here
-\u2028 - Line Separator - <LS> - <LSEP>   <= Here
-\u2029 - Paragraph Separator - <PS> - <PSEP>   <= Here
-\u202F - Narrow No-Break Space - <NNBSP>   <= Here
-\u205F - Medium Mathematical Space - <MMSP>   <= Here
-\u3000 - Ideographic Space - <IDSP>　 <= Here
 ```
 
+````md
+\u1680 - Ogham Space Mark - <OGSP>   <= Here
+\u2000 - En Quad - <NQSP>   <= Here
 ````
+
+~~~txt
+\u2001 - Em Quad - <MQSP>   <= Here
+\u2002 - En Space - <ENSP>   <= Here
+~~~
+
+    \u2003 - Em Space - <EMSP>   <= Here
+    \u2004 - Three-Per-Em - <THPMSP> - <3/MSP>   <= Here
+`````
 
 #### With `{ skipInlineCode: false }` Option
 
 ```md eslint-check
 <!-- eslint mark/no-irregular-whitespace: ["error", { skipInlineCode: false }] -->
 
-`\u000B - Line Tabulation (\v) - <VT>  <= Here`
-`\u0085 - Next Line - <NEL>  <= Here`
-`\u1680 - Ogham Space Mark - <OGSP>   <= Here`
-`\u2000 - En Quad - <NQSP>   <= Here`
-`\u2001 - Em Quad - <MQSP>   <= Here`
-`\u2002 - En Space - <ENSP>   <= Here`
-`\u2003 - Em Space - <EMSP>   <= Here`
-`\u2004 - Three-Per-Em - <THPMSP> - <3/MSP>   <= Here`
-`\u2005 - Four-Per-Em - <FPMSP> - <4/MSP>  <= Here`
-`\u2006 - Six-Per-Em - <SPMSP> - <6/MSP>   <= Here`
-`\u2007 - Figure Space - <FSP>   <= Here`
-`\u2008 - Punctuation Space - <PUNCSP>   <= Here`
-`\u2009 - Thin Space - <THSP>   <= Here`
-`\u200A - Hair Space - <HSP>   <= Here`
-`\u2028 - Line Separator - <LS> - <LSEP>   <= Here`
-`\u2029 - Paragraph Separator - <PS> - <PSEP>   <= Here`
-`\u202F - Narrow No-Break Space - <NNBSP>   <= Here`
-`\u205F - Medium Mathematical Space - <MMSP>   <= Here`
-`\u3000 - Ideographic Space - <IDSP>　 <= Here`
+\u000B - Line Tabulation (\v) - <VT> `` <= Here
+\u0085 - Next Line - <NEL> `` <= Here
 ```
 
 ### :white_check_mark: Correct
@@ -154,57 +132,35 @@ Examples of **correct** code for this rule:
 
 #### With `{ skipCode: true }` Option
 
-````md eslint-check
+`````md eslint-check
 <!-- eslint mark/no-irregular-whitespace: ["error", { skipCode: true }] -->
 
 ```md
 \u000B - Line Tabulation (\v) - <VT>  <= Here
 \u0085 - Next Line - <NEL>  <= Here
-\u1680 - Ogham Space Mark - <OGSP>   <= Here
-\u2000 - En Quad - <NQSP>   <= Here
-\u2001 - Em Quad - <MQSP>   <= Here
-\u2002 - En Space - <ENSP>   <= Here
-\u2003 - Em Space - <EMSP>   <= Here
-\u2004 - Three-Per-Em - <THPMSP> - <3/MSP>   <= Here
-\u2005 - Four-Per-Em - <FPMSP> - <4/MSP>  <= Here
-\u2006 - Six-Per-Em - <SPMSP> - <6/MSP>   <= Here
-\u2007 - Figure Space - <FSP>   <= Here
-\u2008 - Punctuation Space - <PUNCSP>   <= Here
-\u2009 - Thin Space - <THSP>   <= Here
-\u200A - Hair Space - <HSP>   <= Here
-\u2028 - Line Separator - <LS> - <LSEP>   <= Here
-\u2029 - Paragraph Separator - <PS> - <PSEP>   <= Here
-\u202F - Narrow No-Break Space - <NNBSP>   <= Here
-\u205F - Medium Mathematical Space - <MMSP>   <= Here
-\u3000 - Ideographic Space - <IDSP>　 <= Here
 ```
 
+````md
+\u1680 - Ogham Space Mark - <OGSP>   <= Here
+\u2000 - En Quad - <NQSP>   <= Here
 ````
+
+~~~txt
+\u2001 - Em Quad - <MQSP>   <= Here
+\u2002 - En Space - <ENSP>   <= Here
+~~~
+
+    \u2003 - Em Space - <EMSP>   <= Here
+    \u2004 - Three-Per-Em - <THPMSP> - <3/MSP>   <= Here
+`````
 
 #### With `{ skipInlineCode: true }` Option
 
 ```md eslint-check
 <!-- eslint mark/no-irregular-whitespace: ["error", { skipInlineCode: true }] -->
 
-`\u000B - Line Tabulation (\v) - <VT>  <= Here`
-`\u0085 - Next Line - <NEL>  <= Here`
-`\u1680 - Ogham Space Mark - <OGSP>   <= Here`
-`\u2000 - En Quad - <NQSP>   <= Here`
-`\u2001 - Em Quad - <MQSP>   <= Here`
-`\u2002 - En Space - <ENSP>   <= Here`
-`\u2003 - Em Space - <EMSP>   <= Here`
-`\u2004 - Three-Per-Em - <THPMSP> - <3/MSP>   <= Here`
-`\u2005 - Four-Per-Em - <FPMSP> - <4/MSP>  <= Here`
-`\u2006 - Six-Per-Em - <SPMSP> - <6/MSP>   <= Here`
-`\u2007 - Figure Space - <FSP>   <= Here`
-`\u2008 - Punctuation Space - <PUNCSP>   <= Here`
-`\u2009 - Thin Space - <THSP>   <= Here`
-`\u200A - Hair Space - <HSP>   <= Here`
-`\u2028 - Line Separator - <LS> - <LSEP>   <= Here`
-`\u2029 - Paragraph Separator - <PS> - <PSEP>   <= Here`
-`\u202F - Narrow No-Break Space - <NNBSP>   <= Here`
-`\u205F - Medium Mathematical Space - <MMSP>   <= Here`
-`\u3000 - Ideographic Space - <IDSP>　 <= Here`
+\u000B - Line Tabulation (\v) - <VT> `` <= Here
+\u0085 - Next Line - <NEL> `` <= Here
 ```
 
 ## Options
