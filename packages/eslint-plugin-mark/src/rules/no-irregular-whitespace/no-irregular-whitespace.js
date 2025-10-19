@@ -7,7 +7,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { IgnoredPositions } from '../../core/ast/index.js';
+import { SkipRanges } from '../../core/ast/index.js';
 import { URL_RULE_DOCS } from '../../core/constants.js';
 
 // --------------------------------------------------------------------------------
@@ -15,7 +15,6 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
 // --------------------------------------------------------------------------------
 
 /**
- * @import { Position } from 'unist';
  * @import { RuleModule } from '../../core/types.js';
  * @typedef {[{ skipCode: boolean, skipInlineCode: boolean }]} RuleOptions
  * @typedef {'noIrregularWhitespace'} MessageIds
@@ -83,15 +82,15 @@ export default {
     const { sourceCode } = context;
     const [{ skipCode, skipInlineCode }] = context.options;
 
-    const ignoredPositions = new IgnoredPositions();
+    const skipRanges = new SkipRanges();
 
     return {
       code(node) {
-        if (skipCode) ignoredPositions.push(sourceCode.getLoc(node)); // Store position information of `Code`.
+        if (skipCode) skipRanges.push(sourceCode.getRange(node)); // Store range information of `Code`.
       },
 
       inlineCode(node) {
-        if (skipInlineCode) ignoredPositions.push(sourceCode.getLoc(node)); // Store position information of `InlineCode`.
+        if (skipInlineCode) skipRanges.push(sourceCode.getRange(node)); // Store range information of `InlineCode`.
       },
 
       'root:exit'() {
@@ -103,16 +102,13 @@ export default {
           const startOffset = match.index;
           const endOffset = startOffset + irregularWhitespace.length;
 
-          /** @type {Position} */
-          const loc = {
-            start: sourceCode.getLocFromIndex(startOffset),
-            end: sourceCode.getLocFromIndex(endOffset),
-          };
-
-          if (ignoredPositions.isIgnoredPosition(loc)) return;
+          if (skipRanges.isInSkipRange(startOffset)) return;
 
           context.report({
-            loc,
+            loc: {
+              start: sourceCode.getLocFromIndex(startOffset),
+              end: sourceCode.getLocFromIndex(endOffset),
+            },
 
             data: {
               irregularWhitespace: `U+${irregularWhitespace.codePointAt(0)?.toString(16).toUpperCase().padStart(4, '0')}`,
