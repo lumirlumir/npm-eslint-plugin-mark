@@ -7,7 +7,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { IgnoredPositions } from '../../core/ast/index.js';
+import { SkipRanges } from '../../core/ast/index.js';
 import { URL_RULE_DOCS } from '../../core/constants.js';
 
 // --------------------------------------------------------------------------------
@@ -79,11 +79,11 @@ export default {
     const { sourceCode } = context;
     const [{ skipCode }] = context.options;
 
-    const ignoredPositions = new IgnoredPositions();
+    const skipRanges = new SkipRanges();
 
     return {
       code(node) {
-        if (skipCode) ignoredPositions.push(sourceCode.getLoc(node)); // Store position information of `Code`.
+        if (skipCode) skipRanges.push(sourceCode.getRange(node)); // Store range information of `Code`.
       },
 
       'root:exit'() {
@@ -95,16 +95,13 @@ export default {
           const startOffset = match.index;
           const endOffset = startOffset + gitConflictMarker.length;
 
-          /** @type {Position} */
-          const loc = {
-            start: sourceCode.getLocFromIndex(startOffset),
-            end: sourceCode.getLocFromIndex(endOffset),
-          };
-
-          if (ignoredPositions.isIgnoredPosition(loc)) return;
+          if (skipRanges.isInSkipRange(startOffset)) return;
 
           context.report({
-            loc,
+            loc: {
+              start: sourceCode.getLocFromIndex(startOffset),
+              end: sourceCode.getLocFromIndex(endOffset),
+            },
 
             data: {
               gitConflictMarker,
