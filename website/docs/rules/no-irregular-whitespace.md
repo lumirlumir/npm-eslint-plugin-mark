@@ -3,7 +3,7 @@
 
 ## Rule Details
 
-Invalid or irregular whitespace can cause issues with Markdown parsers and also makes Markdown documents harder to debug in a similar nature to mixed tabs and spaces.
+Invalid or irregular whitespace can cause issues with Markdown renderers and also makes Markdown documents harder to debug in a similar nature to mixed tabs and spaces.
 
 Various whitespace characters can be inputted by writers by mistake, for example from copying or keyboard shortcuts. Pressing Alt + Space on macOS adds in a non-breaking space character, for example. Additionally, AI-generated Markdown documents often include irregular whitespace characters.
 
@@ -16,24 +16,26 @@ In Markdown, irregular whitespace may cause:
 - Code fences or indented code blocks to break because indentation uses irregular spaces instead of normal spaces or tabs.
 - Links and images to break when zero-width or non-breaking spaces are embedded in URLs or reference labels.
 - Table alignment to render incorrectly when pipes `|` are surrounded by irregular whitespace.
-- Hard/soft line breaks to be misinterpreted, especially when Line Separator or Paragraph Separator characters are present.
 - Front matter delimiters (`---`) or HTML blocks to be misparsed if invisible characters are mixed into delimiter lines.
 
-Known issues these spaces cause:
+Known issues these spaces cause in Markdown:
 
-- Ogham Space Mark
-  - Is a valid token separator, but is rendered as a visible glyph in most typefaces, which may be misleading in Markdown source.
-- Mongolian Vowel Separator
-  - Is no longer considered a space separator since Unicode 6.3. It could result in an error in Markdown parsers.
-- Line Separator and Paragraph Separator
-  - Can cause issues with Markdown parsers that expect traditional line breaks (`\n` or `\r\n`). Many Markdown implementations may not properly recognize these as line terminators, leading to incorrectly formatted content or rendering problems.
-- Zero Width Space
-  - Is NOT considered a separator for tokens.
-  - Is NOT shown in modern browsers or many Markdown renderers, making visualization and debugging difficult in repository UIs.
+- Ogham Space Mark (U+1680)
+  - Renders as a visible glyph in most fonts, producing unexpected symbols in rendered Markdown.
+  - May prevent syntax that requires a normal space from being recognized (e.g., the space after `#` in headings, before list markers, or around table pipes).
 
-This rule is aimed at catching invalid whitespace that is not a normal tab and space. Some of these characters may cause issues in Markdown renderers and modern browsers, and others will be a debugging issue to spot.
+- Mongolian Vowel Separator (U+180E)
+  - No longer treated as a whitespace separator since Unicode 6.3; most Markdown parsers will not treat it as a space.
+  - Can break headings, lists, links, and tables when used where a normal space is required, and may cause parsing errors.
 
-This rule disallows the following characters except where the options allow:
+- Line Separator (U+2028) and Paragraph Separator (U+2029)
+  - Many Markdown parsers expect line endings to be `\r\n`, `\r`, or `\n`. These characters may not be recognized as line breaks, leading to merged paragraphs, broken lists, or code fences not closing.
+
+- Zero Width Space (U+200B)
+  - Invisible in most editors and renderers, making it hard to locate.
+  - Not treated as a normal space in Markdown syntax; can cause headings not to parse, autolinks or reference labels to fail, and table cell alignment to break when inserted inadvertently.
+
+This rule aims to catch invalid whitespace other than normal tabs and spaces, and disallows the following characters except where permitted by the options:
 
 ```txt
 \u000B - Line Tabulation (\v) - <VT>
