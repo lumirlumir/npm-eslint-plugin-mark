@@ -15,7 +15,6 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
 // --------------------------------------------------------------------------------
 
 /**
- * @import { Position } from 'unist';
  * @import { RuleModule } from '../../core/types.js';
  * @typedef {[{ skipCode: boolean }]} RuleOptions
  * @typedef {'noGitConflictMarker'} MessageIds
