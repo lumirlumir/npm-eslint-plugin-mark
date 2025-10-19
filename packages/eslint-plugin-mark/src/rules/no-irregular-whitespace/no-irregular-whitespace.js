@@ -102,7 +102,7 @@ export default {
           const startOffset = match.index;
           const endOffset = startOffset + irregularWhitespace.length;
 
-          if (skipRanges.isInSkipRange(startOffset)) return;
+          if (skipRanges.includes(startOffset)) return;
 
           context.report({
             loc: {
