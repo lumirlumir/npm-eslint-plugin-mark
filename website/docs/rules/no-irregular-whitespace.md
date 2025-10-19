@@ -5,7 +5,7 @@
 
 Irregular whitespace can cause issues with Markdown renderers and also makes Markdown documents harder to debug in a similar nature to mixed tabs and spaces.
 
-Various whitespace characters can be inputted by writers by mistake, for example from copying or keyboard shortcuts. Pressing Alt + Space on macOS adds in a non-breaking space character, for example. Additionally, AI-generated Markdown documents often include irregular whitespace characters.
+Various whitespace characters can be introduced accidentally, for example, when copying text or using keyboard shortcuts; on macOS, pressing Alt + Space inserts a non-breaking space. AI-generated Markdown documents also often contain irregular whitespace characters.
 
 A simple fix for this problem could be to rewrite the offending line from scratch. This might also be a problem introduced by the text editor: if rewriting the line does not fix it, try using a different editor.
 
