@@ -3,25 +3,35 @@
 
 ## Rule Details
 
-Invalid or irregular whitespace can cause issues with Markdown parsers and also makes documentation code harder to debug in a similar nature to mixed tabs and spaces.
+Invalid or irregular whitespace can cause issues with Markdown parsers and also makes Markdown documents harder to debug in a similar nature to mixed tabs and spaces.
 
-Various whitespace characters can be inputted by programmers by mistake for example from copying or keyboard shortcuts. Pressing Alt + Space on macOS adds in a non breaking space character for example.
+Various whitespace characters can be inputted by writers by mistake, for example from copying or keyboard shortcuts. Pressing Alt + Space on macOS adds in a non-breaking space character, for example. Additionally, AI-generated Markdown documents often include irregular whitespace characters.
 
 A simple fix for this problem could be to rewrite the offending line from scratch. This might also be a problem introduced by the text editor: if rewriting the line does not fix it, try using a different editor.
+
+In Markdown, irregular whitespace may cause:
+
+- Headings not to be recognized (e.g., a non-breaking space between `#` and the heading text).
+- Lists or task lists to fail to parse due to non-standard spaces before `-`, `*`, `+`, or digits.
+- Code fences or indented code blocks to break because indentation uses irregular spaces instead of normal spaces or tabs.
+- Links and images to break when zero-width or non-breaking spaces are embedded in URLs or reference labels.
+- Table alignment to render incorrectly when pipes `|` are surrounded by irregular whitespace.
+- Hard/soft line breaks to be misinterpreted, especially when Line Separator or Paragraph Separator characters are present.
+- Front matter delimiters (`---`) or HTML blocks to be misparsed if invisible characters are mixed into delimiter lines.
 
 Known issues these spaces cause:
 
 - Ogham Space Mark
-  - Is a valid token separator, but is rendered as a visible glyph in most typefaces, which may be misleading in source code.
+  - Is a valid token separator, but is rendered as a visible glyph in most typefaces, which may be misleading in Markdown source.
 - Mongolian Vowel Separator
-  - Is no longer considered a space separator since Unicode 6.3. It could result in a error in Markdown parsers.
+  - Is no longer considered a space separator since Unicode 6.3. It could result in an error in Markdown parsers.
 - Line Separator and Paragraph Separator
   - Can cause issues with Markdown parsers that expect traditional line breaks (`\n` or `\r\n`). Many Markdown implementations may not properly recognize these as line terminators, leading to incorrectly formatted content or rendering problems.
 - Zero Width Space
   - Is NOT considered a separator for tokens.
-  - Is NOT shown in modern browsers making code repository software expected to resolve the visualization.
+  - Is NOT shown in modern browsers or many Markdown renderers, making visualization and debugging difficult in repository UIs.
 
-This rule is aimed at catching invalid whitespace that is not a normal tab and space. Some of these characters may cause issues in modern browsers and others will be a debugging issue to spot.
+This rule is aimed at catching invalid whitespace that is not a normal tab and space. Some of these characters may cause issues in Markdown renderers and modern browsers, and others will be a debugging issue to spot.
 
 This rule disallows the following characters except where the options allow:
 
@@ -150,8 +160,8 @@ Examples of **correct** code for this rule:
 ```md eslint-check
 <!-- eslint mark/no-irregular-whitespace: "error" -->
 
-\u0009 - Horizontal Tab (\t) - <TAB> 	 <= Allowed
-\u0020 - Space - <SP>   <= Allowed
+\u0009 - Horizontal Tab (\t) - <TAB> 	 <= Here
+\u0020 - Space - <SP>   <= Here
 ```
 
 <!-- markdownlint-enable no-hard-tabs -->
