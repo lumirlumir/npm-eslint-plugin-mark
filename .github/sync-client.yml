@@ -36,6 +36,8 @@ lumirlumir/lumirlumir-configs:
     dest: ./configs/scripts/cp.mjs
   - source: ./scripts/vercel-ignore-command.sh
     dest: ./configs/scripts/vercel-ignore-command.sh
+  - source: ./scripts/version.mjs
+    dest: ./configs/scripts/version.mjs
   # ./
   - source: ./.editorconfig
     dest: ./configs/.editorconfig
