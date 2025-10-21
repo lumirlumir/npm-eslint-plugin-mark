@@ -37,8 +37,8 @@ ruleTester(getFileName(import.meta.url), rule, {
   invalid: [
     {
       name: '`consistent` style - 1',
-      code: '---\n\n***\n\n___',
-      output: '---\n\n---\n\n---',
+      code: '---\n\n***\n\n___\n\n---',
+      output: '---\n\n---\n\n---\n\n---',
       errors: [
         {
           messageId: 'consistentThematicBreakStyle',
@@ -58,8 +58,8 @@ ruleTester(getFileName(import.meta.url), rule, {
     },
     {
       name: '`consistent` style - 2',
-      code: '***\n\n___\n\n---',
-      output: '***\n\n***\n\n***',
+      code: '***\n\n___\n\n---\n\n***',
+      output: '***\n\n***\n\n***\n\n***',
       errors: [
         {
           messageId: 'consistentThematicBreakStyle',
@@ -79,8 +79,8 @@ ruleTester(getFileName(import.meta.url), rule, {
     },
     {
       name: '`consistent` style - 3',
-      code: '___\n\n---\n\n***',
-      output: '___\n\n___\n\n___',
+      code: '___\n\n---\n\n***\n\n___',
+      output: '___\n\n___\n\n___\n\n___',
       errors: [
         {
           messageId: 'consistentThematicBreakStyle',
