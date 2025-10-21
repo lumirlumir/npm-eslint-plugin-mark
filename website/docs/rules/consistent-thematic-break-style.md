@@ -74,3 +74,8 @@ Examples of **correct** code for this rule:
 
 ---
 ```
+
+## Prior Art
+
+- [MD035 - Horizontal rule style](https://github.com/DavidAnson/markdownlint/blob/main/doc/md035.md#md035---horizontal-rule-style)
+- [`remark-lint-rule-style`](https://github.com/remarkjs/remark-lint/tree/main/packages/remark-lint-rule-style#remark-lint-rule-style)
