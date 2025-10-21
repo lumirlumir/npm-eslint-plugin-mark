@@ -1,20 +1,20 @@
 /* eslint sort-imports: 'error', sort-keys: 'error' */
 
-import allowHeading from './allow-heading/index.js';
-import altText from './alt-text/index.js';
-import codeLangShorthand from './code-lang-shorthand/index.js';
-import enCapitalization from './en-capitalization/index.js';
-import headingId from './heading-id/index.js';
-import imageTitle from './image-title/index.js';
-import noBoldParagraph from './no-bold-paragraph/index.js';
-import noControlCharacter from './no-control-character/index.js';
-import noCurlyQuote from './no-curly-quote/index.js';
-import noDoubleSpace from './no-double-space/index.js';
-import noEmoji from './no-emoji/index.js';
-import noGitConflictMarker from './no-git-conflict-marker/index.js';
-import noIrregularDash from './no-irregular-dash/index.js';
-import noIrregularWhitespace from './no-irregular-whitespace/index.js';
-import noUnusedDefinition from './no-unused-definition/index.js';
+import allowHeading from './allow-heading.js';
+import altText from './alt-text.js';
+import codeLangShorthand from './code-lang-shorthand.js';
+import enCapitalization from './en-capitalization.js';
+import headingId from './heading-id.js';
+import imageTitle from './image-title.js';
+import noBoldParagraph from './no-bold-paragraph.js';
+import noControlCharacter from './no-control-character.js';
+import noCurlyQuote from './no-curly-quote.js';
+import noDoubleSpace from './no-double-space.js';
+import noEmoji from './no-emoji.js';
+import noGitConflictMarker from './no-git-conflict-marker.js';
+import noIrregularDash from './no-irregular-dash.js';
+import noIrregularWhitespace from './no-irregular-whitespace.js';
+import noUnusedDefinition from './no-unused-definition.js';
 
 export default {
   'allow-heading': allowHeading,
