@@ -1,6 +1,6 @@
 /* eslint sort-imports: 'error', sort-keys: 'error' */
 
-import getFileName from './get-file-name/index.js';
-import ruleTester from './rule-tester/index.js';
+import getFileName from './get-file-name.js';
+import ruleTester from './rule-tester.js';
 
 export { getFileName, ruleTester };
