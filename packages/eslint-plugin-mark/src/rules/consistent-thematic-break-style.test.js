@@ -77,5 +77,26 @@ ruleTester(getFileName(import.meta.url), rule, {
         },
       ],
     },
+    {
+      name: '`consistent` style - 3',
+      code: '___\n\n---\n\n***',
+      output: '___\n\n___\n\n___',
+      errors: [
+        {
+          messageId: 'consistentThematicBreakStyle',
+          line: 3,
+          column: 1,
+          endLine: 3,
+          endColumn: 4,
+        },
+        {
+          messageId: 'consistentThematicBreakStyle',
+          line: 5,
+          column: 1,
+          endLine: 5,
+          endColumn: 4,
+        },
+      ],
+    },
   ],
 });

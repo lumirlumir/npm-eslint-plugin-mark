@@ -59,7 +59,7 @@ export default {
     ],
 
     messages: {
-      consistentThematicBreakStyle: 'Thematic breaks should be `{{ style }}`.',
+      consistentThematicBreakStyle: 'Thematic break style should be `{{ style }}`.',
     },
 
     language: 'markdown',
