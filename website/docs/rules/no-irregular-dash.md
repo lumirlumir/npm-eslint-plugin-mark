@@ -51,3 +51,7 @@ This rule disallows the following characters except where the options allow:
 ## When Not To Use It
 
 If you deliberately want to use typographically correct dash characters in your Markdown documents, such as em dashes for parenthetical statements or en dashes for ranges, you may want to disable this rule.
+
+<!--
+리스트나 hr 같은 곳에서 정석 대시 대신, irregular dash를 사용하면 문제가 되기 때문에, 이 규칙이 필요한 것.
+-->
