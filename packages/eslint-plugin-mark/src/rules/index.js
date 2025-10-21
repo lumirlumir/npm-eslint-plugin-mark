@@ -1,9 +1,9 @@
 /* eslint sort-imports: 'error', sort-keys: 'error' */
 
-import allowHeading from './allow-heading/index.js';
-import altText from './alt-text/index.js';
-import codeLangShorthand from './code-lang-shorthand/index.js';
-import enCapitalization from './en-capitalization/index.js';
+import allowHeading from './allow-heading.js';
+import altText from './alt-text.js';
+import codeLangShorthand from './code-lang-shorthand.js';
+import enCapitalization from './en-capitalization.js';
 import headingId from './heading-id/index.js';
 import imageTitle from './image-title/index.js';
 import noBoldParagraph from './no-bold-paragraph/index.js';

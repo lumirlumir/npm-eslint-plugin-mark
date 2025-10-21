@@ -7,14 +7,14 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { URL_RULE_DOCS } from '../../core/constants.js';
+import { URL_RULE_DOCS } from '../core/constants.js';
 
 // --------------------------------------------------------------------------------
 // Typedefs
 // --------------------------------------------------------------------------------
 
 /**
- * @import { RuleModule } from '../../core/types.js';
+ * @import { RuleModule } from '../core/types.js';
  * @typedef {[{ h1: HeadingOption, h2: HeadingOption, h3: HeadingOption, h4: HeadingOption, h5: HeadingOption, h6: HeadingOption }]} RuleOptions
  * @typedef {'allowHeading' | 'allowHeadingDepth'} MessageIds
  * @typedef {false | string[]} HeadingOption

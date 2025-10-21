@@ -7,7 +7,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { getFileName, ruleTester } from '../../core/tests/index.js';
+import { getFileName, ruleTester } from '../core/tests/index.js';
 import rule from './code-lang-shorthand.js';
 
 // --------------------------------------------------------------------------------

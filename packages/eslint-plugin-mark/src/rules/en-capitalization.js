@@ -7,7 +7,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { URL_RULE_DOCS } from '../../core/constants.js';
+import { URL_RULE_DOCS } from '../core/constants.js';
 
 // --------------------------------------------------------------------------------
 // Typedefs
@@ -15,7 +15,7 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
 
 /**
  * @import { Text, Heading, Paragraph } from 'mdast';
- * @import { RuleModule } from '../../core/types.js';
+ * @import { RuleModule } from '../core/types.js';
  * @typedef {[{ skipHeading: boolean, skipListItem: boolean }]} RuleOptions
  * @typedef {'enCapitalization'} MessageIds
  */

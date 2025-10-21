@@ -7,15 +7,15 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { getElementsByTagName } from '../../core/ast/index.js';
-import { URL_RULE_DOCS } from '../../core/constants.js';
+import { getElementsByTagName } from '../core/ast/index.js';
+import { URL_RULE_DOCS } from '../core/constants.js';
 
 // --------------------------------------------------------------------------------
 // Typedefs
 // --------------------------------------------------------------------------------
 
 /**
- * @import { RuleModule } from '../../core/types.js';
+ * @import { RuleModule } from '../core/types.js';
  * @typedef {[]} RuleOptions
  * @typedef {'altText'} MessageIds
  */

@@ -10,14 +10,14 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { URL_RULE_DOCS } from '../../core/constants.js';
+import { URL_RULE_DOCS } from '../core/constants.js';
 
 // --------------------------------------------------------------------------------
 // Typedefs
 // --------------------------------------------------------------------------------
 
 /**
- * @import { RuleModule } from '../../core/types.js';
+ * @import { RuleModule } from '../core/types.js';
  * @typedef {[{ ignores: string[], override: Record<string, string> }]} RuleOptions
  * @typedef {'codeLangShorthand'} MessageIds
  */
