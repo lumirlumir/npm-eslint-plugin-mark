@@ -7,14 +7,14 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { URL_RULE_DOCS } from '../../core/constants.js';
+import { URL_RULE_DOCS } from '../core/constants.js';
 
 // --------------------------------------------------------------------------------
 // Typedef
 // --------------------------------------------------------------------------------
 
 /**
- * @import { RuleModule } from '../../core/types.js';
+ * @import { RuleModule } from '../core/types.js';
  * @typedef {[{ checkLeftDoubleQuotationMark: boolean, checkRightDoubleQuotationMark: boolean, checkLeftSingleQuotationMark: boolean, checkRightSingleQuotationMark: boolean }]} RuleOptions
  * @typedef {'noCurlyQuote'} MessageIds
  */
