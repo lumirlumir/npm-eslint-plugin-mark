@@ -7,8 +7,8 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { IgnoredPositions } from '../../core/ast/index.js';
-import { URL_RULE_DOCS, ZERO_TO_ONE_BASED_OFFSET } from '../../core/constants.js';
+import { IgnoredPositions } from '../core/ast/index.js';
+import { URL_RULE_DOCS, ZERO_TO_ONE_BASED_OFFSET } from '../core/constants.js';
 
 // --------------------------------------------------------------------------------
 // Typedefs
@@ -16,7 +16,7 @@ import { URL_RULE_DOCS, ZERO_TO_ONE_BASED_OFFSET } from '../../core/constants.js
 
 /**
  * @import { Position } from 'unist';
- * @import { RuleModule } from '../../core/types.js';
+ * @import { RuleModule } from '../core/types.js';
  * @typedef {[{ skipCode: boolean, skipInlineCode: boolean }]} RuleOptions
  * @typedef {'noIrregularDash'} MessageIds
  */

@@ -8,14 +8,14 @@
 // --------------------------------------------------------------------------------
 
 import emojiRegex from 'emoji-regex';
-import { URL_RULE_DOCS } from '../../core/constants.js';
+import { URL_RULE_DOCS } from '../core/constants.js';
 
 // --------------------------------------------------------------------------------
 // Typedef
 // --------------------------------------------------------------------------------
 
 /**
- * @import { RuleModule } from '../../core/types.js';
+ * @import { RuleModule } from '../core/types.js';
  * @typedef {[]} RuleOptions
  * @typedef {'noEmoji'} MessageIds
  */

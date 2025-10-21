@@ -10,11 +10,11 @@ import noBoldParagraph from './no-bold-paragraph/index.js';
 import noControlCharacter from './no-control-character/index.js';
 import noCurlyQuote from './no-curly-quote/index.js';
 import noDoubleSpace from './no-double-space/index.js';
-import noEmoji from './no-emoji/index.js';
-import noGitConflictMarker from './no-git-conflict-marker/index.js';
-import noIrregularDash from './no-irregular-dash/index.js';
-import noIrregularWhitespace from './no-irregular-whitespace/index.js';
-import noUnusedDefinition from './no-unused-definition/index.js';
+import noEmoji from './no-emoji.js';
+import noGitConflictMarker from './no-git-conflict-marker.js';
+import noIrregularDash from './no-irregular-dash.js';
+import noIrregularWhitespace from './no-irregular-whitespace.js';
+import noUnusedDefinition from './no-unused-definition.js';
 
 export default {
   'allow-heading': allowHeading,
