@@ -7,7 +7,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { URL_RULE_DOCS } from '../../core/constants.js';
+import { URL_RULE_DOCS } from '../core/constants.js';
 
 // --------------------------------------------------------------------------------
 // Typedefs
@@ -15,7 +15,7 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
 
 /**
  * @import { Heading } from 'mdast';
- * @import { RuleModule } from '../../core/types.js';
+ * @import { RuleModule } from '../core/types.js';
  * @typedef {['always' | 'never', { leftDelimiter: string, rightDelimiter: string, ignoreDepth: Heading['depth'][] }]} RuleOptions
  * @typedef {'headingIdAlways' | 'headingIdNever'} MessageIds
  */

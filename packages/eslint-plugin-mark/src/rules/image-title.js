@@ -7,11 +7,8 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import {
-  getElementsByTagName,
-  ReferenceDefinitionHandler,
-} from '../../core/ast/index.js';
-import { URL_RULE_DOCS } from '../../core/constants.js';
+import { getElementsByTagName, ReferenceDefinitionHandler } from '../core/ast/index.js';
+import { URL_RULE_DOCS } from '../core/constants.js';
 
 // --------------------------------------------------------------------------------
 // Typedefs
@@ -19,7 +16,7 @@ import { URL_RULE_DOCS } from '../../core/constants.js';
 
 /**
  * @import { Image, ImageReference, Definition, Html } from 'mdast'
- * @import { RuleModule } from '../../core/types.js';
+ * @import { RuleModule } from '../core/types.js';
  * @typedef {[]} RuleOptions
  * @typedef {'imageTitle'} MessageIds
  */
