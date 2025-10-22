@@ -423,9 +423,9 @@ foo bar baz
       ],
     },
     {
-      name: 'Double spaces with CRLF and LF newlines',
-      code: '  hi  hi  hi  \r\n  hi  hi  hi  \n  hi  hi  hi  ',
-      output: '  hi hi hi  \r\n  hi hi hi  \n  hi hi hi  ',
+      name: 'Double spaces with CRLF, CR, and LF newlines',
+      code: '  hi  hi  hi  \r\n  hi  hi  hi  \r  hi  hi  hi  \n  hi  hi  hi',
+      output: '  hi hi hi  \r\n  hi hi hi  \r  hi hi hi  \n  hi hi hi',
       errors: [
         {
           messageId: 'noDoubleSpace',
@@ -467,6 +467,20 @@ foo bar baz
           line: 3,
           column: 9,
           endLine: 3,
+          endColumn: 11,
+        },
+        {
+          messageId: 'noDoubleSpace',
+          line: 4,
+          column: 5,
+          endLine: 4,
+          endColumn: 7,
+        },
+        {
+          messageId: 'noDoubleSpace',
+          line: 4,
+          column: 9,
+          endLine: 4,
           endColumn: 11,
         },
       ],
