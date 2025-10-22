@@ -98,6 +98,106 @@ ruleTester(getFileName(import.meta.url), rule, {
         },
       ],
     },
+    {
+      name: '`consistent` style with indentation - 1',
+      code: '---\n\n ***',
+      output: '---\n\n ---',
+      errors: [
+        {
+          messageId: 'style',
+          line: 3,
+          column: 2,
+          endLine: 3,
+          endColumn: 5,
+        },
+      ],
+    },
+    {
+      name: '`consistent` style with indentation - 2',
+      code: '---\n\n  ***',
+      output: '---\n\n  ---',
+      errors: [
+        {
+          messageId: 'style',
+          line: 3,
+          column: 3,
+          endLine: 3,
+          endColumn: 6,
+        },
+      ],
+    },
+    {
+      name: '`consistent` style with indentation - 3',
+      code: '---\n\n   ***',
+      output: '---\n\n   ---',
+      errors: [
+        {
+          messageId: 'style',
+          line: 3,
+          column: 4,
+          endLine: 3,
+          endColumn: 7,
+        },
+      ],
+    },
+    {
+      name: '`-----` style - 1',
+      code: '---\n\n***\n\n___',
+      output: '-----\n\n-----\n\n-----',
+      options: [{ style: '-----' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 4,
+        },
+        {
+          messageId: 'style',
+          line: 3,
+          column: 1,
+          endLine: 3,
+          endColumn: 4,
+        },
+        {
+          messageId: 'style',
+          line: 5,
+          column: 1,
+          endLine: 5,
+          endColumn: 4,
+        },
+      ],
+    },
+    {
+      name: '`* * *` style - 1',
+      code: '---\n\n***\n\n___',
+      output: '* * *\n\n* * *\n\n* * *',
+      options: [{ style: '* * *' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 4,
+        },
+        {
+          messageId: 'style',
+          line: 3,
+          column: 1,
+          endLine: 3,
+          endColumn: 4,
+        },
+        {
+          messageId: 'style',
+          line: 5,
+          column: 1,
+          endLine: 5,
+          endColumn: 4,
+        },
+      ],
+    },
 
     // Blockquote
     {
