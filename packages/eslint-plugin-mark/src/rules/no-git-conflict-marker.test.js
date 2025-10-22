@@ -160,6 +160,33 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
     },
     {
+      name: 'Real world example (CR)',
+      code: '<<<<<<< HEAD\rHello\r=======\rWorld\r>>>>>>> ab18d2f0f5151ab0c927a12eb0a64f8170762eff',
+      errors: [
+        {
+          messageId: 'noGitConflictMarker',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 8,
+        },
+        {
+          messageId: 'noGitConflictMarker',
+          line: 3,
+          column: 1,
+          endLine: 3,
+          endColumn: 8,
+        },
+        {
+          messageId: 'noGitConflictMarker',
+          line: 5,
+          column: 1,
+          endLine: 5,
+          endColumn: 8,
+        },
+      ],
+    },
+    {
       name: 'Real world example (LF)',
       code: '<<<<<<< HEAD\nHello\n=======\nWorld\n>>>>>>> ab18d2f0f5151ab0c927a12eb0a64f8170762eff',
       errors: [
