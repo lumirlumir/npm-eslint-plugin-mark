@@ -42,10 +42,10 @@ ___
 ___
 ```
 
-#### With `{ style: '-----' }` Option
+#### With `{ style: '-- - --' }` Option
 
 ```md eslint-check
-<!-- eslint mark/consistent-thematic-break-style: ["error", { style: '-----' }] -->
+<!-- eslint mark/consistent-thematic-break-style: ["error", { style: '-- - --' }] -->
 
 ---
 ***
@@ -64,7 +64,32 @@ Examples of **correct** code for this rule:
 ---
 ---
 ---
----
+```
+
+```md eslint-check
+<!-- eslint mark/consistent-thematic-break-style: "error" -->
+
+***
+***
+***
+```
+
+```md eslint-check
+<!-- eslint mark/consistent-thematic-break-style: "error" -->
+
+___
+___
+___
+```
+
+#### With `{ style: '-- - --' }` Option
+
+```md eslint-check
+<!-- eslint mark/consistent-thematic-break-style: ["error", { style: '-- - --' }] -->
+
+-- - --
+-- - --
+-- - --
 ```
 
 ## Options
