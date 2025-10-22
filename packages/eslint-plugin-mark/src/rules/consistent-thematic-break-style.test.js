@@ -41,14 +41,14 @@ ruleTester(getFileName(import.meta.url), rule, {
       output: '---\n\n---\n\n---\n\n---',
       errors: [
         {
-          messageId: 'consistentThematicBreakStyle',
+          messageId: 'style',
           line: 3,
           column: 1,
           endLine: 3,
           endColumn: 4,
         },
         {
-          messageId: 'consistentThematicBreakStyle',
+          messageId: 'style',
           line: 5,
           column: 1,
           endLine: 5,
@@ -62,14 +62,14 @@ ruleTester(getFileName(import.meta.url), rule, {
       output: '***\n\n***\n\n***\n\n***',
       errors: [
         {
-          messageId: 'consistentThematicBreakStyle',
+          messageId: 'style',
           line: 3,
           column: 1,
           endLine: 3,
           endColumn: 4,
         },
         {
-          messageId: 'consistentThematicBreakStyle',
+          messageId: 'style',
           line: 5,
           column: 1,
           endLine: 5,
@@ -83,18 +83,41 @@ ruleTester(getFileName(import.meta.url), rule, {
       output: '___\n\n___\n\n___\n\n___',
       errors: [
         {
-          messageId: 'consistentThematicBreakStyle',
+          messageId: 'style',
           line: 3,
           column: 1,
           endLine: 3,
           endColumn: 4,
         },
         {
-          messageId: 'consistentThematicBreakStyle',
+          messageId: 'style',
           line: 5,
           column: 1,
           endLine: 5,
           endColumn: 4,
+        },
+      ],
+    },
+
+    // Blockquote
+    {
+      name: 'Blockquote - `consistent` style',
+      code: '---\n\n> ***\n\n> ___',
+      output: '---\n\n> ---\n\n> ---',
+      errors: [
+        {
+          messageId: 'style',
+          line: 3,
+          column: 3,
+          endLine: 3,
+          endColumn: 6,
+        },
+        {
+          messageId: 'style',
+          line: 5,
+          column: 3,
+          endLine: 5,
+          endColumn: 6,
         },
       ],
     },
