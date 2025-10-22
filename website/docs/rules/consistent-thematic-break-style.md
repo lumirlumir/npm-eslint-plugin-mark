@@ -19,18 +19,22 @@ Examples of **incorrect** code for this rule:
 <!-- eslint mark/consistent-thematic-break-style: "error" -->
 
 ---
+- - -
 ***
+* * *
+****
 ___
----
 ```
 
 ```md eslint-check
 <!-- eslint mark/consistent-thematic-break-style: "error" -->
 
 ***
+* * *
+****
 ___
 ---
-***
+- - -
 ```
 
 ```md eslint-check
@@ -38,14 +42,16 @@ ___
 
 ___
 ---
+- - -
 ***
-___
+* * *
+****
 ```
 
-#### With `{ style: '-- - --' }` Option
+#### With `{ style: '- - -' }` Option
 
 ```md eslint-check
-<!-- eslint mark/consistent-thematic-break-style: ["error", { style: '-- - --' }] -->
+<!-- eslint mark/consistent-thematic-break-style: ["error", { style: '- - -' }] -->
 
 ---
 ***
@@ -82,14 +88,14 @@ ___
 ___
 ```
 
-#### With `{ style: '-- - --' }` Option
+#### With `{ style: '- - -' }` Option
 
 ```md eslint-check
-<!-- eslint mark/consistent-thematic-break-style: ["error", { style: '-- - --' }] -->
+<!-- eslint mark/consistent-thematic-break-style: ["error", { style: '- - -' }] -->
 
--- - --
--- - --
--- - --
+- - -
+- - -
+- - -
 ```
 
 ## Options
