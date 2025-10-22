@@ -16,7 +16,7 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 /**
  * @import { RuleModule } from '../core/types.js';
  * @typedef {[{ style: string }]} RuleOptions
- * @typedef {'consistentThematicBreakStyle'} MessageIds
+ * @typedef {'style'} MessageIds
  */
 
 // --------------------------------------------------------------------------------
@@ -59,7 +59,7 @@ export default {
     ],
 
     messages: {
-      consistentThematicBreakStyle: 'Thematic break style should be `{{ style }}`.',
+      style: 'Thematic break style should be `{{ style }}`.',
     },
 
     language: 'markdown',
@@ -86,7 +86,7 @@ export default {
           context.report({
             node,
 
-            messageId: 'consistentThematicBreakStyle',
+            messageId: 'style',
 
             data: {
               style: thematicBreakStyle,
