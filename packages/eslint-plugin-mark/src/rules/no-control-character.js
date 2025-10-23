@@ -11,7 +11,7 @@ import { IgnoredPositions } from '../core/ast/index.js';
 import { URL_RULE_DOCS, ZERO_TO_ONE_BASED_OFFSET } from '../core/constants.js';
 
 // --------------------------------------------------------------------------------
-// Typedefs
+// Typedef
 // --------------------------------------------------------------------------------
 
 /**
@@ -22,7 +22,7 @@ import { URL_RULE_DOCS, ZERO_TO_ONE_BASED_OFFSET } from '../core/constants.js';
  */
 
 // --------------------------------------------------------------------------------
-// Helpers
+// Helper
 // --------------------------------------------------------------------------------
 
 const controlCharacterRegex = // eslint-disable-next-line no-control-regex -- Needed for rule definition.
@@ -79,8 +79,8 @@ export default {
   },
 
   create(context) {
+    const { sourceCode } = context;
     const [{ skipCode, skipInlineCode }] = context.options;
-    const { lines } = context.sourceCode;
 
     const ignoredPositions = new IgnoredPositions();
 
@@ -94,39 +94,37 @@ export default {
       },
 
       'root:exit'() {
-        lines.forEach((line, lineIndex) => {
-          const matches = [...line.matchAll(controlCharacterRegex)];
+        sourceCode.lines.forEach((line, lineIndex) => {
+          const matches = line.matchAll(controlCharacterRegex);
 
-          if (matches.length > 0) {
-            matches.forEach(match => {
-              const controlCharacterLength = match[0].length;
+          for (const match of matches) {
+            const controlCharacter = match[0];
 
-              const matchIndexStart = match.index;
-              const matchIndexEnd = matchIndexStart + controlCharacterLength;
+            const matchIndexStart = match.index;
+            const matchIndexEnd = matchIndexStart + controlCharacter.length;
 
-              /** @type {Position} */
-              const loc = {
-                start: {
-                  line: lineIndex + ZERO_TO_ONE_BASED_OFFSET,
-                  column: matchIndexStart + ZERO_TO_ONE_BASED_OFFSET,
-                },
-                end: {
-                  line: lineIndex + ZERO_TO_ONE_BASED_OFFSET,
-                  column: matchIndexEnd + ZERO_TO_ONE_BASED_OFFSET,
-                },
-              };
+            /** @type {Position} */
+            const loc = {
+              start: {
+                line: lineIndex + ZERO_TO_ONE_BASED_OFFSET,
+                column: matchIndexStart + ZERO_TO_ONE_BASED_OFFSET,
+              },
+              end: {
+                line: lineIndex + ZERO_TO_ONE_BASED_OFFSET,
+                column: matchIndexEnd + ZERO_TO_ONE_BASED_OFFSET,
+              },
+            };
 
-              if (ignoredPositions.isIgnoredPosition(loc)) return;
+            if (ignoredPositions.isIgnoredPosition(loc)) return;
 
-              context.report({
-                loc,
+            context.report({
+              loc,
 
-                data: {
-                  controlCharacter: `U+${match[0].codePointAt(0).toString(16).toUpperCase().padStart(4, '0')}`,
-                },
+              data: {
+                controlCharacter: `U+${controlCharacter.codePointAt(0)?.toString(16).toUpperCase().padStart(4, '0')}`,
+              },
 
-                messageId: 'noControlCharacter',
-              });
+              messageId: 'noControlCharacter',
             });
           }
         });
