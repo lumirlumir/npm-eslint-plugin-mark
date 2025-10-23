@@ -9,7 +9,7 @@
 import { describe, it } from 'node:test';
 import { doesNotMatch, match, ok } from 'node:assert';
 
-import rules from 'eslint-plugin-mark/rules';
+import mark from 'eslint-plugin-mark';
 import { getFileName } from 'eslint-plugin-mark/core/tests';
 
 // ---------------------------------------------------------------------------------
@@ -18,7 +18,7 @@ import { getFileName } from 'eslint-plugin-mark/core/tests';
 
 describe(getFileName(import.meta.url), () => {
   it('`meta` should exist', () => {
-    Object.values(rules).forEach(rule => {
+    Object.values(mark.rules).forEach(rule => {
       const { meta } = rule;
 
       ok(meta);
@@ -26,7 +26,7 @@ describe(getFileName(import.meta.url), () => {
   });
 
   it('`meta.type` should exist', () => {
-    Object.values(rules).forEach(rule => {
+    Object.values(mark.rules).forEach(rule => {
       const { type } = rule.meta;
 
       ok(type);
@@ -34,7 +34,7 @@ describe(getFileName(import.meta.url), () => {
   });
 
   it('`meta.docs` should exist', () => {
-    Object.values(rules).forEach(rule => {
+    Object.values(mark.rules).forEach(rule => {
       const { docs } = rule.meta;
 
       ok(docs);
@@ -42,7 +42,7 @@ describe(getFileName(import.meta.url), () => {
   });
 
   it('`meta.docs.description` should exist and should not end with a period', () => {
-    Object.values(rules).forEach(rule => {
+    Object.values(mark.rules).forEach(rule => {
       const { description } = rule.meta.docs;
 
       ok(description);
@@ -51,7 +51,7 @@ describe(getFileName(import.meta.url), () => {
   });
 
   it('`meta.docs.url` should exist and should end with the rule name defined in `index.js`', () => {
-    Object.entries(rules).forEach(([ruleName, rule]) => {
+    Object.entries(mark.rules).forEach(([ruleName, rule]) => {
       const { url } = rule.meta.docs;
 
       ok(url);
@@ -60,7 +60,7 @@ describe(getFileName(import.meta.url), () => {
   });
 
   it('`meta.messages` should exist', () => {
-    Object.values(rules).forEach(rule => {
+    Object.values(mark.rules).forEach(rule => {
       const { messages } = rule.meta;
 
       ok(messages);
@@ -68,7 +68,7 @@ describe(getFileName(import.meta.url), () => {
   });
 
   it('`meta.message.messageId` should exist and should end with a period', () => {
-    Object.values(rules).forEach(rule => {
+    Object.values(mark.rules).forEach(rule => {
       const { messages } = rule.meta;
 
       Object.values(messages).forEach(message => {
@@ -79,7 +79,7 @@ describe(getFileName(import.meta.url), () => {
   });
 
   it('`meta.language` should exist and should be `markdown`', () => {
-    Object.values(rules).forEach(rule => {
+    Object.values(mark.rules).forEach(rule => {
       const { language } = rule.meta;
 
       ok(language);
@@ -88,7 +88,7 @@ describe(getFileName(import.meta.url), () => {
   });
 
   it("`meta.dialects` should exist and should be `'commonmark'` or `'gfm'`", () => {
-    Object.values(rules).forEach(rule => {
+    Object.values(mark.rules).forEach(rule => {
       const { dialects } = rule.meta;
 
       ok(dialects);
