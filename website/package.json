@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "@codecov/vite-plugin": "^1.9.1",
-    "@shikijs/transformers": "^3.12.3",
+    "@shikijs/transformers": "^3.13.0",
     "@shikijs/vitepress-twoslash": "^3.13.0",
     "eslint-plugin-mark": "^0.1.0-canary.8",
     "markdown-it-footnote": "^4.0.0",
