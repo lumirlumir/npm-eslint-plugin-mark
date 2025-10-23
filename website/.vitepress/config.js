@@ -315,8 +315,8 @@ export default defineConfig({
   ${(rule.meta.dialects.includes('gfm') ?? false) ? '<code class="rule-emoji">🌟 GFM</code>' : ''}
 </p>
 <p>
-  <code class="rule-emoji">🔗 <a target="_blank" href="${URL_RULE_SRC}/${ruleName}/${ruleName}.js">Rule Source</a></code>
-  <code class="rule-emoji">🔗 <a target="_blank" href="${URL_RULE_SRC}/${ruleName}/${ruleName}.test.js">Test Source</a></code>
+  <code class="rule-emoji">🔗 <a target="_blank" href="${URL_RULE_SRC}/${ruleName}.js">Rule Source</a></code>
+  <code class="rule-emoji">🔗 <a target="_blank" href="${URL_RULE_SRC}/${ruleName}.test.js">Test Source</a></code>
 </p>
 <p>
   ${(rule.meta.docs.description ?? '')

@@ -3,6 +3,7 @@
 import allowHeading from './allow-heading.js';
 import altText from './alt-text.js';
 import codeLangShorthand from './code-lang-shorthand.js';
+import consistentThematicBreakStyle from './consistent-thematic-break-style.js';
 import enCapitalization from './en-capitalization.js';
 import headingId from './heading-id.js';
 import imageTitle from './image-title.js';
@@ -20,6 +21,7 @@ export default {
   'allow-heading': allowHeading,
   'alt-text': altText,
   'code-lang-shorthand': codeLangShorthand,
+  'consistent-thematic-break-style': consistentThematicBreakStyle,
   'en-capitalization': enCapitalization,
   'heading-id': headingId,
   'image-title': imageTitle,
