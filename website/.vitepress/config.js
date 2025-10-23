@@ -10,7 +10,6 @@
 import { parse } from 'node:path';
 
 import mark from 'eslint-plugin-mark';
-import rules from 'eslint-plugin-mark/rules';
 import {
   PKG_NAME,
   PKG_DESCRIPTION,
@@ -161,7 +160,7 @@ export default defineConfig({
           text: 'Rules',
           link: '/',
           collapsed: false,
-          items: Object.keys(rules).map(ruleName => ({
+          items: Object.keys(mark.rules).map(ruleName => ({
             text: ruleName,
             link: ruleName,
           })),
@@ -298,7 +297,7 @@ export default defineConfig({
     // Process only the files inside `docs/rules/`, excluding `index.md`.
     if (/^docs\/rules\/(?!index).+/.test(pageData.relativePath)) {
       const ruleName = parse(pageData.relativePath).name;
-      const rule = rules[ruleName];
+      const rule = mark.rules[ruleName];
 
       pageData.title = ruleName;
       pageData.frontmatter.title = ruleName;
