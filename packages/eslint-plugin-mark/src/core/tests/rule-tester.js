@@ -7,7 +7,7 @@
 // --------------------------------------------------------------------------------
 
 import { describe, it } from 'node:test';
-import { doesNotMatch, match, ok } from 'node:assert';
+import { match, ok } from 'node:assert';
 import { RuleTester } from 'eslint';
 import markdown from '@eslint/markdown';
 
@@ -74,12 +74,12 @@ export default function ruleTester(ruleName, rule, tests) {
         ok(meta?.docs);
       });
 
-      it('`meta.docs.description` should exist and should not end with a period', () => {
+      it('`meta.docs.description` should exist and follow the convention', () => {
         ok(meta?.docs?.description);
-        doesNotMatch(meta?.docs?.description, /\.$/);
+        match(meta?.docs?.description, /^(Enforce|Require|Disallow) .+[^. ]$/);
       });
 
-      it('`meta.docs.url` should exist and should end with the rule name`', () => {
+      it('`meta.docs.url` should exist and end with the rule name', () => {
         ok(meta?.docs?.url);
         match(meta?.docs?.url, new RegExp(`${ruleName}$`));
       });
@@ -88,20 +88,20 @@ export default function ruleTester(ruleName, rule, tests) {
         ok(meta?.messages);
       });
 
-      it('`meta.messages.messageId` should exist and should end with a period', () => {
+      it('`meta.messages.messageId` should exist and value should follow the convention', () => {
         // @ts-expect-error -- Required for testing.
         Object.values(meta.messages).forEach(message => {
           ok(message);
-          match(message, /\.$/);
+          match(message, /^[^a-z].*\.$/);
         });
       });
 
-      it('`meta.language` should exist and should be `markdown`', () => {
+      it("`meta.language` should exist and be `'markdown'`", () => {
         ok(meta?.language);
         match(meta?.language, /^markdown$/);
       });
 
-      it("`meta.dialects` should exist and should be `'commonmark'` or `'gfm'`", () => {
+      it("`meta.dialects` should exist and be `'commonmark'` or `'gfm'`", () => {
         ok(meta?.dialects);
         ok(meta?.dialects.length > 0);
         meta?.dialects.forEach(dialect => {
@@ -111,14 +111,17 @@ export default function ruleTester(ruleName, rule, tests) {
     });
 
     describe('rule', () => {
-      it('commonmark', () => {
-        if (meta?.dialects?.includes('commonmark'))
+      if (meta?.dialects?.includes('commonmark')) {
+        it('commonmark', () => {
           ruleTesterCommonmark.run(ruleName, rule, tests);
-      });
+        });
+      }
 
-      it('gfm', () => {
-        if (meta?.dialects?.includes('gfm')) ruleTesterGfm.run(ruleName, rule, tests);
-      });
+      if (meta?.dialects?.includes('gfm')) {
+        it('gfm', () => {
+          ruleTesterGfm.run(ruleName, rule, tests);
+        });
+      }
     });
   });
 }
