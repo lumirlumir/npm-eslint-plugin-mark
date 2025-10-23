@@ -6,8 +6,8 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { test } from 'node:test';
-
+import { describe, it } from 'node:test';
+import { doesNotMatch, match, ok } from 'node:assert';
 import { RuleTester } from 'eslint';
 import markdown from '@eslint/markdown';
 
@@ -53,18 +53,72 @@ const ruleTesterGfm = new RuleTester({
 
 /**
  * Markdown rule tester.
- * @param {string} name Rule name.
+ * @param {string} ruleName Rule name.
  * @param {RuleModule<RuleOptions, MessageIds>} rule Rule module.
  * @param {Tests} tests Tests.
  */
-export default function ruleTester(name, rule, tests) {
-  const dialects = rule?.meta?.dialects;
+export default function ruleTester(ruleName, rule, tests) {
+  const { meta } = rule;
 
-  if (!dialects) throw new Error('Rule meta dialects should be defined');
-  if (dialects.length === 0) throw new Error('Rule meta dialects should not be empty');
+  describe(ruleName, () => {
+    describe('meta', () => {
+      it('`meta` should exist', () => {
+        ok(meta);
+      });
 
-  test(name, () => {
-    if (dialects.includes('commonmark')) ruleTesterCommonmark.run(name, rule, tests);
-    if (dialects.includes('gfm')) ruleTesterGfm.run(name, rule, tests);
+      it('`meta.type` should exist', () => {
+        ok(meta?.type);
+      });
+
+      it('`meta.docs` should exist', () => {
+        ok(meta?.docs);
+      });
+
+      it('`meta.docs.description` should exist and should not end with a period', () => {
+        ok(meta?.docs?.description);
+        doesNotMatch(meta?.docs?.description, /\.$/);
+      });
+
+      it('`meta.docs.url` should exist and should end with the rule name`', () => {
+        ok(meta?.docs?.url);
+        match(meta?.docs?.url, new RegExp(`${ruleName}$`));
+      });
+
+      it('`meta.messages` should exist', () => {
+        ok(meta?.messages);
+      });
+
+      it('`meta.messages.messageId` should exist and should end with a period', () => {
+        // @ts-expect-error -- Required for testing.
+        Object.values(meta.messages).forEach(message => {
+          ok(message);
+          match(message, /\.$/);
+        });
+      });
+
+      it('`meta.language` should exist and should be `markdown`', () => {
+        ok(meta?.language);
+        match(meta?.language, /^markdown$/);
+      });
+
+      it("`meta.dialects` should exist and should be `'commonmark'` or `'gfm'`", () => {
+        ok(meta?.dialects);
+        ok(meta?.dialects.length > 0);
+        meta?.dialects.forEach(dialect => {
+          match(dialect, /^(?:commonmark|gfm)$/);
+        });
+      });
+    });
+
+    describe('rule', () => {
+      it('commonmark', () => {
+        if (meta?.dialects?.includes('commonmark'))
+          ruleTesterCommonmark.run(ruleName, rule, tests);
+      });
+
+      it('gfm', () => {
+        if (meta?.dialects?.includes('gfm')) ruleTesterGfm.run(ruleName, rule, tests);
+      });
+    });
   });
 }
