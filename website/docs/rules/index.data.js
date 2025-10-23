@@ -34,6 +34,7 @@ const ruleMetas = Object.keys(rules).map(
       name: rule,
       description: rules[rule].meta.docs.description ?? '',
       recommended: rules[rule].meta.docs.recommended ?? false,
+      stylistic: rules[rule].meta.docs.stylistic ?? false,
       fixable: rules[rule].meta.fixable ?? false,
       suggestion: rules[rule].meta.docs.suggestion ?? false,
       commonmark: rules[rule].meta.dialects.includes('commonmark') ?? false,

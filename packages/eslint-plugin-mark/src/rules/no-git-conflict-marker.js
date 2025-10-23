@@ -38,11 +38,8 @@ export default {
     docs: {
       description: 'Disallow git conflict markers',
       url: URL_RULE_DOCS('no-git-conflict-marker'),
-
       recommended: true,
-      strict: true,
-      style: false,
-      typography: false,
+      stylistic: false,
     },
 
     schema: [

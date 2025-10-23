@@ -25,18 +25,8 @@ export type RuleModule<
   MessageIds: MessageIds;
   ExtRuleDocs: Partial<{
     /**
-     * Indicates whether this rule is part of the strict configuration.
+     * Indicates whether this rule is part of the stylistic configuration.
      */
-    strict: boolean;
-
-    /**
-     * Indicates whether this rule is part of the style configuration.
-     */
-    style: boolean;
-
-    /**
-     * Indicates whether this rule is part of the typography configuration.
-     */
-    typography: boolean;
+    stylistic: boolean;
   }>;
 }>;

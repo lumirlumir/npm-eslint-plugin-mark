@@ -31,11 +31,8 @@ export default {
     docs: {
       description: 'Enforce consistent thematic break style',
       url: URL_RULE_DOCS('consistent-thematic-break-style'),
-
       recommended: false,
-      strict: false,
-      style: true,
-      typography: false,
+      stylistic: true,
     },
 
     fixable: 'code',

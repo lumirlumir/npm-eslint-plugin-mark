@@ -38,11 +38,8 @@ export default {
     docs: {
       description: 'Enforce the use of allowed text for headings',
       url: URL_RULE_DOCS('allow-heading'),
-
       recommended: false,
-      strict: false,
-      style: false,
-      typography: false,
+      stylistic: false,
     },
 
     schema: [
