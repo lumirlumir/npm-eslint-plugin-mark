@@ -40,11 +40,8 @@ export default {
     docs: {
       description: 'Disallow irregular dash',
       url: URL_RULE_DOCS('no-irregular-dash'),
-
       recommended: false,
-      strict: false,
-      style: false,
-      typography: true,
+      stylistic: false,
     },
 
     schema: [

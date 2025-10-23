@@ -40,11 +40,8 @@ export default {
     docs: {
       description: 'Disallow control character',
       url: URL_RULE_DOCS('no-control-character'),
-
       recommended: true,
-      strict: true,
-      style: false,
-      typography: false,
+      stylistic: false,
     },
 
     schema: [

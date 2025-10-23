@@ -33,11 +33,8 @@ export default {
     docs: {
       description: 'Enforce the use of title attribute for images',
       url: URL_RULE_DOCS('image-title'),
-
       recommended: false,
-      strict: false,
-      style: false,
-      typography: false,
+      stylistic: false,
     },
 
     messages: {
