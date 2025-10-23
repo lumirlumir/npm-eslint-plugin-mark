@@ -103,6 +103,6 @@ Examples of **correct** code for this rule:
 
 ### `skipCode`
 
-> Default: `true`
+> Type: `boolean` / Default: `true`
 
 `true` allows any Git conflict markers in code blocks.

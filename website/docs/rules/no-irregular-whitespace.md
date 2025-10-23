@@ -174,13 +174,13 @@ Examples of **correct** code for this rule:
 
 ### `skipCode`
 
-> Default: `true`
+> Type: `boolean` / Default: `true`
 
 `true` allows any irregular whitespace in code blocks.
 
 ### `skipInlineCode`
 
-> Default: `true`
+> Type: `boolean` / Default: `true`
 
 `true` allows any irregular whitespace in inline code.
 
