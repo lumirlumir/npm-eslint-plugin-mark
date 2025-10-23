@@ -81,7 +81,7 @@ foo bar    <!-- trailing multiple space⁡ -->
 
 ### `checkMultipleSpace`
 
-> Default: `false`
+> Type: `boolean` / Default: `false`
 
 When `checkMultipleSpace` is set to `true`, this rule will also check for multiple consecutive spaces (more than two) within a sentence.
 
