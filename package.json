@@ -9,7 +9,6 @@
   "workspaces": [
     ".",
     "packages/*",
-    "tests/*",
     "website"
   ],
   "scripts": {
@@ -17,9 +16,7 @@
     "release:publish": "node -e \"require('child_process').execSync('npm publish -w packages ' + (require('./package.json').version.includes('-') ? '--tag next' : ''), { stdio: 'inherit' })\"",
     "release:version": "node ./scripts/version.mjs",
     "coverage": "npx c8 --reporter=lcov npm run test",
-    "test": "npm-run-all -c -l -p --aggregate-output test:**",
-    "test:pkg:epm": "npm run test -w packages/eslint-plugin-mark",
-    "test:t:i": "npm run test -w tests/integration",
+    "test": "npm run test -w packages/eslint-plugin-mark",
     "build": "npm-run-all -c -l -p --aggregate-output build:**",
     "build:pkg:epm": "npm run build -w packages/eslint-plugin-mark",
     "build:website": "npm run build -w website",
