@@ -59,8 +59,8 @@ ruleTester(getFileName(import.meta.url), rule, {
   invalid: [
     {
       name: '`consistent` style - 1',
-      code: '*hi*\n\n_hi_\n\n*hi*',
-      output: '*hi*\n\n*hi*\n\n*hi*',
+      code: '*hi*\n\n_hi_\n\n*hi*\n\n**_hi_**',
+      output: '*hi*\n\n*hi*\n\n*hi*\n\n***hi***',
       errors: [
         {
           messageId: 'style',
@@ -70,12 +70,20 @@ ruleTester(getFileName(import.meta.url), rule, {
           endColumn: 5,
           data: { style: '*' },
         },
+        {
+          messageId: 'style',
+          line: 7,
+          column: 3,
+          endLine: 7,
+          endColumn: 7,
+          data: { style: '*' },
+        },
       ],
     },
     {
       name: '`consistent` style - 2',
-      code: '_hi_\n\n*hi*\n\n_hi_',
-      output: '_hi_\n\n_hi_\n\n_hi_',
+      code: '_hi_\n\n*hi*\n\n_hi_\n\n__*hi*__',
+      output: '_hi_\n\n_hi_\n\n_hi_\n\n___hi___',
       errors: [
         {
           messageId: 'style',
@@ -83,6 +91,14 @@ ruleTester(getFileName(import.meta.url), rule, {
           column: 1,
           endLine: 3,
           endColumn: 5,
+          data: { style: '_' },
+        },
+        {
+          messageId: 'style',
+          line: 7,
+          column: 3,
+          endLine: 7,
+          endColumn: 7,
           data: { style: '_' },
         },
       ],
