@@ -4,6 +4,7 @@ import allowHeading from './allow-heading.js';
 import altText from './alt-text.js';
 import codeLangShorthand from './code-lang-shorthand.js';
 import consistentEmphasisStyle from './consistent-emphasis-style.js';
+import consistentStrongStyle from './consistent-strong-style.js';
 import consistentThematicBreakStyle from './consistent-thematic-break-style.js';
 import enCapitalization from './en-capitalization.js';
 import headingId from './heading-id.js';
@@ -23,6 +24,7 @@ export default {
   'alt-text': altText,
   'code-lang-shorthand': codeLangShorthand,
   'consistent-emphasis-style': consistentEmphasisStyle,
+  'consistent-strong-style': consistentStrongStyle,
   'consistent-thematic-break-style': consistentThematicBreakStyle,
   'en-capitalization': enCapitalization,
   'heading-id': headingId,

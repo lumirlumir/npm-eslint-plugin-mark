@@ -77,6 +77,8 @@ export default {
      * @param {number} endOffset
      */
     function reportStyle(startOffset, endOffset) {
+      const stringifiedEmphasisStyle = String(emphasisStyle);
+
       context.report({
         loc: {
           start: sourceCode.getLocFromIndex(startOffset),
@@ -86,11 +88,14 @@ export default {
         messageId: 'style',
 
         data: {
-          style: String(emphasisStyle),
+          style: stringifiedEmphasisStyle,
         },
 
         fix(fixer) {
-          return fixer.replaceTextRange([startOffset, endOffset], String(emphasisStyle));
+          return fixer.replaceTextRange(
+            [startOffset, endOffset],
+            stringifiedEmphasisStyle,
+          );
         },
       });
     }
