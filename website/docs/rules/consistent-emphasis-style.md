@@ -75,21 +75,61 @@ Examples of **correct** code for this rule:
 <!-- eslint mark/consistent-emphasis-style: "error" -->
 
 *foo*
-
-*bar*
-
-*baz*
+__*bar*__
+*__baz__*
+***qux***
 ```
 
 ```md eslint-check
 <!-- eslint mark/consistent-emphasis-style: "error" -->
 
 _foo_
-
-_bar_
-
-_baz_
+**_bar_**
+_**baz**_
+___qux___
 ```
+
+#### With `{ style: '*' }` Option
+
+```md eslint-check
+<!-- eslint mark/consistent-emphasis-style: ["error", { style: '*' }] -->
+
+*foo*
+__*bar*__
+*__baz__*
+***qux***
+```
+
+#### With `{ style: '_' }` Option
+
+```md eslint-check
+<!-- eslint mark/consistent-emphasis-style: ["error", { style: '_' }] -->
+
+_foo_
+**_bar_**
+_**baz**_
+___qux___
+```
+
+## Options
+
+```js
+'mark/consistent-emphasis-style': ['error', {
+  style: 'consistent',
+}]
+```
+
+### `style`
+
+> Type: `'consistent' | '*' | '_'` / Default: `'consistent'`
+
+When `style` is set to `'consistent'`, the rule enforces that all emphasis in the document use the same style as the first one encountered.
+
+You can also specify a particular style by setting style to `'*'` or `'_'`, which will enforce that all emphasis use the specified style.
+
+## Fix
+
+This rule fixes the emphasis by replacing them with the configured style.
 
 ## Prior Art
 
