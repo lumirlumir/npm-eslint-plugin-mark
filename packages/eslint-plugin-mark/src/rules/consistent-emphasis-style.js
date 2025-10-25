@@ -16,7 +16,7 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 /**
  * @import { RuleModule } from '../core/types.js';
  * @typedef {[{ style: 'consistent' | '*' | '_' }]} RuleOptions
- * @typedef {'consistentEmphasisStyle'} MessageIds
+ * @typedef {'style'} MessageIds
  */
 
 // --------------------------------------------------------------------------------
@@ -31,11 +31,8 @@ export default {
     docs: {
       description: 'Enforce consistent emphasis style',
       url: URL_RULE_DOCS('consistent-emphasis-style'),
-
       recommended: false,
-      strict: false,
-      style: true,
-      typography: false,
+      stylistic: true,
     },
 
     fixable: 'code',
@@ -59,7 +56,7 @@ export default {
     ],
 
     messages: {
-      consistentEmphasisStyle: 'Emphasis style should be `{{ style }}`.',
+      style: 'Emphasis style should be `{{ style }}`.',
     },
 
     language: 'markdown',
@@ -75,8 +72,9 @@ export default {
     let emphasisStyle = style === 'consistent' ? null : style;
 
     return {
-      thematicBreak(node) {
-        const currentEmphasisStyle = sourceCode.getText(node);
+      emphasis(node) {
+        const [nodeStartOffset, nodeEndOffset] = sourceCode.getRange(node);
+        const currentEmphasisStyle = sourceCode.text[nodeStartOffset];
 
         if (emphasisStyle === null) {
           emphasisStyle = currentEmphasisStyle;
@@ -86,17 +84,23 @@ export default {
           context.report({
             node,
 
-            messageId: 'consistentEmphasisStyle',
+            messageId: 'style',
 
             data: {
               style: emphasisStyle,
             },
 
             fix(fixer) {
-              return fixer.replaceTextRange(
-                sourceCode.getRange(node),
-                String(emphasisStyle),
-              );
+              return [
+                fixer.replaceTextRange(
+                  [nodeStartOffset, nodeStartOffset + 1],
+                  String(emphasisStyle),
+                ),
+                fixer.replaceTextRange(
+                  [nodeEndOffset - 1, nodeEndOffset],
+                  String(emphasisStyle),
+                ),
+              ];
             },
           });
         }
