@@ -71,6 +71,30 @@ export default {
     /** @type {string | null} */
     let emphasisStyle = style === 'consistent' ? null : style;
 
+    /**
+     * Report style.
+     * @param {number} startOffset
+     * @param {number} endOffset
+     */
+    function reportStyle(startOffset, endOffset) {
+      context.report({
+        loc: {
+          start: sourceCode.getLocFromIndex(startOffset),
+          end: sourceCode.getLocFromIndex(endOffset),
+        },
+
+        messageId: 'style',
+
+        data: {
+          style: String(emphasisStyle),
+        },
+
+        fix(fixer) {
+          return fixer.replaceTextRange([startOffset, endOffset], String(emphasisStyle));
+        },
+      });
+    }
+
     return {
       emphasis(node) {
         const [nodeStartOffset, nodeEndOffset] = sourceCode.getRange(node);
@@ -81,28 +105,8 @@ export default {
         }
 
         if (emphasisStyle !== currentEmphasisStyle) {
-          context.report({
-            node,
-
-            messageId: 'style',
-
-            data: {
-              style: emphasisStyle,
-            },
-
-            fix(fixer) {
-              return [
-                fixer.replaceTextRange(
-                  [nodeStartOffset, nodeStartOffset + 1],
-                  String(emphasisStyle),
-                ),
-                fixer.replaceTextRange(
-                  [nodeEndOffset - 1, nodeEndOffset],
-                  String(emphasisStyle),
-                ),
-              ];
-            },
-          });
+          reportStyle(nodeStartOffset, nodeStartOffset + 1);
+          reportStyle(nodeEndOffset - 1, nodeEndOffset);
         }
       },
     };
