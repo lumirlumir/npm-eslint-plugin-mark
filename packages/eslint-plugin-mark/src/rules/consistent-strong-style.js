@@ -1,5 +1,5 @@
 /**
- * @fileoverview Rule to enforce consistent emphasis style.
+ * @fileoverview Rule to enforce consistent strong style.
  * @author 루밀LuMir(lumirlumir)
  */
 
@@ -29,8 +29,8 @@ export default {
     type: 'layout',
 
     docs: {
-      description: 'Enforce consistent emphasis style',
-      url: URL_RULE_DOCS('consistent-emphasis-style'),
+      description: 'Enforce consistent strong style',
+      url: URL_RULE_DOCS('consistent-strong-style'),
       recommended: false,
       stylistic: true,
     },
@@ -56,7 +56,7 @@ export default {
     ],
 
     messages: {
-      style: 'Emphasis style should be `{{ style }}`.',
+      style: 'Strong style should be `{{ style }}`.',
     },
 
     language: 'markdown',
@@ -69,7 +69,7 @@ export default {
     const [{ style }] = context.options;
 
     /** @type {string | null} */
-    let emphasisStyle = style === 'consistent' ? null : style;
+    let strongStyle = style === 'consistent' ? null : style;
 
     /**
      * Report style.
@@ -77,7 +77,7 @@ export default {
      * @param {number} endOffset
      */
     function reportStyle(startOffset, endOffset) {
-      const stringifiedEmphasisStyle = String(emphasisStyle);
+      const stringifiedStrongStyle = String(strongStyle).repeat(2);
 
       context.report({
         loc: {
@@ -88,30 +88,27 @@ export default {
         messageId: 'style',
 
         data: {
-          style: stringifiedEmphasisStyle,
+          style: stringifiedStrongStyle,
         },
 
         fix(fixer) {
-          return fixer.replaceTextRange(
-            [startOffset, endOffset],
-            stringifiedEmphasisStyle,
-          );
+          return fixer.replaceTextRange([startOffset, endOffset], stringifiedStrongStyle);
         },
       });
     }
 
     return {
-      emphasis(node) {
+      strong(node) {
         const [nodeStartOffset, nodeEndOffset] = sourceCode.getRange(node);
-        const currentEmphasisStyle = sourceCode.text[nodeStartOffset];
+        const currentStrongStyle = sourceCode.text[nodeStartOffset];
 
-        if (emphasisStyle === null) {
-          emphasisStyle = currentEmphasisStyle;
+        if (strongStyle === null) {
+          strongStyle = currentStrongStyle;
         }
 
-        if (emphasisStyle !== currentEmphasisStyle) {
-          reportStyle(nodeStartOffset, nodeStartOffset + 1);
-          reportStyle(nodeEndOffset - 1, nodeEndOffset);
+        if (strongStyle !== currentStrongStyle) {
+          reportStyle(nodeStartOffset, nodeStartOffset + 2);
+          reportStyle(nodeEndOffset - 2, nodeEndOffset);
         }
       },
     };
