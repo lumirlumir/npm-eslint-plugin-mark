@@ -64,25 +64,25 @@ Examples of **correct** code for this rule:
 
 ### `checkLeftDoubleQuotationMark`
 
-> Default: `true`
+> Type: `boolean` / Default: `true`
 
 When `checkLeftDoubleQuotationMark` is set to `false`, this rule will not check for the left double quotation mark (`“`).
 
 ### `checkRightDoubleQuotationMark`
 
-> Default: `true`
+> Type: `boolean` / Default: `true`
 
 When `checkRightDoubleQuotationMark` is set to `false`, this rule will not check for the right double quotation mark (`”`).
 
 ### `checkLeftSingleQuotationMark`
 
-> Default: `true`
+> Type: `boolean` / Default: `true`
 
 When `checkLeftSingleQuotationMark` is set to `false`, this rule will not check for the left single quotation mark (`‘`).
 
 ### `checkRightSingleQuotationMark`
 
-> Default: `true`
+> Type: `boolean` / Default: `true`
 
 When `checkRightSingleQuotationMark` is set to `false`, this rule will not check for the right single quotation mark (`’`).
 

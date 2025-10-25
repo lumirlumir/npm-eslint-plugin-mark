@@ -31,11 +31,8 @@ export default {
     docs: {
       description: 'Disallow using fully bolded paragraphs as headings',
       url: URL_RULE_DOCS('no-bold-paragraph'),
-
       recommended: true,
-      strict: true,
-      style: false,
-      typography: false,
+      stylistic: false,
     },
 
     messages: {

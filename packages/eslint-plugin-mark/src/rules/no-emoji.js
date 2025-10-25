@@ -32,11 +32,8 @@ export default {
     docs: {
       description: 'Disallow emojis in text',
       url: URL_RULE_DOCS('no-emoji'),
-
       recommended: false,
-      strict: false,
-      style: false,
-      typography: false,
+      stylistic: false,
     },
 
     messages: {

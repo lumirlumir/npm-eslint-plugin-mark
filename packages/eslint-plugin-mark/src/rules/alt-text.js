@@ -32,11 +32,8 @@ export default {
     docs: {
       description: 'Enforce the use of alternative text for images',
       url: URL_RULE_DOCS('alt-text'),
-
       recommended: true,
-      strict: true,
-      style: false,
-      typography: false,
+      stylistic: false,
     },
 
     messages: {

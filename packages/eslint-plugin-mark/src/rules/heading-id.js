@@ -32,11 +32,8 @@ export default {
     docs: {
       description: 'Enforce the use of heading IDs',
       url: URL_RULE_DOCS('heading-id'),
-
       recommended: false,
-      strict: false,
-      style: false,
-      typography: false,
+      stylistic: false,
     },
 
     fixable: 'code',

@@ -60,11 +60,8 @@ export default {
     docs: {
       description: 'Enforce the use of capital letters at the beginning of sentences',
       url: URL_RULE_DOCS('en-capitalization'),
-
       recommended: false,
-      strict: true,
-      style: false,
-      typography: false,
+      stylistic: false,
     },
 
     fixable: 'code',

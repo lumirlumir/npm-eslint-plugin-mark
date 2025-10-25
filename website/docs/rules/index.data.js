@@ -7,10 +7,10 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import rules from 'eslint-plugin-mark/rules';
+import mark from 'eslint-plugin-mark';
 
 // --------------------------------------------------------------------------------
-// Typedefs
+// Typedef
 // --------------------------------------------------------------------------------
 
 /**
@@ -25,15 +25,17 @@ import rules from 'eslint-plugin-mark/rules';
  */
 
 // --------------------------------------------------------------------------------
-// Helpers
+// Helper
 // --------------------------------------------------------------------------------
 
+const { rules } = mark;
 const ruleMetas = Object.keys(rules).map(
   rule =>
     /** @type {RuleMeta} */ ({
       name: rule,
       description: rules[rule].meta.docs.description ?? '',
       recommended: rules[rule].meta.docs.recommended ?? false,
+      stylistic: rules[rule].meta.docs.stylistic ?? false,
       fixable: rules[rule].meta.fixable ?? false,
       suggestion: rules[rule].meta.docs.suggestion ?? false,
       commonmark: rules[rule].meta.dialects.includes('commonmark') ?? false,

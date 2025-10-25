@@ -40,11 +40,8 @@ export default {
       description:
         'Disallow double or multiple consecutive spaces in text, except for leading and trailing spaces',
       url: URL_RULE_DOCS('no-double-space'),
-
       recommended: true,
-      strict: true,
-      style: false,
-      typography: false,
+      stylistic: false,
     },
 
     fixable: 'whitespace',

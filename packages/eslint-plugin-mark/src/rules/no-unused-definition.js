@@ -34,11 +34,8 @@ export default {
     docs: {
       description: 'Disallow unused definitions',
       url: URL_RULE_DOCS('no-unused-definition'),
-
       recommended: true,
-      strict: true,
-      style: false,
-      typography: false,
+      stylistic: false,
     },
 
     messages: {
