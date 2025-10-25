@@ -16,7 +16,6 @@ import rule from './consistent-emphasis-style.js';
 
 ruleTester(getFileName(import.meta.url), rule, {
   valid: [
-    /*
     {
       name: 'Empty',
       code: '',
@@ -27,13 +26,24 @@ ruleTester(getFileName(import.meta.url), rule, {
     },
     {
       name: '`consistent` style - 1',
-      code: '---',
+      code: '*hi*',
     },
     {
       name: '`consistent` style - 2',
-      code: '---\n\n---\n\n---',
+      code: '*hi*\n\n*hi*\n\n*hi*',
     },
-    */
+    {
+      name: '`consistent` style - 3',
+      code: '_hi_\n\n_hi_\n\n_hi_',
+    },
+    {
+      name: '`consistent` style - 4',
+      code: '__*hi*__\n\n*__hi__*\n\n***hi***',
+    },
+    {
+      name: '`consistent` style - 5',
+      code: '**_hi_**\n\n_**hi**_\n\n___hi___',
+    },
   ],
 
   invalid: [
