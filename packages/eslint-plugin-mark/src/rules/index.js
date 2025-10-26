@@ -11,6 +11,7 @@ import enCapitalization from './en-capitalization.js';
 import headingId from './heading-id.js';
 import imageTitle from './image-title.js';
 import noBoldParagraph from './no-bold-paragraph.js';
+import noConsecutiveBlankLine from './no-consecutive-blank-line.js';
 import noControlCharacter from './no-control-character.js';
 import noCurlyQuote from './no-curly-quote.js';
 import noDoubleSpace from './no-double-space.js';
@@ -32,6 +33,7 @@ export default {
   'heading-id': headingId,
   'image-title': imageTitle,
   'no-bold-paragraph': noBoldParagraph,
+  'no-consecutive-blank-line': noConsecutiveBlankLine,
   'no-control-character': noControlCharacter,
   'no-curly-quote': noCurlyQuote,
   'no-double-space': noDoubleSpace,
