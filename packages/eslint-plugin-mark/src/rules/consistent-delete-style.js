@@ -1,5 +1,5 @@
 /**
- * @fileoverview Rule to enforce consistent emphasis style.
+ * @fileoverview Rule to enforce consistent delete style.
  * @author 루밀LuMir(lumirlumir)
  */
 
@@ -15,7 +15,7 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 
 /**
  * @import { RuleModule } from '../core/types.js';
- * @typedef {[{ style: 'consistent' | '*' | '_' }]} RuleOptions
+ * @typedef {[{ style: 'consistent' | '~' | '~~' }]} RuleOptions
  * @typedef {'style'} MessageIds
  */
 
@@ -29,8 +29,8 @@ export default {
     type: 'layout',
 
     docs: {
-      description: 'Enforce consistent emphasis style',
-      url: URL_RULE_DOCS('consistent-emphasis-style'),
+      description: 'Enforce consistent delete style',
+      url: URL_RULE_DOCS('consistent-delete-style'),
       recommended: false,
       stylistic: true,
     },
@@ -42,7 +42,7 @@ export default {
         type: 'object',
         properties: {
           style: {
-            enum: ['consistent', '*', '_'],
+            enum: ['consistent', '~', '~~'],
           },
         },
         additionalProperties: false,
@@ -56,12 +56,12 @@ export default {
     ],
 
     messages: {
-      style: 'Emphasis style should be `{{ style }}`.',
+      style: 'Delete style should be `{{ style }}`.',
     },
 
     language: 'markdown',
 
-    dialects: ['commonmark', 'gfm'],
+    dialects: ['gfm'],
   },
 
   create(context) {
@@ -69,15 +69,14 @@ export default {
     const [{ style }] = context.options;
 
     /** @type {string | null} */
-    let emphasisStyle = style === 'consistent' ? null : style;
+    let deleteStyle = style === 'consistent' ? null : style;
 
     /**
-     * Report style.
      * @param {number} startOffset
      * @param {number} endOffset
      */
     function reportStyle(startOffset, endOffset) {
-      const stringifiedEmphasisStyle = String(emphasisStyle);
+      const stringifiedDeleteStyle = String(deleteStyle);
 
       context.report({
         loc: {
@@ -88,14 +87,11 @@ export default {
         messageId: 'style',
 
         data: {
-          style: stringifiedEmphasisStyle,
+          style: stringifiedDeleteStyle,
         },
 
         fix(fixer) {
-          return fixer.replaceTextRange(
-            [startOffset, endOffset],
-            stringifiedEmphasisStyle,
-          );
+          return fixer.replaceTextRange([startOffset, endOffset], stringifiedDeleteStyle);
         },
       });
     }
@@ -103,13 +99,13 @@ export default {
     return {
       emphasis(node) {
         const [nodeStartOffset, nodeEndOffset] = sourceCode.getRange(node);
-        const currentEmphasisStyle = sourceCode.text[nodeStartOffset];
+        const currentDeleteStyle = sourceCode.text[nodeStartOffset];
 
-        if (emphasisStyle === null) {
-          emphasisStyle = currentEmphasisStyle;
+        if (deleteStyle === null) {
+          deleteStyle = currentDeleteStyle;
         }
 
-        if (emphasisStyle !== currentEmphasisStyle) {
+        if (deleteStyle !== currentDeleteStyle) {
           reportStyle(nodeStartOffset, nodeStartOffset + 1);
           reportStyle(nodeEndOffset - 1, nodeEndOffset);
         }
