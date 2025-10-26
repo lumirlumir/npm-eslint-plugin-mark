@@ -123,7 +123,7 @@ You can also specify a particular style by setting style to `'~'` or `'~~'`, whi
 
 ## Fix
 
-This rule fixes the emphasis by replacing them with the configured style.
+This rule fixes the deletes by replacing them with the configured style.
 
 ## Prior Art
 
