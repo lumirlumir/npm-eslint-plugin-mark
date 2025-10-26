@@ -96,11 +96,10 @@ ruleTester(getFileName(import.meta.url), rule, {
         },
       ],
     },
-    /*
     {
       name: '`consistent` style - 2',
-      code: '_hi_\n\n*hi*\n\n_hi_\n\n__*hi*__',
-      output: '_hi_\n\n_hi_\n\n_hi_\n\n___hi___',
+      code: '~~hi~~\n\n~hi~\n\n~~hi~~\n\n__~hi~__',
+      output: '~~hi~~\n\n~~hi~~\n\n~~hi~~\n\n__~~hi~~__',
       errors: [
         {
           messageId: 'style',
@@ -108,7 +107,7 @@ ruleTester(getFileName(import.meta.url), rule, {
           column: 1,
           endLine: 3,
           endColumn: 2,
-          data: { style: '_' },
+          data: { style: '~~' },
         },
         {
           messageId: 'style',
@@ -116,7 +115,7 @@ ruleTester(getFileName(import.meta.url), rule, {
           column: 4,
           endLine: 3,
           endColumn: 5,
-          data: { style: '_' },
+          data: { style: '~~' },
         },
         {
           messageId: 'style',
@@ -124,7 +123,7 @@ ruleTester(getFileName(import.meta.url), rule, {
           column: 3,
           endLine: 7,
           endColumn: 4,
-          data: { style: '_' },
+          data: { style: '~~' },
         },
         {
           messageId: 'style',
@@ -132,15 +131,55 @@ ruleTester(getFileName(import.meta.url), rule, {
           column: 6,
           endLine: 7,
           endColumn: 7,
-          data: { style: '_' },
+          data: { style: '~~' },
         },
       ],
     },
     {
-      name: '`*` style - 1',
-      code: '_hi_\n\n_hi_',
-      output: '*hi*\n\n*hi*',
-      options: [{ style: '*' }],
+      name: '`~` style - 1',
+      code: '~~hi~~\n\n~~hi~~',
+      output: '~hi~\n\n~hi~',
+      options: [{ style: '~' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 3,
+          data: { style: '~' },
+        },
+        {
+          messageId: 'style',
+          line: 1,
+          column: 5,
+          endLine: 1,
+          endColumn: 7,
+          data: { style: '~' },
+        },
+        {
+          messageId: 'style',
+          line: 3,
+          column: 1,
+          endLine: 3,
+          endColumn: 3,
+          data: { style: '~' },
+        },
+        {
+          messageId: 'style',
+          line: 3,
+          column: 5,
+          endLine: 3,
+          endColumn: 7,
+          data: { style: '~' },
+        },
+      ],
+    },
+    {
+      name: '`~~` style - 1',
+      code: '~hi~\n\n~hi~',
+      output: '~~hi~~\n\n~~hi~~',
+      options: [{ style: '~~' }],
       errors: [
         {
           messageId: 'style',
@@ -148,7 +187,7 @@ ruleTester(getFileName(import.meta.url), rule, {
           column: 1,
           endLine: 1,
           endColumn: 2,
-          data: { style: '*' },
+          data: { style: '~~' },
         },
         {
           messageId: 'style',
@@ -156,7 +195,7 @@ ruleTester(getFileName(import.meta.url), rule, {
           column: 4,
           endLine: 1,
           endColumn: 5,
-          data: { style: '*' },
+          data: { style: '~~' },
         },
         {
           messageId: 'style',
@@ -164,7 +203,7 @@ ruleTester(getFileName(import.meta.url), rule, {
           column: 1,
           endLine: 3,
           endColumn: 2,
-          data: { style: '*' },
+          data: { style: '~~' },
         },
         {
           messageId: 'style',
@@ -172,50 +211,9 @@ ruleTester(getFileName(import.meta.url), rule, {
           column: 4,
           endLine: 3,
           endColumn: 5,
-          data: { style: '*' },
+          data: { style: '~~' },
         },
       ],
     },
-    {
-      name: '`_` style - 1',
-      code: '*hi*\n\n*hi*',
-      output: '_hi_\n\n_hi_',
-      options: [{ style: '_' }],
-      errors: [
-        {
-          messageId: 'style',
-          line: 1,
-          column: 1,
-          endLine: 1,
-          endColumn: 2,
-          data: { style: '_' },
-        },
-        {
-          messageId: 'style',
-          line: 1,
-          column: 4,
-          endLine: 1,
-          endColumn: 5,
-          data: { style: '_' },
-        },
-        {
-          messageId: 'style',
-          line: 3,
-          column: 1,
-          endLine: 3,
-          endColumn: 2,
-          data: { style: '_' },
-        },
-        {
-          messageId: 'style',
-          line: 3,
-          column: 4,
-          endLine: 3,
-          endColumn: 5,
-          data: { style: '_' },
-        },
-      ],
-    },
-    */
   ],
 });
