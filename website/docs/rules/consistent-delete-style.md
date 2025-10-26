@@ -117,7 +117,7 @@ _~~qux~~_
 
 > Type: `'consistent' | '~' | '~~'` / Default: `'consistent'`
 
-When `style` is set to `'consistent'`, the rule enforces that all delete in the document use the same style as the first one encountered.
+When `style` is set to `'consistent'`, the rule enforces that all deletes in the document use the same style as the first one encountered.
 
 You can also specify a particular style by setting style to `'~'` or `'~~'`, which will enforce that all emphasis use the specified style.
 
