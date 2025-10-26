@@ -97,17 +97,20 @@ export default {
     }
 
     return {
-      emphasis(node) {
+      delete(node) {
         const [nodeStartOffset, nodeEndOffset] = sourceCode.getRange(node);
-        const currentDeleteStyle = sourceCode.text[nodeStartOffset];
+        const currentDeleteStyle =
+          sourceCode.text[nodeStartOffset] === sourceCode.text[nodeStartOffset + 1]
+            ? '~~'
+            : '~';
 
         if (deleteStyle === null) {
           deleteStyle = currentDeleteStyle;
         }
 
         if (deleteStyle !== currentDeleteStyle) {
-          reportStyle(nodeStartOffset, nodeStartOffset + 1);
-          reportStyle(nodeEndOffset - 1, nodeEndOffset);
+          reportStyle(nodeStartOffset, nodeStartOffset + currentDeleteStyle.length);
+          reportStyle(nodeEndOffset - currentDeleteStyle.length, nodeEndOffset);
         }
       },
     };

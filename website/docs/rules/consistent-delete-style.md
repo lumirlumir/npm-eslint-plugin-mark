@@ -3,9 +3,9 @@
 
 ## Rule Details
 
-This rule enforces a single, consistent style for emphasis (italic text) in Markdown files. Consistent formatting makes it easier to understand a document, and mixing different emphasis styles can reduce readability.
+This rule enforces a single, consistent style for delete (strikethrough text) in Markdown files. Consistent formatting makes it easier to understand a document, and mixing different delete styles can reduce readability.
 
-An emphasis is defined as text wrapped in either `*` (asterisks) or `_` (underscores). While Markdown allows any of these styles, this rule ensures that only one is used throughout the document.
+A delete is defined as text wrapped in either `~` (single tilde) or `~~` (double tildes). While Markdown allows any of these styles, this rule ensures that only one is used throughout the document.
 
 ## Examples
 
@@ -16,53 +16,47 @@ Examples of **incorrect** code for this rule:
 #### Default
 
 ```md eslint-check
-<!-- eslint mark/consistent-emphasis-style: "error" -->
+<!-- eslint mark/consistent-delete-style: "error" -->
 
-*foo*
-_bar_
-*baz*
-**_foo_**
-__*bar*__
-_**foo**_
-*__bar__*
-___foo___
-***bar***
+~foo~
+~~bar~~
+~baz~
+~~_foo_~~
+__~bar~__
+_~~foo~~_
+~__bar__~
 ```
 
 ```md eslint-check
-<!-- eslint mark/consistent-emphasis-style: "error" -->
+<!-- eslint mark/consistent-delete-style: "error" -->
 
-_foo_
-*bar*
-_baz_
-__*foo*__
-**_bar_**
-*__foo__*
-_**bar**_
-***foo***
-___bar___
+~~foo~~
+~bar~
+~~baz~~
+__~foo~__
+~~_bar_~~
+~__foo__~
+_~~bar~~_
 ```
 
-#### With `{ style: '*' }` Option
+#### With `{ style: '~' }` Option
 
 ```md eslint-check
-<!-- eslint mark/consistent-emphasis-style: ["error", { style: '*' }] -->
+<!-- eslint mark/consistent-delete-style: ["error", { style: '~' }] -->
 
-_foo_
-**_bar_**
-_**baz**_
-___qux___
+~~foo~~
+~~_bar_~~
+_~~baz~~_
 ```
 
-#### With `{ style: '_' }` Option
+#### With `{ style: '~~' }` Option
 
 ```md eslint-check
-<!-- eslint mark/consistent-emphasis-style: ["error", { style: '_' }] -->
+<!-- eslint mark/consistent-delete-style: ["error", { style: '~~' }] -->
 
-*foo*
-__*bar*__
-*__baz__*
-***qux***
+~foo~
+__~bar~__
+~__baz__~
 ```
 
 ### :white_check_mark: Correct {#correct}
@@ -72,60 +66,60 @@ Examples of **correct** code for this rule:
 #### Default
 
 ```md eslint-check
-<!-- eslint mark/consistent-emphasis-style: "error" -->
+<!-- eslint mark/consistent-delete-style: "error" -->
 
-*foo*
-__*bar*__
-*__baz__*
-***qux***
+~foo~
+~bar~
+__~baz~__
+~__qux__~
 ```
 
 ```md eslint-check
-<!-- eslint mark/consistent-emphasis-style: "error" -->
+<!-- eslint mark/consistent-delete-style: "error" -->
 
-_foo_
-**_bar_**
-_**baz**_
-___qux___
+~~foo~~
+~~bar~~
+~~_baz_~~
+_~~qux~~_
 ```
 
-#### With `{ style: '*' }` Option
+#### With `{ style: '~' }` Option
 
 ```md eslint-check
-<!-- eslint mark/consistent-emphasis-style: ["error", { style: '*' }] -->
+<!-- eslint mark/consistent-delete-style: ["error", { style: '~' }] -->
 
-*foo*
-__*bar*__
-*__baz__*
-***qux***
+~foo~
+~bar~
+__~baz~__
+~__qux__~
 ```
 
-#### With `{ style: '_' }` Option
+#### With `{ style: '~~' }` Option
 
 ```md eslint-check
-<!-- eslint mark/consistent-emphasis-style: ["error", { style: '_' }] -->
+<!-- eslint mark/consistent-delete-style: ["error", { style: '~~' }] -->
 
-_foo_
-**_bar_**
-_**baz**_
-___qux___
+~~foo~~
+~~bar~~
+~~_baz_~~
+_~~qux~~_
 ```
 
 ## Options
 
 ```js
-'mark/consistent-emphasis-style': ['error', {
+'mark/consistent-delete-style': ['error', {
   style: 'consistent',
 }]
 ```
 
 ### `style`
 
-> Type: `'consistent' | '*' | '_'` / Default: `'consistent'`
+> Type: `'consistent' | '~' | '~~'` / Default: `'consistent'`
 
-When `style` is set to `'consistent'`, the rule enforces that all emphasis in the document use the same style as the first one encountered.
+When `style` is set to `'consistent'`, the rule enforces that all delete in the document use the same style as the first one encountered.
 
-You can also specify a particular style by setting style to `'*'` or `'_'`, which will enforce that all emphasis use the specified style.
+You can also specify a particular style by setting style to `'~'` or `'~~'`, which will enforce that all emphasis use the specified style.
 
 ## Fix
 
@@ -133,5 +127,4 @@ This rule fixes the emphasis by replacing them with the configured style.
 
 ## Prior Art
 
-- [`MD049` - Emphasis style](https://github.com/DavidAnson/markdownlint/blob/main/doc/md049.md#md049---emphasis-style)
-- [`remark-lint-emphasis-marker`](https://github.com/remarkjs/remark-lint/tree/main/packages/remark-lint-emphasis-marker#remark-lint-emphasis-marker)
+- [`remark-lint-strikethrough-marker`](https://github.com/remarkjs/remark-lint/tree/main/packages/remark-lint-strikethrough-marker#remark-lint-strikethrough-marker)
