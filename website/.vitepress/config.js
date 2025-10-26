@@ -329,6 +329,12 @@ export default defineConfig({
     .join('')}.
 </p>
 
+${
+  !rule.meta.dialects.includes('commonmark') && rule.meta.dialects.includes('gfm')
+    ? '<div class="caution custom-block github-alert" bis_skin_checked="1"><p class="custom-block-title">GFM Only</p><p></p><p>This rule applies only when GFM (GitHub Flavored Markdown) is enabled by setting the <code>language</code> mode to <code>markdown/gfm</code>.</p></div>'
+    : ''
+}
+
 `;
     }
 

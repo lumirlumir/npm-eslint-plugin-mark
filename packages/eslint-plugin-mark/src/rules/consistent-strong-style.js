@@ -72,7 +72,6 @@ export default {
     let strongStyle = style === 'consistent' ? null : style;
 
     /**
-     * Report style.
      * @param {number} startOffset
      * @param {number} endOffset
      */
