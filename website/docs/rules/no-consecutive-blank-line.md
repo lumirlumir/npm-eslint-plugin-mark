@@ -131,6 +131,10 @@ You can also specify a particular style by setting style to `'*'` or `'_'`, whic
 
 This rule fixes the emphasis by replacing them with the configured style.
 
+## Further Reading
+
+- [CommonMark Spec: Blank Line](https://spec.commonmark.org/0.31.2/#blank-line)
+
 ## Prior Art
 
 - [`MD012` - Multiple consecutive blank lines](https://github.com/DavidAnson/markdownlint/blob/main/doc/md012.md#md012---multiple-consecutive-blank-lines)
