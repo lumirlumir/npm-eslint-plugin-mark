@@ -72,6 +72,7 @@ export default {
     let emphasisStyle = style === 'consistent' ? null : style;
 
     /**
+     * Report style.
      * @param {number} startOffset
      * @param {number} endOffset
      */
