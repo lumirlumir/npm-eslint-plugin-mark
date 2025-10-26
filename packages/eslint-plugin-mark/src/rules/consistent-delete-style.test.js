@@ -57,46 +57,46 @@ ruleTester(getFileName(import.meta.url), rule, {
   ],
 
   invalid: [
-    /*
     {
       name: '`consistent` style - 1',
-      code: '*hi*\n\n_hi_\n\n*hi*\n\n**_hi_**',
-      output: '*hi*\n\n*hi*\n\n*hi*\n\n***hi***',
+      code: '~hi~\n\n~~hi~~\n\n~hi~\n\n~~_hi_~~',
+      output: '~hi~\n\n~hi~\n\n~hi~\n\n~_hi_~',
       errors: [
         {
           messageId: 'style',
           line: 3,
           column: 1,
           endLine: 3,
-          endColumn: 2,
-          data: { style: '*' },
+          endColumn: 3,
+          data: { style: '~' },
         },
         {
           messageId: 'style',
           line: 3,
-          column: 4,
+          column: 5,
           endLine: 3,
-          endColumn: 5,
-          data: { style: '*' },
-        },
-        {
-          messageId: 'style',
-          line: 7,
-          column: 3,
-          endLine: 7,
-          endColumn: 4,
-          data: { style: '*' },
-        },
-        {
-          messageId: 'style',
-          line: 7,
-          column: 6,
-          endLine: 7,
           endColumn: 7,
-          data: { style: '*' },
+          data: { style: '~' },
+        },
+        {
+          messageId: 'style',
+          line: 7,
+          column: 1,
+          endLine: 7,
+          endColumn: 3,
+          data: { style: '~' },
+        },
+        {
+          messageId: 'style',
+          line: 7,
+          column: 7,
+          endLine: 7,
+          endColumn: 9,
+          data: { style: '~' },
         },
       ],
     },
+    /*
     {
       name: '`consistent` style - 2',
       code: '_hi_\n\n*hi*\n\n_hi_\n\n__*hi*__',
