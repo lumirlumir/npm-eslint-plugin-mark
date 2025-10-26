@@ -1,7 +1,5 @@
-// TODO
-
 /**
- * @fileoverview Rule to enforce consistent emphasis style.
+ * @fileoverview Rule to disallow consecutive blank lines.
  * @author 루밀LuMir(lumirlumir)
  */
 
