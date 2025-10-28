@@ -187,6 +187,10 @@ export default defineConfig({
               link: 'configurations',
             },
             {
+              text: 'Migration',
+              link: 'migration',
+            },
+            {
               text: 'Dependency Versions',
               link: 'dependency-versions',
             },
@@ -200,7 +204,7 @@ export default defineConfig({
         {
           base: '/docs/community/',
           text: 'Community',
-          collapsed: true,
+          collapsed: false,
           items: [
             {
               text: 'Code of Conduct',
