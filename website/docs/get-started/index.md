@@ -1,5 +1,5 @@
 ---
-description: "Overview for the `eslint-plugin-mark` npm package."
+description: "Overview for the `eslint-markdown` npm package."
 next:
   text: 'Introduction'
   link: '/docs/get-started/introduction/'
