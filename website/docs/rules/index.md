@@ -2,7 +2,7 @@
 
 # Rules
 
-All rules from `eslint-plugin-mark`.
+All rules from `eslint-markdown`.
 
 <!-- Auto-generated rule list start -->
 
@@ -11,14 +11,14 @@ import { data } from './index.data.js';
 const { ruleMetas } = data;
 </script>
 
-| Emoji                    | Description                                                                                                                                             |
-| :----------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| {{ $emoji.recommended }} | Using `recommended` config from `eslint-plugin-mark` in a config file enables this rule.                                                                |
-| {{ $emoji.stylistic }}   | Using `stylistic` config from `eslint-plugin-mark` in a config file enables this rule.                                                                  |
-| {{ $emoji.fixable }}     | Some problems reported by this rule are automatically fixable by `--fix` [CLI](https://eslint.org/docs/latest/use/command-line-interface#--fix) option. |
-| {{ $emoji.suggestion }}  | Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/latest/use/core-concepts#rule-suggestions).    |
-| {{ $emoji.commonmark }}  | Rule is applicable to [CommonMark](https://commonmark.org/).                                                                                            |
-| {{ $emoji.gfm }}         | Rule is applicable to [GitHub Flavored Markdown](https://github.github.com/gfm/).                                                                       |
+| Emoji              | Description                                                                                                                                             |
+| :----------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| :white_check_mark: | Using `recommended` config from `eslint-markdown` in a config file enables this rule.                                                                   |
+| :art:              | Using `stylistic` config from `eslint-markdown` in a config file enables this rule.                                                                     |
+| :wrench:           | Some problems reported by this rule are automatically fixable by `--fix` [CLI](https://eslint.org/docs/latest/use/command-line-interface#--fix) option. |
+| :bulb:             | Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/latest/use/core-concepts#rule-suggestions).    |
+| :star:             | Rule is applicable to [CommonMark](https://commonmark.org/).                                                                                            |
+| :star2:            | Rule is applicable to [GitHub Flavored Markdown](https://github.github.com/gfm/).                                                                       |
 
 ---
 
@@ -28,12 +28,12 @@ const { ruleMetas } = data;
       <tr>
         <th style="width: 11rem">Rules ({{ ruleMetas.length }})</th>
         <th>Description</th>
-        <th class="table-narrow">{{ $emoji.recommended }}</th>
-        <th class="table-narrow">{{ $emoji.stylistic }}</th>
-        <th class="table-narrow">{{ $emoji.fixable }}</th>
-        <th class="table-narrow">{{ $emoji.suggestion }}</th>
-        <th class="table-narrow">{{ $emoji.commonmark }}</th>
-        <th class="table-narrow">{{ $emoji.gfm }}</th>
+        <th class="table-narrow">✅</th>
+        <th class="table-narrow">🎨</th>
+        <th class="table-narrow">🔧</th>
+        <th class="table-narrow">💡</th>
+        <th class="table-narrow">⭐</th>
+        <th class="table-narrow">🌟</th>
       </tr>
     </thead>
     <tbody>
@@ -48,12 +48,12 @@ const { ruleMetas } = data;
             <template v-else>{{ part }}</template>
           </template>
         </td>
-        <td class="table-narrow">{{ ruleMeta.recommended ? $emoji.recommended : '' }}</td>
-        <td class="table-narrow">{{ ruleMeta.stylistic ? $emoji.stylistic : '' }}</td>
-        <td class="table-narrow">{{ ruleMeta.fixable ? $emoji.fixable : '' }}</td>
-        <td class="table-narrow">{{ ruleMeta.suggestion ? $emoji.suggestion : '' }}</td>
-        <td class="table-narrow">{{ ruleMeta.commonmark ? $emoji.commonmark : '' }}</td>
-        <td class="table-narrow">{{ ruleMeta.gfm ? $emoji.gfm : '' }}</td>
+        <td class="table-narrow">{{ ruleMeta.recommended ? '✅' : '' }}</td>
+        <td class="table-narrow">{{ ruleMeta.stylistic ? '🎨' : '' }}</td>
+        <td class="table-narrow">{{ ruleMeta.fixable ? '🔧' : '' }}</td>
+        <td class="table-narrow">{{ ruleMeta.suggestion ? '💡' : '' }}</td>
+        <td class="table-narrow">{{ ruleMeta.commonmark ? '⭐' : '' }}</td>
+        <td class="table-narrow">{{ ruleMeta.gfm ? '🌟' : '' }}</td>
       </tr>
     </tbody>
   </table>
