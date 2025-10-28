@@ -10,34 +10,27 @@ import markdown from '@eslint/markdown';
 import rules from '../rules/index.js';
 
 // --------------------------------------------------------------------------------
-// Typedefs
+// Typedef
 // --------------------------------------------------------------------------------
 
 /**
  * @import { Linter } from "eslint";
- * @import { ParserMode } from '../core/types.js';
  */
 
 // --------------------------------------------------------------------------------
 // Export
 // --------------------------------------------------------------------------------
 
-/**
- * Base configuration.
- * @param {ParserMode} parserMode
- * @return {Linter.Config}
- */
-export default function base(parserMode) {
-  return {
-    name: `mark/base/${parserMode}`,
-    files: ['**/*.md'],
-    plugins: {
-      markdown,
-      mark: { rules },
-    },
-    languageOptions: {
-      frontmatter: 'yaml',
-    },
-    language: `markdown/${parserMode}`,
-  };
-}
+/** @type {Linter.Config} */
+export default {
+  name: 'mark/base',
+  files: ['**/*.md'],
+  plugins: {
+    markdown,
+    mark: { rules },
+  },
+  languageOptions: {
+    frontmatter: 'yaml',
+  },
+  language: 'markdown/gfm',
+};

@@ -71,10 +71,13 @@ export default {
 // Script
 // --------------------------------------------------------------------------------
 
+const allRules = {};
 const recommendedRules = {};
 const stylisticRules = {};
 
 for (const [ruleName, rule] of Object.entries(markdown.rules)) {
+  allRules[`mark/${ruleName}`] = 'error';
+
   if (rule.meta.docs.recommended === true) {
     recommendedRules[`mark/${ruleName}`] = 'error';
   }
@@ -84,5 +87,6 @@ for (const [ruleName, rule] of Object.entries(markdown.rules)) {
   }
 }
 
+generateCode('All', allRules);
 generateCode('Recommended', recommendedRules);
 generateCode('Stylistic', stylisticRules);
