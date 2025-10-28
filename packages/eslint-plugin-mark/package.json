@@ -8,10 +8,6 @@
       "types": "./build/index.d.ts",
       "default": "./src/index.js"
     },
-    "./core/constants": {
-      "types": "./build/core/constants.d.ts",
-      "default": "./src/core/constants.js"
-    },
     "./package.json": "./package.json"
   },
   "typesVersions": {
@@ -21,9 +17,6 @@
       ],
       ".": [
         "./build/index.d.ts"
-      ],
-      "./core/constants": [
-        "./build/core/constants.d.ts"
       ]
     }
   },
