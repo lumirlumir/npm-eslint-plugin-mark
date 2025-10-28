@@ -14,6 +14,7 @@ const { ruleMetas } = data;
 | Emoji                    | Description                                                                                                                                             |
 | :----------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | {{ $emoji.recommended }} | Using `recommended` config from `eslint-plugin-mark` in a config file enables this rule.                                                                |
+| {{ $emoji.stylistic }}   | Using `stylistic` config from `eslint-plugin-mark` in a config file enables this rule.                                                                  |
 | {{ $emoji.fixable }}     | Some problems reported by this rule are automatically fixable by `--fix` [CLI](https://eslint.org/docs/latest/use/command-line-interface#--fix) option. |
 | {{ $emoji.suggestion }}  | Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/latest/use/core-concepts#rule-suggestions).    |
 | {{ $emoji.commonmark }}  | Rule is applicable to [CommonMark](https://commonmark.org/).                                                                                            |
@@ -28,6 +29,7 @@ const { ruleMetas } = data;
         <th style="width: 11rem">Rules ({{ ruleMetas.length }})</th>
         <th>Description</th>
         <th class="table-narrow">{{ $emoji.recommended }}</th>
+        <th class="table-narrow">{{ $emoji.stylistic }}</th>
         <th class="table-narrow">{{ $emoji.fixable }}</th>
         <th class="table-narrow">{{ $emoji.suggestion }}</th>
         <th class="table-narrow">{{ $emoji.commonmark }}</th>
@@ -47,6 +49,7 @@ const { ruleMetas } = data;
           </template>
         </td>
         <td class="table-narrow">{{ ruleMeta.recommended ? $emoji.recommended : '' }}</td>
+        <td class="table-narrow">{{ ruleMeta.stylistic ? $emoji.stylistic : '' }}</td>
         <td class="table-narrow">{{ ruleMeta.fixable ? $emoji.fixable : '' }}</td>
         <td class="table-narrow">{{ ruleMeta.suggestion ? $emoji.suggestion : '' }}</td>
         <td class="table-narrow">{{ ruleMeta.commonmark ? $emoji.commonmark : '' }}</td>

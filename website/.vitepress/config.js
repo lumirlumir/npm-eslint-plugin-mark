@@ -10,7 +10,6 @@
 import { parse } from 'node:path';
 
 import mark from 'eslint-plugin-mark';
-import rules from 'eslint-plugin-mark/rules';
 import {
   PKG_NAME,
   PKG_DESCRIPTION,
@@ -34,7 +33,7 @@ import { transformerTwoslash } from '@shikijs/vitepress-twoslash';
 import { createTwoslasher } from 'twoslash-eslint';
 
 // --------------------------------------------------------------------------------
-// Constants
+// Constant
 // --------------------------------------------------------------------------------
 
 const GOOGLE_GA_ID = 'G-9KLYX5PTLT';
@@ -161,7 +160,7 @@ export default defineConfig({
           text: 'Rules',
           link: '/',
           collapsed: false,
-          items: Object.keys(rules).map(ruleName => ({
+          items: Object.keys(mark.rules).map(ruleName => ({
             text: ruleName,
             link: ruleName,
           })),
@@ -298,7 +297,7 @@ export default defineConfig({
     // Process only the files inside `docs/rules/`, excluding `index.md`.
     if (/^docs\/rules\/(?!index).+/.test(pageData.relativePath)) {
       const ruleName = parse(pageData.relativePath).name;
-      const rule = rules[ruleName];
+      const rule = mark.rules[ruleName];
 
       pageData.title = ruleName;
       pageData.frontmatter.title = ruleName;
@@ -309,6 +308,7 @@ export default defineConfig({
 </h1>
 <p>
   ${(rule.meta.docs.recommended ?? false) ? '<code class="rule-emoji">✅ Recommended</code>' : ''}
+  ${(rule.meta.docs.stylistic ?? false) ? '<code class="rule-emoji">🎨 Stylistic</code>' : ''}
   ${(rule.meta.fixable ?? false) ? '<code class="rule-emoji">🔧 Fixable</code>' : ''}
   ${(rule.meta.docs.suggestion ?? false) ? '<code class="rule-emoji">💡 Suggestion</code>' : ''}
   ${(rule.meta.dialects.includes('commonmark') ?? false) ? '<code class="rule-emoji">⭐ CommonMark</code>' : ''}
@@ -328,6 +328,12 @@ export default defineConfig({
     )
     .join('')}.
 </p>
+
+${
+  !rule.meta.dialects.includes('commonmark') && rule.meta.dialects.includes('gfm')
+    ? '<div class="caution custom-block github-alert" bis_skin_checked="1"><p class="custom-block-title">GFM Only</p><p></p><p>This rule applies only when GFM (GitHub Flavored Markdown) is enabled by setting the <code>language</code> mode to <code>markdown/gfm</code>.</p></div>'
+    : ''
+}
 
 `;
     }

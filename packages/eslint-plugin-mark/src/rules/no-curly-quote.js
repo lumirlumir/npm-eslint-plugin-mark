@@ -42,11 +42,8 @@ export default {
     docs: {
       description: 'Disallow curly quotes(`“`, `”`, `‘` or `’`) in text',
       url: URL_RULE_DOCS('no-curly-quote'),
-
       recommended: false,
-      strict: false,
-      style: false,
-      typography: true,
+      stylistic: false,
     },
 
     fixable: 'code',

@@ -39,11 +39,8 @@ export default {
     docs: {
       description: 'Disallow irregular whitespace',
       url: URL_RULE_DOCS('no-irregular-whitespace'),
-
       recommended: true,
-      strict: true,
-      style: false,
-      typography: false,
+      stylistic: false,
     },
 
     schema: [

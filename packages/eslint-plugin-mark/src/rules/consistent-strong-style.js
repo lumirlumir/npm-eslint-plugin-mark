@@ -1,5 +1,5 @@
 /**
- * @fileoverview Rule to enforce consistent thematic break style.
+ * @fileoverview Rule to enforce consistent strong style.
  * @author 루밀LuMir(lumirlumir)
  */
 
@@ -15,7 +15,7 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 
 /**
  * @import { RuleModule } from '../core/types.js';
- * @typedef {[{ style: string }]} RuleOptions
+ * @typedef {[{ style: 'consistent' | '*' | '_' }]} RuleOptions
  * @typedef {'style'} MessageIds
  */
 
@@ -29,8 +29,8 @@ export default {
     type: 'layout',
 
     docs: {
-      description: 'Enforce consistent thematic break style',
-      url: URL_RULE_DOCS('consistent-thematic-break-style'),
+      description: 'Enforce consistent strong style',
+      url: URL_RULE_DOCS('consistent-strong-style'),
       recommended: false,
       stylistic: true,
     },
@@ -42,7 +42,7 @@ export default {
         type: 'object',
         properties: {
           style: {
-            type: 'string',
+            enum: ['consistent', '*', '_'],
           },
         },
         additionalProperties: false,
@@ -56,7 +56,7 @@ export default {
     ],
 
     messages: {
-      style: 'Thematic break style should be `{{ style }}`.',
+      style: 'Strong style should be `{{ style }}`.',
     },
 
     language: 'markdown',
@@ -69,33 +69,45 @@ export default {
     const [{ style }] = context.options;
 
     /** @type {string | null} */
-    let thematicBreakStyle = style === 'consistent' ? null : style;
+    let strongStyle = style === 'consistent' ? null : style;
+
+    /**
+     * @param {number} startOffset
+     * @param {number} endOffset
+     */
+    function reportStyle(startOffset, endOffset) {
+      const stringifiedStrongStyle = String(strongStyle).repeat(2);
+
+      context.report({
+        loc: {
+          start: sourceCode.getLocFromIndex(startOffset),
+          end: sourceCode.getLocFromIndex(endOffset),
+        },
+
+        messageId: 'style',
+
+        data: {
+          style: stringifiedStrongStyle,
+        },
+
+        fix(fixer) {
+          return fixer.replaceTextRange([startOffset, endOffset], stringifiedStrongStyle);
+        },
+      });
+    }
 
     return {
-      thematicBreak(node) {
-        const currentThematicBreakStyle = sourceCode.getText(node);
+      strong(node) {
+        const [nodeStartOffset, nodeEndOffset] = sourceCode.getRange(node);
+        const currentStrongStyle = sourceCode.text[nodeStartOffset];
 
-        if (thematicBreakStyle === null) {
-          thematicBreakStyle = currentThematicBreakStyle;
+        if (strongStyle === null) {
+          strongStyle = currentStrongStyle;
         }
 
-        if (thematicBreakStyle !== currentThematicBreakStyle) {
-          context.report({
-            node,
-
-            messageId: 'style',
-
-            data: {
-              style: thematicBreakStyle,
-            },
-
-            fix(fixer) {
-              return fixer.replaceTextRange(
-                sourceCode.getRange(node),
-                String(thematicBreakStyle),
-              );
-            },
-          });
+        if (strongStyle !== currentStrongStyle) {
+          reportStyle(nodeStartOffset, nodeStartOffset + 2);
+          reportStyle(nodeEndOffset - 2, nodeEndOffset);
         }
       },
     };
