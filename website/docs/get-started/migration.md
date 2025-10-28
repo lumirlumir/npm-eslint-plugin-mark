@@ -1,8 +1,8 @@
 # Migration Guide
 
-This chapter provides guidance for migrating to `eslint-markdown` from other popular Markdown linting tools like `@eslint/markdown`, `markdownlint`, `remark-lint`, and `textlint`.
+This chapter provides guidance for migrating to `eslint-markdown` from other popular Markdown linting tools like [`@eslint/markdown`](https://github.com/eslint/markdown), [`markdownlint`](https://github.com/DavidAnson/markdownlint), `remark-lint`, and `textlint`.
 
-## Migrating from `@eslint/markdown`
+## Migrating from [`@eslint/markdown`](https://github.com/eslint/markdown)
 
 `eslint-markdown` is a complete super-set of `@eslint/markdown`, so migration is straightforward.
 
@@ -12,7 +12,9 @@ Every rule provided by `@eslint/markdown` is included in this package. (NOTE: I'
 
 Follow these steps to migrate your project:
 
-## Migrating from `markdownlint`, `markdownlint-cli`, or `markdownlint-cli2`
+## Migrating from [`markdownlint`](https://github.com/DavidAnson/markdownlint)
+
+If you are a user of [`markdownlint`](https://github.com/DavidAnson/markdownlint), [`markdownlint-cli`](https://github.com/igorshubovych/markdownlint-cli), or [`markdownlint-cli2`](https://github.com/DavidAnson/markdownlint-cli2)
 
 TODO
 
