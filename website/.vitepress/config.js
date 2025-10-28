@@ -10,15 +10,7 @@
 import { parse } from 'node:path';
 
 import mark from 'eslint-plugin-mark';
-import {
-  PKG_NAME,
-  PKG_DESCRIPTION,
-  PKG_AUTHOR,
-  URL_HOMEPAGE,
-  URL_GITHUB,
-  URL_NPM,
-  URL_RULE_SRC,
-} from 'eslint-plugin-mark/core/constants';
+import packageJson from 'eslint-plugin-mark/package.json' with { type: 'json' };
 
 import footnote from 'markdown-it-footnote';
 import { defineConfig } from 'vitepress';
@@ -37,6 +29,12 @@ import { createTwoslasher } from 'twoslash-eslint';
 // --------------------------------------------------------------------------------
 
 const GOOGLE_GA_ID = 'G-9KLYX5PTLT';
+const PKG_NAME = packageJson.name;
+const PKG_DESCRIPTION = packageJson.description;
+const PKG_AUTHOR = '루밀LuMir';
+const URL_HOMEPAGE = packageJson.homepage;
+const URL_GITHUB = `https://github.com/lumirlumir/npm-${PKG_NAME}`;
+const URL_RULE_SRC = `${URL_GITHUB}/tree/main/packages/${PKG_NAME}/src/rules`;
 
 // --------------------------------------------------------------------------------
 // Export
@@ -215,10 +213,6 @@ export default defineConfig({
               link: 'change-log',
             },
             {
-              text: 'Versioning',
-              link: 'versioning',
-            },
-            {
               text: 'Security',
               link: 'security',
             },
@@ -234,7 +228,7 @@ export default defineConfig({
     socialLinks: [
       {
         icon: 'npm',
-        link: `${URL_NPM}/package/eslint-plugin-mark`,
+        link: `https://www.npmjs.com/package/eslint-plugin-mark`,
         ariaLabel: 'npm package link for eslint-plugin-mark',
       },
       {
@@ -274,7 +268,7 @@ export default defineConfig({
         errorRendering: 'hover',
         explicitTrigger: /\beslint-check\b/,
         twoslasher: createTwoslasher({
-          eslintConfig: [mark.configs.baseGfm],
+          eslintConfig: [mark.configs.base],
         }),
       }),
     ],

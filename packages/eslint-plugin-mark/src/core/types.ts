@@ -12,10 +12,8 @@ import type {
 } from '@eslint/markdown';
 
 // --------------------------------------------------------------------------------
-// Typedefs
+// Typedef
 // --------------------------------------------------------------------------------
-
-export type ParserMode = 'commonmark' | 'gfm';
 
 export type RuleModule<
   RuleOptions extends MarkdownRuleDefinitionTypeOptions['RuleOptions'],

@@ -1,14 +1,14 @@
 ---
 layout: home
-title: eslint-plugin-mark
+title: eslint-markdown
 
 hero:
-  name: eslint-plugin-mark
+  name: eslint-markdown
   text: Lint your Markdown with ESLint
   tagline: Improve Your Markdown Documentation Quality
   image:
     src: /logo.svg
-    alt: eslint-plugin-mark Logo
+    alt: eslint-markdown Logo
   actions:
     - theme: brand
       text: Get Started
