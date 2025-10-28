@@ -270,7 +270,7 @@ export default defineConfig({
         errorRendering: 'hover',
         explicitTrigger: /\beslint-check\b/,
         twoslasher: createTwoslasher({
-          eslintConfig: [mark.configs.baseGfm],
+          eslintConfig: [mark.configs.base],
         }),
       }),
     ],
