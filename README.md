@@ -28,7 +28,7 @@ See [Change Log](https://github.com/lumirlumir/npm-eslint-plugin-mark/blob/main/
 
 ## Versioning
 
-See [Versioning](http://eslint-plugin-mark.lumir.page/docs/community/versioning).
+See [Versioning](https://eslint-plugin-mark.lumir.page/docs/get-started/versioning).
 
 ## Security
 
