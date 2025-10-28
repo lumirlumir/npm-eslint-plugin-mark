@@ -215,10 +215,6 @@ export default defineConfig({
               link: 'change-log',
             },
             {
-              text: 'Versioning',
-              link: 'versioning',
-            },
-            {
               text: 'Security',
               link: 'security',
             },
