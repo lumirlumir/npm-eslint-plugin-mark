@@ -1,9 +1,7 @@
 /**
- * @fileoverview Script to build configs for `eslint-plugin-mark`.
+ * @fileoverview Script to build configs for `eslint-markdown`.
  * Usage: `node path/to/build-config.mjs`
  */
-
-/* eslint-disable import/no-extraneous-dependencies -- Required */
 
 // --------------------------------------------------------------------------------
 // Import
@@ -11,23 +9,18 @@
 
 import { writeFileSync } from 'node:fs';
 import markdown from 'eslint-plugin-mark';
-import prettier from 'prettier';
+import prettier from 'prettier'; // eslint-disable-line import/no-extraneous-dependencies -- Required
 
 // --------------------------------------------------------------------------------
 // Helper
 // --------------------------------------------------------------------------------
 
-/** @param {string} configName */
-function createUrl(configName) {
-  return new URL(
+/** @param {string} configName @param {Record<string, string>} rules */
+async function generateCode(configName, rules) {
+  const url = new URL(
     `../packages/eslint-plugin-mark/src/configs/${configName.toLowerCase()}.js`,
     import.meta.url,
   );
-}
-
-/** @param {string} configName @param {Record<string, string>} rules */
-async function generateCode(configName, rules) {
-  const url = createUrl(configName);
   const prettierConfig = await prettier.resolveConfig(url);
   const code = `
 /**
@@ -62,7 +55,7 @@ export default {
 `.trimStart();
 
   writeFileSync(
-    createUrl(configName),
+    url,
     await prettier.format(code, { filepath: url.pathname, ...prettierConfig }),
   );
 }
