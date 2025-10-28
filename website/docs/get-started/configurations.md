@@ -28,21 +28,21 @@ Create an `eslint.config.{js,mjs}` or `eslint.config.{ts,mts}` config file in th
 ```js [eslint.config.mjs]
 // @ts-check
 
-import mark from 'eslint-markdown';
+import { defineConfig } from 'eslint/config';
+import markdown from 'eslint-markdown';
 
-/** @type {import("eslint").Linter.Config[]} */
-export default [
-  mark.configs.recommendedGfm,
-];
+export default defineConfig([
+  markdown.configs.recommended,
+]);
 ```
 
 ```ts [eslint.config.mts]
-import mark from 'eslint-plugin-mark';
-import type { Linter } from 'eslint';
+import { defineConfig } from 'eslint/config';
+import markdown from 'eslint-markdown';
 
-export default [
-  mark.configs.recommendedGfm,
-] as Linter.Config[];
+export default defineConfig([
+  markdown.configs.recommended,
+]);
 ```
 
 :::
