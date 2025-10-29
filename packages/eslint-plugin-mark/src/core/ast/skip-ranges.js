@@ -45,7 +45,7 @@ export default class SkipRanges {
    */
   includes(offset) {
     return [...this.#skipRanges].some(
-      skipRange => skipRange[0] <= offset && offset < skipRange[1],
+      skipRange => skipRange[0] <= offset && offset < skipRange[1], // Since `skipRange[1]` is an open interval, we use `<`.
     );
   }
 }
