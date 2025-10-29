@@ -25,5 +25,3 @@ export const PKG_NAME = name;
 export const PKG_VERSION = version;
 /** Get the URL for the rule documentation based on the rule name. @param {string} [ruleName] */
 export const URL_RULE_DOCS = (ruleName = '') => `${homepage}/docs/rules/${ruleName}`;
-/** @satisfies {number} */
-export const ZERO_TO_ONE_BASED_OFFSET = 1;
