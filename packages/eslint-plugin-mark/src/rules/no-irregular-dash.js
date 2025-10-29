@@ -11,7 +11,7 @@ import { IgnoredPositions } from '../core/ast/index.js';
 import { URL_RULE_DOCS, ZERO_TO_ONE_BASED_OFFSET } from '../core/constants.js';
 
 // --------------------------------------------------------------------------------
-// Typedefs
+// Typedef
 // --------------------------------------------------------------------------------
 
 /**
@@ -22,7 +22,7 @@ import { URL_RULE_DOCS, ZERO_TO_ONE_BASED_OFFSET } from '../core/constants.js';
  */
 
 // --------------------------------------------------------------------------------
-// Helpers
+// Helper
 // --------------------------------------------------------------------------------
 
 const irregularDashRegex =
@@ -92,38 +92,36 @@ export default {
 
       'root:exit'() {
         lines.forEach((line, lineIndex) => {
-          const matches = [...line.matchAll(irregularDashRegex)];
+          const matches = line.matchAll(irregularDashRegex);
 
-          if (matches.length > 0) {
-            matches.forEach(match => {
-              const irregularDashLength = match[0].length;
+          for (const match of matches) {
+            const irregularDash = match[0];
 
-              const matchIndexStart = match.index;
-              const matchIndexEnd = matchIndexStart + irregularDashLength;
+            const matchIndexStart = match.index;
+            const matchIndexEnd = matchIndexStart + irregularDash.length;
 
-              /** @type {Position} */
-              const loc = {
-                start: {
-                  line: lineIndex + ZERO_TO_ONE_BASED_OFFSET,
-                  column: matchIndexStart + ZERO_TO_ONE_BASED_OFFSET,
-                },
-                end: {
-                  line: lineIndex + ZERO_TO_ONE_BASED_OFFSET,
-                  column: matchIndexEnd + ZERO_TO_ONE_BASED_OFFSET,
-                },
-              };
+            /** @type {Position} */
+            const loc = {
+              start: {
+                line: lineIndex + ZERO_TO_ONE_BASED_OFFSET,
+                column: matchIndexStart + ZERO_TO_ONE_BASED_OFFSET,
+              },
+              end: {
+                line: lineIndex + ZERO_TO_ONE_BASED_OFFSET,
+                column: matchIndexEnd + ZERO_TO_ONE_BASED_OFFSET,
+              },
+            };
 
-              if (ignoredPositions.isIgnoredPosition(loc)) return;
+            if (ignoredPositions.isIgnoredPosition(loc)) continue;
 
-              context.report({
-                loc,
+            context.report({
+              loc,
 
-                data: {
-                  irregularDash: `U+${match[0].codePointAt(0).toString(16).toUpperCase().padStart(4, '0')}`,
-                },
+              data: {
+                irregularDash: `U+${irregularDash.codePointAt(0)?.toString(16).toUpperCase().padStart(4, '0')}`,
+              },
 
-                messageId: 'noIrregularDash',
-              });
+              messageId: 'noIrregularDash',
             });
           }
         });
