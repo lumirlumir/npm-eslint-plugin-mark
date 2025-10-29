@@ -61,6 +61,9 @@ console.log(\u200b'Hello World');
           column: 2,
           endLine: 2,
           endColumn: 3,
+          data: {
+            irregularWhitespace: 'U+000C',
+          },
         },
         {
           messageId: 'noIrregularWhitespace',
@@ -68,6 +71,9 @@ console.log(\u200b'Hello World');
           column: 4,
           endLine: 2,
           endColumn: 5,
+          data: {
+            irregularWhitespace: 'U+000B',
+          },
         },
         {
           messageId: 'noIrregularWhitespace',
@@ -75,6 +81,9 @@ console.log(\u200b'Hello World');
           column: 6,
           endLine: 2,
           endColumn: 7,
+          data: {
+            irregularWhitespace: 'U+0085',
+          },
         },
         {
           messageId: 'noIrregularWhitespace',
@@ -82,6 +91,9 @@ console.log(\u200b'Hello World');
           column: 8,
           endLine: 2,
           endColumn: 9,
+          data: {
+            irregularWhitespace: 'U+FEFF',
+          },
         },
         {
           messageId: 'noIrregularWhitespace',
@@ -89,6 +101,9 @@ console.log(\u200b'Hello World');
           column: 10,
           endLine: 2,
           endColumn: 11,
+          data: {
+            irregularWhitespace: 'U+00A0',
+          },
         },
         {
           messageId: 'noIrregularWhitespace',
@@ -96,6 +111,9 @@ console.log(\u200b'Hello World');
           column: 12,
           endLine: 2,
           endColumn: 13,
+          data: {
+            irregularWhitespace: 'U+1680',
+          },
         },
         {
           messageId: 'noIrregularWhitespace',
@@ -103,6 +121,9 @@ console.log(\u200b'Hello World');
           column: 14,
           endLine: 2,
           endColumn: 15,
+          data: {
+            irregularWhitespace: 'U+180E',
+          },
         },
         {
           messageId: 'noIrregularWhitespace',
@@ -110,6 +131,9 @@ console.log(\u200b'Hello World');
           column: 16,
           endLine: 2,
           endColumn: 17,
+          data: {
+            irregularWhitespace: 'U+2000',
+          },
         },
         {
           messageId: 'noIrregularWhitespace',
@@ -117,6 +141,9 @@ console.log(\u200b'Hello World');
           column: 18,
           endLine: 2,
           endColumn: 19,
+          data: {
+            irregularWhitespace: 'U+2001',
+          },
         },
         {
           messageId: 'noIrregularWhitespace',
@@ -124,6 +151,9 @@ console.log(\u200b'Hello World');
           column: 20,
           endLine: 2,
           endColumn: 21,
+          data: {
+            irregularWhitespace: 'U+2002',
+          },
         },
         {
           messageId: 'noIrregularWhitespace',
@@ -131,6 +161,9 @@ console.log(\u200b'Hello World');
           column: 2,
           endLine: 3,
           endColumn: 3,
+          data: {
+            irregularWhitespace: 'U+2003',
+          },
         },
         {
           messageId: 'noIrregularWhitespace',
@@ -138,6 +171,9 @@ console.log(\u200b'Hello World');
           column: 4,
           endLine: 3,
           endColumn: 5,
+          data: {
+            irregularWhitespace: 'U+2004',
+          },
         },
         {
           messageId: 'noIrregularWhitespace',
@@ -145,6 +181,9 @@ console.log(\u200b'Hello World');
           column: 6,
           endLine: 3,
           endColumn: 7,
+          data: {
+            irregularWhitespace: 'U+2005',
+          },
         },
         {
           messageId: 'noIrregularWhitespace',
@@ -152,6 +191,9 @@ console.log(\u200b'Hello World');
           column: 8,
           endLine: 3,
           endColumn: 9,
+          data: {
+            irregularWhitespace: 'U+2006',
+          },
         },
         {
           messageId: 'noIrregularWhitespace',
@@ -159,6 +201,9 @@ console.log(\u200b'Hello World');
           column: 10,
           endLine: 3,
           endColumn: 11,
+          data: {
+            irregularWhitespace: 'U+2007',
+          },
         },
         {
           messageId: 'noIrregularWhitespace',
@@ -166,6 +211,9 @@ console.log(\u200b'Hello World');
           column: 12,
           endLine: 3,
           endColumn: 13,
+          data: {
+            irregularWhitespace: 'U+2008',
+          },
         },
         {
           messageId: 'noIrregularWhitespace',
@@ -173,6 +221,9 @@ console.log(\u200b'Hello World');
           column: 14,
           endLine: 3,
           endColumn: 15,
+          data: {
+            irregularWhitespace: 'U+2009',
+          },
         },
         {
           messageId: 'noIrregularWhitespace',
@@ -180,6 +231,9 @@ console.log(\u200b'Hello World');
           column: 16,
           endLine: 3,
           endColumn: 17,
+          data: {
+            irregularWhitespace: 'U+200A',
+          },
         },
         {
           messageId: 'noIrregularWhitespace',
@@ -187,6 +241,9 @@ console.log(\u200b'Hello World');
           column: 18,
           endLine: 3,
           endColumn: 19,
+          data: {
+            irregularWhitespace: 'U+200B',
+          },
         },
         {
           messageId: 'noIrregularWhitespace',
@@ -194,6 +251,9 @@ console.log(\u200b'Hello World');
           column: 20,
           endLine: 3,
           endColumn: 21,
+          data: {
+            irregularWhitespace: 'U+202F',
+          },
         },
         {
           messageId: 'noIrregularWhitespace',
@@ -201,6 +261,9 @@ console.log(\u200b'Hello World');
           column: 2,
           endLine: 4,
           endColumn: 3,
+          data: {
+            irregularWhitespace: 'U+205F',
+          },
         },
         {
           messageId: 'noIrregularWhitespace',
@@ -208,6 +271,9 @@ console.log(\u200b'Hello World');
           column: 4,
           endLine: 4,
           endColumn: 5,
+          data: {
+            irregularWhitespace: 'U+3000',
+          },
         },
         {
           messageId: 'noIrregularWhitespace',
@@ -215,6 +281,9 @@ console.log(\u200b'Hello World');
           column: 6,
           endLine: 4,
           endColumn: 7,
+          data: {
+            irregularWhitespace: 'U+2028',
+          },
         },
         {
           messageId: 'noIrregularWhitespace',
@@ -222,6 +291,9 @@ console.log(\u200b'Hello World');
           column: 8,
           endLine: 4,
           endColumn: 9,
+          data: {
+            irregularWhitespace: 'U+2029',
+          },
         },
       ],
     },
@@ -240,6 +312,9 @@ console.log(\u200b'Hello World');
           column: 13,
           endLine: 3,
           endColumn: 14,
+          data: {
+            irregularWhitespace: 'U+200B',
+          },
         },
       ],
       options: [
@@ -258,6 +333,9 @@ console.log(\u200b'Hello World');
           column: 14,
           endLine: 1,
           endColumn: 15,
+          data: {
+            irregularWhitespace: 'U+200B',
+          },
         },
       ],
       options: [
