@@ -25,10 +25,10 @@ This rule disallows the following control characters except where the options al
 \u0006 - Acknowledge - <ACK>
 \u0007 - Bell - <BEL>
 \u0008 - Backspace - <BS>
-\u000b - Line Tabulation - <VT>
-\u000c - Form Feed - <FF>
-\u000e - Shift Out - <SO>
-\u000f - Shift In - <SI>
+\u000B - Line Tabulation (\v) - <VT>
+\u000C - Form Feed (\f) - <FF>
+\u000E - Shift Out - <SO>
+\u000F - Shift In - <SI>
 \u0010 - Data Link Escape - <DLE>
 \u0011 - Device Control One - <DC1>
 \u0012 - Device Control Two - <DC2>
@@ -39,13 +39,13 @@ This rule disallows the following control characters except where the options al
 \u0017 - End of Transmission Block - <ETB>
 \u0018 - Cancel - <CAN>
 \u0019 - End of Medium - <EM>
-\u001a - Substitute - <SUB>
-\u001b - Escape - <ESC>
-\u001c - Information Separator Four - <FS>
-\u001d - Information Separator Three - <GS>
-\u001e - Information Separator Two - <RS>
-\u001f - Information Separator One - <US>
-\u007f - Delete - <DEL>
+\u001A - Substitute - <SUB>
+\u001B - Escape - <ESC>
+\u001C - Information Separator Four - <FS>
+\u001D - Information Separator Three - <GS>
+\u001E - Information Separator Two - <RS>
+\u001F - Information Separator One - <US>
+\u007F - Delete - <DEL>
 \u0080 - Padding Character - <PAD>
 \u0081 - High Octet Preset - <HOP>
 \u0082 - Break Permitted Here - <BPH>
@@ -56,12 +56,12 @@ This rule disallows the following control characters except where the options al
 \u0087 - End of Selected Area - <ESA>
 \u0088 - Character Tabulation Set - <HTS>
 \u0089 - Character Tabulation with Justification - <HTJ>
-\u008a - Line Tabulation Set - <VTS>
-\u008b - Partial Line Forward - <PLD>
-\u008c - Partial Line Backward - <PLU>
-\u008d - Reverse Line Feed - <RI>
-\u008e - Single Shift Two - <SS2>
-\u008f - Single Shift Three - <SS3>
+\u008A - Line Tabulation Set - <VTS>
+\u008B - Partial Line Forward - <PLD>
+\u008C - Partial Line Backward - <PLU>
+\u008D - Reverse Line Feed - <RI>
+\u008E - Single Shift Two - <SS2>
+\u008F - Single Shift Three - <SS3>
 \u0090 - Device Control String - <DCS>
 \u0091 - Private Use One - <PU1>
 \u0092 - Private Use Two - <PU2>
@@ -72,15 +72,144 @@ This rule disallows the following control characters except where the options al
 \u0097 - End of Guarded Area - <EPA>
 \u0098 - Start of String - <SOS>
 \u0099 - Single Graphic Character Introducer - <SGCI>
-\u009a - Single Character Introducer - <SCI>
-\u009b - Control Sequence Introducer - <CSI>
-\u009c - String Terminator - <ST>
-\u009d - Operating System Command - <OSC>
-\u009e - Privacy Message - <PM>
-\u009f - Application Program Command - <APC>
-\u202c - Pop Directional Formatting - <POPDF>
-\u202d - Left-to-Right Override - <LRO>
-\u202e - Right-to-Left Override - <RLO>
+\u009A - Single Character Introducer - <SCI>
+\u009B - Control Sequence Introducer - <CSI>
+\u009C - String Terminator - <ST>
+\u009D - Operating System Command - <OSC>
+\u009E - Privacy Message - <PM>
+\u009F - Application Program Command - <APC>
+\u202C - Pop Directional Formatting - <POPDF>
+\u202D - Left-to-Right Override - <LRO>
+\u202E - Right-to-Left Override - <RLO>
+```
+
+## Examples
+
+### :x: Incorrect
+
+Examples of **incorrect** code for this rule:
+
+#### Default
+
+```md eslint-check
+<!-- eslint mark/no-control-character: "error" -->
+
+\u0002 - Start of Text - <STX>  <= Here
+\u0003 - End of Text - <ETX>  <= Here
+\u0004 - End of Transmission - <EOT>  <= Here
+\u0005 - Enquiry - <ENQ>  <= Here
+\u0006 - Acknowledge - <ACK>  <= Here
+\u0007 - Bell - <BEL>  <= Here
+\u0008 - Backspace - <BS>  <= Here
+\u000B - Line Tabulation (\v) - <VT>  <= Here
+\u000E - Shift Out - <SO>  <= Here
+\u000F - Shift In - <SI>  <= Here
+\u0010 - Data Link Escape - <DLE>  <= Here
+\u0011 - Device Control One - <DC1>  <= Here
+\u0012 - Device Control Two - <DC2>  <= Here
+\u0013 - Device Control Three - <DC3>  <= Here
+\u0014 - Device Control Four - <DC4>  <= Here
+\u0015 - Negative Acknowledge - <NAK>  <= Here
+\u0016 - Synchronous Idle - <SYN>  <= Here
+\u0017 - End of Transmission Block - <ETB>  <= Here
+\u0018 - Cancel - <CAN>  <= Here
+\u0019 - End of Medium - <EM>  <= Here
+\u001A - Substitute - <SUB>  <= Here
+\u001B - Escape - <ESC>  <= Here
+\u001C - Information Separator Four - <FS>  <= Here
+\u001D - Information Separator Three - <GS>  <= Here
+\u001E - Information Separator Two - <RS>  <= Here
+\u001F - Information Separator One - <US>  <= Here
+\u007F - Delete - <DEL>  <= Here
+\u0080 - Padding Character - <PAD>  <= Here
+\u0081 - High Octet Preset - <HOP>  <= Here
+\u0082 - Break Permitted Here - <BPH>  <= Here
+\u0083 - No Break Here - <NBH>  <= Here
+\u0084 - Index - <IND>  <= Here
+\u0085 - Next Line - <NEL>  <= Here
+```
+
+#### With `{ skipCode: false }` Option
+
+`````md eslint-check
+<!-- eslint mark/no-control-character: ["error", { skipCode: false }] -->
+
+```md
+\u0002 - Start of Text - <STX>  <= Here
+\u0003 - End of Text - <ETX>  <= Here
+```
+
+````md
+\u0004 - End of Transmission - <EOT>  <= Here
+\u0005 - Enquiry - <ENQ>  <= Here
+````
+
+~~~txt
+\u0006 - Acknowledge - <ACK>  <= Here
+\u0007 - Bell - <BEL>  <= Here
+~~~
+
+    \u0008 - Backspace - <BS>  <= Here
+    \u000B - Line Tabulation (\v) - <VT>  <= Here
+`````
+
+#### With `{ skipInlineCode: false }` Option
+
+```md eslint-check
+<!-- eslint mark/no-control-character: ["error", { skipInlineCode: false }] -->
+
+\u0002 - Start of Text - <STX> `` <= Here
+\u0003 - End of Text - <ETX> `` <= Here
+```
+
+### :white_check_mark: Correct
+
+Examples of **correct** code for this rule:
+
+#### Default
+
+<!-- markdownlint-disable no-hard-tabs -->
+
+```md eslint-check
+<!-- eslint mark/no-control-character: "error" -->
+
+\u0009 - Horizontal Tab (\t) - <TAB> 	 <= Here
+\u0020 - Space - <SP>   <= Here
+```
+
+<!-- markdownlint-enable no-hard-tabs -->
+
+#### With `{ skipCode: true }` Option
+
+`````md eslint-check
+<!-- eslint mark/no-control-character: ["error", { skipCode: true }] -->
+
+```md
+\u0002 - Start of Text - <STX>  <= Here
+\u0003 - End of Text - <ETX>  <= Here
+```
+
+````md
+\u0004 - End of Transmission - <EOT>  <= Here
+\u0005 - Enquiry - <ENQ>  <= Here
+````
+
+~~~txt
+\u0006 - Acknowledge - <ACK>  <= Here
+\u0007 - Bell - <BEL>  <= Here
+~~~
+
+    \u0008 - Backspace - <BS>  <= Here
+    \u000B - Line Tabulation (\v) - <VT>  <= Here
+`````
+
+#### With `{ skipInlineCode: true }` Option
+
+```md eslint-check
+<!-- eslint mark/no-control-character: ["error", { skipInlineCode: true }] -->
+
+\u0002 - Start of Text - <STX> `` <= Here
+\u0003 - End of Text - <ETX> `` <= Here
 ```
 
 ## Options
@@ -94,13 +223,13 @@ This rule disallows the following control characters except where the options al
 
 ### `skipCode`
 
-> Default: `true`
+> Type: `boolean` / Default: `true`
 
 `true` allows any control characters in code blocks.
 
 ### `skipInlineCode`
 
-> Default: `true`
+> Type: `boolean` / Default: `true`
 
 `true` allows any control characters in inline code.
 
@@ -111,4 +240,4 @@ You might want to disable this rule if you're working with documents that intent
 ## Prior Art
 
 - [`textlint-rule-no-invalid-control-character`](https://github.com/textlint-rule/textlint-rule-no-invalid-control-character)
-- [`eslint/no-control-regex`](https://eslint.org/docs/latest/rules/no-control-regex)
+- [`no-control-regex`](https://eslint.org/docs/latest/rules/no-control-regex)
