@@ -10,16 +10,7 @@
 import { parse } from 'node:path';
 
 import mark from 'eslint-plugin-mark';
-import rules from 'eslint-plugin-mark/rules';
-import {
-  PKG_NAME,
-  PKG_DESCRIPTION,
-  PKG_AUTHOR,
-  URL_HOMEPAGE,
-  URL_GITHUB,
-  URL_NPM,
-  URL_RULE_SRC,
-} from 'eslint-plugin-mark/core/constants';
+import packageJson from 'eslint-plugin-mark/package.json' with { type: 'json' };
 
 import footnote from 'markdown-it-footnote';
 import { defineConfig } from 'vitepress';
@@ -34,10 +25,16 @@ import { transformerTwoslash } from '@shikijs/vitepress-twoslash';
 import { createTwoslasher } from 'twoslash-eslint';
 
 // --------------------------------------------------------------------------------
-// Constants
+// Constant
 // --------------------------------------------------------------------------------
 
 const GOOGLE_GA_ID = 'G-9KLYX5PTLT';
+const PKG_NAME = packageJson.name;
+const PKG_DESCRIPTION = packageJson.description;
+const PKG_AUTHOR = '루밀LuMir';
+const URL_HOMEPAGE = packageJson.homepage;
+const URL_GITHUB = `https://github.com/lumirlumir/npm-${PKG_NAME}`;
+const URL_RULE_SRC = `${URL_GITHUB}/tree/main/packages/${PKG_NAME}/src/rules`;
 
 // --------------------------------------------------------------------------------
 // Export
@@ -161,7 +158,7 @@ export default defineConfig({
           text: 'Rules',
           link: '/',
           collapsed: false,
-          items: Object.keys(rules).map(ruleName => ({
+          items: Object.keys(mark.rules).map(ruleName => ({
             text: ruleName,
             link: ruleName,
           })),
@@ -216,10 +213,6 @@ export default defineConfig({
               link: 'change-log',
             },
             {
-              text: 'Versioning',
-              link: 'versioning',
-            },
-            {
               text: 'Security',
               link: 'security',
             },
@@ -235,7 +228,7 @@ export default defineConfig({
     socialLinks: [
       {
         icon: 'npm',
-        link: `${URL_NPM}/package/eslint-plugin-mark`,
+        link: `https://www.npmjs.com/package/eslint-plugin-mark`,
         ariaLabel: 'npm package link for eslint-plugin-mark',
       },
       {
@@ -275,7 +268,7 @@ export default defineConfig({
         errorRendering: 'hover',
         explicitTrigger: /\beslint-check\b/,
         twoslasher: createTwoslasher({
-          eslintConfig: [mark.configs.baseGfm],
+          eslintConfig: [mark.configs.base],
         }),
       }),
     ],
@@ -298,7 +291,7 @@ export default defineConfig({
     // Process only the files inside `docs/rules/`, excluding `index.md`.
     if (/^docs\/rules\/(?!index).+/.test(pageData.relativePath)) {
       const ruleName = parse(pageData.relativePath).name;
-      const rule = rules[ruleName];
+      const rule = mark.rules[ruleName];
 
       pageData.title = ruleName;
       pageData.frontmatter.title = ruleName;
@@ -309,14 +302,15 @@ export default defineConfig({
 </h1>
 <p>
   ${(rule.meta.docs.recommended ?? false) ? '<code class="rule-emoji">✅ Recommended</code>' : ''}
+  ${(rule.meta.docs.stylistic ?? false) ? '<code class="rule-emoji">🎨 Stylistic</code>' : ''}
   ${(rule.meta.fixable ?? false) ? '<code class="rule-emoji">🔧 Fixable</code>' : ''}
   ${(rule.meta.docs.suggestion ?? false) ? '<code class="rule-emoji">💡 Suggestion</code>' : ''}
   ${(rule.meta.dialects.includes('commonmark') ?? false) ? '<code class="rule-emoji">⭐ CommonMark</code>' : ''}
   ${(rule.meta.dialects.includes('gfm') ?? false) ? '<code class="rule-emoji">🌟 GFM</code>' : ''}
 </p>
 <p>
-  <code class="rule-emoji">🔗 <a target="_blank" href="${URL_RULE_SRC}/${ruleName}/${ruleName}.js">Rule Source</a></code>
-  <code class="rule-emoji">🔗 <a target="_blank" href="${URL_RULE_SRC}/${ruleName}/${ruleName}.test.js">Test Source</a></code>
+  <code class="rule-emoji">🔗 <a target="_blank" href="${URL_RULE_SRC}/${ruleName}.js">Rule Source</a></code>
+  <code class="rule-emoji">🔗 <a target="_blank" href="${URL_RULE_SRC}/${ruleName}.test.js">Test Source</a></code>
 </p>
 <p>
   ${(rule.meta.docs.description ?? '')
@@ -328,6 +322,12 @@ export default defineConfig({
     )
     .join('')}.
 </p>
+
+${
+  !rule.meta.dialects.includes('commonmark') && rule.meta.dialects.includes('gfm')
+    ? '<div class="caution custom-block github-alert" bis_skin_checked="1"><p class="custom-block-title">GFM Only</p><p></p><p>This rule applies only when GFM (GitHub Flavored Markdown) is enabled by setting the <code>language</code> mode to <code>markdown/gfm</code>.</p></div>'
+    : ''
+}
 
 `;
     }

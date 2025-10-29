@@ -8,18 +8,6 @@
       "types": "./build/index.d.ts",
       "default": "./src/index.js"
     },
-    "./rules": {
-      "types": "./build/rules/index.d.ts",
-      "default": "./src/rules/index.js"
-    },
-    "./core/tests": {
-      "types": "./build/core/tests/index.d.ts",
-      "default": "./src/core/tests/index.js"
-    },
-    "./core/constants": {
-      "types": "./build/core/constants.d.ts",
-      "default": "./src/core/constants.js"
-    },
     "./package.json": "./package.json"
   },
   "typesVersions": {
@@ -29,15 +17,6 @@
       ],
       ".": [
         "./build/index.d.ts"
-      ],
-      "./rules": [
-        "./build/rules/index.d.ts"
-      ],
-      "./core/tests": [
-        "./build/core/tests/index.d.ts"
-      ],
-      "./core/constants": [
-        "./build/core/constants.d.ts"
       ]
     }
   },
@@ -82,7 +61,7 @@
     "eslint": "^9.15.0"
   },
   "dependencies": {
-    "@eslint/markdown": "^7.4.1",
+    "@eslint/markdown": "^7.5.0",
     "emoji-regex": "^10.6.0",
     "parse5": "^8.0.0"
   },

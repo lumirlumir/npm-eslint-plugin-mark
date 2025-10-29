@@ -1,0 +1,2 @@
+// TODO
+// https://github.com/textlint-rule/textlint-rule-footnote-order

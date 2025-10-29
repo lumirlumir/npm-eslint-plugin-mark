@@ -9,7 +9,6 @@
   "workspaces": [
     ".",
     "packages/*",
-    "tests/*",
     "website"
   ],
   "scripts": {
@@ -17,9 +16,7 @@
     "release:publish": "node -e \"require('child_process').execSync('npm publish -w packages ' + (require('./package.json').version.includes('-') ? '--tag next' : ''), { stdio: 'inherit' })\"",
     "release:version": "node ./scripts/version.mjs",
     "coverage": "npx c8 --reporter=lcov npm run test",
-    "test": "npm-run-all -c -l -p --aggregate-output test:**",
-    "test:pkg:epm": "npm run test -w packages/eslint-plugin-mark",
-    "test:t:i": "npm run test -w tests/integration",
+    "test": "npm run test -w packages/eslint-plugin-mark",
     "build": "npm-run-all -c -l -p --aggregate-output build:**",
     "build:pkg:epm": "npm run build -w packages/eslint-plugin-mark",
     "build:website": "npm run build -w website",
@@ -39,14 +36,14 @@
     "lint:textlint": "npx textlint -f pretty-error **/*.md"
   },
   "devDependencies": {
-    "@types/node": "^24.9.1",
+    "@types/node": "^24.9.2",
     "c8": "^10.1.3",
-    "editorconfig-checker": "^6.1.0",
+    "editorconfig-checker": "^6.1.1",
     "eslint": "^9.38.0",
     "eslint-config-bananass": "^0.5.1",
     "eslint-plugin-mark": "^0.1.0-canary.8",
     "husky": "^9.1.7",
-    "lint-staged": "^16.2.4",
+    "lint-staged": "^16.2.6",
     "markdownlint-cli": "^0.45.0",
     "npm-run-all2": "^8.0.4",
     "prettier": "^3.6.2",
@@ -54,10 +51,5 @@
     "textlint": "14.7.2",
     "textlint-rule-allowed-uris": "^2.0.1",
     "typescript": "^5.9.3"
-  },
-  "overrides": {
-    "@eslint/json": {
-      "@eslint/core": "^0.16.0"
-    }
   }
 }

@@ -23,12 +23,5 @@ export default {
   ...theme,
   enhanceApp({ app }) {
     app.use(TwoslashFloatingVue);
-    app.config.globalProperties.$emoji = {
-      recommended: '✅',
-      fixable: '🔧',
-      suggestion: '💡',
-      commonmark: '⭐',
-      gfm: '🌟',
-    };
   },
 };
