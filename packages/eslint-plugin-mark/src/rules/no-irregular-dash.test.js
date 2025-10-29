@@ -66,6 +66,9 @@ console.log(\u2014'Hello World');
           column: 2,
           endLine: 2,
           endColumn: 3,
+          data: {
+            irregularDash: 'U+2010',
+          },
         },
         {
           messageId: noIrregularDash,
@@ -73,6 +76,9 @@ console.log(\u2014'Hello World');
           column: 4,
           endLine: 2,
           endColumn: 5,
+          data: {
+            irregularDash: 'U+2011',
+          },
         },
         {
           messageId: noIrregularDash,
@@ -80,6 +86,9 @@ console.log(\u2014'Hello World');
           column: 6,
           endLine: 2,
           endColumn: 7,
+          data: {
+            irregularDash: 'U+2012',
+          },
         },
         {
           messageId: noIrregularDash,
@@ -87,6 +96,9 @@ console.log(\u2014'Hello World');
           column: 8,
           endLine: 2,
           endColumn: 9,
+          data: {
+            irregularDash: 'U+2013',
+          },
         },
         {
           messageId: noIrregularDash,
@@ -94,6 +106,9 @@ console.log(\u2014'Hello World');
           column: 10,
           endLine: 2,
           endColumn: 11,
+          data: {
+            irregularDash: 'U+2014',
+          },
         },
         {
           messageId: noIrregularDash,
@@ -101,6 +116,9 @@ console.log(\u2014'Hello World');
           column: 12,
           endLine: 2,
           endColumn: 13,
+          data: {
+            irregularDash: 'U+2015',
+          },
         },
         {
           messageId: noIrregularDash,
@@ -108,6 +126,9 @@ console.log(\u2014'Hello World');
           column: 14,
           endLine: 2,
           endColumn: 15,
+          data: {
+            irregularDash: 'U+2043',
+          },
         },
         {
           messageId: noIrregularDash,
@@ -115,6 +136,9 @@ console.log(\u2014'Hello World');
           column: 16,
           endLine: 2,
           endColumn: 17,
+          data: {
+            irregularDash: 'U+2212',
+          },
         },
         {
           messageId: noIrregularDash,
@@ -122,6 +146,9 @@ console.log(\u2014'Hello World');
           column: 18,
           endLine: 2,
           endColumn: 19,
+          data: {
+            irregularDash: 'U+23AF',
+          },
         },
         {
           messageId: noIrregularDash,
@@ -129,6 +156,9 @@ console.log(\u2014'Hello World');
           column: 20,
           endLine: 2,
           endColumn: 21,
+          data: {
+            irregularDash: 'U+2E3A',
+          },
         },
         {
           messageId: noIrregularDash,
@@ -136,6 +166,9 @@ console.log(\u2014'Hello World');
           column: 2,
           endLine: 3,
           endColumn: 3,
+          data: {
+            irregularDash: 'U+2E3B',
+          },
         },
         {
           messageId: noIrregularDash,
@@ -143,6 +176,9 @@ console.log(\u2014'Hello World');
           column: 4,
           endLine: 3,
           endColumn: 5,
+          data: {
+            irregularDash: 'U+30FC',
+          },
         },
         {
           messageId: noIrregularDash,
@@ -150,6 +186,9 @@ console.log(\u2014'Hello World');
           column: 6,
           endLine: 3,
           endColumn: 7,
+          data: {
+            irregularDash: 'U+FE58',
+          },
         },
         {
           messageId: noIrregularDash,
@@ -157,6 +196,9 @@ console.log(\u2014'Hello World');
           column: 8,
           endLine: 3,
           endColumn: 9,
+          data: {
+            irregularDash: 'U+FE63',
+          },
         },
         {
           messageId: noIrregularDash,
@@ -164,6 +206,9 @@ console.log(\u2014'Hello World');
           column: 10,
           endLine: 3,
           endColumn: 11,
+          data: {
+            irregularDash: 'U+FF0D',
+          },
         },
       ],
     },
@@ -182,6 +227,9 @@ console.log(\u2013'Hello World');
           column: 13,
           endLine: 3,
           endColumn: 14,
+          data: {
+            irregularDash: 'U+2013',
+          },
         },
       ],
       options: [
@@ -200,6 +248,9 @@ console.log(\u2013'Hello World');
           column: 14,
           endLine: 1,
           endColumn: 15,
+          data: {
+            irregularDash: 'U+2014',
+          },
         },
       ],
       options: [
