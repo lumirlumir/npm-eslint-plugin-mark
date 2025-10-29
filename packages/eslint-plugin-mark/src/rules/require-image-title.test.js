@@ -8,7 +8,7 @@
 // --------------------------------------------------------------------------------
 
 import { getFileName, ruleTester } from '../core/tests/index.js';
-import rule from './image-title.js';
+import rule from './require-image-title.js';
 
 // --------------------------------------------------------------------------------
 // Helpers
