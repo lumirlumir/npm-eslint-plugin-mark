@@ -65,6 +65,9 @@ console.log(\u0003'Hello World');
           column: 2,
           endLine: 2,
           endColumn: 3,
+          data: {
+            controlCharacter: 'U+0000',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -72,6 +75,9 @@ console.log(\u0003'Hello World');
           column: 4,
           endLine: 2,
           endColumn: 5,
+          data: {
+            controlCharacter: 'U+0001',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -79,6 +85,9 @@ console.log(\u0003'Hello World');
           column: 6,
           endLine: 2,
           endColumn: 7,
+          data: {
+            controlCharacter: 'U+0002',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -86,6 +95,9 @@ console.log(\u0003'Hello World');
           column: 8,
           endLine: 2,
           endColumn: 9,
+          data: {
+            controlCharacter: 'U+0003',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -93,6 +105,9 @@ console.log(\u0003'Hello World');
           column: 10,
           endLine: 2,
           endColumn: 11,
+          data: {
+            controlCharacter: 'U+0004',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -100,6 +115,9 @@ console.log(\u0003'Hello World');
           column: 12,
           endLine: 2,
           endColumn: 13,
+          data: {
+            controlCharacter: 'U+0005',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -107,6 +125,9 @@ console.log(\u0003'Hello World');
           column: 14,
           endLine: 2,
           endColumn: 15,
+          data: {
+            controlCharacter: 'U+0006',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -114,6 +135,9 @@ console.log(\u0003'Hello World');
           column: 16,
           endLine: 2,
           endColumn: 17,
+          data: {
+            controlCharacter: 'U+0007',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -121,6 +145,9 @@ console.log(\u0003'Hello World');
           column: 18,
           endLine: 2,
           endColumn: 19,
+          data: {
+            controlCharacter: 'U+0008',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -128,6 +155,9 @@ console.log(\u0003'Hello World');
           column: 20,
           endLine: 2,
           endColumn: 21,
+          data: {
+            controlCharacter: 'U+000B',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -135,6 +165,9 @@ console.log(\u0003'Hello World');
           column: 2,
           endLine: 3,
           endColumn: 3,
+          data: {
+            controlCharacter: 'U+000C',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -142,6 +175,9 @@ console.log(\u0003'Hello World');
           column: 4,
           endLine: 3,
           endColumn: 5,
+          data: {
+            controlCharacter: 'U+000E',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -149,6 +185,9 @@ console.log(\u0003'Hello World');
           column: 6,
           endLine: 3,
           endColumn: 7,
+          data: {
+            controlCharacter: 'U+000F',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -156,6 +195,9 @@ console.log(\u0003'Hello World');
           column: 8,
           endLine: 3,
           endColumn: 9,
+          data: {
+            controlCharacter: 'U+0010',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -163,6 +205,9 @@ console.log(\u0003'Hello World');
           column: 10,
           endLine: 3,
           endColumn: 11,
+          data: {
+            controlCharacter: 'U+0011',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -170,6 +215,9 @@ console.log(\u0003'Hello World');
           column: 12,
           endLine: 3,
           endColumn: 13,
+          data: {
+            controlCharacter: 'U+0012',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -177,6 +225,9 @@ console.log(\u0003'Hello World');
           column: 14,
           endLine: 3,
           endColumn: 15,
+          data: {
+            controlCharacter: 'U+0013',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -184,6 +235,9 @@ console.log(\u0003'Hello World');
           column: 16,
           endLine: 3,
           endColumn: 17,
+          data: {
+            controlCharacter: 'U+0014',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -191,6 +245,9 @@ console.log(\u0003'Hello World');
           column: 18,
           endLine: 3,
           endColumn: 19,
+          data: {
+            controlCharacter: 'U+0015',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -198,6 +255,9 @@ console.log(\u0003'Hello World');
           column: 20,
           endLine: 3,
           endColumn: 21,
+          data: {
+            controlCharacter: 'U+0016',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -205,6 +265,9 @@ console.log(\u0003'Hello World');
           column: 2,
           endLine: 4,
           endColumn: 3,
+          data: {
+            controlCharacter: 'U+0017',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -212,6 +275,9 @@ console.log(\u0003'Hello World');
           column: 4,
           endLine: 4,
           endColumn: 5,
+          data: {
+            controlCharacter: 'U+0018',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -219,6 +285,9 @@ console.log(\u0003'Hello World');
           column: 6,
           endLine: 4,
           endColumn: 7,
+          data: {
+            controlCharacter: 'U+0019',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -226,6 +295,9 @@ console.log(\u0003'Hello World');
           column: 8,
           endLine: 4,
           endColumn: 9,
+          data: {
+            controlCharacter: 'U+001A',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -233,6 +305,9 @@ console.log(\u0003'Hello World');
           column: 10,
           endLine: 4,
           endColumn: 11,
+          data: {
+            controlCharacter: 'U+001B',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -240,6 +315,9 @@ console.log(\u0003'Hello World');
           column: 12,
           endLine: 4,
           endColumn: 13,
+          data: {
+            controlCharacter: 'U+001C',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -247,6 +325,9 @@ console.log(\u0003'Hello World');
           column: 14,
           endLine: 4,
           endColumn: 15,
+          data: {
+            controlCharacter: 'U+001D',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -254,6 +335,9 @@ console.log(\u0003'Hello World');
           column: 16,
           endLine: 4,
           endColumn: 17,
+          data: {
+            controlCharacter: 'U+001E',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -261,6 +345,9 @@ console.log(\u0003'Hello World');
           column: 18,
           endLine: 4,
           endColumn: 19,
+          data: {
+            controlCharacter: 'U+001F',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -268,6 +355,9 @@ console.log(\u0003'Hello World');
           column: 20,
           endLine: 4,
           endColumn: 21,
+          data: {
+            controlCharacter: 'U+007F',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -275,6 +365,9 @@ console.log(\u0003'Hello World');
           column: 2,
           endLine: 5,
           endColumn: 3,
+          data: {
+            controlCharacter: 'U+0080',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -282,6 +375,9 @@ console.log(\u0003'Hello World');
           column: 4,
           endLine: 5,
           endColumn: 5,
+          data: {
+            controlCharacter: 'U+0081',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -289,6 +385,9 @@ console.log(\u0003'Hello World');
           column: 6,
           endLine: 5,
           endColumn: 7,
+          data: {
+            controlCharacter: 'U+0082',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -296,6 +395,9 @@ console.log(\u0003'Hello World');
           column: 8,
           endLine: 5,
           endColumn: 9,
+          data: {
+            controlCharacter: 'U+0083',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -303,6 +405,9 @@ console.log(\u0003'Hello World');
           column: 10,
           endLine: 5,
           endColumn: 11,
+          data: {
+            controlCharacter: 'U+0084',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -310,6 +415,9 @@ console.log(\u0003'Hello World');
           column: 12,
           endLine: 5,
           endColumn: 13,
+          data: {
+            controlCharacter: 'U+0085',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -317,6 +425,9 @@ console.log(\u0003'Hello World');
           column: 14,
           endLine: 5,
           endColumn: 15,
+          data: {
+            controlCharacter: 'U+0086',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -324,6 +435,9 @@ console.log(\u0003'Hello World');
           column: 16,
           endLine: 5,
           endColumn: 17,
+          data: {
+            controlCharacter: 'U+0087',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -331,6 +445,9 @@ console.log(\u0003'Hello World');
           column: 18,
           endLine: 5,
           endColumn: 19,
+          data: {
+            controlCharacter: 'U+0088',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -338,6 +455,9 @@ console.log(\u0003'Hello World');
           column: 20,
           endLine: 5,
           endColumn: 21,
+          data: {
+            controlCharacter: 'U+0089',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -345,6 +465,9 @@ console.log(\u0003'Hello World');
           column: 2,
           endLine: 6,
           endColumn: 3,
+          data: {
+            controlCharacter: 'U+008A',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -352,6 +475,9 @@ console.log(\u0003'Hello World');
           column: 4,
           endLine: 6,
           endColumn: 5,
+          data: {
+            controlCharacter: 'U+008B',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -359,6 +485,9 @@ console.log(\u0003'Hello World');
           column: 6,
           endLine: 6,
           endColumn: 7,
+          data: {
+            controlCharacter: 'U+008C',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -366,6 +495,9 @@ console.log(\u0003'Hello World');
           column: 8,
           endLine: 6,
           endColumn: 9,
+          data: {
+            controlCharacter: 'U+008D',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -373,6 +505,9 @@ console.log(\u0003'Hello World');
           column: 10,
           endLine: 6,
           endColumn: 11,
+          data: {
+            controlCharacter: 'U+008E',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -380,6 +515,9 @@ console.log(\u0003'Hello World');
           column: 12,
           endLine: 6,
           endColumn: 13,
+          data: {
+            controlCharacter: 'U+008F',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -387,6 +525,9 @@ console.log(\u0003'Hello World');
           column: 14,
           endLine: 6,
           endColumn: 15,
+          data: {
+            controlCharacter: 'U+0090',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -394,6 +535,9 @@ console.log(\u0003'Hello World');
           column: 16,
           endLine: 6,
           endColumn: 17,
+          data: {
+            controlCharacter: 'U+0091',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -401,6 +545,9 @@ console.log(\u0003'Hello World');
           column: 18,
           endLine: 6,
           endColumn: 19,
+          data: {
+            controlCharacter: 'U+0092',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -408,6 +555,9 @@ console.log(\u0003'Hello World');
           column: 20,
           endLine: 6,
           endColumn: 21,
+          data: {
+            controlCharacter: 'U+0093',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -415,6 +565,9 @@ console.log(\u0003'Hello World');
           column: 2,
           endLine: 7,
           endColumn: 3,
+          data: {
+            controlCharacter: 'U+0094',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -422,6 +575,9 @@ console.log(\u0003'Hello World');
           column: 4,
           endLine: 7,
           endColumn: 5,
+          data: {
+            controlCharacter: 'U+0095',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -429,6 +585,9 @@ console.log(\u0003'Hello World');
           column: 6,
           endLine: 7,
           endColumn: 7,
+          data: {
+            controlCharacter: 'U+0096',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -436,6 +595,9 @@ console.log(\u0003'Hello World');
           column: 8,
           endLine: 7,
           endColumn: 9,
+          data: {
+            controlCharacter: 'U+0097',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -443,6 +605,9 @@ console.log(\u0003'Hello World');
           column: 10,
           endLine: 7,
           endColumn: 11,
+          data: {
+            controlCharacter: 'U+0098',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -450,6 +615,9 @@ console.log(\u0003'Hello World');
           column: 12,
           endLine: 7,
           endColumn: 13,
+          data: {
+            controlCharacter: 'U+0099',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -457,6 +625,9 @@ console.log(\u0003'Hello World');
           column: 14,
           endLine: 7,
           endColumn: 15,
+          data: {
+            controlCharacter: 'U+009A',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -464,6 +635,9 @@ console.log(\u0003'Hello World');
           column: 16,
           endLine: 7,
           endColumn: 17,
+          data: {
+            controlCharacter: 'U+009B',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -471,6 +645,9 @@ console.log(\u0003'Hello World');
           column: 18,
           endLine: 7,
           endColumn: 19,
+          data: {
+            controlCharacter: 'U+009C',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -478,6 +655,9 @@ console.log(\u0003'Hello World');
           column: 20,
           endLine: 7,
           endColumn: 21,
+          data: {
+            controlCharacter: 'U+009D',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -485,6 +665,9 @@ console.log(\u0003'Hello World');
           column: 2,
           endLine: 8,
           endColumn: 3,
+          data: {
+            controlCharacter: 'U+009E',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -492,6 +675,9 @@ console.log(\u0003'Hello World');
           column: 4,
           endLine: 8,
           endColumn: 5,
+          data: {
+            controlCharacter: 'U+009F',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -499,6 +685,9 @@ console.log(\u0003'Hello World');
           column: 6,
           endLine: 8,
           endColumn: 7,
+          data: {
+            controlCharacter: 'U+202C',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -506,6 +695,9 @@ console.log(\u0003'Hello World');
           column: 8,
           endLine: 8,
           endColumn: 9,
+          data: {
+            controlCharacter: 'U+202D',
+          },
         },
         {
           messageId: 'noControlCharacter',
@@ -513,6 +705,9 @@ console.log(\u0003'Hello World');
           column: 10,
           endLine: 8,
           endColumn: 11,
+          data: {
+            controlCharacter: 'U+202E',
+          },
         },
       ],
     },
@@ -531,6 +726,9 @@ console.log(\u0005'Hello World');
           column: 13,
           endLine: 3,
           endColumn: 14,
+          data: {
+            controlCharacter: 'U+0005',
+          },
         },
       ],
       options: [
@@ -549,6 +747,9 @@ console.log(\u0005'Hello World');
           column: 14,
           endLine: 1,
           endColumn: 15,
+          data: {
+            controlCharacter: 'U+0006',
+          },
         },
       ],
       options: [
