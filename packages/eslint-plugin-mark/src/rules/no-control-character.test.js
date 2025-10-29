@@ -711,6 +711,22 @@ console.log(\u0003'Hello World');
         },
       ],
     },
+    {
+      name: 'Control character in inline code',
+      code: '`\u0000`\u0000',
+      errors: [
+        {
+          messageId: 'noControlCharacter',
+          line: 1,
+          column: 4,
+          endLine: 1,
+          endColumn: 5,
+          data: {
+            controlCharacter: 'U+0000',
+          },
+        },
+      ],
+    },
 
     // Options
     {

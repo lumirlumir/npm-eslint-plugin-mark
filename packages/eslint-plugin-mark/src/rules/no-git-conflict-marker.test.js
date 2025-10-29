@@ -249,6 +249,22 @@ ruleTester(getFileName(import.meta.url), rule, {
         },
       ],
     },
+    {
+      name: 'Git conflict marker in code',
+      code: '```txt\n>>>>>>>\n```\n>>>>>>>',
+      errors: [
+        {
+          messageId: 'noGitConflictMarker',
+          line: 4,
+          column: 1,
+          endLine: 4,
+          endColumn: 8,
+          data: {
+            gitConflictMarker: '>>>>>>>',
+          },
+        },
+      ],
+    },
 
     // Options
     {
