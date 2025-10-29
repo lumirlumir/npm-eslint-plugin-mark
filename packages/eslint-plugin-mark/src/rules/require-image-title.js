@@ -11,14 +11,14 @@ import { getElementsByTagName, ReferenceDefinitionHandler } from '../core/ast/in
 import { URL_RULE_DOCS } from '../core/constants.js';
 
 // --------------------------------------------------------------------------------
-// Typedefs
+// Typedef
 // --------------------------------------------------------------------------------
 
 /**
  * @import { Image, ImageReference, Definition, Html } from 'mdast'
  * @import { RuleModule } from '../core/types.js';
  * @typedef {[]} RuleOptions
- * @typedef {'imageTitle'} MessageIds
+ * @typedef {'requireImageTitle'} MessageIds
  */
 
 // --------------------------------------------------------------------------------
@@ -32,13 +32,13 @@ export default {
 
     docs: {
       description: 'Enforce the use of title attribute for images',
-      url: URL_RULE_DOCS('image-title'),
+      url: URL_RULE_DOCS('require-image-title'),
       recommended: false,
       stylistic: false,
     },
 
     messages: {
-      imageTitle: 'Images should have a title attribute.',
+      requireImageTitle: 'Images should have a title attribute.',
     },
 
     language: 'markdown',
@@ -53,7 +53,7 @@ export default {
     function report(node) {
       context.report({
         node,
-        messageId: 'imageTitle',
+        messageId: 'requireImageTitle',
       });
     }
 

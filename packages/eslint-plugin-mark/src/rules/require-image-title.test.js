@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `image-title.js`.
+ * @fileoverview Test for `require-image-title.js`.
  * @author 루밀LuMir(lumirlumir)
  */
 
@@ -9,12 +9,6 @@
 
 import { getFileName, ruleTester } from '../core/tests/index.js';
 import rule from './require-image-title.js';
-
-// --------------------------------------------------------------------------------
-// Helpers
-// --------------------------------------------------------------------------------
-
-const imageTitle = 'imageTitle';
 
 // --------------------------------------------------------------------------------
 // Test
@@ -62,7 +56,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: '![](https://example.com/image.jpg)',
       errors: [
         {
-          messageId: imageTitle,
+          messageId: 'requireImageTitle',
           line: 1,
           column: 1,
           endLine: 1,
@@ -75,7 +69,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: '![](https://example.com/image.jpg "")',
       errors: [
         {
-          messageId: imageTitle,
+          messageId: 'requireImageTitle',
           line: 1,
           column: 1,
           endLine: 1,
@@ -92,7 +86,7 @@ ruleTester(getFileName(import.meta.url), rule, {
 [image]: https://example.com/image.jpg`,
       errors: [
         {
-          messageId: imageTitle,
+          messageId: 'requireImageTitle',
           line: 4,
           column: 1,
           endLine: 4,
@@ -108,7 +102,7 @@ ruleTester(getFileName(import.meta.url), rule, {
 [image]: https://example.com/image.jpg ""`,
       errors: [
         {
-          messageId: imageTitle,
+          messageId: 'requireImageTitle',
           line: 4,
           column: 1,
           endLine: 4,
@@ -122,7 +116,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: '<img src="https://example.com/image.jpg">',
       errors: [
         {
-          messageId: imageTitle,
+          messageId: 'requireImageTitle',
           line: 1,
           column: 1,
           endLine: 1,
@@ -135,7 +129,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: '<img src="https://example.com/image.jpg" title="">',
       errors: [
         {
-          messageId: imageTitle,
+          messageId: 'requireImageTitle',
           line: 1,
           column: 1,
           endLine: 1,
@@ -151,7 +145,7 @@ ruleTester(getFileName(import.meta.url), rule, {
 </div>`,
       errors: [
         {
-          messageId: imageTitle,
+          messageId: 'requireImageTitle',
           line: 2,
           column: 1,
           endLine: 4,
