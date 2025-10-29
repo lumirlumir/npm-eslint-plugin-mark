@@ -297,6 +297,22 @@ console.log(\u200b'Hello World');
         },
       ],
     },
+    {
+      name: 'Irregular whitespace in inline code',
+      code: '`\v`\v',
+      errors: [
+        {
+          messageId: 'noIrregularWhitespace',
+          line: 1,
+          column: 4,
+          endLine: 1,
+          endColumn: 5,
+          data: {
+            irregularWhitespace: 'U+000B',
+          },
+        },
+      ],
+    },
 
     // Options
     {
