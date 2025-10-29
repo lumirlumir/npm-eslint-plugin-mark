@@ -7,15 +7,14 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { IgnoredPositions } from '../core/ast/index.js';
-import { URL_RULE_DOCS, ZERO_TO_ONE_BASED_OFFSET } from '../core/constants.js';
+import { SkipRanges } from '../core/ast/index.js';
+import { URL_RULE_DOCS } from '../core/constants.js';
 
 // --------------------------------------------------------------------------------
 // Typedef
 // --------------------------------------------------------------------------------
 
 /**
- * @import { Position } from 'unist';
  * @import { RuleModule } from '../core/types.js';
  * @typedef {[{ skipCode: boolean, skipInlineCode: boolean }]} RuleOptions
  * @typedef {'noIrregularDash'} MessageIds
@@ -76,55 +75,44 @@ export default {
   },
 
   create(context) {
+    const { sourceCode } = context;
     const [{ skipCode, skipInlineCode }] = context.options;
-    const { lines } = context.sourceCode;
 
-    const ignoredPositions = new IgnoredPositions();
+    const skipRanges = new SkipRanges();
 
     return {
       code(node) {
-        if (skipCode) ignoredPositions.push(node.position); // Store position information of `Code`.
+        if (skipCode) skipRanges.push(sourceCode.getRange(node)); // Store position information of `Code`.
       },
 
       inlineCode(node) {
-        if (skipInlineCode) ignoredPositions.push(node.position); // Store position information of `InlineCode`.
+        if (skipInlineCode) skipRanges.push(sourceCode.getRange(node)); // Store position information of `InlineCode`.
       },
 
       'root:exit'() {
-        lines.forEach((line, lineIndex) => {
-          const matches = line.matchAll(irregularDashRegex);
+        const matches = sourceCode.text.matchAll(irregularDashRegex);
 
-          for (const match of matches) {
-            const irregularDash = match[0];
+        for (const match of matches) {
+          const irregularDash = match[0];
 
-            const matchIndexStart = match.index;
-            const matchIndexEnd = matchIndexStart + irregularDash.length;
+          const startOffset = match.index;
+          const endOffset = startOffset + irregularDash.length;
 
-            /** @type {Position} */
-            const loc = {
-              start: {
-                line: lineIndex + ZERO_TO_ONE_BASED_OFFSET,
-                column: matchIndexStart + ZERO_TO_ONE_BASED_OFFSET,
-              },
-              end: {
-                line: lineIndex + ZERO_TO_ONE_BASED_OFFSET,
-                column: matchIndexEnd + ZERO_TO_ONE_BASED_OFFSET,
-              },
-            };
+          if (skipRanges.includes(startOffset)) continue;
 
-            if (ignoredPositions.isIgnoredPosition(loc)) continue;
+          context.report({
+            loc: {
+              start: sourceCode.getLocFromIndex(startOffset),
+              end: sourceCode.getLocFromIndex(endOffset),
+            },
 
-            context.report({
-              loc,
+            data: {
+              irregularDash: `U+${irregularDash.codePointAt(0)?.toString(16).toUpperCase().padStart(4, '0')}`,
+            },
 
-              data: {
-                irregularDash: `U+${irregularDash.codePointAt(0)?.toString(16).toUpperCase().padStart(4, '0')}`,
-              },
-
-              messageId: 'noIrregularDash',
-            });
-          }
-        });
+            messageId: 'noIrregularDash',
+          });
+        }
       },
     };
   },
