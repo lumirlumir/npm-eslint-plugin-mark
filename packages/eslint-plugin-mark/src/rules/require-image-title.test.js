@@ -25,15 +25,39 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: '  ',
     },
     {
-      name: 'Image node with title attribute',
+      name: 'Image node with title attribute - 1',
       code: '![](https://example.com/image.jpg "title")',
     },
     {
-      name: 'ImageReference node with title attribute',
+      name: 'Image node with title attribute - 2',
+      code: "![](https://example.com/image.jpg 'title')",
+    },
+    {
+      name: 'Image node with title attribute - 3',
+      code: '![](https://example.com/image.jpg (title))',
+    },
+    {
+      name: 'ImageReference node with title attribute - 1',
       code: `
 ![alt text][image]
 
 [image]: https://example.com/image.jpg "title"
+`,
+    },
+    {
+      name: 'ImageReference node with title attribute - 2',
+      code: `
+![alt text][image]
+
+[image]: https://example.com/image.jpg 'title'
+`,
+    },
+    {
+      name: 'ImageReference node with title attribute - 3',
+      code: `
+![alt text][image]
+
+[image]: https://example.com/image.jpg (title)
 `,
     },
     {
@@ -65,8 +89,34 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
     },
     {
-      name: 'Image node with empty title attribute',
+      name: 'Image node with empty title attribute - 1',
       code: '![](https://example.com/image.jpg "")',
+      errors: [
+        {
+          messageId: 'requireImageTitle',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 38,
+        },
+      ],
+    },
+    {
+      name: 'Image node with empty title attribute - 2',
+      code: "![](https://example.com/image.jpg '')",
+      errors: [
+        {
+          messageId: 'requireImageTitle',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 38,
+        },
+      ],
+    },
+    {
+      name: 'Image node with empty title attribute - 3',
+      code: '![](https://example.com/image.jpg ())',
       errors: [
         {
           messageId: 'requireImageTitle',
@@ -95,11 +145,43 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
     },
     {
-      name: 'ImageReference node with empty title attribute',
+      name: 'ImageReference node with empty title attribute - 1',
       code: `
 ![alt text][image]
 
 [image]: https://example.com/image.jpg ""`,
+      errors: [
+        {
+          messageId: 'requireImageTitle',
+          line: 4,
+          column: 1,
+          endLine: 4,
+          endColumn: 42,
+        },
+      ],
+    },
+    {
+      name: 'ImageReference node with empty title attribute - 2',
+      code: `
+![alt text][image]
+
+[image]: https://example.com/image.jpg ''`,
+      errors: [
+        {
+          messageId: 'requireImageTitle',
+          line: 4,
+          column: 1,
+          endLine: 4,
+          endColumn: 42,
+        },
+      ],
+    },
+    {
+      name: 'ImageReference node with empty title attribute - 3',
+      code: `
+![alt text][image]
+
+[image]: https://example.com/image.jpg ()`,
       errors: [
         {
           messageId: 'requireImageTitle',
