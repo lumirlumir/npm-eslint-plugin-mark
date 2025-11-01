@@ -12,7 +12,6 @@ import { parse } from 'node:path';
 import mark from 'eslint-plugin-mark';
 import packageJson from 'eslint-plugin-mark/package.json' with { type: 'json' };
 
-import footnote from 'markdown-it-footnote';
 import { defineConfig } from 'vitepress';
 import { groupIconMdPlugin, groupIconVitePlugin } from 'vitepress-plugin-group-icons';
 import { codecovVitePlugin } from '@codecov/vite-plugin';
@@ -255,7 +254,6 @@ export default defineConfig({
 
   markdown: {
     config(md) {
-      md.use(footnote);
       md.use(groupIconMdPlugin);
     },
 
