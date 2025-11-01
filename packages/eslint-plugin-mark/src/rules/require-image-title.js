@@ -17,7 +17,8 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 // --------------------------------------------------------------------------------
 
 /**
- * @import { Image, ImageReference, Definition, Html } from 'mdast'
+ * @import { Position } from 'unist';
+ * @import { Definition } from 'mdast'
  * @import { RuleModule } from '../core/types.js';
  * @typedef {[]} RuleOptions
  * @typedef {'requireImageTitle'} MessageIds
@@ -49,22 +50,24 @@ export default {
   },
 
   create(context) {
+    const { sourceCode } = context;
+
     /** @type {Set<string>} */
     const imageReferenceIdentifiers = new Set();
     /** @type {Set<Definition>} */
     const definitions = new Set();
 
-    /** @param {Image | ImageReference | Definition | Html} node */
-    function report(node) {
+    /** @param {Position} loc */
+    function report(loc) {
       context.report({
-        node,
+        loc,
         messageId: 'requireImageTitle',
       });
     }
 
     return {
       image(node) {
-        if (!node.title) report(node);
+        if (!node.title) report(sourceCode.getLoc(node));
       },
 
       html(node) {
@@ -78,7 +81,7 @@ export default {
           });
 
           if (!hasTitle) {
-            report(node);
+            report(sourceCode.getLoc(node));
           }
         });
       },
@@ -94,7 +97,7 @@ export default {
       'root:exit'() {
         for (const definition of definitions) {
           if (imageReferenceIdentifiers.has(definition.identifier) && !definition.title) {
-            report(definition);
+            report(sourceCode.getLoc(definition));
           }
         }
       },
