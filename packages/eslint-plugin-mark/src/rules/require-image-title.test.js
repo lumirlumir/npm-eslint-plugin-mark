@@ -220,7 +220,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
     },
     {
-      name: 'Nested Html node without title attribute',
+      name: 'Nested Html node without title attribute - 1',
       code: `
 <div>
   <img src="https://example.com/image.jpg">
@@ -228,10 +228,35 @@ ruleTester(getFileName(import.meta.url), rule, {
       errors: [
         {
           messageId: 'requireImageTitle',
-          line: 2,
-          column: 1,
-          endLine: 4,
-          endColumn: 7,
+          line: 3,
+          column: 3,
+          endLine: 3,
+          endColumn: 44,
+        },
+      ],
+    },
+    {
+      name: 'Nested Html node without title attribute - 2',
+      code: `
+<div>
+  <img src="https://example.com/image.jpg">
+  <br>
+  <img src="https://example.com/image.jpg">
+</div>`,
+      errors: [
+        {
+          messageId: 'requireImageTitle',
+          line: 3,
+          column: 3,
+          endLine: 3,
+          endColumn: 44,
+        },
+        {
+          messageId: 'requireImageTitle',
+          line: 5,
+          column: 3,
+          endLine: 5,
+          endColumn: 44,
         },
       ],
     },

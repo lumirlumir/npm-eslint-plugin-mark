@@ -71,19 +71,30 @@ export default {
       },
 
       html(node) {
-        getElementsByTagName(node.value, 'img').forEach(({ attrs }) => {
-          let hasTitle = false;
+        const [nodeStartOffset] = sourceCode.getRange(node);
 
-          attrs.forEach(({ name, value }) => {
-            if (name === 'title' && value) {
-              hasTitle = true;
+        getElementsByTagName(node.value, 'img').forEach(
+          ({ attrs, sourceCodeLocation }) => {
+            let hasTitle = false;
+
+            for (const { name, value } of attrs) {
+              if (name === 'title' && value) {
+                hasTitle = true;
+              }
             }
-          });
 
-          if (!hasTitle) {
-            report(sourceCode.getLoc(node));
-          }
-        });
+            if (!hasTitle && sourceCodeLocation) {
+              report({
+                start: sourceCode.getLocFromIndex(
+                  nodeStartOffset + sourceCodeLocation.startOffset,
+                ),
+                end: sourceCode.getLocFromIndex(
+                  nodeStartOffset + sourceCodeLocation.endOffset,
+                ),
+              });
+            }
+          },
+        );
       },
 
       imageReference(node) {
