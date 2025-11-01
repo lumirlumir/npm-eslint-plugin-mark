@@ -3,11 +3,13 @@
  * @author 루밀LuMir(lumirlumir)
  */
 
+// TODO: allow option
+
 // --------------------------------------------------------------------------------
 // Import
 // --------------------------------------------------------------------------------
 
-import { getElementsByTagName, ReferenceDefinitionHandler } from '../core/ast/index.js';
+import { getElementsByTagName } from '../core/ast/index.js';
 import { URL_RULE_DOCS } from '../core/constants.js';
 
 // --------------------------------------------------------------------------------
@@ -47,7 +49,10 @@ export default {
   },
 
   create(context) {
-    const refDefHandler = new ReferenceDefinitionHandler();
+    /** @type {Set<string>} */
+    const imageReferenceIdentifiers = new Set();
+    /** @type {Set<Definition>} */
+    const definitions = new Set();
 
     /** @param {Image | ImageReference | Definition | Html} node */
     function report(node) {
@@ -79,17 +84,19 @@ export default {
       },
 
       imageReference(node) {
-        refDefHandler.push(node);
+        imageReferenceIdentifiers.add(node.identifier);
       },
 
       definition(node) {
-        refDefHandler.push(node);
+        definitions.add(node);
       },
 
       'root:exit'() {
-        refDefHandler.getImageDefinitions().forEach(definition => {
-          if (!definition.title) report(definition);
-        });
+        for (const definition of definitions) {
+          if (imageReferenceIdentifiers.has(definition.identifier) && !definition.title) {
+            report(definition);
+          }
+        }
       },
     };
   },
