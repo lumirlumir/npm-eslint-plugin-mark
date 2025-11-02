@@ -98,29 +98,28 @@ export default {
 
       html(node) {
         const [nodeStartOffset] = sourceCode.getRange(node);
+        const html = sourceCode.getText(node);
 
-        getElementsByTagName(node.value, 'img').forEach(
-          ({ attrs, sourceCodeLocation }) => {
-            let hasTitle = false;
+        getElementsByTagName(html, 'img').forEach(({ attrs, sourceCodeLocation }) => {
+          let hasTitle = false;
 
-            for (const { name, value } of attrs) {
-              if (name === 'title' && value) {
-                hasTitle = true;
-              }
+          for (const { name, value } of attrs) {
+            if (name === 'title' && value) {
+              hasTitle = true;
             }
+          }
 
-            if (!hasTitle && sourceCodeLocation) {
-              report({
-                start: sourceCode.getLocFromIndex(
-                  nodeStartOffset + sourceCodeLocation.startOffset,
-                ),
-                end: sourceCode.getLocFromIndex(
-                  nodeStartOffset + sourceCodeLocation.endOffset,
-                ),
-              });
-            }
-          },
-        );
+          if (!hasTitle && sourceCodeLocation) {
+            report({
+              start: sourceCode.getLocFromIndex(
+                nodeStartOffset + sourceCodeLocation.startOffset,
+              ),
+              end: sourceCode.getLocFromIndex(
+                nodeStartOffset + sourceCodeLocation.endOffset,
+              ),
+            });
+          }
+        });
       },
 
       imageReference(node) {
