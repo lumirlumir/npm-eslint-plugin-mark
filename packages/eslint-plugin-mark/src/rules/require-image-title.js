@@ -3,12 +3,11 @@
  * @author 루밀LuMir(lumirlumir)
  */
 
-// TODO: allow option
-
 // --------------------------------------------------------------------------------
 // Import
 // --------------------------------------------------------------------------------
 
+import { normalizeIdentifier } from 'micromark-util-normalize-identifier';
 import { getElementsByTagName } from '../core/ast/index.js';
 import { URL_RULE_DOCS } from '../core/constants.js';
 
@@ -20,7 +19,7 @@ import { URL_RULE_DOCS } from '../core/constants.js';
  * @import { Position } from 'unist';
  * @import { Definition } from 'mdast'
  * @import { RuleModule } from '../core/types.js';
- * @typedef {[]} RuleOptions
+ * @typedef {[{ allowDefinitions: string[] }]} RuleOptions
  * @typedef {'requireImageTitle'} MessageIds
  */
 
@@ -40,6 +39,28 @@ export default {
       stylistic: false,
     },
 
+    schema: [
+      {
+        type: 'object',
+        properties: {
+          allowDefinitions: {
+            type: 'array',
+            items: {
+              type: 'string',
+            },
+            uniqueItems: true,
+          },
+        },
+        additionalProperties: false,
+      },
+    ],
+
+    defaultOptions: [
+      {
+        allowDefinitions: ['//'],
+      },
+    ],
+
     messages: {
       requireImageTitle: 'Images should have a title attribute.',
     },
@@ -51,6 +72,12 @@ export default {
 
   create(context) {
     const { sourceCode } = context;
+
+    const allowDefinitions = new Set(
+      context.options[0].allowDefinitions.map(identifier =>
+        normalizeIdentifier(identifier).toLowerCase(),
+      ),
+    );
 
     /** @type {Set<string>} */
     const imageReferenceIdentifiers = new Set();
@@ -102,6 +129,8 @@ export default {
       },
 
       definition(node) {
+        if (allowDefinitions.has(node.identifier)) return;
+
         definitions.add(node);
       },
 
