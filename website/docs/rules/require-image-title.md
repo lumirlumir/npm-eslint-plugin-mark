@@ -17,10 +17,18 @@ The rule examines all image elements in a Markdown document and reports any imag
 
 Examples of **incorrect** code for this rule:
 
-```md
+#### Default
+
+```md eslint-check
+<!-- eslint mark/require-image-title: "error" -->
+
 ![Alt text](https://example.com/image.png)
 
 <img src="https://example.com/image.png" alt="Alt text">
+
+<div>
+  <img src="https://example.com/image.png" alt="Alt text">
+</div>
 
 ![Alt text][reference]
 
@@ -31,24 +39,66 @@ Examples of **incorrect** code for this rule:
 
 Examples of **correct** code for this rule:
 
+#### Default
+
 ```md
+<!-- eslint mark/require-image-title: "error" -->
+
 ![Alt text](https://example.com/image.png "Image title")
 
 <img src="https://example.com/image.png" alt="Alt text" title="Image title">
+
+<div>
+  <img src="https://example.com/image.png" alt="Alt text" title="Image title">
+</div>
 
 ![Alt text][reference]
 
 [reference]: https://example.com/image.png "Image title"
 ```
 
+::: tip NOTE
+
+Please note that this rule doesn't report definition-style comments (e.g., `[//]: ...`) by default.
+
+```md eslint-check
+<!-- eslint mark/require-image-title: "error" -->
+
+![Alt text][//]
+
+[//]: https://example.com/image.png
+```
+
+:::
+
+#### With `{ allowDefinitions: ['hi'] }` Option
+
+```md eslint-check
+<!-- eslint mark/require-image-title: ["error", { allowDefinitions: ['hi'] }] -->
+
+![Alt text][hi]
+
+[hi]: https://example.com/image.png
+```
+
+## Options
+
+```js
+'mark/require-image-title': ['error', {
+  allowDefinitions: ['//'],
+}]
+```
+
+### `allowDefinitions`
+
+> Type: `string[]` / Default: `['//']`
+
+When specified, specific definitions are allowed if they match one of the identifiers in this array. This is useful for ignoring definitions that are intentionally left without titles, such as comments or placeholders.
+
 ## When Not To Use It
 
 You might want to disable this rule if:
 
-- Your documentation style guide doesn't require image titles
-- You're working with legacy documentation where adding titles to all images would be impractical
-- You're using a documentation system that provides alternative methods for image descriptions or captions
-
-## Options
-
-No options are available for this rule.
+- Your documentation style guide doesn't require image titles.
+- You're working with legacy documentation where adding titles to all images would be impractical.
+- You're using a documentation system that provides alternative methods for image descriptions or captions.
