@@ -72,7 +72,6 @@ export default {
 
   create(context) {
     const { sourceCode } = context;
-
     const allowDefinitions = new Set(
       context.options[0].allowDefinitions.map(identifier =>
         normalizeIdentifier(identifier).toLowerCase(),

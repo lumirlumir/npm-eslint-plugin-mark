@@ -61,6 +61,14 @@ ruleTester(getFileName(import.meta.url), rule, {
 `,
     },
     {
+      name: "ImageReference node with `'//'`",
+      code: `
+![alt text][//]
+
+[//]: https://example.com/image.jpg
+`,
+    },
+    {
       name: 'Html node with title attribute',
       code: '<img src="https://example.com/image.jpg" title="title">',
     },
@@ -70,6 +78,35 @@ ruleTester(getFileName(import.meta.url), rule, {
 <div>
   <img src="https://example.com/image.jpg" title="title">
 </div>
+`,
+    },
+
+    // Options
+    {
+      name: "ImageReference node with `'hi'` `allowDefinitions` option",
+      options: [{ allowDefinitions: ['hi'] }],
+      code: `
+![alt text][hi]
+
+[hi]: https://example.com/image.jpg
+`,
+    },
+    {
+      name: "ImageReference node with `'HI'` `allowDefinitions` option",
+      options: [{ allowDefinitions: ['HI'] }],
+      code: `
+![alt text][hi]
+
+[hi]: https://example.com/image.jpg
+`,
+    },
+    {
+      name: "ImageReference node with `'GRÜẞE'` `allowDefinitions` option",
+      options: [{ allowDefinitions: ['GRÜẞE'] }],
+      code: `
+![alt text][Grüsse]
+
+[Grüsse]: https://example.com/image.jpg
 `,
     },
   ],
