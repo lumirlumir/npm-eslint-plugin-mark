@@ -61,7 +61,7 @@
     "eslint": "^9.15.0"
   },
   "dependencies": {
-    "@eslint/markdown": "^7.5.0",
+    "@eslint/markdown": "^7.5.1",
     "emoji-regex": "^10.6.0",
     "parse5": "^8.0.0"
   },
