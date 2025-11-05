@@ -89,6 +89,7 @@ export default function ruleTester(ruleName, rule, tests) {
       });
 
       it('`meta.messages.messageId` should exist and value should follow the convention', () => {
+        // @ts-expect-error -- Required for testing.
         Object.values(meta.messages).forEach(message => {
           ok(message);
           match(message, /^[^a-z].*\.$/);

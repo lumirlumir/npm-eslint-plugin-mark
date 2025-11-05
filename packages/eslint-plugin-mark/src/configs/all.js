@@ -26,6 +26,7 @@ export default {
   ...base,
   name: 'mark/all',
   rules: {
+    'markdown/no-unused-definitions': 'error',
     'mark/allow-heading': 'error',
     'mark/alt-text': 'error',
     'mark/code-lang-shorthand': 'error',
@@ -35,7 +36,6 @@ export default {
     'mark/consistent-thematic-break-style': 'error',
     'mark/en-capitalization': 'error',
     'mark/heading-id': 'error',
-    'mark/image-title': 'error',
     'mark/no-bold-paragraph': 'error',
     'mark/no-control-character': 'error',
     'mark/no-curly-quote': 'error',
@@ -44,6 +44,6 @@ export default {
     'mark/no-git-conflict-marker': 'error',
     'mark/no-irregular-dash': 'error',
     'mark/no-irregular-whitespace': 'error',
-    'mark/no-unused-definition': 'error',
+    'mark/require-image-title': 'error',
   },
 };

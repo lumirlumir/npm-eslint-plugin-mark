@@ -27,7 +27,7 @@ import { parseFragment } from 'parse5';
  * @returns {Array<DefaultTreeAdapterTypes.Element | DefaultTreeAdapterTypes.Template>}
  */
 export default function getElementsByTagName(html, tagName) {
-  const ast = parseFragment(html);
+  const ast = parseFragment(html, { sourceCodeLocationInfo: true });
   const normalizedTagName = tagName.toLowerCase();
 
   /** @type {Array<DefaultTreeAdapterTypes.Element | DefaultTreeAdapterTypes.Template>} */

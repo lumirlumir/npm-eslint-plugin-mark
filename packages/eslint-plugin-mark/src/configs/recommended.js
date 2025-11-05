@@ -26,6 +26,7 @@ export default {
   ...base,
   name: 'mark/recommended',
   rules: {
+    'markdown/no-unused-definitions': 'error',
     'mark/alt-text': 'error',
     'mark/code-lang-shorthand': 'error',
     'mark/no-bold-paragraph': 'error',
@@ -35,6 +36,5 @@ export default {
     'mark/no-git-conflict-marker': 'error',
     'mark/no-irregular-dash': 'error',
     'mark/no-irregular-whitespace': 'error',
-    'mark/no-unused-definition': 'error',
   },
 };
