@@ -106,6 +106,7 @@ export default {
           for (const { name, value } of attrs) {
             if (name === 'title' && value) {
               hasTitle = true;
+              break;
             }
           }
 
