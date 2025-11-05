@@ -71,14 +71,14 @@ Please note that this rule doesn't report definition-style comments (e.g., `[//]
 
 :::
 
-#### With `{ allowDefinitions: ['hi'] }` Option
+#### With `{ allowDefinitions: ['reference'] }` Option
 
 ```md eslint-check
-<!-- eslint mark/require-image-title: ["error", { allowDefinitions: ['hi'] }] -->
+<!-- eslint mark/require-image-title: ["error", { allowDefinitions: ['reference'] }] -->
 
-![Alt text][hi]
+![Alt text][reference]
 
-[hi]: https://example.com/image.png
+[reference]: https://example.com/image.png
 ```
 
 ## Options
