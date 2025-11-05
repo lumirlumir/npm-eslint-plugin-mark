@@ -7,18 +7,20 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { getElementsByTagName, ReferenceDefinitionHandler } from '../core/ast/index.js';
+import { normalizeIdentifier } from 'micromark-util-normalize-identifier';
+import { getElementsByTagName } from '../core/ast/index.js';
 import { URL_RULE_DOCS } from '../core/constants.js';
 
 // --------------------------------------------------------------------------------
-// Typedefs
+// Typedef
 // --------------------------------------------------------------------------------
 
 /**
- * @import { Image, ImageReference, Definition, Html } from 'mdast'
+ * @import { Position } from 'unist';
+ * @import { Definition } from 'mdast'
  * @import { RuleModule } from '../core/types.js';
- * @typedef {[]} RuleOptions
- * @typedef {'imageTitle'} MessageIds
+ * @typedef {[{ allowDefinitions: string[] }]} RuleOptions
+ * @typedef {'requireImageTitle'} MessageIds
  */
 
 // --------------------------------------------------------------------------------
@@ -32,13 +34,35 @@ export default {
 
     docs: {
       description: 'Enforce the use of title attribute for images',
-      url: URL_RULE_DOCS('image-title'),
+      url: URL_RULE_DOCS('require-image-title'),
       recommended: false,
       stylistic: false,
     },
 
+    schema: [
+      {
+        type: 'object',
+        properties: {
+          allowDefinitions: {
+            type: 'array',
+            items: {
+              type: 'string',
+            },
+            uniqueItems: true,
+          },
+        },
+        additionalProperties: false,
+      },
+    ],
+
+    defaultOptions: [
+      {
+        allowDefinitions: ['//'],
+      },
+    ],
+
     messages: {
-      imageTitle: 'Images should have a title attribute.',
+      requireImageTitle: 'Images should have a title attribute.',
     },
 
     language: 'markdown',
@@ -47,49 +71,74 @@ export default {
   },
 
   create(context) {
-    const refDefHandler = new ReferenceDefinitionHandler();
+    const { sourceCode } = context;
+    const allowDefinitions = new Set(
+      context.options[0].allowDefinitions.map(identifier =>
+        normalizeIdentifier(identifier).toLowerCase(),
+      ),
+    );
 
-    /** @param {Image | ImageReference | Definition | Html} node */
-    function report(node) {
+    /** @type {Set<string>} */
+    const imageReferenceIdentifiers = new Set();
+    /** @type {Set<Definition>} */
+    const definitions = new Set();
+
+    /** @param {Position} loc */
+    function report(loc) {
       context.report({
-        node,
-        messageId: 'imageTitle',
+        loc,
+        messageId: 'requireImageTitle',
       });
     }
 
     return {
       image(node) {
-        if (!node.title) report(node);
+        if (!node.title) report(sourceCode.getLoc(node));
       },
 
       html(node) {
-        getElementsByTagName(node.value, 'img').forEach(({ attrs }) => {
+        const [nodeStartOffset] = sourceCode.getRange(node);
+        const html = sourceCode.getText(node);
+
+        getElementsByTagName(html, 'img').forEach(({ attrs, sourceCodeLocation }) => {
           let hasTitle = false;
 
-          attrs.forEach(({ name, value }) => {
+          for (const { name, value } of attrs) {
             if (name === 'title' && value) {
               hasTitle = true;
+              break;
             }
-          });
+          }
 
-          if (!hasTitle) {
-            report(node);
+          if (!hasTitle && sourceCodeLocation) {
+            report({
+              start: sourceCode.getLocFromIndex(
+                nodeStartOffset + sourceCodeLocation.startOffset,
+              ),
+              end: sourceCode.getLocFromIndex(
+                nodeStartOffset + sourceCodeLocation.endOffset,
+              ),
+            });
           }
         });
       },
 
       imageReference(node) {
-        refDefHandler.push(node);
+        imageReferenceIdentifiers.add(node.identifier);
       },
 
       definition(node) {
-        refDefHandler.push(node);
+        if (allowDefinitions.has(node.identifier)) return;
+
+        definitions.add(node);
       },
 
       'root:exit'() {
-        refDefHandler.getImageDefinitions().forEach(definition => {
-          if (!definition.title) report(definition);
-        });
+        for (const definition of definitions) {
+          if (imageReferenceIdentifiers.has(definition.identifier) && !definition.title) {
+            report(sourceCode.getLoc(definition));
+          }
+        }
       },
     };
   },
