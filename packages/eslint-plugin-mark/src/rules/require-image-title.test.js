@@ -258,6 +258,19 @@ ruleTester(getFileName(import.meta.url), rule, {
     },
     {
       name: 'Html node without title attribute - 3',
+      code: '<img\n src="https://example.com/image.jpg">',
+      errors: [
+        {
+          messageId: 'requireImageTitle',
+          line: 1,
+          column: 1,
+          endLine: 2,
+          endColumn: 38,
+        },
+      ],
+    },
+    {
+      name: 'Html node without title attribute - 4',
       code: '<img\n  src="https://example.com/image.jpg">',
       errors: [
         {
