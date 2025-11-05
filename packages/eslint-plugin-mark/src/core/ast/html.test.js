@@ -7,7 +7,7 @@
 // --------------------------------------------------------------------------------
 
 import { describe, it } from 'node:test';
-import { ok } from 'node:assert';
+import { ok, strictEqual } from 'node:assert';
 import { getFileName } from '../tests/index.js';
 import getElementsByTagName from './html.js';
 
@@ -22,6 +22,13 @@ const html = '<p>hello world</p>';
 // --------------------------------------------------------------------------------
 
 describe(getFileName(import.meta.url), () => {
+  it('should parse tag name case-insensitively', () => {
+    const elements = getElementsByTagName(html, 'P');
+
+    strictEqual(elements.length, 1);
+    strictEqual(elements[0].tagName, 'p');
+  });
+
   it('should have `sourceCodeLocation` property', () => {
     const elements = getElementsByTagName(html, 'p');
 
