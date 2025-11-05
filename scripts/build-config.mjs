@@ -64,8 +64,12 @@ export default {
 // Script
 // --------------------------------------------------------------------------------
 
-const allRules = {};
-const recommendedRules = {};
+const allRules = {
+  'markdown/no-unused-definitions': 'error', // TODO: Remove this line once integrated with `@eslint/markdown`.
+};
+const recommendedRules = {
+  'markdown/no-unused-definitions': 'error', // TODO: Remove this line once integrated with `@eslint/markdown`.
+};
 const stylisticRules = {};
 
 for (const [ruleName, rule] of Object.entries(markdown.rules)) {

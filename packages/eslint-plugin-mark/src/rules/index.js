@@ -17,7 +17,6 @@ import noEmoji from './no-emoji.js';
 import noGitConflictMarker from './no-git-conflict-marker.js';
 import noIrregularDash from './no-irregular-dash.js';
 import noIrregularWhitespace from './no-irregular-whitespace.js';
-import noUnusedDefinition from './no-unused-definition.js';
 import requireImageTitle from './require-image-title.js';
 
 export default {
@@ -38,6 +37,5 @@ export default {
   'no-git-conflict-marker': noGitConflictMarker,
   'no-irregular-dash': noIrregularDash,
   'no-irregular-whitespace': noIrregularWhitespace,
-  'no-unused-definition': noUnusedDefinition,
   'require-image-title': requireImageTitle,
 };
