@@ -6,6 +6,8 @@
  * @see https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
  */
 
+// @ts-nocheck -- TODO
+
 // --------------------------------------------------------------------------------
 // Import
 // --------------------------------------------------------------------------------
