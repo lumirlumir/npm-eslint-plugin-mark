@@ -1,5 +1,5 @@
 /**
- * @fileoverview Rule to enforce the use of title attribute for images.
+ * @fileoverview Rule to enforce the use of title attribute for links.
  * @author 루밀LuMir(lumirlumir)
  */
 
@@ -20,7 +20,7 @@ import { URL_RULE_DOCS } from '../core/constants.js';
  * @import { Definition } from 'mdast'
  * @import { RuleModule } from '../core/types.js';
  * @typedef {[{ allowDefinitions: string[] }]} RuleOptions
- * @typedef {'requireImageTitle'} MessageIds
+ * @typedef {'requireLinkTitle'} MessageIds
  */
 
 // --------------------------------------------------------------------------------
@@ -33,8 +33,8 @@ export default {
     type: 'problem',
 
     docs: {
-      description: 'Enforce the use of title attribute for images',
-      url: URL_RULE_DOCS('require-image-title'),
+      description: 'Enforce the use of title attribute for links',
+      url: URL_RULE_DOCS('require-link-title'),
       recommended: false,
       stylistic: false,
     },
@@ -62,7 +62,7 @@ export default {
     ],
 
     messages: {
-      requireImageTitle: 'Images should have a title attribute.',
+      requireLinkTitle: 'Links should have a title attribute.',
     },
 
     language: 'markdown',
@@ -79,7 +79,7 @@ export default {
     );
 
     /** @type {Set<string>} */
-    const imageReferenceIdentifiers = new Set();
+    const linkReferenceIdentifiers = new Set();
     /** @type {Set<Definition>} */
     const definitions = new Set();
 
@@ -87,12 +87,15 @@ export default {
     function report(loc) {
       context.report({
         loc,
-        messageId: 'requireImageTitle',
+        messageId: 'requireLinkTitle',
       });
     }
 
     return {
-      image(node) {
+      link(node) {
+        // TODO: Detect auto-link literals like
+        // `<https://example.com>` or `https://example.com`
+
         if (!node.title) report(sourceCode.getLoc(node));
       },
 
@@ -100,7 +103,7 @@ export default {
         const [nodeStartOffset] = sourceCode.getRange(node);
         const html = sourceCode.getText(node);
 
-        getElementsByTagName(html, 'img').forEach(({ attrs, sourceCodeLocation }) => {
+        getElementsByTagName(html, 'a').forEach(({ attrs, sourceCodeLocation }) => {
           let hasTitle = false;
 
           for (const { name, value } of attrs) {
@@ -123,8 +126,8 @@ export default {
         });
       },
 
-      imageReference(node) {
-        imageReferenceIdentifiers.add(node.identifier);
+      linkReference(node) {
+        linkReferenceIdentifiers.add(node.identifier);
       },
 
       definition(node) {
@@ -135,7 +138,7 @@ export default {
 
       'root:exit'() {
         for (const definition of definitions) {
-          if (imageReferenceIdentifiers.has(definition.identifier) && !definition.title) {
+          if (linkReferenceIdentifiers.has(definition.identifier) && !definition.title) {
             report(sourceCode.getLoc(definition));
           }
         }

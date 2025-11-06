@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `require-image-title.js`.
+ * @fileoverview Test for `require-link-title.js`.
  * @author 루밀LuMir(lumirlumir)
  */
 
@@ -8,7 +8,7 @@
 // --------------------------------------------------------------------------------
 
 import { getFileName, ruleTester } from '../core/tests/index.js';
-import rule from './require-image-title.js';
+import rule from './require-link-title.js';
 
 // --------------------------------------------------------------------------------
 // Test
@@ -25,9 +25,10 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: '  ',
     },
     {
-      name: 'Image node with title attribute - 1',
-      code: '![](https://example.com/image.jpg "title")',
+      name: 'Link node with title attribute - 1',
+      code: '[](https://example.com "title")',
     },
+    /*
     {
       name: 'Image node with title attribute - 2',
       code: "![](https://example.com/image.jpg 'title')",
@@ -109,9 +110,11 @@ ruleTester(getFileName(import.meta.url), rule, {
 [Grüsse]: https://example.com/image.jpg
 `,
     },
+    */
   ],
 
   invalid: [
+    /*
     {
       name: 'Image node without title attribute',
       code: '![](https://example.com/image.jpg)',
@@ -336,5 +339,6 @@ ruleTester(getFileName(import.meta.url), rule, {
         },
       ],
     },
+    */
   ],
 });
