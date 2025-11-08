@@ -28,51 +28,51 @@ ruleTester(getFileName(import.meta.url), rule, {
       name: 'Link node with title attribute - 1',
       code: '[](https://example.com "title")',
     },
-    /*
     {
-      name: 'Image node with title attribute - 2',
-      code: "![](https://example.com/image.jpg 'title')",
+      name: 'Link node with title attribute - 2',
+      code: "[](https://example.com 'title')",
     },
     {
-      name: 'Image node with title attribute - 3',
-      code: '![](https://example.com/image.jpg (title))',
+      name: 'Link node with title attribute - 3',
+      code: '[](https://example.com (title))',
     },
     {
-      name: 'ImageReference node with title attribute - 1',
+      name: 'LinkReference node with title attribute - 1',
       code: `
-![alt text][image]
+[text][link]
 
-[image]: https://example.com/image.jpg "title"
+[link]: https://example.com "title"
 `,
     },
     {
-      name: 'ImageReference node with title attribute - 2',
+      name: 'LinkReference node with title attribute - 2',
       code: `
-![alt text][image]
+[text][link]
 
-[image]: https://example.com/image.jpg 'title'
+[link]: https://example.com 'title'
 `,
     },
     {
-      name: 'ImageReference node with title attribute - 3',
+      name: 'LinkReference node with title attribute - 3',
       code: `
-![alt text][image]
+[text][link]
 
-[image]: https://example.com/image.jpg (title)
+[link]: https://example.com (title)
 `,
     },
     {
-      name: "ImageReference node with `'//'`",
+      name: "LinkReference node with `'//'`",
       code: `
-![alt text][//]
+[text][//]
 
-[//]: https://example.com/image.jpg
+[//]: https://example.com
 `,
     },
     {
       name: 'Html node with title attribute',
-      code: '<img src="https://example.com/image.jpg" title="title">',
+      code: '<a href="https://example.com" title="title">text</a>',
     },
+    /*
     {
       name: 'Nested Html node with title attribute',
       code: `
