@@ -72,45 +72,43 @@ ruleTester(getFileName(import.meta.url), rule, {
       name: 'Html node with title attribute',
       code: '<a href="https://example.com" title="title">text</a>',
     },
-    /*
     {
       name: 'Nested Html node with title attribute',
       code: `
 <div>
-  <img src="https://example.com/image.jpg" title="title">
+  <a href="https://example.com" title="title">text</a>
 </div>
 `,
     },
 
     // Options
     {
-      name: "ImageReference node with `'hi'` `allowDefinitions` option",
+      name: "LinkReference node with `'hi'` `allowDefinitions` option",
       options: [{ allowDefinitions: ['hi'] }],
       code: `
-![alt text][hi]
+[text][hi]
 
-[hi]: https://example.com/image.jpg
+[hi]: https://example.com
 `,
     },
     {
-      name: "ImageReference node with `'HI'` `allowDefinitions` option",
+      name: "LinkReference node with `'HI'` `allowDefinitions` option",
       options: [{ allowDefinitions: ['HI'] }],
       code: `
-![alt text][hi]
+[text][hi]
 
-[hi]: https://example.com/image.jpg
+[hi]: https://example.com
 `,
     },
     {
-      name: "ImageReference node with `'GRÜẞE'` `allowDefinitions` option",
+      name: "LinkReference node with `'GRÜẞE'` `allowDefinitions` option",
       options: [{ allowDefinitions: ['GRÜẞE'] }],
       code: `
-![alt text][Grüsse]
+[text][Grüsse]
 
-[Grüsse]: https://example.com/image.jpg
+[Grüsse]: https://example.com
 `,
     },
-    */
   ],
 
   invalid: [
