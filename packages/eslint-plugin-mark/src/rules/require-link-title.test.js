@@ -313,7 +313,7 @@ ruleTester(getFileName(import.meta.url), rule, {
           line: 1,
           column: 1,
           endLine: 1,
-          endColumn: 41,
+          endColumn: 40,
         },
       ],
     },
