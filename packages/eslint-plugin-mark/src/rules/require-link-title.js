@@ -119,13 +119,13 @@ export default {
             }
           }
 
-          if (!hasTitle && sourceCodeLocation) {
+          if (!hasTitle && sourceCodeLocation?.startTag) {
             report({
               start: sourceCode.getLocFromIndex(
-                nodeStartOffset + sourceCodeLocation.startOffset,
+                nodeStartOffset + sourceCodeLocation.startTag.startOffset,
               ),
               end: sourceCode.getLocFromIndex(
-                nodeStartOffset + sourceCodeLocation.endOffset,
+                nodeStartOffset + sourceCodeLocation.startTag.endOffset,
               ),
             });
           }

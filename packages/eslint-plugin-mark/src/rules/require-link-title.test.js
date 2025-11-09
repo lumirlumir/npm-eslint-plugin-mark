@@ -239,69 +239,81 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
     },
 
-    /*
     {
       name: 'Html node without title attribute - 1',
-      code: '<img src="https://example.com/image.jpg">',
+      code: '<a href="https://example.com">text</a>',
       errors: [
         {
-          messageId: 'requireImageTitle',
+          messageId: 'requireLinkTitle',
           line: 1,
           column: 1,
           endLine: 1,
-          endColumn: 42,
+          endColumn: 31,
         },
       ],
     },
     {
       name: 'Html node without title attribute - 2',
-      code: '<img\nsrc="https://example.com/image.jpg">',
+      code: '<a\nhref="https://example.com">text</a>',
       errors: [
         {
-          messageId: 'requireImageTitle',
+          messageId: 'requireLinkTitle',
           line: 1,
           column: 1,
           endLine: 2,
-          endColumn: 37,
+          endColumn: 28,
         },
       ],
     },
     {
       name: 'Html node without title attribute - 3',
-      code: '<img\n src="https://example.com/image.jpg">',
+      code: '<a\n href="https://example.com">text</a>',
       errors: [
         {
-          messageId: 'requireImageTitle',
+          messageId: 'requireLinkTitle',
           line: 1,
           column: 1,
           endLine: 2,
-          endColumn: 38,
+          endColumn: 29,
         },
       ],
     },
     {
       name: 'Html node without title attribute - 4',
-      code: '<img\n  src="https://example.com/image.jpg">',
+      code: '<a\n  href="https://example.com">text</a>',
       errors: [
         {
-          messageId: 'requireImageTitle',
+          messageId: 'requireLinkTitle',
           line: 1,
           column: 1,
           endLine: 2,
-          endColumn: 39,
+          endColumn: 30,
         },
       ],
     },
     {
-      name: 'Html node with empty title attribute',
-      code: '<img src="https://example.com/image.jpg" title="">',
+      name: 'Html node with empty title attribute - 1',
+      code: '<a href="https://example.com" title>text</a>',
       errors: [
         {
-          messageId: 'requireImageTitle',
+          messageId: 'requireLinkTitle',
           line: 1,
           column: 1,
           endLine: 1,
-          endColumn: 51,
+          endColumn: 37,
+        },
+      ],
+    },
+    {
+      name: 'Html node with empty title attribute - 2',
+      code: '<a href="https://example.com" title="">text</a>',
+      errors: [
+        {
+          messageId: 'requireLinkTitle',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 41,
         },
       ],
     },
@@ -309,15 +321,15 @@ ruleTester(getFileName(import.meta.url), rule, {
       name: 'Nested Html node without title attribute - 1',
       code: `
 <div>
-  <img src="https://example.com/image.jpg">
+  <a href="https://example.com">text</a>
 </div>`,
       errors: [
         {
-          messageId: 'requireImageTitle',
+          messageId: 'requireLinkTitle',
           line: 3,
           column: 3,
           endLine: 3,
-          endColumn: 44,
+          endColumn: 33,
         },
       ],
     },
@@ -325,27 +337,26 @@ ruleTester(getFileName(import.meta.url), rule, {
       name: 'Nested Html node without title attribute - 2',
       code: `
 <div>
-  <img src="https://example.com/image.jpg">
+  <a href="https://example.com">text</a>
   <br>
-  <img src="https://example.com/image.jpg">
+  <a href="https://example.com">text</a>
 </div>`,
       errors: [
         {
-          messageId: 'requireImageTitle',
+          messageId: 'requireLinkTitle',
           line: 3,
           column: 3,
           endLine: 3,
-          endColumn: 44,
+          endColumn: 33,
         },
         {
-          messageId: 'requireImageTitle',
+          messageId: 'requireLinkTitle',
           line: 5,
           column: 3,
           endLine: 5,
-          endColumn: 44,
+          endColumn: 33,
         },
       ],
     },
-    */
   ],
 });

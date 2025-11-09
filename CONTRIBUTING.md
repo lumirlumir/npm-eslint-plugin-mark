@@ -45,3 +45,8 @@ All packages are located in the `packages` directory, and the documentation can 
 1. Push them to your remote branch.
 
 1. Submit a pull request.🙇‍♂️
+
+## Helpful Websites
+
+- [ESLint Code Explorer](https://explorer.eslint.org)
+- [`parse5` AST Explorer](https://astexplorer.net/#/1CHlCXc4n4)
