@@ -93,10 +93,16 @@ export default {
 
     return {
       link(node) {
-        // TODO: Detect auto-link literals like
-        // `<https://example.com>` or `https://example.com`
+        const [nodeStartOffset, nodeEndOffset] = sourceCode.getRange(node);
 
-        if (!node.title) report(sourceCode.getLoc(node));
+        // Exclude auto-link literals like `<https://example.com>` or `https://example.com`
+        if (
+          sourceCode.text[nodeStartOffset] === '[' &&
+          sourceCode.text[nodeEndOffset - 1] === ')' &&
+          !node.title
+        ) {
+          report(sourceCode.getLoc(node));
+        }
       },
 
       html(node) {

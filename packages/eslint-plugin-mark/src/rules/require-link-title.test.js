@@ -37,6 +37,15 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: '[](https://example.com (title))',
     },
     {
+      name: 'Link node with autolink - 1',
+      code: '<https://example.com>',
+    },
+    {
+      name: 'Link node with autolink - 2',
+      code: 'https://example.com',
+      language: 'markdown/gfm', // TODO: ESLint does not support `language` key in the Test runner.
+    },
+    {
       name: 'LinkReference node with title attribute - 1',
       code: `
 [text][link]
