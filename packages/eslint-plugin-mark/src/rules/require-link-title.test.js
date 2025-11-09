@@ -43,7 +43,7 @@ ruleTester(getFileName(import.meta.url), rule, {
     {
       name: 'Link node with autolink - 2',
       code: 'https://example.com',
-      language: 'markdown/gfm', // TODO: ESLint does not support `language` key in the Test runner.
+      language: 'markdown/gfm',
     },
     {
       name: 'LinkReference node with title attribute - 1',
@@ -190,56 +190,56 @@ ruleTester(getFileName(import.meta.url), rule, {
         },
       ],
     },
+    {
+      name: 'LinkReference node with empty title attribute - 1',
+      code: `
+[text][link]
+
+[link]: https://example.com ""`,
+      errors: [
+        {
+          messageId: 'requireLinkTitle',
+          line: 4,
+          column: 1,
+          endLine: 4,
+          endColumn: 31,
+        },
+      ],
+    },
+    {
+      name: 'LinkReference node with empty title attribute - 2',
+      code: `
+[text][link]
+
+[link]: https://example.com ''`,
+      errors: [
+        {
+          messageId: 'requireLinkTitle',
+          line: 4,
+          column: 1,
+          endLine: 4,
+          endColumn: 31,
+        },
+      ],
+    },
+    {
+      name: 'LinkReference node with empty title attribute - 3',
+      code: `
+[text][link]
+
+[link]: https://example.com ()`,
+      errors: [
+        {
+          messageId: 'requireLinkTitle',
+          line: 4,
+          column: 1,
+          endLine: 4,
+          endColumn: 31,
+        },
+      ],
+    },
+
     /*
-    {
-      name: 'ImageReference node with empty title attribute - 1',
-      code: `
-![alt text][image]
-
-[image]: https://example.com/image.jpg ""`,
-      errors: [
-        {
-          messageId: 'requireImageTitle',
-          line: 4,
-          column: 1,
-          endLine: 4,
-          endColumn: 42,
-        },
-      ],
-    },
-    {
-      name: 'ImageReference node with empty title attribute - 2',
-      code: `
-![alt text][image]
-
-[image]: https://example.com/image.jpg ''`,
-      errors: [
-        {
-          messageId: 'requireImageTitle',
-          line: 4,
-          column: 1,
-          endLine: 4,
-          endColumn: 42,
-        },
-      ],
-    },
-    {
-      name: 'ImageReference node with empty title attribute - 3',
-      code: `
-![alt text][image]
-
-[image]: https://example.com/image.jpg ()`,
-      errors: [
-        {
-          messageId: 'requireImageTitle',
-          line: 4,
-          column: 1,
-          endLine: 4,
-          endColumn: 42,
-        },
-      ],
-    },
-
     {
       name: 'Html node without title attribute - 1',
       code: '<img src="https://example.com/image.jpg">',
