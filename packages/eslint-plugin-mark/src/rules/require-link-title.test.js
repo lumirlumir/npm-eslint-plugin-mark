@@ -112,76 +112,76 @@ ruleTester(getFileName(import.meta.url), rule, {
   ],
 
   invalid: [
-    /*
     {
-      name: 'Image node without title attribute',
-      code: '![](https://example.com/image.jpg)',
+      name: 'Link node without title attribute',
+      code: '[](https://example.com)',
       errors: [
         {
-          messageId: 'requireImageTitle',
+          messageId: 'requireLinkTitle',
           line: 1,
           column: 1,
           endLine: 1,
-          endColumn: 35,
+          endColumn: 24,
         },
       ],
     },
     {
-      name: 'Image node with empty title attribute - 1',
-      code: '![](https://example.com/image.jpg "")',
+      name: 'Link node with empty title attribute - 1',
+      code: '[](https://example.com "")',
       errors: [
         {
-          messageId: 'requireImageTitle',
+          messageId: 'requireLinkTitle',
           line: 1,
           column: 1,
           endLine: 1,
-          endColumn: 38,
+          endColumn: 27,
         },
       ],
     },
     {
-      name: 'Image node with empty title attribute - 2',
-      code: "![](https://example.com/image.jpg '')",
+      name: 'Link node with empty title attribute - 2',
+      code: "[](https://example.com '')",
       errors: [
         {
-          messageId: 'requireImageTitle',
+          messageId: 'requireLinkTitle',
           line: 1,
           column: 1,
           endLine: 1,
-          endColumn: 38,
+          endColumn: 27,
         },
       ],
     },
     {
-      name: 'Image node with empty title attribute - 3',
-      code: '![](https://example.com/image.jpg ())',
+      name: 'Link node with empty title attribute - 3',
+      code: '[](https://example.com ())',
       errors: [
         {
-          messageId: 'requireImageTitle',
+          messageId: 'requireLinkTitle',
           line: 1,
           column: 1,
           endLine: 1,
-          endColumn: 38,
+          endColumn: 27,
         },
       ],
     },
 
     {
-      name: 'ImageReference node without title attribute',
+      name: 'LinkReference node without title attribute',
       code: `
-![alt text][image]
+[text][link]
 
-[image]: https://example.com/image.jpg`,
+[link]: https://example.com`,
       errors: [
         {
-          messageId: 'requireImageTitle',
+          messageId: 'requireLinkTitle',
           line: 4,
           column: 1,
           endLine: 4,
-          endColumn: 39,
+          endColumn: 28,
         },
       ],
     },
+    /*
     {
       name: 'ImageReference node with empty title attribute - 1',
       code: `
