@@ -3,13 +3,13 @@
 
 ## Rule Details
 
-This rule enforces the use of title attributes for all images in Markdown documents. Having title attributes on images provides additional context and can improve accessibility by offering supplementary information when hovering over an image.
+This rule enforces the use of title attributes for all links in Markdown documents. Having title attributes on links provides additional context and can improve accessibility by offering supplementary information when hovering over a link.
 
-The rule examines all image elements in a Markdown document and reports any images that lack a title attribute. It checks:
+The rule examines all link elements in a Markdown document and reports any links that lack a title attribute. It checks:
 
-- Standard Markdown image syntax: `![alt text](url "title")`
-- Image reference definitions: `[ref]: url "title"`
-- HTML image tags: `<img src="url" alt="alt text" title="title">`
+- Standard Markdown link syntax: `[text](url "title")`
+- Link reference definitions: `[ref]: url "title"`
+- HTML link tags: `<a href="url" title="title">text</a>`
 
 ## Examples
 
@@ -20,19 +20,19 @@ Examples of **incorrect** code for this rule:
 #### Default
 
 ```md eslint-check
-<!-- eslint mark/require-image-title: "error" -->
+<!-- eslint mark/require-link-title: "error" -->
 
-![Alt text](https://example.com/image.png)
+[Text](https://example.com)
 
-<img src="https://example.com/image.png" alt="Alt text">
+<a href="https://example.com">Text</a>
 
 <div>
-  <img src="https://example.com/image.png" alt="Alt text">
+  <a href="https://example.com">Text</a>
 </div>
 
-![Alt text][reference]
+[Text][reference]
 
-[reference]: https://example.com/image.png
+[reference]: https://example.com
 ```
 
 ### :white_check_mark: Correct
@@ -42,7 +42,7 @@ Examples of **correct** code for this rule:
 #### Default
 
 ```md
-<!-- eslint mark/require-image-title: "error" -->
+<!-- eslint mark/require-link-title: "error" -->
 
 ![Alt text](https://example.com/image.png "Image title")
 
@@ -62,7 +62,7 @@ Examples of **correct** code for this rule:
 Please note that this rule doesn't report definition-style comments (e.g., `[//]: ...`) by default.
 
 ```md eslint-check
-<!-- eslint mark/require-image-title: "error" -->
+<!-- eslint mark/require-link-title: "error" -->
 
 ![Alt text][//]
 
@@ -74,7 +74,7 @@ Please note that this rule doesn't report definition-style comments (e.g., `[//]
 #### With `{ allowDefinitions: ['reference'] }` Option
 
 ```md eslint-check
-<!-- eslint mark/require-image-title: ["error", { allowDefinitions: ['reference'] }] -->
+<!-- eslint mark/require-link-title: ["error", { allowDefinitions: ['reference'] }] -->
 
 ![Alt text][reference]
 
@@ -84,7 +84,7 @@ Please note that this rule doesn't report definition-style comments (e.g., `[//]
 ## Options
 
 ```js
-'mark/require-image-title': ['error', {
+'mark/require-link-title': ['error', {
   allowDefinitions: ['//'],
 }]
 ```
@@ -99,6 +99,6 @@ When specified, specific definitions are allowed if they match one of the identi
 
 You might want to disable this rule if:
 
-- Your documentation style guide doesn't require image titles.
-- You're working with legacy documentation where adding titles to all images would be impractical.
-- You're using a documentation system that provides alternative methods for image descriptions or captions.
+- Your documentation style guide doesn't require link titles.
+- You're working with legacy documentation where adding titles to all links would be impractical.
+- You're using a documentation system that provides alternative methods for link descriptions or captions.
