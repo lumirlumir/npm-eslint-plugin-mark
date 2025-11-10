@@ -11,7 +11,8 @@ export default defineConfig([
   bananass.configs.json,
   bananass.configs.jsonc,
   bananass.configs.json5,
-  mark.configs.recommendedGfm,
+  mark.configs.recommended,
+  mark.configs.stylistic,
 
   {
     name: 'website/rules',

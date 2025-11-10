@@ -9,7 +9,6 @@ import consistentStrongStyle from './consistent-strong-style.js';
 import consistentThematicBreakStyle from './consistent-thematic-break-style.js';
 import enCapitalization from './en-capitalization.js';
 import headingId from './heading-id.js';
-import imageTitle from './image-title.js';
 import noBoldParagraph from './no-bold-paragraph.js';
 import noConsecutiveBlankLine from './no-consecutive-blank-line.js';
 import noControlCharacter from './no-control-character.js';
@@ -19,7 +18,7 @@ import noEmoji from './no-emoji.js';
 import noGitConflictMarker from './no-git-conflict-marker.js';
 import noIrregularDash from './no-irregular-dash.js';
 import noIrregularWhitespace from './no-irregular-whitespace.js';
-import noUnusedDefinition from './no-unused-definition.js';
+import requireImageTitle from './require-image-title.js';
 
 export default {
   'allow-heading': allowHeading,
@@ -31,7 +30,6 @@ export default {
   'consistent-thematic-break-style': consistentThematicBreakStyle,
   'en-capitalization': enCapitalization,
   'heading-id': headingId,
-  'image-title': imageTitle,
   'no-bold-paragraph': noBoldParagraph,
   'no-consecutive-blank-line': noConsecutiveBlankLine,
   'no-control-character': noControlCharacter,
@@ -41,5 +39,5 @@ export default {
   'no-git-conflict-marker': noGitConflictMarker,
   'no-irregular-dash': noIrregularDash,
   'no-irregular-whitespace': noIrregularWhitespace,
-  'no-unused-definition': noUnusedDefinition,
+  'require-image-title': requireImageTitle,
 };

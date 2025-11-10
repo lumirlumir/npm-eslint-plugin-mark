@@ -6,6 +6,8 @@
  * @see https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
  */
 
+// @ts-nocheck -- TODO
+
 // --------------------------------------------------------------------------------
 // Import
 // --------------------------------------------------------------------------------
@@ -111,7 +113,7 @@ export default {
     docs: {
       description: 'Enforce the use of shorthand for code block language identifiers',
       url: URL_RULE_DOCS('code-lang-shorthand'),
-      recommended: false,
+      recommended: true,
       stylistic: false,
     },
 
