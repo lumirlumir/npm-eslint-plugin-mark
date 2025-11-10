@@ -45,5 +45,6 @@ export default {
     'mark/no-irregular-dash': 'error',
     'mark/no-irregular-whitespace': 'error',
     'mark/require-image-title': 'error',
+    'mark/require-link-title': 'error',
   },
 };

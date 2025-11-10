@@ -18,6 +18,7 @@ import noGitConflictMarker from './no-git-conflict-marker.js';
 import noIrregularDash from './no-irregular-dash.js';
 import noIrregularWhitespace from './no-irregular-whitespace.js';
 import requireImageTitle from './require-image-title.js';
+import requireLinkTitle from './require-link-title.js';
 
 export default {
   'allow-heading': allowHeading,
@@ -38,4 +39,5 @@ export default {
   'no-irregular-dash': noIrregularDash,
   'no-irregular-whitespace': noIrregularWhitespace,
   'require-image-title': requireImageTitle,
+  'require-link-title': requireLinkTitle,
 };
