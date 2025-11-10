@@ -10,6 +10,7 @@ import consistentThematicBreakStyle from './consistent-thematic-break-style.js';
 import enCapitalization from './en-capitalization.js';
 import headingId from './heading-id.js';
 import noBoldParagraph from './no-bold-paragraph.js';
+import noConsecutiveBlankLine from './no-consecutive-blank-line.js';
 import noControlCharacter from './no-control-character.js';
 import noCurlyQuote from './no-curly-quote.js';
 import noDoubleSpace from './no-double-space.js';
@@ -30,6 +31,7 @@ export default {
   'en-capitalization': enCapitalization,
   'heading-id': headingId,
   'no-bold-paragraph': noBoldParagraph,
+  'no-consecutive-blank-line': noConsecutiveBlankLine,
   'no-control-character': noControlCharacter,
   'no-curly-quote': noCurlyQuote,
   'no-double-space': noDoubleSpace,

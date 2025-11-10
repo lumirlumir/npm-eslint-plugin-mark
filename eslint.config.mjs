@@ -28,6 +28,7 @@ export default defineConfig([
             'Fix',
             'Limitations',
             'When Not To Use It',
+            'Further Reading',
             'Prior Art',
           ],
         },
