@@ -46,6 +46,12 @@ ruleTester(getFileName(import.meta.url), rule, {
       language: 'markdown/gfm',
     },
     {
+      // https://github.github.com/gfm/#example-625
+      name: 'Link node with autolink - 3',
+      code: 'www.google.com/search?q=Markup+(business)',
+      language: 'markdown/gfm',
+    },
+    {
       name: 'LinkReference node with title attribute - 1',
       code: `
 [text][link]
