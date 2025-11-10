@@ -93,14 +93,10 @@ export default {
 
     return {
       link(node) {
-        const [nodeStartOffset, nodeEndOffset] = sourceCode.getRange(node);
+        const [nodeStartOffset] = sourceCode.getRange(node);
 
         // Exclude auto-link literals like `<https://example.com>` or `https://example.com`
-        if (
-          sourceCode.text[nodeStartOffset] === '[' &&
-          sourceCode.text[nodeEndOffset - 1] === ')' &&
-          !node.title
-        ) {
+        if (sourceCode.text[nodeStartOffset] === '[' && !node.title) {
           report(sourceCode.getLoc(node));
         }
       },
