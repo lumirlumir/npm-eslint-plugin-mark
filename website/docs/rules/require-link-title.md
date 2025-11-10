@@ -44,17 +44,17 @@ Examples of **correct** code for this rule:
 ```md
 <!-- eslint mark/require-link-title: "error" -->
 
-![Alt text](https://example.com/image.png "Image title")
+[Text](https://example.com "Link title")
 
-<img src="https://example.com/image.png" alt="Alt text" title="Image title">
+<a href="https://example.com" title="Link title">Text</a>
 
 <div>
-  <img src="https://example.com/image.png" alt="Alt text" title="Image title">
+  <a href="https://example.com" title="Link title">Text</a>
 </div>
 
-![Alt text][reference]
+[Text][reference]
 
-[reference]: https://example.com/image.png "Image title"
+[reference]: https://example.com "Link title"
 ```
 
 ::: tip NOTE
@@ -64,9 +64,9 @@ Please note that this rule doesn't report definition-style comments (e.g., `[//]
 ```md eslint-check
 <!-- eslint mark/require-link-title: "error" -->
 
-![Alt text][//]
+[Text][//]
 
-[//]: https://example.com/image.png
+[//]: https://example.com
 ```
 
 :::
@@ -76,9 +76,9 @@ Please note that this rule doesn't report definition-style comments (e.g., `[//]
 ```md eslint-check
 <!-- eslint mark/require-link-title: ["error", { allowDefinitions: ['reference'] }] -->
 
-![Alt text][reference]
+[Text][reference]
 
-[reference]: https://example.com/image.png
+[reference]: https://example.com
 ```
 
 ## Options
