@@ -11,12 +11,6 @@ import { getFileName, ruleTester } from '../core/tests/index.js';
 import rule from './code-lang-shorthand.js';
 
 // --------------------------------------------------------------------------------
-// Helpers
-// --------------------------------------------------------------------------------
-
-const codeLangShorthand = 'codeLangShorthand';
-
-// --------------------------------------------------------------------------------
 // Test
 // --------------------------------------------------------------------------------
 
@@ -77,7 +71,7 @@ const foo = 'bar';
 \`\`\``,
       errors: [
         {
-          messageId: codeLangShorthand,
+          messageId: 'codeLangShorthand',
           line: 1,
           column: 4,
           endLine: 1,
@@ -95,7 +89,7 @@ echo "Hello, World!"
 \`\`\``,
       errors: [
         {
-          messageId: codeLangShorthand,
+          messageId: 'codeLangShorthand',
           line: 1,
           column: 4,
           endLine: 1,
@@ -115,7 +109,7 @@ const foo = 'bar';
 \`\`\``,
       errors: [
         {
-          messageId: codeLangShorthand,
+          messageId: 'codeLangShorthand',
           line: 1,
           column: 4,
           endLine: 1,
@@ -133,7 +127,7 @@ Hello, World!
 \`\`\``,
       errors: [
         {
-          messageId: codeLangShorthand,
+          messageId: 'codeLangShorthand',
           line: 1,
           column: 4,
           endLine: 1,
@@ -153,7 +147,7 @@ const foo = 'bar';
 \`\`\`\``,
       errors: [
         {
-          messageId: codeLangShorthand,
+          messageId: 'codeLangShorthand',
           line: 1,
           column: 5,
           endLine: 1,
@@ -171,7 +165,7 @@ const foo = 'bar';
 ~~~`,
       errors: [
         {
-          messageId: codeLangShorthand,
+          messageId: 'codeLangShorthand',
           line: 1,
           column: 4,
           endLine: 1,
@@ -191,7 +185,7 @@ const foo = 'bar';
 \`\`\``,
       errors: [
         {
-          messageId: codeLangShorthand,
+          messageId: 'codeLangShorthand',
           line: 1,
           column: 4,
           endLine: 1,
@@ -216,7 +210,7 @@ const foo = 'bar';
 \`\`\``,
       errors: [
         {
-          messageId: codeLangShorthand,
+          messageId: 'codeLangShorthand',
           line: 1,
           column: 4,
           endLine: 1,
