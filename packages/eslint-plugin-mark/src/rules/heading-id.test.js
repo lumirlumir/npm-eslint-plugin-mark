@@ -11,13 +11,6 @@ import { getFileName, ruleTester } from '../core/tests/index.js';
 import rule from './heading-id.js';
 
 // --------------------------------------------------------------------------------
-// Helpers
-// --------------------------------------------------------------------------------
-
-const headingIdAlways = 'headingIdAlways';
-const headingIdNever = 'headingIdNever';
-
-// --------------------------------------------------------------------------------
 // Test
 // --------------------------------------------------------------------------------
 
@@ -149,7 +142,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: '# Heading',
       errors: [
         {
-          messageId: headingIdAlways,
+          messageId: 'headingIdAlways',
           line: 1,
           column: 10,
           endLine: 1,
@@ -162,7 +155,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: '## Heading',
       errors: [
         {
-          messageId: headingIdAlways,
+          messageId: 'headingIdAlways',
           line: 1,
           column: 11,
           endLine: 1,
@@ -175,7 +168,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: '### Heading',
       errors: [
         {
-          messageId: headingIdAlways,
+          messageId: 'headingIdAlways',
           line: 1,
           column: 12,
           endLine: 1,
@@ -188,7 +181,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: '#### Heading',
       errors: [
         {
-          messageId: headingIdAlways,
+          messageId: 'headingIdAlways',
           line: 1,
           column: 13,
           endLine: 1,
@@ -201,7 +194,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: '##### Heading',
       errors: [
         {
-          messageId: headingIdAlways,
+          messageId: 'headingIdAlways',
           line: 1,
           column: 14,
           endLine: 1,
@@ -214,7 +207,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: '###### Heading',
       errors: [
         {
-          messageId: headingIdAlways,
+          messageId: 'headingIdAlways',
           line: 1,
           column: 15,
           endLine: 1,
@@ -229,7 +222,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: '# Heading {#}',
       errors: [
         {
-          messageId: headingIdAlways,
+          messageId: 'headingIdAlways',
           line: 1,
           column: 14,
           endLine: 1,
@@ -242,7 +235,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: '# Heading { #id}',
       errors: [
         {
-          messageId: headingIdAlways,
+          messageId: 'headingIdAlways',
           line: 1,
           column: 17,
           endLine: 1,
@@ -258,7 +251,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       output: '# Heading ',
       errors: [
         {
-          messageId: headingIdNever,
+          messageId: 'headingIdNever',
           line: 1,
           column: 11,
           endLine: 1,
@@ -273,7 +266,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       output: '## Heading ',
       errors: [
         {
-          messageId: headingIdNever,
+          messageId: 'headingIdNever',
           line: 1,
           column: 12,
           endLine: 1,
@@ -288,7 +281,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       output: '### Heading ',
       errors: [
         {
-          messageId: headingIdNever,
+          messageId: 'headingIdNever',
           line: 1,
           column: 13,
           endLine: 1,
@@ -303,7 +296,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       output: '#### Heading ',
       errors: [
         {
-          messageId: headingIdNever,
+          messageId: 'headingIdNever',
           line: 1,
           column: 14,
           endLine: 1,
@@ -318,7 +311,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       output: '##### Heading ',
       errors: [
         {
-          messageId: headingIdNever,
+          messageId: 'headingIdNever',
           line: 1,
           column: 15,
           endLine: 1,
@@ -333,7 +326,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       output: '###### Heading ',
       errors: [
         {
-          messageId: headingIdNever,
+          messageId: 'headingIdNever',
           line: 1,
           column: 16,
           endLine: 1,
