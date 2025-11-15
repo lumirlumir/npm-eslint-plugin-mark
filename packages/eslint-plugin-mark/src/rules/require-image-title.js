@@ -100,7 +100,7 @@ export default {
         const [nodeStartOffset] = sourceCode.getRange(node);
         const html = sourceCode.getText(node);
 
-        getElementsByTagName(html, 'img').forEach(({ attrs, sourceCodeLocation }) => {
+        for (const { attrs, sourceCodeLocation } of getElementsByTagName(html, 'img')) {
           let hasTitle = false;
 
           for (const { name, value } of attrs) {
@@ -120,7 +120,7 @@ export default {
               ),
             });
           }
-        });
+        }
       },
 
       imageReference(node) {
