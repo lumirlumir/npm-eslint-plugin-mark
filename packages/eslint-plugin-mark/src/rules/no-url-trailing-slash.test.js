@@ -16,15 +16,87 @@ import rule from './no-url-trailing-slash.js';
 
 ruleTester(getFileName(import.meta.url), rule, {
   valid: [
-    {
-      name: 'Empty',
-      code: '',
-    },
-    {
-      name: 'Empty string',
-      code: '  ',
-    },
+    '',
+    '  ',
+    // Link
+    '[](https://example.com)',
+    '[](https://example.com/path/to/resource)',
+    '[](https://example.com#fragment)',
+    '[](https://example.com#fragment/)',
+    '[](https://example.com?query=string)',
+    '[](https://example.com?query=string/)',
+    '[](https://example.com/path/to/resource?query=string#fragment)',
   ],
 
-  invalid: [],
+  invalid: [
+    // Link
+    {
+      code: '[](https://example.com/)',
+      errors: [
+        {
+          messageId: 'noUrlTrailingSlash',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 25,
+        },
+      ],
+    },
+
+    // Image
+    {
+      code: '![](https://example.com/)',
+      errors: [
+        {
+          messageId: 'noUrlTrailingSlash',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 26,
+        },
+      ],
+    },
+
+    // Definition
+    {
+      code: '[foo]: https://example.com/',
+      errors: [
+        {
+          messageId: 'noUrlTrailingSlash',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 28,
+        },
+      ],
+    },
+
+    // HTML - `a` tag
+    {
+      code: '<a href="https://example.com/">text</a>',
+      errors: [
+        {
+          messageId: 'noUrlTrailingSlash',
+          line: 1,
+          column: 4,
+          endLine: 1,
+          endColumn: 31,
+        },
+      ],
+    },
+
+    // HTML - `img` tag
+    {
+      code: '<img src="https://example.com/">',
+      errors: [
+        {
+          messageId: 'noUrlTrailingSlash',
+          line: 1,
+          column: 6,
+          endLine: 1,
+          endColumn: 32,
+        },
+      ],
+    },
+  ],
 });

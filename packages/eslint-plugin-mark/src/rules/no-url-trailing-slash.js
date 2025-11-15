@@ -15,7 +15,7 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 // --------------------------------------------------------------------------------
 
 /**
- * @import { Image, Link, Definition } from 'mdast';
+ * @import { Link, Image, Definition } from 'mdast';
  * @import { RuleModule } from '../core/types.js';
  * @typedef {[]} RuleOptions
  * @typedef {'noUrlTrailingSlash'} MessageIds
@@ -80,7 +80,7 @@ export default {
     const { sourceCode } = context;
 
     return {
-      'image, link, definition'(/** @type {Image | Link | Definition} */ node) {
+      'link, image, definition'(/** @type {Link | Image | Definition} */ node) {
         if (hasTrailingSlash(node.url)) {
           context.report({
             node,
@@ -95,7 +95,7 @@ export default {
 
         for (const { attrs, sourceCodeLocation } of getElementsByTagName(html, 'a')) {
           for (const { name, value } of attrs) {
-            if (name === 'href' && sourceCodeLocation?.attrs && hasTrailingSlash(value)) {
+            if (name === 'href' && hasTrailingSlash(value) && sourceCodeLocation?.attrs) {
               context.report({
                 loc: {
                   start: sourceCode.getLocFromIndex(
@@ -113,7 +113,7 @@ export default {
 
         for (const { attrs, sourceCodeLocation } of getElementsByTagName(html, 'img')) {
           for (const { name, value } of attrs) {
-            if (name === 'src' && sourceCodeLocation?.attrs && hasTrailingSlash(value)) {
+            if (name === 'src' && hasTrailingSlash(value) && sourceCodeLocation?.attrs) {
               context.report({
                 loc: {
                   start: sourceCode.getLocFromIndex(
