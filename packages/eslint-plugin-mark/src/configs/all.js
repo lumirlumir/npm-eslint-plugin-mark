@@ -28,6 +28,7 @@ export default {
   rules: {
     'markdown/no-unused-definitions': 'error',
     'mark/allow-heading': 'error',
+    'mark/allow-link-url': 'error',
     'mark/alt-text': 'error',
     'mark/code-lang-shorthand': 'error',
     'mark/consistent-delete-style': 'error',
