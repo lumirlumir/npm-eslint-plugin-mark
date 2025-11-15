@@ -105,7 +105,7 @@ export default {
         const [nodeStartOffset] = sourceCode.getRange(node);
         const html = sourceCode.getText(node);
 
-        getElementsByTagName(html, 'a').forEach(({ attrs, sourceCodeLocation }) => {
+        for (const { attrs, sourceCodeLocation } of getElementsByTagName(html, 'a')) {
           let hasTitle = false;
 
           for (const { name, value } of attrs) {
@@ -125,7 +125,7 @@ export default {
               ),
             });
           }
-        });
+        }
       },
 
       linkReference(node) {
