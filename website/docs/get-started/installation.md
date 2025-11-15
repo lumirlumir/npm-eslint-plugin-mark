@@ -9,19 +9,19 @@ description: "Installation instructions for `eslint-plugin-mark` npm package wit
 ::: code-group
 
 ```sh [npm]
-$ npm install -D eslint-plugin-mark@latest
+$ npm install -D eslint-plugin-mark@latest eslint@latest
 ```
 
 ```sh [pnpm]
-$ pnpm add -D eslint-plugin-mark@latest
+$ pnpm add -D eslint-plugin-mark@latest eslint@latest
 ```
 
 ```sh [yarn]
-$ yarn add --dev eslint-plugin-mark@latest
+$ yarn add --dev eslint-plugin-mark@latest eslint@latest
 ```
 
 ```sh [bun]
-$ bun add -d eslint-plugin-mark@latest
+$ bun add -d eslint-plugin-mark@latest eslint@latest
 ```
 
 :::
