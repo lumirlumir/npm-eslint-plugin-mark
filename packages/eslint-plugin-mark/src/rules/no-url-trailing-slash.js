@@ -1,5 +1,5 @@
 /**
- * @fileoverview TODO
+ * @fileoverview Rule to disallow URL trailing slash.
  * @author 루밀LuMir(lumirlumir)
  */
 
@@ -15,10 +15,41 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 // --------------------------------------------------------------------------------
 
 /**
+ * @import { Image, Link, Definition } from 'mdast';
  * @import { RuleModule } from '../core/types.js';
  * @typedef {[]} RuleOptions
  * @typedef {'noUrlTrailingSlash'} MessageIds
  */
+
+// --------------------------------------------------------------------------------
+// Helper
+// --------------------------------------------------------------------------------
+
+/**
+ * Check whether the URL has a trailing slash.
+ * - It returns `false` if the `URL` constructor cannot parse the given URL.
+ * - This function ignores the `hash` and `search` parts.
+ * @param {string} url
+ * @returns {boolean}
+ */
+function hasTrailingSlash(url) {
+  try {
+    const { hash, search } = new URL(url);
+    let urlWithoutHashAndSearch = url;
+
+    if (hash) {
+      urlWithoutHashAndSearch = urlWithoutHashAndSearch.slice(0, url.indexOf(hash));
+    }
+
+    if (search) {
+      urlWithoutHashAndSearch = urlWithoutHashAndSearch.slice(0, url.indexOf(search));
+    }
+
+    return urlWithoutHashAndSearch.endsWith('/');
+  } catch {
+    return false;
+  }
+}
 
 // --------------------------------------------------------------------------------
 // Rule Definition
@@ -49,27 +80,8 @@ export default {
     const { sourceCode } = context;
 
     return {
-      image(node) {
-        const url = new URL(node.url);
-
-        url.search = '';
-        url.hash = '';
-
-        if (url.href.endsWith('/')) {
-          context.report({
-            node,
-            messageId: 'noUrlTrailingSlash',
-          });
-        }
-      },
-
-      link(node) {
-        const url = new URL(node.url);
-
-        url.search = '';
-        url.hash = '';
-
-        if (url.href.endsWith('/')) {
+      'image, link, definition'(/** @type {Image | Link | Definition} */ node) {
+        if (hasTrailingSlash(node.url)) {
           context.report({
             node,
             messageId: 'noUrlTrailingSlash',
@@ -78,58 +90,43 @@ export default {
       },
 
       html(node) {
+        const [nodeStartOffset] = sourceCode.getRange(node);
         const html = sourceCode.getText(node);
 
-        getElementsByTagName(html, 'a').forEach(({ attrs /* sourceCodeLocation */ }) => {
+        for (const { attrs, sourceCodeLocation } of getElementsByTagName(html, 'a')) {
           for (const { name, value } of attrs) {
-            if (name === 'href') {
-              const url = new URL(value);
-
-              url.search = '';
-              url.hash = '';
-
-              if (url.href.endsWith('/')) {
-                context.report({
-                  node,
-                  messageId: 'noUrlTrailingSlash',
-                });
-              }
+            if (name === 'href' && sourceCodeLocation?.attrs && hasTrailingSlash(value)) {
+              context.report({
+                loc: {
+                  start: sourceCode.getLocFromIndex(
+                    nodeStartOffset + sourceCodeLocation.attrs.href.startOffset,
+                  ),
+                  end: sourceCode.getLocFromIndex(
+                    nodeStartOffset + sourceCodeLocation.attrs.href.endOffset,
+                  ),
+                },
+                messageId: 'noUrlTrailingSlash',
+              });
             }
           }
-        });
+        }
 
-        getElementsByTagName(html, 'img').forEach(
-          ({ attrs /* sourceCodeLocation */ }) => {
-            for (const { name, value } of attrs) {
-              if (name === 'src') {
-                const url = new URL(value);
-
-                url.search = '';
-                url.hash = '';
-
-                if (url.href.endsWith('/')) {
-                  context.report({
-                    node,
-                    messageId: 'noUrlTrailingSlash',
-                  });
-                }
-              }
+        for (const { attrs, sourceCodeLocation } of getElementsByTagName(html, 'img')) {
+          for (const { name, value } of attrs) {
+            if (name === 'src' && sourceCodeLocation?.attrs && hasTrailingSlash(value)) {
+              context.report({
+                loc: {
+                  start: sourceCode.getLocFromIndex(
+                    nodeStartOffset + sourceCodeLocation.attrs.src.startOffset,
+                  ),
+                  end: sourceCode.getLocFromIndex(
+                    nodeStartOffset + sourceCodeLocation.attrs.src.endOffset,
+                  ),
+                },
+                messageId: 'noUrlTrailingSlash',
+              });
             }
-          },
-        );
-      },
-
-      definition(node) {
-        const url = new URL(node.url);
-
-        url.search = '';
-        url.hash = '';
-
-        if (url.href.endsWith('/')) {
-          context.report({
-            node,
-            messageId: 'noUrlTrailingSlash',
-          });
+          }
         }
       },
     };
