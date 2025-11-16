@@ -1,5 +1,5 @@
 /**
- * @fileoverview TODO.
+ * @fileoverview Rule to enforce the use of allowed or disallowed URLs for links.
  * @author 루밀LuMir(lumirlumir)
  */
 
@@ -33,7 +33,7 @@ export default {
     type: 'problem',
 
     docs: {
-      description: 'Enforce the use of TODO',
+      description: 'Enforce the use of allowed or disallowed URLs for links',
       url: URL_RULE_DOCS('allow-link-url'),
       recommended: false,
       stylistic: false,
@@ -78,8 +78,10 @@ export default {
     ],
 
     messages: {
-      allowLinkUrl: 'TODO.',
-      disallowLinkUrl: 'TODO.',
+      allowLinkUrl:
+        'The URL `{{ url }}` is not in the list of allowed URLs. (Allow: {{ patterns }})',
+      disallowLinkUrl:
+        'The URL `{{ url }}` is in the list of disallowed URLs. (Disallow: {{ patterns }})',
     },
 
     language: 'markdown',
@@ -165,6 +167,10 @@ export default {
             context.report({
               loc,
               messageId: 'allowLinkUrl',
+              data: {
+                url,
+                patterns: allowUrls.map(regex => `\`${regex}\``).join(', '),
+              },
             });
           }
 
@@ -172,6 +178,10 @@ export default {
             context.report({
               loc,
               messageId: 'disallowLinkUrl',
+              data: {
+                url,
+                patterns: disallowUrls.map(regex => `\`${regex}\``).join(', '),
+              },
             });
           }
         }
