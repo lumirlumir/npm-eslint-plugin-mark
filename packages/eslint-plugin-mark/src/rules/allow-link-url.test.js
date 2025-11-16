@@ -1,6 +1,7 @@
 /**
  * @fileoverview Test for `allow-link-url.js`.
  * @author 루밀LuMir(lumirlumir)
+ * @see https://github.com/lumirlumir/npm-textlint-rule-allowed-uris/blob/main/src/textlint-rule-allowed-uris.test.js
  */
 
 // --------------------------------------------------------------------------------
@@ -15,7 +16,351 @@ import rule from './allow-link-url.js';
 // --------------------------------------------------------------------------------
 
 ruleTester(getFileName(import.meta.url), rule, {
-  valid: ['', '  '],
+  valid: [
+    {
+      name: 'Empty',
+      code: '',
+    },
+    {
+      name: 'Empty String',
+      code: '  ',
+    },
 
-  invalid: [],
+    // Link
+    {
+      name: 'With no options',
+      code: '[](https://example.com)',
+    },
+    {
+      name: '`allowUrls` option - 1',
+      code: '[Text](https://example.com)',
+      options: [
+        {
+          allowUrls: [/example.com/],
+        },
+      ],
+    },
+    {
+      name: '`allowUrls` option - 2',
+      code: '[Text](https://example.com)\n<https://foo.com>',
+      options: [
+        {
+          allowUrls: [/example.com/, /foo.com/],
+        },
+      ],
+    },
+    {
+      name: '`disallowUrls` option - 1',
+      code: '[Text](https://example.com)',
+      options: [
+        {
+          disallowUrls: [/foo.com/],
+        },
+      ],
+    },
+    {
+      name: '`disallowUrls` option - 2',
+      code: '[Text](https://example.com)\n<https://bar.com>',
+      options: [
+        {
+          disallowUrls: [/foo.com/, /baz.com/],
+        },
+      ],
+    },
+    {
+      name: '`allowUrls` and `disallowUrls` options',
+      code: '[Text](https://example.com)',
+      options: [
+        {
+          allowUrls: [/example.com/],
+          disallowUrls: [/foo.com/],
+        },
+      ],
+    },
+
+    // Definition
+    {
+      name: 'Lone definition should not be checked',
+      code: '[reference]: https://example.com',
+      options: [
+        {
+          disallowUrls: [/example.com/],
+        },
+      ],
+    },
+    {
+      name: '`//` definition should not be checked',
+      code: '[Text][//]\n\n[//]: https://example.com',
+      options: [
+        {
+          disallowUrls: [/example.com/],
+        },
+      ],
+    },
+    {
+      name: '`allowUrls` option - 1',
+      code: '[Text][reference]\n\n[reference]: https://example.com',
+      options: [
+        {
+          allowUrls: [/example.com/],
+        },
+      ],
+    },
+    {
+      name: '`allowUrls` option - 2',
+      code: `
+[Text][reference1]
+
+[reference1]: https://example.com
+
+[Text][reference2]
+
+[reference2]: https://foo.com`,
+      options: [
+        {
+          allowUrls: [/example.com/, /foo.com/],
+        },
+      ],
+    },
+    {
+      name: '`disallowUrls` option - 1',
+      code: '[Text][reference]\n\n[reference]: https://example.com',
+      options: [
+        {
+          disallowUrls: [/foo.com/],
+        },
+      ],
+    },
+    {
+      name: '`disallowUrls` option - 2',
+      code: `
+[Text][reference1]
+
+[reference1]: https://example.com
+
+[Text][reference2]
+
+[reference2]: https://bar.com`,
+      options: [
+        {
+          disallowUrls: [/foo.com/, /baz.com/],
+        },
+      ],
+    },
+    {
+      name: '`allowUrls` and `disallowUrls` options',
+      code: '[Text][reference]\n\n[reference]: https://example.com',
+      options: [
+        {
+          allowUrls: [/example.com/],
+          disallowUrls: [/foo.com/],
+        },
+      ],
+    },
+    {
+      name: '`allowDefinitions` option - 1',
+      code: '[Text][reference]\n\n[reference]: https://example.com',
+      options: [
+        {
+          allowDefinitions: ['reference'],
+          disallowUrls: [/example.com/],
+        },
+      ],
+    },
+    {
+      name: '`allowDefinitions` option - 2',
+      code: '[Text][hi]\n\n[hi]: https://example.com',
+      options: [
+        {
+          allowDefinitions: ['hi'],
+          disallowUrls: [/example.com/],
+        },
+      ],
+    },
+    {
+      name: '`allowDefinitions` option - 3',
+      code: '[Text][hi]\n\n[hi]: https://example.com',
+      options: [
+        {
+          allowDefinitions: ['HI'],
+          disallowUrls: [/example.com/],
+        },
+      ],
+    },
+    {
+      name: '`allowDefinitions` option - 4',
+      code: '[Text][Grüsse]\n\n[Grüsse]: https://example.com',
+      options: [
+        {
+          allowDefinitions: ['GRÜẞE'],
+          disallowUrls: [/example.com/],
+        },
+      ],
+    },
+
+    // HTML
+
+    // TODO: Nested HTML
+  ],
+
+  invalid: [
+    // Link
+    {
+      name: '`allowUrls` option - 1',
+      code: '[Text](https://example.com)',
+      options: [
+        {
+          allowUrls: [/foo.com/],
+        },
+      ],
+      errors: [
+        {
+          messageId: 'allowLinkUrl',
+          data: {
+            url: 'https://example.com',
+            patterns: '`/foo.com/`',
+          },
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 28,
+        },
+      ],
+    },
+
+    // Definition
+
+    // HTML
+    {
+      name: '`disallowUrls` option - 1',
+      code: '<a href="https://example.com">text</a>',
+      options: [
+        {
+          disallowUrls: [/example.com/],
+        },
+      ],
+      errors: [
+        {
+          messageId: 'disallowLinkUrl',
+          data: {
+            url: 'https://example.com',
+            patterns: '`/example.com/`',
+          },
+          line: 1,
+          column: 4,
+          endLine: 1,
+          endColumn: 30,
+        },
+      ],
+    },
+    {
+      name: '`disallowUrls` option - 2',
+      code: '<a\nhref="https://example.com">text</a>',
+      options: [
+        {
+          disallowUrls: [/example.com/],
+        },
+      ],
+      errors: [
+        {
+          messageId: 'disallowLinkUrl',
+          data: {
+            url: 'https://example.com',
+            patterns: '`/example.com/`',
+          },
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 27,
+        },
+      ],
+    },
+    {
+      name: '`disallowUrls` option - 3',
+      code: '<a\n href="https://example.com">text</a>',
+      options: [
+        {
+          disallowUrls: [/example.com/],
+        },
+      ],
+      errors: [
+        {
+          messageId: 'disallowLinkUrl',
+          data: {
+            url: 'https://example.com',
+            patterns: '`/example.com/`',
+          },
+          line: 2,
+          column: 2,
+          endLine: 2,
+          endColumn: 28,
+        },
+      ],
+    },
+    {
+      name: '`disallowUrls` option - 4',
+      code: '<a\n  href="https://example.com">text</a>',
+      options: [
+        {
+          disallowUrls: [/example.com/],
+        },
+      ],
+      errors: [
+        {
+          messageId: 'disallowLinkUrl',
+          data: {
+            url: 'https://example.com',
+            patterns: '`/example.com/`',
+          },
+          line: 2,
+          column: 3,
+          endLine: 2,
+          endColumn: 29,
+        },
+      ],
+    },
+    /*
+    {
+      name: 'Nested Html node without title attribute - 1',
+      code: `
+<div>
+  <a href="https://example.com">text</a>
+</div>`,
+      errors: [
+        {
+          messageId: 'requireLinkTitle',
+          line: 3,
+          column: 3,
+          endLine: 3,
+          endColumn: 33,
+        },
+      ],
+    },
+    {
+      name: 'Nested Html node without title attribute - 2',
+      code: `
+<div>
+  <a href="https://example.com">text</a>
+  <br>
+  <a href="https://example.com">text</a>
+</div>`,
+      errors: [
+        {
+          messageId: 'requireLinkTitle',
+          line: 3,
+          column: 3,
+          endLine: 3,
+          endColumn: 33,
+        },
+        {
+          messageId: 'requireLinkTitle',
+          line: 5,
+          column: 3,
+          endLine: 5,
+          endColumn: 33,
+        },
+      ],
+    },
+    */
+  ],
 });

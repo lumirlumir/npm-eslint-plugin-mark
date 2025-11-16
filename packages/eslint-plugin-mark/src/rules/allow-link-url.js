@@ -79,9 +79,9 @@ export default {
 
     messages: {
       allowLinkUrl:
-        'The URL `{{ url }}` is not in the list of allowed URLs. (Allow: {{ patterns }})',
+        'The URL `{{ url }}` is not in the list of allowed URLs. (Allow: {{ patterns }}).',
       disallowLinkUrl:
-        'The URL `{{ url }}` is in the list of disallowed URLs. (Disallow: {{ patterns }})',
+        'The URL `{{ url }}` is in the list of disallowed URLs. (Disallow: {{ patterns }}).',
     },
 
     language: 'markdown',
