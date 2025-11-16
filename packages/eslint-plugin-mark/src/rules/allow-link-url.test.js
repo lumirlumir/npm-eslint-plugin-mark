@@ -319,48 +319,68 @@ ruleTester(getFileName(import.meta.url), rule, {
         },
       ],
     },
-    /*
     {
-      name: 'Nested Html node without title attribute - 1',
+      name: '`disallowUrls` option - 5',
       code: `
 <div>
   <a href="https://example.com">text</a>
 </div>`,
+      options: [
+        {
+          disallowUrls: [/example.com/],
+        },
+      ],
       errors: [
         {
-          messageId: 'requireLinkTitle',
+          messageId: 'disallowLinkUrl',
+          data: {
+            url: 'https://example.com',
+            patterns: '`/example.com/`',
+          },
           line: 3,
-          column: 3,
+          column: 6,
           endLine: 3,
-          endColumn: 33,
+          endColumn: 32,
         },
       ],
     },
     {
-      name: 'Nested Html node without title attribute - 2',
+      name: '`disallowUrls` option - 6',
       code: `
 <div>
   <a href="https://example.com">text</a>
   <br>
   <a href="https://example.com">text</a>
 </div>`,
+      options: [
+        {
+          disallowUrls: [/example.com/],
+        },
+      ],
       errors: [
         {
-          messageId: 'requireLinkTitle',
+          messageId: 'disallowLinkUrl',
+          data: {
+            url: 'https://example.com',
+            patterns: '`/example.com/`',
+          },
           line: 3,
-          column: 3,
+          column: 6,
           endLine: 3,
-          endColumn: 33,
+          endColumn: 32,
         },
         {
-          messageId: 'requireLinkTitle',
+          messageId: 'disallowLinkUrl',
+          data: {
+            url: 'https://example.com',
+            patterns: '`/example.com/`',
+          },
           line: 5,
-          column: 3,
+          column: 6,
           endLine: 5,
-          endColumn: 33,
+          endColumn: 32,
         },
       ],
     },
-    */
   ],
 });
