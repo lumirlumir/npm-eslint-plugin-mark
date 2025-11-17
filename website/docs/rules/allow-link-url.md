@@ -165,41 +165,23 @@ Please note that this rule doesn't report definition-style comments (e.g., `[//]
 
 > Type: `RegExp[]` / Default: `[/.*/u]`
 
-Allowed URIs act like an <u>**whitelist**</u>. Only those written on the whitelist **can** pass through.
+Allowed URLs act like an ***whitelist***. Only those written on the whitelist **can** pass through.
 
-For example, If you pass an empty array to the option, it allows nothing. i.e. Every ***links*** or ***images*** will be detected.
-
-If you want to turn off this option, then pass nothing. **NOTE: DO NOT PASS AN EMPTY ARRAY TO TURN OFF THIS OPTION.**
-
-```js [eslint.config.js]
-// Correct way of turning off this option:
-'mark/allow-link-url': ['error', {
-  // allowUrls: [], => Turned off.
-}]
-```
+For example, If you pass an empty array to the option, it allows nothing. i.e. Every **links** will be detected.
 
 ### `disallowUrls`
 
 > Type: `RegExp[]` / Default: `[]`
 
-On the contrary, disallowed URIs act like an <u>**blacklist**</u>. Only those written on the blacklist **cannot** pass through.
+On the contrary, disallowed URLs act like an ***blacklist***. Only those written on the blacklist **cannot** pass through.
 
-For example, If you pass an empty array to the option, it allows everything. i.e. no ***links*** or ***images*** will be detected.
-
-If you want to turn off this option, then pass nothing. or here, you can pass an empty array. (because the default value passed is an empty array too.)
-
-```js [eslint.config.js]
-// Correct way of turning off this option:
-'mark/allow-link-url': ['error', {
-  // disallowUrls: [], => Turned off.
-}]
-```
+For example, If you pass an empty array to the option, it allows everything. i.e. no **links** will be detected.
 
 ### `allowDefinitions`
 
 > Type: `string[]` / Default: `['//']`
 
-When specified, specific definitions are allowed if they match one of the identifiers in this array. This is useful for ignoring definitions that are intentionally left without titles, such as comments or placeholders.
+When specified, specific definitions are allowed if they match one of the identifiers in this array. This is useful for ignoring definitions that are intentionally left, such as comments or placeholders.
 
 ## When Not To Use It
 
