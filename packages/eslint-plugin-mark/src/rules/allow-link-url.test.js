@@ -508,5 +508,71 @@ ruleTester(getFileName(import.meta.url), rule, {
         },
       ],
     },
+
+    // Edge cases
+    {
+      name: '`allowUrls` with empty array should report all URLs',
+      code: `
+[Text](https://example.com)
+
+<https://foo.com>
+
+<a href="https://bar.com">text</a>
+
+[Text][reference]
+
+[reference]: https://baz.com`,
+      options: [
+        {
+          allowUrls: [],
+        },
+      ],
+      errors: [
+        {
+          messageId: 'allowLinkUrl',
+          data: {
+            url: 'https://example.com',
+            patterns: '',
+          },
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 28,
+        },
+        {
+          messageId: 'allowLinkUrl',
+          data: {
+            url: 'https://foo.com',
+            patterns: '',
+          },
+          line: 4,
+          column: 1,
+          endLine: 4,
+          endColumn: 18,
+        },
+        {
+          messageId: 'allowLinkUrl',
+          data: {
+            url: 'https://bar.com',
+            patterns: '',
+          },
+          line: 6,
+          column: 4,
+          endLine: 6,
+          endColumn: 26,
+        },
+        {
+          messageId: 'allowLinkUrl',
+          data: {
+            url: 'https://baz.com',
+            patterns: '',
+          },
+          line: 10,
+          column: 1,
+          endLine: 10,
+          endColumn: 29,
+        },
+      ],
+    },
   ],
 });
