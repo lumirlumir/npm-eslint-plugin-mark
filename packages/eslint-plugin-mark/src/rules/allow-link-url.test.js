@@ -199,8 +199,24 @@ ruleTester(getFileName(import.meta.url), rule, {
     },
 
     // HTML
-
-    // TODO: Nested HTML
+    {
+      name: '`allowUrls` option - 1',
+      code: '<a href="https://example.com">text</a>',
+      options: [
+        {
+          allowUrls: [/example.com/],
+        },
+      ],
+    },
+    {
+      name: '`disallowUrls` option - 1',
+      code: '<a href="https://example.com">text</a>',
+      options: [
+        {
+          disallowUrls: [/foo.com/],
+        },
+      ],
+    },
   ],
 
   invalid: [
@@ -227,10 +243,120 @@ ruleTester(getFileName(import.meta.url), rule, {
         },
       ],
     },
+    {
+      name: '`allowUrls` option - 2',
+      code: '<https://example.com>',
+      options: [
+        {
+          allowUrls: [/foo.com/],
+        },
+      ],
+      errors: [
+        {
+          messageId: 'allowLinkUrl',
+          data: {
+            url: 'https://example.com',
+            patterns: '`/foo.com/`',
+          },
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 22,
+        },
+      ],
+    },
+    {
+      name: '`disallowUrls` option - 1',
+      code: '[Text](https://example.com)',
+      options: [
+        {
+          disallowUrls: [/example.com/],
+        },
+      ],
+      errors: [
+        {
+          messageId: 'disallowLinkUrl',
+          data: {
+            url: 'https://example.com',
+            patterns: '`/example.com/`',
+          },
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 28,
+        },
+      ],
+    },
 
     // Definition
+    {
+      name: '`allowUrls` option - 1',
+      code: '[Text][reference]\n\n[reference]: https://example.com',
+      options: [
+        {
+          allowUrls: [/foo.com/],
+        },
+      ],
+      errors: [
+        {
+          messageId: 'allowLinkUrl',
+          data: {
+            url: 'https://example.com',
+            patterns: '`/foo.com/`',
+          },
+          line: 3,
+          column: 1,
+          endLine: 3,
+          endColumn: 33,
+        },
+      ],
+    },
+    {
+      name: '`disallowUrls` option - 1',
+      code: '[Text][reference]\n\n[reference]: https://example.com',
+      options: [
+        {
+          disallowUrls: [/example.com/],
+        },
+      ],
+      errors: [
+        {
+          messageId: 'disallowLinkUrl',
+          data: {
+            url: 'https://example.com',
+            patterns: '`/example.com/`',
+          },
+          line: 3,
+          column: 1,
+          endLine: 3,
+          endColumn: 33,
+        },
+      ],
+    },
 
     // HTML
+    {
+      name: '`allowUrls` option - 1',
+      code: '<a href="https://example.com">text</a>',
+      options: [
+        {
+          allowUrls: [/foo.com/],
+        },
+      ],
+      errors: [
+        {
+          messageId: 'allowLinkUrl',
+          data: {
+            url: 'https://example.com',
+            patterns: '`/foo.com/`',
+          },
+          line: 1,
+          column: 4,
+          endLine: 1,
+          endColumn: 30,
+        },
+      ],
+    },
     {
       name: '`disallowUrls` option - 1',
       code: '<a href="https://example.com">text</a>',
