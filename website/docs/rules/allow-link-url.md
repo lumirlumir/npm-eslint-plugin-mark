@@ -165,17 +165,17 @@ Please note that this rule doesn't report definition-style comments (e.g., `[//]
 
 > Type: `RegExp[]` / Default: `[/.*/u]`
 
-Allowed URLs act like an ***whitelist***. Only those written on the whitelist **can** pass through.
+Allowed URLs act like a ***whitelist***. Only those written on the whitelist **can** pass through.
 
-For example, If you pass an empty array to the option, it allows nothing. i.e. Every **links** will be detected.
+For example, if you pass an empty array to the option, it allows nothing. i.e. Every **link** will be detected.
 
 ### `disallowUrls`
 
 > Type: `RegExp[]` / Default: `[]`
 
-On the contrary, disallowed URLs act like an ***blacklist***. Only those written on the blacklist **cannot** pass through.
+On the contrary, disallowed URLs act like a ***blacklist***. Only those written on the blacklist **cannot** pass through.
 
-For example, If you pass an empty array to the option, it allows everything. i.e. no **links** will be detected.
+For example, if you pass an empty array to the option, it allows everything. i.e. no **link** will be detected.
 
 ### `allowDefinitions`
 
