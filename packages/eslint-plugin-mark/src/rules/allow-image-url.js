@@ -1,5 +1,5 @@
 /**
- * @fileoverview Rule to enforce the use of allowed or disallowed URLs for links.
+ * @fileoverview Rule to enforce the use of allowed or disallowed URLs for images.
  * @author 루밀LuMir(lumirlumir)
  */
 
@@ -20,7 +20,7 @@ import { URL_RULE_DOCS } from '../core/constants.js';
  * @import { Definition } from 'mdast';
  * @import { RuleModule } from '../core/types.js';
  * @typedef {[{ allowUrls: RegExp[], disallowUrls: RegExp[], allowDefinitions: string[] }]} RuleOptions
- * @typedef {'allowLinkUrl' | 'disallowLinkUrl'} MessageIds
+ * @typedef {'allowImageUrl' | 'disallowImageUrl'} MessageIds
  */
 
 // --------------------------------------------------------------------------------
@@ -33,8 +33,8 @@ export default {
     type: 'problem',
 
     docs: {
-      description: 'Enforce the use of allowed or disallowed URLs for links',
-      url: URL_RULE_DOCS('allow-link-url'),
+      description: 'Enforce the use of allowed or disallowed URLs for images',
+      url: URL_RULE_DOCS('allow-image-url'),
       recommended: false,
       stylistic: false,
     },
@@ -78,9 +78,9 @@ export default {
     ],
 
     messages: {
-      allowLinkUrl:
+      allowImageUrl:
         'The URL `{{ url }}` is not in the list of allowed URLs. (Allow: {{ patterns }}).',
-      disallowLinkUrl:
+      disallowImageUrl:
         'The URL `{{ url }}` is in the list of disallowed URLs. (Disallow: {{ patterns }}).',
     },
 
@@ -99,15 +99,15 @@ export default {
     );
 
     /** @type {Set<{ loc: Position, url: string }>} */
-    const links = new Set();
+    const images = new Set();
     /** @type {Set<string>} */
-    const linkReferenceIdentifiers = new Set();
+    const imageReferenceIdentifiers = new Set();
     /** @type {Set<Definition>} */
     const definitions = new Set();
 
     return {
-      link(node) {
-        links.add({
+      image(node) {
+        images.add({
           loc: sourceCode.getLoc(node),
           url: node.url,
         });
@@ -117,16 +117,16 @@ export default {
         const [nodeStartOffset] = sourceCode.getRange(node);
         const html = sourceCode.getText(node);
 
-        for (const { attrs, sourceCodeLocation } of getElementsByTagName(html, 'a')) {
+        for (const { attrs, sourceCodeLocation } of getElementsByTagName(html, 'img')) {
           for (const { name, value } of attrs) {
-            if (name === 'href' && sourceCodeLocation?.attrs) {
-              links.add({
+            if (name === 'src' && sourceCodeLocation?.attrs) {
+              images.add({
                 loc: {
                   start: sourceCode.getLocFromIndex(
-                    nodeStartOffset + sourceCodeLocation.attrs.href.startOffset,
+                    nodeStartOffset + sourceCodeLocation.attrs.src.startOffset,
                   ),
                   end: sourceCode.getLocFromIndex(
-                    nodeStartOffset + sourceCodeLocation.attrs.href.endOffset,
+                    nodeStartOffset + sourceCodeLocation.attrs.src.endOffset,
                   ),
                 },
                 url: value,
@@ -136,8 +136,8 @@ export default {
         }
       },
 
-      linkReference(node) {
-        linkReferenceIdentifiers.add(node.identifier);
+      imageReference(node) {
+        imageReferenceIdentifiers.add(node.identifier);
       },
 
       definition(node) {
@@ -148,8 +148,8 @@ export default {
 
       'root:exit'() {
         for (const definition of definitions) {
-          if (linkReferenceIdentifiers.has(definition.identifier)) {
-            links.add({
+          if (imageReferenceIdentifiers.has(definition.identifier)) {
+            images.add({
               loc: sourceCode.getLoc(definition),
               url: definition.url,
             });
@@ -162,11 +162,11 @@ export default {
          * Therefore, calling the `some` method on an empty array will always return `false`.
          */
 
-        for (const { loc, url } of links) {
+        for (const { loc, url } of images) {
           if (!allowUrls.some(regex => regex.test(url))) {
             context.report({
               loc,
-              messageId: 'allowLinkUrl',
+              messageId: 'allowImageUrl',
               data: {
                 url,
                 patterns: allowUrls.map(regex => `\`${regex}\``).join(', '),
@@ -177,7 +177,7 @@ export default {
           if (disallowUrls.some(regex => regex.test(url))) {
             context.report({
               loc,
-              messageId: 'disallowLinkUrl',
+              messageId: 'disallowImageUrl',
               data: {
                 url,
                 patterns: disallowUrls.map(regex => `\`${regex}\``).join(', '),
