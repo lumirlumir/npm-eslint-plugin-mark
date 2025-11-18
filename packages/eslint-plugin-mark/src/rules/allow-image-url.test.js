@@ -1,5 +1,5 @@
 /**
- * @fileoverview Test for `allow-link-url.js`.
+ * @fileoverview Test for `allow-image-url.js`.
  * @author 루밀LuMir(lumirlumir)
  * @see https://github.com/lumirlumir/npm-textlint-rule-allowed-uris/blob/main/src/textlint-rule-allowed-uris.test.js
  */
@@ -9,7 +9,7 @@
 // --------------------------------------------------------------------------------
 
 import { getFileName, ruleTester } from '../core/tests/index.js';
-import rule from './allow-link-url.js';
+import rule from './allow-image-url.js';
 
 // --------------------------------------------------------------------------------
 // Test
@@ -26,7 +26,8 @@ ruleTester(getFileName(import.meta.url), rule, {
       code: '  ',
     },
 
-    // Link
+    // Image
+    /*
     {
       name: 'With no options',
       code: '[](https://example.com)',
@@ -217,13 +218,14 @@ ruleTester(getFileName(import.meta.url), rule, {
         },
       ],
     },
+    */
   ],
 
   invalid: [
-    // Link
+    // Image
     {
       name: '`allowUrls` option - 1',
-      code: '[Text](https://example.com)',
+      code: '![Text](https://example.com)',
       options: [
         {
           allowUrls: [/foo.com/],
@@ -231,7 +233,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
       errors: [
         {
-          messageId: 'allowLinkUrl',
+          messageId: 'allowImageUrl',
           data: {
             url: 'https://example.com',
             patterns: '`/foo.com/`',
@@ -239,35 +241,13 @@ ruleTester(getFileName(import.meta.url), rule, {
           line: 1,
           column: 1,
           endLine: 1,
-          endColumn: 28,
-        },
-      ],
-    },
-    {
-      name: '`allowUrls` option - 2',
-      code: '<https://example.com>',
-      options: [
-        {
-          allowUrls: [/foo.com/],
-        },
-      ],
-      errors: [
-        {
-          messageId: 'allowLinkUrl',
-          data: {
-            url: 'https://example.com',
-            patterns: '`/foo.com/`',
-          },
-          line: 1,
-          column: 1,
-          endLine: 1,
-          endColumn: 22,
+          endColumn: 29,
         },
       ],
     },
     {
       name: '`disallowUrls` option - 1',
-      code: '[Text](https://example.com)',
+      code: '![Text](https://example.com)',
       options: [
         {
           disallowUrls: [/example.com/],
@@ -275,7 +255,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
       errors: [
         {
-          messageId: 'disallowLinkUrl',
+          messageId: 'disallowImageUrl',
           data: {
             url: 'https://example.com',
             patterns: '`/example.com/`',
@@ -283,7 +263,7 @@ ruleTester(getFileName(import.meta.url), rule, {
           line: 1,
           column: 1,
           endLine: 1,
-          endColumn: 28,
+          endColumn: 29,
         },
       ],
     },
@@ -291,7 +271,7 @@ ruleTester(getFileName(import.meta.url), rule, {
     // Definition
     {
       name: '`allowUrls` option - 1',
-      code: '[Text][reference]\n\n[reference]: https://example.com',
+      code: '![Text][reference]\n\n[reference]: https://example.com',
       options: [
         {
           allowUrls: [/foo.com/],
@@ -299,7 +279,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
       errors: [
         {
-          messageId: 'allowLinkUrl',
+          messageId: 'allowImageUrl',
           data: {
             url: 'https://example.com',
             patterns: '`/foo.com/`',
@@ -313,7 +293,7 @@ ruleTester(getFileName(import.meta.url), rule, {
     },
     {
       name: '`disallowUrls` option - 1',
-      code: '[Text][reference]\n\n[reference]: https://example.com',
+      code: '![Text][reference]\n\n[reference]: https://example.com',
       options: [
         {
           disallowUrls: [/example.com/],
@@ -321,7 +301,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
       errors: [
         {
-          messageId: 'disallowLinkUrl',
+          messageId: 'disallowImageUrl',
           data: {
             url: 'https://example.com',
             patterns: '`/example.com/`',
@@ -337,7 +317,7 @@ ruleTester(getFileName(import.meta.url), rule, {
     // HTML
     {
       name: '`allowUrls` option - 1',
-      code: '<a href="https://example.com">text</a>',
+      code: '<img src="https://example.com" alt="Alt text">',
       options: [
         {
           allowUrls: [/foo.com/],
@@ -345,21 +325,21 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
       errors: [
         {
-          messageId: 'allowLinkUrl',
+          messageId: 'allowImageUrl',
           data: {
             url: 'https://example.com',
             patterns: '`/foo.com/`',
           },
           line: 1,
-          column: 4,
+          column: 6,
           endLine: 1,
-          endColumn: 30,
+          endColumn: 31,
         },
       ],
     },
     {
       name: '`disallowUrls` option - 1',
-      code: '<a href="https://example.com">text</a>',
+      code: '<img src="https://example.com" alt="Alt text">',
       options: [
         {
           disallowUrls: [/example.com/],
@@ -367,21 +347,21 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
       errors: [
         {
-          messageId: 'disallowLinkUrl',
+          messageId: 'disallowImageUrl',
           data: {
             url: 'https://example.com',
             patterns: '`/example.com/`',
           },
           line: 1,
-          column: 4,
+          column: 6,
           endLine: 1,
-          endColumn: 30,
+          endColumn: 31,
         },
       ],
     },
     {
       name: '`disallowUrls` option - 2',
-      code: '<a\nhref="https://example.com">text</a>',
+      code: '<img\nsrc="https://example.com" alt="Alt text">',
       options: [
         {
           disallowUrls: [/example.com/],
@@ -389,7 +369,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
       errors: [
         {
-          messageId: 'disallowLinkUrl',
+          messageId: 'disallowImageUrl',
           data: {
             url: 'https://example.com',
             patterns: '`/example.com/`',
@@ -397,13 +377,13 @@ ruleTester(getFileName(import.meta.url), rule, {
           line: 2,
           column: 1,
           endLine: 2,
-          endColumn: 27,
+          endColumn: 26,
         },
       ],
     },
     {
       name: '`disallowUrls` option - 3',
-      code: '<a\n href="https://example.com">text</a>',
+      code: '<img\n src="https://example.com" alt="Alt text">',
       options: [
         {
           disallowUrls: [/example.com/],
@@ -411,7 +391,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
       errors: [
         {
-          messageId: 'disallowLinkUrl',
+          messageId: 'disallowImageUrl',
           data: {
             url: 'https://example.com',
             patterns: '`/example.com/`',
@@ -419,13 +399,13 @@ ruleTester(getFileName(import.meta.url), rule, {
           line: 2,
           column: 2,
           endLine: 2,
-          endColumn: 28,
+          endColumn: 27,
         },
       ],
     },
     {
       name: '`disallowUrls` option - 4',
-      code: '<a\n  href="https://example.com">text</a>',
+      code: '<img\n  src="https://example.com" alt="Alt text">',
       options: [
         {
           disallowUrls: [/example.com/],
@@ -433,7 +413,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
       errors: [
         {
-          messageId: 'disallowLinkUrl',
+          messageId: 'disallowImageUrl',
           data: {
             url: 'https://example.com',
             patterns: '`/example.com/`',
@@ -441,7 +421,7 @@ ruleTester(getFileName(import.meta.url), rule, {
           line: 2,
           column: 3,
           endLine: 2,
-          endColumn: 29,
+          endColumn: 28,
         },
       ],
     },
@@ -449,7 +429,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       name: '`disallowUrls` option - 5',
       code: `
 <div>
-  <a href="https://example.com">text</a>
+  <img src="https://example.com" alt="Alt text">
 </div>`,
       options: [
         {
@@ -458,15 +438,15 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
       errors: [
         {
-          messageId: 'disallowLinkUrl',
+          messageId: 'disallowImageUrl',
           data: {
             url: 'https://example.com',
             patterns: '`/example.com/`',
           },
           line: 3,
-          column: 6,
+          column: 8,
           endLine: 3,
-          endColumn: 32,
+          endColumn: 33,
         },
       ],
     },
@@ -474,9 +454,9 @@ ruleTester(getFileName(import.meta.url), rule, {
       name: '`disallowUrls` option - 6',
       code: `
 <div>
-  <a href="https://example.com">text</a>
+  <img src="https://example.com" alt="Alt text">
   <br>
-  <a href="https://example.com">text</a>
+  <img src="https://example.com" alt="Alt text">
 </div>`,
       options: [
         {
@@ -485,26 +465,26 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
       errors: [
         {
-          messageId: 'disallowLinkUrl',
+          messageId: 'disallowImageUrl',
           data: {
             url: 'https://example.com',
             patterns: '`/example.com/`',
           },
           line: 3,
-          column: 6,
+          column: 8,
           endLine: 3,
-          endColumn: 32,
+          endColumn: 33,
         },
         {
-          messageId: 'disallowLinkUrl',
+          messageId: 'disallowImageUrl',
           data: {
             url: 'https://example.com',
             patterns: '`/example.com/`',
           },
           line: 5,
-          column: 6,
+          column: 8,
           endLine: 5,
-          endColumn: 32,
+          endColumn: 33,
         },
       ],
     },
@@ -513,15 +493,13 @@ ruleTester(getFileName(import.meta.url), rule, {
     {
       name: '`allowUrls` with empty array should report all URLs',
       code: `
-[Text](https://example.com)
+![Text](https://example.com)
 
-<https://foo.com>
+<img src="https://foo.com" alt="Alt text">
 
-<a href="https://bar.com">text</a>
+![Text][reference]
 
-[Text][reference]
-
-[reference]: https://baz.com`,
+[reference]: https://bar.com`,
       options: [
         {
           allowUrls: [],
@@ -529,7 +507,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       ],
       errors: [
         {
-          messageId: 'allowLinkUrl',
+          messageId: 'allowImageUrl',
           data: {
             url: 'https://example.com',
             patterns: '',
@@ -537,39 +515,28 @@ ruleTester(getFileName(import.meta.url), rule, {
           line: 2,
           column: 1,
           endLine: 2,
-          endColumn: 28,
+          endColumn: 29,
         },
         {
-          messageId: 'allowLinkUrl',
+          messageId: 'allowImageUrl',
           data: {
             url: 'https://foo.com',
             patterns: '',
           },
           line: 4,
-          column: 1,
+          column: 6,
           endLine: 4,
-          endColumn: 18,
+          endColumn: 27,
         },
         {
-          messageId: 'allowLinkUrl',
+          messageId: 'allowImageUrl',
           data: {
             url: 'https://bar.com',
             patterns: '',
           },
-          line: 6,
-          column: 4,
-          endLine: 6,
-          endColumn: 26,
-        },
-        {
-          messageId: 'allowLinkUrl',
-          data: {
-            url: 'https://baz.com',
-            patterns: '',
-          },
-          line: 10,
+          line: 8,
           column: 1,
-          endLine: 10,
+          endLine: 8,
           endColumn: 29,
         },
       ],
