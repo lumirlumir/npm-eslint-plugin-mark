@@ -3,13 +3,13 @@
 
 ## Rule Details
 
-This rule allows or disallows specific URLs for links in Markdown documents using [configurable patterns](#options). It can help enforce or relax link URL policies in your documentation, for example, by restricting links to certain domains or preventing the use of particular URLs.
+This rule allows or disallows specific URLs for images in Markdown documents using [configurable patterns](#options). It can help enforce or relax image URL policies in your documentation, for example, by restricting images to certain domains or preventing the use of particular URLs.
 
-The rule examines all link elements in a Markdown document and reports any links that either don't match the allowed URL patterns or that match disallowed URL patterns. It checks:
+The rule examines all image elements in a Markdown document and reports any images that either don't match the allowed URL patterns or that match disallowed URL patterns. It checks:
 
-- Standard Markdown link syntax: `[text](url "title")` or `<https://example.com>`
-- Link reference definitions: `[ref]: url "title"`
-- HTML link tags: `<a href="url" title="title">text</a>`
+- Standard Markdown image syntax: `![alt text](url "title")`
+- Image reference definitions: `[ref]: url "title"`
+- HTML image tags: `<img src="url" alt="alt text" title="title">`
 
 ## Examples
 
@@ -20,41 +20,37 @@ Examples of **incorrect** code for this rule:
 #### With `{ allowUrls: [/example.com/] }` Option
 
 ```md eslint-check
-<!-- eslint mark/allow-link-url: ["error", { allowUrls: [/example.com/] }] -->
+<!-- eslint mark/allow-image-url: ["error", { allowUrls: [/example.com/] }] -->
 
-[Text](https://foo.com)
+![Alt text](https://foo.com/image.png)
 
-<https://foo.com>
-
-<a href="https://foo.com">Text</a>
+<img src="https://foo.com/image.png" alt="Alt text">
 
 <div>
-  <a href="https://foo.com">Text</a>
+  <img src="https://foo.com/image.png" alt="Alt text">
 </div>
 
-[Text][reference]
+![Alt text][reference]
 
-[reference]: https://foo.com
+[reference]: https://foo.com/image.png
 ```
 
 #### With `{ disallowUrls: [/example.com/] }` Option
 
 ```md eslint-check
-<!-- eslint mark/allow-link-url: ["error", { disallowUrls: [/example.com/] }] -->
+<!-- eslint mark/allow-image-url: ["error", { disallowUrls: [/example.com/] }] -->
 
-[Text](https://example.com)
+![Alt text](https://example.com/image.png)
 
-<https://example.com>
-
-<a href="https://example.com">Text</a>
+<img src="https://example.com/image.png" alt="Alt text">
 
 <div>
-  <a href="https://example.com">Text</a>
+  <img src="https://example.com/image.png" alt="Alt text">
 </div>
 
-[Text][reference]
+![Alt text][reference]
 
-[reference]: https://example.com
+[reference]: https://example.com/image.png
 ```
 
 ### :white_check_mark: Correct
@@ -70,71 +66,65 @@ By default, this rule reports nothing. To use this rule, please configure the [`
 :::
 
 ```md
-<!-- eslint mark/allow-link-url: "error" -->
+<!-- eslint mark/allow-image-url: "error" -->
 
-[Text](https://example.com)
+![Alt text](https://example.com/image.png)
 
-<https://example.com>
-
-<a href="https://example.com">Text</a>
+<img src="https://example.com/image.png" alt="Alt text">
 
 <div>
-  <a href="https://example.com">Text</a>
+  <img src="https://example.com/image.png" alt="Alt text">
 </div>
 
-[Text][reference]
+![Alt text][reference]
 
-[reference]: https://example.com
+[reference]: https://example.com/image.png
 ```
 
 #### With `{ allowUrls: [/example.com/] }` Option
 
 ```md eslint-check
-<!-- eslint mark/allow-link-url: ["error", { allowUrls: [/example.com/] }] -->
+<!-- eslint mark/allow-image-url: ["error", { allowUrls: [/example.com/] }] -->
 
-[Text](https://example.com)
+![Alt text](https://example.com/image.png)
 
-<https://example.com>
-
-<a href="https://example.com">Text</a>
+<img src="https://example.com/image.png" alt="Alt text">
 
 <div>
-  <a href="https://example.com">Text</a>
+  <img src="https://example.com/image.png" alt="Alt text">
 </div>
 
-[Text][reference]
+![Alt text][reference]
 
-[reference]: https://example.com
+[reference]: https://example.com/image.png
 ```
 
 #### With `{ disallowUrls: [/example.com/] }` Option
 
 ```md eslint-check
-<!-- eslint mark/allow-link-url: ["error", { disallowUrls: [/example.com/] }] -->
+<!-- eslint mark/allow-image-url: ["error", { disallowUrls: [/example.com/] }] -->
 
-[Text](https://foo.com)
+![Alt text](https://foo.com/image.png)
 
-<https://foo.com>
-
-<a href="https://foo.com">Text</a>
+<img src="https://foo.com/image.png" alt="Alt text">
 
 <div>
-  <a href="https://foo.com">Text</a>
+  <img src="https://foo.com/image.png" alt="Alt text">
 </div>
 
-[Text][reference]
+![Alt text][reference]
 
-[reference]: https://foo.com
+[reference]: https://foo.com/image.png
 ```
 
 #### With `{ allowDefinitions: ['reference'], disallowUrls: [/example.com/] }` Option
 
 ```md eslint-check
-<!-- eslint mark/allow-link-url: ["error", { allowDefinitions: ['reference'], disallowUrls: [/example.com/] }] -->
+<!-- eslint mark/allow-image-url: ["error", { allowDefinitions: ['reference'], disallowUrls: [/example.com/] }] -->
 
-[Text][reference]
+![Alt text][reference]
 
-[reference]: https://example.com
+[reference]: https://example.com/image.png
 ```
 
 ::: tip NOTE
@@ -142,11 +132,11 @@ By default, this rule reports nothing. To use this rule, please configure the [`
 Please note that this rule doesn't report definition-style comments (e.g., `[//]: ...`) by default.
 
 ```md eslint-check
-<!-- eslint mark/allow-link-url: ["error", { disallowUrls: [/example.com/] }] -->
+<!-- eslint mark/allow-image-url: ["error", { disallowUrls: [/example.com/] }] -->
 
-[Text][//]
+![Alt text][//]
 
-[//]: https://example.com
+[//]: https://example.com/image.png
 ```
 
 :::
@@ -154,7 +144,7 @@ Please note that this rule doesn't report definition-style comments (e.g., `[//]
 ## Options
 
 ```js
-'mark/allow-link-url': ['error', {
+'mark/allow-image-url': ['error', {
   allowUrls: [/.*/u],
   disallowUrls: [],
   allowDefinitions: ['//'],
@@ -167,7 +157,7 @@ Please note that this rule doesn't report definition-style comments (e.g., `[//]
 
 Allowed URLs act like an ***whitelist***. Only those written on the whitelist **can** pass through.
 
-For example, If you pass an empty array to the option, it allows nothing. i.e. Every **links** will be detected.
+For example, If you pass an empty array to the option, it allows nothing. i.e. Every **images** will be detected.
 
 ### `disallowUrls`
 
@@ -175,7 +165,7 @@ For example, If you pass an empty array to the option, it allows nothing. i.e. E
 
 On the contrary, disallowed URLs act like an ***blacklist***. Only those written on the blacklist **cannot** pass through.
 
-For example, If you pass an empty array to the option, it allows everything. i.e. no **links** will be detected.
+For example, If you pass an empty array to the option, it allows everything. i.e. no **images** will be detected.
 
 ### `allowDefinitions`
 
@@ -185,7 +175,7 @@ When specified, specific definitions are allowed if they match one of the identi
 
 ## When Not To Use It
 
-You might want to disable this rule if you don't need to enforce any specific URL policies for links in your Markdown documents.
+You might want to disable this rule if you don't need to enforce any specific URL policies for images in your Markdown documents.
 
 ## Prior Art
 
