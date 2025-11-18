@@ -1,6 +1,7 @@
 /* eslint sort-imports: 'error', sort-keys: 'error' */
 
 import allowHeading from './allow-heading.js';
+import allowLinkUrl from './allow-link-url.js';
 import altText from './alt-text.js';
 import codeLangShorthand from './code-lang-shorthand.js';
 import consistentDeleteStyle from './consistent-delete-style.js';
@@ -22,6 +23,7 @@ import requireLinkTitle from './require-link-title.js';
 
 export default {
   'allow-heading': allowHeading,
+  'allow-link-url': allowLinkUrl,
   'alt-text': altText,
   'code-lang-shorthand': codeLangShorthand,
   'consistent-delete-style': consistentDeleteStyle,
