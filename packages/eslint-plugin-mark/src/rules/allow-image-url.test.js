@@ -27,14 +27,13 @@ ruleTester(getFileName(import.meta.url), rule, {
     },
 
     // Image
-    /*
     {
       name: 'With no options',
-      code: '[](https://example.com)',
+      code: '![](https://example.com)',
     },
     {
       name: '`allowUrls` option - 1',
-      code: '[Text](https://example.com)',
+      code: '![Text](https://example.com)',
       options: [
         {
           allowUrls: [/example.com/],
@@ -43,7 +42,7 @@ ruleTester(getFileName(import.meta.url), rule, {
     },
     {
       name: '`allowUrls` option - 2',
-      code: '[Text](https://example.com)\n<https://foo.com>',
+      code: '![Text](https://example.com)',
       options: [
         {
           allowUrls: [/example.com/, /foo.com/],
@@ -52,7 +51,7 @@ ruleTester(getFileName(import.meta.url), rule, {
     },
     {
       name: '`disallowUrls` option - 1',
-      code: '[Text](https://example.com)',
+      code: '![Text](https://example.com)',
       options: [
         {
           disallowUrls: [/foo.com/],
@@ -61,7 +60,7 @@ ruleTester(getFileName(import.meta.url), rule, {
     },
     {
       name: '`disallowUrls` option - 2',
-      code: '[Text](https://example.com)\n<https://bar.com>',
+      code: '![Text](https://example.com)',
       options: [
         {
           disallowUrls: [/foo.com/, /baz.com/],
@@ -70,7 +69,7 @@ ruleTester(getFileName(import.meta.url), rule, {
     },
     {
       name: '`allowUrls` and `disallowUrls` options',
-      code: '[Text](https://example.com)',
+      code: '![Text](https://example.com)',
       options: [
         {
           allowUrls: [/example.com/],
@@ -91,7 +90,7 @@ ruleTester(getFileName(import.meta.url), rule, {
     },
     {
       name: '`//` definition should not be checked',
-      code: '[Text][//]\n\n[//]: https://example.com',
+      code: '![Text][//]\n\n[//]: https://example.com',
       options: [
         {
           disallowUrls: [/example.com/],
@@ -100,7 +99,7 @@ ruleTester(getFileName(import.meta.url), rule, {
     },
     {
       name: '`allowUrls` option - 1',
-      code: '[Text][reference]\n\n[reference]: https://example.com',
+      code: '![Text][reference]\n\n[reference]: https://example.com',
       options: [
         {
           allowUrls: [/example.com/],
@@ -110,11 +109,11 @@ ruleTester(getFileName(import.meta.url), rule, {
     {
       name: '`allowUrls` option - 2',
       code: `
-[Text][reference1]
+![Text][reference1]
 
 [reference1]: https://example.com
 
-[Text][reference2]
+![Text][reference2]
 
 [reference2]: https://foo.com`,
       options: [
@@ -125,7 +124,7 @@ ruleTester(getFileName(import.meta.url), rule, {
     },
     {
       name: '`disallowUrls` option - 1',
-      code: '[Text][reference]\n\n[reference]: https://example.com',
+      code: '![Text][reference]\n\n[reference]: https://example.com',
       options: [
         {
           disallowUrls: [/foo.com/],
@@ -135,11 +134,11 @@ ruleTester(getFileName(import.meta.url), rule, {
     {
       name: '`disallowUrls` option - 2',
       code: `
-[Text][reference1]
+![Text][reference1]
 
 [reference1]: https://example.com
 
-[Text][reference2]
+![Text][reference2]
 
 [reference2]: https://bar.com`,
       options: [
@@ -150,7 +149,7 @@ ruleTester(getFileName(import.meta.url), rule, {
     },
     {
       name: '`allowUrls` and `disallowUrls` options',
-      code: '[Text][reference]\n\n[reference]: https://example.com',
+      code: '![Text][reference]\n\n[reference]: https://example.com',
       options: [
         {
           allowUrls: [/example.com/],
@@ -160,7 +159,7 @@ ruleTester(getFileName(import.meta.url), rule, {
     },
     {
       name: '`allowDefinitions` option - 1',
-      code: '[Text][reference]\n\n[reference]: https://example.com',
+      code: '![Text][reference]\n\n[reference]: https://example.com',
       options: [
         {
           allowDefinitions: ['reference'],
@@ -170,7 +169,7 @@ ruleTester(getFileName(import.meta.url), rule, {
     },
     {
       name: '`allowDefinitions` option - 2',
-      code: '[Text][hi]\n\n[hi]: https://example.com',
+      code: '![Text][hi]\n\n[hi]: https://example.com',
       options: [
         {
           allowDefinitions: ['hi'],
@@ -180,7 +179,7 @@ ruleTester(getFileName(import.meta.url), rule, {
     },
     {
       name: '`allowDefinitions` option - 3',
-      code: '[Text][hi]\n\n[hi]: https://example.com',
+      code: '![Text][hi]\n\n[hi]: https://example.com',
       options: [
         {
           allowDefinitions: ['HI'],
@@ -190,7 +189,7 @@ ruleTester(getFileName(import.meta.url), rule, {
     },
     {
       name: '`allowDefinitions` option - 4',
-      code: '[Text][Grüsse]\n\n[Grüsse]: https://example.com',
+      code: '![Text][Grüsse]\n\n[Grüsse]: https://example.com',
       options: [
         {
           allowDefinitions: ['GRÜẞE'],
@@ -202,7 +201,7 @@ ruleTester(getFileName(import.meta.url), rule, {
     // HTML
     {
       name: '`allowUrls` option - 1',
-      code: '<a href="https://example.com">text</a>',
+      code: '<img src="https://example.com" alt="Alt text">',
       options: [
         {
           allowUrls: [/example.com/],
@@ -211,14 +210,13 @@ ruleTester(getFileName(import.meta.url), rule, {
     },
     {
       name: '`disallowUrls` option - 1',
-      code: '<a href="https://example.com">text</a>',
+      code: '<img src="https://example.com" alt="Alt text">',
       options: [
         {
           disallowUrls: [/foo.com/],
         },
       ],
     },
-    */
   ],
 
   invalid: [
