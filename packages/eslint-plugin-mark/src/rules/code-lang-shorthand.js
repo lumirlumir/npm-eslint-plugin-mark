@@ -20,7 +20,7 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 
 /**
  * @import { RuleModule } from '../core/types.js';
- * @typedef {[{ ignores: string[], override: Record<string, string> }]} RuleOptions
+ * @typedef {[{ allow: string[], override: Record<string, string> }]} RuleOptions
  * @typedef {'codeLangShorthand'} MessageIds
  */
 
@@ -123,7 +123,7 @@ export default {
       {
         type: 'object',
         properties: {
-          ignores: {
+          allow: {
             type: 'array',
             items: {
               enum: Object.keys(langShorthandMap),
@@ -143,7 +143,7 @@ export default {
 
     defaultOptions: [
       {
-        ignores: [],
+        allow: [],
         override: {},
       },
     ],
@@ -160,14 +160,14 @@ export default {
   create(context) {
     return {
       code(node) {
-        const [{ ignores, override }] = context.options;
+        const [{ allow, override }] = context.options;
         const langShorthandMapMerged = Object.fromEntries(
           Object.entries({
             ...langShorthandMap,
             ...override, // `override` option handling.
           })
             .map(([key, value]) => [key.toLowerCase(), value.toLowerCase()]) // Normalize keys and values.
-            .filter(([key]) => !ignores.includes(key)), // `ignores` option handling.
+            .filter(([key]) => !allow.includes(key)), // `ignores` option handling.
         );
         const langShorthand = langShorthandMapMerged[node.lang?.toLowerCase()]; // Normalize lang.
 
