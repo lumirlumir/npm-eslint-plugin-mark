@@ -15,7 +15,19 @@ export default defineConfig([
   mark.configs.stylistic,
 
   {
-    name: 'website/rules',
+    name: 'md/global',
+    files: ['**/*.md'],
+    rules: {
+      'mark/allow-link-url': [
+        'error',
+        {
+          disallowUrls: [/^\.\//],
+        },
+      ],
+    },
+  },
+  {
+    name: 'md/website/rules',
     files: ['website/docs/rules/**/*.md'],
     rules: {
       'mark/allow-heading': [

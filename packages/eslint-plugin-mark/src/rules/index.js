@@ -1,6 +1,8 @@
 /* eslint sort-imports: 'error', sort-keys: 'error' */
 
 import allowHeading from './allow-heading.js';
+import allowImageUrl from './allow-image-url.js';
+import allowLinkUrl from './allow-link-url.js';
 import altText from './alt-text.js';
 import codeLangShorthand from './code-lang-shorthand.js';
 import consistentDeleteStyle from './consistent-delete-style.js';
@@ -19,9 +21,12 @@ import noGitConflictMarker from './no-git-conflict-marker.js';
 import noIrregularDash from './no-irregular-dash.js';
 import noIrregularWhitespace from './no-irregular-whitespace.js';
 import requireImageTitle from './require-image-title.js';
+import requireLinkTitle from './require-link-title.js';
 
 export default {
   'allow-heading': allowHeading,
+  'allow-image-url': allowImageUrl,
+  'allow-link-url': allowLinkUrl,
   'alt-text': altText,
   'code-lang-shorthand': codeLangShorthand,
   'consistent-delete-style': consistentDeleteStyle,
@@ -40,4 +45,5 @@ export default {
   'no-irregular-dash': noIrregularDash,
   'no-irregular-whitespace': noIrregularWhitespace,
   'require-image-title': requireImageTitle,
+  'require-link-title': requireLinkTitle,
 };

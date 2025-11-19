@@ -11,12 +11,6 @@ import { getFileName, ruleTester } from '../core/tests/index.js';
 import rule from './en-capitalization.js';
 
 // --------------------------------------------------------------------------------
-// Helpers
-// --------------------------------------------------------------------------------
-
-const enCapitalization = 'enCapitalization';
-
-// --------------------------------------------------------------------------------
 // Test
 // --------------------------------------------------------------------------------
 
@@ -138,7 +132,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       output: 'Hello world!',
       errors: [
         {
-          messageId: enCapitalization,
+          messageId: 'enCapitalization',
           line: 1,
           column: 1,
           endLine: 1,
@@ -152,7 +146,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       output: '*Hello* world!',
       errors: [
         {
-          messageId: enCapitalization,
+          messageId: 'enCapitalization',
           line: 1,
           column: 2,
           endLine: 1,
@@ -166,7 +160,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       output: '**Hello** world!',
       errors: [
         {
-          messageId: enCapitalization,
+          messageId: 'enCapitalization',
           line: 1,
           column: 3,
           endLine: 1,
@@ -180,7 +174,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       output: '***Hello*** world!',
       errors: [
         {
-          messageId: enCapitalization,
+          messageId: 'enCapitalization',
           line: 1,
           column: 4,
           endLine: 1,
@@ -194,7 +188,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       output: '_**Hello**_ world!',
       errors: [
         {
-          messageId: enCapitalization,
+          messageId: 'enCapitalization',
           line: 1,
           column: 4,
           endLine: 1,
@@ -211,7 +205,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       options: [{ skipHeading: false }],
       errors: [
         {
-          messageId: enCapitalization,
+          messageId: 'enCapitalization',
           line: 1,
           column: 3,
           endLine: 1,
@@ -226,7 +220,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       options: [{ skipHeading: false }],
       errors: [
         {
-          messageId: enCapitalization,
+          messageId: 'enCapitalization',
           line: 1,
           column: 4,
           endLine: 1,
@@ -241,7 +235,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       options: [{ skipHeading: false }],
       errors: [
         {
-          messageId: enCapitalization,
+          messageId: 'enCapitalization',
           line: 1,
           column: 5,
           endLine: 1,
@@ -256,7 +250,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       options: [{ skipHeading: false }],
       errors: [
         {
-          messageId: enCapitalization,
+          messageId: 'enCapitalization',
           line: 1,
           column: 6,
           endLine: 1,
@@ -271,7 +265,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       options: [{ skipHeading: false }],
       errors: [
         {
-          messageId: enCapitalization,
+          messageId: 'enCapitalization',
           line: 1,
           column: 6,
           endLine: 1,
@@ -288,7 +282,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       options: [{ skipListItem: false }],
       errors: [
         {
-          messageId: enCapitalization,
+          messageId: 'enCapitalization',
           line: 1,
           column: 3,
           endLine: 1,
@@ -303,7 +297,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       options: [{ skipListItem: false }],
       errors: [
         {
-          messageId: enCapitalization,
+          messageId: 'enCapitalization',
           line: 1,
           column: 4,
           endLine: 1,
@@ -318,7 +312,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       options: [{ skipListItem: false }],
       errors: [
         {
-          messageId: enCapitalization,
+          messageId: 'enCapitalization',
           line: 1,
           column: 5,
           endLine: 1,
@@ -333,7 +327,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       options: [{ skipListItem: false }],
       errors: [
         {
-          messageId: enCapitalization,
+          messageId: 'enCapitalization',
           line: 1,
           column: 6,
           endLine: 1,
@@ -348,7 +342,7 @@ ruleTester(getFileName(import.meta.url), rule, {
       options: [{ skipListItem: false }],
       errors: [
         {
-          messageId: enCapitalization,
+          messageId: 'enCapitalization',
           line: 1,
           column: 6,
           endLine: 1,
