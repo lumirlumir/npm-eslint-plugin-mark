@@ -104,6 +104,7 @@ export default {
           }
         }
 
+        // Handle the case where the file ends with blank lines.
         if (startIdx !== null && lines.length - startIdx > max) {
           context.report({
             loc: {
