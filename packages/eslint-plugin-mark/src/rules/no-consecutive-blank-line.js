@@ -15,8 +15,8 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 
 /**
  * @import { RuleModule } from '../core/types.js';
- * @typedef {[{ style: 'consistent' | '*' | '_' }]} RuleOptions
- * @typedef {'style'} MessageIds
+ * @typedef {[{ max: number, skipCode: boolean }]} RuleOptions
+ * @typedef {'noConsecutiveBlankLine'} MessageIds
  */
 
 // --------------------------------------------------------------------------------
@@ -29,20 +29,24 @@ export default {
     type: 'layout',
 
     docs: {
-      description: 'Enforce consistent emphasis style',
-      url: URL_RULE_DOCS('consistent-emphasis-style'),
+      description: 'Disallow consecutive blank lines',
+      url: URL_RULE_DOCS('no-consecutive-blank-line'),
       recommended: false,
       stylistic: true,
     },
 
-    fixable: 'code',
+    fixable: 'whitespace',
 
     schema: [
       {
         type: 'object',
         properties: {
-          style: {
-            enum: ['consistent', '*', '_'],
+          max: {
+            type: 'integer',
+            minimum: 0,
+          },
+          skipCode: {
+            type: 'boolean',
           },
         },
         additionalProperties: false,
@@ -51,12 +55,13 @@ export default {
 
     defaultOptions: [
       {
-        style: 'consistent',
+        max: 1,
+        skipCode: true,
       },
     ],
 
     messages: {
-      style: 'Emphasis style should be `{{ style }}`.',
+      noConsecutiveBlankLine: 'Consecutive blank lines are not allowed.',
     },
 
     language: 'markdown',
@@ -64,55 +69,12 @@ export default {
     dialects: ['commonmark', 'gfm'],
   },
 
-  create(context) {
-    const { sourceCode } = context;
-    const [{ style }] = context.options;
-
-    /** @type {string | null} */
-    let emphasisStyle = style === 'consistent' ? null : style;
-
-    /**
-     * @param {number} startOffset
-     * @param {number} endOffset
-     */
-    function reportStyle(startOffset, endOffset) {
-      const stringifiedEmphasisStyle = String(emphasisStyle);
-
-      context.report({
-        loc: {
-          start: sourceCode.getLocFromIndex(startOffset),
-          end: sourceCode.getLocFromIndex(endOffset),
-        },
-
-        messageId: 'style',
-
-        data: {
-          style: stringifiedEmphasisStyle,
-        },
-
-        fix(fixer) {
-          return fixer.replaceTextRange(
-            [startOffset, endOffset],
-            stringifiedEmphasisStyle,
-          );
-        },
-      });
-    }
+  create(/* context */) {
+    // const { sourceCode } = context;
+    // const [{ max, skipCode }] = context.options;
 
     return {
-      emphasis(node) {
-        const [nodeStartOffset, nodeEndOffset] = sourceCode.getRange(node);
-        const currentEmphasisStyle = sourceCode.text[nodeStartOffset];
-
-        if (emphasisStyle === null) {
-          emphasisStyle = currentEmphasisStyle;
-        }
-
-        if (emphasisStyle !== currentEmphasisStyle) {
-          reportStyle(nodeStartOffset, nodeStartOffset + 1);
-          reportStyle(nodeEndOffset - 1, nodeEndOffset);
-        }
-      },
+      'root:exit'(/* node */) {},
     };
   },
 };
