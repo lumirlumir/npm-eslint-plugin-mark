@@ -7,6 +7,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
+import { isBlankLine } from '../core/ast/index.js';
 import { URL_RULE_DOCS } from '../core/constants.js';
 
 // --------------------------------------------------------------------------------
@@ -69,12 +70,40 @@ export default {
     dialects: ['commonmark', 'gfm'],
   },
 
-  create(/* context */) {
-    // const { sourceCode } = context;
-    // const [{ max, skipCode }] = context.options;
+  create(context) {
+    const {
+      sourceCode: { lines },
+    } = context;
+    const [{ max /* skipCode */ }] = context.options;
 
     return {
-      'root:exit'(/* node */) {},
+      'root:exit'() {
+        /** @type {number | null} */
+        let startIdx = null;
+
+        for (let currentIdx = 0; currentIdx < lines.length; currentIdx++) {
+          if (isBlankLine(lines[currentIdx])) {
+            if (startIdx === null) {
+              startIdx = currentIdx;
+            }
+          } else if (startIdx !== null) {
+            if (currentIdx - startIdx > max) {
+              context.report({
+                loc: {
+                  start: { line: startIdx + 1, column: 0 },
+                  end: {
+                    line: currentIdx,
+                    column: lines[currentIdx - 1].length,
+                  },
+                },
+                messageId: 'noConsecutiveBlankLine',
+              });
+            }
+
+            startIdx = null;
+          }
+        }
+      },
     };
   },
 };
