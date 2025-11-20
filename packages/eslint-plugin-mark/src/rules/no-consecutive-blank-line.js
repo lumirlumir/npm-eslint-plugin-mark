@@ -44,7 +44,7 @@ export default {
         properties: {
           max: {
             type: 'integer',
-            minimum: 0,
+            minimum: 0, // TODO: Think about proper minimum value
           },
           skipCode: {
             type: 'boolean',
@@ -90,10 +90,10 @@ export default {
             if (currentIdx - startIdx > max) {
               context.report({
                 loc: {
-                  start: { line: startIdx + 1, column: 0 },
+                  start: { line: startIdx + 1, column: 1 },
                   end: {
-                    line: currentIdx,
-                    column: lines[currentIdx - 1].length,
+                    line: currentIdx + 1,
+                    column: 1,
                   },
                 },
                 messageId: 'noConsecutiveBlankLine',

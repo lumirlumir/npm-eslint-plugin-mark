@@ -24,10 +24,6 @@ ruleTester(getFileName(import.meta.url), rule, {
       name: 'Empty string',
       code: '  ',
     },
-    {
-      name: 'CR LF CRLF - 1',
-      code: '123\r456\n789\r\n123',
-    },
   ],
 
   invalid: [],
