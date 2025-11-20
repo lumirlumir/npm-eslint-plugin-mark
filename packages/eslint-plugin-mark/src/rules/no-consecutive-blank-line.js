@@ -104,7 +104,10 @@ export default {
           }
         }
 
-        // Handle the case where the file ends with blank lines.
+        /*
+         * Handle the case where the file ends with blank lines.
+         * Now, `currentIdx` is equal to `lines.length`.
+         */
         if (startIdx !== null && lines.length - startIdx > max) {
           context.report({
             loc: {
