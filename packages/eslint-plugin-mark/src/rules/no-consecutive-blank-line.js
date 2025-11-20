@@ -81,8 +81,12 @@ export default {
         /** @type {number | null} */
         let startIdx = null;
 
-        for (let currentIdx = 0; currentIdx < lines.length; currentIdx++) {
-          if (isBlankLine(lines[currentIdx])) {
+        /*
+         * We use `currentIdx <= lines.length` instead of `currentIdx < lines.length`
+         * to handle the case where the file ends with blank lines.
+         */
+        for (let currentIdx = 0; currentIdx <= lines.length; currentIdx++) {
+          if (lines[currentIdx] !== undefined && isBlankLine(lines[currentIdx])) {
             if (startIdx === null) {
               startIdx = currentIdx;
             }
@@ -90,7 +94,7 @@ export default {
             if (currentIdx - startIdx > max) {
               context.report({
                 loc: {
-                  start: { line: startIdx + 1, column: 1 },
+                  start: { line: startIdx + max + 1, column: 1 },
                   end: {
                     line: currentIdx + 1,
                     column: 1,
