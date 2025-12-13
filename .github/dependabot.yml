@@ -11,10 +11,6 @@ updates:
     directories:
       - '**/*'
     groups:
-      bananass:
-        patterns:
-          - 'eslint-config-bananass'
-          - 'prettier-config-bananass'
       babel:
         patterns:
           - '@babel/*'
