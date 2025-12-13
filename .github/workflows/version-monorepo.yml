@@ -49,7 +49,7 @@ jobs:
           cache: npm
 
       - name: Set up cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -90,7 +90,7 @@ jobs:
           } >> $GITHUB_ENV
 
       - name: Create pull request
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.GH_PAT }}
           commit-message: 'chore(release): bump package versions from `v${{ env.OLD_VERSION }}` to `v${{ env.NEW_VERSION }}`'
