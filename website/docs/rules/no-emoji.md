@@ -52,3 +52,5 @@ No options are available for this rule.
 ## Limitations
 
 This rule uses [`emoji-regex`](https://github.com/mathiasbynens/emoji-regex#readme) internally to match emojis. Any emoji not supported by the current version of that regex will not be detected (for example, very recent Unicode additions until the dependency is updated).
+
+TODO

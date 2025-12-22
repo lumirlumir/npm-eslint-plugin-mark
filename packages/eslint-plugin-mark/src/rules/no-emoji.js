@@ -7,7 +7,6 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import emojiRegex from 'emoji-regex';
 import { URL_RULE_DOCS } from '../core/constants.js';
 
 // --------------------------------------------------------------------------------
@@ -19,6 +18,13 @@ import { URL_RULE_DOCS } from '../core/constants.js';
  * @typedef {[]} RuleOptions
  * @typedef {'noEmoji'} MessageIds
  */
+
+// --------------------------------------------------------------------------------
+// Helper
+// --------------------------------------------------------------------------------
+
+/** @see https://github.com/slevithan/emoji-regex-xs?tab=readme-ov-file#comparison-with-emoji-regex-and-prgi_emoji */
+const emojiRegex = /\p{RGI_Emoji}/gv;
 
 // --------------------------------------------------------------------------------
 // Rule Definition
@@ -51,7 +57,7 @@ export default {
     return {
       text(node) {
         const [nodeStartOffset] = sourceCode.getRange(node);
-        const matches = sourceCode.getText(node).matchAll(emojiRegex());
+        const matches = sourceCode.getText(node).matchAll(emojiRegex);
 
         for (const match of matches) {
           const startOffset = nodeStartOffset + match.index;
