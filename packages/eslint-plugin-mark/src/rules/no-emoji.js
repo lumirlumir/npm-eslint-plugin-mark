@@ -23,7 +23,6 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 // Helper
 // --------------------------------------------------------------------------------
 
-/** @see https://github.com/slevithan/emoji-regex-xs?tab=readme-ov-file#comparison-with-emoji-regex-and-prgi_emoji */
 const emojiRegex = /\p{RGI_Emoji}/gv;
 
 // --------------------------------------------------------------------------------
