@@ -51,4 +51,4 @@ No options are available for this rule.
 
 ## Limitations
 
-This rule uses [`emoji-regex`](https://github.com/mathiasbynens/emoji-regex#readme) internally to match emojis. Any emoji not supported by the current version of that regex will not be detected (for example, very recent Unicode additions until the dependency is updated).
+This rule uses `/\p{RGI_Emoji}/gv` internally to match emojis. Unicode property escapes rely on the Unicode data/version supported by the runtime, so matches can vary across environments. Also, `RGI_Emoji` targets only Unicode's "Recommended for General Interchange" emoji set, so it may not match some non-RGI or emoji-like sequences.
