@@ -28,7 +28,7 @@ lumirlumir/lumirlumir-configs:
     dest: ./configs/.husky/pre-commit
   # ./.vscode
   - source: ./.vscode/extensions.json
-    dest: ./configs/.vscode/npm-extensions.json
+    dest: ./configs/.vscode/extensions.json
   - source: ./.vscode/settings.json
     dest: ./configs/.vscode/settings.json
   # ./scripts

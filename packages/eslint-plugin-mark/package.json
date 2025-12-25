@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-mark",
-  "version": "0.1.0-canary.10",
+  "version": "0.1.0-canary.11",
   "type": "module",
   "description": "Lint your Markdown with ESLint.🛠️",
   "exports": {
@@ -49,6 +49,9 @@
   "bugs": {
     "url": "https://github.com/lumirlumir/npm-eslint-plugin-mark/issues"
   },
+  "engines": {
+    "node": "^20.19.0 || ^22.13.0 || >=24.0.0"
+  },
   "publishConfig": {
     "provenance": true
   },
@@ -67,12 +70,11 @@
   },
   "dependencies": {
     "@eslint/markdown": "^7.5.1",
-    "emoji-regex": "^10.6.0",
     "micromark-util-normalize-identifier": "^2.0.1",
     "parse5": "^8.0.0"
   },
   "devDependencies": {
     "@types/mdast": "^4.0.4",
-    "eslint": "^9.39.1"
+    "eslint": "^9.39.2"
   }
 }
