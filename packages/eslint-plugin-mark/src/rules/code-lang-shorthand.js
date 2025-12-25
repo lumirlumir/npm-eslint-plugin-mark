@@ -6,8 +6,6 @@
  * @see https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
  */
 
-// @ts-nocheck -- TODO
-
 // --------------------------------------------------------------------------------
 // Import
 // --------------------------------------------------------------------------------
@@ -15,17 +13,17 @@
 import { URL_RULE_DOCS } from '../core/constants.js';
 
 // --------------------------------------------------------------------------------
-// Typedefs
+// Typedef
 // --------------------------------------------------------------------------------
 
 /**
  * @import { RuleModule } from '../core/types.js';
- * @typedef {[{ ignores: string[], override: Record<string, string> }]} RuleOptions
+ * @typedef {[{ allow: string[], override: Record<string, string> }]} RuleOptions
  * @typedef {'codeLangShorthand'} MessageIds
  */
 
 // --------------------------------------------------------------------------------
-// Helpers
+// Helper
 // --------------------------------------------------------------------------------
 
 /** @satisfies {Record<string, string>} */
@@ -123,7 +121,7 @@ export default {
       {
         type: 'object',
         properties: {
-          ignores: {
+          allow: {
             type: 'array',
             items: {
               enum: Object.keys(langShorthandMap),
@@ -143,7 +141,7 @@ export default {
 
     defaultOptions: [
       {
-        ignores: [],
+        allow: [],
         override: {},
       },
     ],
@@ -158,36 +156,44 @@ export default {
   },
 
   create(context) {
+    const { sourceCode } = context;
+    const [{ allow, override }] = context.options;
+
+    const langShorthandMapMerged = Object.fromEntries(
+      Object.entries({
+        ...langShorthandMap,
+        ...override, // `override` option handling.
+      })
+        .map(([key, value]) => [key.toLowerCase(), value.toLowerCase()]) // Normalize keys and values.
+        .filter(([key]) => !allow.includes(key)), // `allow` option handling.
+    );
+
     return {
       code(node) {
-        const [{ ignores, override }] = context.options;
-        const langShorthandMapMerged = Object.fromEntries(
-          Object.entries({
-            ...langShorthandMap,
-            ...override, // `override` option handling.
-          })
-            .map(([key, value]) => [key.toLowerCase(), value.toLowerCase()]) // Normalize keys and values.
-            .filter(([key]) => !ignores.includes(key)), // `ignores` option handling.
-        );
-        const langShorthand = langShorthandMapMerged[node.lang?.toLowerCase()]; // Normalize lang.
+        if (node.lang === null || node.lang === undefined) {
+          return;
+        }
 
-        if (langShorthand === undefined) return;
+        const langShorthand = langShorthandMapMerged[node.lang.toLowerCase()]; // Normalize lang.
 
-        const match = context.sourceCode.getText(node).match(node.lang);
+        if (langShorthand === undefined) {
+          return;
+        }
 
-        const matchIndexStart = match.index;
-        const matchIndexEnd = matchIndexStart + match[0].length;
+        const [nodeStartOffset] = sourceCode.getRange(node);
+        const match = sourceCode.getText(node).match(node.lang);
+
+        if (match === null) {
+          return;
+        }
+
+        const startOffset = nodeStartOffset + match.index;
+        const endOffset = startOffset + match[0].length;
 
         context.report({
           loc: {
-            start: {
-              line: node.position.start.line,
-              column: node.position.start.column + matchIndexStart,
-            },
-            end: {
-              line: node.position.start.line,
-              column: node.position.start.column + matchIndexEnd,
-            },
+            start: sourceCode.getLocFromIndex(startOffset),
+            end: sourceCode.getLocFromIndex(endOffset),
           },
 
           data: {
@@ -198,13 +204,7 @@ export default {
           messageId: 'codeLangShorthand',
 
           fix(fixer) {
-            return fixer.replaceTextRange(
-              [
-                node.position.start.offset + matchIndexStart,
-                node.position.start.offset + matchIndexEnd,
-              ],
-              langShorthand,
-            );
+            return fixer.replaceTextRange([startOffset, endOffset], langShorthand);
           },
         });
       },
