@@ -11,10 +11,23 @@ export default defineConfig([
   bananass.configs.json,
   bananass.configs.jsonc,
   bananass.configs.json5,
-  mark.configs.recommendedGfm,
+  mark.configs.recommended,
+  mark.configs.stylistic,
 
   {
-    name: 'website/rules',
+    name: 'md/global',
+    files: ['**/*.md'],
+    rules: {
+      'mark/allow-link-url': [
+        'error',
+        {
+          disallowUrls: [/^\.\//],
+        },
+      ],
+    },
+  },
+  {
+    name: 'md/website/rules',
     files: ['website/docs/rules/**/*.md'],
     rules: {
       'mark/allow-heading': [

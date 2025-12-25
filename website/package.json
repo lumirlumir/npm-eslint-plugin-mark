@@ -9,12 +9,11 @@
   },
   "devDependencies": {
     "@codecov/vite-plugin": "^1.9.1",
-    "@shikijs/transformers": "^3.14.0",
-    "@shikijs/vitepress-twoslash": "^3.14.0",
-    "eslint-plugin-mark": "^0.1.0-canary.8",
-    "markdown-it-footnote": "^4.0.0",
+    "@shikijs/transformers": "^3.20.0",
+    "@shikijs/vitepress-twoslash": "^3.20.0",
+    "eslint-plugin-mark": "^0.1.0-canary.11",
     "twoslash-eslint": "^0.3.4",
-    "vitepress": "^2.0.0-alpha.12",
-    "vitepress-plugin-group-icons": "^1.6.4"
+    "vitepress": "^2.0.0-alpha.15",
+    "vitepress-plugin-group-icons": "^1.6.5"
   }
 }

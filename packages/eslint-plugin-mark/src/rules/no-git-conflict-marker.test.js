@@ -103,6 +103,9 @@ ruleTester(getFileName(import.meta.url), rule, {
           column: 1,
           endLine: 1,
           endColumn: 8,
+          data: {
+            gitConflictMarker: '<<<<<<<',
+          },
         },
       ],
     },
@@ -116,6 +119,9 @@ ruleTester(getFileName(import.meta.url), rule, {
           column: 1,
           endLine: 1,
           endColumn: 8,
+          data: {
+            gitConflictMarker: '=======',
+          },
         },
       ],
     },
@@ -129,6 +135,9 @@ ruleTester(getFileName(import.meta.url), rule, {
           column: 1,
           endLine: 1,
           endColumn: 8,
+          data: {
+            gitConflictMarker: '>>>>>>>',
+          },
         },
       ],
     },
@@ -142,6 +151,9 @@ ruleTester(getFileName(import.meta.url), rule, {
           column: 1,
           endLine: 1,
           endColumn: 8,
+          data: {
+            gitConflictMarker: '<<<<<<<',
+          },
         },
         {
           messageId: 'noGitConflictMarker',
@@ -149,6 +161,9 @@ ruleTester(getFileName(import.meta.url), rule, {
           column: 1,
           endLine: 3,
           endColumn: 8,
+          data: {
+            gitConflictMarker: '=======',
+          },
         },
         {
           messageId: 'noGitConflictMarker',
@@ -156,6 +171,9 @@ ruleTester(getFileName(import.meta.url), rule, {
           column: 1,
           endLine: 5,
           endColumn: 8,
+          data: {
+            gitConflictMarker: '>>>>>>>',
+          },
         },
       ],
     },
@@ -169,6 +187,9 @@ ruleTester(getFileName(import.meta.url), rule, {
           column: 1,
           endLine: 1,
           endColumn: 8,
+          data: {
+            gitConflictMarker: '<<<<<<<',
+          },
         },
         {
           messageId: 'noGitConflictMarker',
@@ -176,6 +197,9 @@ ruleTester(getFileName(import.meta.url), rule, {
           column: 1,
           endLine: 3,
           endColumn: 8,
+          data: {
+            gitConflictMarker: '=======',
+          },
         },
         {
           messageId: 'noGitConflictMarker',
@@ -183,6 +207,9 @@ ruleTester(getFileName(import.meta.url), rule, {
           column: 1,
           endLine: 5,
           endColumn: 8,
+          data: {
+            gitConflictMarker: '>>>>>>>',
+          },
         },
       ],
     },
@@ -196,6 +223,9 @@ ruleTester(getFileName(import.meta.url), rule, {
           column: 1,
           endLine: 1,
           endColumn: 8,
+          data: {
+            gitConflictMarker: '<<<<<<<',
+          },
         },
         {
           messageId: 'noGitConflictMarker',
@@ -203,6 +233,9 @@ ruleTester(getFileName(import.meta.url), rule, {
           column: 1,
           endLine: 3,
           endColumn: 8,
+          data: {
+            gitConflictMarker: '=======',
+          },
         },
         {
           messageId: 'noGitConflictMarker',
@@ -210,6 +243,25 @@ ruleTester(getFileName(import.meta.url), rule, {
           column: 1,
           endLine: 5,
           endColumn: 8,
+          data: {
+            gitConflictMarker: '>>>>>>>',
+          },
+        },
+      ],
+    },
+    {
+      name: 'Git conflict marker in code',
+      code: '```txt\n>>>>>>>\n```\n>>>>>>>',
+      errors: [
+        {
+          messageId: 'noGitConflictMarker',
+          line: 4,
+          column: 1,
+          endLine: 4,
+          endColumn: 8,
+          data: {
+            gitConflictMarker: '>>>>>>>',
+          },
         },
       ],
     },
@@ -227,6 +279,9 @@ ruleTester(getFileName(import.meta.url), rule, {
           column: 1,
           endLine: 2,
           endColumn: 8,
+          data: {
+            gitConflictMarker: '>>>>>>>',
+          },
         },
       ],
       options: [
@@ -247,6 +302,9 @@ ruleTester(getFileName(import.meta.url), rule, {
           column: 1,
           endLine: 2,
           endColumn: 8,
+          data: {
+            gitConflictMarker: '=======',
+          },
         },
       ],
       options: [
@@ -267,6 +325,9 @@ ruleTester(getFileName(import.meta.url), rule, {
           column: 1,
           endLine: 2,
           endColumn: 8,
+          data: {
+            gitConflictMarker: '<<<<<<<',
+          },
         },
       ],
       options: [
