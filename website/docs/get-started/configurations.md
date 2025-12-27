@@ -78,3 +78,7 @@ yarn eslint .
 :::
 
 ESLint will lint all Markdown files within the current folder, and will output the results to your terminal.
+
+<!--
+  TODO: This plugin already includes the rules for the `@eslint/mark` plugin. You can add the rules to your ESLint configuration file.
+-->

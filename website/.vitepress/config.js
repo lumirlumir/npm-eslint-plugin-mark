@@ -188,10 +188,6 @@ export default defineConfig({
               link: 'migration',
             },
             {
-              text: 'Dependency Versions',
-              link: 'dependency-versions',
-            },
-            {
               text: 'Versioning',
               link: 'versioning',
             },
