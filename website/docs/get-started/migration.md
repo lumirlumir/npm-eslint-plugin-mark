@@ -12,7 +12,7 @@ You can use both `@eslint/markdown` and `eslint-markdown` together to get full s
 
 ## Migrating from [`markdownlint`](https://github.com/DavidAnson/markdownlint#readme)
 
-If you are a user of [`markdownlint`](https://github.com/DavidAnson/markdownlint), [`markdownlint-cli`](https://github.com/igorshubovych/markdownlint-cli), or [`markdownlint-cli2`](https://github.com/DavidAnson/markdownlint-cli2)
+If you are a user of [`markdownlint`](https://github.com/DavidAnson/markdownlint), [`markdownlint-cli`](https://github.com/igorshubovych/markdownlint-cli), or [`markdownlint-cli2`](https://github.com/DavidAnson/markdownlint-cli2), this section will guide you through migrating your existing configuration to `eslint-markdown`.
 
 TODO
 
