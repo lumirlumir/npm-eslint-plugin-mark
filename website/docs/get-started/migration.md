@@ -20,6 +20,6 @@ TODO
 
 TODO
 
-## Mirating from [`textlint`](https://github.com/textlint/textlint#readme)
+## Migrating from [`textlint`](https://github.com/textlint/textlint#readme)
 
 TODO
