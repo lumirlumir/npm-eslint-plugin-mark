@@ -6,44 +6,49 @@
 
 With the exception of [`all`](#all), every configuration is considered "stable". Rule additions and removals are treated as ***breaking changes*** and will only be done in major version bumps.
 
----
-
-NOTE: `eslint-markdown` is currently in active `0.x` development, so configurations may receive ***breaking changes*** in minor version bumps until it reaches `1.0.0`.
-
 :::
 
-::: danger Supported Environments
+::: danger Active `0.x` Development Notice
 
-- This plugin only supports ***ECMAScript Modules (ESM)*** configurations. CommonJS configurations are not supported.
-- This plugin only supports ***ESLint [`v9.15.0`](https://github.com/eslint/eslint/releases/tag/v9.15.0) and above***.
+`eslint-markdown` is currently in active `0.x` development, so configurations may receive ***breaking changes*** in minor version bumps until it reaches `1.0.0`.
 
 :::
 
 ## Configuration File Location
 
-Create an `eslint.config.{js,mjs}` or `eslint.config.{ts,mts}` config file in the root of your project, and populate it with the following:
+Create an [`eslint.config.{js,mjs,cjs,ts,mts,cts}`](https://eslint.org/docs/latest/use/configure/configuration-files#configuration-file) configuration file in the root of your project, and populate it with the following:
+
+::: tip When to use Extends vs Cascading
+
+You can find more details about it in the [ESLint documentation](https://eslint.org/docs/latest/use/configure/configuration-files#when-to-use-extends-vs-cascading).
+
+:::
+
+### Cascading Style
 
 ::: code-group
 
 ```js [eslint.config.mjs]
-// @ts-check
-
 import { defineConfig } from 'eslint/config';
-import markdown from 'eslint-markdown';
+import md from 'eslint-markdown';
 
 export default defineConfig([
-  markdown.configs.recommended,
+  md.configs.recommended,
 ]);
 ```
 
 ```ts [eslint.config.mts]
 import { defineConfig } from 'eslint/config';
-import markdown from 'eslint-markdown';
+import md from 'eslint-markdown';
 
 export default defineConfig([
-  markdown.configs.recommended,
+  md.configs.recommended,
 ]);
 ```
+
+### Extends Style
+
+TODO
 
 :::
 
@@ -56,28 +61,6 @@ export default defineConfig([
 ### `base`
 
 ### `all`
-
-## Running ESLint
-
-Open a terminal to the root of your project and run the following command:
-
-::: code-group
-
-```sh [npm]
-npx eslint .
-```
-
-```sh [pnpm]
-pnpm eslint .
-```
-
-```sh [yarn]
-yarn eslint .
-```
-
-:::
-
-ESLint will lint all Markdown files within the current folder, and will output the results to your terminal.
 
 <!--
   TODO: This plugin already includes the rules for the `@eslint/mark` plugin. You can add the rules to your ESLint configuration file.
