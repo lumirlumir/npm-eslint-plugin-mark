@@ -4,9 +4,6 @@ description: "Installation instructions for `eslint-plugin-mark` npm package wit
 
 # Installation {#installation}
 
-[![npm package eslint-plugin-mark latest version](https://img.shields.io/npm/v/eslint-plugin-mark?label=eslint-plugin-mark@latest&color=6358d4&labelColor=333333&logo=npm)](https://www.npmjs.com/package/eslint-plugin-mark)&nbsp;
-[![npm package eslint-plugin-mark next version](https://img.shields.io/npm/v/eslint-plugin-mark/next?label=eslint-plugin-mark@next&color=6358d4&labelColor=333333&logo=npm)](https://www.npmjs.com/package/eslint-plugin-mark)
-
 ## Prerequisites
 
 - Node.js: `^20.19.0 || ^22.13.0 || >=24.0.0`
@@ -20,6 +17,8 @@ In line with the [ESLint v10 prerequisites](https://github.com/eslint/eslint?tab
 :::
 
 ## Installation (`@latest`)
+
+[![npm package eslint-plugin-mark latest version](https://img.shields.io/npm/v/eslint-plugin-mark?label=eslint-plugin-mark@latest&color=6358d4&labelColor=333333&logo=npm)](https://www.npmjs.com/package/eslint-plugin-mark)
 
 > Latest stable release.
 
@@ -44,6 +43,8 @@ $ bun add -d eslint-plugin-mark@latest eslint@latest
 :::
 
 ## Installation (`@next`)
+
+[![npm package eslint-plugin-mark next version](https://img.shields.io/npm/v/eslint-plugin-mark/next?label=eslint-plugin-mark@next&color=6358d4&labelColor=333333&logo=npm)](https://www.npmjs.com/package/eslint-plugin-mark)
 
 > Latest pre-release version. (e.g., `canary`, `alpha`, `beta`, and `rc`)
 
