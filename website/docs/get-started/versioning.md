@@ -10,7 +10,7 @@ However, due to the nature of `eslint-markdown` as a Markdown quality tool, it's
 
 According to our policy, any minor update may report more linting errors than the previous release (ex: from a bug fix). As such, we recommend using the tilde (`~`) in `package.json` e.g. `"eslint-markdown": "~1.1.0"` to guarantee the results of your builds.
 
-::: warning WARNING: Active `0.x` Development
+::: danger Active `0.x` Development Notice
 
 `eslint-markdown` is currently in active `0.x` development, so minor releases may include [***Breaking Changes***](#major-release-breaking-changes) until it reaches `1.0.0`.
 

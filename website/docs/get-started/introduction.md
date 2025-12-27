@@ -20,4 +20,6 @@ I hope this plugin becomes a [unicorn](https://github.com/sindresorhus/eslint-pl
 
 ## Limitations
 
-This plugin does not include rules that overlap with ESLint's built-in Markdown rules provided by [`@eslint/markdown`](https://github.com/eslint/markdown#readme). If the upstream `@eslint/markdown` project adopts any rules from this plugin, we will deprecate and remove the overlapping rules in this plugin.
+This plugin does not include any rules that overlap with ESLint's built-in Markdown rules provided by [`@eslint/markdown`](https://github.com/eslint/markdown#readme). As a result, `eslint-markdown` is completely disjoint from `@eslint/markdown`.
+
+If the upstream `@eslint/markdown` project adopts any rules from this plugin, we will deprecate and remove the overlapping rules in this plugin.

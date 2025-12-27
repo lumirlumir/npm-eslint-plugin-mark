@@ -4,9 +4,9 @@ This chapter provides guidance for migrating to [`@eslint/markdown`](https://git
 
 ## Migrating from [`@eslint/markdown`](https://github.com/eslint/markdown#readme)
 
-`eslint-markdown` is a complete complement to `@eslint/markdown`, so no migration is needed.
+This plugin does not include any rules that overlap with ESLint's built-in Markdown rules provided by `@eslint/markdown`. As a result, `eslint-markdown` is completely disjoint from `@eslint/markdown`, and no migration is needed.
 
-This plugin does not include rules that overlap with ESLint's built-in Markdown rules provided by `@eslint/markdown`. If the upstream `@eslint/markdown` project adopts any rules from this plugin, we will deprecate and remove the overlapping rules in this plugin.
+If the upstream `@eslint/markdown` project adopts any rules from this plugin, we will deprecate and remove the overlapping rules in this plugin.
 
 You can use both `@eslint/markdown` and `eslint-markdown` together to get full support and additional features when migrating your Markdown linting setup, which is covered in the following section.
 
