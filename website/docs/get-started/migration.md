@@ -1,27 +1,25 @@
 # Migration Guide
 
-This chapter provides guidance for migrating to `eslint-markdown` from other popular Markdown linting tools like [`@eslint/markdown`](https://github.com/eslint/markdown), [`markdownlint`](https://github.com/DavidAnson/markdownlint), `remark-lint`, and `textlint`.
+This chapter provides guidance for migrating to [`@eslint/markdown`](https://github.com/eslint/markdown) and [`eslint-markdown`](https://github.com/lumirlumir/npm-eslint-plugin-mark) from other Markdown linting tools like [`markdownlint`](https://github.com/DavidAnson/markdownlint), [`remark-lint`](https://github.com/remarkjs/remark-lint#readme), and [`textlint`](https://github.com/textlint/textlint#readme).
 
-## Migrating from [`@eslint/markdown`](https://github.com/eslint/markdown)
+## Migrating from [`@eslint/markdown`](https://github.com/eslint/markdown#readme)
 
-`eslint-markdown` is a complete super-set of `@eslint/markdown`, so migration is straightforward.
+`eslint-markdown` is a complete complement to `@eslint/markdown`, so no migration is needed.
 
-You can use `eslint-markdown` as a drop-in replacement for `@eslint/markdown` by updating your ESLint configuration to use `eslint-markdown`'s recommended configuration.
+This plugin does not include rules that overlap with ESLint's built-in Markdown rules provided by [`@eslint/markdown`](https://github.com/eslint/markdown#readme). If the upstream `@eslint/markdown` project adopts any rules from this plugin, we will deprecate and remove the overlapping rules in this plugin.
 
-Every rule provided by `@eslint/markdown` is included in this package. (NOTE: I'm also a dedicated maintainer of `@eslint/markdown`)
+You can use both `@eslint/markdown` and `eslint-markdown` together to get full support and additional features when migrating your Markdown linting setup, which is covered in the following section.
 
-Follow these steps to migrate your project:
-
-## Migrating from [`markdownlint`](https://github.com/DavidAnson/markdownlint)
+## Migrating from [`markdownlint`](https://github.com/DavidAnson/markdownlint#readme)
 
 If you are a user of [`markdownlint`](https://github.com/DavidAnson/markdownlint), [`markdownlint-cli`](https://github.com/igorshubovych/markdownlint-cli), or [`markdownlint-cli2`](https://github.com/DavidAnson/markdownlint-cli2)
 
 TODO
 
-## Migrating from `remark-lint`
+## Migrating from [`remark-lint`](https://github.com/remarkjs/remark-lint#readme)
 
 TODO
 
-## Mirating from `textlint`
+## Mirating from [`textlint`](https://github.com/textlint/textlint#readme)
 
 TODO
