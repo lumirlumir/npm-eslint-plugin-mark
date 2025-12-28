@@ -21,10 +21,18 @@ ruleTester(getFileName(import.meta.url), rule, {
     // Link
     '[](https://example.com)',
     '[](https://example.com/path/to/resource)',
+    '[](https://example.com#)',
+    '[](https://example.com##)',
     '[](https://example.com#fragment)',
     '[](https://example.com#fragment/)',
+    '[](https://example.com?)',
+    '[](https://example.com??)',
     '[](https://example.com?query=string)',
     '[](https://example.com?query=string/)',
+    '[](https://example.com#?)',
+    '[](https://example.com?#)',
+    '[](https://example.com?query=string#)',
+    '[](https://example.com/path/to/resource?query=string#)',
     '[](https://example.com/path/to/resource?query=string#fragment)',
   ],
 
@@ -39,6 +47,90 @@ ruleTester(getFileName(import.meta.url), rule, {
           column: 1,
           endLine: 1,
           endColumn: 25,
+        },
+      ],
+    },
+    {
+      code: '[](https://example.com/#)',
+      errors: [
+        {
+          messageId: 'noUrlTrailingSlash',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 26,
+        },
+      ],
+    },
+    {
+      code: '[](https://example.com/##)',
+      errors: [
+        {
+          messageId: 'noUrlTrailingSlash',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 27,
+        },
+      ],
+    },
+    {
+      code: '[](https://example.com/?)',
+      errors: [
+        {
+          messageId: 'noUrlTrailingSlash',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 26,
+        },
+      ],
+    },
+    {
+      code: '[](https://example.com/??)',
+      errors: [
+        {
+          messageId: 'noUrlTrailingSlash',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 27,
+        },
+      ],
+    },
+    {
+      code: '[](https://example.com/#?)',
+      errors: [
+        {
+          messageId: 'noUrlTrailingSlash',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 27,
+        },
+      ],
+    },
+    {
+      code: '[](https://example.com/?#)',
+      errors: [
+        {
+          messageId: 'noUrlTrailingSlash',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 27,
+        },
+      ],
+    },
+    {
+      code: '[](https://example.com/?query=string#)',
+      errors: [
+        {
+          messageId: 'noUrlTrailingSlash',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 39,
         },
       ],
     },

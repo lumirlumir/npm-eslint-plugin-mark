@@ -34,18 +34,53 @@ import { URL_RULE_DOCS } from '../core/constants.js';
  */
 function hasTrailingSlash(url) {
   try {
+    /*
+     * Please note that the `href` and `pathname` properties of a `URL` object
+     * cannot be used directly to check for trailing slashes. For example:
+     * - `new URL('https://foo.com')`'s `href` is `'https://foo.com/'` (with trailing slash) and `pathname` is `'/'`.
+     * - `new URL('https://foo.com/')`'s `href` is `'https://foo.com/'` (with trailing slash) and `pathname` is `'/'`.
+     * So, both `href` and `pathname` include trailing slashes, which is not what we want.
+     */
     const { hash, search } = new URL(url);
-    let urlWithoutHashAndSearch = url;
+    let urlWithoutSearchAndHash = url;
 
+    /*
+     * Remove the `hash` part first, since it always comes after the `search` part.
+     *
+     *     https://example.com/path/to/resource?query=string#fragment
+     *     -------------------------------------------------^^^^^^^^^
+     *
+     * If there is no `hash` part but the URL ends with `#`, remove it too.
+     * A lone `#` is treated as an empty string (`''`) in `hash` property.
+     *
+     *     https://example.com/path/to/resource?query=string#
+     *     -------------------------------------------------^
+     */
     if (hash) {
-      urlWithoutHashAndSearch = urlWithoutHashAndSearch.slice(0, url.indexOf(hash));
+      urlWithoutSearchAndHash = urlWithoutSearchAndHash.slice(0, url.indexOf(hash));
+    } else if (urlWithoutSearchAndHash.endsWith('#')) {
+      urlWithoutSearchAndHash = urlWithoutSearchAndHash.slice(0, -1);
     }
 
+    /*
+     * Then, remove the `search` part, since it always comes after the `pathname` part.
+     *
+     *     https://example.com/path/to/resource?query=string
+     *     ------------------------------------^^^^^^^^^^^^^
+     *
+     * If there is no `search` part but the URL ends with `?`, remove it too.
+     * A lone `?` is treated as an empty string (`''`) in `search` property.
+     *
+     *     https://example.com/path/to/resource?
+     *     ------------------------------------^
+     */
     if (search) {
-      urlWithoutHashAndSearch = urlWithoutHashAndSearch.slice(0, url.indexOf(search));
+      urlWithoutSearchAndHash = urlWithoutSearchAndHash.slice(0, url.indexOf(search));
+    } else if (urlWithoutSearchAndHash.endsWith('?')) {
+      urlWithoutSearchAndHash = urlWithoutSearchAndHash.slice(0, -1);
     }
 
-    return urlWithoutHashAndSearch.endsWith('/');
+    return urlWithoutSearchAndHash.endsWith('/');
   } catch {
     return false;
   }
