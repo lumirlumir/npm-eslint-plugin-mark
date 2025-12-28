@@ -26,7 +26,7 @@ Platforms like [GitHub](https://github.com) and Markdown plugins such as [`remar
 Examples of **incorrect** code for this rule:
 
 ```md eslint-check
-<!-- eslint mark/no-emoji: "error" -->
+<!-- eslint mark/no-emoji: 'error' -->
 
 Smiley 😃
 Unicorn 🦄
@@ -38,7 +38,7 @@ Unicorn 🦄
 Examples of **correct** code for this rule:
 
 ```md eslint-check
-<!-- eslint mark/no-emoji: "error" -->
+<!-- eslint mark/no-emoji: 'error' -->
 
 Smiley :smiley:
 Unicorn :unicorn:

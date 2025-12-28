@@ -20,7 +20,7 @@ Examples of **incorrect** code for this rule:
 #### Default
 
 ```md eslint-check
-<!-- eslint mark/require-image-title: "error" -->
+<!-- eslint mark/require-image-title: 'error' -->
 
 ![Alt text](https://example.com/image.png)
 
@@ -42,7 +42,7 @@ Examples of **correct** code for this rule:
 #### Default
 
 ```md
-<!-- eslint mark/require-image-title: "error" -->
+<!-- eslint mark/require-image-title: 'error' -->
 
 ![Alt text](https://example.com/image.png "Image title")
 
@@ -62,7 +62,7 @@ Examples of **correct** code for this rule:
 Please note that this rule doesn't report definition-style comments (e.g., `[//]: ...`) by default.
 
 ```md eslint-check
-<!-- eslint mark/require-image-title: "error" -->
+<!-- eslint mark/require-image-title: 'error' -->
 
 ![Alt text][//]
 
@@ -74,7 +74,7 @@ Please note that this rule doesn't report definition-style comments (e.g., `[//]
 #### With `{ allowDefinitions: ['reference'] }` Option
 
 ```md eslint-check
-<!-- eslint mark/require-image-title: ["error", { allowDefinitions: ['reference'] }] -->
+<!-- eslint mark/require-image-title: ['error', { allowDefinitions: ['reference'] }] -->
 
 ![Alt text][reference]
 
