@@ -20,7 +20,7 @@ Examples of **incorrect** code for this rule:
 #### Default
 
 ```md eslint-check
-<!-- eslint mark/no-double-space: "error" -->
+<!-- eslint mark/no-double-space: 'error' -->
 
 foo  bar  baz
 ```
@@ -28,7 +28,7 @@ foo  bar  baz
 #### With `{ checkMultipleSpace: true }` Option
 
 ```md eslint-check
-<!-- eslint mark/no-double-space: ["error", { checkMultipleSpace: true }] -->
+<!-- eslint mark/no-double-space: ['error', { checkMultipleSpace: true }] -->
 
 foo  bar  baz
 foo   bar   baz
@@ -42,7 +42,7 @@ Examples of **correct** code for this rule:
 #### Default
 
 ```md eslint-check
-<!-- eslint mark/no-double-space: "error" -->
+<!-- eslint mark/no-double-space: 'error' -->
 
 foo bar baz qux
 
@@ -58,7 +58,7 @@ foo bar    <!-- trailing multiple space⁡ -->
 #### With `{ checkMultipleSpace: true }` Option
 
 ```md eslint-check
-<!-- eslint mark/no-double-space: ["error", { checkMultipleSpace: true }] -->
+<!-- eslint mark/no-double-space: ['error', { checkMultipleSpace: true }] -->
 
 foo bar baz qux
 

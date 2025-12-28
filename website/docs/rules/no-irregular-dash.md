@@ -38,7 +38,7 @@ Examples of **incorrect** code for this rule:
 #### Default
 
 ```md eslint-check
-<!-- eslint mark/no-irregular-dash: "error" -->
+<!-- eslint mark/no-irregular-dash: 'error' -->
 
 \u2010 - Hyphen - <HYPH> ‐ <= Here
 \u2011 - Non-Breaking Hyphen - <NBHY> ‑ <= Here
@@ -60,7 +60,7 @@ Examples of **incorrect** code for this rule:
 #### With `{ skipCode: false }` Option
 
 `````md eslint-check
-<!-- eslint mark/no-irregular-dash: ["error", { skipCode: false }] -->
+<!-- eslint mark/no-irregular-dash: ['error', { skipCode: false }] -->
 
 ```md
 \u2010 - Hyphen - <HYPH> ‐ <= Here
@@ -84,7 +84,7 @@ Examples of **incorrect** code for this rule:
 #### With `{ skipInlineCode: false }` Option
 
 ```md eslint-check
-<!-- eslint mark/no-irregular-dash: ["error", { skipInlineCode: false }] -->
+<!-- eslint mark/no-irregular-dash: ['error', { skipInlineCode: false }] -->
 
 \u2010 - Hyphen - <HYPH> `‐` <= Here
 \u2011 - Non-Breaking Hyphen - <NBHY> `‑` <= Here
@@ -97,7 +97,7 @@ Examples of **correct** code for this rule:
 #### Default
 
 ```md eslint-check
-<!-- eslint mark/no-irregular-dash: "error" -->
+<!-- eslint mark/no-irregular-dash: 'error' -->
 
 \u002D - Hyphen Minus - <HYPHMNUS> - <= Here
 ```
@@ -105,7 +105,7 @@ Examples of **correct** code for this rule:
 #### With `{ skipCode: true }` Option
 
 `````md eslint-check
-<!-- eslint mark/no-irregular-dash: ["error", { skipCode: true }] -->
+<!-- eslint mark/no-irregular-dash: ['error', { skipCode: true }] -->
 
 ```md
 \u2010 - Hyphen - <HYPH> ‐ <= Here
@@ -129,7 +129,7 @@ Examples of **correct** code for this rule:
 #### With `{ skipInlineCode: true }` Option
 
 ```md eslint-check
-<!-- eslint mark/no-irregular-dash: ["error", { skipInlineCode: true }] -->
+<!-- eslint mark/no-irregular-dash: ['error', { skipInlineCode: true }] -->
 
 \u2010 - Hyphen - <HYPH> `‐` <= Here
 \u2011 - Non-Breaking Hyphen - <NBHY> `‑` <= Here
