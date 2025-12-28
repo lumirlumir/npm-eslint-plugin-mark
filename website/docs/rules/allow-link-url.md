@@ -20,7 +20,7 @@ Examples of **incorrect** code for this rule:
 #### With `{ allowUrls: [/example.com/] }` Option
 
 ```md eslint-check
-<!-- eslint mark/allow-link-url: ["error", { allowUrls: [/example.com/] }] -->
+<!-- eslint mark/allow-link-url: ['error', { allowUrls: [/example.com/] }] -->
 
 [Text](https://foo.com)
 
@@ -40,7 +40,7 @@ Examples of **incorrect** code for this rule:
 #### With `{ disallowUrls: [/example.com/] }` Option
 
 ```md eslint-check
-<!-- eslint mark/allow-link-url: ["error", { disallowUrls: [/example.com/] }] -->
+<!-- eslint mark/allow-link-url: ['error', { disallowUrls: [/example.com/] }] -->
 
 [Text](https://example.com)
 
@@ -70,7 +70,7 @@ By default, this rule reports nothing. To use this rule, please configure the [`
 :::
 
 ```md
-<!-- eslint mark/allow-link-url: "error" -->
+<!-- eslint mark/allow-link-url: 'error' -->
 
 [Text](https://example.com)
 
@@ -90,7 +90,7 @@ By default, this rule reports nothing. To use this rule, please configure the [`
 #### With `{ allowUrls: [/example.com/] }` Option
 
 ```md eslint-check
-<!-- eslint mark/allow-link-url: ["error", { allowUrls: [/example.com/] }] -->
+<!-- eslint mark/allow-link-url: ['error', { allowUrls: [/example.com/] }] -->
 
 [Text](https://example.com)
 
@@ -110,7 +110,7 @@ By default, this rule reports nothing. To use this rule, please configure the [`
 #### With `{ disallowUrls: [/example.com/] }` Option
 
 ```md eslint-check
-<!-- eslint mark/allow-link-url: ["error", { disallowUrls: [/example.com/] }] -->
+<!-- eslint mark/allow-link-url: ['error', { disallowUrls: [/example.com/] }] -->
 
 [Text](https://foo.com)
 
@@ -130,7 +130,7 @@ By default, this rule reports nothing. To use this rule, please configure the [`
 #### With `{ allowDefinitions: ['reference'], disallowUrls: [/example.com/] }` Option
 
 ```md eslint-check
-<!-- eslint mark/allow-link-url: ["error", { allowDefinitions: ['reference'], disallowUrls: [/example.com/] }] -->
+<!-- eslint mark/allow-link-url: ['error', { allowDefinitions: ['reference'], disallowUrls: [/example.com/] }] -->
 
 [Text][reference]
 
@@ -142,7 +142,7 @@ By default, this rule reports nothing. To use this rule, please configure the [`
 Please note that this rule doesn't report definition-style comments (e.g., `[//]: ...`) by default.
 
 ```md eslint-check
-<!-- eslint mark/allow-link-url: ["error", { disallowUrls: [/example.com/] }] -->
+<!-- eslint mark/allow-link-url: ['error', { disallowUrls: [/example.com/] }] -->
 
 [Text][//]
 

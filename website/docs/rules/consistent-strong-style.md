@@ -16,7 +16,7 @@ Examples of **incorrect** code for this rule:
 #### Default
 
 ```md eslint-check
-<!-- eslint mark/consistent-strong-style: "error" -->
+<!-- eslint mark/consistent-strong-style: 'error' -->
 
 **foo**
 __bar__
@@ -30,7 +30,7 @@ ___foo___
 ```
 
 ```md eslint-check
-<!-- eslint mark/consistent-strong-style: "error" -->
+<!-- eslint mark/consistent-strong-style: 'error' -->
 
 __foo__
 **bar**
@@ -46,7 +46,7 @@ ___bar___
 #### With `{ style: '*' }` Option
 
 ```md eslint-check
-<!-- eslint mark/consistent-strong-style: ["error", { style: '*' }] -->
+<!-- eslint mark/consistent-strong-style: ['error', { style: '*' }] -->
 
 __foo__
 __*bar*__
@@ -57,7 +57,7 @@ ___qux___
 #### With `{ style: '_' }` Option
 
 ```md eslint-check
-<!-- eslint mark/consistent-strong-style: ["error", { style: '_' }] -->
+<!-- eslint mark/consistent-strong-style: ['error', { style: '_' }] -->
 
 **foo**
 **_bar_**
@@ -72,7 +72,7 @@ Examples of **correct** code for this rule:
 #### Default
 
 ```md eslint-check
-<!-- eslint mark/consistent-strong-style: "error" -->
+<!-- eslint mark/consistent-strong-style: 'error' -->
 
 **foo**
 **_bar_**
@@ -81,7 +81,7 @@ _**baz**_
 ```
 
 ```md eslint-check
-<!-- eslint mark/consistent-strong-style: "error" -->
+<!-- eslint mark/consistent-strong-style: 'error' -->
 
 __foo__
 __*bar*__
@@ -92,7 +92,7 @@ ___qux___
 #### With `{ style: '*' }` Option
 
 ```md eslint-check
-<!-- eslint mark/consistent-strong-style: ["error", { style: '*' }] -->
+<!-- eslint mark/consistent-strong-style: ['error', { style: '*' }] -->
 
 **foo**
 **_bar_**
@@ -103,7 +103,7 @@ _**baz**_
 #### With `{ style: '_' }` Option
 
 ```md eslint-check
-<!-- eslint mark/consistent-strong-style: ["error", { style: '_' }] -->
+<!-- eslint mark/consistent-strong-style: ['error', { style: '_' }] -->
 
 __foo__
 __*bar*__
