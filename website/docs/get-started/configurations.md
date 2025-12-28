@@ -1,70 +1,75 @@
 # Shared Configurations
 
-[ESLint shareable configurations](https://eslint.org/docs/latest/extend/shareable-configs) exist to provide a comprehensive list of rules settings that you can start with. `eslint-plugin-mark` includes built-in configurations you can extend from to pull in the recommended starting rules.
+[ESLint shareable configurations](https://eslint.org/docs/latest/extend/shareable-configs) exist to provide a comprehensive list of rules settings that you can start with. [`eslint-markdown`](https://github.com/lumirlumir/npm-eslint-plugin-mark) includes built-in configurations you can extend from to pull in the recommended starting rules.
 
-::: danger
+::: warning Stability of Configurations
 
-- This plugin only supports ***ECMAScript Modules (ESM)*** configurations. CommonJS configurations are not supported.
-- This plugin only supports ***ESLint [`v9.15.0`](https://github.com/eslint/eslint/releases/tag/v9.15.0) and above***.
+With the exception of [`all`](#all), every configuration is considered "stable". Rule additions and removals are treated as ***breaking changes*** and will only be done in major version bumps.
+
+:::
+
+::: danger Active `0.x` Development Notice
+
+`eslint-markdown` is currently in active `0.x` development, so minor releases may include [***Breaking Changes***](versioning.md#major-release-breaking-changes) until it reaches `1.0.0`.
 
 :::
 
 ## Configuration File Location
 
-Create an `eslint.config.mjs` or `eslint.config.mts` config file in the root of your project, and populate it with the following:
+Create an [`eslint.config.{js,mjs,cjs,ts,mts,cts}`](https://eslint.org/docs/latest/use/configure/configuration-files#configuration-file) configuration file in the root of your project, and populate it with the following:
+
+::: tip When to use Extends vs Cascading
+
+You can find more details about it in the [ESLint documentation](https://eslint.org/docs/latest/use/configure/configuration-files#when-to-use-extends-vs-cascading).
+
+:::
+
+### Cascading Style
 
 ::: code-group
 
 ```js [eslint.config.mjs]
-// @ts-check
+import { defineConfig } from 'eslint/config';
+import md from 'eslint-markdown';
 
-import mark from 'eslint-plugin-mark';
-
-/** @type {import("eslint").Linter.Config[]} */
-export default [
-  mark.configs.recommendedGfm,
-];
+export default defineConfig([
+  md.configs.recommended,
+]);
 ```
 
 ```ts [eslint.config.mts]
-import mark from 'eslint-plugin-mark';
-import type { Linter } from 'eslint';
+import { defineConfig } from 'eslint/config';
+import md from 'eslint-markdown';
 
-export default [
-  mark.configs.recommendedGfm,
-] as Linter.Config[];
+export default defineConfig([
+  md.configs.recommended,
+]);
 ```
+
+### Extends Style
+
+TODO
 
 :::
 
 ## Configurations
 
-### `mark.configs.recommendedCommonmark`
+### `recommended`
 
-### `mark.configs.recommendedGfm`
+TODO
 
-### `mark.configs.allCommonmark`
+### `stylistic`
 
-### `mark.configs.allGfm`
+TODO
 
-## Running ESLint
+### `base`
 
-Open a terminal to the root of your project and run the following command:
+TODO
 
-::: code-group
+### `all`
 
-```sh [npm]
-npx eslint .
-```
+TODO
 
-```sh [pnpm]
-pnpm eslint .
-```
-
-```sh [yarn]
-yarn eslint .
-```
-
-:::
-
-ESLint will lint all Markdown files within the current folder, and will output the results to your terminal.
+<!--
+  TODO: This plugin already includes the rules for the `@eslint/mark` plugin. You can add the rules to your ESLint configuration file.
+-->
