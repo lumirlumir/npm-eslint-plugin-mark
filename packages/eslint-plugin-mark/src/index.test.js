@@ -8,7 +8,7 @@
 // --------------------------------------------------------------------------------
 
 import { describe, it } from 'node:test';
-import { strictEqual } from 'node:assert';
+import { ok, strictEqual } from 'node:assert';
 import { defineConfig } from 'eslint/config';
 import { Linter } from 'eslint/universal';
 import { getFileName } from './core/tests/index.js';
@@ -19,6 +19,29 @@ import plugin from './index.js';
 // --------------------------------------------------------------------------------
 
 describe(getFileName(import.meta.url), () => {
+  describe('Basic', () => {
+    it('should have correct meta information', () => {
+      strictEqual(plugin.meta.name, 'eslint-plugin-mark');
+      strictEqual(typeof plugin.meta.version, 'string');
+    });
+
+    it('should have rules', () => {
+      ok(plugin.rules);
+      strictEqual(typeof plugin.rules, 'object');
+      strictEqual(Object.keys(plugin.rules).length > 0, true);
+    });
+
+    it('should have configs', () => {
+      ok(plugin.configs);
+      ok(plugin.configs.all);
+      ok(plugin.configs.base);
+      ok(plugin.configs.recommended);
+      ok(plugin.configs.stylistic);
+      strictEqual(typeof plugin.configs, 'object');
+      strictEqual(Object.keys(plugin.configs).length > 0, true);
+    });
+  });
+
   describe('Cascading style configuration should work correctly', async () => {
     it('`all` configuration', () => {
       const linter = new Linter();
