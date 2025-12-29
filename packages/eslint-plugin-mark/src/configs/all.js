@@ -46,6 +46,7 @@ export default {
     'mark/no-git-conflict-marker': 'error',
     'mark/no-irregular-dash': 'error',
     'mark/no-irregular-whitespace': 'error',
+    'mark/no-url-trailing-slash': 'error',
     'mark/require-image-title': 'error',
     'mark/require-link-title': 'error',
   },
