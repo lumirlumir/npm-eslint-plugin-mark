@@ -21,8 +21,8 @@ import base from './base.js';
 // Export
 // --------------------------------------------------------------------------------
 
-/** @type {Linter.Config} */
-export default {
+/** @satisfies {Linter.Config} */
+export default /** @type {const} */ ({
   ...base,
   name: 'mark/stylistic',
   rules: {
@@ -31,4 +31,4 @@ export default {
     'mark/consistent-strong-style': 'error',
     'mark/consistent-thematic-break-style': 'error',
   },
-};
+});

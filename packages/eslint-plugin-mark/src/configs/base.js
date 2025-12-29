@@ -7,7 +7,6 @@
 // --------------------------------------------------------------------------------
 
 import markdown from '@eslint/markdown';
-import rules from '../rules/index.js';
 
 // --------------------------------------------------------------------------------
 // Typedef
@@ -21,16 +20,15 @@ import rules from '../rules/index.js';
 // Export
 // --------------------------------------------------------------------------------
 
-/** @type {Linter.Config} */
-export default {
+/** @satisfies {Linter.Config} */
+export default /** @type {const} */ ({
   name: 'mark/base',
   files: ['**/*.md'],
   plugins: {
     markdown,
-    mark: { rules },
   },
   languageOptions: {
     frontmatter: 'yaml',
   },
   language: 'markdown/gfm',
-};
+});

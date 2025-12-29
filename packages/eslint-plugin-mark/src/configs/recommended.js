@@ -21,8 +21,8 @@ import base from './base.js';
 // Export
 // --------------------------------------------------------------------------------
 
-/** @type {Linter.Config} */
-export default {
+/** @satisfies {Linter.Config} */
+export default /** @type {const} */ ({
   ...base,
   name: 'mark/recommended',
   rules: {
@@ -37,4 +37,4 @@ export default {
     'mark/no-irregular-dash': 'error',
     'mark/no-irregular-whitespace': 'error',
   },
-};
+});

@@ -22,8 +22,7 @@ import rules from './rules/index.js';
 // Export
 // --------------------------------------------------------------------------------
 
-/** @type {ESLint.Plugin} */
-export default {
+const plugin = {
   meta: {
     name,
     version,
@@ -38,3 +37,15 @@ export default {
     stylistic,
   },
 };
+
+// @ts-expect-error -- Intentionally assign the `plugin` to each config's `plugins` to support `extends` style configuration.
+plugin.configs.all.plugins.mark = plugin;
+// @ts-expect-error -- Intentionally assign the `plugin` to each config's `plugins` to support `extends` style configuration.
+plugin.configs.base.plugins.mark = plugin;
+// @ts-expect-error -- Intentionally assign the `plugin` to each config's `plugins` to support `extends` style configuration.
+plugin.configs.recommended.plugins.mark = plugin;
+// @ts-expect-error -- Intentionally assign the `plugin` to each config's `plugins` to support `extends` style configuration.
+plugin.configs.stylistic.plugins.mark = plugin;
+
+/** @type {ESLint.Plugin} */
+export default plugin;

@@ -46,12 +46,12 @@ import base from './base.js';
 // Export
 // --------------------------------------------------------------------------------
 
-/** @type {Linter.Config} */
-export default {
+/** @satisfies {Linter.Config} */
+export default /** @type {const} */ ({
   ...base,
   name: 'mark/${configName}',
   rules: ${JSON.stringify(rules)},
-};
+});
 `.trimStart();
 
   writeFileSync(

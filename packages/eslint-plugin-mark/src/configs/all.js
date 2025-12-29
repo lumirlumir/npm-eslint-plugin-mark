@@ -21,8 +21,8 @@ import base from './base.js';
 // Export
 // --------------------------------------------------------------------------------
 
-/** @type {Linter.Config} */
-export default {
+/** @satisfies {Linter.Config} */
+export default /** @type {const} */ ({
   ...base,
   name: 'mark/all',
   rules: {
@@ -50,4 +50,4 @@ export default {
     'mark/require-image-title': 'error',
     'mark/require-link-title': 'error',
   },
-};
+});
