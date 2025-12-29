@@ -28,7 +28,7 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 /**
  * Check whether the URL has a trailing slash.
  * - It returns `false` if the `URL` constructor cannot parse the given URL.
- * - This function ignores the `hash` and `search` parts.
+ * - This function trims the `search` and `hash` parts.
  * @param {string} url
  * @returns {boolean}
  */
@@ -41,7 +41,7 @@ function hasTrailingSlash(url) {
      * - `new URL('https://foo.com/')`'s `href` is `'https://foo.com/'` (with trailing slash) and `pathname` is `'/'`.
      * So, both `href` and `pathname` include trailing slashes, which is not what we want.
      */
-    const { hash, search } = new URL(url);
+    const { search, hash } = new URL(url);
     let urlWithoutSearchAndHash = url;
 
     /*
