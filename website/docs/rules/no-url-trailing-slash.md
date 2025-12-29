@@ -15,7 +15,7 @@ By enforcing consistent URL formatting without trailing slashes, this rule helps
 
 > [!NOTE]
 >
-> This rule intelligently handles URLs by removing query parameters (`?query=string`) and fragments (`#fragment`) before checking for trailing slashes. This means `https://example.com/?query=string` will be flagged because the pathname ends with a trailing slash, but `https://example.com?query=string` will not be flagged.
+> This rule intelligently handles URLs by removing query parameters (`?query=string`) and fragments (`#fragment`) before checking for trailing slashes. For example, `https://example.com/?query=string` will be flagged because the base path (before the query parameter) ends with a trailing slash, but `https://example.com?query=string` will not be flagged because there's no trailing slash before the query parameter.
 
 The rule examines all URL-bearing elements in a Markdown document:
 
@@ -41,6 +41,8 @@ Examples of **incorrect** code for this rule:
 [Link](https://example.com/?query=string)
 
 [Link](https://example.com/#fragment)
+
+[Link](https://example.com/path/to/resource/?query=string#fragment)
 
 <https://example.com/>
 
