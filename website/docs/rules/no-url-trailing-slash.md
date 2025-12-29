@@ -3,25 +3,23 @@
 
 ## Rule Details
 
-This rule disallows trailing slashes in URLs within Markdown documents. Trailing slashes in URLs can lead to inconsistencies and potential issues with link resolution, SEO, and web server configurations.
+This rule disallows trailing slashes in the [`pathname`](https://developer.mozilla.org/en-US/docs/Web/API/URL/pathname) portion of URLs within Markdown documents.
 
-Many web servers and content management systems treat URLs with and without trailing slashes as different resources, which can cause:
+A URL is considered to have a trailing slash when its `pathname` ends with `/`, including cases where that `/` appears **immediately before** a query string (`?`) or fragment (`#`), for example: `https://example.com/?q=1` or `https://example.com/#section`.
 
-- Duplicate content issues for SEO
-- Broken links when URLs are inconsistently referenced
-- Confusion about which URL variant is canonical
+Depending on your server, framework, and canonicalization settings, URLs with and without a trailing slash may be treated as different resources, which can lead to:
 
-By enforcing consistent URL formatting without trailing slashes, this rule helps maintain clean and predictable link structures in your documentation.
+- Duplicate content and canonical URL ambiguity.
+- Broken or inconsistent links when different variants are referenced.
+- Inconsistent caching and routing behavior.
 
-> [!NOTE]
->
-> This rule intelligently handles URLs by removing query parameters (`?query=string`) and fragments (`#fragment`) before checking for trailing slashes. For example, `https://example.com/?query=string` will be flagged because the base path (before the query parameter) ends with a trailing slash, but `https://example.com?query=string` will not be flagged because there's no trailing slash before the query parameter.
+By enforcing consistent URL formatting without trailing slashes, this rule helps maintain clean and predictable link structures in documentation.
 
 The rule examines all URL-bearing elements in a Markdown document:
 
 - Standard Markdown link syntax: `[text](url "title")` or `<https://example.com>`
-- Markdown images: `![alt text](url "title")`
-- Link reference definitions: `[ref]: url "title"`
+- Standard Markdown image syntax: `![alt text](url "title")`
+- Standard Markdown definition syntax: `[ref]: url "title"`
 - HTML link tags: `<a href="url">text</a>`
 - HTML image tags: `<img src="url" />`
 
@@ -48,7 +46,7 @@ Examples of **incorrect** code for this rule:
 
 ![Image](https://example.com/)
 
-[reference]: https://example.com/
+[Definition]: https://example.com/
 
 <a href="https://example.com/">Link</a>
 
@@ -76,7 +74,7 @@ Examples of **correct** code for this rule:
 
 ![Image](https://example.com)
 
-[reference]: https://example.com
+[Definition]: https://example.com
 
 <a href="https://example.com">Link</a>
 
