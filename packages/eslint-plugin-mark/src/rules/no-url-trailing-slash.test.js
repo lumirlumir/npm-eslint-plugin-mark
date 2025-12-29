@@ -335,6 +335,45 @@ ruleTester(getFileName(import.meta.url), rule, {
         },
       ],
     },
+    {
+      code: `
+<div>
+  <a href="https://example.com/">text</a>
+</div>`,
+      errors: [
+        {
+          messageId: 'noUrlTrailingSlash',
+          line: 3,
+          column: 6,
+          endLine: 3,
+          endColumn: 33,
+        },
+      ],
+    },
+    {
+      code: `
+<div>
+  <a href="https://example.com/">text</a>
+  <br>
+  <a href="https://example.com/">text</a>
+</div>`,
+      errors: [
+        {
+          messageId: 'noUrlTrailingSlash',
+          line: 3,
+          column: 6,
+          endLine: 3,
+          endColumn: 33,
+        },
+        {
+          messageId: 'noUrlTrailingSlash',
+          line: 5,
+          column: 6,
+          endLine: 5,
+          endColumn: 33,
+        },
+      ],
+    },
 
     // HTML - `img` tag
     {
@@ -382,6 +421,45 @@ ruleTester(getFileName(import.meta.url), rule, {
           column: 3,
           endLine: 2,
           endColumn: 29,
+        },
+      ],
+    },
+    {
+      code: `
+<div>
+  <img src="https://example.com/">
+</div>`,
+      errors: [
+        {
+          messageId: 'noUrlTrailingSlash',
+          line: 3,
+          column: 8,
+          endLine: 3,
+          endColumn: 34,
+        },
+      ],
+    },
+    {
+      code: `
+<div>
+  <img src="https://example.com/">
+  <br>
+  <img src="https://example.com/">
+</div>`,
+      errors: [
+        {
+          messageId: 'noUrlTrailingSlash',
+          line: 3,
+          column: 8,
+          endLine: 3,
+          endColumn: 34,
+        },
+        {
+          messageId: 'noUrlTrailingSlash',
+          line: 5,
+          column: 8,
+          endLine: 5,
+          endColumn: 34,
         },
       ],
     },
