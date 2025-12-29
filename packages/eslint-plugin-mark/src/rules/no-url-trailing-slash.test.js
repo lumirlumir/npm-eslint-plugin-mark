@@ -299,6 +299,42 @@ ruleTester(getFileName(import.meta.url), rule, {
         },
       ],
     },
+    {
+      code: '<a\nhref="https://example.com/">text</a>',
+      errors: [
+        {
+          messageId: 'noUrlTrailingSlash',
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 28,
+        },
+      ],
+    },
+    {
+      code: '<a\n href="https://example.com/">text</a>',
+      errors: [
+        {
+          messageId: 'noUrlTrailingSlash',
+          line: 2,
+          column: 2,
+          endLine: 2,
+          endColumn: 29,
+        },
+      ],
+    },
+    {
+      code: '<a\n  href="https://example.com/">text</a>',
+      errors: [
+        {
+          messageId: 'noUrlTrailingSlash',
+          line: 2,
+          column: 3,
+          endLine: 2,
+          endColumn: 30,
+        },
+      ],
+    },
 
     // HTML - `img` tag
     {
@@ -310,6 +346,42 @@ ruleTester(getFileName(import.meta.url), rule, {
           column: 6,
           endLine: 1,
           endColumn: 32,
+        },
+      ],
+    },
+    {
+      code: '<img\nsrc="https://example.com/">',
+      errors: [
+        {
+          messageId: 'noUrlTrailingSlash',
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 27,
+        },
+      ],
+    },
+    {
+      code: '<img\n src="https://example.com/">',
+      errors: [
+        {
+          messageId: 'noUrlTrailingSlash',
+          line: 2,
+          column: 2,
+          endLine: 2,
+          endColumn: 28,
+        },
+      ],
+    },
+    {
+      code: '<img\n  src="https://example.com/">',
+      errors: [
+        {
+          messageId: 'noUrlTrailingSlash',
+          line: 2,
+          column: 3,
+          endLine: 2,
+          endColumn: 29,
         },
       ],
     },
