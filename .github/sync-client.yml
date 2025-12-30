@@ -64,3 +64,6 @@ lumirlumir/lumirlumir-configs:
   # tsconfig.json
   - source: ./packages/eslint-plugin-mark/tsconfig.json
     dest: ./configs/tsconfig.json
+  # tsconfig.test.json
+  - source: ./packages/eslint-plugin-mark/tsconfig.test.json
+    dest: ./configs/tsconfig.test.json

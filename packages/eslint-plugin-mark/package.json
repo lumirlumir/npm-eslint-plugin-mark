@@ -58,7 +58,9 @@
   "scripts": {
     "prepublishOnly": "npm run build",
     "build": "npx tsc && node ../../scripts/cp.mjs ../../LICENSE.md LICENSE.md ../../README.md README.md",
-    "test": "node --test"
+    "test": "npm run test:types && npm run test:unit",
+    "test:types": "tsc -p ./tsconfig.test.json",
+    "test:unit": "node --test"
   },
   "peerDependencies": {
     "eslint": "^9.15.0"
