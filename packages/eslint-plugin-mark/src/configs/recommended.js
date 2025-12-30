@@ -7,34 +7,47 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import base from './base.js';
+import markdown from '@eslint/markdown';
 
 // --------------------------------------------------------------------------------
 // Typedef
 // --------------------------------------------------------------------------------
 
 /**
- * @import { Linter } from "eslint";
+ * @import { ESLint, Linter } from "eslint";
  */
 
 // --------------------------------------------------------------------------------
 // Export
 // --------------------------------------------------------------------------------
 
-/** @type {Linter.Config} */
-export default {
-  ...base,
-  name: 'mark/recommended',
-  rules: {
-    'markdown/no-unused-definitions': 'error',
-    'mark/alt-text': 'error',
-    'mark/code-lang-shorthand': 'error',
-    'mark/no-bold-paragraph': 'error',
-    'mark/no-control-character': 'error',
-    'mark/no-curly-quote': 'error',
-    'mark/no-double-space': 'error',
-    'mark/no-git-conflict-marker': 'error',
-    'mark/no-irregular-dash': 'error',
-    'mark/no-irregular-whitespace': 'error',
-  },
-};
+/** @param {ESLint.Plugin} plugin */
+export default function recommended(plugin) {
+  /** @satisfies {Linter.Config} */
+  return /** @type {const} */ ({
+    name: 'mark/recommended',
+    files: ['**/*.md'],
+    plugins: {
+      markdown,
+      get mark() {
+        return plugin;
+      },
+    },
+    languageOptions: {
+      frontmatter: 'yaml',
+    },
+    language: 'markdown/gfm',
+    rules: {
+      'markdown/no-unused-definitions': 'error',
+      'mark/alt-text': 'error',
+      'mark/code-lang-shorthand': 'error',
+      'mark/no-bold-paragraph': 'error',
+      'mark/no-control-character': 'error',
+      'mark/no-curly-quote': 'error',
+      'mark/no-double-space': 'error',
+      'mark/no-git-conflict-marker': 'error',
+      'mark/no-irregular-dash': 'error',
+      'mark/no-irregular-whitespace': 'error',
+    },
+  });
+}

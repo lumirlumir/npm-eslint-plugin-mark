@@ -22,8 +22,8 @@ import rules from './rules/index.js';
 // Export
 // --------------------------------------------------------------------------------
 
-/** @type {ESLint.Plugin} */
-export default {
+/** @satisfies {ESLint.Plugin} */
+const plugin = /** @type {const} */ ({
   meta: {
     name,
     version,
@@ -32,9 +32,23 @@ export default {
   rules,
 
   configs: {
-    all,
-    base,
-    recommended,
-    stylistic,
+    /** @returns {ReturnType<typeof all>} */
+    get all() {
+      return all(plugin);
+    },
+    /** @returns {ReturnType<typeof base>} */
+    get base() {
+      return base(plugin);
+    },
+    /** @returns {ReturnType<typeof recommended>} */
+    get recommended() {
+      return recommended(plugin);
+    },
+    /** @returns {ReturnType<typeof stylistic>} */
+    get stylistic() {
+      return stylistic(plugin);
+    },
   },
-};
+});
+
+export default plugin;
