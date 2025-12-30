@@ -35,6 +35,7 @@
     "plugin",
     "markdown",
     "mark",
+    "md",
     "commonmark",
     "gfm"
   ],

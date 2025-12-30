@@ -30,7 +30,7 @@ The rule examines all URL-bearing elements in a Markdown document:
 Examples of **incorrect** code for this rule:
 
 ```md eslint-check
-<!-- eslint mark/no-url-trailing-slash: 'error' -->
+<!-- eslint md/no-url-trailing-slash: 'error' -->
 
 [Link](https://example.com/)
 
@@ -58,7 +58,7 @@ Examples of **incorrect** code for this rule:
 Examples of **correct** code for this rule:
 
 ```md eslint-check
-<!-- eslint mark/no-url-trailing-slash: 'error' -->
+<!-- eslint md/no-url-trailing-slash: 'error' -->
 
 [Link](https://example.com)
 

@@ -57,7 +57,7 @@ export default [
   // ...
   {
     rules: {
-      'mark/alt-text': 'error', // [!code focus]
+      'md/alt-text': 'error', // [!code focus]
     },
   },
   // ...
@@ -87,7 +87,7 @@ export default [
   // ...
   {
     rules: {
-      'mark/alt-text': 'error', // [!code focus]
+      'md/alt-text': 'error', // [!code focus]
     },
   },
   // ...

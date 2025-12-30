@@ -20,7 +20,7 @@ Examples of **incorrect** code for this rule:
 #### With `{ allowUrls: [/example.com/] }` Option
 
 ```md eslint-check
-<!-- eslint mark/allow-image-url: ['error', { allowUrls: [/example.com/] }] -->
+<!-- eslint md/allow-image-url: ['error', { allowUrls: [/example.com/] }] -->
 
 ![Alt text](https://foo.com/image.png)
 
@@ -38,7 +38,7 @@ Examples of **incorrect** code for this rule:
 #### With `{ disallowUrls: [/example.com/] }` Option
 
 ```md eslint-check
-<!-- eslint mark/allow-image-url: ['error', { disallowUrls: [/example.com/] }] -->
+<!-- eslint md/allow-image-url: ['error', { disallowUrls: [/example.com/] }] -->
 
 ![Alt text](https://example.com/image.png)
 
@@ -66,7 +66,7 @@ By default, this rule reports nothing. To use this rule, please configure the [`
 :::
 
 ```md
-<!-- eslint mark/allow-image-url: 'error' -->
+<!-- eslint md/allow-image-url: 'error' -->
 
 ![Alt text](https://example.com/image.png)
 
@@ -84,7 +84,7 @@ By default, this rule reports nothing. To use this rule, please configure the [`
 #### With `{ allowUrls: [/example.com/] }` Option
 
 ```md eslint-check
-<!-- eslint mark/allow-image-url: ['error', { allowUrls: [/example.com/] }] -->
+<!-- eslint md/allow-image-url: ['error', { allowUrls: [/example.com/] }] -->
 
 ![Alt text](https://example.com/image.png)
 
@@ -102,7 +102,7 @@ By default, this rule reports nothing. To use this rule, please configure the [`
 #### With `{ disallowUrls: [/example.com/] }` Option
 
 ```md eslint-check
-<!-- eslint mark/allow-image-url: ['error', { disallowUrls: [/example.com/] }] -->
+<!-- eslint md/allow-image-url: ['error', { disallowUrls: [/example.com/] }] -->
 
 ![Alt text](https://foo.com/image.png)
 
@@ -120,7 +120,7 @@ By default, this rule reports nothing. To use this rule, please configure the [`
 #### With `{ allowDefinitions: ['reference'], disallowUrls: [/example.com/] }` Option
 
 ```md eslint-check
-<!-- eslint mark/allow-image-url: ['error', { allowDefinitions: ['reference'], disallowUrls: [/example.com/] }] -->
+<!-- eslint md/allow-image-url: ['error', { allowDefinitions: ['reference'], disallowUrls: [/example.com/] }] -->
 
 ![Alt text][reference]
 
@@ -132,7 +132,7 @@ By default, this rule reports nothing. To use this rule, please configure the [`
 Please note that this rule doesn't report definition-style comments (e.g., `[//]: ...`) by default.
 
 ```md eslint-check
-<!-- eslint mark/allow-image-url: ['error', { disallowUrls: [/example.com/] }] -->
+<!-- eslint md/allow-image-url: ['error', { disallowUrls: [/example.com/] }] -->
 
 ![Alt text][//]
 
@@ -144,7 +144,7 @@ Please note that this rule doesn't report definition-style comments (e.g., `[//]
 ## Options
 
 ```js
-'mark/allow-image-url': ['error', {
+'md/allow-image-url': ['error', {
   allowUrls: [/.*/u],
   disallowUrls: [],
   allowDefinitions: ['//'],

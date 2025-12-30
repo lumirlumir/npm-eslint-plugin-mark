@@ -22,7 +22,7 @@ Examples of **incorrect** code for this rule:
 ::: code-group
 
 ````md [incorrect.md] eslint-check
-<!-- eslint mark/code-lang-shorthand: "error" -->
+<!-- eslint md/code-lang-shorthand: "error" -->
 
 ```javascript
 console.log('Hello, world!');
@@ -42,7 +42,7 @@ export default [
   // ...
   {
     rules: {
-      'mark/code-lang-shorthand': 'error', // [!code focus]
+      'md/code-lang-shorthand': 'error', // [!code focus]
     },
   },
   // ...
@@ -67,7 +67,7 @@ export default [
   // ...
   {
     rules: {
-      'mark/code-lang-shorthand': ['error', { // [!code focus]
+      'md/code-lang-shorthand': ['error', { // [!code focus]
         override: { example: 'ex' }, // [!code focus]
       }], // [!code focus]
     },
@@ -105,7 +105,7 @@ export default [
   // ...
   {
     rules: {
-      'mark/code-lang-shorthand': 'error', // [!code focus]
+      'md/code-lang-shorthand': 'error', // [!code focus]
     },
   },
   // ...
@@ -133,7 +133,7 @@ export default [
   // ...
   {
     rules: {
-      'mark/code-lang-shorthand': ['error', { // [!code focus]
+      'md/code-lang-shorthand': ['error', { // [!code focus]
         ignores: ['javascript', 'typescript'], // [!code focus]
       }], // [!code focus]
     },
@@ -147,7 +147,7 @@ export default [
 ## Options
 
 ```js
-'mark/code-lang-shorthand': ['error', {
+'md/code-lang-shorthand': ['error', {
   ignores: [],
   override: {},
 }]
@@ -162,7 +162,7 @@ An array of code block language identifiers to ignore. Each value should be a **
 For example, to ignore the `javascript` and `typescript` language identifiers:
 
 ```js
-'mark/code-lang-shorthand': ['error', {
+'md/code-lang-shorthand': ['error', {
   ignores: ['javascript', 'typescript'],
 }]
 ```
@@ -178,7 +178,7 @@ An object where the key is the unabridged language identifier and the value is t
 For example, to shorten the `example` language identifier to `ex`:
 
 ```js
-'mark/code-lang-shorthand': ['error', {
+'md/code-lang-shorthand': ['error', {
   override: {
     example: 'ex',
   },
@@ -190,7 +190,7 @@ For example, to shorten the `example` language identifier to `ex`:
 For example, to change the default abbreviation for `javascript` to `mjs`:
 
 ```js
-'mark/code-lang-shorthand': ['error', {
+'md/code-lang-shorthand': ['error', {
   override: {
     javascript: 'mjs',
   },

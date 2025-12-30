@@ -16,7 +16,7 @@ Examples of **incorrect** code for this rule:
 #### Default
 
 ```md eslint-check
-<!-- eslint mark/consistent-thematic-break-style: 'error' -->
+<!-- eslint md/consistent-thematic-break-style: 'error' -->
 
 ---
 - - -
@@ -27,7 +27,7 @@ ___
 ```
 
 ```md eslint-check
-<!-- eslint mark/consistent-thematic-break-style: 'error' -->
+<!-- eslint md/consistent-thematic-break-style: 'error' -->
 
 ***
 * * *
@@ -38,7 +38,7 @@ ___
 ```
 
 ```md eslint-check
-<!-- eslint mark/consistent-thematic-break-style: 'error' -->
+<!-- eslint md/consistent-thematic-break-style: 'error' -->
 
 ___
 ---
@@ -51,7 +51,7 @@ ___
 #### With `{ style: '- - -' }` Option
 
 ```md eslint-check
-<!-- eslint mark/consistent-thematic-break-style: ['error', { style: '- - -' }] -->
+<!-- eslint md/consistent-thematic-break-style: ['error', { style: '- - -' }] -->
 
 ---
 ***
@@ -65,7 +65,7 @@ Examples of **correct** code for this rule:
 #### Default
 
 ```md eslint-check
-<!-- eslint mark/consistent-thematic-break-style: 'error' -->
+<!-- eslint md/consistent-thematic-break-style: 'error' -->
 
 ---
 ---
@@ -73,7 +73,7 @@ Examples of **correct** code for this rule:
 ```
 
 ```md eslint-check
-<!-- eslint mark/consistent-thematic-break-style: 'error' -->
+<!-- eslint md/consistent-thematic-break-style: 'error' -->
 
 ***
 ***
@@ -81,7 +81,7 @@ Examples of **correct** code for this rule:
 ```
 
 ```md eslint-check
-<!-- eslint mark/consistent-thematic-break-style: 'error' -->
+<!-- eslint md/consistent-thematic-break-style: 'error' -->
 
 ___
 ___
@@ -91,7 +91,7 @@ ___
 #### With `{ style: '- - -' }` Option
 
 ```md eslint-check
-<!-- eslint mark/consistent-thematic-break-style: ['error', { style: '- - -' }] -->
+<!-- eslint md/consistent-thematic-break-style: ['error', { style: '- - -' }] -->
 
 - - -
 - - -
@@ -101,7 +101,7 @@ ___
 ## Options
 
 ```js
-'mark/consistent-thematic-break-style': ['error', {
+'md/consistent-thematic-break-style': ['error', {
   style: 'consistent',
 }]
 ```

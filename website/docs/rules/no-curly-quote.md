@@ -20,7 +20,7 @@ Examples of **incorrect** code for this rule:
 #### Default
 
 ```md eslint-check
-<!-- eslint mark/no-curly-quote: 'error' -->
+<!-- eslint md/no-curly-quote: 'error' -->
 
 “foo bar”
 ‘foo bar’
@@ -30,7 +30,7 @@ Examples of **incorrect** code for this rule:
 #### With `{ checkLeftDoubleQuotationMark: false }` Option
 
 ```md eslint-check
-<!-- eslint mark/no-curly-quote: ['error', { checkLeftDoubleQuotationMark: false }] -->
+<!-- eslint md/no-curly-quote: ['error', { checkLeftDoubleQuotationMark: false }] -->
 
 “foo bar”
 ‘foo bar’
@@ -44,7 +44,7 @@ Examples of **correct** code for this rule:
 #### Default
 
 ```md eslint-check
-<!-- eslint mark/no-curly-quote: 'error' -->
+<!-- eslint md/no-curly-quote: 'error' -->
 
 "foo bar"
 'foo bar'
@@ -54,7 +54,7 @@ Examples of **correct** code for this rule:
 ## Options
 
 ```js
-'mark/no-curly-quote': ['error', {
+'md/no-curly-quote': ['error', {
   checkLeftDoubleQuotationMark: true,
   checkRightDoubleQuotationMark: true,
   checkLeftSingleQuotationMark: true,

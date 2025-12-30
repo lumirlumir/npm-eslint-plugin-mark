@@ -34,7 +34,7 @@ A paragraph with multiple sentences. This one correctly starts with uppercase.
 ## Options
 
 ```js
-'mark/en-capitalization': ['error', {
+'md/en-capitalization': ['error', {
   skipHeading: true,
   skipListItem: true,
 }]

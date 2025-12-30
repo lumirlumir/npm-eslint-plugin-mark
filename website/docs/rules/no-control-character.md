@@ -92,7 +92,7 @@ Examples of **incorrect** code for this rule:
 #### Default
 
 ```md eslint-check
-<!-- eslint mark/no-control-character: 'error' -->
+<!-- eslint md/no-control-character: 'error' -->
 
 \u0002 - Start of Text - <STX>  <= Here
 \u0003 - End of Text - <ETX>  <= Here
@@ -132,7 +132,7 @@ Examples of **incorrect** code for this rule:
 #### With `{ skipCode: false }` Option
 
 `````md eslint-check
-<!-- eslint mark/no-control-character: ['error', { skipCode: false }] -->
+<!-- eslint md/no-control-character: ['error', { skipCode: false }] -->
 
 ```md
 \u0002 - Start of Text - <STX>  <= Here
@@ -156,7 +156,7 @@ Examples of **incorrect** code for this rule:
 #### With `{ skipInlineCode: false }` Option
 
 ```md eslint-check
-<!-- eslint mark/no-control-character: ['error', { skipInlineCode: false }] -->
+<!-- eslint md/no-control-character: ['error', { skipInlineCode: false }] -->
 
 \u0002 - Start of Text - <STX> `` <= Here
 \u0003 - End of Text - <ETX> `` <= Here
@@ -171,7 +171,7 @@ Examples of **correct** code for this rule:
 <!-- markdownlint-disable no-hard-tabs -->
 
 ```md eslint-check
-<!-- eslint mark/no-control-character: 'error' -->
+<!-- eslint md/no-control-character: 'error' -->
 
 \u0009 - Horizontal Tab (\t) - <TAB> 	 <= Here
 \u0020 - Space - <SP>   <= Here
@@ -182,7 +182,7 @@ Examples of **correct** code for this rule:
 #### With `{ skipCode: true }` Option
 
 `````md eslint-check
-<!-- eslint mark/no-control-character: ['error', { skipCode: true }] -->
+<!-- eslint md/no-control-character: ['error', { skipCode: true }] -->
 
 ```md
 \u0002 - Start of Text - <STX>  <= Here
@@ -206,7 +206,7 @@ Examples of **correct** code for this rule:
 #### With `{ skipInlineCode: true }` Option
 
 ```md eslint-check
-<!-- eslint mark/no-control-character: ['error', { skipInlineCode: true }] -->
+<!-- eslint md/no-control-character: ['error', { skipInlineCode: true }] -->
 
 \u0002 - Start of Text - <STX> `` <= Here
 \u0003 - End of Text - <ETX> `` <= Here
@@ -215,7 +215,7 @@ Examples of **correct** code for this rule:
 ## Options
 
 ```js
-'mark/no-control-character': ['error', {
+'md/no-control-character': ['error', {
   skipCode: true,
   skipInlineCode: true,
 }]

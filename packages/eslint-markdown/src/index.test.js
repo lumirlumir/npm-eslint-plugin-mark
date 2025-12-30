@@ -51,7 +51,7 @@ describe(getFileName(import.meta.url), () => {
       });
 
       strictEqual(cascadingStyleConfigResult.length, 1);
-      strictEqual(cascadingStyleConfigResult[0].ruleId, 'mark/no-double-space');
+      strictEqual(cascadingStyleConfigResult[0].ruleId, 'md/no-double-space');
       strictEqual(cascadingStyleConfigResult[0].severity, 2);
       strictEqual(cascadingStyleConfigResult[0].line, 1);
       strictEqual(cascadingStyleConfigResult[0].column, 3);
@@ -63,14 +63,14 @@ describe(getFileName(import.meta.url), () => {
       const linter = new Linter();
       const cascadingStyleConfig = defineConfig([
         plugin.configs.base,
-        { rules: { 'mark/no-double-space': 'error' } },
+        { rules: { 'md/no-double-space': 'error' } },
       ]);
       const cascadingStyleConfigResult = linter.verify('12  34', cascadingStyleConfig, {
         filename: 'test.md',
       });
 
       strictEqual(cascadingStyleConfigResult.length, 1);
-      strictEqual(cascadingStyleConfigResult[0].ruleId, 'mark/no-double-space');
+      strictEqual(cascadingStyleConfigResult[0].ruleId, 'md/no-double-space');
       strictEqual(cascadingStyleConfigResult[0].severity, 2);
       strictEqual(cascadingStyleConfigResult[0].line, 1);
       strictEqual(cascadingStyleConfigResult[0].column, 3);
@@ -86,7 +86,7 @@ describe(getFileName(import.meta.url), () => {
       });
 
       strictEqual(cascadingStyleConfigResult.length, 1);
-      strictEqual(cascadingStyleConfigResult[0].ruleId, 'mark/no-double-space');
+      strictEqual(cascadingStyleConfigResult[0].ruleId, 'md/no-double-space');
       strictEqual(cascadingStyleConfigResult[0].severity, 2);
       strictEqual(cascadingStyleConfigResult[0].line, 1);
       strictEqual(cascadingStyleConfigResult[0].column, 3);
@@ -108,7 +108,7 @@ describe(getFileName(import.meta.url), () => {
       strictEqual(cascadingStyleConfigResult.length, 1);
       strictEqual(
         cascadingStyleConfigResult[0].ruleId,
-        'mark/consistent-thematic-break-style',
+        'md/consistent-thematic-break-style',
       );
       strictEqual(cascadingStyleConfigResult[0].severity, 2);
       strictEqual(cascadingStyleConfigResult[0].line, 3);
@@ -125,9 +125,9 @@ describe(getFileName(import.meta.url), () => {
         {
           files: ['**/*.md'],
           plugins: {
-            mark: plugin,
+            md: plugin,
           },
-          extends: ['mark/all'],
+          extends: ['md/all'],
         },
       ]);
       const extendsStyleConfigResult = linter.verify('12  34', extendsStyleConfig, {
@@ -135,7 +135,7 @@ describe(getFileName(import.meta.url), () => {
       });
 
       strictEqual(extendsStyleConfigResult.length, 1);
-      strictEqual(extendsStyleConfigResult[0].ruleId, 'mark/no-double-space');
+      strictEqual(extendsStyleConfigResult[0].ruleId, 'md/no-double-space');
       strictEqual(extendsStyleConfigResult[0].severity, 2);
       strictEqual(extendsStyleConfigResult[0].line, 1);
       strictEqual(extendsStyleConfigResult[0].column, 3);
@@ -149,12 +149,12 @@ describe(getFileName(import.meta.url), () => {
         {
           files: ['**/*.md'],
           plugins: {
-            mark: plugin,
+            md: plugin,
           },
           rules: {
-            'mark/no-double-space': 'error',
+            'md/no-double-space': 'error',
           },
-          extends: ['mark/base'],
+          extends: ['md/base'],
         },
       ]);
       const extendsStyleConfigResult = linter.verify('12  34', extendsStyleConfig, {
@@ -162,7 +162,7 @@ describe(getFileName(import.meta.url), () => {
       });
 
       strictEqual(extendsStyleConfigResult.length, 1);
-      strictEqual(extendsStyleConfigResult[0].ruleId, 'mark/no-double-space');
+      strictEqual(extendsStyleConfigResult[0].ruleId, 'md/no-double-space');
       strictEqual(extendsStyleConfigResult[0].severity, 2);
       strictEqual(extendsStyleConfigResult[0].line, 1);
       strictEqual(extendsStyleConfigResult[0].column, 3);
@@ -176,9 +176,9 @@ describe(getFileName(import.meta.url), () => {
         {
           files: ['**/*.md'],
           plugins: {
-            mark: plugin,
+            md: plugin,
           },
-          extends: ['mark/recommended'],
+          extends: ['md/recommended'],
         },
       ]);
       const extendsStyleConfigResult = linter.verify('12  34', extendsStyleConfig, {
@@ -186,7 +186,7 @@ describe(getFileName(import.meta.url), () => {
       });
 
       strictEqual(extendsStyleConfigResult.length, 1);
-      strictEqual(extendsStyleConfigResult[0].ruleId, 'mark/no-double-space');
+      strictEqual(extendsStyleConfigResult[0].ruleId, 'md/no-double-space');
       strictEqual(extendsStyleConfigResult[0].severity, 2);
       strictEqual(extendsStyleConfigResult[0].line, 1);
       strictEqual(extendsStyleConfigResult[0].column, 3);
@@ -200,9 +200,9 @@ describe(getFileName(import.meta.url), () => {
         {
           files: ['**/*.md'],
           plugins: {
-            mark: plugin,
+            md: plugin,
           },
-          extends: ['mark/stylistic'],
+          extends: ['md/stylistic'],
         },
       ]);
       const extendsStyleConfigResult = linter.verify('---\n\n___', extendsStyleConfig, {
@@ -212,7 +212,7 @@ describe(getFileName(import.meta.url), () => {
       strictEqual(extendsStyleConfigResult.length, 1);
       strictEqual(
         extendsStyleConfigResult[0].ruleId,
-        'mark/consistent-thematic-break-style',
+        'md/consistent-thematic-break-style',
       );
       strictEqual(extendsStyleConfigResult[0].severity, 2);
       strictEqual(extendsStyleConfigResult[0].line, 3);

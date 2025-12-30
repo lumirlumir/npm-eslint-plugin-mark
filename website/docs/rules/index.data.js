@@ -7,7 +7,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import mark from 'eslint-markdown';
+import md from 'eslint-markdown';
 
 // --------------------------------------------------------------------------------
 // Typedef
@@ -28,7 +28,7 @@ import mark from 'eslint-markdown';
 // Helper
 // --------------------------------------------------------------------------------
 
-const { rules } = mark;
+const { rules } = md;
 const ruleMetas = Object.keys(rules).map(
   rule =>
     /** @type {RuleMeta} */ ({
