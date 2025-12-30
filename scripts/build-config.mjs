@@ -15,7 +15,10 @@ import prettier from 'prettier'; // eslint-disable-line import/no-extraneous-dep
 // Helper
 // --------------------------------------------------------------------------------
 
-/** @param {string} configName @param {Record<string, string>} rules */
+/**
+ * @param {'all' | 'base' | 'recommended' | 'stylistic'} configName
+ * @param {Record<string, string>} rules
+ */
 async function generateCode(configName, rules) {
   const url = new URL(
     `../packages/eslint-plugin-mark/src/configs/${configName}.js`,
@@ -32,26 +35,39 @@ async function generateCode(configName, rules) {
 // Import
 // --------------------------------------------------------------------------------
 
-import base from './base.js';
+import markdown from '@eslint/markdown';
 
 // --------------------------------------------------------------------------------
 // Typedef
 // --------------------------------------------------------------------------------
 
 /**
- * @import { Linter } from "eslint";
+ * @import { ESLint, Linter } from "eslint";
  */
 
 // --------------------------------------------------------------------------------
 // Export
 // --------------------------------------------------------------------------------
 
-/** @type {Linter.Config} */
-export default {
-  ...base,
-  name: 'mark/${configName}',
-  rules: ${JSON.stringify(rules)},
-};
+/** @param {ESLint.Plugin} plugin */
+export default function ${configName}(plugin) {
+  /** @satisfies {Linter.Config} */
+  return /** @type {const} */ ({
+    name: 'mark/${configName}',
+    files: ['**/*.md'],
+    plugins: {
+      markdown,
+      get mark() {
+        return plugin;
+      }
+    },
+    languageOptions: {
+      frontmatter: 'yaml',
+    },
+    language: 'markdown/gfm',
+    ${configName === 'base' ? '' : `rules: ${JSON.stringify(rules)},`}
+  });
+}
 `.trimStart();
 
   writeFileSync(
@@ -67,6 +83,7 @@ export default {
 const allRules = {
   'markdown/no-unused-definitions': 'error', // TODO: Remove this line once integrated with `@eslint/markdown`.
 };
+const baseRules = {};
 const recommendedRules = {
   'markdown/no-unused-definitions': 'error', // TODO: Remove this line once integrated with `@eslint/markdown`.
 };
@@ -85,5 +102,6 @@ for (const [ruleName, rule] of Object.entries(markdown.rules)) {
 }
 
 generateCode('all', allRules);
+generateCode('base', baseRules);
 generateCode('recommended', recommendedRules);
 generateCode('stylistic', stylisticRules);
