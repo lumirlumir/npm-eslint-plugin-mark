@@ -6,6 +6,9 @@
     /* Type Checking */
     "noUnusedParameters": false, // Turning it off since it's a test.
 
+    /* Modules */
+    "rootDir": ".",
+
     /* Emit */
     "noEmit": true
   }
