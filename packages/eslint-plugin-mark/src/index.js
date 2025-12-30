@@ -15,7 +15,7 @@ import rules from './rules/index.js';
 // --------------------------------------------------------------------------------
 
 /**
- * @import { ESLint, Linter } from "eslint";
+ * @import { ESLint } from "eslint";
  */
 
 // --------------------------------------------------------------------------------
@@ -32,19 +32,19 @@ const plugin = /** @type {const} */ ({
   rules,
 
   configs: {
-    /** @returns {Linter.Config} */
+    /** @returns {ReturnType<typeof all>} */
     get all() {
       return all(plugin);
     },
-    /** @returns {Linter.Config} */
+    /** @returns {ReturnType<typeof base>} */
     get base() {
       return base(plugin);
     },
-    /** @returns {Linter.Config} */
+    /** @returns {ReturnType<typeof recommended>} */
     get recommended() {
       return recommended(plugin);
     },
-    /** @returns {Linter.Config} */
+    /** @returns {ReturnType<typeof stylistic>} */
     get stylistic() {
       return stylistic(plugin);
     },
