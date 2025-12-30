@@ -6,8 +6,8 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { all, base, recommended, stylistic } from './configs/index.js';
 import { PKG_NAME as name, PKG_VERSION as version } from './core/constants.js';
+import { all, base, recommended, stylistic } from './configs/index.js';
 import rules from './rules/index.js';
 
 // --------------------------------------------------------------------------------
