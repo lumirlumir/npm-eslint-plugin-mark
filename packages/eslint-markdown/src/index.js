@@ -1,5 +1,5 @@
 /**
- * @fileoverview Entry file for the `eslint-plugin-mark` package.
+ * @fileoverview Entry file for the `eslint-markdown` package.
  */
 
 // --------------------------------------------------------------------------------

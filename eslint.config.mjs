@@ -1,6 +1,6 @@
 import { defineConfig, globalIgnores } from 'eslint/config';
 import bananass from 'eslint-config-bananass';
-import mark from 'eslint-plugin-mark';
+import mark from 'eslint-markdown';
 
 /** @type {import("eslint").Linter.Config[]} */
 export default defineConfig([

@@ -21,7 +21,7 @@ import plugin from './index.js';
 describe(getFileName(import.meta.url), () => {
   describe('Basic', () => {
     it('should have correct meta information', () => {
-      strictEqual(plugin.meta.name, 'eslint-plugin-mark');
+      strictEqual(plugin.meta.name, 'eslint-markdown');
       strictEqual(typeof plugin.meta.version, 'string');
     });
 

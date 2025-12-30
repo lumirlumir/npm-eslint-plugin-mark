@@ -6,7 +6,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import plugin from 'eslint-plugin-mark';
+import plugin from 'eslint-markdown';
 import type { ESLint, Linter } from 'eslint';
 
 // --------------------------------------------------------------------------------
@@ -24,7 +24,7 @@ plugin satisfies ESLint.Plugin;
 // --------------------------------------------------------------------------------
 // #region meta
 
-plugin.meta.name satisfies 'eslint-plugin-mark';
+plugin.meta.name satisfies 'eslint-markdown';
 plugin.meta.version satisfies string;
 
 // #endregion meta

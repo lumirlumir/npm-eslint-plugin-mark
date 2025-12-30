@@ -1,22 +1,22 @@
-# eslint-plugin-mark
+# eslint-markdown
 
-[![lint](https://img.shields.io/github/actions/workflow/status/lumirlumir/npm-eslint-plugin-mark/lint.yml?label=lint&color=6358d4&labelColor=333333&logo=github)](https://github.com/lumirlumir/npm-eslint-plugin-mark/actions/workflows/lint.yml)
-[![test](https://img.shields.io/github/actions/workflow/status/lumirlumir/npm-eslint-plugin-mark/test.yml?label=test&color=6358d4&labelColor=333333&logo=github)](https://github.com/lumirlumir/npm-eslint-plugin-mark/actions/workflows/test.yml)
-[![codecov](https://img.shields.io/codecov/c/gh/lumirlumir/npm-eslint-plugin-mark?token=2zUCHlMFT3&label=Codecov&color=6358d4&labelColor=333333&logo=codecov)](https://codecov.io/gh/lumirlumir/npm-eslint-plugin-mark)
+[![lint](https://img.shields.io/github/actions/workflow/status/lumirlumir/npm-eslint-markdown/lint.yml?label=lint&color=6358d4&labelColor=333333&logo=github)](https://github.com/lumirlumir/npm-eslint-markdown/actions/workflows/lint.yml)
+[![test](https://img.shields.io/github/actions/workflow/status/lumirlumir/npm-eslint-markdown/test.yml?label=test&color=6358d4&labelColor=333333&logo=github)](https://github.com/lumirlumir/npm-eslint-markdown/actions/workflows/test.yml)
+[![codecov](https://img.shields.io/codecov/c/gh/lumirlumir/npm-eslint-markdown?token=2zUCHlMFT3&label=Codecov&color=6358d4&labelColor=333333&logo=codecov)](https://codecov.io/gh/lumirlumir/npm-eslint-markdown)
 
-[![npm package eslint-plugin-mark latest version](https://img.shields.io/npm/v/eslint-plugin-mark?label=eslint-plugin-mark@latest&color=6358d4&labelColor=333333&logo=npm)](https://www.npmjs.com/package/eslint-plugin-mark)
-[![npm package eslint-plugin-mark next version](https://img.shields.io/npm/v/eslint-plugin-mark/next?label=eslint-plugin-mark@next&color=6358d4&labelColor=333333&logo=npm)](https://www.npmjs.com/package/eslint-plugin-mark)
+[![npm package eslint-markdown latest version](https://img.shields.io/npm/v/eslint-markdown?label=eslint-markdown@latest&color=6358d4&labelColor=333333&logo=npm)](https://www.npmjs.com/package/eslint-markdown)
+[![npm package eslint-markdown next version](https://img.shields.io/npm/v/eslint-markdown/next?label=eslint-markdown@next&color=6358d4&labelColor=333333&logo=npm)](https://www.npmjs.com/package/eslint-markdown)
 
 > [!IMPORTANT]
 >
-> If you like this package, please give it a star on [GitHub](https://github.com/lumirlumir/npm-eslint-plugin-mark)!⭐<br/>
+> If you like this package, please give it a star on [GitHub](https://github.com/lumirlumir/npm-eslint-markdown)!⭐<br/>
 > Your support helps us improve and maintain the project.
 
 Lint your Markdown with ESLint.🛠️
 
 ## Documentation
 
-For full documentation, see the [official documentation of the `eslint-plugin-mark`](https://eslint-plugin-mark.lumir.page).
+For full documentation, see the [official documentation of the `eslint-markdown`](https://eslint-markdown.lumir.page).
 
 ## Code of Conduct
 
@@ -24,11 +24,11 @@ See [Code of Conduct](https://github.com/lumirlumir/.github/blob/main/CODE_OF_CO
 
 ## Change Log
 
-See [Change Log](https://github.com/lumirlumir/npm-eslint-plugin-mark/blob/main/CHANGELOG.md).
+See [Change Log](https://github.com/lumirlumir/npm-eslint-markdown/blob/main/CHANGELOG.md).
 
 ## Versioning
 
-See [Versioning](https://eslint-plugin-mark.lumir.page/docs/get-started/versioning).
+See [Versioning](https://eslint-markdown.lumir.page/docs/get-started/versioning).
 
 ## Security
 
@@ -36,4 +36,4 @@ See [Security](https://github.com/lumirlumir/.github/blob/main/SECURITY.md#secur
 
 ## License
 
-[MIT](https://github.com/lumirlumir/npm-eslint-plugin-mark/blob/main/LICENSE.md)
+[MIT](https://github.com/lumirlumir/npm-eslint-markdown/blob/main/LICENSE.md)

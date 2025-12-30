@@ -1,6 +1,6 @@
 # Shared Configurations
 
-[ESLint shareable configurations](https://eslint.org/docs/latest/extend/shareable-configs) exist to provide a comprehensive list of rules settings that you can start with. [`eslint-markdown`](https://github.com/lumirlumir/npm-eslint-plugin-mark) includes built-in configurations you can extend from to pull in the recommended starting rules.
+[ESLint shareable configurations](https://eslint.org/docs/latest/extend/shareable-configs) exist to provide a comprehensive list of rules settings that you can start with. [`eslint-markdown`](https://github.com/lumirlumir/npm-eslint-markdown) includes built-in configurations you can extend from to pull in the recommended starting rules.
 
 ::: warning Stability of Configurations
 

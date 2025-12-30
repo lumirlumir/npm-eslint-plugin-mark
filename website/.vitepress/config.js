@@ -9,8 +9,8 @@
 
 import { parse } from 'node:path';
 
-import mark from 'eslint-plugin-mark';
-import packageJson from 'eslint-plugin-mark/package.json' with { type: 'json' };
+import mark from 'eslint-markdown';
+import packageJson from 'eslint-markdown/package.json' with { type: 'json' };
 
 import { defineConfig } from 'vitepress';
 import { groupIconMdPlugin, groupIconVitePlugin } from 'vitepress-plugin-group-icons';
@@ -55,7 +55,7 @@ export default defineConfig({
       'meta',
       {
         name: 'keywords',
-        content: 'eslint, plugin, mark, markdown, lint, linting, eslint-plugin-mark',
+        content: 'eslint, plugin, mark, markdown, lint, linting, eslint-markdown',
       },
     ],
 
@@ -113,7 +113,7 @@ export default defineConfig({
   themeConfig: {
     logo: {
       src: '/logo.svg',
-      alt: 'eslint-plugin-mark Logo',
+      alt: 'eslint-markdown Logo',
     },
 
     outline: {
@@ -227,13 +227,13 @@ export default defineConfig({
     socialLinks: [
       {
         icon: 'npm',
-        link: `https://www.npmjs.com/package/eslint-plugin-mark`,
-        ariaLabel: 'npm package link for eslint-plugin-mark',
+        link: `https://www.npmjs.com/package/eslint-markdown`,
+        ariaLabel: 'npm package link for eslint-markdown',
       },
       {
         icon: 'github',
         link: URL_GITHUB,
-        ariaLabel: 'GitHub repository link for eslint-plugin-mark',
+        ariaLabel: 'GitHub repository link for eslint-markdown',
       },
     ],
 
