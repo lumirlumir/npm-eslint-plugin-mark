@@ -25,6 +25,9 @@ import base from './base.js';
 export default /** @type {const} */ ({
   ...base,
   name: 'mark/recommended',
+  plugins: {
+    ...base.plugins,
+  },
   rules: {
     'markdown/no-unused-definitions': 'error',
     'mark/alt-text': 'error',

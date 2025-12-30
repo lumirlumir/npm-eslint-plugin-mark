@@ -25,6 +25,9 @@ import base from './base.js';
 export default /** @type {const} */ ({
   ...base,
   name: 'mark/stylistic',
+  plugins: {
+    ...base.plugins,
+  },
   rules: {
     'mark/consistent-delete-style': 'error',
     'mark/consistent-emphasis-style': 'error',
