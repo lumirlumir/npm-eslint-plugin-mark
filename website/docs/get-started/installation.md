@@ -1,5 +1,5 @@
 ---
-description: "Installation instructions for `eslint-plugin-mark` npm package with support for local installs using npm, pnpm, yarn, and bun."
+description: "Installation instructions for `eslint-markdown` npm package with support for local installs using npm, pnpm, yarn, and bun."
 ---
 
 # Installation {#installation}
@@ -18,52 +18,52 @@ In line with the [ESLint v10 prerequisites](https://github.com/eslint/eslint?tab
 
 ## Installation (`@latest`)
 
-[![npm package eslint-plugin-mark latest version](https://img.shields.io/npm/v/eslint-plugin-mark?label=eslint-plugin-mark@latest&color=6358d4&labelColor=333333&logo=npm)](https://www.npmjs.com/package/eslint-plugin-mark)
+[![npm package eslint-markdown latest version](https://img.shields.io/npm/v/eslint-markdown?label=eslint-markdown@latest&color=6358d4&labelColor=333333&logo=npm)](https://www.npmjs.com/package/eslint-markdown)
 
 > Latest stable release.
 
 ::: code-group
 
 ```sh [npm]
-$ npm install -D eslint-plugin-mark@latest eslint@latest
+$ npm install -D eslint-markdown@latest eslint@latest
 ```
 
 ```sh [pnpm]
-$ pnpm add -D eslint-plugin-mark@latest eslint@latest
+$ pnpm add -D eslint-markdown@latest eslint@latest
 ```
 
 ```sh [yarn]
-$ yarn add --dev eslint-plugin-mark@latest eslint@latest
+$ yarn add --dev eslint-markdown@latest eslint@latest
 ```
 
 ```sh [bun]
-$ bun add -d eslint-plugin-mark@latest eslint@latest
+$ bun add -d eslint-markdown@latest eslint@latest
 ```
 
 :::
 
 ## Installation (`@next`)
 
-[![npm package eslint-plugin-mark next version](https://img.shields.io/npm/v/eslint-plugin-mark/next?label=eslint-plugin-mark@next&color=6358d4&labelColor=333333&logo=npm)](https://www.npmjs.com/package/eslint-plugin-mark)
+[![npm package eslint-markdown next version](https://img.shields.io/npm/v/eslint-markdown/next?label=eslint-markdown@next&color=6358d4&labelColor=333333&logo=npm)](https://www.npmjs.com/package/eslint-markdown)
 
 > Latest pre-release version. (e.g., `canary`, `alpha`, `beta`, and `rc`)
 
 ::: code-group
 
 ```sh [npm]
-$ npm install -D eslint-plugin-mark@next eslint@latest
+$ npm install -D eslint-markdown@next eslint@latest
 ```
 
 ```sh [pnpm]
-$ pnpm add -D eslint-plugin-mark@next eslint@latest
+$ pnpm add -D eslint-markdown@next eslint@latest
 ```
 
 ```sh [yarn]
-$ yarn add --dev eslint-plugin-mark@next eslint@latest
+$ yarn add --dev eslint-markdown@next eslint@latest
 ```
 
 ```sh [bun]
-$ bun add -d eslint-plugin-mark@next eslint@latest
+$ bun add -d eslint-markdown@next eslint@latest
 ```
 
 :::

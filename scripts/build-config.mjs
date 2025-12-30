@@ -8,7 +8,7 @@
 // --------------------------------------------------------------------------------
 
 import { writeFileSync } from 'node:fs';
-import markdown from 'eslint-plugin-mark';
+import markdown from 'eslint-markdown';
 import prettier from 'prettier'; // eslint-disable-line import/no-extraneous-dependencies -- Required
 
 // --------------------------------------------------------------------------------
@@ -21,7 +21,7 @@ import prettier from 'prettier'; // eslint-disable-line import/no-extraneous-dep
  */
 async function generateCode(configName, rules) {
   const url = new URL(
-    `../packages/eslint-plugin-mark/src/configs/${configName}.js`,
+    `../packages/eslint-markdown/src/configs/${configName}.js`,
     import.meta.url,
   );
   const prettierConfig = await prettier.resolveConfig(url);

@@ -1,5 +1,5 @@
 /**
- * @fileoverview This file declares constants used throughout the `eslint-plugin-mark` package.
+ * @fileoverview This file declares constants used throughout the `eslint-markdown` package.
  */
 
 // --------------------------------------------------------------------------------
@@ -12,7 +12,7 @@ import { createRequire } from 'node:module';
 // Declaration
 // --------------------------------------------------------------------------------
 
-/** @type {{ homepage: string, name: 'eslint-plugin-mark', version: string }} */
+/** @type {{ homepage: string, name: 'eslint-markdown', version: string }} */
 const { homepage, name, version } = createRequire(import.meta.url)('../../package.json');
 
 // --------------------------------------------------------------------------------

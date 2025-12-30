@@ -13,13 +13,13 @@ All packages are located in the `packages` directory, and the documentation can 
 1. Clone it to your local directory. ([Git](https://git-scm.com/downloads) is required.)
 
     ```sh
-    git clone https://github.com/lumirlumir/npm-eslint-plugin-mark.git
+    git clone https://github.com/lumirlumir/npm-eslint-markdown.git
     ```
 
-1. Move to the `npm-eslint-plugin-mark` directory.
+1. Move to the `npm-eslint-markdown` directory.
 
     ```sh
-    cd npm-eslint-plugin-mark
+    cd npm-eslint-markdown
     ```
 
 1. Install npm packages. ([Node.js](https://nodejs.org/en) is required.)
