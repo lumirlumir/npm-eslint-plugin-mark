@@ -9,7 +9,7 @@
 
 import { parse } from 'node:path';
 
-import mark from 'eslint-markdown';
+import md from 'eslint-markdown';
 import packageJson from 'eslint-markdown/package.json' with { type: 'json' };
 
 import { defineConfig } from 'vitepress';
@@ -55,7 +55,7 @@ export default defineConfig({
       'meta',
       {
         name: 'keywords',
-        content: 'eslint, plugin, mark, markdown, lint, linting, eslint-markdown',
+        content: 'eslint, plugin, mark, markdown, md, lint, linting, eslint-markdown',
       },
     ],
 
@@ -157,7 +157,7 @@ export default defineConfig({
           text: 'Rules',
           link: '/',
           collapsed: false,
-          items: Object.keys(mark.rules).map(ruleName => ({
+          items: Object.keys(md.rules).map(ruleName => ({
             text: ruleName,
             link: ruleName,
           })),
@@ -253,8 +253,8 @@ export default defineConfig({
   },
 
   markdown: {
-    config(md) {
-      md.use(groupIconMdPlugin);
+    config(markdown) {
+      markdown.use(groupIconMdPlugin);
     },
 
     codeTransformers: [
@@ -266,7 +266,7 @@ export default defineConfig({
         errorRendering: 'hover',
         explicitTrigger: /\beslint-check\b/,
         twoslasher: createTwoslasher({
-          eslintConfig: [mark.configs.base],
+          eslintConfig: [md.configs.base],
         }),
       }),
     ],
@@ -289,7 +289,7 @@ export default defineConfig({
     // Process only the files inside `docs/rules/`, excluding `index.md`.
     if (/^docs\/rules\/(?!index).+/.test(pageData.relativePath)) {
       const ruleName = parse(pageData.relativePath).name;
-      const rule = mark.rules[ruleName];
+      const rule = md.rules[ruleName];
 
       pageData.title = ruleName;
       pageData.frontmatter.title = ruleName;

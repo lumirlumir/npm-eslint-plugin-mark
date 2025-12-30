@@ -53,11 +53,11 @@ import markdown from '@eslint/markdown';
 export default function ${configName}(plugin) {
   /** @satisfies {Linter.Config} */
   return /** @type {const} */ ({
-    name: 'mark/${configName}',
+    name: 'md/${configName}',
     files: ['**/*.md'],
     plugins: {
       markdown,
-      get mark() {
+      get md() {
         return plugin;
       }
     },
@@ -90,14 +90,14 @@ const recommendedRules = {
 const stylisticRules = {};
 
 for (const [ruleName, rule] of Object.entries(markdown.rules)) {
-  allRules[`mark/${ruleName}`] = 'error';
+  allRules[`md/${ruleName}`] = 'error';
 
   if (rule.meta.docs.recommended === true) {
-    recommendedRules[`mark/${ruleName}`] = 'error';
+    recommendedRules[`md/${ruleName}`] = 'error';
   }
 
   if (rule.meta.docs.stylistic === true) {
-    stylisticRules[`mark/${ruleName}`] = 'error';
+    stylisticRules[`md/${ruleName}`] = 'error';
   }
 }
 

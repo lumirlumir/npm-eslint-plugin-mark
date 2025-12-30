@@ -29,7 +29,7 @@ Examples of **incorrect** code for this rule:
 #### With `{ h1: ["Introduction"], h2: ["Overview", "Installation"] }` Option
 
 ```md [incorrect.md] eslint-check
-<!-- eslint mark/allow-heading: ["error", { h1: ["Introduction"], h2: ["Overview", "Installation"] }] -->
+<!-- eslint md/allow-heading: ["error", { h1: ["Introduction"], h2: ["Overview", "Installation"] }] -->
 
 # Introduction
 
@@ -49,7 +49,7 @@ Examples of **incorrect** code for this rule:
 If you want to disallow all `h3` headings, you can set the `h3` option to an empty array. This will report any `h3` heading as an error.
 
 ```md [incorrect.md] eslint-check
-<!-- eslint mark/allow-heading: ["error", { h3: [] }] -->
+<!-- eslint md/allow-heading: ["error", { h3: [] }] -->
 
 # Introduction
 
@@ -75,7 +75,7 @@ Examples of **correct** code for this rule:
 This rule doesn't report any errors by default. You must configure it with the allowed heading values you want to enforce.
 
 ```md [correct.md] eslint-check
-<!-- eslint mark/allow-heading: "error" -->
+<!-- eslint md/allow-heading: "error" -->
 
 # Introduction
 
@@ -87,7 +87,7 @@ This rule doesn't report any errors by default. You must configure it with the a
 #### With `{ h1: ["Introduction"], h2: ["Overview", "Installation"] }` Option
 
 ```md [correct.md] eslint-check
-<!-- eslint mark/allow-heading: ["error", { h1: ["Introduction"], h2: ["Overview", "Installation"] }] -->
+<!-- eslint md/allow-heading: ["error", { h1: ["Introduction"], h2: ["Overview", "Installation"] }] -->
 
 # Introduction
 
@@ -101,7 +101,7 @@ This rule doesn't report any errors by default. You must configure it with the a
 If you want to allow any text for all headings, you can set each heading level to `false`. This will not restrict any headings.
 
 ```md [correct.md] eslint-check
-<!-- eslint mark/allow-heading: ["error", { h1: false, h2: false, h3: false, h4: false, h5: false, h6: false }] -->
+<!-- eslint md/allow-heading: ["error", { h1: false, h2: false, h3: false, h4: false, h5: false, h6: false }] -->
 
 # H1 Heading
 
@@ -119,7 +119,7 @@ If you want to allow any text for all headings, you can set each heading level t
 ## Options
 
 ```js
-'mark/allow-heading': ['error', {
+'md/allow-heading': ['error', {
   h1: false,
   h2: false,
   h3: false,

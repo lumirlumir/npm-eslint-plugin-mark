@@ -25,11 +25,11 @@ import markdown from '@eslint/markdown';
 export default function base(plugin) {
   /** @satisfies {Linter.Config} */
   return /** @type {const} */ ({
-    name: 'mark/base',
+    name: 'md/base',
     files: ['**/*.md'],
     plugins: {
       markdown,
-      get mark() {
+      get md() {
         return plugin;
       },
     },

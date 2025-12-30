@@ -20,7 +20,7 @@ Examples of **incorrect** code for this rule:
 #### Default
 
 ```md eslint-check
-<!-- eslint mark/require-link-title: 'error' -->
+<!-- eslint md/require-link-title: 'error' -->
 
 [Text](https://example.com)
 
@@ -42,7 +42,7 @@ Examples of **correct** code for this rule:
 #### Default
 
 ```md
-<!-- eslint mark/require-link-title: 'error' -->
+<!-- eslint md/require-link-title: 'error' -->
 
 [Text](https://example.com "Link title")
 
@@ -62,7 +62,7 @@ Examples of **correct** code for this rule:
 Please note that this rule doesn't report definition-style comments (e.g., `[//]: ...`) by default.
 
 ```md eslint-check
-<!-- eslint mark/require-link-title: 'error' -->
+<!-- eslint md/require-link-title: 'error' -->
 
 [Text][//]
 
@@ -74,7 +74,7 @@ Please note that this rule doesn't report definition-style comments (e.g., `[//]
 #### With `{ allowDefinitions: ['reference'] }` Option
 
 ```md eslint-check
-<!-- eslint mark/require-link-title: ['error', { allowDefinitions: ['reference'] }] -->
+<!-- eslint md/require-link-title: ['error', { allowDefinitions: ['reference'] }] -->
 
 [Text][reference]
 
@@ -84,7 +84,7 @@ Please note that this rule doesn't report definition-style comments (e.g., `[//]
 ## Options
 
 ```js
-'mark/require-link-title': ['error', {
+'md/require-link-title': ['error', {
   allowDefinitions: ['//'],
 }]
 ```

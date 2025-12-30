@@ -28,7 +28,7 @@ Examples of **incorrect** code for this rule:
 #### Default
 
   ```md eslint-check
-  <!-- eslint mark/no-git-conflict-marker: 'error' -->
+  <!-- eslint md/no-git-conflict-marker: 'error' -->
 
   # My Document
 
@@ -44,7 +44,7 @@ Examples of **incorrect** code for this rule:
 #### With `{ skipCode: false }` Option
 
   ````md eslint-check
-  <!-- eslint mark/no-git-conflict-marker: ['error', { skipCode: false }] -->
+  <!-- eslint md/no-git-conflict-marker: ['error', { skipCode: false }] -->
 
   # My Document
 
@@ -66,7 +66,7 @@ Examples of **correct** code for this rule:
 #### Default
 
   ```md eslint-check
-  <!-- eslint mark/no-git-conflict-marker: 'error' -->
+  <!-- eslint md/no-git-conflict-marker: 'error' -->
 
   # My Document
 
@@ -78,7 +78,7 @@ Examples of **correct** code for this rule:
 #### With `{ skipCode: true }` Option
 
   ````md eslint-check
-  <!-- eslint mark/no-git-conflict-marker: ['error', { skipCode: true }] -->
+  <!-- eslint md/no-git-conflict-marker: ['error', { skipCode: true }] -->
 
   # My Document
 
@@ -96,7 +96,7 @@ Examples of **correct** code for this rule:
 ## Options
 
 ```js
-'mark/no-git-conflict-marker': ['error', {
+'md/no-git-conflict-marker': ['error', {
   skipCode: true,
 }]
 ```

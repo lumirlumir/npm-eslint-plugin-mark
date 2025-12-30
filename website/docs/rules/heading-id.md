@@ -42,7 +42,7 @@ export default [
   // ...
   {
     rules: {
-      'mark/heading-id': 'error', // [!code focus]
+      'md/heading-id': 'error', // [!code focus]
     },
   },
   // ...
@@ -78,7 +78,7 @@ export default [
   // ...
   {
     rules: {
-      'mark/heading-id': 'error', // [!code focus]
+      'md/heading-id': 'error', // [!code focus]
     },
   },
   // ...
@@ -90,7 +90,7 @@ export default [
 ## Options
 
 ```js
-'mark/heading-id': [
+'md/heading-id': [
   'error',
   'always',
   {

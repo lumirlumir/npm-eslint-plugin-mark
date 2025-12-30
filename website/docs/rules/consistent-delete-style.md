@@ -16,7 +16,7 @@ Examples of **incorrect** code for this rule:
 #### Default
 
 ```md eslint-check
-<!-- eslint mark/consistent-delete-style: 'error' -->
+<!-- eslint md/consistent-delete-style: 'error' -->
 
 ~foo~
 ~~bar~~
@@ -28,7 +28,7 @@ _~~foo~~_
 ```
 
 ```md eslint-check
-<!-- eslint mark/consistent-delete-style: 'error' -->
+<!-- eslint md/consistent-delete-style: 'error' -->
 
 ~~foo~~
 ~bar~
@@ -42,7 +42,7 @@ _~~bar~~_
 #### With `{ style: '~' }` Option
 
 ```md eslint-check
-<!-- eslint mark/consistent-delete-style: ['error', { style: '~' }] -->
+<!-- eslint md/consistent-delete-style: ['error', { style: '~' }] -->
 
 ~~foo~~
 ~~_bar_~~
@@ -52,7 +52,7 @@ _~~baz~~_
 #### With `{ style: '~~' }` Option
 
 ```md eslint-check
-<!-- eslint mark/consistent-delete-style: ['error', { style: '~~' }] -->
+<!-- eslint md/consistent-delete-style: ['error', { style: '~~' }] -->
 
 ~foo~
 __~bar~__
@@ -66,7 +66,7 @@ Examples of **correct** code for this rule:
 #### Default
 
 ```md eslint-check
-<!-- eslint mark/consistent-delete-style: 'error' -->
+<!-- eslint md/consistent-delete-style: 'error' -->
 
 ~foo~
 ~bar~
@@ -75,7 +75,7 @@ __~baz~__
 ```
 
 ```md eslint-check
-<!-- eslint mark/consistent-delete-style: 'error' -->
+<!-- eslint md/consistent-delete-style: 'error' -->
 
 ~~foo~~
 ~~bar~~
@@ -86,7 +86,7 @@ _~~qux~~_
 #### With `{ style: '~' }` Option
 
 ```md eslint-check
-<!-- eslint mark/consistent-delete-style: ['error', { style: '~' }] -->
+<!-- eslint md/consistent-delete-style: ['error', { style: '~' }] -->
 
 ~foo~
 ~bar~
@@ -97,7 +97,7 @@ __~baz~__
 #### With `{ style: '~~' }` Option
 
 ```md eslint-check
-<!-- eslint mark/consistent-delete-style: ['error', { style: '~~' }] -->
+<!-- eslint md/consistent-delete-style: ['error', { style: '~~' }] -->
 
 ~~foo~~
 ~~bar~~
@@ -108,7 +108,7 @@ _~~qux~~_
 ## Options
 
 ```js
-'mark/consistent-delete-style': ['error', {
+'md/consistent-delete-style': ['error', {
   style: 'consistent',
 }]
 ```

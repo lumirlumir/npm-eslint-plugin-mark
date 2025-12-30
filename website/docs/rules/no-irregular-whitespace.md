@@ -57,7 +57,7 @@ Examples of **incorrect** code for this rule:
 #### Default
 
 ```md eslint-check
-<!-- eslint mark/no-irregular-whitespace: 'error' -->
+<!-- eslint md/no-irregular-whitespace: 'error' -->
 
 \u000B - Line Tabulation (\v) - <VT>  <= Here
 \u0085 - Next Line - <NEL>  <= Here
@@ -83,7 +83,7 @@ Examples of **incorrect** code for this rule:
 #### With `{ skipCode: false }` Option
 
 `````md eslint-check
-<!-- eslint mark/no-irregular-whitespace: ['error', { skipCode: false }] -->
+<!-- eslint md/no-irregular-whitespace: ['error', { skipCode: false }] -->
 
 ```md
 \u000B - Line Tabulation (\v) - <VT>  <= Here
@@ -107,7 +107,7 @@ Examples of **incorrect** code for this rule:
 #### With `{ skipInlineCode: false }` Option
 
 ```md eslint-check
-<!-- eslint mark/no-irregular-whitespace: ['error', { skipInlineCode: false }] -->
+<!-- eslint md/no-irregular-whitespace: ['error', { skipInlineCode: false }] -->
 
 \u000B - Line Tabulation (\v) - <VT> `` <= Here
 \u0085 - Next Line - <NEL> `` <= Here
@@ -122,7 +122,7 @@ Examples of **correct** code for this rule:
 <!-- markdownlint-disable no-hard-tabs -->
 
 ```md eslint-check
-<!-- eslint mark/no-irregular-whitespace: 'error' -->
+<!-- eslint md/no-irregular-whitespace: 'error' -->
 
 \u0009 - Horizontal Tab (\t) - <TAB> 	 <= Here
 \u0020 - Space - <SP>   <= Here
@@ -133,7 +133,7 @@ Examples of **correct** code for this rule:
 #### With `{ skipCode: true }` Option
 
 `````md eslint-check
-<!-- eslint mark/no-irregular-whitespace: ['error', { skipCode: true }] -->
+<!-- eslint md/no-irregular-whitespace: ['error', { skipCode: true }] -->
 
 ```md
 \u000B - Line Tabulation (\v) - <VT>  <= Here
@@ -157,7 +157,7 @@ Examples of **correct** code for this rule:
 #### With `{ skipInlineCode: true }` Option
 
 ```md eslint-check
-<!-- eslint mark/no-irregular-whitespace: ['error', { skipInlineCode: true }] -->
+<!-- eslint md/no-irregular-whitespace: ['error', { skipInlineCode: true }] -->
 
 \u000B - Line Tabulation (\v) - <VT> `` <= Here
 \u0085 - Next Line - <NEL> `` <= Here
@@ -166,7 +166,7 @@ Examples of **correct** code for this rule:
 ## Options
 
 ```js
-'mark/no-irregular-whitespace': ['error', {
+'md/no-irregular-whitespace': ['error', {
   skipCode: true,
   skipInlineCode: true,
 }]

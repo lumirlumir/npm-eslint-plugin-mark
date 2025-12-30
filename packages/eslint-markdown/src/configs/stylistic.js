@@ -25,11 +25,11 @@ import markdown from '@eslint/markdown';
 export default function stylistic(plugin) {
   /** @satisfies {Linter.Config} */
   return /** @type {const} */ ({
-    name: 'mark/stylistic',
+    name: 'md/stylistic',
     files: ['**/*.md'],
     plugins: {
       markdown,
-      get mark() {
+      get md() {
         return plugin;
       },
     },
@@ -38,10 +38,10 @@ export default function stylistic(plugin) {
     },
     language: 'markdown/gfm',
     rules: {
-      'mark/consistent-delete-style': 'error',
-      'mark/consistent-emphasis-style': 'error',
-      'mark/consistent-strong-style': 'error',
-      'mark/consistent-thematic-break-style': 'error',
+      'md/consistent-delete-style': 'error',
+      'md/consistent-emphasis-style': 'error',
+      'md/consistent-strong-style': 'error',
+      'md/consistent-thematic-break-style': 'error',
     },
   });
 }

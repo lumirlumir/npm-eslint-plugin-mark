@@ -30,7 +30,7 @@ This rule identifies paragraphs that:
 Examples of **incorrect** code for this rule:
 
 ```md /**First Chapter**/ /__Second Chapter__/
-<!-- eslint mark/no-bold-paragraph: "error" -->
+<!-- eslint md/no-bold-paragraph: "error" -->
 
 # Book
 
@@ -48,7 +48,7 @@ Content of the second chapter
 Examples of **correct** code for this rule:
 
 ```md
-<!-- eslint mark/no-bold-paragraph: "error" -->
+<!-- eslint md/no-bold-paragraph: "error" -->
 
 # Book
 

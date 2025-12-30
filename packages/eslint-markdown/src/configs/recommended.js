@@ -25,11 +25,11 @@ import markdown from '@eslint/markdown';
 export default function recommended(plugin) {
   /** @satisfies {Linter.Config} */
   return /** @type {const} */ ({
-    name: 'mark/recommended',
+    name: 'md/recommended',
     files: ['**/*.md'],
     plugins: {
       markdown,
-      get mark() {
+      get md() {
         return plugin;
       },
     },
@@ -39,15 +39,15 @@ export default function recommended(plugin) {
     language: 'markdown/gfm',
     rules: {
       'markdown/no-unused-definitions': 'error',
-      'mark/alt-text': 'error',
-      'mark/code-lang-shorthand': 'error',
-      'mark/no-bold-paragraph': 'error',
-      'mark/no-control-character': 'error',
-      'mark/no-curly-quote': 'error',
-      'mark/no-double-space': 'error',
-      'mark/no-git-conflict-marker': 'error',
-      'mark/no-irregular-dash': 'error',
-      'mark/no-irregular-whitespace': 'error',
+      'md/alt-text': 'error',
+      'md/code-lang-shorthand': 'error',
+      'md/no-bold-paragraph': 'error',
+      'md/no-control-character': 'error',
+      'md/no-curly-quote': 'error',
+      'md/no-double-space': 'error',
+      'md/no-git-conflict-marker': 'error',
+      'md/no-irregular-dash': 'error',
+      'md/no-irregular-whitespace': 'error',
     },
   });
 }

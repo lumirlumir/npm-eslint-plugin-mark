@@ -16,7 +16,7 @@ Examples of **incorrect** code for this rule:
 #### Default
 
 ```md eslint-check
-<!-- eslint mark/consistent-emphasis-style: 'error' -->
+<!-- eslint md/consistent-emphasis-style: 'error' -->
 
 *foo*
 _bar_
@@ -30,7 +30,7 @@ ___foo___
 ```
 
 ```md eslint-check
-<!-- eslint mark/consistent-emphasis-style: 'error' -->
+<!-- eslint md/consistent-emphasis-style: 'error' -->
 
 _foo_
 *bar*
@@ -46,7 +46,7 @@ ___bar___
 #### With `{ style: '*' }` Option
 
 ```md eslint-check
-<!-- eslint mark/consistent-emphasis-style: ['error', { style: '*' }] -->
+<!-- eslint md/consistent-emphasis-style: ['error', { style: '*' }] -->
 
 _foo_
 **_bar_**
@@ -57,7 +57,7 @@ ___qux___
 #### With `{ style: '_' }` Option
 
 ```md eslint-check
-<!-- eslint mark/consistent-emphasis-style: ['error', { style: '_' }] -->
+<!-- eslint md/consistent-emphasis-style: ['error', { style: '_' }] -->
 
 *foo*
 __*bar*__
@@ -72,7 +72,7 @@ Examples of **correct** code for this rule:
 #### Default
 
 ```md eslint-check
-<!-- eslint mark/consistent-emphasis-style: 'error' -->
+<!-- eslint md/consistent-emphasis-style: 'error' -->
 
 *foo*
 __*bar*__
@@ -81,7 +81,7 @@ __*bar*__
 ```
 
 ```md eslint-check
-<!-- eslint mark/consistent-emphasis-style: 'error' -->
+<!-- eslint md/consistent-emphasis-style: 'error' -->
 
 _foo_
 **_bar_**
@@ -92,7 +92,7 @@ ___qux___
 #### With `{ style: '*' }` Option
 
 ```md eslint-check
-<!-- eslint mark/consistent-emphasis-style: ['error', { style: '*' }] -->
+<!-- eslint md/consistent-emphasis-style: ['error', { style: '*' }] -->
 
 *foo*
 __*bar*__
@@ -103,7 +103,7 @@ __*bar*__
 #### With `{ style: '_' }` Option
 
 ```md eslint-check
-<!-- eslint mark/consistent-emphasis-style: ['error', { style: '_' }] -->
+<!-- eslint md/consistent-emphasis-style: ['error', { style: '_' }] -->
 
 _foo_
 **_bar_**
@@ -114,7 +114,7 @@ ___qux___
 ## Options
 
 ```js
-'mark/consistent-emphasis-style': ['error', {
+'md/consistent-emphasis-style': ['error', {
   style: 'consistent',
 }]
 ```
