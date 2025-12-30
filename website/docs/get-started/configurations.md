@@ -682,21 +682,27 @@ export default defineConfig([
 import { defineConfig } from 'eslint/config';
 import md from 'eslint-markdown';
 
-export default defineConfig([md.configs.all]);
+export default defineConfig([
+  md.configs.all,
+]);
 ```
 
 ```js [eslint.config.cjs]
 const { defineConfig } = require('eslint/config');
 const md = require('eslint-markdown');
 
-module.exports = defineConfig([md.configs.all]);
+module.exports = defineConfig([
+  md.configs.all,
+]);
 ```
 
 ```ts [eslint.config.ts]
 import { defineConfig } from 'eslint/config';
 import md from 'eslint-markdown';
 
-export default defineConfig([md.configs.all]);
+export default defineConfig([
+  md.configs.all,
+]);
 ```
 
 :::
