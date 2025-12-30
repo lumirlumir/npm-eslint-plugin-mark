@@ -42,7 +42,7 @@ describe(getFileName(import.meta.url), () => {
     });
   });
 
-  describe('Cascading style configuration should work correctly', async () => {
+  describe('Cascading style configuration should work correctly', () => {
     it('`all` configuration', () => {
       const linter = new Linter();
       const cascadingStyleConfig = defineConfig([plugin.configs.all]);
@@ -118,7 +118,7 @@ describe(getFileName(import.meta.url), () => {
     });
   });
 
-  describe('Extends style configuration should work correctly', async () => {
+  describe('Extends style configuration should work correctly', () => {
     it('`all` configuration', () => {
       const linter = new Linter();
       const extendsStyleConfig = defineConfig([
