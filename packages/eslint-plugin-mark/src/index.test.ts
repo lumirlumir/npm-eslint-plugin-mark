@@ -59,9 +59,16 @@ type RuleName = keyof typeof plugin.rules;
 // #region configs
 
 plugin.configs.all satisfies Linter.Config;
+plugin.configs.all.name satisfies 'mark/all';
+
 plugin.configs.base satisfies Linter.Config;
+plugin.configs.base.name satisfies 'mark/base';
+
 plugin.configs.recommended satisfies Linter.Config;
+plugin.configs.recommended.name satisfies 'mark/recommended';
+
 plugin.configs.stylistic satisfies Linter.Config;
+plugin.configs.stylistic.name satisfies 'mark/stylistic';
 
 // #endregion configs
 // --------------------------------------------------------------------------------
