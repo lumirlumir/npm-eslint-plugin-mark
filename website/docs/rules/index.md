@@ -13,8 +13,8 @@ const { ruleMetas } = data;
 
 | Emoji              | Description                                                                                                                                             |
 | :----------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| :white_check_mark: | Using `recommended` config from `eslint-markdown` in a config file enables this rule.                                                                   |
-| :art:              | Using `stylistic` config from `eslint-markdown` in a config file enables this rule.                                                                     |
+| :white_check_mark: | Using [`recommended`](../get-started/configurations.md#recommended) config from `eslint-markdown` in a config file enables this rule.                   |
+| :art:              | Using [`stylistic`](../get-started/configurations.md#stylistic) config from `eslint-markdown` in a config file enables this rule.                       |
 | :wrench:           | Some problems reported by this rule are automatically fixable by `--fix` [CLI](https://eslint.org/docs/latest/use/command-line-interface#--fix) option. |
 | :bulb:             | Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/latest/use/core-concepts#rule-suggestions).    |
 | :star:             | Rule is applicable to [CommonMark](https://commonmark.org/).                                                                                            |

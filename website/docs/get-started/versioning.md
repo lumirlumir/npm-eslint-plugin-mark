@@ -46,7 +46,7 @@ According to our policy, any minor update may report more linting errors than th
   - A new fixer or suggestion for an existing rule.
   - An existing rule is deprecated.
 - Configs
-  - `all` config is updated. (e.g., rule additions, rule removals, most rule option updates).
+  - [`all`](configurations.md#all) config is updated. (e.g., rule additions, rule removals, most rule option updates).
 - Others
   - New capabilities to the public API are added (new classes, new methods, new arguments to existing methods, etc.).
 
@@ -61,8 +61,8 @@ According to our policy, any minor update may report more linting errors than th
   - Changes the default option of a rule.
   - Changes a rule's schema to be stricter.
 - Configs
-  - `recommended` config is updated. (e.g., rule additions, rule removals, most rule option updates).
-  - `stylistic` config is updated. (e.g., rule additions, rule removals, most rule option updates).
-  - `base` config is updated.
+  - [`recommended`](configurations.md#recommended) config is updated. (e.g., rule additions, rule removals, most rule option updates).
+  - [`stylistic`](configurations.md#stylistic) config is updated. (e.g., rule additions, rule removals, most rule option updates).
+  - [`base`](configurations.md#base) config is updated.
 - Others
   - Part of the public API is removed or changed in an incompatible way.
