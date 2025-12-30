@@ -7,7 +7,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import base from './base.js';
+import markdown from '@eslint/markdown';
 
 // --------------------------------------------------------------------------------
 // Typedef
@@ -23,8 +23,15 @@ import base from './base.js';
 
 /** @satisfies {Linter.Config} */
 export default /** @type {const} */ ({
-  ...base,
   name: 'mark/stylistic',
+  files: ['**/*.md'],
+  plugins: {
+    markdown,
+  },
+  languageOptions: {
+    frontmatter: 'yaml',
+  },
+  language: 'markdown/gfm',
   rules: {
     'mark/consistent-delete-style': 'error',
     'mark/consistent-emphasis-style': 'error',
