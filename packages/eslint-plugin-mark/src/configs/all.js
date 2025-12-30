@@ -14,47 +14,53 @@ import markdown from '@eslint/markdown';
 // --------------------------------------------------------------------------------
 
 /**
- * @import { Linter } from "eslint";
+ * @import { ESLint, Linter } from "eslint";
  */
 
 // --------------------------------------------------------------------------------
 // Export
 // --------------------------------------------------------------------------------
 
-/** @satisfies {Linter.Config} */
-export default /** @type {const} */ ({
-  name: 'mark/all',
-  files: ['**/*.md'],
-  plugins: {
-    markdown,
-  },
-  languageOptions: {
-    frontmatter: 'yaml',
-  },
-  language: 'markdown/gfm',
-  rules: {
-    'markdown/no-unused-definitions': 'error',
-    'mark/allow-heading': 'error',
-    'mark/allow-image-url': 'error',
-    'mark/allow-link-url': 'error',
-    'mark/alt-text': 'error',
-    'mark/code-lang-shorthand': 'error',
-    'mark/consistent-delete-style': 'error',
-    'mark/consistent-emphasis-style': 'error',
-    'mark/consistent-strong-style': 'error',
-    'mark/consistent-thematic-break-style': 'error',
-    'mark/en-capitalization': 'error',
-    'mark/heading-id': 'error',
-    'mark/no-bold-paragraph': 'error',
-    'mark/no-control-character': 'error',
-    'mark/no-curly-quote': 'error',
-    'mark/no-double-space': 'error',
-    'mark/no-emoji': 'error',
-    'mark/no-git-conflict-marker': 'error',
-    'mark/no-irregular-dash': 'error',
-    'mark/no-irregular-whitespace': 'error',
-    'mark/no-url-trailing-slash': 'error',
-    'mark/require-image-title': 'error',
-    'mark/require-link-title': 'error',
-  },
-});
+/** @param {ESLint.Plugin} plugin */
+export default function all(plugin) {
+  /** @satisfies {Linter.Config} */
+  return /** @type {const} */ ({
+    name: 'mark/all',
+    files: ['**/*.md'],
+    plugins: {
+      markdown,
+      get mark() {
+        return plugin;
+      },
+    },
+    languageOptions: {
+      frontmatter: 'yaml',
+    },
+    language: 'markdown/gfm',
+    rules: {
+      'markdown/no-unused-definitions': 'error',
+      'mark/allow-heading': 'error',
+      'mark/allow-image-url': 'error',
+      'mark/allow-link-url': 'error',
+      'mark/alt-text': 'error',
+      'mark/code-lang-shorthand': 'error',
+      'mark/consistent-delete-style': 'error',
+      'mark/consistent-emphasis-style': 'error',
+      'mark/consistent-strong-style': 'error',
+      'mark/consistent-thematic-break-style': 'error',
+      'mark/en-capitalization': 'error',
+      'mark/heading-id': 'error',
+      'mark/no-bold-paragraph': 'error',
+      'mark/no-control-character': 'error',
+      'mark/no-curly-quote': 'error',
+      'mark/no-double-space': 'error',
+      'mark/no-emoji': 'error',
+      'mark/no-git-conflict-marker': 'error',
+      'mark/no-irregular-dash': 'error',
+      'mark/no-irregular-whitespace': 'error',
+      'mark/no-url-trailing-slash': 'error',
+      'mark/require-image-title': 'error',
+      'mark/require-link-title': 'error',
+    },
+  });
+}

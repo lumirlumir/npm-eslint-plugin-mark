@@ -6,8 +6,8 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import { PKG_NAME as name, PKG_VERSION as version } from './core/constants.js';
 import { all, base, recommended, stylistic } from './configs/index.js';
+import { PKG_NAME as name, PKG_VERSION as version } from './core/constants.js';
 import rules from './rules/index.js';
 
 // --------------------------------------------------------------------------------
@@ -15,14 +15,15 @@ import rules from './rules/index.js';
 // --------------------------------------------------------------------------------
 
 /**
- * @import { ESLint } from "eslint";
+ * @import { ESLint, Linter } from "eslint";
  */
 
 // --------------------------------------------------------------------------------
 // Export
 // --------------------------------------------------------------------------------
 
-const plugin = {
+/** @satisfies {ESLint.Plugin} */
+const plugin = /** @type {const} */ ({
   meta: {
     name,
     version,
@@ -31,21 +32,23 @@ const plugin = {
   rules,
 
   configs: {
-    all,
-    base,
-    recommended,
-    stylistic,
+    /** @returns {Linter.Config} */
+    get all() {
+      return all(plugin);
+    },
+    /** @returns {Linter.Config} */
+    get base() {
+      return base(plugin);
+    },
+    /** @returns {Linter.Config} */
+    get recommended() {
+      return recommended(plugin);
+    },
+    /** @returns {Linter.Config} */
+    get stylistic() {
+      return stylistic(plugin);
+    },
   },
-};
+});
 
-// @ts-expect-error -- Intentionally assign the `plugin` to each config's `plugins` to support `extends` style configuration.
-plugin.configs.all.plugins.mark = plugin;
-// @ts-expect-error -- Intentionally assign the `plugin` to each config's `plugins` to support `extends` style configuration.
-plugin.configs.base.plugins.mark = plugin;
-// @ts-expect-error -- Intentionally assign the `plugin` to each config's `plugins` to support `extends` style configuration.
-plugin.configs.recommended.plugins.mark = plugin;
-// @ts-expect-error -- Intentionally assign the `plugin` to each config's `plugins` to support `extends` style configuration.
-plugin.configs.stylistic.plugins.mark = plugin;
-
-/** @type {ESLint.Plugin} */
 export default plugin;

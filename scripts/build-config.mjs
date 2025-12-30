@@ -42,26 +42,32 @@ import markdown from '@eslint/markdown';
 // --------------------------------------------------------------------------------
 
 /**
- * @import { Linter } from "eslint";
+ * @import { ESLint, Linter } from "eslint";
  */
 
 // --------------------------------------------------------------------------------
 // Export
 // --------------------------------------------------------------------------------
 
-/** @satisfies {Linter.Config} */
-export default /** @type {const} */ ({
-  name: 'mark/${configName}',
-  files: ['**/*.md'],
-  plugins: {
-    markdown,
-  },
-  languageOptions: {
-    frontmatter: 'yaml',
-  },
-  language: 'markdown/gfm',
-  ${configName === 'base' ? '' : `rules: ${JSON.stringify(rules)},`}
-});
+/** @param {ESLint.Plugin} plugin */
+export default function ${configName}(plugin) {
+  /** @satisfies {Linter.Config} */
+  return /** @type {const} */ ({
+    name: 'mark/${configName}',
+    files: ['**/*.md'],
+    plugins: {
+      markdown,
+      get mark() {
+        return plugin;
+      }
+    },
+    languageOptions: {
+      frontmatter: 'yaml',
+    },
+    language: 'markdown/gfm',
+    ${configName === 'base' ? '' : `rules: ${JSON.stringify(rules)},`}
+  });
+}
 `.trimStart();
 
   writeFileSync(

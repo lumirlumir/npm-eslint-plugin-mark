@@ -14,28 +14,34 @@ import markdown from '@eslint/markdown';
 // --------------------------------------------------------------------------------
 
 /**
- * @import { Linter } from "eslint";
+ * @import { ESLint, Linter } from "eslint";
  */
 
 // --------------------------------------------------------------------------------
 // Export
 // --------------------------------------------------------------------------------
 
-/** @satisfies {Linter.Config} */
-export default /** @type {const} */ ({
-  name: 'mark/stylistic',
-  files: ['**/*.md'],
-  plugins: {
-    markdown,
-  },
-  languageOptions: {
-    frontmatter: 'yaml',
-  },
-  language: 'markdown/gfm',
-  rules: {
-    'mark/consistent-delete-style': 'error',
-    'mark/consistent-emphasis-style': 'error',
-    'mark/consistent-strong-style': 'error',
-    'mark/consistent-thematic-break-style': 'error',
-  },
-});
+/** @param {ESLint.Plugin} plugin */
+export default function stylistic(plugin) {
+  /** @satisfies {Linter.Config} */
+  return /** @type {const} */ ({
+    name: 'mark/stylistic',
+    files: ['**/*.md'],
+    plugins: {
+      markdown,
+      get mark() {
+        return plugin;
+      },
+    },
+    languageOptions: {
+      frontmatter: 'yaml',
+    },
+    language: 'markdown/gfm',
+    rules: {
+      'mark/consistent-delete-style': 'error',
+      'mark/consistent-emphasis-style': 'error',
+      'mark/consistent-strong-style': 'error',
+      'mark/consistent-thematic-break-style': 'error',
+    },
+  });
+}

@@ -14,22 +14,28 @@ import markdown from '@eslint/markdown';
 // --------------------------------------------------------------------------------
 
 /**
- * @import { Linter } from "eslint";
+ * @import { ESLint, Linter } from "eslint";
  */
 
 // --------------------------------------------------------------------------------
 // Export
 // --------------------------------------------------------------------------------
 
-/** @satisfies {Linter.Config} */
-export default /** @type {const} */ ({
-  name: 'mark/base',
-  files: ['**/*.md'],
-  plugins: {
-    markdown,
-  },
-  languageOptions: {
-    frontmatter: 'yaml',
-  },
-  language: 'markdown/gfm',
-});
+/** @param {ESLint.Plugin} plugin */
+export default function base(plugin) {
+  /** @satisfies {Linter.Config} */
+  return /** @type {const} */ ({
+    name: 'mark/base',
+    files: ['**/*.md'],
+    plugins: {
+      markdown,
+      get mark() {
+        return plugin;
+      },
+    },
+    languageOptions: {
+      frontmatter: 'yaml',
+    },
+    language: 'markdown/gfm',
+  });
+}
