@@ -64,9 +64,9 @@ export default defineConfig({
     ['meta', { property: 'og:url', content: URL_HOMEPAGE }],
     ['meta', { property: 'og:title', content: PKG_NAME }],
     ['meta', { property: 'og:description', content: PKG_DESCRIPTION }],
-    ['meta', { property: 'og:image', content: `${URL_HOMEPAGE}/logo-og.png` }],
+    ['meta', { property: 'og:image', content: `${URL_HOMEPAGE}/logo-og.jpg` }],
     ['meta', { property: 'og:image:width', content: '1280' }],
-    ['meta', { property: 'og:image:height', content: '640' }],
+    ['meta', { property: 'og:image:height', content: '633' }],
     ['meta', { property: 'og:site_name', content: PKG_NAME }],
     ['meta', { property: 'og:article:author', content: PKG_AUTHOR }],
 
@@ -74,7 +74,7 @@ export default defineConfig({
     ['meta', { name: 'twitter:url', content: URL_HOMEPAGE }],
     ['meta', { name: 'twitter:title', content: PKG_NAME }],
     ['meta', { name: 'twitter:description', content: PKG_DESCRIPTION }],
-    ['meta', { name: 'twitter:image', content: `${URL_HOMEPAGE}/logo-og.png` }],
+    ['meta', { name: 'twitter:image', content: `${URL_HOMEPAGE}/logo-og.jpg` }],
     ['meta', { name: 'twitter:creator', content: PKG_AUTHOR }],
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
 
