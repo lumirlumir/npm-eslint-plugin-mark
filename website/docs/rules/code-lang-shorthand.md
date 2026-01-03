@@ -9,7 +9,7 @@ Using shorthand language identifiers offers several advantages: they improve rea
 
 Note that the code block language identifiers are **case-insensitive**, meaning `JavaScript`, `javascript`, and `JAVASCRIPT` are all treated as the same language identifier.
 
-You can see the full list of [language identifiers shorthand mapping](https://github.com/lumirlumir/npm-eslint-markdown/blob/main/packages/eslint-markdown/src/rules/code-lang-shorthand/code-lang-shorthand.js#L31-L101) in the source code.
+You can see the full list of [language identifiers shorthand mapping](https://github.com/lumirlumir/npm-eslint-plugin-mark/blob/main/packages/eslint-plugin-mark/src/rules/code-lang-shorthand/code-lang-shorthand.js#L31-L101) in the source code.
 
 ## Examples
 
@@ -19,10 +19,8 @@ Examples of **incorrect** code for this rule:
 
 #### Default
 
-::: code-group
-
-````md [incorrect.md] eslint-check
-<!-- eslint md/code-lang-shorthand: "error" -->
+````md eslint-check
+<!-- eslint mark/code-lang-shorthand: 'error' -->
 
 ```javascript
 console.log('Hello, world!');
@@ -37,46 +35,15 @@ Hello, world!
 ```
 ````
 
-```js [eslint.config.mjs] {5}
-export default [
-  // ...
-  {
-    rules: {
-      'md/code-lang-shorthand': 'error', // [!code focus]
-    },
-  },
-  // ...
-];
-```
-
-:::
-
 #### With `override: { example: 'ex' }` Option
 
-::: code-group
+````md eslint-check
+<!-- eslint mark/code-lang-shorthand: ['error', { override: { example: 'ex' } }] -->
 
-````md [incorrect.md]
-<!-- [!code word:example:1] -->
 ```example
 Welcome to the example language!
 ```
 ````
-
-```js [eslint.config.mjs] {5-7}
-export default [
-  // ...
-  {
-    rules: {
-      'md/code-lang-shorthand': ['error', { // [!code focus]
-        override: { example: 'ex' }, // [!code focus]
-      }], // [!code focus]
-    },
-  },
-  // ...
-];
-```
-
-:::
 
 ### :white_check_mark: Correct {#correct}
 
@@ -84,9 +51,9 @@ Examples of **correct** code for this rule:
 
 #### Default
 
-::: code-group
+````md eslint-check
+<!-- eslint mark/code-lang-shorthand: 'error' -->
 
-````md [correct.md]
 ```js
 console.log('Hello, world!');
 ```
@@ -100,25 +67,11 @@ Hello, world!
 ```
 ````
 
-```js [eslint.config.mjs] {5}
-export default [
-  // ...
-  {
-    rules: {
-      'md/code-lang-shorthand': 'error', // [!code focus]
-    },
-  },
-  // ...
-];
-```
+#### With `allow: ['javascript', 'typescript']` Option
 
-:::
+````md eslint-check
+<!-- eslint mark/code-lang-shorthand: ['error', { allow: ['javascript', 'typescript'] }] -->
 
-#### With `ignores: ['javascript', 'typescript']` Option
-
-::: code-group
-
-````md [correct.md]
 ```javascript
 console.log('Hello, world!');
 ```
@@ -128,48 +81,32 @@ console.log('Hello, world!');
 ```
 ````
 
-```js [eslint.config.mjs] {5-7}
-export default [
-  // ...
-  {
-    rules: {
-      'md/code-lang-shorthand': ['error', { // [!code focus]
-        ignores: ['javascript', 'typescript'], // [!code focus]
-      }], // [!code focus]
-    },
-  },
-  // ...
-];
-```
-
-:::
-
 ## Options
 
 ```js
-'md/code-lang-shorthand': ['error', {
-  ignores: [],
+'mark/code-lang-shorthand': ['error', {
+  allow: [],
   override: {},
 }]
 ```
 
-### `ignores`
+### `allow`
 
-> Default: `[]`
+> Type: `string[]` / Default: `[]`
 
-An array of code block language identifiers to ignore. Each value should be a **lowercase**, unabridged language identifier.
+An array of code block language identifiers to allow. Each value should be a **lowercase**, unabridged language identifier.
 
-For example, to ignore the `javascript` and `typescript` language identifiers:
+For example, to allow the `javascript` and `typescript` language identifiers:
 
 ```js
-'md/code-lang-shorthand': ['error', {
-  ignores: ['javascript', 'typescript'],
+'mark/code-lang-shorthand': ['error', {
+  allow: ['javascript', 'typescript'],
 }]
 ```
 
 ### `override`
 
-> Default: `{}`
+> Type: `Record<string, string>` / Default: `{}`
 
 An object where the key is the unabridged language identifier and the value is the abbreviated form.
 
@@ -178,7 +115,7 @@ An object where the key is the unabridged language identifier and the value is t
 For example, to shorten the `example` language identifier to `ex`:
 
 ```js
-'md/code-lang-shorthand': ['error', {
+'mark/code-lang-shorthand': ['error', {
   override: {
     example: 'ex',
   },
@@ -190,7 +127,7 @@ For example, to shorten the `example` language identifier to `ex`:
 For example, to change the default abbreviation for `javascript` to `mjs`:
 
 ```js
-'md/code-lang-shorthand': ['error', {
+'mark/code-lang-shorthand': ['error', {
   override: {
     javascript: 'mjs',
   },

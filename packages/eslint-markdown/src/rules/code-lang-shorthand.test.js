@@ -30,7 +30,7 @@ const foo = 'bar';
 \`\`\``,
     },
 
-    // Options - ignores
+    // Options - allow
     {
       name: 'Ignored lang identifier',
       code: `\`\`\`javascript
@@ -38,7 +38,7 @@ const foo = 'bar';
 \`\`\``,
       options: [
         {
-          ignores: ['javascript'],
+          allow: ['javascript'],
         },
       ],
     },
@@ -53,7 +53,7 @@ const foo = 'bar';
 \`\`\``,
       options: [
         {
-          ignores: ['javascript', 'typescript'],
+          allow: ['javascript', 'typescript'],
         },
       ],
     },
