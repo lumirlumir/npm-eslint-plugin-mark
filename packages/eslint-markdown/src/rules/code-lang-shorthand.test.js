@@ -109,6 +109,25 @@ const foo = 'bar';
         },
       ],
     },
+    {
+      name: 'Allow and override lang identifiers - 3',
+      code: `\`\`\`abcdefg
+1234567890
+\`\`\`
+
+\`\`\`example
+1234567890
+\`\`\``,
+      options: [
+        {
+          allow: ['abcdefg', 'example'],
+          override: {
+            abcdefg: 'abc',
+            example: 'ex',
+          },
+        },
+      ],
+    },
   ],
 
   invalid: [
