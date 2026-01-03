@@ -100,6 +100,11 @@ const langShorthandMap = Object.freeze({
   yaml: 'yml',
 });
 
+/** @param {string} str */
+function normalize(str) {
+  return str.toLowerCase();
+}
+
 // --------------------------------------------------------------------------------
 // Rule Definition
 // --------------------------------------------------------------------------------
@@ -165,7 +170,7 @@ export default {
         ...langShorthandMap,
         ...override, // `override` option handling.
       })
-        .map(([key, value]) => [key.toLowerCase(), value.toLowerCase()]) // Normalize keys and values.
+        .map(([key, value]) => [normalize(key), normalize(value)]) // Normalize keys and values.
         .filter(([key]) => !allow.includes(key)), // `allow` option handling.
     );
 
@@ -175,7 +180,7 @@ export default {
           return;
         }
 
-        const langShorthand = langShorthandMapMerged[node.lang.toLowerCase()]; // Normalize lang.
+        const langShorthand = langShorthandMapMerged[normalize(node.lang)]; // Normalize lang.
 
         if (langShorthand === undefined) {
           return;

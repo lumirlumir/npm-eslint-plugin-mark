@@ -36,7 +36,7 @@ const foo = 'bar';
 
     // Options - allow
     {
-      name: 'Allowed lang identifier',
+      name: 'Allow lang identifier',
       code: `\`\`\`javascript
 const foo = 'bar';
 \`\`\``,
@@ -47,7 +47,7 @@ const foo = 'bar';
       ],
     },
     {
-      name: 'Allowed lang identifiers',
+      name: 'Allow lang identifiers',
       code: `\`\`\`javascript
 const foo = 'bar';
 \`\`\`
