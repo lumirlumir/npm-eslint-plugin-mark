@@ -34,9 +34,21 @@ const foo = 'bar';
 \`\`\``,
     },
     {
-      name: 'Shorthand lang identifier',
+      name: 'Shorthand lang identifier - 1',
       code: `\`\`\`js
 const foo = 'bar';
+\`\`\``,
+    },
+    {
+      name: 'Shorthand lang identifier - 2',
+      code: `\`\`\`ts
+const foo = 'bar';
+\`\`\``,
+    },
+    {
+      name: 'Shorthand lang identifier - 3',
+      code: `\`\`\`md
+Hello, world!
 \`\`\``,
     },
 
@@ -64,6 +76,36 @@ const foo = 'bar';
       options: [
         {
           allow: ['javascript', 'typescript'],
+        },
+      ],
+    },
+
+    // Options - allow, override
+    {
+      name: 'Allow and override lang identifiers - 1',
+      code: `\`\`\`abcdefg
+1234567890
+\`\`\``,
+      options: [
+        {
+          allow: ['abcdefg'],
+          override: {
+            abcdefg: 'abc',
+          },
+        },
+      ],
+    },
+    {
+      name: 'Allow and override lang identifiers - 2',
+      code: `\`\`\`example
+1234567890
+\`\`\``,
+      options: [
+        {
+          allow: ['example'],
+          override: {
+            example: 'ex',
+          },
         },
       ],
     },
@@ -202,6 +244,28 @@ const foo = 'bar';
       ],
     },
     {
+      name: 'Case-insensitive non-shorthand lang identifier (TYPESCRIPT)',
+      code: `\`\`\`TYPESCRIPT
+const foo = 'bar';
+\`\`\``,
+      output: `\`\`\`ts
+const foo = 'bar';
+\`\`\``,
+      errors: [
+        {
+          messageId: 'codeLangShorthand',
+          data: {
+            lang: 'TYPESCRIPT',
+            langShorthand: 'ts',
+          },
+          line: 1,
+          column: 4,
+          endLine: 1,
+          endColumn: 14,
+        },
+      ],
+    },
+    {
       name: 'Case-insensitive non-shorthand lang identifier (AsciiDoc)',
       code: `\`\`\`AsciiDoc
 Hello, World!
@@ -272,36 +336,94 @@ const foo = 'bar';
 
     // Options - override
     {
-      name: 'Override lang identifier (existing)',
-      code: `\`\`\`javascript
-const foo = 'bar';
+      name: 'Adding a new abbreviation - 1',
+      code: `\`\`\`example
+example
 \`\`\``,
-      output: `\`\`\`abc
-const foo = 'bar';
+      output: `\`\`\`ex
+example
 \`\`\``,
       errors: [
         {
           messageId: 'codeLangShorthand',
           data: {
-            lang: 'javascript',
-            langShorthand: 'abc',
+            lang: 'example',
+            langShorthand: 'ex',
           },
           line: 1,
           column: 4,
           endLine: 1,
-          endColumn: 14,
+          endColumn: 11,
         },
       ],
       options: [
         {
           override: {
-            javascript: 'abc',
+            example: 'ex',
           },
         },
       ],
     },
     {
-      name: 'Override lang identifier (custom)',
+      name: 'Adding a new abbreviation - 2',
+      code: `\`\`\`Example
+example
+\`\`\``,
+      output: `\`\`\`ex
+example
+\`\`\``,
+      errors: [
+        {
+          messageId: 'codeLangShorthand',
+          data: {
+            lang: 'Example',
+            langShorthand: 'ex',
+          },
+          line: 1,
+          column: 4,
+          endLine: 1,
+          endColumn: 11,
+        },
+      ],
+      options: [
+        {
+          override: {
+            example: 'ex',
+          },
+        },
+      ],
+    },
+    {
+      name: 'Adding a new abbreviation - 3',
+      code: `\`\`\`EXAMPLE
+example
+\`\`\``,
+      output: `\`\`\`ex
+example
+\`\`\``,
+      errors: [
+        {
+          messageId: 'codeLangShorthand',
+          data: {
+            lang: 'EXAMPLE',
+            langShorthand: 'ex',
+          },
+          line: 1,
+          column: 4,
+          endLine: 1,
+          endColumn: 11,
+        },
+      ],
+      options: [
+        {
+          override: {
+            example: 'ex',
+          },
+        },
+      ],
+    },
+    {
+      name: 'Adding a new abbreviation - 4',
       code: `\`\`\`abcdefg
 1234567890
 \`\`\``,
@@ -325,6 +447,114 @@ const foo = 'bar';
         {
           override: {
             abcdefg: 'abc',
+          },
+        },
+      ],
+    },
+    {
+      name: 'Adding a new abbreviation - 5',
+      code: `\`\`\`example
+example
+\`\`\`
+
+\`\`\`abcdefg
+1234567890
+\`\`\``,
+      output: `\`\`\`ex
+example
+\`\`\`
+
+\`\`\`abc
+1234567890
+\`\`\``,
+      errors: [
+        {
+          messageId: 'codeLangShorthand',
+          data: {
+            lang: 'example',
+            langShorthand: 'ex',
+          },
+          line: 1,
+          column: 4,
+          endLine: 1,
+          endColumn: 11,
+        },
+        {
+          messageId: 'codeLangShorthand',
+          data: {
+            lang: 'abcdefg',
+            langShorthand: 'abc',
+          },
+          line: 5,
+          column: 4,
+          endLine: 5,
+          endColumn: 11,
+        },
+      ],
+      options: [
+        {
+          override: {
+            example: 'ex',
+            abcdefg: 'abc',
+          },
+        },
+      ],
+    },
+
+    {
+      name: 'Overriding an existing abbreviation - 1',
+      code: `\`\`\`javascript
+const foo = 'bar';
+\`\`\``,
+      output: `\`\`\`mjs
+const foo = 'bar';
+\`\`\``,
+      errors: [
+        {
+          messageId: 'codeLangShorthand',
+          data: {
+            lang: 'javascript',
+            langShorthand: 'mjs',
+          },
+          line: 1,
+          column: 4,
+          endLine: 1,
+          endColumn: 14,
+        },
+      ],
+      options: [
+        {
+          override: {
+            javascript: 'mjs',
+          },
+        },
+      ],
+    },
+    {
+      name: 'Overriding an existing abbreviation - 2',
+      code: `\`\`\`javascript
+const foo = 'bar';
+\`\`\``,
+      output: `\`\`\`abc
+const foo = 'bar';
+\`\`\``,
+      errors: [
+        {
+          messageId: 'codeLangShorthand',
+          data: {
+            lang: 'javascript',
+            langShorthand: 'abc',
+          },
+          line: 1,
+          column: 4,
+          endLine: 1,
+          endColumn: 14,
+        },
+      ],
+      options: [
+        {
+          override: {
+            javascript: 'abc',
           },
         },
       ],

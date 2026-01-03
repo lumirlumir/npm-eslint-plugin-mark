@@ -30,6 +30,14 @@ console.log('Hello, world!');
 console.log('Hello, world!');
 ```
 
+```TypeScript
+console.log('Hello, world!');
+```
+
+```TYPESCRIPT
+console.log('Hello, world!');
+```
+
 ```markdown
 Hello, world!
 ```
@@ -41,6 +49,14 @@ Hello, world!
 <!-- eslint md/code-lang-shorthand: ['error', { override: { example: 'ex' } }] -->
 
 ```example
+Welcome to the example language!
+```
+
+```Example
+Welcome to the example language!
+```
+
+```EXAMPLE
 Welcome to the example language!
 ```
 ````
@@ -100,7 +116,11 @@ console.log('Hello, world!');
 
 > Type: `string[]` / Default: `[]`
 
-An array of code block language identifiers to allow. Each value should be a **lowercase**, unabridged language identifier.
+An array of code block language identifiers to allow. Each value must be the full, unabridged language identifier.
+
+The values in this array are **case-insensitive**, since each value is normalized to lowercase when compared with the code block's language identifier.
+
+#### Allowing specific language identifiers
 
 For example, to allow the `javascript` and `typescript` language identifiers:
 
@@ -110,11 +130,24 @@ For example, to allow the `javascript` and `typescript` language identifiers:
 }]
 ```
 
+#### Allowing overridden language identifiers
+
+For example, to allow an overridden `example` language identifier:
+
+```js
+'md/code-lang-shorthand': ['error', {
+  allow: ['example'],
+  override: {
+    example: 'ex',
+  },
+}]
+```
+
 ### `override`
 
 > Type: `Record<string, string>` / Default: `{}`
 
-An object where the key is the unabridged language identifier and the value is the abbreviated form.
+An object where the **key** is the full, unabridged language identifier and the **value** is the abbreviated form.
 
 #### Adding a new abbreviation
 

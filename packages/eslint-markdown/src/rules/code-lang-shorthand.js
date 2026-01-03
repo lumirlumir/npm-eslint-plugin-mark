@@ -130,7 +130,7 @@ export default {
           allow: {
             type: 'array',
             items: {
-              enum: Object.keys(langShorthandMap),
+              type: 'string',
             },
             uniqueItems: true,
           },
