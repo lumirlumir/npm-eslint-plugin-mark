@@ -15,33 +15,51 @@ When building websites with internationalization in mind, it's recommended to us
 
 Examples of **incorrect** code for this rule:
 
-#### Default
+#### Default (With `'always'` Option)
 
 ```md eslint-check
 <!-- eslint md/require-heading-id: 'error' -->
 
-# Heading 1 ⁡
+# Heading 1
 
-## Heading 2 ⁡
+## Heading 2
 
-### Heading 3 ⁡
+### Heading 3
 
-#### Heading 4 ⁡
+#### Heading 4
 
-##### Heading 5 ⁡
+##### Heading 5
 
-###### Heading 6 ⁡
+###### Heading 6
 
-# Heading {#} ⁡
+# Heading {#}
 
-# Heading { #id} ⁡
+# Heading { #id}
+```
+
+#### With `'never'` Option
+
+```md eslint-check
+<!-- eslint md/require-heading-id: ['error', 'never'] -->
+
+# Heading 1 {#heading-1}
+
+## Heading 2 {#heading-2}
+
+### Heading 3 {#heading-3}
+
+#### Heading 4 {#heading-4}
+
+##### Heading 5 {#heading-5}
+
+###### Heading 6 {#heading-6}
 ```
 
 ### :white_check_mark: Correct
 
 Examples of **correct** code for this rule:
 
-#### Default
+#### Default (With `'always'` Option)
 
 ```md eslint-check
 <!-- eslint md/require-heading-id: 'error' -->
@@ -59,11 +77,31 @@ Examples of **correct** code for this rule:
 ###### Heading 6 {#heading-6}
 ```
 
+#### With `'never'` Option
+
+```md eslint-check
+<!-- eslint md/require-heading-id: ['error', 'never'] -->
+
+# Heading 1
+
+## Heading 2
+
+### Heading 3
+
+#### Heading 4
+
+##### Heading 5
+
+###### Heading 6
+```
+
 ## Options
 
 ```js
 'md/require-heading-id': ['error',
+  // First Option
   'always',
+  // Second Option
   {
     leftDelimiter: '{',
     rightDelimiter: '}',
