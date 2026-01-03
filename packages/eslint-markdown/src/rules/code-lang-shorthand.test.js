@@ -65,6 +65,28 @@ const foo = 'bar';
       ],
     },
     {
+      name: 'Allow lang identifier',
+      code: `\`\`\`javascript
+const foo = 'bar';
+\`\`\``,
+      options: [
+        {
+          allow: ['JavaScript'],
+        },
+      ],
+    },
+    {
+      name: 'Allow lang identifier',
+      code: `\`\`\`javascript
+const foo = 'bar';
+\`\`\``,
+      options: [
+        {
+          allow: ['JAVASCRIPT'],
+        },
+      ],
+    },
+    {
       name: 'Allow lang identifiers',
       code: `\`\`\`javascript
 const foo = 'bar';

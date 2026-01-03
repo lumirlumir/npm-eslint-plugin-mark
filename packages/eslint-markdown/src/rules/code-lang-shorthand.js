@@ -165,6 +165,7 @@ export default {
     const { sourceCode } = context;
     const [{ allow, override }] = context.options;
 
+    const normalizedAllow = new Set(allow.map(normalize));
     const normalizedOverride = Object.fromEntries(
       Object.entries(override).map(([key, value]) => [normalize(key), normalize(value)]), // Normalize keys and values.
     );
@@ -183,7 +184,8 @@ export default {
 
         const normalizedLang = normalize(node.lang);
 
-        if (allow.includes(normalizedLang)) {
+        // If the lang is in the allow list, skip it.
+        if (normalizedAllow.has(normalizedLang)) {
           return;
         }
 
