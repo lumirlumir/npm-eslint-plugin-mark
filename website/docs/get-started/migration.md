@@ -12,7 +12,7 @@ You can use both `@eslint/markdown` and `eslint-markdown` together to get full s
 
 ::: tip NOTE
 
-You can find more information on using `@eslint/markdown` together with `eslint-markdown` in the [Configurations](configurations.md#with-eslint-built-in-markdown-support-eslint-markdown) section.
+You can find more information on using `@eslint/markdown` together with `eslint-markdown` in the [Configurations](configurations.md#with-eslint-built-in-markdown-support-eslint-markdown) chapter.
 
 :::
 
@@ -20,12 +20,30 @@ You can find more information on using `@eslint/markdown` together with `eslint-
 
 If you are a user of [`markdownlint`](https://github.com/DavidAnson/markdownlint), [`markdownlint-cli`](https://github.com/igorshubovych/markdownlint-cli), or [`markdownlint-cli2`](https://github.com/DavidAnson/markdownlint-cli2), this section will guide you through migrating your existing configuration to `eslint-markdown`.
 
-TODO
+<!-- TODO -->
+
+::: warning :construction: This section is a work in progress :construction:
+
+This section is currently under construction and will be updated soon.
+
+:::
 
 ## Migrating from [`remark-lint`](https://github.com/remarkjs/remark-lint#readme)
 
-TODO
+<!-- TODO -->
+
+::: warning :construction: This section is a work in progress :construction:
+
+This section is currently under construction and will be updated soon.
+
+:::
 
 ## Migrating from [`textlint`](https://github.com/textlint/textlint#readme)
 
-TODO
+<!-- TODO -->
+
+::: warning :construction: This section is a work in progress :construction:
+
+This section is currently under construction and will be updated soon.
+
+:::
