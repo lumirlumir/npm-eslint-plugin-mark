@@ -7,9 +7,9 @@ The purpose of this rule is to enforce the use of shorthand language identifiers
 
 Using shorthand language identifiers offers several advantages: they improve readability by simplifying code, optimize file size, ensure consistency across code blocks, and make it easier for tools and automation systems to process language identifiers efficiently.
 
-Note that the code block language identifiers are **case-insensitive**, meaning `JavaScript`, `javascript`, and `JAVASCRIPT` are all treated as the same language identifier.
+Please note that the code block language identifier detection logic is **case-insensitive**, so `JavaScript`, `javascript`, and `JAVASCRIPT` are all treated as the same language identifier.
 
-You can see the full list of [language identifiers shorthand mapping](https://github.com/lumirlumir/npm-eslint-markdown/blob/main/packages/eslint-markdown/src/rules/code-lang-shorthand/code-lang-shorthand.js#L31-L101) in the source code.
+You can find the full list of [language identifiers shorthand mapping](https://github.com/lumirlumir/npm-eslint-markdown/blob/main/packages/eslint-markdown/src/rules/code-lang-shorthand.js) in the source code.
 
 ## Examples
 

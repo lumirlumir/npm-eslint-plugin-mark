@@ -1,7 +1,6 @@
 /**
  * @fileoverview Rule to enforce the use of shorthand for code block language identifiers.
  * @author 루밀LuMir(lumirlumir)
- * @see https://shiki.style/languages#bundled-languages
  */
 
 // --------------------------------------------------------------------------------
@@ -24,7 +23,11 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 // Helper
 // --------------------------------------------------------------------------------
 
-/** @satisfies {Record<string, string>} */
+/**
+ * Please note that the keys and values are all in lowercase.
+ * @see https://shiki.style/languages#bundled-languages
+ * @satisfies {Record<string, string>}
+ */
 const langShorthandMap = Object.freeze({
   asciidoc: 'adoc',
   batch: 'bat',
