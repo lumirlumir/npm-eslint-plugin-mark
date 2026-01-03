@@ -2,7 +2,9 @@
 
 [![lint](https://img.shields.io/github/actions/workflow/status/lumirlumir/npm-eslint-markdown/lint.yml?label=lint&color=6358d4&labelColor=333333&logo=github)](https://github.com/lumirlumir/npm-eslint-markdown/actions/workflows/lint.yml)
 [![test](https://img.shields.io/github/actions/workflow/status/lumirlumir/npm-eslint-markdown/test.yml?label=test&color=6358d4&labelColor=333333&logo=github)](https://github.com/lumirlumir/npm-eslint-markdown/actions/workflows/test.yml)
-[![codecov](https://img.shields.io/codecov/c/gh/lumirlumir/npm-eslint-markdown?token=2zUCHlMFT3&label=Codecov&color=6358d4&labelColor=333333&logo=codecov)](https://codecov.io/gh/lumirlumir/npm-eslint-markdown)
+[![test-cross-platform](https://img.shields.io/github/actions/workflow/status/lumirlumir/npm-eslint-markdown/test-cross-platform.yml?label=test-cross-platform&color=6358d4&labelColor=333333&logo=github)](https://github.com/lumirlumir/npm-eslint-markdown/actions/workflows/test-cross-platform.yml)
+[![codecov](https://img.shields.io/codecov/c/gh/lumirlumir/npm-eslint-markdown?token=LJMUst9eR3&label=Codecov&color=6358d4&labelColor=333333&logo=codecov)](https://codecov.io/gh/lumirlumir/npm-eslint-markdown)
+![Node Current](https://img.shields.io/node/v/eslint-markdown?color=6358d4&labelColor=333333&logo=node.js)
 
 [![npm package eslint-markdown latest version](https://img.shields.io/npm/v/eslint-markdown?label=eslint-markdown@latest&color=6358d4&labelColor=333333&logo=npm)](https://www.npmjs.com/package/eslint-markdown)
 [![npm package eslint-markdown next version](https://img.shields.io/npm/v/eslint-markdown/next?label=eslint-markdown@next&color=6358d4&labelColor=333333&logo=npm)](https://www.npmjs.com/package/eslint-markdown)
@@ -17,6 +19,11 @@ Lint your Markdown with ESLint.🛠️
 ## Documentation
 
 For full documentation, see the [official documentation of the `eslint-markdown`](https://eslint-markdown.lumir.page).
+
+- [Installation](https://eslint-markdown.lumir.page/docs/get-started/installation)
+- [Configurations](https://eslint-markdown.lumir.page/docs/get-started/configurations)
+- [Migration Guide](https://eslint-markdown.lumir.page/docs/get-started/migration)
+- [Rules](https://eslint-markdown.lumir.page/docs/rules)
 
 ## Code of Conduct
 
