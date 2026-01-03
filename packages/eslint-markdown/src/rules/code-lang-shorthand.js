@@ -1,12 +1,7 @@
 /**
  * @fileoverview Rule to enforce the use of shorthand for code block language identifiers.
  * @author 루밀LuMir(lumirlumir)
- * @see https://shiki.style/languages#bundled-languages
- * @see https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/fromEntries
- * @see https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
  */
-
-// @ts-nocheck -- TODO
 
 // --------------------------------------------------------------------------------
 // Import
@@ -15,20 +10,24 @@
 import { URL_RULE_DOCS } from '../core/constants.js';
 
 // --------------------------------------------------------------------------------
-// Typedefs
+// Typedef
 // --------------------------------------------------------------------------------
 
 /**
  * @import { RuleModule } from '../core/types.js';
- * @typedef {[{ ignores: string[], override: Record<string, string> }]} RuleOptions
+ * @typedef {[{ allow: string[], override: Record<string, string> }]} RuleOptions
  * @typedef {'codeLangShorthand'} MessageIds
  */
 
 // --------------------------------------------------------------------------------
-// Helpers
+// Helper
 // --------------------------------------------------------------------------------
 
-/** @satisfies {Record<string, string>} */
+/**
+ * Please note that the keys and values should be in lowercase.
+ * @see https://shiki.style/languages#bundled-languages
+ * @type {Record<string, string>}
+ */
 const langShorthandMap = Object.freeze({
   asciidoc: 'adoc',
   batch: 'bat',
@@ -101,6 +100,11 @@ const langShorthandMap = Object.freeze({
   yaml: 'yml',
 });
 
+/** @param {string} str */
+function normalize(str) {
+  return str.toLowerCase();
+}
+
 // --------------------------------------------------------------------------------
 // Rule Definition
 // --------------------------------------------------------------------------------
@@ -123,10 +127,10 @@ export default {
       {
         type: 'object',
         properties: {
-          ignores: {
+          allow: {
             type: 'array',
             items: {
-              enum: Object.keys(langShorthandMap),
+              type: 'string',
             },
             uniqueItems: true,
           },
@@ -143,7 +147,7 @@ export default {
 
     defaultOptions: [
       {
-        ignores: [],
+        allow: [],
         override: {},
       },
     ],
@@ -158,36 +162,50 @@ export default {
   },
 
   create(context) {
+    const { sourceCode } = context;
+    const [{ allow, override }] = context.options;
+
+    const normalizedAllow = new Set(allow.map(normalize));
+    const normalizedOverride = Object.fromEntries(
+      Object.entries(override).map(([key, value]) => [normalize(key), normalize(value)]), // Normalize keys and values.
+    );
+
+    const mergedLangShorthandMap = {
+      ...langShorthandMap,
+      ...normalizedOverride,
+    };
+
     return {
       code(node) {
-        const [{ ignores, override }] = context.options;
-        const langShorthandMapMerged = Object.fromEntries(
-          Object.entries({
-            ...langShorthandMap,
-            ...override, // `override` option handling.
-          })
-            .map(([key, value]) => [key.toLowerCase(), value.toLowerCase()]) // Normalize keys and values.
-            .filter(([key]) => !ignores.includes(key)), // `ignores` option handling.
-        );
-        const langShorthand = langShorthandMapMerged[node.lang?.toLowerCase()]; // Normalize lang.
+        // If it's 'Indented code block' or 'Fenced code block without lang', skip it.
+        if (node.lang === null || node.lang === undefined) {
+          return;
+        }
 
-        if (langShorthand === undefined) return;
+        const normalizedLang = normalize(node.lang);
 
-        const match = context.sourceCode.getText(node).match(node.lang);
+        // If the lang is in the allow list, skip it.
+        if (normalizedAllow.has(normalizedLang)) {
+          return;
+        }
 
-        const matchIndexStart = match.index;
-        const matchIndexEnd = matchIndexStart + match[0].length;
+        const langShorthand = mergedLangShorthandMap[normalizedLang];
+
+        // If there is no shorthand for the lang, skip it.
+        if (langShorthand === undefined) {
+          return;
+        }
+
+        const [nodeStartOffset] = sourceCode.getRange(node);
+        const matchIndex = sourceCode.getText(node).indexOf(node.lang);
+
+        const startOffset = nodeStartOffset + matchIndex;
+        const endOffset = startOffset + node.lang.length;
 
         context.report({
           loc: {
-            start: {
-              line: node.position.start.line,
-              column: node.position.start.column + matchIndexStart,
-            },
-            end: {
-              line: node.position.start.line,
-              column: node.position.start.column + matchIndexEnd,
-            },
+            start: sourceCode.getLocFromIndex(startOffset),
+            end: sourceCode.getLocFromIndex(endOffset),
           },
 
           data: {
@@ -198,13 +216,7 @@ export default {
           messageId: 'codeLangShorthand',
 
           fix(fixer) {
-            return fixer.replaceTextRange(
-              [
-                node.position.start.offset + matchIndexStart,
-                node.position.start.offset + matchIndexEnd,
-              ],
-              langShorthand,
-            );
+            return fixer.replaceTextRange([startOffset, endOffset], langShorthand);
           },
         });
       },
