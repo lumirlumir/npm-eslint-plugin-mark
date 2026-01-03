@@ -65,7 +65,7 @@ plugin.configs.all.name satisfies 'md/all';
 plugin.configs.all.language satisfies 'markdown/gfm';
 plugin.configs.all.rules satisfies Linter.RulesRecord;
 'md/consistent-emphasis-style' satisfies keyof typeof plugin.configs.all.rules; // Stylistic rule.
-'md/no-curly-quote' satisfies keyof typeof plugin.configs.recommended.rules;
+'md/no-curly-quote' satisfies keyof typeof plugin.configs.all.rules;
 'md/no-double-space' satisfies keyof typeof plugin.configs.all.rules; // Recommended rule.
 'md/no-emoji' satisfies keyof typeof plugin.configs.all.rules;
 
