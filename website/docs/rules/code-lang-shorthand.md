@@ -54,6 +54,12 @@ Examples of **correct** code for this rule:
 ````md eslint-check
 <!-- eslint md/code-lang-shorthand: 'error' -->
 
+    Indented code block
+
+```
+Fenced code block without lang
+```
+
 ```js
 console.log('Hello, world!');
 ```

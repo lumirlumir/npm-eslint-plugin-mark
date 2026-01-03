@@ -19,10 +19,16 @@ ruleTester(getFileName(import.meta.url), rule, {
     // Basic
     {
       name: 'Indented code block',
-      code: `    const foo = 'bar';`,
+      code: `    Indented code block`,
     },
     {
-      name: 'No lang identifier',
+      name: 'Fenced code block without lang - 1',
+      code: `\`\`\`
+Fenced code block without lang
+\`\`\``,
+    },
+    {
+      name: 'Fenced code block without lang - 2',
       code: `\`\`\`
 const foo = 'bar';
 \`\`\``,

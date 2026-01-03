@@ -24,9 +24,9 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 // --------------------------------------------------------------------------------
 
 /**
- * Please note that the keys and values are all in lowercase.
+ * Please note that the keys and values should be in lowercase.
  * @see https://shiki.style/languages#bundled-languages
- * @satisfies {Record<string, string>}
+ * @type {Record<string, string>}
  */
 const langShorthandMap = Object.freeze({
   asciidoc: 'adoc',
@@ -165,22 +165,29 @@ export default {
     const { sourceCode } = context;
     const [{ allow, override }] = context.options;
 
-    const langShorthandMapMerged = Object.fromEntries(
-      Object.entries({
-        ...langShorthandMap,
-        ...override, // `override` option handling.
-      })
-        .map(([key, value]) => [normalize(key), normalize(value)]) // Normalize keys and values.
-        .filter(([key]) => !allow.includes(key)), // `allow` option handling.
+    const normalizedOverride = Object.fromEntries(
+      Object.entries(override).map(([key, value]) => [normalize(key), normalize(value)]), // Normalize keys and values.
     );
+
+    const langShorthandMapMerged = {
+      ...langShorthandMap,
+      ...normalizedOverride,
+    };
 
     return {
       code(node) {
+        // 'Indented code block' or 'Fenced code block without lang' will be skipped.
         if (node.lang === null || node.lang === undefined) {
           return;
         }
 
-        const langShorthand = langShorthandMapMerged[normalize(node.lang)]; // Normalize lang.
+        const normalizedLang = normalize(node.lang);
+
+        if (allow.includes(normalizedLang)) {
+          return;
+        }
+
+        const langShorthand = langShorthandMapMerged[normalizedLang]; // Normalize lang.
 
         if (langShorthand === undefined) {
           return;
