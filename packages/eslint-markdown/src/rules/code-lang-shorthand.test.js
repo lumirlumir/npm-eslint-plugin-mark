@@ -18,6 +18,10 @@ ruleTester(getFileName(import.meta.url), rule, {
   valid: [
     // Basic
     {
+      name: 'Indented code block',
+      code: `    const foo = 'bar';`,
+    },
+    {
       name: 'No lang identifier',
       code: `\`\`\`
 const foo = 'bar';
@@ -32,7 +36,7 @@ const foo = 'bar';
 
     // Options - allow
     {
-      name: 'Ignored lang identifier',
+      name: 'Allowed lang identifier',
       code: `\`\`\`javascript
 const foo = 'bar';
 \`\`\``,
@@ -43,7 +47,7 @@ const foo = 'bar';
       ],
     },
     {
-      name: 'Ignored lang identifiers',
+      name: 'Allowed lang identifiers',
       code: `\`\`\`javascript
 const foo = 'bar';
 \`\`\`
@@ -62,7 +66,7 @@ const foo = 'bar';
   invalid: [
     // Basic
     {
-      name: 'Non-shorthand lang identifier (javascript)',
+      name: 'Non-shorthand lang identifier (javascript) - 1',
       code: `\`\`\`javascript
 const foo = 'bar';
 \`\`\``,
@@ -76,6 +80,56 @@ const foo = 'bar';
           column: 4,
           endLine: 1,
           endColumn: 14,
+        },
+      ],
+    },
+    {
+      name: 'Non-shorthand lang identifier (javascript) - 2',
+      code: `\`\`\` javascript
+const foo = 'bar';
+\`\`\``,
+      output: `\`\`\` js
+const foo = 'bar';
+\`\`\``,
+      errors: [
+        {
+          messageId: 'codeLangShorthand',
+          line: 1,
+          column: 5,
+          endLine: 1,
+          endColumn: 15,
+        },
+      ],
+    },
+    {
+      name: 'Non-shorthand lang identifier (javascript) - 3',
+      code: `\`\`\`  javascript
+const foo = 'bar';
+\`\`\``,
+      output: `\`\`\`  js
+const foo = 'bar';
+\`\`\``,
+      errors: [
+        {
+          messageId: 'codeLangShorthand',
+          line: 1,
+          column: 6,
+          endLine: 1,
+          endColumn: 16,
+        },
+      ],
+    },
+    {
+      name: 'Non-shorthand lang identifier (javascript) - 4',
+      code: "```  javascript  \nconst foo = 'bar';\n```",
+      output: "```  js  \nconst foo = 'bar';\n```",
+      errors: [
+        {
+          messageId: 'codeLangShorthand',
+          line: 1,
+          column: 6,
+          endLine: 1,
+          endColumn: 16,
         },
       ],
     },

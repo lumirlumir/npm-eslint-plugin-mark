@@ -2,8 +2,6 @@
  * @fileoverview Rule to enforce the use of shorthand for code block language identifiers.
  * @author 루밀LuMir(lumirlumir)
  * @see https://shiki.style/languages#bundled-languages
- * @see https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/fromEntries
- * @see https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
  */
 
 // --------------------------------------------------------------------------------
@@ -181,14 +179,14 @@ export default {
         }
 
         const [nodeStartOffset] = sourceCode.getRange(node);
-        const match = sourceCode.getText(node).match(node.lang);
+        const matchIndex = sourceCode.getText(node).indexOf(node.lang);
 
-        if (match === null) {
+        if (matchIndex === -1) {
           return;
         }
 
-        const startOffset = nodeStartOffset + match.index;
-        const endOffset = startOffset + match[0].length;
+        const startOffset = nodeStartOffset + matchIndex;
+        const endOffset = startOffset + node.lang.length;
 
         context.report({
           loc: {
