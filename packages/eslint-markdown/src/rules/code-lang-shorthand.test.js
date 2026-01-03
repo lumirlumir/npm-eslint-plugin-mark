@@ -76,6 +76,10 @@ const foo = 'bar';
       errors: [
         {
           messageId: 'codeLangShorthand',
+          data: {
+            lang: 'javascript',
+            langShorthand: 'js',
+          },
           line: 1,
           column: 4,
           endLine: 1,
@@ -94,6 +98,10 @@ const foo = 'bar';
       errors: [
         {
           messageId: 'codeLangShorthand',
+          data: {
+            lang: 'javascript',
+            langShorthand: 'js',
+          },
           line: 1,
           column: 5,
           endLine: 1,
@@ -112,6 +120,10 @@ const foo = 'bar';
       errors: [
         {
           messageId: 'codeLangShorthand',
+          data: {
+            lang: 'javascript',
+            langShorthand: 'js',
+          },
           line: 1,
           column: 6,
           endLine: 1,
@@ -126,6 +138,10 @@ const foo = 'bar';
       errors: [
         {
           messageId: 'codeLangShorthand',
+          data: {
+            lang: 'javascript',
+            langShorthand: 'js',
+          },
           line: 1,
           column: 6,
           endLine: 1,
@@ -144,6 +160,10 @@ echo "Hello, World!"
       errors: [
         {
           messageId: 'codeLangShorthand',
+          data: {
+            lang: 'shell',
+            langShorthand: 'sh',
+          },
           line: 1,
           column: 4,
           endLine: 1,
@@ -164,6 +184,10 @@ const foo = 'bar';
       errors: [
         {
           messageId: 'codeLangShorthand',
+          data: {
+            lang: 'TypeScript',
+            langShorthand: 'ts',
+          },
           line: 1,
           column: 4,
           endLine: 1,
@@ -182,6 +206,10 @@ Hello, World!
       errors: [
         {
           messageId: 'codeLangShorthand',
+          data: {
+            lang: 'AsciiDoc',
+            langShorthand: 'adoc',
+          },
           line: 1,
           column: 4,
           endLine: 1,
@@ -202,6 +230,10 @@ const foo = 'bar';
       errors: [
         {
           messageId: 'codeLangShorthand',
+          data: {
+            lang: 'javascript',
+            langShorthand: 'js',
+          },
           line: 1,
           column: 5,
           endLine: 1,
@@ -220,6 +252,10 @@ const foo = 'bar';
       errors: [
         {
           messageId: 'codeLangShorthand',
+          data: {
+            lang: 'javascript',
+            langShorthand: 'js',
+          },
           line: 1,
           column: 4,
           endLine: 1,
@@ -240,6 +276,10 @@ const foo = 'bar';
       errors: [
         {
           messageId: 'codeLangShorthand',
+          data: {
+            lang: 'javascript',
+            langShorthand: 'abc',
+          },
           line: 1,
           column: 4,
           endLine: 1,
@@ -265,6 +305,10 @@ const foo = 'bar';
       errors: [
         {
           messageId: 'codeLangShorthand',
+          data: {
+            lang: 'abcdefg',
+            langShorthand: 'abc',
+          },
           line: 1,
           column: 4,
           endLine: 1,
