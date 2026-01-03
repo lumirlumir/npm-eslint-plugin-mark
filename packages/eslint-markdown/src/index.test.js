@@ -533,44 +533,44 @@ describe(getFileName(import.meta.url), () => {
       strictEqual(cascadingStyleConfigResult[1].endLine, 5);
       strictEqual(cascadingStyleConfigResult[1].endColumn, 11);
     });
-  });
 
-  it('Mixed configuration', () => {
-    const linter = new Linter();
-    const cascadingStyleConfig = defineConfig([
-      markdown.configs.recommended,
-      md.configs.recommended,
-      md.configs.stylistic,
-    ]);
-    const cascadingStyleConfigResult = linter.verify(
-      '12  34\n\n---\n\n___\n\n[foo]: bar',
-      cascadingStyleConfig,
-      {
-        filename: 'test.md',
-      },
-    );
+    it('Mixed configuration', () => {
+      const linter = new Linter();
+      const cascadingStyleConfig = defineConfig([
+        markdown.configs.recommended,
+        md.configs.recommended,
+        md.configs.stylistic,
+      ]);
+      const cascadingStyleConfigResult = linter.verify(
+        '12  34\n\n---\n\n___\n\n[foo]: bar',
+        cascadingStyleConfig,
+        {
+          filename: 'test.md',
+        },
+      );
 
-    strictEqual(cascadingStyleConfigResult.length, 3);
-    strictEqual(cascadingStyleConfigResult[0].ruleId, 'md/no-double-space');
-    strictEqual(cascadingStyleConfigResult[0].severity, 2);
-    strictEqual(cascadingStyleConfigResult[0].line, 1);
-    strictEqual(cascadingStyleConfigResult[0].column, 3);
-    strictEqual(cascadingStyleConfigResult[0].endLine, 1);
-    strictEqual(cascadingStyleConfigResult[0].endColumn, 5);
-    strictEqual(
-      cascadingStyleConfigResult[1].ruleId,
-      'md/consistent-thematic-break-style',
-    );
-    strictEqual(cascadingStyleConfigResult[1].severity, 2);
-    strictEqual(cascadingStyleConfigResult[1].line, 5);
-    strictEqual(cascadingStyleConfigResult[1].column, 1);
-    strictEqual(cascadingStyleConfigResult[1].endLine, 5);
-    strictEqual(cascadingStyleConfigResult[1].endColumn, 4);
-    strictEqual(cascadingStyleConfigResult[2].ruleId, 'markdown/no-unused-definitions');
-    strictEqual(cascadingStyleConfigResult[2].severity, 2);
-    strictEqual(cascadingStyleConfigResult[2].line, 7);
-    strictEqual(cascadingStyleConfigResult[2].column, 1);
-    strictEqual(cascadingStyleConfigResult[2].endLine, 7);
-    strictEqual(cascadingStyleConfigResult[2].endColumn, 11);
+      strictEqual(cascadingStyleConfigResult.length, 3);
+      strictEqual(cascadingStyleConfigResult[0].ruleId, 'md/no-double-space');
+      strictEqual(cascadingStyleConfigResult[0].severity, 2);
+      strictEqual(cascadingStyleConfigResult[0].line, 1);
+      strictEqual(cascadingStyleConfigResult[0].column, 3);
+      strictEqual(cascadingStyleConfigResult[0].endLine, 1);
+      strictEqual(cascadingStyleConfigResult[0].endColumn, 5);
+      strictEqual(
+        cascadingStyleConfigResult[1].ruleId,
+        'md/consistent-thematic-break-style',
+      );
+      strictEqual(cascadingStyleConfigResult[1].severity, 2);
+      strictEqual(cascadingStyleConfigResult[1].line, 5);
+      strictEqual(cascadingStyleConfigResult[1].column, 1);
+      strictEqual(cascadingStyleConfigResult[1].endLine, 5);
+      strictEqual(cascadingStyleConfigResult[1].endColumn, 4);
+      strictEqual(cascadingStyleConfigResult[2].ruleId, 'markdown/no-unused-definitions');
+      strictEqual(cascadingStyleConfigResult[2].severity, 2);
+      strictEqual(cascadingStyleConfigResult[2].line, 7);
+      strictEqual(cascadingStyleConfigResult[2].column, 1);
+      strictEqual(cascadingStyleConfigResult[2].endLine, 7);
+      strictEqual(cascadingStyleConfigResult[2].endColumn, 11);
+    });
   });
 });
