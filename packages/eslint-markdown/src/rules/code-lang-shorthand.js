@@ -189,7 +189,7 @@ export default {
           return;
         }
 
-        const langShorthand = mergedLangShorthandMap[normalizedLang]; // Normalize lang.
+        const langShorthand = mergedLangShorthandMap[normalizedLang];
 
         if (langShorthand === undefined) {
           return;

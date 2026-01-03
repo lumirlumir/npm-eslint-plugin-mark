@@ -541,6 +541,35 @@ example
         },
       ],
     },
+    {
+      name: 'Adding a new abbreviation - 6',
+      code: `\`\`\`example
+example
+\`\`\``,
+      output: `\`\`\`ex
+example
+\`\`\``,
+      errors: [
+        {
+          messageId: 'codeLangShorthand',
+          data: {
+            lang: 'example',
+            langShorthand: 'ex',
+          },
+          line: 1,
+          column: 4,
+          endLine: 1,
+          endColumn: 11,
+        },
+      ],
+      options: [
+        {
+          override: {
+            EXAMPLE: 'EX',
+          },
+        },
+      ],
+    },
 
     {
       name: 'Overriding an existing abbreviation - 1',
