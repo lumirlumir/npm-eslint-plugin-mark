@@ -169,7 +169,7 @@ export default {
       Object.entries(override).map(([key, value]) => [normalize(key), normalize(value)]), // Normalize keys and values.
     );
 
-    const langShorthandMapMerged = {
+    const mergedLangShorthandMap = {
       ...langShorthandMap,
       ...normalizedOverride,
     };
@@ -187,7 +187,7 @@ export default {
           return;
         }
 
-        const langShorthand = langShorthandMapMerged[normalizedLang]; // Normalize lang.
+        const langShorthand = mergedLangShorthandMap[normalizedLang]; // Normalize lang.
 
         if (langShorthand === undefined) {
           return;
