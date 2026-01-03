@@ -147,7 +147,7 @@ For example, to allow an overridden `example` language identifier:
 
 > Type: `Record<string, string>` / Default: `{}`
 
-An object where the **key** is the full, unabridged language identifier and the **value** is the abbreviated form.
+An object where the **key** is the full, unabridged language identifier and the **value** is the abbreviated form. Both keys and values are treated case-insensitively and normalized to lowercase, so `override: { EXAMPLE: 'EX' }` is equivalent to `override: { example: 'ex' }` and will produce the abbreviation `ex`.
 
 #### Adding a new abbreviation
 
