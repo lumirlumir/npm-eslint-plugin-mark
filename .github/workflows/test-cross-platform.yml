@@ -29,6 +29,10 @@ jobs:
           - 22.13.0
           - 20.x
           - 20.19.0
+        eslint-version:
+          - 10.0.0-beta.0
+          - 9.x
+          - 9.15.0
 
     runs-on: ${{ matrix.runner-image }}
 
@@ -44,6 +48,9 @@ jobs:
 
       - name: Set up node_modules
         run: npm ci
+
+      - name: Set up ESLint
+        run: npm install -D eslint@${{ matrix.eslint-version }} -w packages/eslint-markdown
 
       - name: Build
         run: npm run build --if-present
