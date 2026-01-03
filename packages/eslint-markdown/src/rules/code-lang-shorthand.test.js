@@ -34,6 +34,12 @@ const foo = 'bar';
 \`\`\``,
     },
     {
+      name: 'Unknown lang identifier',
+      code: `\`\`\`unknownlang
+Some code here.
+\`\`\``,
+    },
+    {
       name: 'Shorthand lang identifier - 1',
       code: `\`\`\`js
 const foo = 'bar';
@@ -54,7 +60,7 @@ Hello, world!
 
     // Options - allow
     {
-      name: 'Allow lang identifier',
+      name: 'Allow lang identifier - 1',
       code: `\`\`\`javascript
 const foo = 'bar';
 \`\`\``,
@@ -65,7 +71,7 @@ const foo = 'bar';
       ],
     },
     {
-      name: 'Allow lang identifier',
+      name: 'Allow lang identifier - 2',
       code: `\`\`\`javascript
 const foo = 'bar';
 \`\`\``,
@@ -76,8 +82,19 @@ const foo = 'bar';
       ],
     },
     {
-      name: 'Allow lang identifier',
+      name: 'Allow lang identifier - 3',
       code: `\`\`\`javascript
+const foo = 'bar';
+\`\`\``,
+      options: [
+        {
+          allow: ['JAVASCRIPT'],
+        },
+      ],
+    },
+    {
+      name: 'Allow lang identifier - 4',
+      code: `\`\`\`JAVASCRIPT
 const foo = 'bar';
 \`\`\``,
       options: [

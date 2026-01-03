@@ -177,7 +177,7 @@ export default {
 
     return {
       code(node) {
-        // 'Indented code block' or 'Fenced code block without lang' will be skipped.
+        // If it's 'Indented code block' or 'Fenced code block without lang', skip it.
         if (node.lang === null || node.lang === undefined) {
           return;
         }
@@ -191,16 +191,13 @@ export default {
 
         const langShorthand = mergedLangShorthandMap[normalizedLang];
 
+        // If there is no shorthand for the lang, skip it.
         if (langShorthand === undefined) {
           return;
         }
 
         const [nodeStartOffset] = sourceCode.getRange(node);
         const matchIndex = sourceCode.getText(node).indexOf(node.lang);
-
-        if (matchIndex === -1) {
-          return;
-        }
 
         const startOffset = nodeStartOffset + matchIndex;
         const endOffset = startOffset + node.lang.length;
