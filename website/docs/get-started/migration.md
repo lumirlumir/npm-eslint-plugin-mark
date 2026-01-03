@@ -12,7 +12,7 @@ You can use both `@eslint/markdown` and `eslint-markdown` together to get full s
 
 ::: tip NOTE
 
-You can find more information on using `@eslint/markdown` together with `eslint-markdown` in the [Configurations](configurations.md#with-eslint-built-in-markdown-support-eslint-markdown) section.
+You can find more information on using `@eslint/markdown` together with `eslint-markdown` in the [Configurations](configurations.md#with-eslint-built-in-markdown-support-eslint-markdown) chapter.
 
 :::
 
