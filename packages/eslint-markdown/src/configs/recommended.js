@@ -38,7 +38,6 @@ export default function recommended(plugin) {
     },
     language: 'markdown/gfm',
     rules: {
-      'markdown/no-unused-definitions': 'error',
       'md/alt-text': 'error',
       'md/code-lang-shorthand': 'error',
       'md/no-bold-paragraph': 'error',

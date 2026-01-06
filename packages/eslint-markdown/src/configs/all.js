@@ -38,7 +38,6 @@ export default function all(plugin) {
     },
     language: 'markdown/gfm',
     rules: {
-      'markdown/no-unused-definitions': 'error',
       'md/allow-heading': 'error',
       'md/allow-image-url': 'error',
       'md/allow-link-url': 'error',
