@@ -121,7 +121,6 @@ export default defineConfig({
     },
 
     nav: [
-      // TODO: From here
       {
         text: 'Get Started',
         activeMatch: '/docs/(?:get-started|community)',
