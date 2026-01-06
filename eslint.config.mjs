@@ -30,6 +30,7 @@ export default defineConfig([
     name: 'md/website/rules',
     files: ['website/docs/rules/**/*.md'],
     rules: {
+      /* TODO: Turn this back on when `allow-heading` rule is stabilized.
       'md/allow-heading': [
         'error',
         {
@@ -44,6 +45,7 @@ export default defineConfig([
           ],
         },
       ],
+      */
       'md/no-emoji': 'error',
     },
   },
