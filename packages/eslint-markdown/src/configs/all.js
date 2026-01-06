@@ -38,7 +38,6 @@ export default function all(plugin) {
     },
     language: 'markdown/gfm',
     rules: {
-      'md/allow-heading': 'error',
       'md/allow-image-url': 'error',
       'md/allow-link-url': 'error',
       'md/code-lang-shorthand': 'error',
@@ -46,9 +45,6 @@ export default function all(plugin) {
       'md/consistent-emphasis-style': 'error',
       'md/consistent-strong-style': 'error',
       'md/consistent-thematic-break-style': 'error',
-      'md/en-capitalization': 'error',
-      'md/heading-id': 'error',
-      'md/no-bold-paragraph': 'error',
       'md/no-control-character': 'error',
       'md/no-curly-quote': 'error',
       'md/no-double-space': 'error',

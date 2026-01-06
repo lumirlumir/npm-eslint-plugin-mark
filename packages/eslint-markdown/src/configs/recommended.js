@@ -39,7 +39,6 @@ export default function recommended(plugin) {
     language: 'markdown/gfm',
     rules: {
       'md/code-lang-shorthand': 'error',
-      'md/no-bold-paragraph': 'error',
       'md/no-control-character': 'error',
       'md/no-curly-quote': 'error',
       'md/no-double-space': 'error',
