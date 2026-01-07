@@ -184,8 +184,8 @@ Examples of **correct** code for this rule:
 ```md eslint-check
 <!-- eslint md/no-control-character: ['error', { allow: ['\u0002', '\u0003'] }] -->
 
-\u0002 - Start of Text - <STX>  <= Here
-\u0003 - End of Text - <ETX>  <= Here
+\u0002 - Start of Text - <STX>  <= Here
+\u0003 - End of Text - <ETX>  <= Here
 ```
 
 #### With `{ skipCode: true }` Option

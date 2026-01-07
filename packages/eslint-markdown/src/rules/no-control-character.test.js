@@ -16,6 +16,7 @@ import rule from './no-control-character.js';
 
 ruleTester(getFileName(import.meta.url), rule, {
   valid: [
+    // Basic
     {
       name: 'Empty',
       code: '',
@@ -48,7 +49,7 @@ console.log(\u0003'Hello World');
     // Options
     {
       name: '`allow`',
-      code: `1\u00002\u00013`,
+      code: `1\u00002\u0001`,
       options: [
         {
           allow: ['\u0000', '\u0001'],
