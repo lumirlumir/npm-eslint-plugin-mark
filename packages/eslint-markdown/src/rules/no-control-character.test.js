@@ -44,6 +44,17 @@ console.log(\u0003'Hello World');
 
 \`console.log(\u0005'Hello World')\``,
     },
+
+    // Options
+    {
+      name: '`allow`',
+      code: `1\u00002\u00013`,
+      options: [
+        {
+          allow: ['\u0000', '\u0001'],
+        },
+      ],
+    },
   ],
 
   invalid: [
@@ -729,6 +740,27 @@ console.log(\u0003'Hello World');
     },
 
     // Options
+    {
+      name: '`allow`',
+      code: `1\u00002\u00013\u0002`,
+      errors: [
+        {
+          messageId: 'noControlCharacter',
+          line: 1,
+          column: 6,
+          endLine: 1,
+          endColumn: 7,
+          data: {
+            controlCharacter: 'U+0002',
+          },
+        },
+      ],
+      options: [
+        {
+          allow: ['\u0000', '\u0001'],
+        },
+      ],
+    },
     {
       name: '`skipCode: false`',
       code: `

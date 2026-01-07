@@ -179,6 +179,15 @@ Examples of **correct** code for this rule:
 
 <!-- markdownlint-enable no-hard-tabs -->
 
+#### With `{ allow: ['\u0002', '\u0003'] }` Option
+
+```md eslint-check
+<!-- eslint md/no-control-character: ['error', { allow: ['\u0002', '\u0003'] }] -->
+
+\u0002 - Start of Text - <STX>  <= Here
+\u0003 - End of Text - <ETX>  <= Here
+```
+
 #### With `{ skipCode: true }` Option
 
 `````md eslint-check
@@ -216,10 +225,17 @@ Examples of **correct** code for this rule:
 
 ```js
 'md/no-control-character': ['error', {
+  allow: [],
   skipCode: true,
   skipInlineCode: true,
 }]
 ```
+
+### `allow`
+
+> Type: `string[]` / Default: `[]`
+
+When specified, specific control characters are allowed if they match one of the characters in this array. This is useful for ignoring certain control characters that are intentionally used in the document.
 
 ### `skipCode`
 
