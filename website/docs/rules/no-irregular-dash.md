@@ -102,6 +102,15 @@ Examples of **correct** code for this rule:
 \u002D - Hyphen Minus - <HYPHMNUS> - <= Here
 ```
 
+#### With `{ allow: ['\u2013', '\u2014'] }` Option
+
+```md eslint-check
+<!-- eslint md/no-irregular-dash: ['error', { allow: ['\u2013', '\u2014'] }] -->
+
+\u2013 - En Dash - <ENDASH> – <= Here
+\u2014 - Em Dash - <EMDASH> — <= Here
+```
+
 #### With `{ skipCode: true }` Option
 
 `````md eslint-check
@@ -139,10 +148,17 @@ Examples of **correct** code for this rule:
 
 ```js
 'md/no-irregular-dash': ['error', {
+  allow: [],
   skipCode: true,
   skipInlineCode: true,
 }]
 ```
+
+### `allow`
+
+> Type: `string[]` / Default: `[]`
+
+When specified, specific irregular dash characters are allowed if they match one of the characters in this array. This is useful for ignoring certain irregular dashes that are intentionally used in the document.
 
 ### `skipCode`
 
