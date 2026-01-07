@@ -237,6 +237,27 @@ console.log(\u2014'Hello World');
 
     // Options
     {
+      name: '`allow`',
+      code: `1\u20132\u20143\u2015`,
+      errors: [
+        {
+          messageId: 'noIrregularDash',
+          line: 1,
+          column: 6,
+          endLine: 1,
+          endColumn: 7,
+          data: {
+            irregularDash: 'U+2015',
+          },
+        },
+      ],
+      options: [
+        {
+          allow: ['\u2013', '\u2014'],
+        },
+      ],
+    },
+    {
       name: '`skipCode: false`',
       code: `
 \`\`\`js
