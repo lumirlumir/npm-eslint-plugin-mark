@@ -16,6 +16,7 @@ import rule from './no-irregular-dash.js';
 
 ruleTester(getFileName(import.meta.url), rule, {
   valid: [
+    // Basic
     {
       name: 'Empty',
       code: '',
@@ -43,6 +44,17 @@ console.log(\u2014'Hello World');
       code: `\`console.log(\u2013'Hello World')\`
 
 \`console.log(\u2014'Hello World')\``,
+    },
+
+    // Options
+    {
+      name: '`allow`',
+      code: `1\u20132\u2014`,
+      options: [
+        {
+          allow: ['\u2013', '\u2014'],
+        },
+      ],
     },
   ],
 

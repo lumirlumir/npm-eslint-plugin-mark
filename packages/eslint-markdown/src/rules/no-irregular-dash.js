@@ -16,7 +16,7 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 
 /**
  * @import { RuleModule } from '../core/types.js';
- * @typedef {[{ skipCode: boolean, skipInlineCode: boolean }]} RuleOptions
+ * @typedef {[{ allow: string[], skipCode: boolean, skipInlineCode: boolean }]} RuleOptions
  * @typedef {'noIrregularDash'} MessageIds
  */
 
@@ -47,6 +47,13 @@ export default {
       {
         type: 'object',
         properties: {
+          allow: {
+            type: 'array',
+            items: {
+              type: 'string',
+            },
+            uniqueItems: true,
+          },
           skipCode: {
             type: 'boolean',
           },
@@ -60,6 +67,7 @@ export default {
 
     defaultOptions: [
       {
+        allow: [],
         skipCode: true,
         skipInlineCode: true,
       },
@@ -76,7 +84,7 @@ export default {
 
   create(context) {
     const { sourceCode } = context;
-    const [{ skipCode, skipInlineCode }] = context.options;
+    const [{ allow, skipCode, skipInlineCode }] = context.options;
 
     const skipRanges = new SkipRanges();
 
@@ -94,6 +102,8 @@ export default {
 
         for (const match of matches) {
           const irregularDash = match[0];
+
+          if (allow.includes(irregularDash)) continue;
 
           const startOffset = match.index;
           const endOffset = startOffset + irregularDash.length;
