@@ -135,6 +135,12 @@ Examples of **correct** code for this rule:
 
 Number of spaces to replace each tab with when applying an autofix.
 
+::: warning Why is the default value `4`?
+
+[The CommonMark specification](https://spec.commonmark.org/0.31.2/#tabs) states that "tabs behave as if they were replaced by spaces with a tab stop of 4 characters.".
+
+:::
+
 ## Fix
 
 This rule fixes the tab characters by replacing them with spaces. The number of spaces used for each tab is determined by the [`tabWidth`](#tabwidth) option.
