@@ -16,7 +16,7 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 
 /**
  * @import { RuleModule } from '../core/types.js';
- * @typedef {[{ skipCode: boolean, skipInlineCode: boolean }]} RuleOptions
+ * @typedef {[{ skipCode: boolean, skipInlineCode: boolean, tabWidth: number }]} RuleOptions
  * @typedef {'noTab'} MessageIds
  */
 
@@ -42,6 +42,8 @@ export default {
       stylistic: true,
     },
 
+    fixable: 'whitespace',
+
     schema: [
       {
         type: 'object',
@@ -52,6 +54,10 @@ export default {
           skipInlineCode: {
             type: 'boolean',
           },
+          tabWidth: {
+            type: 'integer',
+            minimum: 1,
+          },
         },
         additionalProperties: false,
       },
@@ -61,6 +67,7 @@ export default {
       {
         skipCode: true,
         skipInlineCode: true,
+        tabWidth: 4,
       },
     ],
 
@@ -75,7 +82,7 @@ export default {
 
   create(context) {
     const { sourceCode } = context;
-    const [{ skipCode, skipInlineCode }] = context.options;
+    const [{ skipCode, skipInlineCode, tabWidth }] = context.options;
 
     const skipRanges = new SkipRanges();
 
@@ -106,6 +113,13 @@ export default {
             },
 
             messageId: 'noTab',
+
+            fix(fixer) {
+              return fixer.replaceTextRange(
+                [startOffset, endOffset],
+                ' '.repeat(tabWidth),
+              );
+            },
           });
         }
       },

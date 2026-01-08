@@ -113,6 +113,7 @@ Examples of **correct** code for this rule:
 'md/no-tab': ['error', {
   skipCode: true,
   skipInlineCode: true,
+  tabWidth: 4,
 }]
 ```
 
@@ -127,6 +128,16 @@ Examples of **correct** code for this rule:
 > Type: `boolean` / Default: `true`
 
 `true` allows any tabs in inline code.
+
+### `tabWidth`
+
+> Type: `number` / default: `4`
+
+Number of spaces to replace each tab with when applying an autofix.
+
+## Fix
+
+This rule fixes the tab characters by replacing them with spaces. The number of spaces used for each tab is determined by the [`tabWidth`](#tabwidth) option.
 
 ## When Not To Use It
 
