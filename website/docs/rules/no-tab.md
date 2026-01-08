@@ -3,7 +3,31 @@
 
 ## Rule Details
 
-TODO
+This rule is triggered by any line that contains tab characters instead of spaces. To fix it, replace tab characters with spaces.
+
+Regardless of debates in other languages about tabs versus spaces, tabs in Markdown don't behave as expected, especially with blockquotes, lists, and indented code.
+
+For example, `>\ta` produces a paragraph with the text `a` in a blockquote, so one might expect `>\t\ta` to produce indented code containing `a` within the blockquote.
+
+```md
+>\ta
+
+>\t\ta
+```
+
+The Markdown above is rendered as the following HTML:
+
+```html
+<blockquote>
+<p>a</p>
+</blockquote>
+<blockquote>
+<pre><code>  a
+</code></pre>
+</blockquote>
+```
+
+Because Markdown uses a hardcoded tab size of 4, the first tab can be represented as 3 spaces (because there is a `>` before it). One of those spaces is consumed because block quotes allow the `>` to be followed by one space, leaving 2 spaces. The next tab can be represented as 4 spaces, so together we have 6 spaces. Indented code uses 4 spaces, so there are 2 spaces left, which are shown in the indented code.
 
 ## Examples
 
