@@ -27,6 +27,13 @@ export default defineConfig([
     },
   },
   {
+    name: 'md/website',
+    files: ['website/docs/**/*.md'],
+    rules: {
+      'md/no-emoji': 'error',
+    },
+  },
+  {
     name: 'md/website/rules',
     files: ['website/docs/rules/**/*.md'],
     rules: {
@@ -46,7 +53,6 @@ export default defineConfig([
         },
       ],
       */
-      'md/no-emoji': 'error',
     },
   },
 ]);

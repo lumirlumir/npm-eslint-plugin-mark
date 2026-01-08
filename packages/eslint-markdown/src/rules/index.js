@@ -20,6 +20,7 @@ import noEmoji from './no-emoji.js';
 import noGitConflictMarker from './no-git-conflict-marker.js';
 import noIrregularDash from './no-irregular-dash.js';
 import noIrregularWhitespace from './no-irregular-whitespace.js';
+import noTab from './no-tab.js';
 import noUrlTrailingSlash from './no-url-trailing-slash.js';
 import requireImageTitle from './require-image-title.js';
 import requireLinkTitle from './require-link-title.js';
@@ -43,6 +44,7 @@ export default {
   'no-git-conflict-marker': noGitConflictMarker,
   'no-irregular-dash': noIrregularDash,
   'no-irregular-whitespace': noIrregularWhitespace,
+  'no-tab': noTab,
   'no-url-trailing-slash': noUrlTrailingSlash,
   'require-image-title': requireImageTitle,
   'require-link-title': requireLinkTitle,
