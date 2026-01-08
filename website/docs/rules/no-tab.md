@@ -155,7 +155,7 @@ Examples of **correct** code for this rule:
 
 ### `tabWidth`
 
-> Type: `number` / default: `4`
+> Type: `number` / Default: `4`
 
 Number of spaces to replace each tab with when applying an autofix.
 
