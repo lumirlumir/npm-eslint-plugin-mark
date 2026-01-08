@@ -52,6 +52,7 @@ export default function all(plugin) {
       'md/no-git-conflict-marker': 'error',
       'md/no-irregular-dash': 'error',
       'md/no-irregular-whitespace': 'error',
+      'md/no-tab': 'error',
       'md/no-url-trailing-slash': 'error',
       'md/require-image-title': 'error',
       'md/require-link-title': 'error',
