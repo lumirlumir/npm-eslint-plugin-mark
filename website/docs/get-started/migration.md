@@ -63,3 +63,7 @@ If you are a user of [`textlint`](https://github.com/textlint/textlint#readme), 
 This section is currently under construction and will be updated soon.
 
 :::
+
+| `textlint` | `eslint-markdown` or `@eslint/markdown` | Fully Compatible? |
+| ---------- | --------------------------------------- | ----------------- |
+| [`textlint-rule-no-zero-width-spaces`](https://github.com/textlint-rule/textlint-rule-no-zero-width-spaces) | [`md/no-irregular-whitespace`](../rules/no-irregular-whitespace.md) | :white_check_mark: Fully |

@@ -130,6 +130,15 @@ Examples of **correct** code for this rule:
 
 <!-- markdownlint-enable no-hard-tabs -->
 
+#### With `{ allow: ['\u1680', '\u2000'] }` Option
+
+```md eslint-check
+<!-- eslint md/no-irregular-whitespace: ['error', { allow: ['\u1680', '\u2000'] }] -->
+
+\u1680 - Ogham Space Mark - <OGSP>   <= Here
+\u2000 - En Quad - <NQSP>   <= Here
+```
+
 #### With `{ skipCode: true }` Option
 
 `````md eslint-check
@@ -167,10 +176,17 @@ Examples of **correct** code for this rule:
 
 ```js
 'md/no-irregular-whitespace': ['error', {
+  allow: [],
   skipCode: true,
   skipInlineCode: true,
 }]
 ```
+
+### `allow`
+
+> Type: `string[]` / Default: `[]`
+
+When specified, specific irregular whitespaces are allowed if they match one of the characters in this array. This is useful for ignoring certain irregular whitespaces that are intentionally used in the document.
 
 ### `skipCode`
 

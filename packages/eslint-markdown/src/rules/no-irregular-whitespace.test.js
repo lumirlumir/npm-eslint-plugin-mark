@@ -16,6 +16,7 @@ import rule from './no-irregular-whitespace.js';
 
 ruleTester(getFileName(import.meta.url), rule, {
   valid: [
+    // Basic
     {
       name: 'Empty',
       code: '',
@@ -43,6 +44,17 @@ console.log(\u200b'Hello World');
       code: `\`console.log(\u200b'Hello World')\`
 
 \`console.log(\u202f'Hello World')\``,
+    },
+
+    // Options
+    {
+      name: '`allow`',
+      code: '1\u00852\u00A0',
+      options: [
+        {
+          allow: ['\u0085', '\u00A0'],
+        },
+      ],
     },
   ],
 
@@ -315,6 +327,27 @@ console.log(\u200b'Hello World');
     },
 
     // Options
+    {
+      name: '`allow`',
+      code: '1\u00852\u00A03\u1680',
+      errors: [
+        {
+          messageId: 'noIrregularWhitespace',
+          line: 1,
+          column: 6,
+          endLine: 1,
+          endColumn: 7,
+          data: {
+            irregularWhitespace: 'U+1680',
+          },
+        },
+      ],
+      options: [
+        {
+          allow: ['\u0085', '\u00A0'],
+        },
+      ],
+    },
     {
       name: '`skipCode: false`',
       code: `
