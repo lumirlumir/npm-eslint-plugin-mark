@@ -18,6 +18,18 @@ type RuleOptions = [{ style: string }];
 type MessageIds = 'style';
 
 // --------------------------------------------------------------------------------
+// Helper
+// --------------------------------------------------------------------------------
+
+/**
+ * Matches `consistent` or a valid CommonMark thematic break style
+ * (3+ identical `-`, `*`, or `_` characters, each optionally followed by spaces/tabs).
+ * @see https://spec.commonmark.org/0.31.2/#thematic-breaks
+ */
+const thematicBreakStylePattern =
+  '^(?:consistent|(?:-[ \\t]*){3,}|(?:\\*[ \\t]*){3,}|(?:_[ \\t]*){3,})$';
+
+// --------------------------------------------------------------------------------
 // Rule Definition
 // --------------------------------------------------------------------------------
 
@@ -40,6 +52,7 @@ export default {
         properties: {
           style: {
             type: 'string',
+            pattern: thematicBreakStylePattern,
           },
         },
         additionalProperties: false,
