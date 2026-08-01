@@ -29,9 +29,6 @@
     "emitDeclarationOnly": false,
     "outDir": "build",
 
-    /* Completeness */
-    "skipLibCheck": true,
-
     /* Projects */
     "tsBuildInfoFile": "${configDir}/.tsbuildinfo/tsconfig.build.tsbuildinfo"
   }

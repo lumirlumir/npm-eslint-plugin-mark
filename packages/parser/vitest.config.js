@@ -3,7 +3,6 @@ import { defineConfig } from 'vitest/config';
 export default defineConfig({
   test: {
     include: ['src/**/*.test.{js,mjs,cjs,ts,mts,cts}'],
-    passWithNoTests: true,
 
     // Vitest's built-in type checking is still experimental, so we intentionally keep it disabled.
     // I prefer the native TypeScript type-checking flow and rely on the repo's project references

@@ -14,9 +14,6 @@
     /* Emit */
     "noEmit": true,
 
-    /* Completeness */
-    "skipLibCheck": true,
-
     /* Projects */
     "tsBuildInfoFile": "${configDir}/.tsbuildinfo/tsconfig.test-d.tsbuildinfo"
   }
