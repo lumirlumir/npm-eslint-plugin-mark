@@ -32,6 +32,16 @@ ruleTester('consistent-thematic-break-style', rule, {
       name: '`consistent` style - 2',
       code: '---\n\n---\n\n---',
     },
+    {
+      name: '`--- ` style with trailing spaces',
+      code: '--- \n\n--- ',
+      options: [{ style: '--- ' }],
+    },
+    {
+      name: '`-\t-\t-` style with tabs',
+      code: '-\t-\t-\n\n-\t-\t-',
+      options: [{ style: '-\t-\t-' }],
+    },
   ],
 
   invalid: [
@@ -210,6 +220,62 @@ ruleTester('consistent-thematic-break-style', rule, {
           endLine: 5,
           endColumn: 4,
           data: { style: '* * *' },
+        },
+      ],
+    },
+    {
+      name: '`--- ` style',
+      code: '--- \n\n***',
+      output: '--- \n\n--- ',
+      options: [{ style: '--- ' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 3,
+          column: 1,
+          endLine: 3,
+          endColumn: 4,
+          data: { style: '--- ' },
+        },
+      ],
+    },
+    {
+      name: '`-\t-\t-` style',
+      code: '-\t-\t-\n\n***',
+      output: '-\t-\t-\n\n-\t-\t-',
+      options: [{ style: '-\t-\t-' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 3,
+          column: 1,
+          endLine: 3,
+          endColumn: 4,
+          data: { style: '-\t-\t-' },
+        },
+      ],
+    },
+    {
+      name: '`_ _ _` style',
+      code: '---\n\n***',
+      output: '_ _ _\n\n_ _ _',
+      options: [{ style: '_ _ _' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 4,
+          data: { style: '_ _ _' },
+        },
+        {
+          messageId: 'style',
+          line: 3,
+          column: 1,
+          endLine: 3,
+          endColumn: 4,
+          data: { style: '_ _ _' },
         },
       ],
     },
