@@ -3,7 +3,7 @@
   "version": "0.0.0-canary.0",
   "type": "module",
   "sideEffects": false,
-  "description": "A blazing fast Markdown parser for ESLint.",
+  "description": "A blazing fast Markdown parser for ESLint.⚡",
   "exports": {
     ".": {
       "types": "./build/index.d.ts",
@@ -52,6 +52,9 @@
   "engines": {
     "node": "^20.19.0 || ^22.13.0 || >=24.0.0"
   },
+  "publishConfig": {
+    "provenance": true
+  },
   "scripts": {
     "prepublishOnly": "npm run build",
     "build": "tsc -b tsconfig.build.json && node ../../scripts/cp.js ../../LICENSE.md LICENSE.md ../../README.md README.md",
@@ -60,9 +63,11 @@
     "test:unit": "vitest run"
   },
   "dependencies": {
+    "@types/mdast": "^4.0.4",
     "satteri": "^0.9.5"
   },
   "devDependencies": {
+    "@eslint/markdown": "^7.5.1",
     "eslint": "^9.39.5",
     "vitest": "^4.1.9"
   }

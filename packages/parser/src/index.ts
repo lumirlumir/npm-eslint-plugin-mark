@@ -8,7 +8,9 @@
 // Import
 // --------------------------------------------------------------------------------
 
+import type { Root } from 'mdast';
 import { markdownToMdast, type Position } from 'satteri';
+import pkg from '../package.json' with { type: 'json' };
 
 // --------------------------------------------------------------------------------
 // Typedef
@@ -58,8 +60,23 @@ export interface ParseOptions {
 }
 
 // --------------------------------------------------------------------------------
-// Export
+// Named Export
 // --------------------------------------------------------------------------------
+
+/**
+ * Metadata describing the parser.
+ */
+export const meta = {
+  /**
+   * The name of the parser.
+   */
+  name: '@eslint-markdown/parser',
+
+  /**
+   * The version of the parser.
+   */
+  version: pkg.version,
+} as const;
 
 /**
  * Parse Markdown source text into a materialized mdast syntax tree.
@@ -98,7 +115,7 @@ export interface ParseOptions {
 export function parse(
   text: string,
   { mode = 'commonmark', frontmatter = false, math = false }: ParseOptions = {},
-) {
+): Root {
   const ast = markdownToMdast(text, {
     features: {
       gfm: mode === 'gfm',
@@ -118,5 +135,14 @@ export function parse(
     }
   }
 
-  return ast;
+  return ast as Root;
 }
+
+// --------------------------------------------------------------------------------
+// Default Export
+// --------------------------------------------------------------------------------
+
+export default {
+  meta,
+  parse,
+};

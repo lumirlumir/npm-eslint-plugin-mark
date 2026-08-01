@@ -28,6 +28,15 @@ export default defineConfig([
       'import/no-extraneous-dependencies': 'off', // Too computationally expensive. TODO: Remove this in shared config.
     },
   },
+  {
+    name: 'js/global/test-d',
+    files: ['**/*.test-d.{ts,mts,cts,tsx}'],
+    rules: {
+      'prefer-const': 'off',
+      '@typescript-eslint/no-unsafe-function-type': 'off',
+      '@typescript-eslint/no-unused-vars': 'off',
+    },
+  },
 
   // md
   {
