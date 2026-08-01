@@ -7,9 +7,9 @@
 // Import
 // --------------------------------------------------------------------------------
 
+import { escapeStringRegexp } from '../core/utils/index.js';
 import { URL_RULE_DOCS } from '../core/constants.js';
 import type { RuleModule } from '../core/types.js';
-import escapeStringRegexp from '../core/utils/escape-string-regexp.js';
 
 // --------------------------------------------------------------------------------
 // Typedef
