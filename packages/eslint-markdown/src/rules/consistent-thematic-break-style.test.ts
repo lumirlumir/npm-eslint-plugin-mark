@@ -223,7 +223,6 @@ ruleTester('consistent-thematic-break-style', rule, {
         },
       ],
     },
-
     {
       name: '`--- ` style',
       code: '--- \n\n***',
@@ -256,6 +255,31 @@ ruleTester('consistent-thematic-break-style', rule, {
         },
       ],
     },
+    {
+      name: '`_ _ _` style',
+      code: '---\n\n***',
+      output: '_ _ _\n\n_ _ _',
+      options: [{ style: '_ _ _' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 4,
+          data: { style: '_ _ _' },
+        },
+        {
+          messageId: 'style',
+          line: 3,
+          column: 1,
+          endLine: 3,
+          endColumn: 4,
+          data: { style: '_ _ _' },
+        },
+      ],
+    },
+
     // Blockquote
     {
       name: 'Blockquote - `consistent` style',
