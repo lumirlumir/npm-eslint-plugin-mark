@@ -33,7 +33,7 @@
     "test:unit": "vitest run",
     "test:pkg:em": "npm run test -w packages/eslint-markdown",
     "test:pkg:p": "npm run test -w packages/parser",
-    "build": "npm run build:pkg && npm run build:website",
+    "build": "npm run build:pkg:p && npm run build:pkg:em && npm run build:website",
     "build:pkg": "tsc -b tsconfig.json",
     "build:pkg:em": "npm run build -w packages/eslint-markdown",
     "build:pkg:p": "npm run build -w packages/parser",

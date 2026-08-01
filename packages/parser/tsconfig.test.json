@@ -15,9 +15,6 @@
     }
   ],
   "compilerOptions": {
-    /* Modules */
-    "types": ["satteri"],
-
     /* Emit */
     "noEmit": true,
 

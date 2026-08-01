@@ -18,7 +18,7 @@ import type {
   JsonData as ESLintMarkdownJsonData,
   MarkdownLanguageOptions,
 } from '@eslint/markdown';
-import type { Data, FrontmatterContent, Root, RootContent } from 'mdast';
+import type { Data, FrontmatterContent, PhrasingContent, Root, RootContent } from 'mdast';
 
 // --------------------------------------------------------------------------------
 // Test
@@ -43,6 +43,16 @@ import type { Data, FrontmatterContent, Root, RootContent } from 'mdast';
 ({}) as JsonData satisfies ESLintMarkdownJsonData;
 
 // #endregion JsonData (type)
+// --------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------
+// #region satteri mdast augmentation (type)
+
+'toml' satisfies RootContent['type'];
+'math' satisfies RootContent['type'];
+'inlineMath' satisfies PhrasingContent['type'];
+
+// #endregion satteri mdast augmentation (type)
 // --------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------
