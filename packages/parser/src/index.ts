@@ -129,7 +129,7 @@ export function parse(
    * Front matter can only appear at the beginning of a document, so we can safely
    * assume that the root node's first child is the front matter node.
    */
-  if (frontmatter === 'json' && ast.type === 'root' && ast.children[0].type === 'yaml') {
+  if (frontmatter === 'json' && ast.type === 'root' && ast.children[0]?.type === 'yaml') {
     ast.children[0] = {
       ...ast.children[0],
       type: 'json',

@@ -140,6 +140,13 @@ describe('index', () => {
         assert.strictEqual(frontmatter.value, '{"title": "Example"}');
       });
 
+      it("should parse an empty document when `frontmatter` is set to `'json'`", () => {
+        const ast = parse('', { frontmatter: 'json' });
+
+        assert(ast.type === 'root');
+        assert.strictEqual(ast.children.length, 0);
+      });
+
       it('should parse inline and block math when `math` is set to `true`', () => {
         const ast = parse('Inline $x$ and block:\n\n$$\ny = 2\n$$', { math: true });
 
