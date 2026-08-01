@@ -32,6 +32,7 @@ export default defineConfig([
     name: 'js/global/test-d',
     files: ['**/*.test-d.{ts,mts,cts,tsx}'],
     rules: {
+      'no-useless-assignment': 'off',
       'prefer-const': 'off',
       '@typescript-eslint/no-unsafe-function-type': 'off',
       '@typescript-eslint/no-unused-vars': 'off',

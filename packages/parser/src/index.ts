@@ -8,8 +8,8 @@
 // Import
 // --------------------------------------------------------------------------------
 
-import type { Root } from 'mdast';
-import { markdownToMdast, type Position } from 'satteri';
+import type { Data, Literal, Root } from 'mdast';
+import { markdownToMdast } from 'satteri';
 import pkg from '../package.json' with { type: 'json' };
 
 // --------------------------------------------------------------------------------
@@ -17,15 +17,27 @@ import pkg from '../package.json' with { type: 'json' };
 // --------------------------------------------------------------------------------
 
 /**
- * An mdast JSON frontmatter node.
+ * Markdown JSON.
  */
-export interface Json {
+export interface Json extends Literal {
+  /**
+   * Node type of mdast JSON.
+   */
   type: 'json';
-  value: string;
-  data?: Record<string, unknown> | undefined;
-  position?: Position | undefined;
+  /**
+   * Data associated with the mdast JSON.
+   */
+  data?: JsonData | undefined;
 }
 
+/**
+ * Info associated with mdast JSON nodes by the ecosystem.
+ */
+export type JsonData = Data;
+
+/**
+ * Registers mdast JSON nodes as valid front matter and root content.
+ */
 declare module 'mdast' {
   interface FrontmatterContentMap {
     json: Json;
@@ -79,37 +91,20 @@ export const meta = {
 } as const;
 
 /**
- * Parse Markdown source text into a materialized mdast syntax tree.
- *
- * By default, the source is parsed as CommonMark with frontmatter and math
- * syntax disabled. Set `mode` to `'gfm'` to enable GitHub Flavored Markdown
- * features such as tables, strikethrough, task lists, and footnotes.
+ * Parse Markdown source text into an mdast syntax tree at blazing-fast speed.
  *
  * @param text The Markdown source text to parse.
- * @param options The parsing options. Defaults to CommonMark with frontmatter
- * and math disabled.
- * @returns The materialized mdast syntax tree.
- * @example Parse Markdown using the default CommonMark options.
+ * @param options The parsing options.
+ * @returns The mdast syntax tree.
+ * @example
  * ```js
  * import { parse } from '@eslint-markdown/parser';
  *
- * const ast = parse('# Hello, world!');
- *
- * console.log(ast.type);
- * // => 'root'
- * ```
- * @example Enable GFM, YAML frontmatter, and math syntax.
- * ```js
- * import { parse } from '@eslint-markdown/parser';
- *
- * const ast = parse('---\ntitle: Example\n---\n\n| A | B |\n| - | - |\n| 1 | 2 |', {
- *   mode: 'gfm',
- *   frontmatter: 'yaml',
- *   math: true,
+ * const ast = parse('# Hello, world!', {
+ *   mode: 'commonmark',
+ *   frontmatter: false,
+ *   math: false,
  * });
- *
- * console.log(ast.type);
- * // => 'root'
  * ```
  */
 export function parse(
@@ -124,17 +119,24 @@ export function parse(
     },
   });
 
-  if (frontmatter === 'json' && ast.type === 'root') {
-    const frontmatterNode = ast.children[0];
-
-    if (frontmatterNode?.type === 'yaml') {
-      ast.children[0] = {
-        ...frontmatterNode,
-        type: 'json',
-      };
-    }
+  /*
+   * `satteri` does not support JSON front matter. Because JSON and YAML front
+   * matter both use `---` delimiters, we can reuse the YAML front matter handling.
+   *
+   * To ensure compatibility with `@eslint/markdown`, convert `yaml` node to a
+   * `json` node when `frontmatter` is set to `'json'`.
+   *
+   * Front matter can only appear at the beginning of a document, so we can safely
+   * assume that the root node's first child is the front matter node.
+   */
+  if (frontmatter === 'json' && ast.type === 'root' && ast.children[0].type === 'yaml') {
+    ast.children[0] = {
+      ...ast.children[0],
+      type: 'json',
+    };
   }
 
+  // TODO: Remove `as Root` when https://github.com/bruits/satteri/issues/191 is resolved.
   return ast as Root;
 }
 

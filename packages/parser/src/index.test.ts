@@ -49,74 +49,118 @@ describe('index', () => {
         assert(text.type === 'text');
         assert.strictEqual(text.value, '~hi~');
       });
-    });
 
-    // TODO
-    it('should enable tables only in GFM mode', () => {
-      const markdown = '| A | B |\n| - | - |\n| 1 | 2 |';
-      const commonmarkAst = parse(markdown);
-      const gfmAst = parse(markdown, { mode: 'gfm' });
+      it("should parse Markdown as CommonMark when `mode` is set to `'commonmark'`", () => {
+        const ast = parse('~hi~', { mode: 'commonmark' });
 
-      assert(commonmarkAst.type === 'root');
-      assert(gfmAst.type === 'root');
-      assert.strictEqual(commonmarkAst.children[0]?.type, 'paragraph');
-      assert.strictEqual(gfmAst.children[0]?.type, 'table');
-    });
+        assert(ast.type === 'root');
+        assert.strictEqual(ast.children.length, 1);
 
-    it('should parse YAML frontmatter when enabled', () => {
-      const ast = parse('---\ntitle: Example\n---\n\n# Hello', {
-        frontmatter: 'yaml',
+        const paragraph = ast.children[0];
+
+        assert(paragraph.type === 'paragraph');
+        assert.strictEqual(paragraph.children.length, 1);
+
+        const text = paragraph.children[0];
+
+        assert(text.type === 'text');
+        assert.strictEqual(text.value, '~hi~');
       });
 
-      assert(ast.type === 'root');
+      it("should parse Markdown as CommonMark when `mode` is set to `'gfm'`", () => {
+        const ast = parse('~hi~', { mode: 'gfm' });
 
-      const frontmatter = ast.children[0];
+        assert(ast.type === 'root');
+        assert.strictEqual(ast.children.length, 1);
 
-      assert(frontmatter?.type === 'yaml');
-      assert.strictEqual(frontmatter.value, 'title: Example');
-    });
+        const paragraph = ast.children[0];
 
-    it('should parse TOML frontmatter when enabled', () => {
-      const ast = parse('+++\ntitle = "Example"\n+++\n\n# Hello', {
-        frontmatter: 'toml',
+        assert(paragraph.type === 'paragraph');
+        assert.strictEqual(paragraph.children.length, 1);
+
+        const del = paragraph.children[0];
+
+        assert(del.type === 'delete');
+        assert.strictEqual(del.children.length, 1);
+
+        const text = del.children[0];
+
+        assert(text.type === 'text');
+        assert.strictEqual(text.value, 'hi');
       });
 
-      assert(ast.type === 'root');
+      it('should not parse frontmatter when `frontmatter` is set to `false`', () => {
+        const ast = parse('---\ntitle: Example\n---\n\n# Hello', {
+          frontmatter: false,
+        });
 
-      const frontmatter = ast.children[0];
+        assert(ast.type === 'root');
 
-      assert(frontmatter?.type === 'toml');
-      assert.strictEqual(frontmatter.value, 'title = "Example"');
-    });
+        const firstChild = ast.children[0];
 
-    it('should parse inline and block math when enabled', () => {
-      const ast = parse('Inline $x$ and block:\n\n$$\ny = 2\n$$', { math: true });
-
-      assert(ast.type === 'root');
-
-      const paragraph = ast.children[0];
-      const math = ast.children[1];
-
-      assert(paragraph?.type === 'paragraph');
-      assert.strictEqual(paragraph.children[1]?.type, 'inlineMath');
-      assert.strictEqual(paragraph.children[1].value, 'x');
-      assert(math?.type === 'math');
-      assert.strictEqual(math.value, 'y = 2');
-    });
-
-    it('should parse JSON frontmatter when enabled', () => {
-      const ast = parse('---\n{\n  "title": "Example"\n}\n---\n\n# Hello', {
-        frontmatter: 'json',
+        assert(firstChild.type === 'thematicBreak');
       });
 
-      assert(ast.type === 'root');
+      it("should parse YAML frontmatter when `frontmatter` is set to `'yaml'`", () => {
+        const ast = parse('---\ntitle: Example\n---\n\n# Hello', {
+          frontmatter: 'yaml',
+        });
 
-      const frontmatter = ast.children[0];
+        assert(ast.type === 'root');
 
-      assert(frontmatter?.type === 'json');
-      assert.strictEqual(frontmatter.value, '{\n  "title": "Example"\n}');
+        const frontmatter = ast.children[0];
+
+        assert(frontmatter.type === 'yaml');
+        assert.strictEqual(frontmatter.value, 'title: Example');
+      });
+
+      it("should parse TOML frontmatter when `frontmatter` is set to `'toml'`", () => {
+        const ast = parse('+++\ntitle = "Example"\n+++\n\n# Hello', {
+          frontmatter: 'toml',
+        });
+
+        assert(ast.type === 'root');
+
+        const frontmatter = ast.children[0];
+
+        assert(frontmatter.type === 'toml');
+        assert.strictEqual(frontmatter.value, 'title = "Example"');
+      });
+
+      it("should parse JSON frontmatter when `frontmatter` is set to `'json'`", () => {
+        const ast = parse('---\n{"title": "Example"}\n---\n\n# Hello', {
+          frontmatter: 'json',
+        });
+
+        assert(ast.type === 'root');
+
+        const frontmatter = ast.children[0];
+
+        assert(frontmatter.type === 'json');
+        assert.strictEqual(frontmatter.value, '{"title": "Example"}');
+      });
+
+      it('should parse inline and block math when `math` is set to `true`', () => {
+        const ast = parse('Inline $x$ and block:\n\n$$\ny = 2\n$$', { math: true });
+
+        assert(ast.type === 'root');
+
+        const paragraph = ast.children[0];
+
+        assert(paragraph.type === 'paragraph');
+        assert.strictEqual(paragraph.children.length, 3);
+
+        const inlineMath = paragraph.children[1];
+
+        assert(inlineMath.type === 'inlineMath');
+        assert.strictEqual(inlineMath.value, 'x');
+
+        const math = ast.children[1];
+
+        assert(math.type === 'math');
+        assert.strictEqual(math.value, 'y = 2');
+      });
     });
-    // TODO
   });
 
   describe('default export', () => {
