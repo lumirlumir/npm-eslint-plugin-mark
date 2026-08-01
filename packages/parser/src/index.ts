@@ -1,5 +1,7 @@
 /**
  * @fileoverview Entry file for the `@eslint-markdown/parser` package.
+ * @see https://eslint.org/docs/latest/use/configure/parser
+ * @see https://eslint.org/docs/latest/extend/custom-parsers
  */
 
 // --------------------------------------------------------------------------------
