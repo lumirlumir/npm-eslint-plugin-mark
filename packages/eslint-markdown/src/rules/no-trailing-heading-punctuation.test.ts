@@ -72,13 +72,7 @@ ruleTester('no-trailing-heading-punctuation', rule, {
     {
       name: 'ATX: Heading ending with punctuation excluded from the option',
       code: '# Heading!',
-      options: [{ punctuation: '.,;:?]' }],
-    },
-    // Empty `punctuation` option
-    {
-      name: 'ATX: Headings should not be reported when punctuation is empty',
-      code: '# Heading.\n# Heading,\n# Heading;\n# Heading:\n# Heading!\n# Heading?',
-      options: [{ punctuation: '' }],
+      options: [{ punctuation: ['.', ',', ';', ':', '?', ']'] }],
     },
     // HTML Entities
     {
@@ -173,7 +167,7 @@ ruleTester('no-trailing-heading-punctuation', rule, {
       name: 'ATX: Heading with configured trailing question mark',
       code: '# Heading?',
       output: '# Heading',
-      options: [{ punctuation: '.,;:?]' }],
+      options: [{ punctuation: ['.', ',', ';', ':', '?', ']'] }],
       errors: [
         {
           messageId: 'noTrailingHeadingPunctuation',
@@ -340,7 +334,7 @@ ruleTester('no-trailing-heading-punctuation', rule, {
       name: 'ATX: Heading ending with punctuation included in the option',
       code: '# Heading]',
       output: '# Heading',
-      options: [{ punctuation: '.,;:?]' }],
+      options: [{ punctuation: ['.', ',', ';', ':', '?', ']'] }],
       errors: [
         {
           messageId: 'noTrailingHeadingPunctuation',

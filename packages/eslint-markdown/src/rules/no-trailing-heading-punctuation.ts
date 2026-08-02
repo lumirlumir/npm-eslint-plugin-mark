@@ -15,7 +15,7 @@ import type { RuleModule } from '../core/types.js';
 // Typedef
 // --------------------------------------------------------------------------------
 
-type RuleOptions = [{ punctuation: string }];
+type RuleOptions = [{ punctuation: string[] }];
 type MessageIds = 'noTrailingHeadingPunctuation';
 
 // --------------------------------------------------------------------------------
@@ -54,7 +54,14 @@ export default {
         type: 'object',
         properties: {
           punctuation: {
-            type: 'string',
+            type: 'array',
+            items: {
+              type: 'string',
+              minLength: 1,
+              maxLength: 1,
+            },
+            minItems: 1,
+            uniqueItems: true,
           },
         },
         additionalProperties: false,
@@ -63,7 +70,7 @@ export default {
 
     defaultOptions: [
       {
-        punctuation: '.,;:!。，；：！',
+        punctuation: ['.', ',', ';', ':', '!', '。', '，', '；', '：', '！'],
       },
     ],
 
@@ -81,12 +88,8 @@ export default {
     const { sourceCode } = context;
     const [{ punctuation }] = context.options;
 
-    if (punctuation === '') {
-      return {};
-    }
-
     const trailingPunctuationRegex = new RegExp(
-      `\\s*[${escapeStringRegexp(punctuation)}]+$`,
+      `\\s*[${escapeStringRegexp(punctuation.join(''))}]+$`,
     );
 
     return {
