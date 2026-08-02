@@ -47,6 +47,7 @@ export default function all(plugin: ESLint.Plugin) {
       'md/no-double-space': 'error',
       'md/no-emoji': 'error',
       'md/no-git-conflict-marker': 'error',
+      'md/no-heading-like-paragraph': 'error',
       'md/no-irregular-dash': 'error',
       'md/no-irregular-whitespace': 'error',
       'md/no-tab': 'error',

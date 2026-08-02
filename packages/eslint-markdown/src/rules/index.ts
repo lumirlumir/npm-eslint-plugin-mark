@@ -22,6 +22,7 @@ import noDoublePunctuation from './no-double-punctuation.js';
 import noDoubleSpace from './no-double-space.js';
 import noEmoji from './no-emoji.js';
 import noGitConflictMarker from './no-git-conflict-marker.js';
+import noHeadingLikeParagraph from './no-heading-like-paragraph.js';
 import noIrregularDash from './no-irregular-dash.js';
 import noIrregularWhitespace from './no-irregular-whitespace.js';
 import noTab from './no-tab.js';
@@ -51,6 +52,7 @@ export default {
   'no-double-space': noDoubleSpace,
   'no-emoji': noEmoji,
   'no-git-conflict-marker': noGitConflictMarker,
+  'no-heading-like-paragraph': noHeadingLikeParagraph,
   'no-irregular-dash': noIrregularDash,
   'no-irregular-whitespace': noIrregularWhitespace,
   'no-tab': noTab,
