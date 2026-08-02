@@ -35,10 +35,10 @@ Setext heading:
 ---------------
 ```
 
-#### With `{ punctuation: '?' }` Option
+#### With `{ punctuation: ['?'] }` Option
 
 ```md eslint-check
-<!-- eslint md/no-trailing-heading-punctuation: ['error', { punctuation: '?' }] -->
+<!-- eslint md/no-trailing-heading-punctuation: ['error', { punctuation: ['?'] }] -->
 
 # Heading?
 ```
@@ -66,10 +66,10 @@ Setext heading
 # Heading :smile:
 ```
 
-#### With `{ punctuation: '?' }` Option
+#### With `{ punctuation: ['?'] }` Option
 
 ```md eslint-check
-<!-- eslint md/no-trailing-heading-punctuation: ['error', { punctuation: '?' }] -->
+<!-- eslint md/no-trailing-heading-punctuation: ['error', { punctuation: ['?'] }] -->
 
 # Heading!
 ```
@@ -78,17 +78,17 @@ Setext heading
 
 ```js
 'md/no-trailing-heading-punctuation': ['error', {
-  punctuation: '.,;:!。，；：！',
+  punctuation: ['.', ',', ';', ':', '!', '。', '，', '；', '：', '！'],
 }]
 ```
 
 ### `punctuation`
 
-> Type: `string` / Default: `'.,;:!。，；：！'`
+> Type: `string[]` / Default: `['.', ',', ';', ':', '!', '。', '，', '；', '：', '！']`
 
 Specifies the characters that are not allowed at the end of headings.
 
-The configured string replaces the default punctuation characters. An empty string (`''`) disables punctuation checking.
+The configured array replaces the default punctuation characters. Each item must be a single character, and at least one character is required.
 
 ## Fix
 
