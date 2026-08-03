@@ -67,7 +67,7 @@ describe('index', () => {
         assert.strictEqual(text.value, '~hi~');
       });
 
-      it("should parse Markdown as CommonMark when `mode` is set to `'gfm'`", () => {
+      it("should parse Markdown as GFM when `mode` is set to `'gfm'`", () => {
         const ast = parse('~hi~', { mode: 'gfm' });
 
         assert(ast.type === 'root');
