@@ -153,6 +153,22 @@ ruleTester('no-trailing-heading-punctuation', rule, {
       name: 'ATX: Heading containing a non-trailing HTML entity',
       code: '# Copyright &copy; 2000',
     },
+    // Non-`text` trailing nodes
+    {
+      name: 'ATX: Heading ending with an HTML node ignores configured punctuation in its closing tag',
+      code: '# Heading.<strong>hi</strong>',
+      options: [{ punctuation: ['>'] }],
+    },
+    {
+      name: 'ATX: Heading ending with emphasis ignores configured punctuation in its delimiter',
+      code: '# Heading *hi*',
+      options: [{ punctuation: ['*'] }],
+    },
+    {
+      name: 'ATX: Heading ending with strong ignores configured punctuation in its delimiter',
+      code: '# Heading __hi__',
+      options: [{ punctuation: ['_'] }],
+    },
     // Edge cases from `markdownlint`
     {
       name: '`markdownlint` edge case: Heading ending with emphasis and period - 1',
