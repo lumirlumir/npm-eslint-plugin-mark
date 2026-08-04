@@ -790,6 +790,66 @@ ruleTester('no-trailing-heading-punctuation', rule, {
     },
     // Edge cases which are not handled by `markdownlint`
     {
+      name: 'ATX: Heading ending with an HTML entity followed by punctuation',
+      code: '# Copyright &copy;.',
+      output: '# Copyright &copy;',
+      errors: [
+        {
+          messageId: 'noTrailingHeadingPunctuation',
+          line: 1,
+          column: 19,
+          endLine: 1,
+          endColumn: 20,
+          data: { punctuation: '.' },
+        },
+      ],
+    },
+    {
+      name: 'ATX: Heading ending with an HTML entity followed by multiple punctuation characters',
+      code: '# Copyright &copy;.!',
+      output: '# Copyright &copy;',
+      errors: [
+        {
+          messageId: 'noTrailingHeadingPunctuation',
+          line: 1,
+          column: 19,
+          endLine: 1,
+          endColumn: 21,
+          data: { punctuation: '.!' },
+        },
+      ],
+    },
+    {
+      name: 'ATX: Heading ending with a gemoji followed by punctuation',
+      code: '# Heading :smile:.',
+      output: '# Heading :smile:',
+      errors: [
+        {
+          messageId: 'noTrailingHeadingPunctuation',
+          line: 1,
+          column: 18,
+          endLine: 1,
+          endColumn: 19,
+          data: { punctuation: '.' },
+        },
+      ],
+    },
+    {
+      name: 'ATX: Heading ending with a gemoji followed by multiple punctuation characters',
+      code: '# Heading :smile:.!',
+      output: '# Heading :smile:',
+      errors: [
+        {
+          messageId: 'noTrailingHeadingPunctuation',
+          line: 1,
+          column: 18,
+          endLine: 1,
+          endColumn: 20,
+          data: { punctuation: '.!' },
+        },
+      ],
+    },
+    {
       name: 'Setext: Level 1 Multiline heading with trailing punctuation - CR',
       code: 'Heading\r.\r===',
       output: 'Heading\r===',
