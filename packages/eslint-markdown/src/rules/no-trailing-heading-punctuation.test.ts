@@ -549,6 +549,23 @@ ruleTester('no-trailing-heading-punctuation', rule, {
         },
       ],
     },
+    {
+      name: 'ATX: Non-breaking space before trailing punctuation should be preserved',
+      code: '# Heading\u00A0.',
+      output: '# Heading\u00A0',
+      errors: [
+        {
+          messageId: 'noTrailingHeadingPunctuation',
+          line: 1,
+          column: 11,
+          endLine: 1,
+          endColumn: 12,
+          data: {
+            punctuation: '.',
+          },
+        },
+      ],
+    },
     // `punctuation` option
     {
       name: 'ATX: Heading ending with punctuation included in the option',
@@ -757,6 +774,36 @@ ruleTester('no-trailing-heading-punctuation', rule, {
     },
     // Edge cases which are not handled by `markdownlint`
     {
+      name: 'Setext: Level 1 Multiline heading with trailing punctuation - CR',
+      code: 'Heading\r.\r===',
+      output: 'Heading\r===',
+      errors: [
+        {
+          messageId: 'noTrailingHeadingPunctuation',
+          line: 1,
+          column: 8,
+          endLine: 2,
+          endColumn: 2,
+          data: { punctuation: '\r.' },
+        },
+      ],
+    },
+    {
+      name: 'Setext: Level 2 Multiline heading with trailing punctuation - CR',
+      code: 'Heading\r.\r---',
+      output: 'Heading\r---',
+      errors: [
+        {
+          messageId: 'noTrailingHeadingPunctuation',
+          line: 1,
+          column: 8,
+          endLine: 2,
+          endColumn: 2,
+          data: { punctuation: '\r.' },
+        },
+      ],
+    },
+    {
       name: 'Setext: Level 1 Multiline heading with trailing punctuation - LF',
       code: 'Heading\n.\n===',
       output: 'Heading\n===',
@@ -783,6 +830,36 @@ ruleTester('no-trailing-heading-punctuation', rule, {
           endLine: 2,
           endColumn: 2,
           data: { punctuation: '\n.' },
+        },
+      ],
+    },
+    {
+      name: 'Setext: Level 1 Multiline heading with trailing punctuation - CRLF',
+      code: 'Heading\r\n.\r\n===',
+      output: 'Heading\r\n===',
+      errors: [
+        {
+          messageId: 'noTrailingHeadingPunctuation',
+          line: 1,
+          column: 8,
+          endLine: 2,
+          endColumn: 2,
+          data: { punctuation: '\r\n.' },
+        },
+      ],
+    },
+    {
+      name: 'Setext: Level 2 Multiline heading with trailing punctuation - CRLF',
+      code: 'Heading\r\n.\r\n---',
+      output: 'Heading\r\n---',
+      errors: [
+        {
+          messageId: 'noTrailingHeadingPunctuation',
+          line: 1,
+          column: 8,
+          endLine: 2,
+          endColumn: 2,
+          data: { punctuation: '\r\n.' },
         },
       ],
     },

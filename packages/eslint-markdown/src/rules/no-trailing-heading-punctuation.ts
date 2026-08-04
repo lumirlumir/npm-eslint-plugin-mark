@@ -89,7 +89,7 @@ export default {
     const [{ punctuation }] = context.options;
 
     const trailingPunctuationRegex = new RegExp(
-      `\\s*[${escapeStringRegexp(punctuation.join(''))}]+$`,
+      `[ \\t\\r\\n]*[${escapeStringRegexp(punctuation.join(''))}]+$`,
     );
 
     return {
