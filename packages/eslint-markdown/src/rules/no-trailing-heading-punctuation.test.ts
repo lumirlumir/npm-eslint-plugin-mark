@@ -73,6 +73,10 @@ ruleTester('no-trailing-heading-punctuation', rule, {
       code: '#',
     },
     {
+      name: 'ATX: Empty heading followed by text ending with prohibited punctuation',
+      code: '#\n\nParagraph.',
+    },
+    {
       name: 'ATX Closed: Empty heading',
       code: '## ##',
     },

@@ -94,9 +94,65 @@ export default {
 
     return {
       heading(node) {
+        /*
+         * NOTE: This behavior is consistent with the `markdownlint` rule `MD026`.
+         *
+         * Instead of using deep recursive traversal to find the final `text` node,
+         * we simply access the node's last child directly with shallow traversal.
+         *
+         * This is because in the "Not OK" case, the `text` node is located
+         * in the last position while DFS(Depth First Search) traversal,
+         * but is located under `emphasis` or `strong` nodes.
+         *
+         * This is the situation we don't want to support.
+         * The trailing punctuation must be in a plain `text` node at the end
+         * of the heading without being wrapped by other nodes.
+         *
+         * OK:
+         *
+         * ```md
+         * # heading .
+         * ```
+         *
+         * Not OK:
+         *
+         * ```md
+         * # heading *.*
+         *           ^ ^
+         *
+         * # heading **.**
+         *           ^^ ^^
+         * ```
+         */
         const lastChildNode = node.children.at(-1);
 
-        if (!lastChildNode) return;
+        /*
+         * ATX headings and closed ATX headings that contain no content have no child nodes.
+         *
+         * ATX Headings:
+         *
+         * ```md
+         * #
+         *
+         * ##
+         *
+         * ###
+         * ```
+         *
+         * ATX Closed Headings:
+         *
+         * ```md
+         * # #
+         *
+         * ## ##
+         *
+         * ### ###
+         * ```
+         */
+        if (!lastChildNode) {
+          // If there are no child nodes, intentionally skip it.
+          return;
+        }
 
         const lastChildText = sourceCode.getText(lastChildNode);
         const match = trailingPunctuationRegex.exec(lastChildText);
