@@ -153,7 +153,7 @@ ruleTester('no-trailing-heading-punctuation', rule, {
       name: 'ATX: Heading containing a non-trailing HTML entity',
       code: '# Copyright &copy; 2000',
     },
-    // Edge cases
+    // Edge cases from `markdownlint`
     {
       name: '`markdownlint` edge case: Heading ending with emphasis and period - 1',
       code: '# Heading *.*',
@@ -694,7 +694,7 @@ ruleTester('no-trailing-heading-punctuation', rule, {
         },
       ],
     },
-    // Edge cases
+    // Edge cases from `markdownlint`
     {
       name: '`markdownlint` edge case: ATX Heading with only punctuation',
       code: '# .',
@@ -737,6 +737,52 @@ ruleTester('no-trailing-heading-punctuation', rule, {
           endLine: 1,
           endColumn: 2,
           data: { punctuation: '.' },
+        },
+      ],
+    },
+    {
+      name: '`markdownlint` edge case: Trailing spaces after punctuation',
+      code: '# .   ',
+      output: '#    ',
+      errors: [
+        {
+          messageId: 'noTrailingHeadingPunctuation',
+          line: 1,
+          column: 3,
+          endLine: 1,
+          endColumn: 4,
+          data: { punctuation: '.' },
+        },
+      ],
+    },
+    // Edge cases which are not handled by `markdownlint`
+    {
+      name: 'Setext: Level 1 Multiline heading with trailing punctuation - LF',
+      code: 'Heading\n.\n===',
+      output: 'Heading\n===',
+      errors: [
+        {
+          messageId: 'noTrailingHeadingPunctuation',
+          line: 1,
+          column: 8,
+          endLine: 2,
+          endColumn: 2,
+          data: { punctuation: '\n.' },
+        },
+      ],
+    },
+    {
+      name: 'Setext: Level 2 Multiline heading with trailing punctuation - LF',
+      code: 'Heading\n.\n---',
+      output: 'Heading\n---',
+      errors: [
+        {
+          messageId: 'noTrailingHeadingPunctuation',
+          line: 1,
+          column: 8,
+          endLine: 2,
+          endColumn: 2,
+          data: { punctuation: '\n.' },
         },
       ],
     },

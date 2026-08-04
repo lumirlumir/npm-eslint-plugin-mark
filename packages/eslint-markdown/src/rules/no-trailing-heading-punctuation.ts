@@ -168,13 +168,10 @@ export default {
         const [, endOffset] = sourceCode.getRange(lastChildNode);
         const startOffset = endOffset - trailingPunctuation.length;
 
-        const startLoc = sourceCode.getLocFromIndex(startOffset);
-        const endLoc = sourceCode.getLocFromIndex(endOffset);
-
         context.report({
           loc: {
-            start: startLoc,
-            end: endLoc,
+            start: sourceCode.getLocFromIndex(startOffset),
+            end: sourceCode.getLocFromIndex(endOffset),
           },
 
           data: {
