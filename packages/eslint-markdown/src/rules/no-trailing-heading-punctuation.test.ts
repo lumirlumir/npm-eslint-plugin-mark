@@ -16,25 +16,58 @@ import rule from './no-trailing-heading-punctuation.js';
 
 ruleTester('no-trailing-heading-punctuation', rule, {
   valid: [
+    {
+      name: 'Empty document',
+      code: '',
+    },
+    {
+      name: 'Empty document',
+      code: '  ',
+    },
     // Default: ATX Headings
     {
-      name: 'ATX: Heading without trailing punctuation',
+      name: 'ATX: Level 1 heading without trailing punctuation',
       code: '# Heading',
     },
     {
-      name: 'ATX: Heading ending with an allowed question mark',
+      name: 'ATX: Level 1 heading ending with an allowed question mark',
       code: '# Heading?',
+    },
+    {
+      name: 'ATX: Level 2 heading without trailing punctuation',
+      code: '## Heading',
+    },
+    {
+      name: 'ATX: Level 3 heading without trailing punctuation',
+      code: '### Heading',
+    },
+    {
+      name: 'ATX: Level 4 heading without trailing punctuation',
+      code: '#### Heading',
+    },
+    {
+      name: 'ATX: Level 5 heading without trailing punctuation',
+      code: '##### Heading',
+    },
+    {
+      name: 'ATX: Level 6 heading without trailing punctuation',
+      code: '###### Heading',
     },
     // Default: ATX Closed Headings
     {
       name: 'ATX Closed: Heading without trailing punctuation',
       code: '## Heading ##',
     },
-    // Default: Empty Headings
+    // Default: Setext Headings
     {
-      name: 'Empty document',
-      code: '',
+      name: 'Setext: Level 1 heading without trailing punctuation',
+      code: 'Heading\n=======',
     },
+    {
+      name: 'Setext: Level 2 heading without trailing punctuation',
+      code: 'Heading\n-------',
+    },
+    // Default: Empty Headings
     {
       name: 'ATX: Empty heading',
       code: '#',
@@ -42,11 +75,6 @@ ruleTester('no-trailing-heading-punctuation', rule, {
     {
       name: 'ATX Closed: Empty heading',
       code: '## ##',
-    },
-    // Default: Setext Headings
-    {
-      name: 'Setext: Heading without trailing punctuation',
-      code: 'Heading\n-------',
     },
     // Default: Full-Width Punctuation
     {
@@ -79,12 +107,10 @@ ruleTester('no-trailing-heading-punctuation', rule, {
       name: 'ATX: Heading ending with an HTML entity',
       code: '# Copyright &copy;',
     },
-    // HTML Entities
     {
       name: 'ATX: Heading ending with a numeric HTML entity',
       code: '# Copyright &#169;',
     },
-    // HTML Entities
     {
       name: 'ATX: Heading ending with a hexadecimal HTML entity',
       code: '# Copyright &#x000A9;',
@@ -123,6 +149,31 @@ ruleTester('no-trailing-heading-punctuation', rule, {
       name: 'ATX: Heading containing a non-trailing HTML entity',
       code: '# Copyright &copy; 2000',
     },
+    // Edge cases
+    {
+      name: '`markdownlint` edge case: Heading ending with emphasis and period - 1',
+      code: '# Heading *.*',
+    },
+    {
+      name: '`markdownlint` edge case: Heading ending with emphasis and period - 2',
+      code: '# Heading _._',
+    },
+    {
+      name: '`markdownlint` edge case: Heading ending with emphasis and period - 3',
+      code: '# Heading *_._*',
+    },
+    {
+      name: '`markdownlint` edge case: Heading ending with strong and period - 1',
+      code: '# Heading **.**',
+    },
+    {
+      name: '`markdownlint` edge case: Heading ending with strong and period - 2',
+      code: '# Heading __.__',
+    },
+    {
+      name: '`markdownlint` edge case: Heading ending with emphasis, strong, and period',
+      code: '# Heading ***.***',
+    },
   ],
 
   invalid: [
@@ -145,6 +196,57 @@ ruleTester('no-trailing-heading-punctuation', rule, {
       ],
     },
     {
+      name: 'ATX: Heading with trailing comma',
+      code: '# Heading,',
+      output: '# Heading',
+      errors: [
+        {
+          messageId: 'noTrailingHeadingPunctuation',
+          line: 1,
+          column: 10,
+          endLine: 1,
+          endColumn: 11,
+          data: {
+            punctuation: ',',
+          },
+        },
+      ],
+    },
+    {
+      name: 'ATX: Heading with trailing semicolon',
+      code: '# Heading;',
+      output: '# Heading',
+      errors: [
+        {
+          messageId: 'noTrailingHeadingPunctuation',
+          line: 1,
+          column: 10,
+          endLine: 1,
+          endColumn: 11,
+          data: {
+            punctuation: ';',
+          },
+        },
+      ],
+    },
+    {
+      name: 'ATX: Heading with trailing colon',
+      code: '# Heading:',
+      output: '# Heading',
+      errors: [
+        {
+          messageId: 'noTrailingHeadingPunctuation',
+          line: 1,
+          column: 10,
+          endLine: 1,
+          endColumn: 11,
+          data: {
+            punctuation: ':',
+          },
+        },
+      ],
+    },
+    {
       name: 'ATX: Heading with trailing exclamation mark',
       code: '# Heading!',
       output: '# Heading',
@@ -158,6 +260,161 @@ ruleTester('no-trailing-heading-punctuation', rule, {
           data: {
             punctuation: '!',
           },
+        },
+      ],
+    },
+    {
+      name: 'ATX: Heading with trailing full-width period',
+      code: '# Heading。',
+      output: '# Heading',
+      errors: [
+        {
+          messageId: 'noTrailingHeadingPunctuation',
+          line: 1,
+          column: 10,
+          endLine: 1,
+          endColumn: 11,
+          data: {
+            punctuation: '。',
+          },
+        },
+      ],
+    },
+    {
+      name: 'ATX: Heading with trailing full-width comma',
+      code: '# Heading，',
+      output: '# Heading',
+      errors: [
+        {
+          messageId: 'noTrailingHeadingPunctuation',
+          line: 1,
+          column: 10,
+          endLine: 1,
+          endColumn: 11,
+          data: {
+            punctuation: '，',
+          },
+        },
+      ],
+    },
+    {
+      name: 'ATX: Heading with trailing full-width semicolon',
+      code: '# Heading；',
+      output: '# Heading',
+      errors: [
+        {
+          messageId: 'noTrailingHeadingPunctuation',
+          line: 1,
+          column: 10,
+          endLine: 1,
+          endColumn: 11,
+          data: {
+            punctuation: '；',
+          },
+        },
+      ],
+    },
+    {
+      name: 'ATX: Heading with trailing full-width colon',
+      code: '# Heading：',
+      output: '# Heading',
+      errors: [
+        {
+          messageId: 'noTrailingHeadingPunctuation',
+          line: 1,
+          column: 10,
+          endLine: 1,
+          endColumn: 11,
+          data: {
+            punctuation: '：',
+          },
+        },
+      ],
+    },
+    {
+      name: 'ATX: Heading with trailing full-width exclamation mark',
+      code: '# Heading！',
+      output: '# Heading',
+      errors: [
+        {
+          messageId: 'noTrailingHeadingPunctuation',
+          line: 1,
+          column: 10,
+          endLine: 1,
+          endColumn: 11,
+          data: {
+            punctuation: '！',
+          },
+        },
+      ],
+    },
+    {
+      name: 'ATX: Headings with prohibited ASCII punctuation',
+      code: '# Heading,\n# Heading;\n# Heading:',
+      output: '# Heading\n# Heading\n# Heading',
+      errors: [
+        {
+          messageId: 'noTrailingHeadingPunctuation',
+          line: 1,
+          column: 10,
+          endLine: 1,
+          endColumn: 11,
+          data: { punctuation: ',' },
+        },
+        {
+          messageId: 'noTrailingHeadingPunctuation',
+          line: 2,
+          column: 10,
+          endLine: 2,
+          endColumn: 11,
+          data: { punctuation: ';' },
+        },
+        {
+          messageId: 'noTrailingHeadingPunctuation',
+          line: 3,
+          column: 10,
+          endLine: 3,
+          endColumn: 11,
+          data: { punctuation: ':' },
+        },
+      ],
+    },
+    {
+      name: 'ATX: Headings with prohibited full-width punctuation',
+      code: '# Heading，\n# Heading；\n# Heading：\n# Heading！',
+      output: '# Heading\n# Heading\n# Heading\n# Heading',
+      errors: [
+        {
+          messageId: 'noTrailingHeadingPunctuation',
+          line: 1,
+          column: 10,
+          endLine: 1,
+          endColumn: 11,
+          data: { punctuation: '，' },
+        },
+        {
+          messageId: 'noTrailingHeadingPunctuation',
+          line: 2,
+          column: 10,
+          endLine: 2,
+          endColumn: 11,
+          data: { punctuation: '；' },
+        },
+        {
+          messageId: 'noTrailingHeadingPunctuation',
+          line: 3,
+          column: 10,
+          endLine: 3,
+          endColumn: 11,
+          data: { punctuation: '：' },
+        },
+        {
+          messageId: 'noTrailingHeadingPunctuation',
+          line: 4,
+          column: 10,
+          endLine: 4,
+          endColumn: 11,
+          data: { punctuation: '！' },
         },
       ],
     },
@@ -201,9 +458,9 @@ ruleTester('no-trailing-heading-punctuation', rule, {
     },
     // Default: Setext Headings
     {
-      name: 'Setext: Heading with trailing exclamation mark',
-      code: 'Heading!\n-------',
-      output: 'Heading\n-------',
+      name: 'Setext: Level 1 heading with trailing exclamation mark',
+      code: 'Heading!\n=======',
+      output: 'Heading\n=======',
       errors: [
         {
           messageId: 'noTrailingHeadingPunctuation',
@@ -217,61 +474,20 @@ ruleTester('no-trailing-heading-punctuation', rule, {
         },
       ],
     },
-    // Default: Full-Width Punctuation
     {
-      name: 'ATX: Heading with trailing full-width period',
-      code: '# Heading。',
-      output: '# Heading',
+      name: 'Setext: Level 2 heading with trailing exclamation mark',
+      code: 'Heading!\n-------',
+      output: 'Heading\n-------',
       errors: [
         {
           messageId: 'noTrailingHeadingPunctuation',
           line: 1,
-          column: 10,
+          column: 8,
           endLine: 1,
-          endColumn: 11,
+          endColumn: 9,
           data: {
-            punctuation: '。',
+            punctuation: '!',
           },
-        },
-      ],
-    },
-    // Default: Full-Width Punctuation
-    {
-      name: 'ATX: Headings with prohibited full-width punctuation',
-      code: '# Heading，\n# Heading；\n# Heading：\n# Heading！',
-      output: '# Heading\n# Heading\n# Heading\n# Heading',
-      errors: [
-        {
-          messageId: 'noTrailingHeadingPunctuation',
-          line: 1,
-          column: 10,
-          endLine: 1,
-          endColumn: 11,
-          data: { punctuation: '，' },
-        },
-        {
-          messageId: 'noTrailingHeadingPunctuation',
-          line: 2,
-          column: 10,
-          endLine: 2,
-          endColumn: 11,
-          data: { punctuation: '；' },
-        },
-        {
-          messageId: 'noTrailingHeadingPunctuation',
-          line: 3,
-          column: 10,
-          endLine: 3,
-          endColumn: 11,
-          data: { punctuation: '：' },
-        },
-        {
-          messageId: 'noTrailingHeadingPunctuation',
-          line: 4,
-          column: 10,
-          endLine: 4,
-          endColumn: 11,
-          data: { punctuation: '！' },
         },
       ],
     },
@@ -364,7 +580,6 @@ ruleTester('no-trailing-heading-punctuation', rule, {
         },
       ],
     },
-    // HTML Entities
     {
       name: 'ATX: Heading ending with an invalid numeric entity',
       code: '# Copyright #169;',
@@ -380,7 +595,6 @@ ruleTester('no-trailing-heading-punctuation', rule, {
         },
       ],
     },
-    // HTML Entities
     {
       name: 'ATX: Heading ending with an invalid hexadecimal entity',
       code: '# Copyright #x000A9;',
@@ -476,35 +690,49 @@ ruleTester('no-trailing-heading-punctuation', rule, {
         },
       ],
     },
-    // Default: ASCII Punctuation
+    // Edge cases
     {
-      name: 'ATX: Headings with prohibited ASCII punctuation',
-      code: '# Heading,\n# Heading;\n# Heading:',
-      output: '# Heading\n# Heading\n# Heading',
+      name: '`markdownlint` edge case: ATX Heading with only punctuation',
+      code: '# .',
+      output: '# ',
       errors: [
         {
           messageId: 'noTrailingHeadingPunctuation',
           line: 1,
-          column: 10,
+          column: 3,
           endLine: 1,
-          endColumn: 11,
-          data: { punctuation: ',' },
+          endColumn: 4,
+          data: { punctuation: '.' },
         },
+      ],
+    },
+    {
+      name: '`markdownlint` edge case: ATX closed Heading with only punctuation',
+      code: '# . #',
+      output: '#  #',
+      errors: [
         {
           messageId: 'noTrailingHeadingPunctuation',
-          line: 2,
-          column: 10,
-          endLine: 2,
-          endColumn: 11,
-          data: { punctuation: ';' },
+          line: 1,
+          column: 3,
+          endLine: 1,
+          endColumn: 4,
+          data: { punctuation: '.' },
         },
+      ],
+    },
+    {
+      name: '`markdownlint` edge case: Setext Heading with only punctuation',
+      code: '.\n---',
+      output: '\n---',
+      errors: [
         {
           messageId: 'noTrailingHeadingPunctuation',
-          line: 3,
-          column: 10,
-          endLine: 3,
-          endColumn: 11,
-          data: { punctuation: ':' },
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 2,
+          data: { punctuation: '.' },
         },
       ],
     },
