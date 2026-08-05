@@ -1,0 +1,234 @@
+/**
+ * @fileoverview Rule to disallow trailing punctuation in headings.
+ * @author Ga eun Lee(tooth-is-silver)
+ */
+
+// --------------------------------------------------------------------------------
+// Import
+// --------------------------------------------------------------------------------
+
+import { escapeStringRegexp } from '../core/utils/index.js';
+import { URL_RULE_DOCS } from '../core/constants.js';
+import type { RuleModule } from '../core/types.js';
+
+// --------------------------------------------------------------------------------
+// Typedef
+// --------------------------------------------------------------------------------
+
+type RuleOptions = [{ punctuation: string[] }];
+type MessageIds = 'noTrailingHeadingPunctuation';
+
+// --------------------------------------------------------------------------------
+// Helper
+// --------------------------------------------------------------------------------
+
+/**
+ * Regular expression for identifying a GitHub emoji code at the end of a line.
+ * - NOTE: These patterns are based on the `markdownlint`.
+ * @see https://github.com/DavidAnson/markdownlint/blob/v0.41.1/helpers/helpers.cjs#L36-L38
+ */
+const trailingGemojiRegex =
+  /:(?:[abmovx]|[-+]1|100|1234|(?:1st|2nd|3rd)_place_medal|8ball|clock\d{1,4}|e-mail|non-potable_water|o2|t-rex|u5272|u5408|u55b6|u6307|u6708|u6709|u6e80|u7121|u7533|u7981|u7a7a|[a-z]{2,15}2?|[a-z]{1,14}(?:_[a-z\d]{1,16})+):$/;
+
+/**
+ * Regular expression for identifying an HTML entity at the end of a line.
+ * - NOTE: These patterns are based on the `markdownlint`.
+ * @see https://github.com/DavidAnson/markdownlint/blob/v0.41.1/helpers/helpers.cjs#L32-L34
+ */
+const trailingHtmlEntityRegex =
+  /&(?:#\d+|#[xX][\da-fA-F]+|[a-zA-Z]{2,31}|blk\d{2}|emsp1[34]|frac\d{2}|sup\d|there4);$/;
+
+// --------------------------------------------------------------------------------
+// Rule Definition
+// --------------------------------------------------------------------------------
+
+export default {
+  meta: {
+    type: 'problem',
+
+    docs: {
+      description: 'Disallow trailing punctuation in headings',
+      url: URL_RULE_DOCS('no-trailing-heading-punctuation'),
+      recommended: false,
+      stylistic: true,
+    },
+
+    fixable: 'code',
+
+    schema: [
+      {
+        type: 'object',
+        properties: {
+          punctuation: {
+            type: 'array',
+            items: {
+              type: 'string',
+              minLength: 1,
+              maxLength: 1,
+            },
+            minItems: 1,
+            uniqueItems: true,
+          },
+        },
+        additionalProperties: false,
+      },
+    ],
+
+    defaultOptions: [
+      {
+        punctuation: ['.', ',', ';', ':', '!', '。', '，', '；', '：', '！'],
+      },
+    ],
+
+    messages: {
+      noTrailingHeadingPunctuation:
+        'Trailing punctuation `{{ punctuation }}` is not allowed in headings.',
+    },
+
+    language: 'markdown',
+
+    dialects: ['commonmark', 'gfm'],
+  },
+
+  create(context) {
+    const { sourceCode } = context;
+    const [{ punctuation }] = context.options;
+
+    const trailingPunctuationRegex = new RegExp(
+      `[ \\t\\r\\n]*[${escapeStringRegexp(punctuation.join(''))}]+$`,
+    );
+
+    return {
+      heading(node) {
+        /*
+         * NOTE: This behavior is consistent with the `markdownlint` rule `MD026`.
+         *
+         * Instead of using deep recursive traversal to find the final `text` node,
+         * we simply access the node's last child directly with shallow traversal.
+         *
+         * This is because in the "Not OK" case, the `text` node is located
+         * in the last position while DFS(Depth First Search) traversal,
+         * but is located under `emphasis` or `strong` nodes.
+         *
+         * This is the situation we don't want to support.
+         * The trailing punctuation must be in a plain `text` node at the end
+         * of the heading without being wrapped by other nodes.
+         *
+         * OK:
+         *
+         * ```md
+         * # heading .
+         * ```
+         *
+         * Not OK:
+         *
+         * ```md
+         * # heading *.*
+         *           ^ ^
+         *
+         * # heading **.**
+         *           ^^ ^^
+         * ```
+         */
+        const lastChildNode = node.children.at(-1);
+
+        /*
+         * ATX headings and closed ATX headings that contain no content have no child nodes.
+         *
+         * ATX Headings:
+         *
+         * ```md
+         * #
+         *
+         * ##
+         *
+         * ###
+         * ```
+         *
+         * ATX Closed Headings:
+         *
+         * ```md
+         * # #
+         *
+         * ## ##
+         *
+         * ### ###
+         * ```
+         */
+        if (!lastChildNode || lastChildNode.type !== 'text') {
+          // If there is no child node or trailing `text` node, intentionally skip the heading.
+          return;
+        }
+
+        const lastChildText = sourceCode.getText(lastChildNode);
+        const match = trailingPunctuationRegex.exec(lastChildText);
+
+        if (!match) {
+          return;
+        }
+
+        let trailingPunctuation = match[0];
+
+        /*
+         * Slice from the beginning of the trailing `text` node through the first
+         * character matched by `trailingPunctuationRegex`, including that character.
+         *
+         * The first matched character can be the closing `:` of a gemoji or the
+         * closing `;` of an HTML entity. Including it allows the end-anchored regular
+         * expressions to recognize the construct while excluding any punctuation
+         * that follows it.
+         *
+         * Gemoji:
+         *
+         * ```text
+         * lastChildText:                       Heading :smile:.
+         * textThroughFirstTrailingPunctuation: Heading :smile:
+         * ```
+         *
+         * HTML entity:
+         *
+         * ```text
+         * lastChildText:                       Copyright &copy;.
+         * textThroughFirstTrailingPunctuation: Copyright &copy;
+         * ```
+         */
+        const textThroughFirstTrailingPunctuation = lastChildText.slice(
+          0,
+          match.index + 1,
+        );
+
+        if (
+          trailingGemojiRegex.test(textThroughFirstTrailingPunctuation) ||
+          trailingHtmlEntityRegex.test(textThroughFirstTrailingPunctuation)
+        ) {
+          trailingPunctuation = trailingPunctuation.slice(1);
+        }
+
+        if (!trailingPunctuation) {
+          // If the match contains only a gemoji or HTML entity terminator, skip it.
+          return;
+        }
+
+        const [, endOffset] = sourceCode.getRange(lastChildNode);
+        const startOffset = endOffset - trailingPunctuation.length;
+
+        context.report({
+          loc: {
+            start: sourceCode.getLocFromIndex(startOffset),
+            end: sourceCode.getLocFromIndex(endOffset),
+          },
+
+          data: {
+            punctuation: trailingPunctuation,
+          },
+
+          messageId: 'noTrailingHeadingPunctuation',
+
+          fix(fixer) {
+            return fixer.removeRange([startOffset, endOffset]);
+          },
+        });
+      },
+    };
+  },
+} as const satisfies RuleModule<RuleOptions, MessageIds>;
