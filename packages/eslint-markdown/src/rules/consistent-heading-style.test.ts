@@ -107,6 +107,9 @@ ruleTester('consistent-heading-style', rule, {
         {
           messageId: 'style',
           line: 5,
+          column: 1,
+          endLine: 6,
+          endColumn: 8,
           data: { style: 'atx' },
         },
       ],
@@ -308,6 +311,9 @@ ruleTester('consistent-heading-style', rule, {
         {
           messageId: 'style',
           line: 1,
+          column: 1,
+          endLine: 3,
+          endColumn: 12,
           data: { style: 'atx' },
         },
       ],
@@ -386,6 +392,9 @@ ruleTester('consistent-heading-style', rule, {
         {
           messageId: 'style',
           line: 1,
+          column: 3,
+          endLine: 2,
+          endColumn: 10,
           data: { style: 'atx' },
         },
       ],
