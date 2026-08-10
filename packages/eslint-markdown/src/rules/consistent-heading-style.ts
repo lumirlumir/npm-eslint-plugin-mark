@@ -176,10 +176,16 @@ export default {
               if (!isMultilineHeading) {
                 const headingMarker = '#'.repeat(node.depth);
 
-                replacementText =
-                  expectedHeadingStyle === 'atx'
-                    ? `${headingMarker} ${headingContent}`
-                    : `${headingMarker} ${headingContent} ${headingMarker}`;
+                if (expectedHeadingStyle === 'atx-closed') {
+                  replacementText = `${headingMarker} ${headingContent} ${headingMarker}`;
+                } else {
+                  // Prevent trailing hashes from becoming an ATX closing sequence.
+                  const escapedHeadingContent = headingContent.replace(
+                    /(?<=[ \t])(?=#+[ \t]*$)/u,
+                    '\\',
+                  );
+                  replacementText = `${headingMarker} ${escapedHeadingContent}`;
+                }
               }
             } else {
               const {

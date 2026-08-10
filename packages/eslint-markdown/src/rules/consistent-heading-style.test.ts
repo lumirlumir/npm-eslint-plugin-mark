@@ -425,5 +425,44 @@ ruleTester('consistent-heading-style', rule, {
         },
       ],
     },
+    {
+      name: '`atx` style escapes a trailing hash when converting a Setext heading',
+      code: 'hashtag #\n===',
+      output: '# hashtag \\#',
+      options: [{ style: 'atx' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          data: { style: 'atx' },
+        },
+      ],
+    },
+    {
+      name: '`atx` style escapes a trailing hash when converting a Setext heading',
+      code: 'Heading \\## hashtag #\n===',
+      output: '# Heading \\## hashtag \\#',
+      options: [{ style: 'atx' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          data: { style: 'atx' },
+        },
+      ],
+    },
+    {
+      name: '`atx-closed` style preserves a trailing hash when converting a Setext heading',
+      code: 'hashtag #\n===',
+      output: '# hashtag # #',
+      options: [{ style: 'atx-closed' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          data: { style: 'atx-closed' },
+        },
+      ],
+    },
   ],
 });
