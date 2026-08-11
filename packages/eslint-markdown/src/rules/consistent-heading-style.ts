@@ -34,6 +34,12 @@ const SETEXT_MAX_DEPTH = 2;
  */
 const closingSequenceRegex = /[ \t]#+[ \t]*$/;
 
+/**
+ * Matches heading content that may start a block-level construct after conversion to Setext.
+ * @see https://spec.commonmark.org/0.31.2/#blocks-and-inlines
+ */
+const potentialBlockStartRegex = /^(?:>|(?:[-+*]|\d{1,9}[.)])(?:[ \t]|$))/u;
+
 function getCurrentHeadingStyle(text: string): HeadingStyle {
   // ATX headings occupy one line, so a heading node containing a line ending is Setext.
   if (text.includes('\n') || text.includes('\r')) {
@@ -192,6 +198,7 @@ export default {
                 start: { line: nodeStartLine },
               } = sourceCode.getLoc(node);
 
+              const isPotentialBlockStart = potentialBlockStartRegex.test(headingContent);
               // Locations are one-based, while `lines` is zero-based; `-2` selects the preceding line.
               // Treat a missing preceding line at the start of the document as blank.
               const isPreviousLineBlank = isBlankLine(
@@ -199,6 +206,7 @@ export default {
               );
 
               const canConvertToSetext =
+                !isPotentialBlockStart &&
                 node.depth <= SETEXT_MAX_DEPTH &&
                 sourceCode.getParent(node)?.type === 'root' &&
                 isPreviousLineBlank;

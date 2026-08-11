@@ -464,5 +464,62 @@ ruleTester('consistent-heading-style', rule, {
         },
       ],
     },
+    {
+      name: '`setext` style does not fix heading content starting with an unordered list marker',
+      code: '# - Heading',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          data: { style: 'setext' },
+        },
+      ],
+    },
+    {
+      name: '`setext` style does not fix heading content starting with a blockquote marker',
+      code: '# > Heading',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          data: { style: 'setext' },
+        },
+      ],
+    },
+    {
+      name: '`setext` style does not fix heading content starting with an ordered list marker',
+      code: '# 1. Heading',
+      output: null,
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          data: { style: 'setext' },
+        },
+      ],
+    },
+    {
+      name: '`setext` style converts marker-like content without separating whitespace',
+      code: '# -Heading\n\n# 1.Heading',
+      output: '-Heading\n========\n\n1.Heading\n=========',
+      options: [{ style: 'setext' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 1,
+          data: { style: 'setext' },
+        },
+        {
+          messageId: 'style',
+          line: 3,
+          data: { style: 'setext' },
+        },
+      ],
+    },
   ],
 });
