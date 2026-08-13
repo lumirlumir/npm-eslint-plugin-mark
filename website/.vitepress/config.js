@@ -288,8 +288,8 @@ export default defineConfig({
     // Process only the files inside `docs/rules/`, excluding `index.md`.
     if (
       /^docs\/rules\/(?!index).+/.test(pageData.relativePath) &&
-      !/(?:en-capitalization|no-bold-paragraph)\.md$/.test(
-        // TODO: Remove this exclusion when the rules are stabilized.
+      !/en-capitalization\.md$/.test(
+        // TODO: Remove this exclusion when the rule is stabilized.
         pageData.relativePath,
       )
     ) {
