@@ -117,10 +117,22 @@ export function parse(
   text: string,
   { mode = 'commonmark', frontmatter = false, math = false }: ParseOptions = {},
 ): Root {
+  /*
+   * ESLint removes the BOM before calling the parser, so the BOM does not need to
+   * be handled here and `startsWith()` is safe to use.
+   * See: https://github.com/eslint/markdown/blob/v8.0.3/src/language/markdown-language.js#L209-L210
+   *
+   * We can also remove this logic once the following issue is resolved:
+   * https://github.com/bruits/satteri/issues/194
+   */
+  const frontmatterEnabled =
+    (frontmatter === 'toml' && text.startsWith('+++')) ||
+    ((frontmatter === 'yaml' || frontmatter === 'json') && text.startsWith('---'));
+
   const ast = markdownToMdast(text, {
     features: {
       gfm: mode === 'gfm',
-      frontmatter: frontmatter !== false,
+      frontmatter: frontmatterEnabled,
       math,
     },
   });

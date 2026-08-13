@@ -140,6 +140,42 @@ describe('index', () => {
         assert.strictEqual(frontmatter.value, '{"title": "Example"}');
       });
 
+      it("should not parse TOML frontmatter when `frontmatter` is set to `'yaml'`", () => {
+        const ast = parse('+++\ntitle = "Example"\n+++', {
+          frontmatter: 'yaml',
+        });
+
+        assert(ast.type === 'root');
+
+        const firstChild = ast.children[0];
+
+        assert(firstChild.type === 'paragraph');
+      });
+
+      it("should not parse YAML frontmatter when `frontmatter` is set to `'toml'`", () => {
+        const ast = parse('---\ntitle: Example\n---', {
+          frontmatter: 'toml',
+        });
+
+        assert(ast.type === 'root');
+
+        const firstChild = ast.children[0];
+
+        assert(firstChild.type === 'thematicBreak');
+      });
+
+      it("should not parse TOML frontmatter when `frontmatter` is set to `'json'`", () => {
+        const ast = parse('+++\ntitle = "Example"\n+++', {
+          frontmatter: 'json',
+        });
+
+        assert(ast.type === 'root');
+
+        const firstChild = ast.children[0];
+
+        assert(firstChild.type === 'paragraph');
+      });
+
       it("should parse an empty document when `frontmatter` is set to `'json'`", () => {
         const ast = parse('', { frontmatter: 'json' });
 
