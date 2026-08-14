@@ -39,13 +39,13 @@ type MessageIds = 'style';
 
 /**
  * Matches the closing sequence of a closed ATX heading.
- * @see https://spec.commonmark.org/0.31.2/#atx-headings
+ * see: https://spec.commonmark.org/0.31.2/#atx-headings
  */
 const closingSequenceRegex = /[ \t]#+[ \t]*$/;
 
 /**
  * Matches heading content that may start a block-level construct after conversion to Setext.
- * @see https://spec.commonmark.org/0.31.2/#blocks-and-inlines
+ * see: https://spec.commonmark.org/0.31.2/#blocks-and-inlines
  */
 const potentialBlockStartRegex = /^(?:>|(?:[-+*]|\d{1,9}[.)])(?:[ \t]|$))/u;
 
