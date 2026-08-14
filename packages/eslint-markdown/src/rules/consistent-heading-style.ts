@@ -49,15 +49,6 @@ const closingSequenceRegex = /[ \t]#+[ \t]*$/;
  */
 const potentialBlockStartRegex = /^(?:>|(?:[-+*]|\d{1,9}[.)])(?:[ \t]|$))/u;
 
-function getCurrentHeadingStyle(text: string): Exclude<HeadingStyle, 'consistent'> {
-  // ATX headings occupy one line, so a heading node containing a line ending is Setext.
-  if (text.includes('\n') || text.includes('\r')) {
-    return 'setext';
-  }
-
-  return closingSequenceRegex.test(text) ? 'atx-closed' : 'atx';
-}
-
 function getExpectedHeadingStyle(
   style: Exclude<HeadingStyle, 'consistent'>,
   depth: number,
@@ -125,7 +116,15 @@ export default {
 
     return {
       heading(node) {
-        const currentHeadingStyle = getCurrentHeadingStyle(sourceCode.getText(node));
+        const nodeText = sourceCode.getText(node);
+        const nodeLocation = sourceCode.getLoc(node);
+
+        const currentHeadingStyle =
+          nodeLocation.start.line !== nodeLocation.end.line
+            ? 'setext'
+            : closingSequenceRegex.test(nodeText)
+              ? 'atx-closed'
+              : 'atx';
 
         if (documentHeadingStyle === null) {
           documentHeadingStyle = currentHeadingStyle;
@@ -178,8 +177,11 @@ export default {
             );
 
             if (currentHeadingStyle === 'setext') {
+              const firstChildLocation = sourceCode.getLoc(firstChildNode);
+              const lastChildLocation = sourceCode.getLoc(lastChildNode);
+
               const isMultilineHeading =
-                headingContent.includes('\n') || headingContent.includes('\r');
+                firstChildLocation.start.line !== lastChildLocation.end.line;
 
               if (!isMultilineHeading) {
                 const headingMarker = '#'.repeat(node.depth);
@@ -196,9 +198,7 @@ export default {
                 }
               }
             } else {
-              const {
-                start: { line: nodeStartLine },
-              } = sourceCode.getLoc(node);
+              const nodeStartLine = nodeLocation.start.line;
 
               const isPotentialBlockStart = potentialBlockStartRegex.test(headingContent);
               // Locations are one-based, while `lines` is zero-based; `-2` selects the preceding line.
