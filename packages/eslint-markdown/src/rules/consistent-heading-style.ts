@@ -1,16 +1,16 @@
 /**
  * @fileoverview Rule to enforce consistent heading style.
- * @see https://github.com/DavidAnson/markdownlint/blob/v0.40.0/lib/md003.mjs
  * @author Ga eun Lee(tooth-is-silver)
+ * @see https://github.com/DavidAnson/markdownlint/blob/v0.40.0/lib/md003.mjs
  */
 
 // --------------------------------------------------------------------------------
 // Import
 // --------------------------------------------------------------------------------
 
+import { isBlankLine } from '../core/utils/index.js';
 import { URL_RULE_DOCS } from '../core/constants.js';
 import type { RuleModule } from '../core/types.js';
-import { isBlankLine } from '../core/utils/index.js';
 
 // --------------------------------------------------------------------------------
 // Typedef
