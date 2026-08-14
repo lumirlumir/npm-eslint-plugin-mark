@@ -13,20 +13,29 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 import type { RuleModule } from '../core/types.js';
 
 // --------------------------------------------------------------------------------
-// Typedef
+// Constants
 // --------------------------------------------------------------------------------
 
-type HeadingStyle = 'atx' | 'atx-closed' | 'setext';
-type RuleOptions = [
-  { style: 'consistent' | 'setext-with-atx' | 'setext-with-atx-closed' | HeadingStyle },
-];
+const SETEXT_MAX_DEPTH = 2;
+const HEADING_STYLE = [
+  'consistent',
+  'atx',
+  'atx-closed',
+  'setext',
+  'setext-with-atx',
+  'setext-with-atx-closed',
+] as const;
+
+// --------------------------------------------------------------------------------
+// Typedef
+// --------------------------------------------------------------------------------
+type HeadingStyle = (typeof HEADING_STYLE)[number];
+type RuleOptions = [{ style: HeadingStyle }];
 type MessageIds = 'style';
 
 // --------------------------------------------------------------------------------
 // Helper
 // --------------------------------------------------------------------------------
-
-const SETEXT_MAX_DEPTH = 2;
 
 /**
  * Matches the closing sequence of a closed ATX heading.
@@ -40,7 +49,7 @@ const closingSequenceRegex = /[ \t]#+[ \t]*$/;
  */
 const potentialBlockStartRegex = /^(?:>|(?:[-+*]|\d{1,9}[.)])(?:[ \t]|$))/u;
 
-function getCurrentHeadingStyle(text: string): HeadingStyle {
+function getCurrentHeadingStyle(text: string): Exclude<HeadingStyle, 'consistent'> {
   // ATX headings occupy one line, so a heading node containing a line ending is Setext.
   if (text.includes('\n') || text.includes('\r')) {
     return 'setext';
@@ -50,9 +59,9 @@ function getCurrentHeadingStyle(text: string): HeadingStyle {
 }
 
 function getExpectedHeadingStyle(
-  style: 'setext-with-atx' | 'setext-with-atx-closed' | HeadingStyle,
+  style: Exclude<HeadingStyle, 'consistent'>,
   depth: number,
-): HeadingStyle {
+): 'atx' | 'atx-closed' | 'setext' {
   if (style === 'setext-with-atx') {
     return depth <= SETEXT_MAX_DEPTH ? 'setext' : 'atx';
   }
@@ -86,14 +95,7 @@ export default {
         type: 'object',
         properties: {
           style: {
-            enum: [
-              'consistent',
-              'atx',
-              'atx-closed',
-              'setext',
-              'setext-with-atx',
-              'setext-with-atx-closed',
-            ],
+            enum: HEADING_STYLE,
           },
         },
         additionalProperties: false,
