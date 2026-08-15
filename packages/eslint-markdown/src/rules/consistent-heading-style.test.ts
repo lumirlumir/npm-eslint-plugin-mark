@@ -30,29 +30,59 @@ ruleTester('consistent-heading-style', rule, {
     },
     {
       name: '`consistent` style with ATX headings at every level',
-      code: '# H1\n\n## H2\n\n### H3\n\n#### H4\n\n##### H5\n\n###### H6',
+      code: `# H1
+
+## H2
+
+### H3
+
+#### H4
+
+##### H5
+
+###### H6`,
     },
     {
       name: '`consistent` style with closed ATX headings',
-      code: '# H1 #\n\n## H2 ##\n\n### H3 ###',
+      code: `# H1 #
+
+## H2 ##
+
+### H3 ###`,
     },
     {
       name: '`consistent` style with Setext headings',
-      code: 'H1\n==\n\nH2\n--',
+      code: `H1
+==
+
+H2
+--`,
     },
     {
       name: '`atx` style',
-      code: '# H1\n\n### H3\n\n###### H6',
+      code: `# H1
+
+### H3
+
+###### H6`,
       options: [{ style: 'atx' }],
     },
     {
       name: '`atx-closed` style',
-      code: '# H1 #\n\n### H3 ###\n\n###### H6 ######',
+      code: `# H1 #
+
+### H3 ###
+
+###### H6 ######`,
       options: [{ style: 'atx-closed' }],
     },
     {
       name: '`setext` style with H1 and H2',
-      code: 'H1\n==\n\nH2\n--',
+      code: `H1
+==
+
+H2
+--`,
       options: [{ style: 'setext' }],
     },
     {
@@ -62,12 +92,28 @@ ruleTester('consistent-heading-style', rule, {
     },
     {
       name: '`setext-with-atx` style',
-      code: 'H1\n==\n\nH2\n--\n\n### H3\n\n###### H6',
+      code: `H1
+==
+
+H2
+--
+
+### H3
+
+###### H6`,
       options: [{ style: 'setext-with-atx' }],
     },
     {
       name: '`setext-with-atx-closed` style',
-      code: 'H1\n==\n\nH2\n--\n\n### H3 ###\n\n###### H6 ######',
+      code: `H1
+==
+
+H2
+--
+
+### H3 ###
+
+###### H6 ######`,
       options: [{ style: 'setext-with-atx-closed' }],
     },
     {
@@ -89,15 +135,29 @@ ruleTester('consistent-heading-style', rule, {
     },
     {
       name: 'Heading-like content in a fenced code block does not determine the consistent style',
-      code: '```md\n# Not a heading\n```\n\nHeading\n=======',
+      code: `\`\`\`md
+# Not a heading
+\`\`\`
+
+Heading
+=======`,
     },
   ],
 
   invalid: [
     {
       name: '`consistent` style uses the first ATX heading',
-      code: '# Heading\n\n## Heading ##\n\nHeading\n-------',
-      output: '# Heading\n\n## Heading\n\n## Heading',
+      code: `# Heading
+
+## Heading ##
+
+Heading
+-------`,
+      output: `# Heading
+
+## Heading
+
+## Heading`,
       errors: [
         {
           messageId: 'style',
@@ -119,8 +179,17 @@ ruleTester('consistent-heading-style', rule, {
     },
     {
       name: '`consistent` style uses the first closed ATX heading',
-      code: '# Heading #\n\n## Heading\n\nHeading\n-------',
-      output: '# Heading #\n\n## Heading ##\n\n## Heading ##',
+      code: `# Heading #
+
+## Heading
+
+Heading
+-------`,
+      output: `# Heading #
+
+## Heading ##
+
+## Heading ##`,
       errors: [
         {
           messageId: 'style',
@@ -142,8 +211,20 @@ ruleTester('consistent-heading-style', rule, {
     },
     {
       name: '`consistent` style uses the first Setext heading',
-      code: 'Heading\n=======\n\n## Heading\n\n## Heading ##',
-      output: 'Heading\n=======\n\nHeading\n-------\n\nHeading\n-------',
+      code: `Heading
+=======
+
+## Heading
+
+## Heading ##`,
+      output: `Heading
+=======
+
+Heading
+-------
+
+Heading
+-------`,
       errors: [
         {
           messageId: 'style',
@@ -165,8 +246,17 @@ ruleTester('consistent-heading-style', rule, {
     },
     {
       name: '`atx` style converts closed ATX and Setext headings',
-      code: '# Heading #\n\n## Heading\n\nHeading\n-------',
-      output: '# Heading\n\n## Heading\n\n## Heading',
+      code: `# Heading #
+
+## Heading
+
+Heading
+-------`,
+      output: `# Heading
+
+## Heading
+
+## Heading`,
       options: [{ style: 'atx' }],
       errors: [
         {
@@ -189,8 +279,17 @@ ruleTester('consistent-heading-style', rule, {
     },
     {
       name: '`atx-closed` style converts ATX and Setext headings',
-      code: '# Heading #\n\n## Heading\n\nHeading\n-------',
-      output: '# Heading #\n\n## Heading ##\n\n## Heading ##',
+      code: `# Heading #
+
+## Heading
+
+Heading
+-------`,
+      output: `# Heading #
+
+## Heading ##
+
+## Heading ##`,
       options: [{ style: 'atx-closed' }],
       errors: [
         {
@@ -213,8 +312,20 @@ ruleTester('consistent-heading-style', rule, {
     },
     {
       name: '`setext` style converts ATX H1 and H2 headings',
-      code: '# Heading\n\n## Heading ##\n\nHeading\n-------',
-      output: 'Heading\n=======\n\nHeading\n-------\n\nHeading\n-------',
+      code: `# Heading
+
+## Heading ##
+
+Heading
+-------`,
+      output: `Heading
+=======
+
+Heading
+-------
+
+Heading
+-------`,
       options: [{ style: 'setext' }],
       errors: [
         {
@@ -253,7 +364,10 @@ ruleTester('consistent-heading-style', rule, {
     },
     {
       name: '`consistent` style uses the first Setext heading for an ATX H3',
-      code: 'H1\n==\n\n### H3',
+      code: `H1
+==
+
+### H3`,
       output: null,
       options: [{ style: 'consistent' }],
       errors: [
@@ -269,8 +383,22 @@ ruleTester('consistent-heading-style', rule, {
     },
     {
       name: '`setext-with-atx` rejects ATX H1/H2 and closed ATX H3+',
-      code: '# H1\n\n## H2\n\n### H3 ###\n\n#### H4',
-      output: 'H1\n==\n\nH2\n--\n\n### H3\n\n#### H4',
+      code: `# H1
+
+## H2
+
+### H3 ###
+
+#### H4`,
+      output: `H1
+==
+
+H2
+--
+
+### H3
+
+#### H4`,
       options: [{ style: 'setext-with-atx' }],
       errors: [
         {
@@ -301,8 +429,22 @@ ruleTester('consistent-heading-style', rule, {
     },
     {
       name: '`setext-with-atx-closed` rejects closed ATX H1/H2 and ATX H3+',
-      code: '# H1 #\n\n## H2 ##\n\n### H3\n\n#### H4 ####',
-      output: 'H1\n==\n\nH2\n--\n\n### H3 ###\n\n#### H4 ####',
+      code: `# H1 #
+
+## H2 ##
+
+### H3
+
+#### H4 ####`,
+      output: `H1
+==
+
+H2
+--
+
+### H3 ###
+
+#### H4 ####`,
       options: [{ style: 'setext-with-atx-closed' }],
       errors: [
         {
@@ -349,8 +491,13 @@ ruleTester('consistent-heading-style', rule, {
     },
     {
       name: '`setext` style converts a heading that follows a blank line',
-      code: 'Paragraph\n\n# Heading',
-      output: 'Paragraph\n\nHeading\n=======',
+      code: `Paragraph
+
+# Heading`,
+      output: `Paragraph
+
+Heading
+=======`,
       options: [{ style: 'setext' }],
       errors: [
         {
@@ -637,8 +784,14 @@ ruleTester('consistent-heading-style', rule, {
     },
     {
       name: '`setext` style converts marker-like content without separating whitespace',
-      code: '# -Heading\n\n# 1.Heading',
-      output: '-Heading\n========\n\n1.Heading\n=========',
+      code: `# -Heading
+
+# 1.Heading`,
+      output: `-Heading
+========
+
+1.Heading
+=========`,
       options: [{ style: 'setext' }],
       errors: [
         {
