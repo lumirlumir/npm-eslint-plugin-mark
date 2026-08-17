@@ -38,6 +38,23 @@ export default defineConfig([
       '@typescript-eslint/no-unused-vars': 'off',
     },
   },
+  {
+    name: 'js/rules',
+    files: ['packages/eslint-markdown/src/rules/**/*.ts'],
+    settings: {
+      'import/internal-regex': '^@/',
+    },
+    rules: {
+      'import/order': [
+        'error',
+        {
+          groups: ['builtin', 'external', 'internal'],
+          alphabetize: { order: 'asc', orderImportKind: 'desc', caseInsensitive: true },
+          'newlines-between': 'always',
+        },
+      ],
+    },
+  },
 
   // md
   {
