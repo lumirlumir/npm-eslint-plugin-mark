@@ -104,7 +104,7 @@ export default {
       heading(node) {
         const { start, end } = sourceCode.getLoc(node);
 
-        if (start.line !== end.line) {
+        if (start.line !== end.line /* Multiline Heading */) {
           currentHeadingStyle = 'setext';
         } else if (closingSequenceRegex.test(sourceCode.getText(node))) {
           currentHeadingStyle = 'atx-closed';
@@ -190,13 +190,10 @@ export default {
             );
 
             if (currentHeadingStyle === 'setext') {
-              const firstChildLocation = sourceCode.getLoc(firstChildNode);
-              const lastChildLocation = sourceCode.getLoc(lastChildNode);
+              const { start } = sourceCode.getLoc(firstChildNode);
+              const { end } = sourceCode.getLoc(lastChildNode);
 
-              const isMultilineHeading =
-                firstChildLocation.start.line !== lastChildLocation.end.line;
-
-              if (!isMultilineHeading) {
+              if (start.line === end.line /* Singleline Heading */) {
                 const headingMarker = '#'.repeat(node.depth);
 
                 if (expectedHeadingStyle === 'atx-closed') {
