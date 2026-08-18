@@ -117,7 +117,7 @@ export default {
         }
       },
 
-      'heading[depth<=2]'() {
+      [`heading[depth<=${SETEXT_MAX_DEPTH}]`]() {
         if (
           headingStyle === 'setext-with-atx' ||
           headingStyle === 'setext-with-atx-closed'
@@ -128,7 +128,7 @@ export default {
         }
       },
 
-      'heading[depth>2]'() {
+      [`heading[depth>${SETEXT_MAX_DEPTH}]`]() {
         if (headingStyle === 'setext-with-atx') {
           expectedHeadingStyle = 'atx';
         } else if (headingStyle === 'setext-with-atx-closed') {
