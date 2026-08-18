@@ -100,7 +100,7 @@ export default {
     let expectedHeadingStyle: 'atx' | 'atx-closed' | 'setext' | null = null;
 
     return {
-      // The `heading` selector is more general, so it is visited before `heading[depth<=2]` and `heading[depth>2]`.
+      // The `heading` selector is more general, so it is visited before the other `heading[xxx]` selectors.
       heading(node) {
         const { start, end } = sourceCode.getLoc(node);
 
