@@ -47,21 +47,6 @@ const closingSequenceRegex = /[ \t]#+[ \t]*$/;
  */
 const potentialBlockStartRegex = /^(?:>|(?:[-+*]|\d{1,9}[.)])(?:[ \t]|$))/u;
 
-function getExpectedHeadingStyle(
-  style: Exclude<HeadingStyle, 'consistent'>,
-  depth: number,
-): 'atx' | 'atx-closed' | 'setext' {
-  if (style === 'setext-with-atx') {
-    return depth <= SETEXT_MAX_DEPTH ? 'setext' : 'atx';
-  }
-
-  if (style === 'setext-with-atx-closed') {
-    return depth <= SETEXT_MAX_DEPTH ? 'setext' : 'atx-closed';
-  }
-
-  return style;
-}
-
 // --------------------------------------------------------------------------------
 // Rule Definition
 // --------------------------------------------------------------------------------
@@ -111,24 +96,49 @@ export default {
     const [{ style }] = context.options;
 
     let headingStyle = style === 'consistent' ? null : style;
+    let currentHeadingStyle: 'atx' | 'atx-closed' | 'setext' | null = null;
+    let expectedHeadingStyle: 'atx' | 'atx-closed' | 'setext' | null = null;
 
     return {
+      // The `heading` selector is more general, so it is visited before `heading[depth<=2]` and `heading[depth>2]`.
       heading(node) {
-        const nodeLocation = sourceCode.getLoc(node);
+        const { start, end } = sourceCode.getLoc(node);
 
-        const currentHeadingStyle =
-          nodeLocation.start.line !== nodeLocation.end.line
-            ? 'setext'
-            : closingSequenceRegex.test(sourceCode.getText(node))
-              ? 'atx-closed'
-              : 'atx';
+        if (start.line !== end.line) {
+          currentHeadingStyle = 'setext';
+        } else if (closingSequenceRegex.test(sourceCode.getText(node))) {
+          currentHeadingStyle = 'atx-closed';
+        } else {
+          currentHeadingStyle = 'atx';
+        }
 
         if (headingStyle === null) {
           headingStyle = currentHeadingStyle;
         }
+      },
 
-        const expectedHeadingStyle = getExpectedHeadingStyle(headingStyle, node.depth);
+      'heading[depth<=2]'() {
+        if (
+          headingStyle === 'setext-with-atx' ||
+          headingStyle === 'setext-with-atx-closed'
+        ) {
+          expectedHeadingStyle = 'setext';
+        } else {
+          expectedHeadingStyle = headingStyle;
+        }
+      },
 
+      'heading[depth>2]'() {
+        if (headingStyle === 'setext-with-atx') {
+          expectedHeadingStyle = 'atx';
+        } else if (headingStyle === 'setext-with-atx-closed') {
+          expectedHeadingStyle = 'atx-closed';
+        } else {
+          expectedHeadingStyle = headingStyle;
+        }
+      },
+
+      'heading:exit'(node) {
         if (currentHeadingStyle === expectedHeadingStyle) {
           return;
         }
@@ -195,7 +205,7 @@ export default {
               // Locations are one-based, while `lines` is zero-based; `-2` selects the preceding line.
               // Treat a missing preceding line at the start of the document as blank.
               const isPreviousLineBlank = isBlankLine(
-                sourceCode.lines[nodeLocation.start.line - 2] ?? '',
+                sourceCode.lines[sourceCode.getLoc(node).start.line - 2] ?? '',
               );
 
               const canConvertToSetext =
