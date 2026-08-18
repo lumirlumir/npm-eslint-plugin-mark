@@ -143,6 +143,16 @@ export default {
           return;
         }
 
+        /*
+         * Possible combinations include:
+         * - Converting `atx` to `atx-closed`.
+         * - Converting `atx` to `setext`.
+         * - Converting `atx-closed` to `atx`.
+         * - Converting `atx-closed` to `setext`.
+         * - Converting `setext` to `atx`.
+         * - Converting `setext` to `atx-closed`.
+         */
+
         let replacementRange = sourceCode.getRange(node);
         let replacementText: string | null = null;
 
