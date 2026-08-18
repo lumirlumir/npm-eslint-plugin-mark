@@ -193,13 +193,11 @@ export default {
                 }
               }
             } else {
-              const nodeStartLine = nodeLocation.start.line;
-
               const isPotentialBlockStart = potentialBlockStartRegex.test(headingContent);
               // Locations are one-based, while `lines` is zero-based; `-2` selects the preceding line.
               // Treat a missing preceding line at the start of the document as blank.
               const isPreviousLineBlank = isBlankLine(
-                sourceCode.lines[nodeStartLine - 2] ?? '',
+                sourceCode.lines[nodeLocation.start.line - 2] ?? '',
               );
 
               const canConvertToSetext =
