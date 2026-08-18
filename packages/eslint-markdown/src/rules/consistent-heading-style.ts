@@ -114,13 +114,12 @@ export default {
 
     return {
       heading(node) {
-        const nodeText = sourceCode.getText(node);
         const nodeLocation = sourceCode.getLoc(node);
 
         const currentHeadingStyle =
           nodeLocation.start.line !== nodeLocation.end.line
             ? 'setext'
-            : closingSequenceRegex.test(nodeText)
+            : closingSequenceRegex.test(sourceCode.getText(node))
               ? 'atx-closed'
               : 'atx';
 
@@ -134,11 +133,10 @@ export default {
           return;
         }
 
-        const nodeRange = sourceCode.getRange(node);
-        const [nodeStartOffset, nodeEndOffset] = nodeRange;
-
-        let replacementRange = nodeRange;
+        let replacementRange = sourceCode.getRange(node);
         let replacementText: string | null = null;
+
+        const [nodeStartOffset, nodeEndOffset] = replacementRange;
 
         if (currentHeadingStyle === 'atx' && expectedHeadingStyle === 'atx-closed') {
           replacementRange = [nodeEndOffset, nodeEndOffset];
