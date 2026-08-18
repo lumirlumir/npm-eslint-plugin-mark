@@ -158,6 +158,8 @@ export default {
 
         const [nodeStartOffset, nodeEndOffset] = replacementRange;
 
+        const lastChildNode = node.children.at(-1);
+
         if (currentHeadingStyle === 'atx' && expectedHeadingStyle === 'atx-closed') {
           replacementRange = [nodeEndOffset, nodeEndOffset];
 
@@ -166,11 +168,9 @@ export default {
           currentHeadingStyle === 'atx-closed' &&
           expectedHeadingStyle === 'atx'
         ) {
-          const lastChild = node.children.at(-1);
-
           // An empty closed heading has no child, so remove everything after its opening sequence.
-          const closingStartOffset = lastChild
-            ? sourceCode.getRange(lastChild)[1]
+          const closingStartOffset = lastChildNode
+            ? sourceCode.getRange(lastChildNode)[1]
             : nodeStartOffset + node.depth;
 
           replacementRange = [closingStartOffset, nodeEndOffset];
@@ -178,7 +178,6 @@ export default {
           replacementText = '';
         } else {
           const firstChildNode = node.children[0];
-          const lastChildNode = node.children.at(-1);
 
           if (firstChildNode && lastChildNode) {
             const [contentStartOffset] = sourceCode.getRange(firstChildNode);
