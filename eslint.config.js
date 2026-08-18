@@ -38,6 +38,51 @@ export default defineConfig([
       '@typescript-eslint/no-unused-vars': 'off',
     },
   },
+  {
+    name: 'js/eslint-markdown/rules',
+    files: ['packages/eslint-markdown/src/rules/*.ts'],
+    ignores: ['packages/eslint-markdown/src/rules/*.test.ts'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              regex: '^\\.\\./core/utils(?:$|/(?!index\\.js$))',
+              message: "Import utilities from '../core/utils/index.js' instead.",
+            },
+          ],
+        },
+      ],
+      'import/order': [
+        'error',
+        {
+          groups: ['builtin', 'external', 'internal', ['parent', 'sibling', 'index']],
+          pathGroups: [
+            {
+              pattern: '../core/utils/index.js',
+              group: 'parent',
+              position: 'before',
+            },
+            {
+              pattern: '../core/constants.js',
+              group: 'parent',
+              position: 'before',
+            },
+            {
+              pattern: '../core/types.js',
+              group: 'parent',
+              position: 'before',
+            },
+          ],
+          alphabetize: {
+            order: 'asc',
+            caseInsensitive: true,
+          },
+        },
+      ],
+    },
+  },
 
   // md
   {
