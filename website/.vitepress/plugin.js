@@ -43,7 +43,6 @@ import {
   Output,
   telemetryPlugin,
 } from '@codecov/bundler-plugin-core';
-import { createVitePlugin } from 'unplugin';
 
 // --------------------------------------------------------------------------------
 // Helper
@@ -66,121 +65,119 @@ const viteBundleAnalysisPlugin = ({ output, pluginName, pluginVersion }) => ({
   writeBundle: async () => {
     await output.write();
   },
-  vite: {
-    async generateBundle(options, bundle) {
-      if (!output.bundleName || output.bundleName === '') {
-        red('Bundle name is not present or empty. Skipping upload.');
-        return;
-      }
-      output.setBundleName(output.originalBundleName);
-      if (options.name && options.name !== '') {
-        output.setBundleName(`${output.bundleName}-${options.name}`);
-      }
-      const format = options.format === 'es' ? 'esm' : options.format;
-      output.setBundleName(`${output.bundleName}-${format}`);
-      const cwd = process.cwd();
-      const assets = [];
-      const chunks = [];
-      const moduleByFileName = /* @__PURE__ */ new Map();
-      const items = Object.values(bundle);
-      const customOptions = {
-        moduleOriginalSize: false,
-        ...options,
-      };
-      let assetFormatString = '';
-      if (typeof customOptions.assetFileNames === 'string') {
-        assetFormatString = customOptions.assetFileNames;
-      }
-      let chunkFormatString = '';
-      if (typeof customOptions.chunkFileNames === 'string') {
-        chunkFormatString = customOptions.chunkFileNames;
-      }
-      let counter = 0;
-      await Promise.all(
-        items.map(async item => {
-          if (item?.type === 'asset') {
-            const fileName = item?.fileName ?? '';
-            if (path.extname(fileName) === '.map') {
-              return;
-            }
-            const asset = await createRollupAsset({
-              fileName,
-              source: item.source,
-              formatString: assetFormatString,
-              metaFramework: output.metaFramework,
-            });
-            assets.push(asset);
-          } else if (item?.type === 'chunk') {
-            const fileName = item?.fileName ?? '';
-            if (path.extname(fileName) === '.map') {
-              return;
-            }
-            const asset = await createRollupAsset({
-              fileName,
-              source: item.code,
-              formatString: chunkFormatString,
-              metaFramework: output.metaFramework,
-            });
-            assets.push(asset);
-            const chunkId = item?.name ?? '';
-            const uniqueId = `${counter}-${chunkId}`;
-            chunks.push({
-              id: chunkId,
-              uniqueId,
-              entry: item?.isEntry,
-              initial: item?.isDynamicEntry,
-              files: [fileName],
-              names: [item?.name],
-              dynamicImports: item?.dynamicImports ?? [],
-            });
-            const moduleEntries = Object.entries(item?.modules ?? {});
-            for (const [modulePath, moduleInfo] of moduleEntries) {
-              const normalizedModulePath = modulePath.replace('\0', '');
-              const relativeModulePath = path.relative(cwd, normalizedModulePath);
-              const relativeModulePathWithPrefix = relativeModulePath.match(/^\.\./)
-                ? relativeModulePath
-                : `.${path.sep}${relativeModulePath}`;
-              const moduleEntry = moduleByFileName.get(relativeModulePathWithPrefix);
-              if (moduleEntry) {
-                moduleEntry.chunkUniqueIds.push(uniqueId);
-              } else {
-                const size = customOptions.moduleOriginalSize
-                  ? moduleInfo.originalLength
-                  : moduleInfo.renderedLength;
-                const module = {
-                  name: relativeModulePathWithPrefix,
-                  size,
-                  chunkUniqueIds: [uniqueId],
-                };
-                moduleByFileName.set(relativeModulePathWithPrefix, module);
-              }
-            }
-            counter += 1;
+  async generateBundle(options, bundle) {
+    if (!output.bundleName || output.bundleName === '') {
+      red('Bundle name is not present or empty. Skipping upload.');
+      return;
+    }
+    output.setBundleName(output.originalBundleName);
+    if (options.name && options.name !== '') {
+      output.setBundleName(`${output.bundleName}-${options.name}`);
+    }
+    const format = options.format === 'es' ? 'esm' : options.format;
+    output.setBundleName(`${output.bundleName}-${format}`);
+    const cwd = process.cwd();
+    const assets = [];
+    const chunks = [];
+    const moduleByFileName = /* @__PURE__ */ new Map();
+    const items = Object.values(bundle);
+    const customOptions = {
+      moduleOriginalSize: false,
+      ...options,
+    };
+    let assetFormatString = '';
+    if (typeof customOptions.assetFileNames === 'string') {
+      assetFormatString = customOptions.assetFileNames;
+    }
+    let chunkFormatString = '';
+    if (typeof customOptions.chunkFileNames === 'string') {
+      chunkFormatString = customOptions.chunkFileNames;
+    }
+    let counter = 0;
+    await Promise.all(
+      items.map(async item => {
+        if (item?.type === 'asset') {
+          const fileName = item?.fileName ?? '';
+          if (path.extname(fileName) === '.map') {
+            return;
           }
-        }),
-      );
-      const modules = Array.from(moduleByFileName.values());
-      output.bundler = {
-        name: 'rollup',
-        version: this.meta.rollupVersion,
-      };
-      output.assets = assets;
-      output.chunks = chunks;
-      output.modules = modules;
-      output.outputPath = options.dir ?? '';
-      if (output.dryRun) {
-        this.emitFile({
-          type: 'asset',
-          fileName: `${output.bundleName}-stats.json`,
-          source: output.bundleStatsToJson(),
-        });
-      }
-    },
+          const asset = await createRollupAsset({
+            fileName,
+            source: item.source,
+            formatString: assetFormatString,
+            metaFramework: output.metaFramework,
+          });
+          assets.push(asset);
+        } else if (item?.type === 'chunk') {
+          const fileName = item?.fileName ?? '';
+          if (path.extname(fileName) === '.map') {
+            return;
+          }
+          const asset = await createRollupAsset({
+            fileName,
+            source: item.code,
+            formatString: chunkFormatString,
+            metaFramework: output.metaFramework,
+          });
+          assets.push(asset);
+          const chunkId = item?.name ?? '';
+          const uniqueId = `${counter}-${chunkId}`;
+          chunks.push({
+            id: chunkId,
+            uniqueId,
+            entry: item?.isEntry,
+            initial: item?.isDynamicEntry,
+            files: [fileName],
+            names: [item?.name],
+            dynamicImports: item?.dynamicImports ?? [],
+          });
+          const moduleEntries = Object.entries(item?.modules ?? {});
+          for (const [modulePath, moduleInfo] of moduleEntries) {
+            const normalizedModulePath = modulePath.replace('\0', '');
+            const relativeModulePath = path.relative(cwd, normalizedModulePath);
+            const relativeModulePathWithPrefix = relativeModulePath.match(/^\.\./)
+              ? relativeModulePath
+              : `.${path.sep}${relativeModulePath}`;
+            const moduleEntry = moduleByFileName.get(relativeModulePathWithPrefix);
+            if (moduleEntry) {
+              moduleEntry.chunkUniqueIds.push(uniqueId);
+            } else {
+              const size = customOptions.moduleOriginalSize
+                ? moduleInfo.originalLength
+                : moduleInfo.renderedLength;
+              const module = {
+                name: relativeModulePathWithPrefix,
+                size,
+                chunkUniqueIds: [uniqueId],
+              };
+              moduleByFileName.set(relativeModulePathWithPrefix, module);
+            }
+          }
+          counter += 1;
+        }
+      }),
+    );
+    const modules = Array.from(moduleByFileName.values());
+    output.bundler = {
+      name: 'rollup',
+      version: this.meta.rollupVersion,
+    };
+    output.assets = assets;
+    output.chunks = chunks;
+    output.modules = modules;
+    output.outputPath = options.dir ?? '';
+    if (output.dryRun) {
+      this.emitFile({
+        type: 'asset',
+        fileName: `${output.bundleName}-stats.json`,
+        source: output.bundleStatsToJson(),
+      });
+    }
   },
 });
 
-const codecovVitePlugin = createVitePlugin((userOptions, unpluginMetaContext) => {
-  if (checkNodeVersion(unpluginMetaContext)) {
+const codecovVitePlugin = userOptions => {
+  if (checkNodeVersion({ framework: 'vite' })) {
     return [];
   }
   const normalizedOptions = normalizeOptions(userOptions);
@@ -199,13 +196,9 @@ const codecovVitePlugin = createVitePlugin((userOptions, unpluginMetaContext) =>
     pluginName: PLUGIN_NAME,
     pluginVersion: PLUGIN_VERSION,
     options,
-    bundler: unpluginMetaContext.framework,
+    bundler: 'vite',
   });
-  const output = new Output(
-    options,
-    { metaFramework: unpluginMetaContext.framework },
-    sentryConfig,
-  );
+  const output = new Output(options, { metaFramework: 'vite' }, sentryConfig);
   if (options.enableBundleAnalysis) {
     plugins.push(
       telemetryPlugin({
@@ -221,7 +214,7 @@ const codecovVitePlugin = createVitePlugin((userOptions, unpluginMetaContext) =>
     );
   }
   return plugins;
-});
+};
 
 // --------------------------------------------------------------------------------
 // Export
