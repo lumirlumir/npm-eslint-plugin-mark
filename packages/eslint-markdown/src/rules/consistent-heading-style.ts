@@ -1,7 +1,7 @@
 /**
  * @fileoverview Rule to enforce consistent heading style.
  * @author Ga eun Lee(tooth-is-silver)
- * @see https://github.com/DavidAnson/markdownlint/blob/v0.40.0/lib/md003.mjs
+ * @see https://github.com/DavidAnson/markdownlint/blob/v0.41.1/lib/md003.mjs
  */
 
 // --------------------------------------------------------------------------------
@@ -13,10 +13,19 @@ import { URL_RULE_DOCS } from '../core/constants.js';
 import type { RuleModule } from '../core/types.js';
 
 // --------------------------------------------------------------------------------
-// Constants
+// Typedef
+// --------------------------------------------------------------------------------
+
+type HeadingStyle = (typeof HEADING_STYLE)[number];
+type RuleOptions = [{ style: HeadingStyle }];
+type MessageIds = 'style';
+
+// --------------------------------------------------------------------------------
+// Helper
 // --------------------------------------------------------------------------------
 
 const SETEXT_MAX_DEPTH = 2;
+
 const HEADING_STYLE = [
   'consistent',
   'atx',
@@ -26,26 +35,15 @@ const HEADING_STYLE = [
   'setext-with-atx-closed',
 ] as const;
 
-// --------------------------------------------------------------------------------
-// Typedef
-// --------------------------------------------------------------------------------
-type HeadingStyle = (typeof HEADING_STYLE)[number];
-type RuleOptions = [{ style: HeadingStyle }];
-type MessageIds = 'style';
-
-// --------------------------------------------------------------------------------
-// Helper
-// --------------------------------------------------------------------------------
-
 /**
  * Matches the closing sequence of a closed ATX heading.
- * see: https://spec.commonmark.org/0.31.2/#atx-headings
+ * @see https://spec.commonmark.org/0.31.2/#atx-headings
  */
 const closingSequenceRegex = /[ \t]#+[ \t]*$/;
 
 /**
  * Matches heading content that may start a block-level construct after conversion to Setext.
- * see: https://spec.commonmark.org/0.31.2/#blocks-and-inlines
+ * @see https://spec.commonmark.org/0.31.2/#blocks-and-inlines
  */
 const potentialBlockStartRegex = /^(?:>|(?:[-+*]|\d{1,9}[.)])(?:[ \t]|$))/u;
 
@@ -112,7 +110,7 @@ export default {
     const { sourceCode } = context;
     const [{ style }] = context.options;
 
-    let documentHeadingStyle = style === 'consistent' ? null : style;
+    let headingStyle = style === 'consistent' ? null : style;
 
     return {
       heading(node) {
@@ -126,14 +124,11 @@ export default {
               ? 'atx-closed'
               : 'atx';
 
-        if (documentHeadingStyle === null) {
-          documentHeadingStyle = currentHeadingStyle;
+        if (headingStyle === null) {
+          headingStyle = currentHeadingStyle;
         }
 
-        const expectedHeadingStyle = getExpectedHeadingStyle(
-          documentHeadingStyle,
-          node.depth,
-        );
+        const expectedHeadingStyle = getExpectedHeadingStyle(headingStyle, node.depth);
 
         if (currentHeadingStyle === expectedHeadingStyle) {
           return;
