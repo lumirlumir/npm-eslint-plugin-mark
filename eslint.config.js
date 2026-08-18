@@ -40,17 +40,17 @@ export default defineConfig([
   },
   {
     name: 'js/rules',
-    files: ['packages/eslint-markdown/src/rules/**/*.ts'],
-    settings: {
-      'import/internal-regex': '^@/',
-    },
+    files: ['packages/eslint-markdown/src/rules/*.ts'],
+    ignores: ['packages/eslint-markdown/src/rules/*.test.ts'],
     rules: {
       'import/order': [
         'error',
         {
-          groups: ['builtin', 'external', 'internal'],
-          alphabetize: { order: 'asc', orderImportKind: 'desc', caseInsensitive: true },
-          'newlines-between': 'always',
+          groups: [
+            ['builtin', 'external', 'internal'],
+            ['parent', 'sibling', 'index', 'type'],
+          ],
+          sortTypesGroup: true,
         },
       ],
     },
