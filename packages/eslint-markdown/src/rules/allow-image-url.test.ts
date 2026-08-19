@@ -31,6 +31,8 @@ ruleTester('allow-image-url', rule, {
       name: 'With no options',
       code: '![](https://example.com)',
     },
+
+    // Options: `allowUrls` - `RegExp[]`
     {
       name: '`allowUrls` option - 1',
       code: '![Text](https://example.com)',
@@ -49,6 +51,19 @@ ruleTester('allow-image-url', rule, {
         },
       ],
     },
+
+    // Options: `allowUrls` - `string[]`
+    {
+      name: '`allowUrls` should support string patterns',
+      code: '![Text](https://example.com)',
+      options: [
+        {
+          allowUrls: ['example\\.com'],
+        },
+      ],
+    },
+
+    // Options: `disallowUrls` - `RegExp[]`
     {
       name: '`disallowUrls` option - 1',
       code: '![Text](https://example.com)',
@@ -67,6 +82,8 @@ ruleTester('allow-image-url', rule, {
         },
       ],
     },
+
+    // Options: `allowUrls` and `disallowUrls` - `RegExp[]`
     {
       name: '`allowUrls` and `disallowUrls` options',
       code: '![Text](https://example.com)',
@@ -241,6 +258,8 @@ ruleTester('allow-image-url', rule, {
 
   invalid: [
     // Image
+
+    // Options: `allowUrls` - `RegExp[]`
     {
       name: '`allowUrls` option - 1',
       code: '![Text](https://example.com)',
@@ -263,6 +282,8 @@ ruleTester('allow-image-url', rule, {
         },
       ],
     },
+
+    // Options: `disallowUrls` - `RegExp[]`
     {
       name: '`disallowUrls` option - 1',
       code: '![Text](https://example.com)',
@@ -277,6 +298,30 @@ ruleTester('allow-image-url', rule, {
           data: {
             url: 'https://example.com',
             patterns: '`/example.com/`',
+          },
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 29,
+        },
+      ],
+    },
+
+    // Options: `disallowUrls` - `string[]`
+    {
+      name: '`disallowUrls` should support string patterns',
+      code: '![Text](https://example.com)',
+      options: [
+        {
+          disallowUrls: ['example\\.com'],
+        },
+      ],
+      errors: [
+        {
+          messageId: 'disallowImageUrl',
+          data: {
+            url: 'https://example.com',
+            patterns: '`/example\\.com/u`',
           },
           line: 1,
           column: 1,
