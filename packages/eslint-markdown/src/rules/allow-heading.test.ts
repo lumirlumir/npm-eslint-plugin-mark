@@ -68,6 +68,15 @@ Multiple Lines
 
     // Options
     {
+      name: 'ATX: Heading should not be reported with string allow pattern',
+      code: '# Hello',
+      options: [
+        {
+          h1: { allow: ['^# Hello$'] },
+        },
+      ],
+    },
+    {
       name: 'ATX: Headings should not be reported when they are allowed',
       code: `
 # Hello
@@ -540,6 +549,25 @@ Multiple Lines
     },
 
     // Basic: disallow heading
+    {
+      name: 'ATX: Heading should be reported with string disallow pattern',
+      code: '# Hello',
+      options: [
+        {
+          h1: { disallow: ['^# Hello$'] },
+        },
+      ],
+      errors: [
+        {
+          messageId: 'disallowHeading',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 8,
+          data: { depth: '1', heading: '# Hello', disallow: '`^# Hello$`' },
+        },
+      ],
+    },
     {
       name: 'ATX: Heading should be reported when it is disallowed',
       code: '# Hello',

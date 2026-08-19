@@ -41,6 +41,15 @@ ruleTester('allow-link-url', rule, {
       ],
     },
     {
+      name: '`allowUrls` should support string patterns',
+      code: '[Text](https://example.com)',
+      options: [
+        {
+          allowUrls: ['example\\.com'],
+        },
+      ],
+    },
+    {
       name: '`allowUrls` option - 2',
       code: '[Text](https://example.com)\n<https://foo.com>',
       options: [
@@ -250,6 +259,28 @@ ruleTester('allow-link-url', rule, {
 
   invalid: [
     // Link
+    {
+      name: '`disallowUrls` should support string patterns',
+      code: '[Text](https://example.com)',
+      options: [
+        {
+          disallowUrls: ['example\\.com'],
+        },
+      ],
+      errors: [
+        {
+          messageId: 'disallowLinkUrl',
+          data: {
+            url: 'https://example.com',
+            patterns: '`example\\.com`',
+          },
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 28,
+        },
+      ],
+    },
     {
       name: '`allowUrls` option - 1',
       code: '[Text](https://example.com)',

@@ -19,6 +19,11 @@ describe('test-regex-stateless', () => {
     assert.strictEqual(testRegexStateless(/allowed/u, 'denied'), false);
   });
 
+  it('should test a string pattern', () => {
+    assert.strictEqual(testRegexStateless('^allowed$', 'allowed'), true);
+    assert.strictEqual(testRegexStateless('^allowed$', 'not allowed'), false);
+  });
+
   it('should test a global regex without mutating its `lastIndex`', () => {
     const regex = /allowed/gu;
 
