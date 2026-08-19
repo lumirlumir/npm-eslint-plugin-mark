@@ -104,11 +104,18 @@ export default {
 
   create(context) {
     const { sourceCode } = context;
-    const [{ allowUrls, disallowUrls }] = context.options;
-    const allowUrlRegexes = allowUrls.map(normalizeRegexPattern);
-    const disallowUrlRegexes = disallowUrls.map(normalizeRegexPattern);
+    const [
+      {
+        allowUrls: allowUrlsOption,
+        disallowUrls: disallowUrlsOption,
+        allowDefinitions: allowDefinitionsOption,
+      },
+    ] = context.options;
+
+    const allowUrls = allowUrlsOption.map(normalizeRegexPattern);
+    const disallowUrls = disallowUrlsOption.map(normalizeRegexPattern);
     const allowDefinitions = new Set(
-      context.options[0].allowDefinitions.map(identifier =>
+      allowDefinitionsOption.map(identifier =>
         normalizeIdentifier(identifier).toLowerCase(),
       ),
     );
@@ -175,24 +182,24 @@ export default {
          */
 
         for (const { loc, url } of links) {
-          if (!allowUrlRegexes.some(regex => testRegexStateless(regex, url))) {
+          if (!allowUrls.some(regex => testRegexStateless(regex, url))) {
             context.report({
               loc,
               messageId: 'allowLinkUrl',
               data: {
                 url,
-                patterns: allowUrlRegexes.map(regex => `\`${regex}\``).join(', '),
+                patterns: allowUrls.map(regex => `\`${regex}\``).join(', '),
               },
             });
           }
 
-          if (disallowUrlRegexes.some(regex => testRegexStateless(regex, url))) {
+          if (disallowUrls.some(regex => testRegexStateless(regex, url))) {
             context.report({
               loc,
               messageId: 'disallowLinkUrl',
               data: {
                 url,
-                patterns: disallowUrlRegexes.map(regex => `\`${regex}\``).join(', '),
+                patterns: disallowUrls.map(regex => `\`${regex}\``).join(', '),
               },
             });
           }
