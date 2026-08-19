@@ -17,8 +17,8 @@ import type { RuleModule } from '../core/types.js';
 // --------------------------------------------------------------------------------
 
 export interface HeadingOptions {
-  allow: RegExp[];
-  disallow: RegExp[];
+  allow: (RegExp | string)[];
+  disallow: (RegExp | string)[];
 }
 type RuleOptions = [Record<`h${Heading['depth']}`, HeadingOptions>];
 type MessageIds = 'allowHeading' | 'disallowHeading';
@@ -33,14 +33,14 @@ const headingOptionsSchema = {
     allow: {
       type: 'array',
       items: {
-        type: 'object',
+        oneOf: [{ type: 'object' }, { type: 'string' }],
       },
       uniqueItems: true,
     },
     disallow: {
       type: 'array',
       items: {
-        type: 'object',
+        oneOf: [{ type: 'object' }, { type: 'string' }],
       },
       uniqueItems: true,
     },

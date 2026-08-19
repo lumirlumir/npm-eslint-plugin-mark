@@ -19,7 +19,11 @@ import type { RuleModule } from '../core/types.js';
 // --------------------------------------------------------------------------------
 
 type RuleOptions = [
-  { allowUrls: RegExp[]; disallowUrls: RegExp[]; allowDefinitions: string[] },
+  {
+    allowUrls: (RegExp | string)[];
+    disallowUrls: (RegExp | string)[];
+    allowDefinitions: string[];
+  },
 ];
 type MessageIds = 'allowImageUrl' | 'disallowImageUrl';
 
@@ -45,14 +49,14 @@ export default {
           allowUrls: {
             type: 'array',
             items: {
-              type: 'object',
+              oneOf: [{ type: 'object' }, { type: 'string' }],
             },
             uniqueItems: true,
           },
           disallowUrls: {
             type: 'array',
             items: {
-              type: 'object',
+              oneOf: [{ type: 'object' }, { type: 'string' }],
             },
             uniqueItems: true,
           },
