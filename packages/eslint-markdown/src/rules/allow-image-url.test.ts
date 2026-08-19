@@ -263,7 +263,7 @@ ruleTester('allow-image-url', rule, {
           messageId: 'disallowImageUrl',
           data: {
             url: 'https://example.com',
-            patterns: '`/example\\.com/`',
+            patterns: '`/example\\.com/u`',
           },
           line: 1,
           column: 1,

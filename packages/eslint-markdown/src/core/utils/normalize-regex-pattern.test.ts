@@ -14,11 +14,11 @@ import normalizeRegexPattern from './normalize-regex-pattern.js';
 // --------------------------------------------------------------------------------
 
 describe('normalize-regex-pattern', () => {
-  it('should compile a string pattern without flags', () => {
+  it('should compile a string pattern with the `u` flag', () => {
     const regex = normalizeRegexPattern('example\\.com');
 
     assert.strictEqual(regex.source, 'example\\.com');
-    assert.strictEqual(regex.flags, '');
+    assert.strictEqual(regex.flags, 'u');
   });
 
   it('should return a `RegExp` as is', () => {

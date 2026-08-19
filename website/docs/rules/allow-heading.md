@@ -134,7 +134,7 @@ Each heading level can be configured with:
 
 Both options accept regular expressions and string patterns, so they can be used in configuration formats that cannot hold `RegExp` objects, such as JSON or YAML.
 
-String patterns are passed to the `RegExp` constructor without any flags. When written as JavaScript strings, backslashes must be escaped. For example, `'^## Overview$'` is equivalent to `/^## Overview$/`, and `'v\\d+'` is equivalent to `/v\d+/`.
+String patterns are passed to the `RegExp` constructor with the `u` flag. When written as JavaScript strings, backslashes must be escaped. For example, `'^## Overview$'` is equivalent to `/^## Overview$/u`, and `'v\\d+'` is equivalent to `/v\d+/u`.
 
 ```js
 'md/allow-heading': ['error', {

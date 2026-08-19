@@ -163,7 +163,7 @@ Please note that this rule doesn't report definition-style comments (e.g., `[//]
 
 `allowUrls` and `disallowUrls` accept regular expressions and string patterns, so they can be used in configuration formats that cannot hold `RegExp` objects, such as JSON or YAML.
 
-String patterns are passed to the `RegExp` constructor without any flags. When written as JavaScript strings, backslashes must be escaped. For example, `'example\\.com'` is equivalent to `/example\.com/`.
+String patterns are passed to the `RegExp` constructor with the `u` flag. When written as JavaScript strings, backslashes must be escaped. For example, `'example\\.com'` is equivalent to `/example\.com/u`.
 
 ```js
 'md/allow-link-url': ['error', {
