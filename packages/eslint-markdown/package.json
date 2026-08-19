@@ -79,6 +79,6 @@
     "@types/mdast": "^4.0.4",
     "@types/unist": "^3.0.3",
     "eslint": "^9.39.5",
-    "vitest": "^4.1.9"
+    "vitest": "^4.1.10"
   }
 }
