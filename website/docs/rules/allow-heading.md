@@ -132,17 +132,11 @@ Each heading level can be configured with:
 - `allow`: Allowed heading patterns. Only headings matching at least one pattern are allowed.
 - `disallow`: Disallowed heading patterns. Headings matching any pattern are reported.
 
-Both options accept regular expressions and string patterns, so they can be used in configuration formats that cannot hold `RegExp` objects, such as JSON or YAML.
+Both options accept `RegExp` objects and string patterns. Patterns are tested against the Markdown source of the entire heading node, including its heading markers. For example, an `h2` ATX heading with the text `Overview` is tested as `## Overview`.
 
-String patterns are passed to the `RegExp` constructor with the `u` flag. When written as JavaScript strings, backslashes must be escaped. For example, `'^## Overview$'` is equivalent to `/^## Overview$/u`, and `'v\\d+'` is equivalent to `/v\d+/u`.
-
-```js
-'md/allow-heading': ['error', {
-  h2: { allow: ['^## Overview$'], disallow: [] },
-}]
-```
-
-The patterns are tested against the Markdown source text for the entire heading node. For example, `## Overview` matches an `h2` ATX heading with the text `Overview`.
+::: warning Escaping special characters
+Regular expression special characters must be escaped when they should be matched literally. For example, to match `## [heading]`, use `/^## \[heading\]$/u` or the string pattern `'^## \\[heading\\]$'`.
+:::
 
 ### `h1`
 
