@@ -106,16 +106,16 @@ export default {
     const { sourceCode } = context;
     const [
       {
-        allowUrls: allowUrlsOptions,
-        disallowUrls: disallowUrlsOptions,
-        allowDefinitions: allowDefinitionsOptions,
+        allowUrls: allowUrlsOption,
+        disallowUrls: disallowUrlsOption,
+        allowDefinitions: allowDefinitionsOption,
       },
     ] = context.options;
 
-    const allowUrls = allowUrlsOptions.map(normalizeRegexPattern);
-    const disallowUrls = disallowUrlsOptions.map(normalizeRegexPattern);
+    const allowUrls = allowUrlsOption.map(normalizeRegexPattern);
+    const disallowUrls = disallowUrlsOption.map(normalizeRegexPattern);
     const allowDefinitions = new Set(
-      allowDefinitionsOptions.map(identifier =>
+      allowDefinitionsOption.map(identifier =>
         normalizeIdentifier(identifier).toLowerCase(),
       ),
     );
