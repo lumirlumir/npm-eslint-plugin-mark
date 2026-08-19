@@ -48,13 +48,6 @@ const headingOptionsSchema = {
   additionalProperties: false,
 } as const;
 
-function toHeadingRegexes({ allow, disallow }: HeadingOptions) {
-  return {
-    allow: allow.map(normalizeRegexPattern),
-    disallow: disallow.map(normalizeRegexPattern),
-  };
-}
-
 // --------------------------------------------------------------------------------
 // Rule Definition
 // --------------------------------------------------------------------------------
@@ -111,19 +104,15 @@ export default {
   create(context) {
     const { sourceCode } = context;
     const [{ h1, h2, h3, h4, h5, h6 }] = context.options;
-    const headingMap = {
-      1: toHeadingRegexes(h1),
-      2: toHeadingRegexes(h2),
-      3: toHeadingRegexes(h3),
-      4: toHeadingRegexes(h4),
-      5: toHeadingRegexes(h5),
-      6: toHeadingRegexes(h6),
-    } as const satisfies Record<Heading['depth'], ReturnType<typeof toHeadingRegexes>>;
+    const headingMap = [h1, h2, h3, h4, h5, h6].map(({ allow, disallow }) => ({
+      allow: allow.map(normalizeRegexPattern),
+      disallow: disallow.map(normalizeRegexPattern),
+    }));
 
     return {
       heading(node) {
         const { depth } = node;
-        const { allow, disallow } = headingMap[depth];
+        const { allow, disallow } = headingMap[depth - 1];
         const headingText = sourceCode.getText(node);
 
         if (!allow.some(regex => testRegexStateless(regex, headingText))) {
