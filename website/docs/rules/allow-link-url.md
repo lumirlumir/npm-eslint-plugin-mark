@@ -161,9 +161,20 @@ Please note that this rule doesn't report definition-style comments (e.g., `[//]
 }]
 ```
 
+`allowUrls` and `disallowUrls` accept regular expressions and string patterns, so they can be used in configuration formats that cannot hold `RegExp` objects, such as JSON or YAML.
+
+String patterns are passed to the `RegExp` constructor without any flags. When written as JavaScript strings, backslashes must be escaped. For example, `'example\\.com'` is equivalent to `/example\.com/`.
+
+```js
+'md/allow-link-url': ['error', {
+  allowUrls: ['^https://example\\.com/'],
+  disallowUrls: [],
+}]
+```
+
 ### `allowUrls`
 
-> Type: `RegExp[]` / Default: `[/.*/u]`
+> Type: `(RegExp | string)[]` / Default: `[/.*/u]`
 
 Allowed URLs act like a ***whitelist***. Only those written on the whitelist **can** pass through.
 
@@ -171,7 +182,7 @@ For example, if you pass an empty array to the option, it allows nothing. i.e. E
 
 ### `disallowUrls`
 
-> Type: `RegExp[]` / Default: `[]`
+> Type: `(RegExp | string)[]` / Default: `[]`
 
 On the contrary, disallowed URLs act like a ***blacklist***. Only those written on the blacklist **cannot** pass through.
 
