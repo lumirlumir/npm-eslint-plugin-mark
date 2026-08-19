@@ -33,14 +33,14 @@ const headingOptionsSchema = {
     allow: {
       type: 'array',
       items: {
-        oneOf: [{ type: 'object' }, { type: 'string' }],
+        oneOf: [{ type: 'object', additionalProperties: false }, { type: 'string' }],
       },
       uniqueItems: true,
     },
     disallow: {
       type: 'array',
       items: {
-        oneOf: [{ type: 'object' }, { type: 'string' }],
+        oneOf: [{ type: 'object', additionalProperties: false }, { type: 'string' }],
       },
       uniqueItems: true,
     },

@@ -53,14 +53,20 @@ export default {
           allowUrls: {
             type: 'array',
             items: {
-              oneOf: [{ type: 'object' }, { type: 'string' }],
+              oneOf: [
+                { type: 'object', additionalProperties: false },
+                { type: 'string' },
+              ],
             },
             uniqueItems: true,
           },
           disallowUrls: {
             type: 'array',
             items: {
-              oneOf: [{ type: 'object' }, { type: 'string' }],
+              oneOf: [
+                { type: 'object', additionalProperties: false },
+                { type: 'string' },
+              ],
             },
             uniqueItems: true,
           },
