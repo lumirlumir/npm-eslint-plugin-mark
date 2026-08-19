@@ -161,32 +161,33 @@ Please note that this rule doesn't report definition-style comments (e.g., `[//]
 }]
 ```
 
-`allowUrls` and `disallowUrls` accept regular expressions and string patterns, so they can be used in configuration formats that cannot hold `RegExp` objects, such as JSON or YAML.
-
-String patterns are passed to the `RegExp` constructor with the `u` flag. When written as JavaScript strings, backslashes must be escaped. For example, `'example\\.com'` is equivalent to `/example\.com/u`.
-
-```js
-'md/allow-link-url': ['error', {
-  allowUrls: ['^https://example\\.com/'],
-  disallowUrls: [],
-}]
-```
-
 ### `allowUrls`
 
 > Type: `(RegExp | string)[]` / Default: `[/.*/u]`
+> > This option accepts `RegExp` objects and string patterns.  
+> > String patterns are compiled with the `u` flag.
 
 Allowed URLs act like a ***whitelist***. Only those written on the whitelist **can** pass through.
 
 For example, if you pass an empty array to the option, it allows nothing. i.e. Every **link** will be detected.
 
+::: warning Escaping special characters
+Regular expression special characters must be escaped when matched literally. For example, to match `image.png`, use `/^image\.png$/u` or `'^image\\.png$'`.
+:::
+
 ### `disallowUrls`
 
 > Type: `(RegExp | string)[]` / Default: `[]`
+> > This option accepts `RegExp` objects and string patterns.  
+> > String patterns are compiled with the `u` flag.
 
 On the contrary, disallowed URLs act like a ***blacklist***. Only those written on the blacklist **cannot** pass through.
 
 For example, if you pass an empty array to the option, it allows everything. i.e. no **link** will be detected.
+
+::: warning Escaping special characters
+Regular expression special characters must be escaped when matched literally. For example, to match `image.png`, use `/^image\.png$/u` or `'^image\\.png$'`.
+:::
 
 ### `allowDefinitions`
 
