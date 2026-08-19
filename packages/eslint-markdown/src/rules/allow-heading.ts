@@ -8,7 +8,7 @@
 // --------------------------------------------------------------------------------
 
 import type { Heading } from 'mdast';
-import { testRegexStateless, toRegExp } from '../core/utils/index.js';
+import { normalizeRegexPattern, testRegexStateless } from '../core/utils/index.js';
 import { URL_RULE_DOCS } from '../core/constants.js';
 import type { RuleModule } from '../core/types.js';
 
@@ -50,8 +50,8 @@ const headingOptionsSchema = {
 
 function toHeadingRegexes({ allow, disallow }: HeadingOptions) {
   return {
-    allow: allow.map(toRegExp),
-    disallow: disallow.map(toRegExp),
+    allow: allow.map(normalizeRegexPattern),
+    disallow: disallow.map(normalizeRegexPattern),
   };
 }
 

@@ -11,6 +11,6 @@
  * @param pattern RegExp or string pattern to normalize.
  * @returns The normalized `RegExp`.
  */
-export default function toRegExp(pattern: RegExp | string): RegExp {
+export default function normalizeRegexPattern(pattern: RegExp | string): RegExp {
   return typeof pattern === 'string' ? new RegExp(pattern) : pattern;
 }

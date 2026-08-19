@@ -12,8 +12,8 @@ import { normalizeIdentifier } from 'micromark-util-normalize-identifier';
 import type { Position } from 'unist';
 import {
   getElementsByTagName,
+  normalizeRegexPattern,
   testRegexStateless,
-  toRegExp,
 } from '../core/utils/index.js';
 import { URL_RULE_DOCS } from '../core/constants.js';
 import type { RuleModule } from '../core/types.js';
@@ -99,8 +99,8 @@ export default {
   create(context) {
     const { sourceCode } = context;
     const [{ allowUrls, disallowUrls }] = context.options;
-    const allowUrlRegexes = allowUrls.map(toRegExp);
-    const disallowUrlRegexes = disallowUrls.map(toRegExp);
+    const allowUrlRegexes = allowUrls.map(normalizeRegexPattern);
+    const disallowUrlRegexes = disallowUrls.map(normalizeRegexPattern);
     const allowDefinitions = new Set(
       context.options[0].allowDefinitions.map(identifier =>
         normalizeIdentifier(identifier).toLowerCase(),
