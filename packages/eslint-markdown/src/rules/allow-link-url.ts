@@ -10,7 +10,11 @@
 import type { Definition } from 'mdast';
 import { normalizeIdentifier } from 'micromark-util-normalize-identifier';
 import type { Position } from 'unist';
-import { getElementsByTagName, testRegexStateless } from '../core/utils/index.js';
+import {
+  getElementsByTagName,
+  testRegexStateless,
+  toRegExp,
+} from '../core/utils/index.js';
 import { URL_RULE_DOCS } from '../core/constants.js';
 import type { RuleModule } from '../core/types.js';
 
@@ -95,6 +99,8 @@ export default {
   create(context) {
     const { sourceCode } = context;
     const [{ allowUrls, disallowUrls }] = context.options;
+    const allowUrlRegexes = allowUrls.map(toRegExp);
+    const disallowUrlRegexes = disallowUrls.map(toRegExp);
     const allowDefinitions = new Set(
       context.options[0].allowDefinitions.map(identifier =>
         normalizeIdentifier(identifier).toLowerCase(),
@@ -163,24 +169,24 @@ export default {
          */
 
         for (const { loc, url } of links) {
-          if (!allowUrls.some(regex => testRegexStateless(regex, url))) {
+          if (!allowUrlRegexes.some(regex => testRegexStateless(regex, url))) {
             context.report({
               loc,
               messageId: 'allowLinkUrl',
               data: {
                 url,
-                patterns: allowUrls.map(regex => `\`${regex}\``).join(', '),
+                patterns: allowUrlRegexes.map(regex => `\`${regex}\``).join(', '),
               },
             });
           }
 
-          if (disallowUrls.some(regex => testRegexStateless(regex, url))) {
+          if (disallowUrlRegexes.some(regex => testRegexStateless(regex, url))) {
             context.report({
               loc,
               messageId: 'disallowLinkUrl',
               data: {
                 url,
-                patterns: disallowUrls.map(regex => `\`${regex}\``).join(', '),
+                patterns: disallowUrlRegexes.map(regex => `\`${regex}\``).join(', '),
               },
             });
           }

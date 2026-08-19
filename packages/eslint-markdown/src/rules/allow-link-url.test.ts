@@ -272,7 +272,7 @@ ruleTester('allow-link-url', rule, {
           messageId: 'disallowLinkUrl',
           data: {
             url: 'https://example.com',
-            patterns: '`example\\.com`',
+            patterns: '`/example\\.com/`',
           },
           line: 1,
           column: 1,

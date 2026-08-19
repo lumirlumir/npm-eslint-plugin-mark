@@ -13,15 +13,13 @@ const statefulRegexFlagRegex = /[gy]/u;
 // --------------------------------------------------------------------------------
 
 /**
- * Tests a regular expression pattern without mutating the `lastIndex` of a `RegExp` input.
- * @param pattern RegExp or string pattern to test.
+ * Tests a regex without mutating the state stored in its `lastIndex`.
+ * @param regex Regex to test.
  * @param text Text to test.
- * @returns Whether the pattern matches the text.
+ * @returns Whether the regex matches the text.
  */
-export default function testRegexStateless(pattern: RegExp | string, text: string) {
-  const normalizedRegex = typeof pattern === 'string' ? new RegExp(pattern) : pattern;
-
-  return statefulRegexFlagRegex.test(normalizedRegex.flags)
-    ? new RegExp(normalizedRegex).test(text)
-    : normalizedRegex.test(text);
+export default function testRegexStateless(regex: RegExp, text: string) {
+  return statefulRegexFlagRegex.test(regex.flags)
+    ? new RegExp(regex).test(text)
+    : regex.test(text);
 }

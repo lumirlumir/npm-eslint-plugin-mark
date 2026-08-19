@@ -8,7 +8,7 @@
 // --------------------------------------------------------------------------------
 
 import type { Heading } from 'mdast';
-import { testRegexStateless } from '../core/utils/index.js';
+import { testRegexStateless, toRegExp } from '../core/utils/index.js';
 import { URL_RULE_DOCS } from '../core/constants.js';
 import type { RuleModule } from '../core/types.js';
 
@@ -47,6 +47,13 @@ const headingOptionsSchema = {
   },
   additionalProperties: false,
 } as const;
+
+function toHeadingRegexes({ allow, disallow }: HeadingOptions) {
+  return {
+    allow: allow.map(toRegExp),
+    disallow: disallow.map(toRegExp),
+  };
+}
 
 // --------------------------------------------------------------------------------
 // Rule Definition
@@ -105,13 +112,13 @@ export default {
     const { sourceCode } = context;
     const [{ h1, h2, h3, h4, h5, h6 }] = context.options;
     const headingMap = {
-      1: h1,
-      2: h2,
-      3: h3,
-      4: h4,
-      5: h5,
-      6: h6,
-    } as const satisfies Record<Heading['depth'], HeadingOptions>;
+      1: toHeadingRegexes(h1),
+      2: toHeadingRegexes(h2),
+      3: toHeadingRegexes(h3),
+      4: toHeadingRegexes(h4),
+      5: toHeadingRegexes(h5),
+      6: toHeadingRegexes(h6),
+    } as const satisfies Record<Heading['depth'], ReturnType<typeof toHeadingRegexes>>;
 
     return {
       heading(node) {

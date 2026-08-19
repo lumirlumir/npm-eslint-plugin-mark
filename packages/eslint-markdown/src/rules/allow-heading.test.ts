@@ -564,7 +564,7 @@ Multiple Lines
           column: 1,
           endLine: 1,
           endColumn: 8,
-          data: { depth: '1', heading: '# Hello', disallow: '`^# Hello$`' },
+          data: { depth: '1', heading: '# Hello', disallow: '`/^# Hello$/`' },
         },
       ],
     },

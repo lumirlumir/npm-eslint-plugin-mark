@@ -3,6 +3,7 @@ import getElementsByTagName from './html.js';
 import isBlankLine from './is-blank-line.js';
 import SkipRanges from './skip-ranges.js';
 import testRegexStateless from './test-regex-stateless.js';
+import toRegExp from './to-regexp.js';
 
 export {
   escapeStringRegexp,
@@ -10,4 +11,5 @@ export {
   isBlankLine,
   SkipRanges,
   testRegexStateless,
+  toRegExp,
 };
