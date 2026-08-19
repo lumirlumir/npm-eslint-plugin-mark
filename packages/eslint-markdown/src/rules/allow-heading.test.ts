@@ -66,16 +66,7 @@ Multiple Lines
 `,
     },
 
-    // Options
-    {
-      name: 'ATX: Heading should not be reported with string allow pattern',
-      code: '# Hello',
-      options: [
-        {
-          h1: { allow: ['^# Hello$'] },
-        },
-      ],
-    },
+    // Options: `allow` - `RegExp[]`
     {
       name: 'ATX: Headings should not be reported when they are allowed',
       code: `
@@ -186,6 +177,17 @@ Multiple Lines
             allow: [/^# Hello$/u],
             disallow: [/^# World$/u],
           },
+        },
+      ],
+    },
+
+    // Options: `allow` - `string[]`
+    {
+      name: 'ATX: Heading should not be reported with string allow pattern',
+      code: '# Hello',
+      options: [
+        {
+          h1: { allow: ['^# Hello$'] },
         },
       ],
     },
@@ -548,26 +550,7 @@ Multiple Lines
       ],
     },
 
-    // Basic: disallow heading
-    {
-      name: 'ATX: Heading should be reported with string disallow pattern',
-      code: '# Hello',
-      options: [
-        {
-          h1: { disallow: ['^# Hello$'] },
-        },
-      ],
-      errors: [
-        {
-          messageId: 'disallowHeading',
-          line: 1,
-          column: 1,
-          endLine: 1,
-          endColumn: 8,
-          data: { depth: '1', heading: '# Hello', disallow: '`/^# Hello$/u`' },
-        },
-      ],
-    },
+    // Basic: disallow heading - `RegExp[]`
     {
       name: 'ATX: Heading should be reported when it is disallowed',
       code: '# Hello',
@@ -622,6 +605,27 @@ Multiple Lines
           endLine: 2,
           endColumn: 6,
           data: { depth: '1', heading: 'Hello\n=====', disallow: '`/^Hello\\n=+$/u`' },
+        },
+      ],
+    },
+
+    // Basic: disallow heading - `string[]`
+    {
+      name: 'ATX: Heading should be reported with string disallow pattern',
+      code: '# Hello',
+      options: [
+        {
+          h1: { disallow: ['^# Hello$'] },
+        },
+      ],
+      errors: [
+        {
+          messageId: 'disallowHeading',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 8,
+          data: { depth: '1', heading: '# Hello', disallow: '`/^# Hello$/u`' },
         },
       ],
     },
