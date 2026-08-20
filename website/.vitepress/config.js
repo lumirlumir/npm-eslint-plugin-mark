@@ -21,7 +21,11 @@ import {
 import { transformerTwoslash } from '@shikijs/vitepress-twoslash';
 import { createTwoslasher } from 'twoslash-eslint';
 
-import { vitePluginCodecov, vitePluginConfigInspector } from './plugins/index.js';
+import {
+  CONFIG_INSPECTOR_ESLINT_MARKDOWN_PATH,
+  vitePluginCodecov,
+  vitePluginConfigInspector,
+} from './plugins/index.js';
 
 // --------------------------------------------------------------------------------
 // Helper
@@ -96,7 +100,7 @@ export default defineConfig({
 
   /* Routing */
   cleanUrls: true,
-  ignoreDeadLinks: ['/inspector/eslint-markdown'],
+  ignoreDeadLinks: [CONFIG_INSPECTOR_ESLINT_MARKDOWN_PATH],
 
   /* Build */
   outDir: 'build',
@@ -153,7 +157,7 @@ export default defineConfig({
         items: [
           {
             text: 'eslint-markdown',
-            link: '/inspector/eslint-markdown',
+            link: CONFIG_INSPECTOR_ESLINT_MARKDOWN_PATH,
             target: '_self',
           },
         ],
