@@ -1,5 +1,5 @@
 /**
- * @fileoverview `vite-plugin-codecov`.
+ * @fileoverview `vite-plugin-codecov`
  * @see https://npmx.dev/package-code/@codecov/vite-plugin/v/2.0.1/dist%2Findex.mjs
  * `@codecov/vite-plugin@2.0.1` does not support Vite 7 and 8, so we copied and adapted the code to add support for them.
  */
