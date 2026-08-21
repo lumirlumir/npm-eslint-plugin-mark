@@ -10,7 +10,11 @@
 import type { Definition } from 'mdast';
 import { normalizeIdentifier } from 'micromark-util-normalize-identifier';
 import type { Position } from 'unist';
-import { getElementsByTagName, testRegexStateless } from '../core/utils/index.js';
+import {
+  getElementsByTagName,
+  normalizeRegexPattern,
+  testRegexStateless,
+} from '../core/utils/index.js';
 import { URL_RULE_DOCS } from '../core/constants.js';
 import type { RuleModule } from '../core/types.js';
 
@@ -19,7 +23,11 @@ import type { RuleModule } from '../core/types.js';
 // --------------------------------------------------------------------------------
 
 type RuleOptions = [
-  { allowUrls: RegExp[]; disallowUrls: RegExp[]; allowDefinitions: string[] },
+  {
+    allowUrls: (RegExp | string)[];
+    disallowUrls: (RegExp | string)[];
+    allowDefinitions: string[];
+  },
 ];
 type MessageIds = 'allowImageUrl' | 'disallowImageUrl';
 
@@ -45,14 +53,20 @@ export default {
           allowUrls: {
             type: 'array',
             items: {
-              type: 'object',
+              oneOf: [
+                { type: 'object', additionalProperties: false },
+                { type: 'string' },
+              ],
             },
             uniqueItems: true,
           },
           disallowUrls: {
             type: 'array',
             items: {
-              type: 'object',
+              oneOf: [
+                { type: 'object', additionalProperties: false },
+                { type: 'string' },
+              ],
             },
             uniqueItems: true,
           },
@@ -90,9 +104,18 @@ export default {
 
   create(context) {
     const { sourceCode } = context;
-    const [{ allowUrls, disallowUrls }] = context.options;
+    const [
+      {
+        allowUrls: allowUrlsOption,
+        disallowUrls: disallowUrlsOption,
+        allowDefinitions: allowDefinitionsOption,
+      },
+    ] = context.options;
+
+    const allowUrls = allowUrlsOption.map(normalizeRegexPattern);
+    const disallowUrls = disallowUrlsOption.map(normalizeRegexPattern);
     const allowDefinitions = new Set(
-      context.options[0].allowDefinitions.map(identifier =>
+      allowDefinitionsOption.map(identifier =>
         normalizeIdentifier(identifier).toLowerCase(),
       ),
     );

@@ -8,11 +8,16 @@ description: "Package documentation for the `eslint-markdown` ESLint plugin."
 
 ::: info
 
-See [Get Started](../get-started/) for installation and configuration guidance.
+See [Get Started](../get-started/) for [installation](../get-started/installation) and [configuration](../get-started/configurations) guidance.
 
 :::
 
 `eslint-markdown` is an ESLint plugin that provides additional rules and shared configurations for linting Markdown. It is designed to work alongside ESLint's built-in Markdown support, [`@eslint/markdown`](https://github.com/eslint/markdown#readme), without duplicating its rules.
+
+## Config Inspector
+
+<!-- markdownlint-disable-next-line no-inline-html -->
+If you want to inspect the ESLint configuration for `eslint-markdown`, use the <a href="/inspector/eslint-markdown" target="_self">config inspector</a>.
 
 ## Exports
 

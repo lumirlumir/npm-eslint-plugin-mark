@@ -8,7 +8,7 @@
 // --------------------------------------------------------------------------------
 
 import type { Heading } from 'mdast';
-import { testRegexStateless } from '../core/utils/index.js';
+import { normalizeRegexPattern, testRegexStateless } from '../core/utils/index.js';
 import { URL_RULE_DOCS } from '../core/constants.js';
 import type { RuleModule } from '../core/types.js';
 
@@ -17,8 +17,8 @@ import type { RuleModule } from '../core/types.js';
 // --------------------------------------------------------------------------------
 
 export interface HeadingOptions {
-  allow: RegExp[];
-  disallow: RegExp[];
+  allow: (RegExp | string)[];
+  disallow: (RegExp | string)[];
 }
 type RuleOptions = [Record<`h${Heading['depth']}`, HeadingOptions>];
 type MessageIds = 'allowHeading' | 'disallowHeading';
@@ -33,14 +33,14 @@ const headingOptionsSchema = {
     allow: {
       type: 'array',
       items: {
-        type: 'object',
+        oneOf: [{ type: 'object', additionalProperties: false }, { type: 'string' }],
       },
       uniqueItems: true,
     },
     disallow: {
       type: 'array',
       items: {
-        type: 'object',
+        oneOf: [{ type: 'object', additionalProperties: false }, { type: 'string' }],
       },
       uniqueItems: true,
     },
@@ -104,19 +104,15 @@ export default {
   create(context) {
     const { sourceCode } = context;
     const [{ h1, h2, h3, h4, h5, h6 }] = context.options;
-    const headingMap = {
-      1: h1,
-      2: h2,
-      3: h3,
-      4: h4,
-      5: h5,
-      6: h6,
-    } as const satisfies Record<Heading['depth'], HeadingOptions>;
+    const headingMap = [h1, h2, h3, h4, h5, h6].map(({ allow, disallow }) => ({
+      allow: allow.map(normalizeRegexPattern),
+      disallow: disallow.map(normalizeRegexPattern),
+    }));
 
     return {
       heading(node) {
         const { depth } = node;
-        const { allow, disallow } = headingMap[depth];
+        const { allow, disallow } = headingMap[depth - 1];
         const headingText = sourceCode.getText(node);
 
         if (!allow.some(regex => testRegexStateless(regex, headingText))) {
