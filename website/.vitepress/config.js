@@ -128,12 +128,17 @@ export default defineConfig({
     nav: [
       {
         text: 'Get Started',
-        activeMatch: '/docs/(?:get-started|community)',
+        activeMatch: '/docs/(?:get-started|packages|community)',
         items: [
           {
             text: 'Get Started',
             link: '/docs/get-started',
             activeMatch: '/docs/get-started',
+          },
+          {
+            text: 'Packages',
+            link: '/docs/packages/eslint-markdown',
+            activeMatch: '/docs/packages',
           },
           {
             text: 'Community',
@@ -204,6 +209,18 @@ export default defineConfig({
             {
               text: 'Versioning',
               link: 'versioning',
+            },
+          ],
+        },
+
+        {
+          base: '/docs/packages/',
+          text: 'Packages',
+          collapsed: false,
+          items: [
+            {
+              text: 'eslint-markdown',
+              link: 'eslint-markdown',
             },
           ],
         },
