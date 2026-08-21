@@ -8,7 +8,7 @@ description: "Package documentation for the `eslint-markdown` ESLint plugin."
 
 ::: info
 
-See [Get Started](../get-started) for [installation](../get-started/installation) and [configuration](../get-started/configurations) guidance.
+See [Get Started](../get-started/) for [installation](../get-started/installation) and [configuration](../get-started/configurations) guidance.
 
 :::
 
