@@ -17,9 +17,15 @@ import type { RuleModule } from '../core/types.js';
 // --------------------------------------------------------------------------------
 
 export interface HeadingOptions {
+  /** Markdown source patterns allowed at this heading level. */
   allow: (RegExp | string)[];
+  /** Markdown source patterns disallowed at this heading level. */
   disallow: (RegExp | string)[];
 }
+
+/**
+ * Options for the `allow-heading` rule, mapped by heading levels from `h1` to `h6`.
+ */
 type RuleOptions = [Record<`h${Heading['depth']}`, HeadingOptions>];
 type MessageIds = 'allowHeading' | 'disallowHeading';
 

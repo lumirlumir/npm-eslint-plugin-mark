@@ -18,7 +18,15 @@ import type { RuleModule } from '../core/types.js';
 // Typedef
 // --------------------------------------------------------------------------------
 
-type RuleOptions = [{ allowDefinitions: string[] }];
+/**
+ * Options for the `require-link-title` rule.
+ */
+type RuleOptions = [
+  {
+    /** Link reference definitions excluded from title validation. */
+    allowDefinitions: string[];
+  },
+];
 type MessageIds = 'requireLinkTitle';
 
 // --------------------------------------------------------------------------------

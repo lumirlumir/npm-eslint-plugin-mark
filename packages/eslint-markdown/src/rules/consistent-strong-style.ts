@@ -14,7 +14,15 @@ import type { RuleModule } from '../core/types.js';
 // Typedef
 // --------------------------------------------------------------------------------
 
-type RuleOptions = [{ style: 'consistent' | '*' | '_' }];
+/**
+ * Options for the `consistent-strong-style` rule.
+ */
+type RuleOptions = [
+  {
+    /** Strong emphasis marker style to enforce. */
+    style: 'consistent' | '*' | '_';
+  },
+];
 type MessageIds = 'style';
 
 // --------------------------------------------------------------------------------

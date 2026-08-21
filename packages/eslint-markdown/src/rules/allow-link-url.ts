@@ -22,10 +22,16 @@ import type { RuleModule } from '../core/types.js';
 // Typedef
 // --------------------------------------------------------------------------------
 
+/**
+ * Options for the `allow-link-url` rule.
+ */
 type RuleOptions = [
   {
+    /** URL patterns that links are allowed to use. */
     allowUrls: (RegExp | string)[];
+    /** URL patterns that links are not allowed to use. */
     disallowUrls: (RegExp | string)[];
+    /** Link reference definitions excluded from URL validation. */
     allowDefinitions: string[];
   },
 ];

@@ -14,7 +14,15 @@ import type { RuleModule } from '../core/types.js';
 // Typedef
 // --------------------------------------------------------------------------------
 
-type RuleOptions = [{ allow: string[] }];
+/**
+ * Options for the `no-double-punctuation` rule.
+ */
+type RuleOptions = [
+  {
+    /** Two-character punctuation patterns to allow. */
+    allow: string[];
+  },
+];
 type MessageIds =
   'noDoublePunctuation' | 'suggestReplaceWithLeft' | 'suggestReplaceWithRight';
 

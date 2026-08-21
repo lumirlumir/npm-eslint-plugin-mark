@@ -14,7 +14,15 @@ import type { RuleModule } from '../core/types.js';
 // Typedef
 // --------------------------------------------------------------------------------
 
-type RuleOptions = [{ style: string }];
+/**
+ * Options for the `consistent-thematic-break-style` rule.
+ */
+type RuleOptions = [
+  {
+    /** Thematic break style to enforce. */
+    style: string;
+  },
+];
 type MessageIds = 'style';
 
 // --------------------------------------------------------------------------------

@@ -14,7 +14,15 @@ import type { RuleModule } from '../core/types.js';
 // Typedef
 // --------------------------------------------------------------------------------
 
-type RuleOptions = [{ checkMultipleSpace: boolean }];
+/**
+ * Options for the `no-double-space` rule.
+ */
+type RuleOptions = [
+  {
+    /** Whether to check sequences containing more than two spaces. */
+    checkMultipleSpace: boolean;
+  },
+];
 type MessageIds = 'noDoubleSpace' | 'noMultipleSpace';
 
 // --------------------------------------------------------------------------------

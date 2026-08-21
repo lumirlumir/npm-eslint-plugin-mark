@@ -14,7 +14,15 @@ import type { RuleModule } from '../core/types.js';
 // Typedef
 // --------------------------------------------------------------------------------
 
-type RuleOptions = [{ style: 'consistent' | '~' | '~~' }];
+/**
+ * Options for the `consistent-delete-style` rule.
+ */
+type RuleOptions = [
+  {
+    /** Delete marker style to enforce. */
+    style: 'consistent' | '~' | '~~';
+  },
+];
 type MessageIds = 'style';
 
 // --------------------------------------------------------------------------------

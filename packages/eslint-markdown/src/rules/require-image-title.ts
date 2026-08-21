@@ -18,7 +18,15 @@ import type { RuleModule } from '../core/types.js';
 // Typedef
 // --------------------------------------------------------------------------------
 
-type RuleOptions = [{ allowDefinitions: string[] }];
+/**
+ * Options for the `require-image-title` rule.
+ */
+type RuleOptions = [
+  {
+    /** Image reference definitions excluded from title validation. */
+    allowDefinitions: string[];
+  },
+];
 type MessageIds = 'requireImageTitle';
 
 // --------------------------------------------------------------------------------

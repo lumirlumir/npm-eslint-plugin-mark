@@ -14,7 +14,15 @@ import type { RuleModule } from '../core/types.js';
 // Typedef
 // --------------------------------------------------------------------------------
 
-type RuleOptions = [{ allow: string[] }];
+/**
+ * Options for the `no-emoji` rule.
+ */
+type RuleOptions = [
+  {
+    /** Emoji sequences to allow. */
+    allow: string[];
+  },
+];
 type MessageIds = 'noEmoji';
 
 // --------------------------------------------------------------------------------

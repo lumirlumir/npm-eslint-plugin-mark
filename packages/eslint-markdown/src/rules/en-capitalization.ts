@@ -18,7 +18,17 @@ import type { RuleModule } from '../core/types.js';
 // Typedef
 // --------------------------------------------------------------------------------
 
-type RuleOptions = [{ skipHeading: boolean; skipListItem: boolean }];
+/**
+ * Options for the `en-capitalization` rule.
+ */
+type RuleOptions = [
+  {
+    /** Whether to skip capitalization checks in headings. */
+    skipHeading: boolean;
+    /** Whether to skip capitalization checks in list items. */
+    skipListItem: boolean;
+  },
+];
 type MessageIds = 'enCapitalization';
 
 // --------------------------------------------------------------------------------

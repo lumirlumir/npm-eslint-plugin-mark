@@ -22,10 +22,16 @@ import type { RuleModule } from '../core/types.js';
 // Typedef
 // --------------------------------------------------------------------------------
 
+/**
+ * Options for the `allow-image-url` rule.
+ */
 type RuleOptions = [
   {
+    /** URL patterns that images are allowed to use. */
     allowUrls: (RegExp | string)[];
+    /** URL patterns that images are not allowed to use. */
     disallowUrls: (RegExp | string)[];
+    /** Image reference definitions excluded from URL validation. */
     allowDefinitions: string[];
   },
 ];

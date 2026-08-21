@@ -26,10 +26,17 @@ import type { RuleModule } from '../core/types.js';
 // --------------------------------------------------------------------------------
 
 type CodeStyle = 'indent' | 'fence-backtick' | 'fence-tilde';
+
+/**
+ * Options for the `consistent-code-style` rule.
+ */
 type RuleOptions = [
   {
+    /** Code block style to enforce. */
     style: 'consistent' | CodeStyle;
+    /** Number of blank lines required above code blocks, or `false` to disable the check. */
     blankLineAbove: number | false;
+    /** Number of blank lines required below code blocks, or `false` to disable the check. */
     blankLineBelow: number | false;
   },
 ];

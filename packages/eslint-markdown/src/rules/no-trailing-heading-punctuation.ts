@@ -15,7 +15,15 @@ import type { RuleModule } from '../core/types.js';
 // Typedef
 // --------------------------------------------------------------------------------
 
-type RuleOptions = [{ punctuation: string[] }];
+/**
+ * Options for the `no-trailing-heading-punctuation` rule.
+ */
+type RuleOptions = [
+  {
+    /** Punctuation characters disallowed at the end of headings. */
+    punctuation: string[];
+  },
+];
 type MessageIds = 'noTrailingHeadingPunctuation';
 
 // --------------------------------------------------------------------------------

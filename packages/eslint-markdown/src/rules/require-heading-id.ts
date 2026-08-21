@@ -16,9 +16,20 @@ import type { RuleModule } from '../core/types.js';
 // Typedef
 // --------------------------------------------------------------------------------
 
+/**
+ * Options for the `require-heading-id` rule.
+ */
 type RuleOptions = [
+  /** Whether to require or disallow heading IDs. */
   'always' | 'never',
-  { leftDelimiter: string; rightDelimiter: string; allowDepths: Heading['depth'][] },
+  {
+    /** Left delimiter used for heading IDs. */
+    leftDelimiter: string;
+    /** Right delimiter used for heading IDs. */
+    rightDelimiter: string;
+    /** Heading depths excluded from heading ID enforcement. */
+    allowDepths: Heading['depth'][];
+  },
 ];
 type MessageIds = 'headingIdAlways' | 'headingIdNever';
 
