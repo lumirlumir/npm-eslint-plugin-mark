@@ -65,7 +65,7 @@
   },
   "dependencies": {
     "@types/mdast": "^4.0.4",
-    "satteri": "^0.9.5"
+    "satteri": "^0.10.5"
   },
   "devDependencies": {
     "@eslint/markdown": "^7.5.1",
