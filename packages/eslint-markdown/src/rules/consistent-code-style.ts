@@ -34,9 +34,9 @@ type RuleOptions = [
   {
     /** Code block style to enforce. */
     style: 'consistent' | CodeStyle;
-    /** Number of blank lines required above code blocks, or `false` to disable the check. */
+    /** Number of blank lines required above fenced code blocks, or `false` to disable the check. */
     blankLineAbove: number | false;
-    /** Number of blank lines required below code blocks, or `false` to disable the check. */
+    /** Number of blank lines required below fenced code blocks, or `false` to disable the check. */
     blankLineBelow: number | false;
   },
 ];
