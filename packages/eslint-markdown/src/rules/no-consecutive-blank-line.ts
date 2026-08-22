@@ -22,12 +22,12 @@ import type { RuleModule } from '../core/types.js';
 type RuleOptions = [
   {
     /**
-     * Maximum number of consecutive blank lines to allow.
+     * Set the maximum number of consecutive blank lines to allow.
      * @default 1
      */
     max: number;
     /**
-     * Whether to skip all code blocks, or the code block language identifiers to skip.
+     * `true` allows consecutive blank lines in all code blocks, while `string[]` allows consecutive blank lines only in code blocks for the specified languages.
      * @default true
      */
     skipCode: boolean | string[];

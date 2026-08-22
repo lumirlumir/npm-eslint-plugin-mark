@@ -21,23 +21,25 @@ import type { RuleModule } from '../core/types.js';
  */
 type RuleOptions = [
   /**
-   * Whether to require or disallow heading IDs.
+   * `'always'` enforces the presence of heading IDs. `'never'` disallows heading IDs.
    * @default 'always'
    */
   'always' | 'never',
   {
     /**
-     * Left delimiter used for heading IDs.
+     * The left delimiter to use for heading IDs.
      * @default '{'
      */
     leftDelimiter: string;
     /**
-     * Right delimiter used for heading IDs.
+     * The right delimiter to use for heading IDs.
      * @default '}'
      */
     rightDelimiter: string;
     /**
-     * Heading depths excluded from heading ID enforcement.
+     * An array of heading depths to ignore.
+     *
+     * For example, `[1, 2]` would ignore level 1 and level 2 headings.
      * @default []
      */
     allowDepths: Heading['depth'][];

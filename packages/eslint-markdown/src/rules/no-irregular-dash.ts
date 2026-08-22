@@ -21,17 +21,19 @@ import type { RuleModule } from '../core/types.js';
 type RuleOptions = [
   {
     /**
-     * Irregular dash characters to allow.
+     * When specified, specific irregular dash characters are allowed if they match one of the characters in this array.
+     *
+     * This is useful for ignoring certain irregular dashes that are intentionally used in the document.
      * @default []
      */
     allow: string[];
     /**
-     * Whether to skip all code blocks, or the code block language identifiers to skip.
+     * `true` allows irregular dashes in all code blocks, while `string[]` allows irregular dashes only in code blocks for the specified languages.
      * @default true
      */
     skipCode: boolean | string[];
     /**
-     * Whether to skip inline code.
+     * `true` allows irregular dashes in all inline code.
      * @default true
      */
     skipInlineCode: boolean;

@@ -21,17 +21,17 @@ import type { RuleModule } from '../core/types.js';
 type RuleOptions = [
   {
     /**
-     * Whether to skip all code blocks, or the code block language identifiers to skip.
+     * `true` allows tabs in all code blocks, while `string[]` allows tabs only in code blocks for the specified languages.
      * @default true
      */
     skipCode: boolean | string[];
     /**
-     * Whether to skip inline code.
+     * `true` allows tabs in all inline code.
      * @default true
      */
     skipInlineCode: boolean;
     /**
-     * Number of spaces used to replace each tab during autofix.
+     * Number of spaces to replace each tab with when applying an autofix.
      * @default 4
      */
     tabWidth: number;

@@ -22,7 +22,7 @@ type UnorderedListStyle = '*' | '+' | '-';
 type RuleOptions = [
   {
     /**
-     * Unordered list marker style to enforce.
+     * When `style` is set to `'consistent'`, the rule enforces that all unordered list markers in the document use the same style as the first one encountered.
      * @default 'consistent'
      */
     style: 'consistent' | 'sublist' | UnorderedListStyle;

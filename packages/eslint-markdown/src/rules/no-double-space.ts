@@ -20,7 +20,7 @@ import type { RuleModule } from '../core/types.js';
 type RuleOptions = [
   {
     /**
-     * Whether to check sequences containing more than two spaces.
+     * When `checkMultipleSpace` is set to `true`, this rule will also check for multiple consecutive spaces (more than two) within a sentence.
      * @default false
      */
     checkMultipleSpace: boolean;

@@ -18,12 +18,12 @@ import type { RuleModule } from '../core/types.js';
 
 export interface HeadingOptions {
   /**
-   * Markdown source patterns allowed at this heading level.
+   * Allowed heading patterns. Only headings matching at least one pattern are allowed.
    * @default [new RegExp('.*', 'u')]
    */
   allow: (RegExp | string)[];
   /**
-   * Markdown source patterns disallowed at this heading level.
+   * Disallowed heading patterns. Headings matching any pattern are reported.
    * @default []
    */
   disallow: (RegExp | string)[];

@@ -20,7 +20,7 @@ import type { RuleModule } from '../core/types.js';
 type RuleOptions = [
   {
     /**
-     * Thematic break style to enforce.
+     * When `style` is set to `'consistent'`, the rule enforces that all thematic breaks in the document use the same style as the first one encountered.
      * @default 'consistent'
      */
     style: string;

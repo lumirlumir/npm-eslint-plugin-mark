@@ -21,7 +21,7 @@ import type { RuleModule } from '../core/types.js';
 type RuleOptions = [
   {
     /**
-     * Punctuation characters disallowed at the end of headings.
+     * Specifies the characters that are not allowed at the end of headings.
      * @default ['.', ',', ';', ':', '!', '。', '，', '；', '：', '！']
      */
     punctuation: string[];

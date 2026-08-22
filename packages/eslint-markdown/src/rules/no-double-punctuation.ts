@@ -20,7 +20,9 @@ import type { RuleModule } from '../core/types.js';
 type RuleOptions = [
   {
     /**
-     * Two-character punctuation patterns to allow.
+     * When `allow` is specified, the listed two-character punctuation patterns are ignored by this rule.
+     *
+     * This is useful when punctuation such as `!!` or `?!` is intentionally used for tone or emphasis instead of being treated as a typo.
      * @default []
      */
     allow: string[];

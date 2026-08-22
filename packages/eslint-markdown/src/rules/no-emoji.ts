@@ -20,7 +20,9 @@ import type { RuleModule } from '../core/types.js';
 type RuleOptions = [
   {
     /**
-     * Emoji sequences to allow.
+     * When specified, specific emoji sequences are allowed if they match one of the strings in this array.
+     *
+     * This is useful when a document intentionally uses a small set of raw Unicode emojis while still disallowing all others.
      * @default []
      */
     allow: string[];

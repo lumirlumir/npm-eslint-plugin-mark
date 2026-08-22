@@ -21,7 +21,7 @@ import type { RuleModule } from '../core/types.js';
 type RuleOptions = [
   {
     /**
-     * Whether to skip all code blocks, or the code block language identifiers to skip.
+     * `true` allows Git conflict markers in all code blocks, while `string[]` allows Git conflict markers only in code blocks for the specified languages.
      * @default true
      */
     skipCode: boolean | string[];

@@ -28,17 +28,23 @@ import type { RuleModule } from '../core/types.js';
 type RuleOptions = [
   {
     /**
-     * URL patterns that links are allowed to use.
+     * Allowed URLs act like a ***whitelist***.
+     *
+     * Only those written on the whitelist **can** pass through.
      * @default [new RegExp('.*', 'u')]
      */
     allowUrls: (RegExp | string)[];
     /**
-     * URL patterns that links are not allowed to use.
+     * On the contrary, disallowed URLs act like a ***blacklist***.
+     *
+     * Only those written on the blacklist **cannot** pass through.
      * @default []
      */
     disallowUrls: (RegExp | string)[];
     /**
-     * Link reference definitions excluded from URL validation.
+     * When specified, specific definitions are allowed if they match one of the identifiers in this array.
+     *
+     * This is useful for ignoring definitions that are intentionally left, such as comments or placeholders.
      * @default ['//']
      */
     allowDefinitions: string[];

@@ -24,12 +24,16 @@ import type { RuleModule } from '../core/types.js';
 type RuleOptions = [
   {
     /**
-     * Whether to skip capitalization checks in headings.
+     * When set to `true`, headings are not checked for capitalization.
+     *
+     * This is useful for documentation styles that intentionally use lowercase headings or for code-like headings.
      * @default true
      */
     skipHeading: boolean;
     /**
-     * Whether to skip capitalization checks in list items.
+     * When set to `true`, paragraphs in list items are not checked for capitalization.
+     *
+     * This is helpful for lists that might contain sentence fragments or code examples.
      * @default true
      */
     skipListItem: boolean;

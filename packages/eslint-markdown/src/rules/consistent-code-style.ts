@@ -33,17 +33,17 @@ type CodeStyle = 'indent' | 'fence-backtick' | 'fence-tilde';
 type RuleOptions = [
   {
     /**
-     * Code block style to enforce.
+     * When `style` is set to `'consistent'`, the rule enforces that all code blocks in the document use the same style as the first one encountered.
      * @default 'consistent'
      */
     style: 'consistent' | CodeStyle;
     /**
-     * Number of blank lines required above fenced code blocks, or `false` to disable the check.
+     * Require a specific number of blank lines above each fenced code block.
      * @default false
      */
     blankLineAbove: number | false;
     /**
-     * Number of blank lines required below fenced code blocks, or `false` to disable the check.
+     * Require a specific number of blank lines below each fenced code block.
      * @default false
      */
     blankLineBelow: number | false;

@@ -21,17 +21,19 @@ import type { RuleModule } from '../core/types.js';
 type RuleOptions = [
   {
     /**
-     * Irregular whitespace characters to allow.
+     * When specified, specific irregular whitespaces are allowed if they match one of the characters in this array.
+     *
+     * This is useful for ignoring certain irregular whitespaces that are intentionally used in the document.
      * @default []
      */
     allow: string[];
     /**
-     * Whether to skip all code blocks, or the code block language identifiers to skip.
+     * `true` allows irregular whitespaces in all code blocks, while `string[]` allows irregular whitespaces only in code blocks for the specified languages.
      * @default true
      */
     skipCode: boolean | string[];
     /**
-     * Whether to skip inline code.
+     * `true` allows irregular whitespaces in all inline code.
      * @default true
      */
     skipInlineCode: boolean;

@@ -20,12 +20,14 @@ import type { RuleModule } from '../core/types.js';
 type RuleOptions = [
   {
     /**
-     * Language identifiers excluded from shorthand enforcement.
+     * An array of code block language identifiers to allow.
+     *
+     * Each value must be the full, unabridged language identifier.
      * @default []
      */
     allow: string[];
     /**
-     * Language identifiers mapped to custom shorthand forms.
+     * An object where the **key** is the full, unabridged language identifier and the **value** is the abbreviated form.
      * @default {}
      */
     override: Record<string, string>;

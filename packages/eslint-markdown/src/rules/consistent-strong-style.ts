@@ -20,7 +20,7 @@ import type { RuleModule } from '../core/types.js';
 type RuleOptions = [
   {
     /**
-     * Strong emphasis marker style to enforce.
+     * When `style` is set to `'consistent'`, the rule enforces that all strong in the document use the same style as the first one encountered.
      * @default 'consistent'
      */
     style: 'consistent' | '*' | '_';
