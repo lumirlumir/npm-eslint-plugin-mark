@@ -27,11 +27,20 @@ import type { RuleModule } from '../core/types.js';
  */
 type RuleOptions = [
   {
-    /** URL patterns that links are allowed to use. */
+    /**
+     * URL patterns that links are allowed to use.
+     * @default [new RegExp('.*', 'u')]
+     */
     allowUrls: (RegExp | string)[];
-    /** URL patterns that links are not allowed to use. */
+    /**
+     * URL patterns that links are not allowed to use.
+     * @default []
+     */
     disallowUrls: (RegExp | string)[];
-    /** Link reference definitions excluded from URL validation. */
+    /**
+     * Link reference definitions excluded from URL validation.
+     * @default ['//']
+     */
     allowDefinitions: string[];
   },
 ];

@@ -20,7 +20,10 @@ import type { RuleModule } from '../core/types.js';
  */
 type RuleOptions = [
   {
-    /** Whether to skip all code blocks, or the code block language identifiers to skip. */
+    /**
+     * Whether to skip all code blocks, or the code block language identifiers to skip.
+     * @default true
+     */
     skipCode: boolean | string[];
   },
 ];

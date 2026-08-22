@@ -19,7 +19,10 @@ import type { RuleModule } from '../core/types.js';
  */
 type RuleOptions = [
   {
-    /** Whether to check sequences containing more than two spaces. */
+    /**
+     * Whether to check sequences containing more than two spaces.
+     * @default false
+     */
     checkMultipleSpace: boolean;
   },
 ];

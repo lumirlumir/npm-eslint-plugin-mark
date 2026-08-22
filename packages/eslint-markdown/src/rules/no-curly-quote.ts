@@ -19,13 +19,25 @@ import type { RuleModule } from '../core/types.js';
  */
 type RuleOptions = [
   {
-    /** Whether to check left double quotation marks. */
+    /**
+     * Whether to check left double quotation marks.
+     * @default true
+     */
     checkLeftDoubleQuotationMark: boolean;
-    /** Whether to check right double quotation marks. */
+    /**
+     * Whether to check right double quotation marks.
+     * @default true
+     */
     checkRightDoubleQuotationMark: boolean;
-    /** Whether to check left single quotation marks. */
+    /**
+     * Whether to check left single quotation marks.
+     * @default true
+     */
     checkLeftSingleQuotationMark: boolean;
-    /** Whether to check right single quotation marks. */
+    /**
+     * Whether to check right single quotation marks.
+     * @default true
+     */
     checkRightSingleQuotationMark: boolean;
   },
 ];

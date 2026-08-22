@@ -32,11 +32,20 @@ type CodeStyle = 'indent' | 'fence-backtick' | 'fence-tilde';
  */
 type RuleOptions = [
   {
-    /** Code block style to enforce. */
+    /**
+     * Code block style to enforce.
+     * @default 'consistent'
+     */
     style: 'consistent' | CodeStyle;
-    /** Number of blank lines required above fenced code blocks, or `false` to disable the check. */
+    /**
+     * Number of blank lines required above fenced code blocks, or `false` to disable the check.
+     * @default false
+     */
     blankLineAbove: number | false;
-    /** Number of blank lines required below fenced code blocks, or `false` to disable the check. */
+    /**
+     * Number of blank lines required below fenced code blocks, or `false` to disable the check.
+     * @default false
+     */
     blankLineBelow: number | false;
   },
 ];

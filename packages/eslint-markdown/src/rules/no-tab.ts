@@ -20,11 +20,20 @@ import type { RuleModule } from '../core/types.js';
  */
 type RuleOptions = [
   {
-    /** Whether to skip all code blocks, or the code block language identifiers to skip. */
+    /**
+     * Whether to skip all code blocks, or the code block language identifiers to skip.
+     * @default true
+     */
     skipCode: boolean | string[];
-    /** Whether to skip inline code. */
+    /**
+     * Whether to skip inline code.
+     * @default true
+     */
     skipInlineCode: boolean;
-    /** Number of spaces used to replace each tab during autofix. */
+    /**
+     * Number of spaces used to replace each tab during autofix.
+     * @default 4
+     */
     tabWidth: number;
   },
 ];

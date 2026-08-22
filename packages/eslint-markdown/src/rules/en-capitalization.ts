@@ -23,9 +23,15 @@ import type { RuleModule } from '../core/types.js';
  */
 type RuleOptions = [
   {
-    /** Whether to skip capitalization checks in headings. */
+    /**
+     * Whether to skip capitalization checks in headings.
+     * @default true
+     */
     skipHeading: boolean;
-    /** Whether to skip capitalization checks in list items. */
+    /**
+     * Whether to skip capitalization checks in list items.
+     * @default true
+     */
     skipListItem: boolean;
   },
 ];

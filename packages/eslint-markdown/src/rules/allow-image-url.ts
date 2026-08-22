@@ -27,11 +27,20 @@ import type { RuleModule } from '../core/types.js';
  */
 type RuleOptions = [
   {
-    /** URL patterns that images are allowed to use. */
+    /**
+     * URL patterns that images are allowed to use.
+     * @default [new RegExp('.*', 'u')]
+     */
     allowUrls: (RegExp | string)[];
-    /** URL patterns that images are not allowed to use. */
+    /**
+     * URL patterns that images are not allowed to use.
+     * @default []
+     */
     disallowUrls: (RegExp | string)[];
-    /** Image reference definitions excluded from URL validation. */
+    /**
+     * Image reference definitions excluded from URL validation.
+     * @default ['//']
+     */
     allowDefinitions: string[];
   },
 ];

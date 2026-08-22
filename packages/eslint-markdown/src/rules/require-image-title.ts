@@ -23,7 +23,10 @@ import type { RuleModule } from '../core/types.js';
  */
 type RuleOptions = [
   {
-    /** Image reference definitions excluded from title validation. */
+    /**
+     * Image reference definitions excluded from title validation.
+     * @default ['//']
+     */
     allowDefinitions: string[];
   },
 ];

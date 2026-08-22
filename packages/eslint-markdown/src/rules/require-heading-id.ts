@@ -20,14 +20,26 @@ import type { RuleModule } from '../core/types.js';
  * Options for the `require-heading-id` rule.
  */
 type RuleOptions = [
-  /** Whether to require or disallow heading IDs. */
+  /**
+   * Whether to require or disallow heading IDs.
+   * @default 'always'
+   */
   'always' | 'never',
   {
-    /** Left delimiter used for heading IDs. */
+    /**
+     * Left delimiter used for heading IDs.
+     * @default '{'
+     */
     leftDelimiter: string;
-    /** Right delimiter used for heading IDs. */
+    /**
+     * Right delimiter used for heading IDs.
+     * @default '}'
+     */
     rightDelimiter: string;
-    /** Heading depths excluded from heading ID enforcement. */
+    /**
+     * Heading depths excluded from heading ID enforcement.
+     * @default []
+     */
     allowDepths: Heading['depth'][];
   },
 ];

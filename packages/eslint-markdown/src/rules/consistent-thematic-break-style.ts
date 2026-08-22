@@ -19,7 +19,10 @@ import type { RuleModule } from '../core/types.js';
  */
 type RuleOptions = [
   {
-    /** Thematic break style to enforce. */
+    /**
+     * Thematic break style to enforce.
+     * @default 'consistent'
+     */
     style: string;
   },
 ];

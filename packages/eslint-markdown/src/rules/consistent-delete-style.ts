@@ -19,7 +19,10 @@ import type { RuleModule } from '../core/types.js';
  */
 type RuleOptions = [
   {
-    /** Delete marker style to enforce. */
+    /**
+     * Delete marker style to enforce.
+     * @default 'consistent'
+     */
     style: 'consistent' | '~' | '~~';
   },
 ];

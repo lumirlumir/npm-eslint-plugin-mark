@@ -21,7 +21,10 @@ type UnorderedListStyle = '*' | '+' | '-';
  */
 type RuleOptions = [
   {
-    /** Unordered list marker style to enforce. */
+    /**
+     * Unordered list marker style to enforce.
+     * @default 'consistent'
+     */
     style: 'consistent' | 'sublist' | UnorderedListStyle;
   },
 ];

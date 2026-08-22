@@ -19,7 +19,10 @@ import type { RuleModule } from '../core/types.js';
  */
 type RuleOptions = [
   {
-    /** Two-character punctuation patterns to allow. */
+    /**
+     * Two-character punctuation patterns to allow.
+     * @default []
+     */
     allow: string[];
   },
 ];

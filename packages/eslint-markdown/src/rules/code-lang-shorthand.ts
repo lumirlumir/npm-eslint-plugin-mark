@@ -19,9 +19,15 @@ import type { RuleModule } from '../core/types.js';
  */
 type RuleOptions = [
   {
-    /** Language identifiers excluded from shorthand enforcement. */
+    /**
+     * Language identifiers excluded from shorthand enforcement.
+     * @default []
+     */
     allow: string[];
-    /** Language identifiers mapped to custom shorthand forms. */
+    /**
+     * Language identifiers mapped to custom shorthand forms.
+     * @default {}
+     */
     override: Record<string, string>;
   },
 ];

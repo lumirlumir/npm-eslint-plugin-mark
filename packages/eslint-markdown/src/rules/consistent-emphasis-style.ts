@@ -19,7 +19,10 @@ import type { RuleModule } from '../core/types.js';
  */
 type RuleOptions = [
   {
-    /** Emphasis marker style to enforce. */
+    /**
+     * Emphasis marker style to enforce.
+     * @default 'consistent'
+     */
     style: 'consistent' | '*' | '_';
   },
 ];

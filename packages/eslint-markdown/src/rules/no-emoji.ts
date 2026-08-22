@@ -19,7 +19,10 @@ import type { RuleModule } from '../core/types.js';
  */
 type RuleOptions = [
   {
-    /** Emoji sequences to allow. */
+    /**
+     * Emoji sequences to allow.
+     * @default []
+     */
     allow: string[];
   },
 ];

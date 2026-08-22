@@ -19,7 +19,10 @@ import type { RuleModule } from '../core/types.js';
  */
 type RuleOptions = [
   {
-    /** Strong emphasis marker style to enforce. */
+    /**
+     * Strong emphasis marker style to enforce.
+     * @default 'consistent'
+     */
     style: 'consistent' | '*' | '_';
   },
 ];
