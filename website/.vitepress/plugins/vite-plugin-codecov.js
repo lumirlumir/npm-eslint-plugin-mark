@@ -1,5 +1,5 @@
 /**
- * @fileoverview `@codecov/vite-plugin`
+ * @fileoverview `vite-plugin-codecov`
  * @see https://npmx.dev/package-code/@codecov/vite-plugin/v/2.0.1/dist%2Findex.mjs
  * `@codecov/vite-plugin@2.0.1` does not support Vite 7 and 8, so we copied and adapted the code to add support for them.
  */
@@ -28,6 +28,8 @@
  * SOFTWARE.
  */
 
+/* eslint-disable import/prefer-default-export */
+
 // --------------------------------------------------------------------------------
 // Import
 // --------------------------------------------------------------------------------
@@ -48,7 +50,7 @@ import {
 // Helper
 // --------------------------------------------------------------------------------
 
-const PLUGIN_NAME = '@codecov/vite-plugin';
+const PLUGIN_NAME = 'vite-plugin-codecov';
 const PLUGIN_VERSION = '2.0.1';
 
 const viteBundleAnalysisPlugin = ({ output, pluginName, pluginVersion }) => ({
@@ -176,7 +178,11 @@ const viteBundleAnalysisPlugin = ({ output, pluginName, pluginVersion }) => ({
   },
 });
 
-const codecovVitePlugin = userOptions => {
+// --------------------------------------------------------------------------------
+// Export
+// --------------------------------------------------------------------------------
+
+export const vitePluginCodecov = userOptions => {
   if (checkNodeVersion({ framework: 'vite' })) {
     return [];
   }
@@ -215,9 +221,3 @@ const codecovVitePlugin = userOptions => {
   }
   return plugins;
 };
-
-// --------------------------------------------------------------------------------
-// Export
-// --------------------------------------------------------------------------------
-
-export default codecovVitePlugin;

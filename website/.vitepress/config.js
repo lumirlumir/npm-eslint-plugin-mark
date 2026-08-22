@@ -11,7 +11,6 @@ import { parse } from 'node:path';
 
 import md from 'eslint-markdown';
 import packageJson from 'eslint-markdown/package.json' with { type: 'json' };
-
 import { defineConfig } from 'vitepress';
 import { groupIconMdPlugin, groupIconVitePlugin } from 'vitepress-plugin-group-icons';
 import {
@@ -22,10 +21,14 @@ import {
 import { transformerTwoslash } from '@shikijs/vitepress-twoslash';
 import { createTwoslasher } from 'twoslash-eslint';
 
-import codecovVitePlugin from './plugin.js';
+import {
+  CONFIG_INSPECTOR_ESLINT_MARKDOWN_PATH,
+  vitePluginCodecov,
+  vitePluginConfigInspector,
+} from './plugins/index.js';
 
 // --------------------------------------------------------------------------------
-// Constant
+// Helper
 // --------------------------------------------------------------------------------
 
 const GOOGLE_GA_ID = 'G-9KLYX5PTLT';
@@ -97,6 +100,7 @@ export default defineConfig({
 
   /* Routing */
   cleanUrls: true,
+  ignoreDeadLinks: [CONFIG_INSPECTOR_ESLINT_MARKDOWN_PATH],
 
   /* Build */
   outDir: 'build',
@@ -124,12 +128,17 @@ export default defineConfig({
     nav: [
       {
         text: 'Get Started',
-        activeMatch: '/docs/(?:get-started|community)',
+        activeMatch: '/docs/(?:get-started|packages|community)',
         items: [
           {
             text: 'Get Started',
             link: '/docs/get-started',
             activeMatch: '/docs/get-started',
+          },
+          {
+            text: 'Packages',
+            link: '/docs/packages/eslint-markdown',
+            activeMatch: '/docs/packages',
           },
           {
             text: 'Community',
@@ -147,6 +156,16 @@ export default defineConfig({
         text: 'Configs',
         link: '/docs/get-started/configurations',
         activeMatch: '/docs/get-started/configurations',
+      },
+      {
+        text: 'Inspector',
+        items: [
+          {
+            text: 'eslint-markdown',
+            link: CONFIG_INSPECTOR_ESLINT_MARKDOWN_PATH,
+            target: '_self',
+          },
+        ],
       },
     ],
 
@@ -190,6 +209,18 @@ export default defineConfig({
             {
               text: 'Versioning',
               link: 'versioning',
+            },
+          ],
+        },
+
+        {
+          base: '/docs/packages/',
+          text: 'Packages',
+          collapsed: false,
+          items: [
+            {
+              text: 'eslint-markdown',
+              link: 'eslint-markdown',
             },
           ],
         },
@@ -275,7 +306,8 @@ export default defineConfig({
   vite: {
     plugins: [
       groupIconVitePlugin(),
-      codecovVitePlugin({
+      vitePluginConfigInspector(),
+      vitePluginCodecov({
         // Put the Codecov vite plugin after all other plugins
         enableBundleAnalysis: process.env.CODECOV !== undefined, // Enable bundle analysis when CODECOV environment variable is defined
         bundleName: 'website',
