@@ -25,7 +25,7 @@ import type { RuleModule } from '../core/types.js';
 // Typedef
 // --------------------------------------------------------------------------------
 
-type CodeStyle = 'indent' | 'fence-backtick' | 'fence-tilde';
+type CodeStyle = (typeof CODE_STYLE)[number];
 type RuleOptions = [
   {
     style: 'consistent' | CodeStyle;
@@ -38,6 +38,8 @@ type MessageIds = 'style' | 'blankLineAbove' | 'blankLineBelow';
 // --------------------------------------------------------------------------------
 // Helper
 // --------------------------------------------------------------------------------
+
+const CODE_STYLE = ['indent', 'fence-backtick', 'fence-tilde'] as const;
 
 /**
  * Get the current code style based on the given text.
@@ -78,7 +80,7 @@ export default {
         type: 'object',
         properties: {
           style: {
-            enum: ['consistent', 'indent', 'fence-backtick', 'fence-tilde'],
+            enum: ['consistent', ...CODE_STYLE],
           },
           blankLineAbove: {
             oneOf: [
