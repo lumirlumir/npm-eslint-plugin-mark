@@ -16,7 +16,12 @@ import type { RuleModule } from '../core/types.js';
 // --------------------------------------------------------------------------------
 
 type RuleOptions = [
-  { allow: string[]; skipCode: boolean | string[]; skipInlineCode: boolean },
+  {
+    allow: string[];
+    override: Record<string, string>;
+    skipCode: boolean | string[];
+    skipInlineCode: boolean;
+  },
 ];
 type MessageIds = 'noIrregularDash';
 
@@ -74,6 +79,12 @@ export default {
             },
             uniqueItems: true,
           },
+          override: {
+            type: 'object',
+            additionalProperties: {
+              type: 'string',
+            },
+          },
           skipCode: {
             oneOf: [
               {
@@ -99,6 +110,7 @@ export default {
     defaultOptions: [
       {
         allow: [],
+        override: {},
         skipCode: true,
         skipInlineCode: true,
       },
