@@ -14,8 +14,15 @@ import type { RuleModule } from '../core/types.js';
 // Typedef
 // --------------------------------------------------------------------------------
 
-type RuleOptions = [{ style: 'consistent' | '*' | '_' }];
+type EmphasisStyle = (typeof EMPHASIS_STYLE)[number];
+type RuleOptions = [{ style: 'consistent' | EmphasisStyle }];
 type MessageIds = 'style';
+
+// --------------------------------------------------------------------------------
+// Helper
+// --------------------------------------------------------------------------------
+
+const EMPHASIS_STYLE = ['*', '_'] as const;
 
 // --------------------------------------------------------------------------------
 // Rule Definition
@@ -39,7 +46,7 @@ export default {
         type: 'object',
         properties: {
           style: {
-            enum: ['consistent', '*', '_'],
+            enum: ['consistent', ...EMPHASIS_STYLE],
           },
         },
         additionalProperties: false,
@@ -65,7 +72,7 @@ export default {
     const { sourceCode } = context;
     const [{ style }] = context.options;
 
-    let emphasisStyle: string | null = style === 'consistent' ? null : style;
+    let emphasisStyle: EmphasisStyle | null = style === 'consistent' ? null : style;
 
     /**
      * @param startOffset Start offset of the style marker.
@@ -98,7 +105,7 @@ export default {
     return {
       emphasis(node) {
         const [nodeStartOffset, nodeEndOffset] = sourceCode.getRange(node);
-        const currentEmphasisStyle = sourceCode.text[nodeStartOffset];
+        const currentEmphasisStyle = sourceCode.text[nodeStartOffset] as EmphasisStyle;
 
         if (emphasisStyle === null) {
           emphasisStyle = currentEmphasisStyle;
