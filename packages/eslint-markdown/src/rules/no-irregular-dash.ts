@@ -24,8 +24,27 @@ type MessageIds = 'noIrregularDash';
 // Helper
 // --------------------------------------------------------------------------------
 
-const irregularDashRegex =
-  /[\u2010\u2011\u2012\u2013\u2014\u2015\u2043\u2212\u23af\u2e3a\u2e3b\u30fc\ufe58\ufe63\uff0d]/gu;
+const irregularDashMap: Readonly<Record<string, string>> = Object.freeze({
+  '\u2010': '-',
+  '\u2011': '-',
+  '\u2012': '-',
+  '\u2013': '-',
+  '\u2014': '-',
+  '\u2015': '-',
+  '\u2043': '-',
+  '\u2212': '-',
+  '\u23af': '-',
+  '\u2e3a': '-',
+  '\u2e3b': '-',
+  '\u30fc': '-',
+  '\ufe58': '-',
+  '\ufe63': '-',
+  '\uff0d': '-',
+});
+const irregularDashRegex = new RegExp(
+  `[${Object.keys(irregularDashMap).join('')}]`,
+  'gu',
+);
 
 // --------------------------------------------------------------------------------
 // Rule Definition
