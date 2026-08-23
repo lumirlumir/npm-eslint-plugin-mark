@@ -15,7 +15,7 @@ import type { RuleModule } from '../core/types.js';
 // Typedef
 // --------------------------------------------------------------------------------
 
-type UnorderedListStyle = '*' | '+' | '-';
+type UnorderedListStyle = (typeof UNORDERED_LIST_STYLE)[number];
 /**
  * Options for the `consistent-unordered-list-style` rule.
  */
@@ -33,6 +33,8 @@ type MessageIds = 'style';
 // --------------------------------------------------------------------------------
 // Helper
 // --------------------------------------------------------------------------------
+
+const UNORDERED_LIST_STYLE = ['*', '+', '-'] as const;
 
 /**
  * Get the next unordered list style in sequence.
@@ -74,7 +76,7 @@ export default {
         type: 'object',
         properties: {
           style: {
-            enum: ['consistent', 'sublist', '*', '+', '-'],
+            enum: ['consistent', 'sublist', ...UNORDERED_LIST_STYLE],
           },
         },
         additionalProperties: false,
