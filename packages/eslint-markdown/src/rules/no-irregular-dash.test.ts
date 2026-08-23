@@ -87,6 +87,9 @@ console.log(\u2014'Hello World');
       code: `
 1\u20102\u20113\u20124\u20135\u20146\u20157\u20438\u22129\u23af0\u2e3a
 1\u2e3b2\u30fc3\ufe584\ufe635\uff0d`,
+      output: `
+1-2-3-4-5-6-7-8-9-0-
+1-2-3-4-5-`,
       errors: [
         {
           messageId: 'noIrregularDash',
@@ -243,6 +246,7 @@ console.log(\u2014'Hello World');
     {
       name: 'Irregular dash in inline code',
       code: '`\u2010`\u2010',
+      output: '`\u2010`-',
       errors: [
         {
           messageId: 'noIrregularDash',
@@ -261,6 +265,7 @@ console.log(\u2014'Hello World');
     {
       name: '`allow`',
       code: `1\u20132\u20143\u2015`,
+      output: `1\u20132\u20143-`,
       errors: [
         {
           messageId: 'noIrregularDash',
@@ -284,6 +289,10 @@ console.log(\u2014'Hello World');
       code: `
 \`\`\`js
 console.log(\u2013'Hello World');
+\`\`\``,
+      output: `
+\`\`\`js
+console.log(-'Hello World');
 \`\`\``,
       errors: [
         {
@@ -310,6 +319,11 @@ Foo\u2010Bar
 \`\`\`
 
     code block with\u2011NBHY`,
+      output: `\`\`\`md
+Foo-Bar
+\`\`\`
+
+    code block with-NBHY`,
       errors: [
         {
           messageId: 'noIrregularDash',
@@ -341,6 +355,7 @@ Foo\u2010Bar
     {
       name: '`skipInlineCode: false`',
       code: "`console.log(\u2014'Hello World')`",
+      output: "`console.log(-'Hello World')`",
       errors: [
         {
           messageId: 'noIrregularDash',

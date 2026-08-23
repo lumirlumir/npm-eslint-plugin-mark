@@ -127,9 +127,14 @@ export default {
 
   create(context) {
     const { sourceCode } = context;
-    const [{ allow, skipCode, skipInlineCode }] = context.options;
+    const [{ allow, override, skipCode, skipInlineCode }] = context.options;
 
     const skipRanges = new SkipRanges();
+
+    const mergedIrregularDashMap = {
+      ...irregularDashMap,
+      ...override,
+    };
 
     return {
       code(node) {
@@ -167,6 +172,13 @@ export default {
             },
 
             messageId: 'noIrregularDash',
+
+            fix(fixer) {
+              return fixer.replaceTextRange(
+                [startOffset, endOffset],
+                mergedIrregularDashMap[irregularDash],
+              );
+            },
           });
         }
       },
