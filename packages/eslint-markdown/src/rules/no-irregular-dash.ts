@@ -42,6 +42,8 @@ export default {
       stylistic: false,
     },
 
+    fixable: 'code',
+
     schema: [
       {
         type: 'object',
