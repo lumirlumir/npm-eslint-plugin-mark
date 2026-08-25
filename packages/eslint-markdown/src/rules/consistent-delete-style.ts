@@ -15,7 +15,18 @@ import type { RuleModule } from '../core/types.js';
 // --------------------------------------------------------------------------------
 
 type DeleteStyle = (typeof DELETE_STYLE)[number];
-type RuleOptions = [{ style: 'consistent' | DeleteStyle }];
+/**
+ * Options for the `consistent-delete-style` rule.
+ */
+type RuleOptions = [
+  {
+    /**
+     * When `style` is set to `'consistent'`, the rule enforces that all deletes in the document use the same style as the first one encountered.
+     * @default 'consistent'
+     */
+    style: 'consistent' | DeleteStyle;
+  },
+];
 type MessageIds = 'style';
 
 // --------------------------------------------------------------------------------

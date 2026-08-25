@@ -15,7 +15,18 @@ import type { RuleModule } from '../core/types.js';
 // --------------------------------------------------------------------------------
 
 type EmphasisStyle = (typeof EMPHASIS_STYLE)[number];
-type RuleOptions = [{ style: 'consistent' | EmphasisStyle }];
+/**
+ * Options for the `consistent-emphasis-style` rule.
+ */
+type RuleOptions = [
+  {
+    /**
+     * When `style` is set to `'consistent'`, the rule enforces that all emphasis in the document use the same style as the first one encountered.
+     * @default 'consistent'
+     */
+    style: 'consistent' | EmphasisStyle;
+  },
+];
 type MessageIds = 'style';
 
 // --------------------------------------------------------------------------------
