@@ -19,7 +19,7 @@ import type { RuleModule } from '../core/types.js';
 export interface HeadingOptions {
   /**
    * Allowed heading patterns. Only headings matching at least one pattern are allowed.
-   * @default [new RegExp('.*', 'u')]
+   * @default [new RegExp('.*', 'u')] // But as a regex literal.
    */
   allow: (RegExp | string)[];
   /**

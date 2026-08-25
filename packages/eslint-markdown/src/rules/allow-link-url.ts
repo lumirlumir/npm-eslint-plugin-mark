@@ -31,7 +31,7 @@ type RuleOptions = [
      * Allowed URLs act like a ***whitelist***.
      *
      * Only those written on the whitelist **can** pass through.
-     * @default [new RegExp('.*', 'u')]
+     * @default [new RegExp('.*', 'u')] // But as a regex literal.
      */
     allowUrls: (RegExp | string)[];
     /**
