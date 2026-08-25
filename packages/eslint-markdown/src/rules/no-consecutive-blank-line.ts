@@ -23,6 +23,8 @@ type RuleOptions = [
   {
     /**
      * Set the maximum number of consecutive blank lines to allow.
+     *
+     * This value must be an integer greater than or equal to `1`.
      * @default 1
      */
     max: number;
