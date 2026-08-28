@@ -33,7 +33,7 @@ export interface HeadingOptions {
  * Options for the `allow-heading` rule, mapped by heading levels from `h1` to `h6`.
  */
 type RuleOptions = [Record<`h${Heading['depth']}`, HeadingOptions>];
-type MessageIds = 'allowHeading' | 'disallowHeading';
+type MessageIds = 'allowHeading' | 'disallowHeading' | 'emptyAllowHeading';
 
 // --------------------------------------------------------------------------------
 // Helper
@@ -106,6 +106,8 @@ export default {
         'The level {{ depth }} heading `{{ heading }}` is not in the list of allowed headings. (Allow: {{ allow }}).',
       disallowHeading:
         'The level {{ depth }} heading `{{ heading }}` is in the list of disallowed headings. (Disallow: {{ disallow }}).',
+      emptyAllowHeading:
+        'No level {{ depth }} headings are allowed because the list of allowed headings is empty.',
     },
 
     language: 'markdown',
@@ -127,7 +129,15 @@ export default {
         const { allow, disallow } = headingMap[depth - 1];
         const headingText = sourceCode.getText(node);
 
-        if (!allow.some(regex => testRegexStateless(regex, headingText))) {
+        if (allow.length === 0) {
+          context.report({
+            node,
+            messageId: 'emptyAllowHeading',
+            data: {
+              depth,
+            },
+          });
+        } else if (!allow.some(regex => testRegexStateless(regex, headingText))) {
           context.report({
             node,
             messageId: 'allowHeading',
