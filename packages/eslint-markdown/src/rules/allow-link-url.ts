@@ -50,7 +50,7 @@ type RuleOptions = [
     allowDefinitions: string[];
   },
 ];
-type MessageIds = 'allowLinkUrl' | 'disallowLinkUrl';
+type MessageIds = 'allowLinkUrl' | 'disallowLinkUrl' | 'emptyAllowLinkUrl';
 
 // --------------------------------------------------------------------------------
 // Rule Definition
@@ -116,6 +116,8 @@ export default {
         'The URL `{{ url }}` is not in the list of allowed URLs. (Allow: {{ patterns }}).',
       disallowLinkUrl:
         'The URL `{{ url }}` is in the list of disallowed URLs. (Disallow: {{ patterns }}).',
+      emptyAllowLinkUrl:
+        'The URL `{{ url }}` is not allowed because the list of allowed URLs is empty.',
     },
 
     language: 'markdown',
@@ -196,14 +198,16 @@ export default {
           }
         }
 
-        /*
-         * The `some` method returns `true` if any element in the array satisfies the given condition.
-         * In the case of an empty array, there are no elements to satisfy the condition, so the method returns `false`.
-         * Therefore, calling the `some` method on an empty array will always return `false`.
-         */
-
         for (const { loc, url } of links) {
-          if (!allowUrls.some(regex => testRegexStateless(regex, url))) {
+          if (allowUrls.length === 0) {
+            context.report({
+              loc,
+              messageId: 'emptyAllowLinkUrl',
+              data: {
+                url,
+              },
+            });
+          } else if (!allowUrls.some(regex => testRegexStateless(regex, url))) {
             context.report({
               loc,
               messageId: 'allowLinkUrl',
