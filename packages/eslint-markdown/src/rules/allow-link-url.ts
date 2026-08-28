@@ -198,6 +198,12 @@ export default {
           }
         }
 
+        /*
+         * The `some` method returns `true` if any element in the array satisfies the given condition.
+         * In the case of an empty array, there are no elements to satisfy the condition, so the method returns `false`.
+         * Therefore, calling the `some` method on an empty array will always return `false`.
+         */
+
         for (const { loc, url } of links) {
           if (allowUrls.length === 0) {
             context.report({
