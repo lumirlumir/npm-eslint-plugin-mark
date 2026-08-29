@@ -8,7 +8,11 @@
 // --------------------------------------------------------------------------------
 
 import { escapeStringRegexp } from '../core/utils/index.js';
-import { URL_RULE_DOCS } from '../core/constants.js';
+import {
+  URL_RULE_DOCS,
+  punctuation as defaultPunctuation,
+  gemojiRegex,
+} from '../core/constants.js';
 import type { RuleModule } from '../core/types.js';
 
 // --------------------------------------------------------------------------------
@@ -35,11 +39,8 @@ type MessageIds = 'noTrailingHeadingPunctuation';
 
 /**
  * Regular expression for identifying a GitHub emoji code at the end of a line.
- * - NOTE: These patterns are based on the `markdownlint`.
- * @see https://github.com/DavidAnson/markdownlint/blob/v0.41.1/helpers/helpers.cjs#L36-L38
  */
-const trailingGemojiRegex =
-  /:(?:[abmovx]|[-+]1|100|1234|(?:1st|2nd|3rd)_place_medal|8ball|clock\d{1,4}|e-mail|non-potable_water|o2|t-rex|u5272|u5408|u55b6|u6307|u6708|u6709|u6e80|u7121|u7533|u7981|u7a7a|[a-z]{2,15}2?|[a-z]{1,14}(?:_[a-z\d]{1,16})+):$/;
+const trailingGemojiRegex = new RegExp(`${gemojiRegex.source}$`, gemojiRegex.flags);
 
 /**
  * Regular expression for identifying an HTML entity at the end of a line.
@@ -87,7 +88,7 @@ export default {
 
     defaultOptions: [
       {
-        punctuation: ['.', ',', ';', ':', '!', '。', '，', '；', '：', '！'],
+        punctuation: [...defaultPunctuation],
       },
     ],
 
