@@ -7,9 +7,9 @@
 // --------------------------------------------------------------------------------
 
 import type { ESLint } from 'eslint';
-import { PKG_NAME as name, PKG_VERSION as version } from './core/constants.js';
 import { all, base, recommended, stylistic } from './configs/index.js';
 import rules from './rules/index.js';
+import pkg from '../package.json' with { type: 'json' };
 
 // --------------------------------------------------------------------------------
 // Export
@@ -17,8 +17,8 @@ import rules from './rules/index.js';
 
 const plugin = {
   meta: {
-    name,
-    version,
+    name: pkg.name as 'eslint-markdown' satisfies string,
+    version: pkg.version satisfies string,
   },
 
   rules,
