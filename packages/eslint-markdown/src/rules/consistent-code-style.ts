@@ -173,8 +173,39 @@ export default {
         }
 
         if (codeStyle !== currentCodeStyle) {
+          const start = sourceCode.getLocFromIndex(nodeStartOffset);
+          let end;
+          if (currentCodeStyle === 'indent') {
+            end = {
+              line: start.line,
+              column: lines[start.line - 1].length + 1,
+            };
+          } else if (node.lang) {
+            end = {
+              line: start.line,
+              column:
+                start.column +
+                sourceCode.getText(node).indexOf(node.lang) +
+                node.lang.length,
+            };
+          } else {
+            let openingCodeFenceEndOffset;
+            for (
+              openingCodeFenceEndOffset = nodeStartOffset;
+              sourceCode.text[openingCodeFenceEndOffset] ===
+              sourceCode.text[nodeStartOffset];
+              openingCodeFenceEndOffset++
+            ) {
+              // Find the end offset of the opening code fence.
+            }
+            end = sourceCode.getLocFromIndex(openingCodeFenceEndOffset);
+          }
+
           context.report({
-            node,
+            loc: {
+              start,
+              end,
+            },
 
             messageId: 'style',
 
