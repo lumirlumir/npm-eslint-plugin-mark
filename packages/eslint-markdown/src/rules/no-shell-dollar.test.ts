@@ -1,6 +1,6 @@
 /**
  * @fileoverview Test for `no-shell-dollar.ts`.
- * @author lumir(lumirlumir)
+ * @author Marry(uncoolclub)
  */
 
 // --------------------------------------------------------------------------------
@@ -75,6 +75,18 @@ ruleTester('no-shell-dollar', rule, {
     {
       name: 'Continued command followed by output',
       code: '```sh\n$ npm install \\\n    --save-dev eslint\nadded 1 package\n```',
+    },
+    {
+      name: 'Blank line ending a continued command followed by output',
+      code: '```sh\n$ printf foo \\\n\noutput\n```',
+    },
+    {
+      name: 'Backslash followed by spaces before output',
+      code: '```sh\n$ printf foo \\   \noutput\n```',
+    },
+    {
+      name: 'Escaped trailing backslash followed by output',
+      code: '```sh\n$ echo \\\\\n\\\n```',
     },
     {
       name: 'Shell secondary prompt',
@@ -292,6 +304,27 @@ ruleTester('no-shell-dollar', rule, {
           line: 5,
           column: 1,
           endLine: 5,
+          endColumn: 3,
+        },
+      ],
+    },
+    {
+      name: 'Command repeated after the same text appears on a continuation line',
+      code: '```sh\n$ echo \\\n$ echo hi\n$ echo hi\n```',
+      output: '```sh\necho \\\n$ echo hi\necho hi\n```',
+      errors: [
+        {
+          messageId: 'noShellDollar',
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 3,
+        },
+        {
+          messageId: 'noShellDollar',
+          line: 4,
+          column: 1,
+          endLine: 4,
           endColumn: 3,
         },
       ],

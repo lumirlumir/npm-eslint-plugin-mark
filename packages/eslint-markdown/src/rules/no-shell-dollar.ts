@@ -1,6 +1,6 @@
 /**
  * @fileoverview Rule to disallow dollar signs before commands without showing output.
- * @author lumir(lumirlumir)
+ * @author Marry(uncoolclub)
  * @see https://github.com/DavidAnson/markdownlint/blob/v0.40.0/lib/md014.mjs
  */
 
@@ -15,16 +15,26 @@ import type { RuleModule } from '../core/types.js';
 // Typedef
 // --------------------------------------------------------------------------------
 
-type RuleOptions = [{ skipCode: string[] }];
+/**
+ * Options for the `no-shell-dollar` rule.
+ */
+type RuleOptions = [
+  {
+    /**
+     * An array of code block language identifiers to skip.
+     * @default []
+     */
+    skipCode: string[];
+  },
+];
 type MessageIds = 'noShellDollar';
 
 // --------------------------------------------------------------------------------
 // Helper
 // --------------------------------------------------------------------------------
 
-// `\s` in regular expressions matches whitespace characters beyond ` ` and `\t`,
-// so we explicitly use `[ \t]` to match those characters to avoid unexpected matches.
 const dollarCommandRegex = /^(?<indentation>[ \t]*)(?<prompt>\$[ \t]+)/;
+const trailingBackslashRegex = /\\+$/u;
 
 // --------------------------------------------------------------------------------
 // Rule Definition
@@ -81,52 +91,46 @@ export default {
 
     return {
       code(node) {
-        // If the lang is in the skip list, skip it.
         if (node.lang && skipCode.includes(node.lang)) {
-          return;
-        }
-
-        const codeLines = node.value.split('\n').filter(line => line.trim() !== ''); // Blank lines are neither commands nor output.
-
-        const commandLines: string[] = [];
-        let isContinued = false;
-
-        for (const codeLine of codeLines) {
-          // A line continued with a backslash carries the rest of the command, not output,
-          // so it has no prompt of its own to report.
-          if (!isContinued) {
-            // A line without a prompt is output, and a code block showing output keeps its prompts.
-            if (!dollarCommandRegex.test(codeLine)) {
-              return;
-            }
-
-            commandLines.push(codeLine);
-          }
-
-          isContinued = codeLine.trimEnd().endsWith('\\');
-        }
-
-        if (commandLines.length === 0) {
           return;
         }
 
         const [nodeStartOffset] = sourceCode.getRange(node);
         const nodeText = sourceCode.getText(node);
 
-        // Skip the opening fence line, as its `lang` and `meta` can contain the same text as a code line.
         let searchOffset = /^[`~]/.test(nodeText) ? nodeText.indexOf('\n') + 1 : 0;
 
-        for (const commandLine of commandLines) {
-          // Each code line appears verbatim in the source, even inside a blockquote or a list.
-          const codeLineOffset = nodeText.indexOf(commandLine, searchOffset);
+        const commandRanges: [number, number][] = [];
+        let previousLineContinues = false;
 
-          searchOffset = codeLineOffset + commandLine.length;
+        for (const codeLine of node.value.split('\n')) {
+          if (codeLine.trim() === '') {
+            previousLineContinues = false;
+            continue;
+          }
 
-          const { indentation, prompt } = dollarCommandRegex.exec(commandLine)!.groups!;
+          const codeLineOffset = nodeText.indexOf(codeLine, searchOffset);
 
-          const startOffset = nodeStartOffset + codeLineOffset + indentation.length;
-          const endOffset = startOffset + prompt.length;
+          searchOffset = codeLineOffset + codeLine.length;
 
+          if (!previousLineContinues) {
+            const match = dollarCommandRegex.exec(codeLine);
+
+            if (!match?.groups) {
+              return;
+            }
+
+            const { indentation, prompt } = match.groups;
+            const startOffset = nodeStartOffset + codeLineOffset + indentation.length;
+
+            commandRanges.push([startOffset, startOffset + prompt.length]);
+          }
+
+          previousLineContinues =
+            (trailingBackslashRegex.exec(codeLine)?.[0].length ?? 0) % 2 === 1;
+        }
+
+        for (const [startOffset, endOffset] of commandRanges) {
           context.report({
             loc: {
               start: sourceCode.getLocFromIndex(startOffset),

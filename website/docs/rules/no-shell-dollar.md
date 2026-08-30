@@ -3,17 +3,15 @@
 
 ## Rule Details
 
-Shell commands in documentation are often prefixed with a dollar sign (`$`) to imitate a command prompt. When the code block contains commands only, that prefix carries no information and gets in the way: readers who copy the block have to strip every `$` before the commands will run, and some tools that copy code blocks include the prefix verbatim.
+Shell examples often add `$` before commands. This looks like a prompt but makes copied commands harder to run.
 
-The prefix is useful in one case, which is when the code block also shows the output of the commands. There, the `$` is what separates what you type from what the terminal prints back.
+This rule reports `$` only when each non-blank line is a command or a continued line. It reports nothing if the block also has output or other text.
 
-This rule therefore reports a dollar sign prefix only when **every** non-blank line of a code block is a prefixed command. Blank lines are ignored, and a block that mixes commands with their output is left alone.
+A command may start with spaces or tabs. It must then have `$` followed by at least one space or tab. Therefore, `$npm install` and a bare `$` do not match.
 
-A line counts as a prefixed command when it starts with a dollar sign followed by at least one space or tab, allowing for leading indentation. So `$npm install` and a bare `$` are treated as regular content.
+An odd number of backslashes at the end of a line continues the command. The next line is part of the command and has no prompt to report. A blank line ends the continuation.
 
-A command continued with a trailing backslash carries on into the next line, and that continuation line is part of the command rather than output. It has no prompt of its own, so nothing is reported on it.
-
-Both fenced and indented code blocks are checked, and the language identifier is not taken into account unless it is listed in the [`skipCode`](#skipcode) option.
+The rule checks fenced and indented code blocks in every language. Set [`skipCode`](#skipcode) to exclude languages.
 
 ## Examples
 
@@ -47,7 +45,7 @@ $ npm install \
 ```
 ````
 
-#### With `skipCode: ['console']` Option
+#### With `{ skipCode: ['console'] }` Option
 
 ````md eslint-check
 <!-- eslint md/no-shell-dollar: ['error', { skipCode: ['console'] }] -->
@@ -91,7 +89,7 @@ added 1 package
 ```
 ````
 
-#### With `skipCode: ['console']` Option
+#### With `{ skipCode: ['console'] }` Option
 
 ````md eslint-check
 <!-- eslint md/no-shell-dollar: ['error', { skipCode: ['console'] }] -->
@@ -113,11 +111,9 @@ $ npm install
 
 > Type: `string[]` / Default: `[]`
 
-An array of code block language identifiers to skip. A code block whose language identifier is listed here is neither reported nor fixed.
+Use this array to skip code blocks by language. Matching is case-sensitive: `sh` and `SH` differ.
 
-The values are compared with the language identifier as written, so `sh` and `SH` are different values.
-
-For example, to allow the prompt prefix in code blocks that represent a terminal session:
+For example, allow prompts in terminal sessions:
 
 ```js
 'md/no-shell-dollar': ['error', {
@@ -125,13 +121,26 @@ For example, to allow the prompt prefix in code blocks that represent a terminal
 }]
 ```
 
-Code blocks without a language identifier, including indented code blocks, cannot be skipped through this option.
+This option cannot skip indented code blocks or fenced code blocks without a language.
 
 ## Fix
 
 This rule removes the dollar sign and the whitespace that follows it, leaving the indentation of the line untouched.
 
 ## Prior Art
+
+### Differences from MD014
+
+Unlike MD014, this rule recognizes commands continued with a backslash. It reports the `$` in this block. MD014 leaves the block unchanged because the second line has no prompt:
+
+````md
+```sh
+$ npm install \
+    --save-dev eslint
+```
+````
+
+### References
 
 - [`MD014` - Dollar signs used before commands without showing output](https://github.com/DavidAnson/markdownlint/blob/main/doc/md014.md#md014---dollar-signs-used-before-commands-without-showing-output)
 - [`remark-lint-no-shell-dollars`](https://github.com/remarkjs/remark-lint/tree/main/packages/remark-lint-no-shell-dollars#remark-lint-no-shell-dollars)
