@@ -164,25 +164,38 @@ export default {
         }
 
         /*
-         * Possible combinations include:
-         * - Converting `atx` to `atx-closed`.
-         *   - If `atx` is empty, it can be converted to `atx-closed`. (O)
-         *   - If `atx` is not empty, it can be converted to `atx-closed`. (O)
-         * - Converting `atx` to `setext`.
-         *   - If `atx` is empty, it cannot be converted to `setext`. (X)
-         *   - If `atx` is not empty, it can be converted to `setext`. (O)
-         * - Converting `atx-closed` to `atx`.
-         *   - If `atx-closed` is empty, it can be converted to `atx`. (O)
-         *   - If `atx-closed` is not empty, it can be converted to `atx`. (O)
-         * - Converting `atx-closed` to `setext`.
-         *   - If `atx-closed` is empty, it cannot be converted to `setext`. (X)
-         *   - If `atx-closed` is not empty, it can be converted to `setext`. (O)
-         * - Converting `setext` to `atx`.
-         *   - Setext headings cannot be empty (https://spec.commonmark.org/0.31.2/#example-97)
-         *   - If `setext` is not empty, it can be converted to `atx`. (O)
-         * - Converting `setext` to `atx-closed`.
-         *   - Setext headings cannot be empty (https://spec.commonmark.org/0.31.2/#example-97)
-         *   - If `setext` is not empty, it can be converted to `atx-closed`. (O)
+         * Possible fix combinations include:
+         *
+         * - autofix: 🔧
+         * - suggestion: 💡
+         * - no fix: ❌
+         *
+         * 1. Converting `atx` to `atx-closed`.
+         *   1-1. If `atx` is empty, it can be converted to `atx-closed`. (🔧)
+         *   1-2. If `atx` is not empty, it can be converted to `atx-closed`. (🔧)
+         * 2. Converting `atx` to `setext`.
+         *   2-1. If `atx` is empty, it cannot be converted to `setext`. (❌)
+         *   2-2. If `atx` is not empty:
+         *     2-2-1. If its depth is 1 or 2, conversion can be offered as a suggestion. (💡)
+         *     2-2-2. If its depth is greater than 2, it cannot be converted to `setext`. (❌)
+         * 3. Converting `atx-closed` to `atx`.
+         *   3-1. If `atx-closed` is empty, it can be converted to `atx`. (🔧)
+         *   3-2. If `atx-closed` is not empty, it can be converted to `atx`. (🔧)
+         * 4. Converting `atx-closed` to `setext`.
+         *   4-1. If `atx-closed` is empty, it cannot be converted to `setext`. (❌)
+         *   4-2. If `atx-closed` is not empty:
+         *     4-2-1. If its depth is 1 or 2, conversion can be offered as a suggestion. (💡)
+         *     4-2-2. If its depth is greater than 2, it cannot be converted to `setext`. (❌)
+         * 5. Converting `setext` to `atx`.
+         *   5-1. Setext headings cannot be empty (https://spec.commonmark.org/0.31.2/#example-97)
+         *   5-2. If `setext` is not empty:
+         *     5-2-1. If it is single-line, it can be converted to `atx`. (🔧)
+         *     5-2-2. If it is multiline, it cannot be converted to `atx`. (❌)
+         * 6. Converting `setext` to `atx-closed`.
+         *   6-1. Setext headings cannot be empty (https://spec.commonmark.org/0.31.2/#example-97)
+         *   6-2. If `setext` is not empty:
+         *     6-2-1. If it is single-line, it can be converted to `atx-closed`. (🔧)
+         *     6-2-2. If it is multiline, it cannot be converted to `atx-closed`. (❌)
          */
 
         if (currentHeadingStyle === 'atx') {
@@ -207,37 +220,33 @@ export default {
                 contentEndOffset,
               );
 
-              {
+              if (
+                !potentialBlockStartRegex.test(headingContent) &&
+                node.depth <= SETEXT_MAX_DEPTH &&
+                sourceCode.getParent(node)?.type === 'root' &&
                 // Locations are one-based, while `lines` is zero-based; `-2` selects the preceding line.
                 // Treat a missing preceding line at the start of the document as blank.
-                const isPreviousLineBlank = isBlankLine(
+                isBlankLine(
                   sourceCode.lines[sourceCode.getLoc(node).start.line - 2] ?? '',
+                )
+              ) {
+                const lineEnding = sourceCode.text.match(/\r\n|\r|\n/)?.[0] ?? '\n';
+
+                const underlineMarker = node.depth === 1 ? '=' : '-';
+
+                const replacementText = `${headingContent}${lineEnding}${underlineMarker.repeat(
+                  headingContent.length,
+                )}`;
+
+                // Report every mismatch even when no semantics-preserving fix is available.
+                reportStyle(fixer =>
+                  fixer.replaceTextRange(
+                    [nodeStartOffset, nodeEndOffset],
+                    replacementText,
+                  ),
                 );
-
-                if (
-                  !potentialBlockStartRegex.test(headingContent) &&
-                  node.depth <= SETEXT_MAX_DEPTH &&
-                  sourceCode.getParent(node)?.type === 'root' &&
-                  isPreviousLineBlank
-                ) {
-                  const lineEnding = sourceCode.text.match(/\r\n|\r|\n/)?.[0] ?? '\n';
-
-                  const underlineMarker = node.depth === 1 ? '=' : '-';
-
-                  const replacementText = `${headingContent}${lineEnding}${underlineMarker.repeat(
-                    headingContent.length,
-                  )}`;
-
-                  // Report every mismatch even when no semantics-preserving fix is available.
-                  reportStyle(fixer =>
-                    fixer.replaceTextRange(
-                      [nodeStartOffset, nodeEndOffset],
-                      replacementText,
-                    ),
-                  );
-                } else {
-                  reportStyle();
-                }
+              } else {
+                reportStyle();
               }
             }
           }
@@ -265,37 +274,33 @@ export default {
                 contentEndOffset,
               );
 
-              {
+              if (
+                !potentialBlockStartRegex.test(headingContent) &&
+                node.depth <= SETEXT_MAX_DEPTH &&
+                sourceCode.getParent(node)?.type === 'root' &&
                 // Locations are one-based, while `lines` is zero-based; `-2` selects the preceding line.
                 // Treat a missing preceding line at the start of the document as blank.
-                const isPreviousLineBlank = isBlankLine(
+                isBlankLine(
                   sourceCode.lines[sourceCode.getLoc(node).start.line - 2] ?? '',
+                )
+              ) {
+                const lineEnding = sourceCode.text.match(/\r\n|\r|\n/)?.[0] ?? '\n';
+
+                const underlineMarker = node.depth === 1 ? '=' : '-';
+
+                const replacementText = `${headingContent}${lineEnding}${underlineMarker.repeat(
+                  headingContent.length,
+                )}`;
+
+                // Report every mismatch even when no semantics-preserving fix is available.
+                reportStyle(fixer =>
+                  fixer.replaceTextRange(
+                    [nodeStartOffset, nodeEndOffset],
+                    replacementText,
+                  ),
                 );
-
-                if (
-                  !potentialBlockStartRegex.test(headingContent) &&
-                  node.depth <= SETEXT_MAX_DEPTH &&
-                  sourceCode.getParent(node)?.type === 'root' &&
-                  isPreviousLineBlank
-                ) {
-                  const lineEnding = sourceCode.text.match(/\r\n|\r|\n/)?.[0] ?? '\n';
-
-                  const underlineMarker = node.depth === 1 ? '=' : '-';
-
-                  const replacementText = `${headingContent}${lineEnding}${underlineMarker.repeat(
-                    headingContent.length,
-                  )}`;
-
-                  // Report every mismatch even when no semantics-preserving fix is available.
-                  reportStyle(fixer =>
-                    fixer.replaceTextRange(
-                      [nodeStartOffset, nodeEndOffset],
-                      replacementText,
-                    ),
-                  );
-                } else {
-                  reportStyle();
-                }
+              } else {
+                reportStyle();
               }
             }
           }
