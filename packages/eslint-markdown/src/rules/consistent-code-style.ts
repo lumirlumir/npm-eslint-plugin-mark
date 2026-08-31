@@ -180,14 +180,6 @@ export default {
               line: start.line,
               column: lines[start.line - 1].length + 1,
             };
-          } else if (node.lang) {
-            end = {
-              line: start.line,
-              column:
-                start.column +
-                sourceCode.getText(node).indexOf(node.lang) +
-                node.lang.length,
-            };
           } else {
             let openingCodeFenceEndOffset;
             for (
@@ -198,7 +190,19 @@ export default {
             ) {
               // Find the end offset of the opening code fence.
             }
-            end = sourceCode.getLocFromIndex(openingCodeFenceEndOffset);
+            if (node.lang) {
+              const openingCodeFenceEndIndex =
+                openingCodeFenceEndOffset - nodeStartOffset;
+              end = {
+                line: start.line,
+                column:
+                  start.column +
+                  sourceCode.getText(node).indexOf(node.lang, openingCodeFenceEndIndex) +
+                  node.lang.length,
+              };
+            } else {
+              end = sourceCode.getLocFromIndex(openingCodeFenceEndOffset);
+            }
           }
 
           context.report({

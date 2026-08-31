@@ -545,6 +545,25 @@ code block 1
         },
       ],
     },
+    {
+      name: '`indent` style - tilde-fenced code with tilde language',
+      code: `
+~~~ ~
+code block 1
+~~~`,
+      options: [{ style: 'indent' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 6,
+          data: { style: 'indent' },
+        },
+      ],
+    },
+
     // option: `style` - `fence-backtick` style
     {
       name: '`fence-backtick` style reports multiline indented code',
