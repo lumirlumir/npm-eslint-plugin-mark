@@ -143,111 +143,206 @@ export default {
           return;
         }
 
+        const [nodeStartOffset, nodeEndOffset] = sourceCode.getRange(node);
+        const firstChildNode = node.children[0];
+        const lastChildNode = node.children[node.children.length - 1];
+
+        function reportStyle(
+          fix: NonNullable<Parameters<typeof context.report>[0]['fix']> | null = null,
+        ) {
+          context.report({
+            node,
+
+            messageId: 'style',
+
+            data: {
+              style: expectedHeadingStyle,
+            },
+
+            fix,
+          });
+        }
+
         /*
          * Possible combinations include:
          * - Converting `atx` to `atx-closed`.
+         *   - If `atx` is empty, it can be converted to `atx-closed`. (O)
+         *   - If `atx` is not empty, it can be converted to `atx-closed`. (O)
          * - Converting `atx` to `setext`.
+         *   - If `atx` is empty, it cannot be converted to `setext`. (X)
+         *   - If `atx` is not empty, it can be converted to `setext`. (O)
          * - Converting `atx-closed` to `atx`.
+         *   - If `atx-closed` is empty, it can be converted to `atx`. (O)
+         *   - If `atx-closed` is not empty, it can be converted to `atx`. (O)
          * - Converting `atx-closed` to `setext`.
+         *   - If `atx-closed` is empty, it cannot be converted to `setext`. (X)
+         *   - If `atx-closed` is not empty, it can be converted to `setext`. (O)
          * - Converting `setext` to `atx`.
+         *   - Setext headings cannot be empty (https://spec.commonmark.org/0.31.2/#example-97)
+         *   - If `setext` is not empty, it can be converted to `atx`. (O)
          * - Converting `setext` to `atx-closed`.
+         *   - Setext headings cannot be empty (https://spec.commonmark.org/0.31.2/#example-97)
+         *   - If `setext` is not empty, it can be converted to `atx-closed`. (O)
          */
 
-        let replacementRange = sourceCode.getRange(node);
-        let replacementText: string | null = null;
-
-        const [nodeStartOffset, nodeEndOffset] = replacementRange;
-
-        const lastChildNode = node.children.at(-1);
-
-        if (currentHeadingStyle === 'atx' && expectedHeadingStyle === 'atx-closed') {
-          replacementRange = [nodeEndOffset, nodeEndOffset];
-
-          replacementText = ` ${'#'.repeat(node.depth)}`;
-        } else if (
-          currentHeadingStyle === 'atx-closed' &&
-          expectedHeadingStyle === 'atx'
-        ) {
-          // An empty closed heading has no child, so remove everything after its opening sequence.
-          const closingStartOffset = lastChildNode
-            ? sourceCode.getRange(lastChildNode)[1]
-            : nodeStartOffset + node.depth;
-
-          replacementRange = [closingStartOffset, nodeEndOffset];
-
-          replacementText = '';
-        } else {
-          const firstChildNode = node.children[0];
-
-          if (firstChildNode && lastChildNode) {
-            const [contentStartOffset] = sourceCode.getRange(firstChildNode);
-            const [, contentEndOffset] = sourceCode.getRange(lastChildNode);
-
-            const headingContent = sourceCode.text.slice(
-              contentStartOffset,
-              contentEndOffset,
+        if (currentHeadingStyle === 'atx') {
+          if (expectedHeadingStyle === 'atx-closed') {
+            reportStyle(fixer =>
+              fixer.replaceTextRange(
+                [nodeEndOffset, nodeEndOffset],
+                ` ${'#'.repeat(node.depth)}`,
+              ),
             );
-
-            if (currentHeadingStyle === 'setext') {
-              const { start } = sourceCode.getLoc(firstChildNode);
-              const { end } = sourceCode.getLoc(lastChildNode);
-
-              if (start.line === end.line /* Singleline Heading */) {
-                const headingMarker = '#'.repeat(node.depth);
-
-                if (expectedHeadingStyle === 'atx-closed') {
-                  replacementText = `${headingMarker} ${headingContent} ${headingMarker}`;
-                } else {
-                  // Prevent trailing hashes from becoming an ATX closing sequence.
-                  const escapedHeadingContent = headingContent.replace(
-                    /(?<=[ \t])(?=#+[ \t]*$)/u,
-                    '\\',
-                  );
-                  replacementText = `${headingMarker} ${escapedHeadingContent}`;
-                }
-              }
+          } else if (expectedHeadingStyle === 'setext') {
+            if (node.children.length === 0) {
+              // Empty ATX headings cannot be converted to Setext headings,
+              // so report the mismatch without a fix.
+              reportStyle();
             } else {
-              const isPotentialBlockStart = potentialBlockStartRegex.test(headingContent);
-              // Locations are one-based, while `lines` is zero-based; `-2` selects the preceding line.
-              // Treat a missing preceding line at the start of the document as blank.
-              const isPreviousLineBlank = isBlankLine(
-                sourceCode.lines[sourceCode.getLoc(node).start.line - 2] ?? '',
+              const [contentStartOffset] = sourceCode.getRange(firstChildNode);
+              const [, contentEndOffset] = sourceCode.getRange(lastChildNode);
+
+              const headingContent = sourceCode.text.slice(
+                contentStartOffset,
+                contentEndOffset,
               );
 
-              const canConvertToSetext =
-                !isPotentialBlockStart &&
-                node.depth <= SETEXT_MAX_DEPTH &&
-                sourceCode.getParent(node)?.type === 'root' &&
-                isPreviousLineBlank;
+              {
+                // Locations are one-based, while `lines` is zero-based; `-2` selects the preceding line.
+                // Treat a missing preceding line at the start of the document as blank.
+                const isPreviousLineBlank = isBlankLine(
+                  sourceCode.lines[sourceCode.getLoc(node).start.line - 2] ?? '',
+                );
 
-              if (canConvertToSetext) {
-                const lineEnding = sourceCode.text.match(/\r\n|\r|\n/)?.[0] ?? '\n';
+                if (
+                  !potentialBlockStartRegex.test(headingContent) &&
+                  node.depth <= SETEXT_MAX_DEPTH &&
+                  sourceCode.getParent(node)?.type === 'root' &&
+                  isPreviousLineBlank
+                ) {
+                  const lineEnding = sourceCode.text.match(/\r\n|\r|\n/)?.[0] ?? '\n';
 
-                const underlineMarker = node.depth === 1 ? '=' : '-';
+                  const underlineMarker = node.depth === 1 ? '=' : '-';
 
-                replacementText = `${headingContent}${lineEnding}${underlineMarker.repeat(
-                  headingContent.length,
-                )}`;
+                  const replacementText = `${headingContent}${lineEnding}${underlineMarker.repeat(
+                    headingContent.length,
+                  )}`;
+
+                  // Report every mismatch even when no semantics-preserving fix is available.
+                  reportStyle(fixer =>
+                    fixer.replaceTextRange(
+                      [nodeStartOffset, nodeEndOffset],
+                      replacementText,
+                    ),
+                  );
+                } else {
+                  reportStyle();
+                }
               }
             }
           }
-        }
+        } else if (currentHeadingStyle === 'atx-closed') {
+          if (expectedHeadingStyle === 'atx') {
+            // An empty closed heading has no child, so remove everything after its opening sequence.
+            const closingStartOffset = lastChildNode
+              ? sourceCode.getRange(lastChildNode)[1]
+              : nodeStartOffset + node.depth;
 
-        // Report every mismatch even when no semantics-preserving fix is available.
-        context.report({
-          node,
-          messageId: 'style',
-          data: {
-            style: expectedHeadingStyle,
-          },
-          fix(fixer) {
-            if (replacementText === null) {
-              return null;
+            reportStyle(fixer =>
+              fixer.replaceTextRange([closingStartOffset, nodeEndOffset], ''),
+            );
+          } else if (expectedHeadingStyle === 'setext') {
+            if (node.children.length === 0) {
+              // Empty ATX Closed headings cannot be converted to Setext headings,
+              // so report the mismatch without a fix.
+              reportStyle();
+            } else {
+              const [contentStartOffset] = sourceCode.getRange(firstChildNode);
+              const [, contentEndOffset] = sourceCode.getRange(lastChildNode);
+
+              const headingContent = sourceCode.text.slice(
+                contentStartOffset,
+                contentEndOffset,
+              );
+
+              {
+                // Locations are one-based, while `lines` is zero-based; `-2` selects the preceding line.
+                // Treat a missing preceding line at the start of the document as blank.
+                const isPreviousLineBlank = isBlankLine(
+                  sourceCode.lines[sourceCode.getLoc(node).start.line - 2] ?? '',
+                );
+
+                if (
+                  !potentialBlockStartRegex.test(headingContent) &&
+                  node.depth <= SETEXT_MAX_DEPTH &&
+                  sourceCode.getParent(node)?.type === 'root' &&
+                  isPreviousLineBlank
+                ) {
+                  const lineEnding = sourceCode.text.match(/\r\n|\r|\n/)?.[0] ?? '\n';
+
+                  const underlineMarker = node.depth === 1 ? '=' : '-';
+
+                  const replacementText = `${headingContent}${lineEnding}${underlineMarker.repeat(
+                    headingContent.length,
+                  )}`;
+
+                  // Report every mismatch even when no semantics-preserving fix is available.
+                  reportStyle(fixer =>
+                    fixer.replaceTextRange(
+                      [nodeStartOffset, nodeEndOffset],
+                      replacementText,
+                    ),
+                  );
+                } else {
+                  reportStyle();
+                }
+              }
             }
+          }
+        } else if (currentHeadingStyle === 'setext') {
+          const [contentStartOffset] = sourceCode.getRange(firstChildNode);
+          const [, contentEndOffset] = sourceCode.getRange(lastChildNode);
 
-            return fixer.replaceTextRange(replacementRange, replacementText);
-          },
-        });
+          const headingContent = sourceCode.text.slice(
+            contentStartOffset,
+            contentEndOffset,
+          );
+
+          const { start } = sourceCode.getLoc(firstChildNode);
+          const { end } = sourceCode.getLoc(lastChildNode);
+
+          const headingMarker = '#'.repeat(node.depth);
+
+          if (expectedHeadingStyle === 'atx') {
+            // Prevent trailing hashes from becoming an ATX closing sequence.
+            const escapedHeadingContent = headingContent.replace(
+              /(?<=[ \t])(?=#+[ \t]*$)/u,
+              '\\',
+            );
+
+            reportStyle(fixer => {
+              if (start.line === end.line /* Singleline Heading */) {
+                return fixer.replaceTextRange(
+                  [nodeStartOffset, nodeEndOffset],
+                  `${headingMarker} ${escapedHeadingContent}`,
+                );
+              } else /* Multiline Heading */ {
+                return null;
+              }
+            });
+          } else if (expectedHeadingStyle === 'atx-closed') {
+            reportStyle(fixer => {
+              if (start.line === end.line /* Singleline Heading */) {
+                return fixer.replaceTextRange(
+                  [nodeStartOffset, nodeEndOffset],
+                  `${headingMarker} ${headingContent} ${headingMarker}`,
+                );
+              } else /* Multiline Heading */ {
+                return null;
+              }
+            });
+          }
+        }
       },
     };
   },
