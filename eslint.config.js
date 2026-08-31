@@ -26,6 +26,7 @@ export default defineConfig([
     rules: {
       'import/no-cycle': 'off', // Too computationally expensive. TODO: Remove this in shared config.
       'import/no-extraneous-dependencies': 'off', // Too computationally expensive. TODO: Remove this in shared config.
+      'import/prefer-default-export': 'off', // Personal preference. TODO: Remove this in shared config.
     },
   },
   {
