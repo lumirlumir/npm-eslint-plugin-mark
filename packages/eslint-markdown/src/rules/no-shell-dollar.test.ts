@@ -92,6 +92,8 @@ ruleTester('no-shell-dollar', rule, {
       name: 'Shell secondary prompt',
       code: '```sh\n$ for f in *; do\n> echo $f\n> done\n```',
     },
+
+    // Options
     {
       name: '`skipCode` option skipping the language of the code block',
       code: '```sh\n$ npm install\n```',
@@ -274,6 +276,8 @@ ruleTester('no-shell-dollar', rule, {
       ],
     },
     {
+      // NOTE: Unlike `markdownlint` and `remark-lint`, `eslint-markdown` recognizes the
+      // backslash-newline pair as a line continuation, which better reflects the rule's intent.
       name: 'Command continued with a backslash',
       code: '```sh\n$ npm install \\\n    --save-dev eslint\n```',
       output: '```sh\nnpm install \\\n    --save-dev eslint\n```',
@@ -288,6 +292,8 @@ ruleTester('no-shell-dollar', rule, {
       ],
     },
     {
+      // NOTE: Unlike `markdownlint` and `remark-lint`, `eslint-markdown` recognizes the
+      // backslash-newline pair as a line continuation, which better reflects the rule's intent.
       name: 'Command continued across multiple lines',
       code: '```sh\n$ docker run \\\n  --rm \\\n  alpine\n$ echo done\n```',
       output: '```sh\ndocker run \\\n  --rm \\\n  alpine\necho done\n```',
@@ -309,6 +315,8 @@ ruleTester('no-shell-dollar', rule, {
       ],
     },
     {
+      // NOTE: Unlike `markdownlint` and `remark-lint`, `eslint-markdown` recognizes the
+      // backslash-newline pair as a line continuation, which better reflects the rule's intent.
       name: 'Command repeated after the same text appears on a continuation line',
       code: '```sh\n$ echo \\\n$ echo hi\n$ echo hi\n```',
       output: '```sh\necho \\\n$ echo hi\necho hi\n```',
@@ -330,6 +338,22 @@ ruleTester('no-shell-dollar', rule, {
       ],
     },
     {
+      name: 'Multiple fenced code blocks where only one shows output',
+      code: '```sh\n$ ls\n```\n\n```sh\n$ ls\nfile.txt\n```',
+      output: '```sh\nls\n```\n\n```sh\n$ ls\nfile.txt\n```',
+      errors: [
+        {
+          messageId: 'noShellDollar',
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 3,
+        },
+      ],
+    },
+
+    // Options
+    {
       name: '`skipCode` option not covering the language of the code block',
       code: '```sh\n$ npm install\n```',
       output: '```sh\nnpm install\n```',
@@ -349,20 +373,6 @@ ruleTester('no-shell-dollar', rule, {
       code: '```\n$ ls\n```',
       output: '```\nls\n```',
       options: [{ skipCode: ['sh'] }],
-      errors: [
-        {
-          messageId: 'noShellDollar',
-          line: 2,
-          column: 1,
-          endLine: 2,
-          endColumn: 3,
-        },
-      ],
-    },
-    {
-      name: 'Multiple fenced code blocks where only one shows output',
-      code: '```sh\n$ ls\n```\n\n```sh\n$ ls\nfile.txt\n```',
-      output: '```sh\nls\n```\n\n```sh\n$ ls\nfile.txt\n```',
       errors: [
         {
           messageId: 'noShellDollar',
