@@ -181,28 +181,16 @@ export default {
               column: lines[start.line - 1].length + 1,
             };
           } else {
-            let openingCodeFenceEndOffset;
+            let openingCodeFenceLength;
             for (
-              openingCodeFenceEndOffset = nodeStartOffset;
-              sourceCode.text[openingCodeFenceEndOffset] ===
+              openingCodeFenceLength = 0;
+              sourceCode.text[nodeStartOffset + openingCodeFenceLength] ===
               sourceCode.text[nodeStartOffset];
-              openingCodeFenceEndOffset++
+              openingCodeFenceLength++
             ) {
-              // Find the end offset of the opening code fence.
+              // Count the opening code fence characters.
             }
-            if (node.lang) {
-              const openingCodeFenceEndIndex =
-                openingCodeFenceEndOffset - nodeStartOffset;
-              end = {
-                line: start.line,
-                column:
-                  start.column +
-                  sourceCode.getText(node).indexOf(node.lang, openingCodeFenceEndIndex) +
-                  node.lang.length,
-              };
-            } else {
-              end = sourceCode.getLocFromIndex(openingCodeFenceEndOffset);
-            }
+            end = sourceCode.getLocFromIndex(openingCodeFenceLength + nodeStartOffset);
           }
 
           context.report({

@@ -540,7 +540,7 @@ code block 1
           line: 2,
           column: 1,
           endLine: 2,
-          endColumn: 7,
+          endColumn: 4,
           data: { style: 'indent' },
         },
       ],
@@ -557,6 +557,42 @@ code block 1
           messageId: 'style',
           line: 2,
           column: 1,
+          endLine: 2,
+          endColumn: 4,
+          data: { style: 'indent' },
+        },
+      ],
+    },
+    {
+      name: '`indent` style - fenced code with an HTML entity language',
+      code: `
+~~~ &amp; meta
+code block 1
+~~~`,
+      options: [{ style: 'indent' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 4,
+          data: { style: 'indent' },
+        },
+      ],
+    },
+    {
+      name: '`indent` style - blockquoted fenced code with an HTML entity language',
+      code: `
+> ~~~ &amp; meta
+> code block 1
+> ~~~`,
+      options: [{ style: 'indent' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 2,
+          column: 3,
           endLine: 2,
           endColumn: 6,
           data: { style: 'indent' },
