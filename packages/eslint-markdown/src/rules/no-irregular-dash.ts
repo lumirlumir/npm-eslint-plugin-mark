@@ -27,6 +27,10 @@ type RuleOptions = [
      * @default []
      */
     allow: string[];
+    /**
+     * An object where the **key** is an irregular dash character and the **value** is the string that replaces it.
+     * @default {}
+     */
     override: Record<string, string>;
     /**
      * `true` allows irregular dashes in all code blocks, while `string[]` allows irregular dashes only in code blocks for the specified languages.
