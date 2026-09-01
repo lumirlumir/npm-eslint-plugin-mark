@@ -104,9 +104,10 @@ export default {
           },
           override: {
             type: 'object',
-            additionalProperties: {
-              type: 'string',
-            },
+            properties: Object.fromEntries(
+              irregularDashes.map(key => [key, { type: 'string' }]),
+            ),
+            additionalProperties: false,
           },
           skipCode: {
             oneOf: [
