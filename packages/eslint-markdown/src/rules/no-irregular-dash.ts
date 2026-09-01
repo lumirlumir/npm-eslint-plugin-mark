@@ -50,27 +50,29 @@ type MessageIds = 'noIrregularDash';
 // Helper
 // --------------------------------------------------------------------------------
 
-const irregularDashMap: Readonly<Record<string, string>> = Object.freeze({
-  '\u2010': '-',
-  '\u2011': '-',
-  '\u2012': '-',
-  '\u2013': '-',
-  '\u2014': '-',
-  '\u2015': '-',
-  '\u2043': '-',
-  '\u2212': '-',
-  '\u23af': '-',
-  '\u2e3a': '-',
-  '\u2e3b': '-',
-  '\u30fc': '-',
-  '\ufe58': '-',
-  '\ufe63': '-',
-  '\uff0d': '-',
-});
-const irregularDashRegex = new RegExp(
-  `[${Object.keys(irregularDashMap).join('')}]`,
-  'gu',
+const irregularDashes = [
+  '\u2010',
+  '\u2011',
+  '\u2012',
+  '\u2013',
+  '\u2014',
+  '\u2015',
+  '\u2043',
+  '\u2212',
+  '\u23af',
+  '\u2e3a',
+  '\u2e3b',
+  '\u30fc',
+  '\ufe58',
+  '\ufe63',
+  '\uff0d',
+] as const;
+
+const irregularDashMap: Readonly<Record<string, string>> = Object.freeze(
+  Object.fromEntries(irregularDashes.map(irregularDash => [irregularDash, '-'])),
 );
+
+const irregularDashRegex = new RegExp(`[${irregularDashes.join('')}]`, 'gu');
 
 // --------------------------------------------------------------------------------
 // Rule Definition
