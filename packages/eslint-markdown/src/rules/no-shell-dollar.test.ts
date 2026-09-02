@@ -57,6 +57,23 @@ ruleTester('no-shell-dollar', rule, {
       code: '```sh\n\n\n```',
     },
     {
+      name: 'Carriage return line endings showing output',
+      code: '```sh\r$ npm --version\r10.9.2\r```',
+    },
+    {
+      // NOTE: CommonMark treats only spaces and tabs as blank, so the line below is content, not a blank line.
+      name: 'Line containing only a no-break space',
+      code: '```sh\n$ npm install\n\u00a0\n```',
+    },
+    {
+      name: 'Line containing only a line tabulation',
+      code: '```sh\n$ npm install\n\v\n```',
+    },
+    {
+      name: 'Line containing only a form feed',
+      code: '```sh\n$ npm install\n\f\n```',
+    },
+    {
       name: 'Indented code block showing output',
       code: '    $ ls\n    file.txt',
     },
@@ -281,6 +298,62 @@ ruleTester('no-shell-dollar', rule, {
       name: 'Command continued with a backslash',
       code: '```sh\n$ npm install \\\n    --save-dev eslint\n```',
       output: '```sh\nnpm install \\\n    --save-dev eslint\n```',
+      errors: [
+        {
+          messageId: 'noShellDollar',
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 3,
+        },
+      ],
+    },
+    {
+      name: 'Carriage return line endings',
+      code: '```sh\r$ npm install\r$ npm run build\r```',
+      output: '```sh\rnpm install\rnpm run build\r```',
+      errors: [
+        {
+          messageId: 'noShellDollar',
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 3,
+        },
+        {
+          messageId: 'noShellDollar',
+          line: 3,
+          column: 1,
+          endLine: 3,
+          endColumn: 3,
+        },
+      ],
+    },
+    {
+      name: 'Carriage return and line feed line endings',
+      code: '```sh\r\n$ npm install\r\n$ npm run build\r\n```',
+      output: '```sh\r\nnpm install\r\nnpm run build\r\n```',
+      errors: [
+        {
+          messageId: 'noShellDollar',
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 3,
+        },
+        {
+          messageId: 'noShellDollar',
+          line: 3,
+          column: 1,
+          endLine: 3,
+          endColumn: 3,
+        },
+      ],
+    },
+    {
+      name: 'Command continued with a backslash across carriage return and line feed line endings',
+      code: '```sh\r\n$ npm install \\\r\n    --save-dev eslint\r\n```',
+      output: '```sh\r\nnpm install \\\r\n    --save-dev eslint\r\n```',
       errors: [
         {
           messageId: 'noShellDollar',

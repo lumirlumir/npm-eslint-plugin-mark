@@ -8,6 +8,7 @@
 // Import
 // --------------------------------------------------------------------------------
 
+import { getCodeStyle, isBlankLine } from '../core/utils/index.js';
 import { URL_RULE_DOCS } from '../core/constants.js';
 import type { RuleModule } from '../core/types.js';
 
@@ -35,6 +36,8 @@ type MessageIds = 'noShellDollar';
 
 const dollarCommandRegex = /^(?<indentation>[ \t]*)(?<prompt>\$[ \t]+)/;
 const trailingBackslashRegex = /\\+$/u;
+// CommonMark accepts CR, LF, and CRLF as line endings, and `Code#value` keeps them as written.
+const lineEndingRegex = /\r\n|[\r\n]/u;
 
 // --------------------------------------------------------------------------------
 // Rule Definition
@@ -95,16 +98,30 @@ export default {
           return;
         }
 
+        // An empty code block has no command to report, and its opening fence may be the only line.
+        if (node.value === '') {
+          return;
+        }
+
         const [nodeStartOffset] = sourceCode.getRange(node);
         const nodeText = sourceCode.getText(node);
+        const {
+          start: { line: nodeStartLine },
+        } = sourceCode.getLoc(node);
 
-        let searchOffset = /^[`~]/.test(nodeText) ? nodeText.indexOf('\n') + 1 : 0;
+        // A fenced code block starts its content on the second line, and that opening fence is skipped
+        // because its `lang` and `meta` can repeat the text of a code line.
+        let searchOffset =
+          getCodeStyle(nodeText) === 'indent'
+            ? 0
+            : sourceCode.getIndexFromLoc({ line: nodeStartLine + 1, column: 1 }) -
+              nodeStartOffset;
 
         const commandRanges: [number, number][] = [];
         let previousLineContinues = false;
 
-        for (const codeLine of node.value.split('\n')) {
-          if (codeLine.trim() === '') {
+        for (const codeLine of node.value.split(lineEndingRegex)) {
+          if (isBlankLine(codeLine)) {
             previousLineContinues = false;
             continue;
           }
