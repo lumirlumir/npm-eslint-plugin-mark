@@ -59,7 +59,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.19.43",
-    "@vitest/coverage-v8": "^4.1.9",
+    "@vitest/coverage-v8": "^5.0.0",
     "editorconfig-checker": "^6.2.0",
     "eslint": "^9.39.5",
     "eslint-config-bananass": "^0.8.0",
@@ -70,6 +70,6 @@
     "npm-run-all2": "^8.0.4",
     "prettier": "^3.9.6",
     "typescript": "^6.0.3",
-    "vitest": "^4.1.9"
+    "vitest": "^5.0.0"
   }
 }
