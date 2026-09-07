@@ -8,7 +8,7 @@ description: "Installation instructions for `eslint-markdown` npm package with s
 
 - Node.js: `^20.19.0 || ^22.13.0 || >=24.0.0`
 - ESLint: `^9.39.0 || ^10.0.0` & Flat Config Only
-- `@eslint/markdown`: `^7.5.1 || ^8.0.3` (required peer dependency)
+- `@eslint/markdown`: `^8.0.3` (required peer dependency)
 - Module Support: ECMAScript Modules (ESM) Only
 
 ::: tip NOTE

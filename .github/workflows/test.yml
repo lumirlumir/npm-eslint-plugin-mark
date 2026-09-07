@@ -38,7 +38,6 @@ jobs:
           - 9.x
         eslint-markdown-version:
           - 8.x
-          - 7.x
         include:
           - runner-image: ubuntu-latest
             node-version: latest
@@ -48,14 +47,6 @@ jobs:
             node-version: latest
             eslint-version: 9.39.0
             eslint-markdown-version: 8.x
-          - runner-image: ubuntu-latest
-            node-version: latest
-            eslint-version: 10.0.0
-            eslint-markdown-version: 7.x
-          - runner-image: ubuntu-latest
-            node-version: latest
-            eslint-version: 9.39.0
-            eslint-markdown-version: 7.x
 
     runs-on: ${{ matrix.runner-image }}
 

@@ -63,7 +63,7 @@
     "test:unit": "vitest run"
   },
   "peerDependencies": {
-    "@eslint/markdown": "^7.5.1 || ^8.0.3",
+    "@eslint/markdown": "^8.0.3",
     "eslint": "^9.39.0 || ^10.0.0"
   },
   "peerDependenciesMeta": {
@@ -76,7 +76,7 @@
     "parse5": "^8.0.1"
   },
   "devDependencies": {
-    "@eslint/markdown": "^7.5.1",
+    "@eslint/markdown": "^8.0.3",
     "@types/mdast": "^4.0.4",
     "@types/unist": "^3.0.3",
     "eslint": "^9.39.5",
