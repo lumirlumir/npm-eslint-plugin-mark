@@ -47,6 +47,9 @@ type RuleName = keyof typeof plugin.rules;
   string
 >;
 
+// @ts-expect-error -- Rule message IDs should remain specific to each rule.
+plugin.rules['no-emoji'].meta.messages.unknownMessage;
+
 'allow-image-url' satisfies RuleName;
 'allow-link-url' satisfies RuleName;
 'code-lang-shorthand' satisfies RuleName;
@@ -69,6 +72,9 @@ type RuleName = keyof typeof plugin.rules;
 'no-url-trailing-slash' satisfies RuleName;
 'require-image-title' satisfies RuleName;
 'require-link-title' satisfies RuleName;
+
+// @ts-expect-error -- Unknown rule names should remain invalid.
+'unknown-rule' satisfies RuleName;
 
 // #endregion rules
 // --------------------------------------------------------------------------------
