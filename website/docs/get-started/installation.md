@@ -14,7 +14,7 @@ description: "Installation instructions for `eslint-markdown` npm package with s
 ::: tip NOTE
 
 - In line with the [ESLint v10 prerequisites](https://github.com/eslint/eslint?tab=readme-ov-file#installation-and-usage), we support only Node.js versions `^20.19.0 || ^22.13.0 || >=24.0.0`.
-- There is a type compatibility issue in older ESLint v9 versions, the minimum required ESLint version is `^9.31.0`.
+- There is a type compatibility issue in older ESLint v9 versions, the minimum required ESLint version is `^9.39.0`.
 
 :::
 
