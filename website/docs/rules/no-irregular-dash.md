@@ -109,6 +109,28 @@ Examples of **incorrect** code for this rule:
 \u2011 - Non-Breaking Hyphen - <NBHY> `‑` <= Here
 ```
 
+#### With `{ skipMath: false }` Option
+
+  ```md
+  # My Document
+
+  $$
+  x \u2212 y = 0
+  $$
+
+  ## Next Section
+  ```
+
+#### With `{ skipInlineMath: false }` Option
+
+  ```md
+  # My Document
+
+  $x \u2212 y = 0$
+
+  ## Next Section
+  ```
+
 ### :white_check_mark: Correct
 
 Examples of **correct** code for this rule:
@@ -179,6 +201,28 @@ Examples of **correct** code for this rule:
 \u2011 - Non-Breaking Hyphen - <NBHY> `‑` <= Here
 ```
 
+#### With `{ skipMath: true }` Option
+
+  ```md
+  # My Document
+
+  $$
+  x \u2212 y = 0
+  $$
+
+  ## Next Section
+  ```
+
+#### With `{ skipInlineMath: true }` Option
+
+  ```md
+  # My Document
+
+  $x \u2212 y = 0$
+
+  ## Next Section
+  ```
+
 ## Options
 
 ```js
@@ -186,6 +230,8 @@ Examples of **correct** code for this rule:
   allow: [],
   skipCode: true,
   skipInlineCode: true,
+  skipMath: true,
+  skipInlineMath: true,
 }]
 ```
 
@@ -206,6 +252,34 @@ When specified, specific irregular dash characters are allowed if they match one
 > Type: `boolean` / Default: `true`
 
 `true` allows irregular dashes in all inline code.
+
+### `skipMath`
+
+> Type: `boolean` / Default: `true`
+
+`true` allows irregular dashes in math blocks.
+
+::: tip NOTE
+This option requires enabling math parsing with `languageOptions: { math: true }`.
+:::
+
+::: warning
+Existing users with math parsing enabled will stop receiving reports inside math blocks by default. Setting `skipMath: false` preserves the previous behavior.
+:::
+
+### `skipInlineMath`
+
+> Type: `boolean` / Default: `true`
+
+`true` allows irregular dashes in inline math.
+
+::: tip NOTE
+This option requires enabling math parsing with `languageOptions: { math: true }`.
+:::
+
+::: warning
+Existing users with math parsing enabled will stop receiving reports inside inline math by default. Setting `skipInlineMath: false` preserves the previous behavior.
+:::
 
 ## When Not To Use It
 

@@ -78,6 +78,93 @@ console.log(\u2014'Hello World');
         },
       ],
     },
+
+    // skipMath and skipInlineMath Options
+    {
+      name: '`skipMath: true` default: math block should be skipped',
+      code: `$$
+x \u2212 y = 0
+$$`,
+      languageOptions: {
+        math: true,
+      },
+    },
+    {
+      name: '`skipInlineMath: true` default: inline math should be skipped',
+      code: `$x \u2212 y$`,
+      languageOptions: {
+        math: true,
+      },
+    },
+    {
+      name: '`skipMath: true` explicit option: math block should be skipped',
+      code: `$$
+x \u2212 y = 0
+$$`,
+      options: [
+        {
+          skipMath: true,
+        },
+      ],
+      languageOptions: {
+        math: true,
+      },
+    },
+    {
+      name: '`skipInlineMath: true` explicit option: inline math should be skipped',
+      code: `$x \u2212 y$`,
+      options: [
+        {
+          skipInlineMath: true,
+        },
+      ],
+      languageOptions: {
+        math: true,
+      },
+    },
+    {
+      name: '`skipMath: true, skipInlineMath: false` options: math block should be skipped',
+      code: `$$
+x \u2212 y = 0
+$$`,
+      options: [
+        {
+          skipMath: true,
+          skipInlineMath: false,
+        },
+      ],
+      languageOptions: {
+        math: true,
+      },
+    },
+    {
+      name: '`skipMath: false, skipInlineMath: true` options: inline math should be skipped',
+      code: `$x \u2212 y$`,
+      options: [
+        {
+          skipMath: false,
+          skipInlineMath: true,
+        },
+      ],
+      languageOptions: {
+        math: true,
+      },
+    },
+    {
+      name: 'Irregular dash outside math block allowed by `allow` option',
+      code: `$$
+x \u2212 y
+$$
+a \u2013 b`,
+      options: [
+        {
+          allow: ['\u2013'],
+        },
+      ],
+      languageOptions: {
+        math: true,
+      },
+    },
   ],
 
   invalid: [
@@ -356,6 +443,180 @@ Foo\u2010Bar
       options: [
         {
           skipInlineCode: false,
+        },
+      ],
+    },
+
+    // skipMath and skipInlineMath Options
+    {
+      name: '`skipMath: false` option: math block should not be skipped',
+      code: `$$
+x \u2212 y
+$$`,
+      errors: [
+        {
+          messageId: 'noIrregularDash',
+          line: 2,
+          column: 3,
+          endLine: 2,
+          endColumn: 4,
+          data: {
+            irregularDash: 'U+2212',
+          },
+        },
+      ],
+      options: [
+        {
+          skipMath: false,
+        },
+      ],
+      languageOptions: {
+        math: true,
+      },
+    },
+    {
+      name: '`skipInlineMath: false` option: inline math should not be skipped',
+      code: `$x \u2212 y$`,
+      errors: [
+        {
+          messageId: 'noIrregularDash',
+          line: 1,
+          column: 4,
+          endLine: 1,
+          endColumn: 5,
+          data: {
+            irregularDash: 'U+2212',
+          },
+        },
+      ],
+      options: [
+        {
+          skipInlineMath: false,
+        },
+      ],
+      languageOptions: {
+        math: true,
+      },
+    },
+    {
+      name: '`skipMath: false, skipInlineMath: true` options: math block is reported',
+      code: `$$
+x \u2212 y
+$$
+$a \u2212 b$`,
+      errors: [
+        {
+          messageId: 'noIrregularDash',
+          line: 2,
+          column: 3,
+          endLine: 2,
+          endColumn: 4,
+          data: {
+            irregularDash: 'U+2212',
+          },
+        },
+      ],
+      options: [
+        {
+          skipMath: false,
+          skipInlineMath: true,
+        },
+      ],
+      languageOptions: {
+        math: true,
+      },
+    },
+    {
+      name: '`skipMath: true, skipInlineMath: false` options: inline math is reported',
+      code: `$$
+x \u2212 y
+$$
+$a \u2212 b$`,
+      errors: [
+        {
+          messageId: 'noIrregularDash',
+          line: 4,
+          column: 4,
+          endLine: 4,
+          endColumn: 5,
+          data: {
+            irregularDash: 'U+2212',
+          },
+        },
+      ],
+      options: [
+        {
+          skipMath: true,
+          skipInlineMath: false,
+        },
+      ],
+      languageOptions: {
+        math: true,
+      },
+    },
+    {
+      name: 'Irregular dash outside math region is reported when not permitted by `allow`',
+      code: `$$
+x \u2212 y
+$$
+outside \u2013 dash`,
+      errors: [
+        {
+          messageId: 'noIrregularDash',
+          line: 4,
+          column: 9,
+          endLine: 4,
+          endColumn: 10,
+          data: {
+            irregularDash: 'U+2013',
+          },
+        },
+      ],
+      languageOptions: {
+        math: true,
+      },
+    },
+    {
+      name: 'Math parsing disabled: `skipMath: true` does not exclude text in math block delimiters',
+      code: `$$
+x \u2212 y
+$$`,
+      errors: [
+        {
+          messageId: 'noIrregularDash',
+          line: 2,
+          column: 3,
+          endLine: 2,
+          endColumn: 4,
+          data: {
+            irregularDash: 'U+2212',
+          },
+        },
+      ],
+      options: [
+        {
+          skipMath: true,
+        },
+      ],
+    },
+    {
+      name: 'Math parsing disabled: `skipInlineMath: true` does not exclude text in inline math delimiters',
+      code: `$x \u2212 y$`,
+      errors: [
+        {
+          messageId: 'noIrregularDash',
+          line: 1,
+          column: 4,
+          endLine: 1,
+          endColumn: 5,
+          data: {
+            irregularDash: 'U+2212',
+          },
+        },
+      ],
+      options: [
+        {
+          skipInlineMath: true,
         },
       ],
     },
