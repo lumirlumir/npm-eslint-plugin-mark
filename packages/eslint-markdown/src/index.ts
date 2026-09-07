@@ -21,7 +21,13 @@ const plugin = {
     version: pkg.version satisfies string,
   },
 
-  rules,
+  // Keep rule metadata precise without exposing version-specific rule contexts.
+  rules: rules as {
+    [RuleName in keyof typeof rules]: {
+      meta: (typeof rules)[RuleName]['meta'];
+      create: (context: unknown) => ReturnType<(typeof rules)[RuleName]['create']>;
+    };
+  },
 
   configs: {
     get all(): ReturnType<typeof all> {
