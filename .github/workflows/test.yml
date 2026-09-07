@@ -40,19 +40,19 @@ jobs:
           - 8.x
           - 7.x
         include:
-          - os: ubuntu-latest
+          - runner-image: ubuntu-latest
             node-version: latest
             eslint-version: 10.0.0
             eslint-markdown-version: 8.x
-          - os: ubuntu-latest
+          - runner-image: ubuntu-latest
             node-version: latest
             eslint-version: 9.39.0
             eslint-markdown-version: 8.x
-          - os: ubuntu-latest
+          - runner-image: ubuntu-latest
             node-version: latest
             eslint-version: 10.0.0
             eslint-markdown-version: 7.x
-          - os: ubuntu-latest
+          - runner-image: ubuntu-latest
             node-version: latest
             eslint-version: 9.39.0
             eslint-markdown-version: 7.x
