@@ -85,6 +85,22 @@ Examples of **incorrect** code for this rule:
   ## Next Section
   ````
 
+#### With `{ skipMath: false }` Option
+
+  ```md
+  # My Document
+
+  $$
+  <<<<<<< HEAD
+  x = 1
+  =======
+  x = 2
+  >>>>>>> branch-name
+  $$
+
+  ## Next Section
+  ```
+
 ### :white_check_mark: Correct
 
 Examples of **correct** code for this rule:
@@ -145,11 +161,28 @@ Examples of **correct** code for this rule:
   ## Next Section
   ````  
 
+#### With `{ skipMath: true }` Option
+
+  ```md
+  # My Document
+
+  $$
+  <<<<<<< HEAD
+  x = 1
+  =======
+  x = 2
+  >>>>>>> branch-name
+  $$
+
+  ## Next Section
+  ```
+
 ## Options
 
 ```js
 'md/no-git-conflict-marker': ['error', {
   skipCode: true,
+  skipMath: true,
 }]
 ```
 
@@ -158,6 +191,20 @@ Examples of **correct** code for this rule:
 > Type: `boolean | string[]` / Default: `true`
 
 `true` allows Git conflict markers in all code blocks, while `string[]` allows Git conflict markers only in code blocks for the specified languages.
+
+### `skipMath`
+
+> Type: `boolean` / Default: `true`
+
+`true` allows Git conflict markers in math blocks.
+
+::: tip NOTE
+This option requires enabling math parsing with `languageOptions: { math: true }`.
+:::
+
+::: warning
+Existing users with math parsing enabled will stop receiving reports inside math blocks by default. Setting `skipMath: false` preserves the previous behavior.
+:::
 
 ## Fix
 
