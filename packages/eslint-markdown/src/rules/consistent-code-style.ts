@@ -165,38 +165,39 @@ export default {
         // 1. Check code style consistency.
         // ------------------------------------------------------------------------
 
+        const { start, end } = sourceCode.getLoc(node);
         const [nodeStartOffset] = sourceCode.getRange(node);
-        const currentCodeStyle = getCurrentCodeStyle(sourceCode.text[nodeStartOffset]);
+        const currentCodeFenceChar = sourceCode.text[nodeStartOffset];
+        const currentCodeStyle = getCurrentCodeStyle(currentCodeFenceChar);
+        const nodeStartLineIndex = start.line - 1;
+        const nodeEndLineIndex = end.line - 1;
 
         if (codeStyle === null) {
           codeStyle = currentCodeStyle;
         }
 
         if (codeStyle !== currentCodeStyle) {
-          const start = sourceCode.getLocFromIndex(nodeStartOffset);
-          let end;
-          if (currentCodeStyle === 'indent') {
-            end = {
-              line: start.line,
-              column: lines[start.line - 1].length + 1,
-            };
-          } else {
-            let openingCodeFenceLength;
-            for (
-              openingCodeFenceLength = 0;
-              sourceCode.text[nodeStartOffset + openingCodeFenceLength] ===
-              sourceCode.text[nodeStartOffset];
-              openingCodeFenceLength++
-            ) {
-              // Count the opening code fence characters.
-            }
-            end = sourceCode.getLocFromIndex(openingCodeFenceLength + nodeStartOffset);
-          }
-
           context.report({
             loc: {
               start,
-              end,
+              end: {
+                line: start.line,
+                column: (() => {
+                  const firstLine = lines[nodeStartLineIndex];
+
+                  if (currentCodeStyle === 'indent') {
+                    return firstLine.length + 1;
+                  }
+
+                  let { column } = start;
+
+                  while (firstLine[column - 1] === currentCodeFenceChar) {
+                    column++;
+                  }
+
+                  return column;
+                })(),
+              },
             },
 
             messageId: 'style',
@@ -213,11 +214,6 @@ export default {
 
         // `markdownlint` doesn't check blank lines above indented code blocks, so we skip this check for the `indent` style.
         if (blankLineAbove !== false && currentCodeStyle !== 'indent') {
-          const {
-            start: { line: nodeStartLine },
-          } = sourceCode.getLoc(node);
-          const nodeStartLineIndex = nodeStartLine - 1;
-
           for (
             let i = nodeStartLineIndex - 1; // Start checking from the line above the code block.
             i >= nodeStartLineIndex - blankLineAbove; // Check up to the specified number of blank lines.
@@ -256,11 +252,6 @@ export default {
 
         // `markdownlint` doesn't check blank lines below indented code blocks, so we skip this check for the `indent` style.
         if (blankLineBelow !== false && currentCodeStyle !== 'indent') {
-          const {
-            end: { line: nodeEndLine },
-          } = sourceCode.getLoc(node);
-          const nodeEndLineIndex = nodeEndLine - 1;
-
           for (
             let i = nodeEndLineIndex + 1; // Start checking from the line below the code block.
             i <= nodeEndLineIndex + blankLineBelow; // Check up to the specified number of blank lines.
