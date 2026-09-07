@@ -15,6 +15,7 @@ description: "Installation instructions for `eslint-markdown` npm package with s
 
 - In line with the [ESLint v10 prerequisites](https://github.com/eslint/eslint?tab=readme-ov-file#installation-and-usage), we support only Node.js versions `^20.19.0 || ^22.13.0 || >=24.0.0`.
 - There is a type compatibility issue in older ESLint v9 versions, the minimum required ESLint version is `^9.39.0`.
+- `@eslint/markdown` is a required peer dependency. npm v7 and later install it automatically by default, but Yarn requires explicit installation. The commands below include it for all package managers.
 
 :::
 
@@ -27,19 +28,19 @@ description: "Installation instructions for `eslint-markdown` npm package with s
 ::: code-group
 
 ```sh [npm]
-$ npm install -D eslint-markdown@latest eslint@latest
+$ npm install -D eslint-markdown@latest @eslint/markdown@latest eslint@latest
 ```
 
 ```sh [pnpm]
-$ pnpm add -D eslint-markdown@latest eslint@latest
+$ pnpm add -D eslint-markdown@latest @eslint/markdown@latest eslint@latest
 ```
 
 ```sh [yarn]
-$ yarn add --dev eslint-markdown@latest eslint@latest
+$ yarn add --dev eslint-markdown@latest @eslint/markdown@latest eslint@latest
 ```
 
 ```sh [bun]
-$ bun add -d eslint-markdown@latest eslint@latest
+$ bun add -d eslint-markdown@latest @eslint/markdown@latest eslint@latest
 ```
 
 :::
@@ -53,19 +54,19 @@ $ bun add -d eslint-markdown@latest eslint@latest
 ::: code-group
 
 ```sh [npm]
-$ npm install -D eslint-markdown@next eslint@latest
+$ npm install -D eslint-markdown@next @eslint/markdown@latest eslint@latest
 ```
 
 ```sh [pnpm]
-$ pnpm add -D eslint-markdown@next eslint@latest
+$ pnpm add -D eslint-markdown@next @eslint/markdown@latest eslint@latest
 ```
 
 ```sh [yarn]
-$ yarn add --dev eslint-markdown@next eslint@latest
+$ yarn add --dev eslint-markdown@next @eslint/markdown@latest eslint@latest
 ```
 
 ```sh [bun]
-$ bun add -d eslint-markdown@next eslint@latest
+$ bun add -d eslint-markdown@next @eslint/markdown@latest eslint@latest
 ```
 
 :::
