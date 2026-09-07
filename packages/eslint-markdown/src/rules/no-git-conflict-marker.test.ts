@@ -111,8 +111,6 @@ ruleTester('no-git-conflict-marker', rule, {
         },
       ],
     },
-
-    // skipMath Option
     {
       name: '`skipMath: true` default: math block should be skipped (`>`)',
       code: `$$
@@ -488,8 +486,6 @@ $$`,
         },
       ],
     },
-
-    // skipMath Option
     {
       name: '`skipMath: false` option: math block should not be skipped (`<`)',
       code: `$$
