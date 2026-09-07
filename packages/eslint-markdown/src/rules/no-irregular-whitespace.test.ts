@@ -78,6 +78,67 @@ console.log(\u200b'Hello World');
         },
       ],
     },
+    {
+      name: '`skipMath: true` default: math block should be skipped',
+      code: `$$
+\\int f(x)\\,dx = \\sum a_i\\u2009b_i
+$$`,
+      languageOptions: {
+        math: true,
+      },
+    },
+    {
+      name: '`skipInlineMath: true` default: inline math should be skipped',
+      code: '$f(x)\\u2009dx$',
+      languageOptions: {
+        math: true,
+      },
+    },
+    {
+      name: '`skipMath: true, skipInlineMath: true` explicit options: math regions should be skipped',
+      code: `$$
+\\int f(x)\\u202Fdx
+$$
+
+$a\\u2009b$`,
+      options: [
+        {
+          skipMath: true,
+          skipInlineMath: true,
+        },
+      ],
+      languageOptions: {
+        math: true,
+      },
+    },
+    {
+      name: '`skipMath: true, skipInlineMath: false` mixed options: math block is skipped',
+      code: `$$
+\\int f(x)\\u2009dx
+$$`,
+      options: [
+        {
+          skipMath: true,
+          skipInlineMath: false,
+        },
+      ],
+      languageOptions: {
+        math: true,
+      },
+    },
+    {
+      name: '`skipMath: false, skipInlineMath: true` mixed options: inline math is skipped',
+      code: '$f(x)\\u2009dx$',
+      options: [
+        {
+          skipMath: false,
+          skipInlineMath: true,
+        },
+      ],
+      languageOptions: {
+        math: true,
+      },
+    },
   ],
 
   invalid: [
@@ -447,6 +508,181 @@ Foo\u00a0Bar
       options: [
         {
           skipInlineCode: false,
+        },
+      ],
+    },
+    {
+      name: '`skipMath: false` option: math block should not be skipped',
+      code: `$$
+x\u2009y
+$$`,
+      errors: [
+        {
+          messageId: 'noIrregularWhitespace',
+          line: 2,
+          column: 2,
+          endLine: 2,
+          endColumn: 3,
+          data: {
+            irregularWhitespace: 'U+2009',
+          },
+        },
+      ],
+      options: [
+        {
+          skipMath: false,
+        },
+      ],
+      languageOptions: {
+        math: true,
+      },
+    },
+    {
+      name: '`skipInlineMath: false` option: inline math should not be skipped',
+      code: '$x\u202Fy$',
+      errors: [
+        {
+          messageId: 'noIrregularWhitespace',
+          line: 1,
+          column: 3,
+          endLine: 1,
+          endColumn: 4,
+          data: {
+            irregularWhitespace: 'U+202F',
+          },
+        },
+      ],
+      options: [
+        {
+          skipInlineMath: false,
+        },
+      ],
+      languageOptions: {
+        math: true,
+      },
+    },
+    {
+      name: '`skipMath: false, skipInlineMath: true` options: math block is reported but inline math is skipped',
+      code: `$$
+x\u2009y
+$$
+
+$a\u2009b$`,
+      errors: [
+        {
+          messageId: 'noIrregularWhitespace',
+          line: 2,
+          column: 2,
+          endLine: 2,
+          endColumn: 3,
+          data: {
+            irregularWhitespace: 'U+2009',
+          },
+        },
+      ],
+      options: [
+        {
+          skipMath: false,
+          skipInlineMath: true,
+        },
+      ],
+      languageOptions: {
+        math: true,
+      },
+    },
+    {
+      name: '`skipMath: true, skipInlineMath: false` options: inline math is reported but math block is skipped',
+      code: `$$
+x\u2009y
+$$
+
+$a\u2009b$`,
+      errors: [
+        {
+          messageId: 'noIrregularWhitespace',
+          line: 5,
+          column: 3,
+          endLine: 5,
+          endColumn: 4,
+          data: {
+            irregularWhitespace: 'U+2009',
+          },
+        },
+      ],
+      options: [
+        {
+          skipMath: true,
+          skipInlineMath: false,
+        },
+      ],
+      languageOptions: {
+        math: true,
+      },
+    },
+    {
+      name: '`skipMath: true, skipInlineMath: true` options: whitespace in surrounding prose is reported',
+      code: `Prose\u2009with whitespace
+
+$$
+x\u2009y
+$$
+
+$a\u2009b$`,
+      errors: [
+        {
+          messageId: 'noIrregularWhitespace',
+          line: 1,
+          column: 6,
+          endLine: 1,
+          endColumn: 7,
+          data: {
+            irregularWhitespace: 'U+2009',
+          },
+        },
+      ],
+      options: [
+        {
+          skipMath: true,
+          skipInlineMath: true,
+        },
+      ],
+      languageOptions: {
+        math: true,
+      },
+    },
+    {
+      name: 'Math parsing disabled: `skipMath: true, skipInlineMath: true` does not exclude delimiters in plain text',
+      code: `$$
+x\u2009y
+$$
+
+$a\u202Fb$`,
+      errors: [
+        {
+          messageId: 'noIrregularWhitespace',
+          line: 2,
+          column: 2,
+          endLine: 2,
+          endColumn: 3,
+          data: {
+            irregularWhitespace: 'U+2009',
+          },
+        },
+        {
+          messageId: 'noIrregularWhitespace',
+          line: 5,
+          column: 3,
+          endLine: 5,
+          endColumn: 4,
+          data: {
+            irregularWhitespace: 'U+202F',
+          },
+        },
+      ],
+      options: [
+        {
+          skipMath: true,
+          skipInlineMath: true,
         },
       ],
     },
