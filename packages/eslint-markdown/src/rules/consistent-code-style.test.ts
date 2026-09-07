@@ -602,24 +602,6 @@ code block 1
 
     // option: `style` - `fence-backtick` style
     {
-      name: '`fence-backtick` style reports multiline indented code',
-      code: `
-    code block 1
-    code block 2`,
-      options: [{ style: 'fence-backtick' }],
-      errors: [
-        {
-          messageId: 'style',
-          line: 2,
-          column: 1,
-          endLine: 2,
-          endColumn: 17,
-          data: { style: 'fence-backtick' },
-        },
-      ],
-    },
-
-    {
       name: '`fence-backtick` style',
       code: `
     code block 1
@@ -643,6 +625,23 @@ code block 2
           column: 1,
           endLine: 4,
           endColumn: 4,
+          data: { style: 'fence-backtick' },
+        },
+      ],
+    },
+    {
+      name: '`fence-backtick` style - multiline indented code',
+      code: `
+    code block 1
+    code block 2`,
+      options: [{ style: 'fence-backtick' }],
+      errors: [
+        {
+          messageId: 'style',
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 17,
           data: { style: 'fence-backtick' },
         },
       ],
