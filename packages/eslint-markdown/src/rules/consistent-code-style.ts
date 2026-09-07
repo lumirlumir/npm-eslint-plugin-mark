@@ -183,15 +183,15 @@ export default {
               end: {
                 line: start.line,
                 column: (() => {
-                  const firstLine = lines[nodeStartLineIndex];
+                  const nodeStartLineText = lines[nodeStartLineIndex];
 
                   if (currentCodeStyle === 'indent') {
-                    return firstLine.length + 1;
+                    return nodeStartLineText.length + 1;
                   }
 
                   let { column } = start;
 
-                  while (firstLine[column - 1] === currentCodeFenceChar) {
+                  while (nodeStartLineText[column - 1] === currentCodeFenceChar) {
                     column++;
                   }
 
