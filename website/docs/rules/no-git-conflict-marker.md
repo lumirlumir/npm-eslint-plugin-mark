@@ -87,7 +87,9 @@ Examples of **incorrect** code for this rule:
 
 #### With `{ skipMath: false }` Option
 
-  ```md
+  ```md eslint-check
+  <!-- eslint md/no-git-conflict-marker: ['error', { skipMath: false }] -->
+
   # My Document
 
   $$
@@ -163,7 +165,9 @@ Examples of **correct** code for this rule:
 
 #### With `{ skipMath: true }` Option
 
-  ```md
+  ```md eslint-check
+  <!-- eslint md/no-git-conflict-marker: ['error', { skipMath: true }] -->
+
   # My Document
 
   $$
@@ -199,11 +203,7 @@ Examples of **correct** code for this rule:
 `true` allows Git conflict markers in math blocks.
 
 ::: tip NOTE
-This option requires enabling math parsing with `languageOptions: { math: true }`.
-:::
-
-::: warning
-Existing users with math parsing enabled will stop receiving reports inside math blocks by default. Setting `skipMath: false` preserves the previous behavior.
+This option requires enabling math parsing with [`languageOptions: { math: true }`](https://github.com/eslint/markdown#enabling-math-latex-in-both-commonmark-and-gfm).
 :::
 
 ## Fix
