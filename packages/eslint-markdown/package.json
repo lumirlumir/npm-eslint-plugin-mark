@@ -63,7 +63,8 @@
     "test:unit": "vitest run"
   },
   "peerDependencies": {
-    "eslint": "^9.31.0 || ^10.0.0-rc.0"
+    "@eslint/markdown": "^8.0.3",
+    "eslint": "^9.39.0 || ^10.0.0"
   },
   "peerDependenciesMeta": {
     "eslint": {
@@ -71,11 +72,11 @@
     }
   },
   "dependencies": {
-    "@eslint/markdown": "^7.5.1",
     "micromark-util-normalize-identifier": "^2.0.1",
     "parse5": "^8.0.1"
   },
   "devDependencies": {
+    "@eslint/markdown": "^8.0.3",
     "@types/mdast": "^4.0.4",
     "@types/unist": "^3.0.3",
     "eslint": "^9.39.5",
