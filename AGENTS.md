@@ -46,6 +46,7 @@ For faster iteration, use workspace-scoped commands when appropriate:
 
 - All tests should be DAMP (Descriptive And Meaningful Phrase).
 - Do not use `for` iteration to generate test cases. Prefer individually named tests that clearly describe the scenario.
+- When writing suggestion test cases, prefer explicit suggestion objects when the expected `output` is concise; use count-only assertions when full output would make the test noisy.
 
 ## Pull Request Workflow
 
@@ -107,3 +108,12 @@ Include:
 - Avoid speculative refactors and broad formatting churn.
 - Call out any assumptions when code context is incomplete.
 - Prefer explicit file references in explanations (for example: `packages/...`, `website/...`, `CONTRIBUTING.md`).
+
+### Codex-only Review Priority Guide
+
+- The priority labels below apply **only** to Codex-generated reviews and follow-up comments.
+- Use review priorities where P0 is highest urgency and P1 is high priority.
+- Flag security regressions as P0.
+- Treat typos and grammar issues in docs as P1.
+- Flag missing documentation as P1.
+- Flag missing tests for behavior changes as P1.
