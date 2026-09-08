@@ -365,6 +365,8 @@ ruleTester('no-shell-dollar', rule, {
       ],
     },
     {
+      // NOTE: Unlike `markdownlint` and `remark-lint`, `eslint-markdown` recognizes the
+      // backslash-newline pair as a line continuation, which better reflects the rule's intent.
       name: 'Command continued across multiple lines',
       code: '```sh\n$ docker run \\\n  --rm \\\n  alpine\n$ echo done\n```',
       output: '```sh\ndocker run \\\n  --rm \\\n  alpine\necho done\n```',
@@ -386,6 +388,8 @@ ruleTester('no-shell-dollar', rule, {
       ],
     },
     {
+      // NOTE: Unlike `markdownlint` and `remark-lint`, `eslint-markdown` recognizes the
+      // backslash-newline pair as a line continuation, which better reflects the rule's intent.
       name: 'Command repeated after the same text appears on a continuation line',
       code: '```sh\n$ echo \\\n$ echo hi\n$ echo hi\n```',
       output: '```sh\necho \\\n$ echo hi\necho hi\n```',

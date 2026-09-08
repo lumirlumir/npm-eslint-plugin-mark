@@ -99,7 +99,7 @@ export default {
           return;
         }
 
-        // The opening fence of an empty code block can be the last line of the file, so there is no next line to look up.
+        // An empty code block has no command to report, and its opening fence may be the only line.
         if (node.value === '') {
           return;
         }
@@ -108,6 +108,7 @@ export default {
         const {
           start: { line: nodeStartLine },
         } = sourceCode.getLoc(node);
+        // A fenced code block starts its content on the second line, so its opening fence is skipped.
         const firstCodeLine =
           getCodeStyle(sourceCode.text[nodeStartOffset]) === 'indent'
             ? nodeStartLine
