@@ -365,8 +365,6 @@ ruleTester('no-shell-dollar', rule, {
       ],
     },
     {
-      // NOTE: Unlike `markdownlint` and `remark-lint`, `eslint-markdown` recognizes the
-      // backslash-newline pair as a line continuation, which better reflects the rule's intent.
       name: 'Command continued across multiple lines',
       code: '```sh\n$ docker run \\\n  --rm \\\n  alpine\n$ echo done\n```',
       output: '```sh\ndocker run \\\n  --rm \\\n  alpine\necho done\n```',
@@ -388,8 +386,6 @@ ruleTester('no-shell-dollar', rule, {
       ],
     },
     {
-      // NOTE: Unlike `markdownlint` and `remark-lint`, `eslint-markdown` recognizes the
-      // backslash-newline pair as a line continuation, which better reflects the rule's intent.
       name: 'Command repeated after the same text appears on a continuation line',
       code: '```sh\n$ echo \\\n$ echo hi\n$ echo hi\n```',
       output: '```sh\necho \\\n$ echo hi\necho hi\n```',
@@ -407,6 +403,21 @@ ruleTester('no-shell-dollar', rule, {
           column: 1,
           endLine: 4,
           endColumn: 3,
+        },
+      ],
+    },
+    {
+      // NOTE: The list item indentation splits the tab, so `Code#value` holds spaces the source line does not.
+      name: 'Fenced code block inside a list item with a tab-indented command',
+      code: '- ```sh\n\t$ ls\n  ```',
+      output: '- ```sh\n\tls\n  ```',
+      errors: [
+        {
+          messageId: 'noShellDollar',
+          line: 2,
+          column: 2,
+          endLine: 2,
+          endColumn: 4,
         },
       ],
     },

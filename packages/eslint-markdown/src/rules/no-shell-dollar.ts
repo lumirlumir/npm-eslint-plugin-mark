@@ -34,7 +34,8 @@ type MessageIds = 'noShellDollar';
 // Helper
 // --------------------------------------------------------------------------------
 
-const dollarCommandRegex = /^(?<indentation>[ \t]*)(?<prompt>\$[ \t]+)/;
+const dollarCommandRegex = /^[ \t]*\$[ \t]+/u;
+const promptRegex = /\$[ \t]+/u;
 const trailingBackslashRegex = /\\+$/u;
 // CommonMark accepts CR, LF, and CRLF as line endings, and `Code#value` keeps them as written.
 const lineEndingRegex = /\r\n|[\r\n]/u;
@@ -98,66 +99,64 @@ export default {
           return;
         }
 
-        // An empty code block has no command to report, and its opening fence may be the only line.
+        // The opening fence of an empty code block can be the last line of the file, so there is no next line to look up.
         if (node.value === '') {
           return;
         }
 
         const [nodeStartOffset] = sourceCode.getRange(node);
-        const nodeText = sourceCode.getText(node);
         const {
           start: { line: nodeStartLine },
         } = sourceCode.getLoc(node);
+        const firstCodeLine =
+          getCodeStyle(sourceCode.text[nodeStartOffset]) === 'indent'
+            ? nodeStartLine
+            : nodeStartLine + 1;
 
-        // A fenced code block starts its content on the second line, and that opening fence is skipped
-        // because its `lang` and `meta` can repeat the text of a code line.
-        let searchOffset =
-          getCodeStyle(nodeText) === 'indent'
-            ? 0
-            : sourceCode.getIndexFromLoc({ line: nodeStartLine + 1, column: 1 }) -
-              nodeStartOffset;
-
-        const commandRanges: [number, number][] = [];
+        const promptLocs: { line: number; column: number; endColumn: number }[] = [];
         let previousLineContinues = false;
 
-        for (const codeLine of node.value.split(lineEndingRegex)) {
+        for (const [index, codeLine] of node.value.split(lineEndingRegex).entries()) {
           if (isBlankLine(codeLine)) {
             previousLineContinues = false;
             continue;
           }
 
-          const codeLineOffset = nodeText.indexOf(codeLine, searchOffset);
-
-          searchOffset = codeLineOffset + codeLine.length;
-
           if (!previousLineContinues) {
-            const match = dollarCommandRegex.exec(codeLine);
-
-            if (!match?.groups) {
+            if (!dollarCommandRegex.test(codeLine)) {
               return;
             }
 
-            const { indentation, prompt } = match.groups;
-            const startOffset = nodeStartOffset + codeLineOffset + indentation.length;
+            // `Code#value` drops container markers and expands partial tabs, so the prompt is located on the
+            // source line instead. Everything before it is `>`, spaces, or tabs, so the first `$` is the prompt.
+            const line = firstCodeLine + index;
+            const match = promptRegex.exec(sourceCode.lines[line - 1]) as RegExpExecArray;
 
-            commandRanges.push([startOffset, startOffset + prompt.length]);
+            promptLocs.push({
+              line,
+              column: match.index + 1,
+              endColumn: match.index + 1 + match[0].length,
+            });
           }
 
           previousLineContinues =
             (trailingBackslashRegex.exec(codeLine)?.[0].length ?? 0) % 2 === 1;
         }
 
-        for (const [startOffset, endOffset] of commandRanges) {
+        for (const { line, column, endColumn } of promptLocs) {
+          const start = { line, column };
+          const end = { line, column: endColumn };
+
           context.report({
-            loc: {
-              start: sourceCode.getLocFromIndex(startOffset),
-              end: sourceCode.getLocFromIndex(endOffset),
-            },
+            loc: { start, end },
 
             messageId: 'noShellDollar',
 
             fix(fixer) {
-              return fixer.removeRange([startOffset, endOffset]);
+              return fixer.removeRange([
+                sourceCode.getIndexFromLoc(start),
+                sourceCode.getIndexFromLoc(end),
+              ]);
             },
           });
         }
