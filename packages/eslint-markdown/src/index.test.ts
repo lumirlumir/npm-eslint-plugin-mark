@@ -30,6 +30,7 @@ describe('index', () => {
   describe('Basic', () => {
     it('should have correct meta information', () => {
       assert.strictEqual(md.meta.name, 'eslint-markdown');
+      assert.strictEqual(md.meta.namespace, 'md');
       assert.strictEqual(typeof md.meta.version, 'string');
     });
 
@@ -47,6 +48,119 @@ describe('index', () => {
       assert.ok(md.configs.stylistic);
       assert.strictEqual(typeof md.configs, 'object');
       assert.strictEqual(Object.keys(md.configs).length > 0, true);
+    });
+  });
+
+  describe('Languages', () => {
+    it('should lint Markdown with the `all` configuration without errors', () => {
+      const linter = new Linter();
+      const messages = linter.verify('Foo Bar Baz', md.configs.all, {
+        filename: 'test.md',
+      });
+
+      assert.deepStrictEqual(messages, []);
+    });
+
+    it('should lint Markdown with the `base` configuration without errors', () => {
+      const linter = new Linter();
+      const messages = linter.verify('Foo Bar Baz', md.configs.base, {
+        filename: 'test.md',
+      });
+
+      assert.deepStrictEqual(messages, []);
+    });
+
+    it('should lint Markdown with the `recommended` configuration without errors', () => {
+      const linter = new Linter();
+      const messages = linter.verify('Foo Bar Baz', md.configs.recommended, {
+        filename: 'test.md',
+      });
+
+      assert.deepStrictEqual(messages, []);
+    });
+
+    it('should lint Markdown with the `stylistic` configuration without errors', () => {
+      const linter = new Linter();
+      const messages = linter.verify('Foo Bar Baz', md.configs.stylistic, {
+        filename: 'test.md',
+      });
+
+      assert.deepStrictEqual(messages, []);
+    });
+
+    it('should report CommonMark violations under a custom rule namespace', () => {
+      const linter = new Linter();
+      const messages = linter.verify(
+        '12  34',
+        {
+          files: ['**/*.md'],
+          plugins: {
+            markdown,
+            custommd: md,
+          },
+          language: 'markdown/commonmark',
+          rules: {
+            'custommd/no-double-space': 'error',
+          },
+        },
+        { filename: 'test.md' },
+      );
+
+      assert.strictEqual(messages.length, 1);
+      assert.strictEqual(messages[0].ruleId, 'custommd/no-double-space');
+      assert.strictEqual(messages[0].messageId, 'noDoubleSpace');
+      assert.strictEqual(messages[0].severity, 2);
+    });
+
+    it('should report GFM violations under a custom rule namespace', () => {
+      const linter = new Linter();
+      const messages = linter.verify(
+        '12  34',
+        {
+          files: ['**/*.md'],
+          plugins: {
+            markdown,
+            custommd: md,
+          },
+          language: 'markdown/gfm',
+          rules: {
+            'custommd/no-double-space': 'error',
+          },
+        },
+        { filename: 'test.md' },
+      );
+
+      assert.strictEqual(messages.length, 1);
+      assert.strictEqual(messages[0].ruleId, 'custommd/no-double-space');
+      assert.strictEqual(messages[0].messageId, 'noDoubleSpace');
+      assert.strictEqual(messages[0].severity, 2);
+    });
+
+    it('should report GFM-only rule violations under a custom rule namespace', () => {
+      const linter = new Linter();
+      const messages = linter.verify(
+        '~foo~ ~~bar~~',
+        {
+          files: ['**/*.md'],
+          plugins: {
+            markdown,
+            custommd: md,
+          },
+          language: 'markdown/gfm',
+          rules: {
+            'custommd/consistent-delete-style': 'error',
+          },
+        },
+        { filename: 'test.md' },
+      );
+
+      assert.strictEqual(messages.length, 2);
+      assert.strictEqual(messages[0].ruleId, 'custommd/consistent-delete-style');
+      assert.strictEqual(messages[0].messageId, 'style');
+      assert.strictEqual(messages[0].severity, 2);
+      assert.strictEqual(messages[1].ruleId, 'custommd/consistent-delete-style');
+      assert.strictEqual(messages[1].messageId, 'style');
+      assert.strictEqual(messages[1].severity, 2);
     });
   });
 
